@@ -1,18 +1,16 @@
 #BRES API download
 library(tidyverse)
 library(nomisr)
-options(scipen = 99)
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#DOWNLOAD LATEST BRES DATA----
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#DOWNLOAD LATEST BRES DATA FOR ITL2 ZONES----
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #Find latest year
 time <- nomis_get_metadata(id = "NM_189_1", concept = "TIME")
 latestyear <- as.numeric(time$id[length(time$id)])
 
 years = c(2015:latestyear)
-# years = c(2015:2021)
 
 #Reminder of geographies
 #TYPE438 is nuts 2016 level 2, which matches ITL2 including SY
@@ -46,7 +44,4 @@ itl2.bres <- list.files(path = "local/data/", pattern = "BRES_NUTS2", full.names
 #Save for public repo
 saveRDS(itl2.bres,paste0('data/BRES_NUTS2_',years[1],'_',years[length(years)],'.rds'))
 
-#Next parts done in "BRES process' to keep this self contained
-
-
-
+#Next parts done in "BRES_process.R'
