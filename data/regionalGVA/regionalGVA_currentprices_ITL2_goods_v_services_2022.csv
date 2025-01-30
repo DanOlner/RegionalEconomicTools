@@ -1,0 +1,2051 @@
+ITL_code,Region_name,SIC07_code,SIC07_description,year,value
+TLH2,Bedfordshire and Hertfordshire,A-F,Goods,1998,6696
+TLH2,Bedfordshire and Hertfordshire,G-T,Services,1998,19615
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-F,Goods,1998,9732
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services,1998,35199
+TLD6,Cheshire,A-F,Goods,1998,5061
+TLD6,Cheshire,G-T,Services,1998,9399
+TLK3,Cornwall and Isles of Scilly,A-F,Goods,1998,1307
+TLK3,Cornwall and Isles of Scilly,G-T,Services,1998,3621
+TLD1,Cumbria,A-F,Goods,1998,2748
+TLD1,Cumbria,G-T,Services,1998,3803
+TLF1,Derbyshire and Nottinghamshire,A-F,Goods,1998,8920
+TLF1,Derbyshire and Nottinghamshire,G-T,Services,1998,16085
+TLK4,Devon,A-F,Goods,1998,3490
+TLK4,Devon,G-T,Services,1998,9125
+TLK2,Dorset and Somerset,A-F,Goods,1998,4292
+TLK2,Dorset and Somerset,G-T,Services,1998,10919
+TLH1,East Anglia,A-F,Goods,1998,9134
+TLH1,East Anglia,G-T,Services,1998,21185
+TLL2,East Wales,A-F,Goods,1998,4648
+TLL2,East Wales,G-T,Services,1998,9664
+TLE1,East Yorkshire and Northern Lincolnshire,A-F,Goods,1998,4441
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services,1998,6344
+TLM7,Eastern Scotland,A-F,Goods,1998,7965
+TLM7,Eastern Scotland,G-T,Services,1998,17916
+TLH3,Essex,A-F,Goods,1998,6454
+TLH3,Essex,G-T,Services,1998,14467
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-F,Goods,1998,9522
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services,1998,24802
+TLD3,Greater Manchester,A-F,Goods,1998,8793
+TLD3,Greater Manchester,G-T,Services,1998,24419
+TLJ3,Hampshire and Isle of Wight,A-F,Goods,1998,7083
+TLJ3,Hampshire and Isle of Wight,G-T,Services,1998,20837
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-F,Goods,1998,5090
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services,1998,11755
+TLM6,Highlands and Islands,A-F,Goods,1998,1782
+TLM6,Highlands and Islands,G-T,Services,1998,3615
+TLI4,Inner London - East,A-F,Goods,1998,3734
+TLI4,Inner London - East,G-T,Services,1998,35977
+TLI3,Inner London - West,A-F,Goods,1998,3171
+TLI3,Inner London - West,G-T,Services,1998,67475
+TLJ4,Kent,A-F,Goods,1998,5753
+TLJ4,Kent,G-T,Services,1998,15323
+TLD4,Lancashire,A-F,Goods,1998,6643
+TLD4,Lancashire,G-T,Services,1998,11043
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-F,Goods,1998,7316
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services,1998,14196
+TLF3,Lincolnshire,A-F,Goods,1998,2986
+TLF3,Lincolnshire,G-T,Services,1998,4765
+TLD7,Merseyside,A-F,Goods,1998,4216
+TLD7,Merseyside,G-T,Services,1998,11964
+TLM5,North Eastern Scotland,A-F,Goods,1998,3215
+TLM5,North Eastern Scotland,G-T,Services,1998,5018
+TLE2,North Yorkshire,A-F,Goods,1998,3158
+TLE2,North Yorkshire,G-T,Services,1998,7436
+TLN0,Northern Ireland,A-F,Goods,1998,6033
+TLN0,Northern Ireland,G-T,Services,1998,13581
+TLC2,"Northumberland, and Tyne and Wear",A-F,Goods,1998,4928
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services,1998,11676
+TLI5,Outer London - East and North East,A-F,Goods,1998,4569
+TLI5,Outer London - East and North East,G-T,Services,1998,14627
+TLI6,Outer London - South,A-F,Goods,1998,2593
+TLI6,Outer London - South,G-T,Services,1998,14960
+TLI7,Outer London - West and North West,A-F,Goods,1998,4864
+TLI7,Outer London - West and North West,G-T,Services,1998,28860
+TLG2,Shropshire and Staffordshire,A-F,Goods,1998,6557
+TLG2,Shropshire and Staffordshire,G-T,Services,1998,11803
+TLE3,South Yorkshire,A-F,Goods,1998,4145
+TLE3,South Yorkshire,G-T,Services,1998,9397
+TLM9,Southern Scotland,A-F,Goods,1998,4000
+TLM9,Southern Scotland,G-T,Services,1998,6382
+TLJ2,"Surrey, East and West Sussex",A-F,Goods,1998,7896
+TLJ2,"Surrey, East and West Sussex",G-T,Services,1998,33960
+TLC1,Tees Valley and Durham,A-F,Goods,1998,4381
+TLC1,Tees Valley and Durham,G-T,Services,1998,7830
+TLM8,West Central Scotland,A-F,Goods,1998,5356
+TLM8,West Central Scotland,G-T,Services,1998,14716
+TLG3,West Midlands,A-F,Goods,1998,11786
+TLG3,West Midlands,G-T,Services,1998,23557
+TLL1,West Wales and The Valleys,A-F,Goods,1998,6170
+TLL1,West Wales and The Valleys,G-T,Services,1998,12233
+TLE4,West Yorkshire,A-F,Goods,1998,8168
+TLE4,West Yorkshire,G-T,Services,1998,19544
+TLH2,Bedfordshire and Hertfordshire,A-F,Goods,1999,7050
+TLH2,Bedfordshire and Hertfordshire,G-T,Services,1999,20743
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-F,Goods,1999,9843
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services,1999,37599
+TLD6,Cheshire,A-F,Goods,1999,5268
+TLD6,Cheshire,G-T,Services,1999,9908
+TLK3,Cornwall and Isles of Scilly,A-F,Goods,1999,1303
+TLK3,Cornwall and Isles of Scilly,G-T,Services,1999,3777
+TLD1,Cumbria,A-F,Goods,1999,2791
+TLD1,Cumbria,G-T,Services,1999,3967
+TLF1,Derbyshire and Nottinghamshire,A-F,Goods,1999,9519
+TLF1,Derbyshire and Nottinghamshire,G-T,Services,1999,16381
+TLK4,Devon,A-F,Goods,1999,3648
+TLK4,Devon,G-T,Services,1999,9593
+TLK2,Dorset and Somerset,A-F,Goods,1999,4626
+TLK2,Dorset and Somerset,G-T,Services,1999,11501
+TLH1,East Anglia,A-F,Goods,1999,9076
+TLH1,East Anglia,G-T,Services,1999,22531
+TLL2,East Wales,A-F,Goods,1999,4727
+TLL2,East Wales,G-T,Services,1999,10178
+TLE1,East Yorkshire and Northern Lincolnshire,A-F,Goods,1999,4404
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services,1999,6425
+TLM7,Eastern Scotland,A-F,Goods,1999,7795
+TLM7,Eastern Scotland,G-T,Services,1999,18323
+TLH3,Essex,A-F,Goods,1999,6179
+TLH3,Essex,G-T,Services,1999,15016
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-F,Goods,1999,9861
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services,1999,26047
+TLD3,Greater Manchester,A-F,Goods,1999,9216
+TLD3,Greater Manchester,G-T,Services,1999,25629
+TLJ3,Hampshire and Isle of Wight,A-F,Goods,1999,7075
+TLJ3,Hampshire and Isle of Wight,G-T,Services,1999,21385
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-F,Goods,1999,5241
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services,1999,12621
+TLM6,Highlands and Islands,A-F,Goods,1999,1752
+TLM6,Highlands and Islands,G-T,Services,1999,3906
+TLI4,Inner London - East,A-F,Goods,1999,3943
+TLI4,Inner London - East,G-T,Services,1999,37712
+TLI3,Inner London - West,A-F,Goods,1999,3435
+TLI3,Inner London - West,G-T,Services,1999,70209
+TLJ4,Kent,A-F,Goods,1999,6079
+TLJ4,Kent,G-T,Services,1999,15742
+TLD4,Lancashire,A-F,Goods,1999,6892
+TLD4,Lancashire,G-T,Services,1999,11543
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-F,Goods,1999,7160
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services,1999,14815
+TLF3,Lincolnshire,A-F,Goods,1999,3041
+TLF3,Lincolnshire,G-T,Services,1999,4825
+TLD7,Merseyside,A-F,Goods,1999,4336
+TLD7,Merseyside,G-T,Services,1999,12747
+TLM5,North Eastern Scotland,A-F,Goods,1999,3031
+TLM5,North Eastern Scotland,G-T,Services,1999,5183
+TLE2,North Yorkshire,A-F,Goods,1999,3139
+TLE2,North Yorkshire,G-T,Services,1999,7742
+TLN0,Northern Ireland,A-F,Goods,1999,6407
+TLN0,Northern Ireland,G-T,Services,1999,14314
+TLC2,"Northumberland, and Tyne and Wear",A-F,Goods,1999,4717
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services,1999,11825
+TLI5,Outer London - East and North East,A-F,Goods,1999,4751
+TLI5,Outer London - East and North East,G-T,Services,1999,15374
+TLI6,Outer London - South,A-F,Goods,1999,2718
+TLI6,Outer London - South,G-T,Services,1999,15848
+TLI7,Outer London - West and North West,A-F,Goods,1999,5279
+TLI7,Outer London - West and North West,G-T,Services,1999,30668
+TLG2,Shropshire and Staffordshire,A-F,Goods,1999,6315
+TLG2,Shropshire and Staffordshire,G-T,Services,1999,12293
+TLE3,South Yorkshire,A-F,Goods,1999,3986
+TLE3,South Yorkshire,G-T,Services,1999,9640
+TLM9,Southern Scotland,A-F,Goods,1999,3903
+TLM9,Southern Scotland,G-T,Services,1999,6670
+TLJ2,"Surrey, East and West Sussex",A-F,Goods,1999,8777
+TLJ2,"Surrey, East and West Sussex",G-T,Services,1999,35752
+TLC1,Tees Valley and Durham,A-F,Goods,1999,4464
+TLC1,Tees Valley and Durham,G-T,Services,1999,8245
+TLM8,West Central Scotland,A-F,Goods,1999,5058
+TLM8,West Central Scotland,G-T,Services,1999,15366
+TLG3,West Midlands,A-F,Goods,1999,11668
+TLG3,West Midlands,G-T,Services,1999,24553
+TLL1,West Wales and The Valleys,A-F,Goods,1999,5982
+TLL1,West Wales and The Valleys,G-T,Services,1999,12502
+TLE4,West Yorkshire,A-F,Goods,1999,8346
+TLE4,West Yorkshire,G-T,Services,1999,20912
+TLH2,Bedfordshire and Hertfordshire,A-F,Goods,2000,7448
+TLH2,Bedfordshire and Hertfordshire,G-T,Services,2000,21904
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-F,Goods,2000,10315
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services,2000,39816
+TLD6,Cheshire,A-F,Goods,2000,5268
+TLD6,Cheshire,G-T,Services,2000,10273
+TLK3,Cornwall and Isles of Scilly,A-F,Goods,2000,1363
+TLK3,Cornwall and Isles of Scilly,G-T,Services,2000,4010
+TLD1,Cumbria,A-F,Goods,2000,2528
+TLD1,Cumbria,G-T,Services,2000,4175
+TLF1,Derbyshire and Nottinghamshire,A-F,Goods,2000,9464
+TLF1,Derbyshire and Nottinghamshire,G-T,Services,2000,16840
+TLK4,Devon,A-F,Goods,2000,3619
+TLK4,Devon,G-T,Services,2000,9948
+TLK2,Dorset and Somerset,A-F,Goods,2000,4724
+TLK2,Dorset and Somerset,G-T,Services,2000,12302
+TLH1,East Anglia,A-F,Goods,2000,9493
+TLH1,East Anglia,G-T,Services,2000,23732
+TLL2,East Wales,A-F,Goods,2000,4957
+TLL2,East Wales,G-T,Services,2000,10820
+TLE1,East Yorkshire and Northern Lincolnshire,A-F,Goods,2000,4606
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services,2000,6745
+TLM7,Eastern Scotland,A-F,Goods,2000,7719
+TLM7,Eastern Scotland,G-T,Services,2000,19742
+TLH3,Essex,A-F,Goods,2000,6324
+TLH3,Essex,G-T,Services,2000,16042
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-F,Goods,2000,10099
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services,2000,27579
+TLD3,Greater Manchester,A-F,Goods,2000,9332
+TLD3,Greater Manchester,G-T,Services,2000,26461
+TLJ3,Hampshire and Isle of Wight,A-F,Goods,2000,7372
+TLJ3,Hampshire and Isle of Wight,G-T,Services,2000,22653
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-F,Goods,2000,5710
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services,2000,12974
+TLM6,Highlands and Islands,A-F,Goods,2000,1778
+TLM6,Highlands and Islands,G-T,Services,2000,4064
+TLI4,Inner London - East,A-F,Goods,2000,4343
+TLI4,Inner London - East,G-T,Services,2000,41358
+TLI3,Inner London - West,A-F,Goods,2000,3970
+TLI3,Inner London - West,G-T,Services,2000,76397
+TLJ4,Kent,A-F,Goods,2000,5905
+TLJ4,Kent,G-T,Services,2000,16466
+TLD4,Lancashire,A-F,Goods,2000,7050
+TLD4,Lancashire,G-T,Services,2000,11783
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-F,Goods,2000,7850
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services,2000,15411
+TLF3,Lincolnshire,A-F,Goods,2000,3124
+TLF3,Lincolnshire,G-T,Services,2000,5115
+TLD7,Merseyside,A-F,Goods,2000,4417
+TLD7,Merseyside,G-T,Services,2000,13374
+TLM5,North Eastern Scotland,A-F,Goods,2000,2969
+TLM5,North Eastern Scotland,G-T,Services,2000,5442
+TLE2,North Yorkshire,A-F,Goods,2000,3292
+TLE2,North Yorkshire,G-T,Services,2000,8106
+TLN0,Northern Ireland,A-F,Goods,2000,6982
+TLN0,Northern Ireland,G-T,Services,2000,15375
+TLC2,"Northumberland, and Tyne and Wear",A-F,Goods,2000,4791
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services,2000,12217
+TLI5,Outer London - East and North East,A-F,Goods,2000,4805
+TLI5,Outer London - East and North East,G-T,Services,2000,16044
+TLI6,Outer London - South,A-F,Goods,2000,2797
+TLI6,Outer London - South,G-T,Services,2000,16568
+TLI7,Outer London - West and North West,A-F,Goods,2000,5506
+TLI7,Outer London - West and North West,G-T,Services,2000,32353
+TLG2,Shropshire and Staffordshire,A-F,Goods,2000,6440
+TLG2,Shropshire and Staffordshire,G-T,Services,2000,12558
+TLE3,South Yorkshire,A-F,Goods,2000,4231
+TLE3,South Yorkshire,G-T,Services,2000,9946
+TLM9,Southern Scotland,A-F,Goods,2000,4043
+TLM9,Southern Scotland,G-T,Services,2000,6951
+TLJ2,"Surrey, East and West Sussex",A-F,Goods,2000,9056
+TLJ2,"Surrey, East and West Sussex",G-T,Services,2000,37556
+TLC1,Tees Valley and Durham,A-F,Goods,2000,4552
+TLC1,Tees Valley and Durham,G-T,Services,2000,8578
+TLM8,West Central Scotland,A-F,Goods,2000,5148
+TLM8,West Central Scotland,G-T,Services,2000,16013
+TLG3,West Midlands,A-F,Goods,2000,11986
+TLG3,West Midlands,G-T,Services,2000,25213
+TLL1,West Wales and The Valleys,A-F,Goods,2000,6256
+TLL1,West Wales and The Valleys,G-T,Services,2000,12976
+TLE4,West Yorkshire,A-F,Goods,2000,8365
+TLE4,West Yorkshire,G-T,Services,2000,21570
+TLH2,Bedfordshire and Hertfordshire,A-F,Goods,2001,7333
+TLH2,Bedfordshire and Hertfordshire,G-T,Services,2001,23370
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-F,Goods,2001,10290
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services,2001,41344
+TLD6,Cheshire,A-F,Goods,2001,6191
+TLD6,Cheshire,G-T,Services,2001,11324
+TLK3,Cornwall and Isles of Scilly,A-F,Goods,2001,1378
+TLK3,Cornwall and Isles of Scilly,G-T,Services,2001,4289
+TLD1,Cumbria,A-F,Goods,2001,2421
+TLD1,Cumbria,G-T,Services,2001,4309
+TLF1,Derbyshire and Nottinghamshire,A-F,Goods,2001,9282
+TLF1,Derbyshire and Nottinghamshire,G-T,Services,2001,18061
+TLK4,Devon,A-F,Goods,2001,3716
+TLK4,Devon,G-T,Services,2001,10472
+TLK2,Dorset and Somerset,A-F,Goods,2001,4576
+TLK2,Dorset and Somerset,G-T,Services,2001,12761
+TLH1,East Anglia,A-F,Goods,2001,9593
+TLH1,East Anglia,G-T,Services,2001,25197
+TLL2,East Wales,A-F,Goods,2001,4858
+TLL2,East Wales,G-T,Services,2001,11467
+TLE1,East Yorkshire and Northern Lincolnshire,A-F,Goods,2001,4441
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services,2001,7457
+TLM7,Eastern Scotland,A-F,Goods,2001,7489
+TLM7,Eastern Scotland,G-T,Services,2001,21436
+TLH3,Essex,A-F,Goods,2001,6542
+TLH3,Essex,G-T,Services,2001,17393
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-F,Goods,2001,10394
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services,2001,30172
+TLD3,Greater Manchester,A-F,Goods,2001,9307
+TLD3,Greater Manchester,G-T,Services,2001,28663
+TLJ3,Hampshire and Isle of Wight,A-F,Goods,2001,7182
+TLJ3,Hampshire and Isle of Wight,G-T,Services,2001,24445
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-F,Goods,2001,5535
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services,2001,13474
+TLM6,Highlands and Islands,A-F,Goods,2001,1716
+TLM6,Highlands and Islands,G-T,Services,2001,4395
+TLI4,Inner London - East,A-F,Goods,2001,4270
+TLI4,Inner London - East,G-T,Services,2001,43293
+TLI3,Inner London - West,A-F,Goods,2001,4009
+TLI3,Inner London - West,G-T,Services,2001,79218
+TLJ4,Kent,A-F,Goods,2001,5917
+TLJ4,Kent,G-T,Services,2001,17383
+TLD4,Lancashire,A-F,Goods,2001,6946
+TLD4,Lancashire,G-T,Services,2001,12532
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-F,Goods,2001,7822
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services,2001,16169
+TLF3,Lincolnshire,A-F,Goods,2001,3207
+TLF3,Lincolnshire,G-T,Services,2001,5615
+TLD7,Merseyside,A-F,Goods,2001,4499
+TLD7,Merseyside,G-T,Services,2001,14322
+TLM5,North Eastern Scotland,A-F,Goods,2001,3106
+TLM5,North Eastern Scotland,G-T,Services,2001,5963
+TLE2,North Yorkshire,A-F,Goods,2001,3265
+TLE2,North Yorkshire,G-T,Services,2001,8798
+TLN0,Northern Ireland,A-F,Goods,2001,7023
+TLN0,Northern Ireland,G-T,Services,2001,16251
+TLC2,"Northumberland, and Tyne and Wear",A-F,Goods,2001,4837
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services,2001,13188
+TLI5,Outer London - East and North East,A-F,Goods,2001,4856
+TLI5,Outer London - East and North East,G-T,Services,2001,16742
+TLI6,Outer London - South,A-F,Goods,2001,2835
+TLI6,Outer London - South,G-T,Services,2001,17169
+TLI7,Outer London - West and North West,A-F,Goods,2001,5651
+TLI7,Outer London - West and North West,G-T,Services,2001,33321
+TLG2,Shropshire and Staffordshire,A-F,Goods,2001,6424
+TLG2,Shropshire and Staffordshire,G-T,Services,2001,13329
+TLE3,South Yorkshire,A-F,Goods,2001,4333
+TLE3,South Yorkshire,G-T,Services,2001,10864
+TLM9,Southern Scotland,A-F,Goods,2001,3971
+TLM9,Southern Scotland,G-T,Services,2001,7559
+TLJ2,"Surrey, East and West Sussex",A-F,Goods,2001,8732
+TLJ2,"Surrey, East and West Sussex",G-T,Services,2001,39666
+TLC1,Tees Valley and Durham,A-F,Goods,2001,4228
+TLC1,Tees Valley and Durham,G-T,Services,2001,9137
+TLM8,West Central Scotland,A-F,Goods,2001,5109
+TLM8,West Central Scotland,G-T,Services,2001,17454
+TLG3,West Midlands,A-F,Goods,2001,11903
+TLG3,West Midlands,G-T,Services,2001,27084
+TLL1,West Wales and The Valleys,A-F,Goods,2001,6092
+TLL1,West Wales and The Valleys,G-T,Services,2001,13732
+TLE4,West Yorkshire,A-F,Goods,2001,8614
+TLE4,West Yorkshire,G-T,Services,2001,22504
+TLH2,Bedfordshire and Hertfordshire,A-F,Goods,2002,7628
+TLH2,Bedfordshire and Hertfordshire,G-T,Services,2002,24144
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-F,Goods,2002,10761
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services,2002,43392
+TLD6,Cheshire,A-F,Goods,2002,5928
+TLD6,Cheshire,G-T,Services,2002,12103
+TLK3,Cornwall and Isles of Scilly,A-F,Goods,2002,1548
+TLK3,Cornwall and Isles of Scilly,G-T,Services,2002,4574
+TLD1,Cumbria,A-F,Goods,2002,2616
+TLD1,Cumbria,G-T,Services,2002,4534
+TLF1,Derbyshire and Nottinghamshire,A-F,Goods,2002,9729
+TLF1,Derbyshire and Nottinghamshire,G-T,Services,2002,18819
+TLK4,Devon,A-F,Goods,2002,3928
+TLK4,Devon,G-T,Services,2002,10983
+TLK2,Dorset and Somerset,A-F,Goods,2002,4837
+TLK2,Dorset and Somerset,G-T,Services,2002,13025
+TLH1,East Anglia,A-F,Goods,2002,10226
+TLH1,East Anglia,G-T,Services,2002,26210
+TLL2,East Wales,A-F,Goods,2002,4941
+TLL2,East Wales,G-T,Services,2002,12056
+TLE1,East Yorkshire and Northern Lincolnshire,A-F,Goods,2002,4657
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services,2002,7940
+TLM7,Eastern Scotland,A-F,Goods,2002,7695
+TLM7,Eastern Scotland,G-T,Services,2002,22900
+TLH3,Essex,A-F,Goods,2002,6643
+TLH3,Essex,G-T,Services,2002,17998
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-F,Goods,2002,11120
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services,2002,31149
+TLD3,Greater Manchester,A-F,Goods,2002,9383
+TLD3,Greater Manchester,G-T,Services,2002,30371
+TLJ3,Hampshire and Isle of Wight,A-F,Goods,2002,7622
+TLJ3,Hampshire and Isle of Wight,G-T,Services,2002,25649
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-F,Goods,2002,5561
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services,2002,14041
+TLM6,Highlands and Islands,A-F,Goods,2002,1826
+TLM6,Highlands and Islands,G-T,Services,2002,4409
+TLI4,Inner London - East,A-F,Goods,2002,4204
+TLI4,Inner London - East,G-T,Services,2002,45144
+TLI3,Inner London - West,A-F,Goods,2002,3899
+TLI3,Inner London - West,G-T,Services,2002,82849
+TLJ4,Kent,A-F,Goods,2002,6264
+TLJ4,Kent,G-T,Services,2002,18079
+TLD4,Lancashire,A-F,Goods,2002,7205
+TLD4,Lancashire,G-T,Services,2002,13204
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-F,Goods,2002,8010
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services,2002,16724
+TLF3,Lincolnshire,A-F,Goods,2002,3411
+TLF3,Lincolnshire,G-T,Services,2002,5878
+TLD7,Merseyside,A-F,Goods,2002,4636
+TLD7,Merseyside,G-T,Services,2002,15204
+TLM5,North Eastern Scotland,A-F,Goods,2002,3237
+TLM5,North Eastern Scotland,G-T,Services,2002,6227
+TLE2,North Yorkshire,A-F,Goods,2002,3580
+TLE2,North Yorkshire,G-T,Services,2002,9646
+TLN0,Northern Ireland,A-F,Goods,2002,7162
+TLN0,Northern Ireland,G-T,Services,2002,16883
+TLC2,"Northumberland, and Tyne and Wear",A-F,Goods,2002,5352
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services,2002,14097
+TLI5,Outer London - East and North East,A-F,Goods,2002,4835
+TLI5,Outer London - East and North East,G-T,Services,2002,17568
+TLI6,Outer London - South,A-F,Goods,2002,2828
+TLI6,Outer London - South,G-T,Services,2002,17849
+TLI7,Outer London - West and North West,A-F,Goods,2002,5759
+TLI7,Outer London - West and North West,G-T,Services,2002,34367
+TLG2,Shropshire and Staffordshire,A-F,Goods,2002,6798
+TLG2,Shropshire and Staffordshire,G-T,Services,2002,14026
+TLE3,South Yorkshire,A-F,Goods,2002,4638
+TLE3,South Yorkshire,G-T,Services,2002,11474
+TLM9,Southern Scotland,A-F,Goods,2002,4068
+TLM9,Southern Scotland,G-T,Services,2002,7795
+TLJ2,"Surrey, East and West Sussex",A-F,Goods,2002,9643
+TLJ2,"Surrey, East and West Sussex",G-T,Services,2002,40577
+TLC1,Tees Valley and Durham,A-F,Goods,2002,4549
+TLC1,Tees Valley and Durham,G-T,Services,2002,9511
+TLM8,West Central Scotland,A-F,Goods,2002,5285
+TLM8,West Central Scotland,G-T,Services,2002,17888
+TLG3,West Midlands,A-F,Goods,2002,12010
+TLG3,West Midlands,G-T,Services,2002,28209
+TLL1,West Wales and The Valleys,A-F,Goods,2002,6421
+TLL1,West Wales and The Valleys,G-T,Services,2002,14363
+TLE4,West Yorkshire,A-F,Goods,2002,8699
+TLE4,West Yorkshire,G-T,Services,2002,23597
+TLH2,Bedfordshire and Hertfordshire,A-F,Goods,2003,7904
+TLH2,Bedfordshire and Hertfordshire,G-T,Services,2003,25674
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-F,Goods,2003,11190
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services,2003,46500
+TLD6,Cheshire,A-F,Goods,2003,5586
+TLD6,Cheshire,G-T,Services,2003,12715
+TLK3,Cornwall and Isles of Scilly,A-F,Goods,2003,1660
+TLK3,Cornwall and Isles of Scilly,G-T,Services,2003,4990
+TLD1,Cumbria,A-F,Goods,2003,2741
+TLD1,Cumbria,G-T,Services,2003,4917
+TLF1,Derbyshire and Nottinghamshire,A-F,Goods,2003,9897
+TLF1,Derbyshire and Nottinghamshire,G-T,Services,2003,19752
+TLK4,Devon,A-F,Goods,2003,4029
+TLK4,Devon,G-T,Services,2003,11743
+TLK2,Dorset and Somerset,A-F,Goods,2003,4956
+TLK2,Dorset and Somerset,G-T,Services,2003,13744
+TLH1,East Anglia,A-F,Goods,2003,10438
+TLH1,East Anglia,G-T,Services,2003,27797
+TLL2,East Wales,A-F,Goods,2003,5138
+TLL2,East Wales,G-T,Services,2003,13086
+TLE1,East Yorkshire and Northern Lincolnshire,A-F,Goods,2003,5131
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services,2003,8444
+TLM7,Eastern Scotland,A-F,Goods,2003,7968
+TLM7,Eastern Scotland,G-T,Services,2003,24868
+TLH3,Essex,A-F,Goods,2003,7060
+TLH3,Essex,G-T,Services,2003,19917
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-F,Goods,2003,11687
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services,2003,32715
+TLD3,Greater Manchester,A-F,Goods,2003,9642
+TLD3,Greater Manchester,G-T,Services,2003,31872
+TLJ3,Hampshire and Isle of Wight,A-F,Goods,2003,8139
+TLJ3,Hampshire and Isle of Wight,G-T,Services,2003,26413
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-F,Goods,2003,5753
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services,2003,14985
+TLM6,Highlands and Islands,A-F,Goods,2003,1978
+TLM6,Highlands and Islands,G-T,Services,2003,4857
+TLI4,Inner London - East,A-F,Goods,2003,4118
+TLI4,Inner London - East,G-T,Services,2003,48142
+TLI3,Inner London - West,A-F,Goods,2003,3866
+TLI3,Inner London - West,G-T,Services,2003,88439
+TLJ4,Kent,A-F,Goods,2003,6720
+TLJ4,Kent,G-T,Services,2003,18984
+TLD4,Lancashire,A-F,Goods,2003,7548
+TLD4,Lancashire,G-T,Services,2003,14527
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-F,Goods,2003,8234
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services,2003,18022
+TLF3,Lincolnshire,A-F,Goods,2003,3529
+TLF3,Lincolnshire,G-T,Services,2003,6283
+TLD7,Merseyside,A-F,Goods,2003,5255
+TLD7,Merseyside,G-T,Services,2003,16190
+TLM5,North Eastern Scotland,A-F,Goods,2003,3039
+TLM5,North Eastern Scotland,G-T,Services,2003,6532
+TLE2,North Yorkshire,A-F,Goods,2003,3675
+TLE2,North Yorkshire,G-T,Services,2003,10330
+TLN0,Northern Ireland,A-F,Goods,2003,7578
+TLN0,Northern Ireland,G-T,Services,2003,18388
+TLC2,"Northumberland, and Tyne and Wear",A-F,Goods,2003,5352
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services,2003,15011
+TLI5,Outer London - East and North East,A-F,Goods,2003,4863
+TLI5,Outer London - East and North East,G-T,Services,2003,18866
+TLI6,Outer London - South,A-F,Goods,2003,2876
+TLI6,Outer London - South,G-T,Services,2003,18986
+TLI7,Outer London - West and North West,A-F,Goods,2003,5698
+TLI7,Outer London - West and North West,G-T,Services,2003,36243
+TLG2,Shropshire and Staffordshire,A-F,Goods,2003,6838
+TLG2,Shropshire and Staffordshire,G-T,Services,2003,15083
+TLE3,South Yorkshire,A-F,Goods,2003,4839
+TLE3,South Yorkshire,G-T,Services,2003,12345
+TLM9,Southern Scotland,A-F,Goods,2003,4283
+TLM9,Southern Scotland,G-T,Services,2003,8194
+TLJ2,"Surrey, East and West Sussex",A-F,Goods,2003,9854
+TLJ2,"Surrey, East and West Sussex",G-T,Services,2003,42193
+TLC1,Tees Valley and Durham,A-F,Goods,2003,5129
+TLC1,Tees Valley and Durham,G-T,Services,2003,9942
+TLM8,West Central Scotland,A-F,Goods,2003,5559
+TLM8,West Central Scotland,G-T,Services,2003,18864
+TLG3,West Midlands,A-F,Goods,2003,12061
+TLG3,West Midlands,G-T,Services,2003,29955
+TLL1,West Wales and The Valleys,A-F,Goods,2003,6690
+TLL1,West Wales and The Valleys,G-T,Services,2003,15361
+TLE4,West Yorkshire,A-F,Goods,2003,8888
+TLE4,West Yorkshire,G-T,Services,2003,25634
+TLH2,Bedfordshire and Hertfordshire,A-F,Goods,2004,7838
+TLH2,Bedfordshire and Hertfordshire,G-T,Services,2004,26840
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-F,Goods,2004,10931
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services,2004,47761
+TLD6,Cheshire,A-F,Goods,2004,6344
+TLD6,Cheshire,G-T,Services,2004,13167
+TLK3,Cornwall and Isles of Scilly,A-F,Goods,2004,1684
+TLK3,Cornwall and Isles of Scilly,G-T,Services,2004,5216
+TLD1,Cumbria,A-F,Goods,2004,2781
+TLD1,Cumbria,G-T,Services,2004,5128
+TLF1,Derbyshire and Nottinghamshire,A-F,Goods,2004,10265
+TLF1,Derbyshire and Nottinghamshire,G-T,Services,2004,21251
+TLK4,Devon,A-F,Goods,2004,4182
+TLK4,Devon,G-T,Services,2004,12967
+TLK2,Dorset and Somerset,A-F,Goods,2004,5138
+TLK2,Dorset and Somerset,G-T,Services,2004,14476
+TLH1,East Anglia,A-F,Goods,2004,10210
+TLH1,East Anglia,G-T,Services,2004,29516
+TLL2,East Wales,A-F,Goods,2004,5188
+TLL2,East Wales,G-T,Services,2004,13900
+TLE1,East Yorkshire and Northern Lincolnshire,A-F,Goods,2004,5367
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services,2004,8938
+TLM7,Eastern Scotland,A-F,Goods,2004,8484
+TLM7,Eastern Scotland,G-T,Services,2004,26618
+TLH3,Essex,A-F,Goods,2004,6904
+TLH3,Essex,G-T,Services,2004,20668
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-F,Goods,2004,11740
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services,2004,34712
+TLD3,Greater Manchester,A-F,Goods,2004,9947
+TLD3,Greater Manchester,G-T,Services,2004,33867
+TLJ3,Hampshire and Isle of Wight,A-F,Goods,2004,8225
+TLJ3,Hampshire and Isle of Wight,G-T,Services,2004,28320
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-F,Goods,2004,6000
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services,2004,15655
+TLM6,Highlands and Islands,A-F,Goods,2004,2120
+TLM6,Highlands and Islands,G-T,Services,2004,5270
+TLI4,Inner London - East,A-F,Goods,2004,4219
+TLI4,Inner London - East,G-T,Services,2004,51120
+TLI3,Inner London - West,A-F,Goods,2004,3962
+TLI3,Inner London - West,G-T,Services,2004,93680
+TLJ4,Kent,A-F,Goods,2004,6631
+TLJ4,Kent,G-T,Services,2004,20342
+TLD4,Lancashire,A-F,Goods,2004,7865
+TLD4,Lancashire,G-T,Services,2004,15565
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-F,Goods,2004,8633
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services,2004,19058
+TLF3,Lincolnshire,A-F,Goods,2004,3267
+TLF3,Lincolnshire,G-T,Services,2004,6466
+TLD7,Merseyside,A-F,Goods,2004,5164
+TLD7,Merseyside,G-T,Services,2004,17388
+TLM5,North Eastern Scotland,A-F,Goods,2004,3198
+TLM5,North Eastern Scotland,G-T,Services,2004,6926
+TLE2,North Yorkshire,A-F,Goods,2004,3599
+TLE2,North Yorkshire,G-T,Services,2004,11035
+TLN0,Northern Ireland,A-F,Goods,2004,7837
+TLN0,Northern Ireland,G-T,Services,2004,19404
+TLC2,"Northumberland, and Tyne and Wear",A-F,Goods,2004,5585
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services,2004,16662
+TLI5,Outer London - East and North East,A-F,Goods,2004,4898
+TLI5,Outer London - East and North East,G-T,Services,2004,19847
+TLI6,Outer London - South,A-F,Goods,2004,2870
+TLI6,Outer London - South,G-T,Services,2004,19939
+TLI7,Outer London - West and North West,A-F,Goods,2004,5646
+TLI7,Outer London - West and North West,G-T,Services,2004,37582
+TLG2,Shropshire and Staffordshire,A-F,Goods,2004,6656
+TLG2,Shropshire and Staffordshire,G-T,Services,2004,16563
+TLE3,South Yorkshire,A-F,Goods,2004,4674
+TLE3,South Yorkshire,G-T,Services,2004,13534
+TLM9,Southern Scotland,A-F,Goods,2004,4309
+TLM9,Southern Scotland,G-T,Services,2004,8732
+TLJ2,"Surrey, East and West Sussex",A-F,Goods,2004,9703
+TLJ2,"Surrey, East and West Sussex",G-T,Services,2004,43663
+TLC1,Tees Valley and Durham,A-F,Goods,2004,5147
+TLC1,Tees Valley and Durham,G-T,Services,2004,10991
+TLM8,West Central Scotland,A-F,Goods,2004,5756
+TLM8,West Central Scotland,G-T,Services,2004,20398
+TLG3,West Midlands,A-F,Goods,2004,11851
+TLG3,West Midlands,G-T,Services,2004,31966
+TLL1,West Wales and The Valleys,A-F,Goods,2004,6873
+TLL1,West Wales and The Valleys,G-T,Services,2004,16711
+TLE4,West Yorkshire,A-F,Goods,2004,8848
+TLE4,West Yorkshire,G-T,Services,2004,27768
+TLH2,Bedfordshire and Hertfordshire,A-F,Goods,2005,8773
+TLH2,Bedfordshire and Hertfordshire,G-T,Services,2005,28290
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-F,Goods,2005,11760
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services,2005,50162
+TLD6,Cheshire,A-F,Goods,2005,6895
+TLD6,Cheshire,G-T,Services,2005,13734
+TLK3,Cornwall and Isles of Scilly,A-F,Goods,2005,1776
+TLK3,Cornwall and Isles of Scilly,G-T,Services,2005,5494
+TLD1,Cumbria,A-F,Goods,2005,2990
+TLD1,Cumbria,G-T,Services,2005,5304
+TLF1,Derbyshire and Nottinghamshire,A-F,Goods,2005,10863
+TLF1,Derbyshire and Nottinghamshire,G-T,Services,2005,22792
+TLK4,Devon,A-F,Goods,2005,4136
+TLK4,Devon,G-T,Services,2005,13677
+TLK2,Dorset and Somerset,A-F,Goods,2005,5340
+TLK2,Dorset and Somerset,G-T,Services,2005,15482
+TLH1,East Anglia,A-F,Goods,2005,10309
+TLH1,East Anglia,G-T,Services,2005,31644
+TLL2,East Wales,A-F,Goods,2005,5522
+TLL2,East Wales,G-T,Services,2005,14398
+TLE1,East Yorkshire and Northern Lincolnshire,A-F,Goods,2005,5620
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services,2005,9250
+TLM7,Eastern Scotland,A-F,Goods,2005,8677
+TLM7,Eastern Scotland,G-T,Services,2005,28236
+TLH3,Essex,A-F,Goods,2005,7253
+TLH3,Essex,G-T,Services,2005,21288
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-F,Goods,2005,12281
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services,2005,36022
+TLD3,Greater Manchester,A-F,Goods,2005,10154
+TLD3,Greater Manchester,G-T,Services,2005,36544
+TLJ3,Hampshire and Isle of Wight,A-F,Goods,2005,8569
+TLJ3,Hampshire and Isle of Wight,G-T,Services,2005,29838
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-F,Goods,2005,6031
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services,2005,16475
+TLM6,Highlands and Islands,A-F,Goods,2005,2282
+TLM6,Highlands and Islands,G-T,Services,2005,5602
+TLI4,Inner London - East,A-F,Goods,2005,4266
+TLI4,Inner London - East,G-T,Services,2005,56274
+TLI3,Inner London - West,A-F,Goods,2005,3881
+TLI3,Inner London - West,G-T,Services,2005,103731
+TLJ4,Kent,A-F,Goods,2005,7049
+TLJ4,Kent,G-T,Services,2005,21497
+TLD4,Lancashire,A-F,Goods,2005,8327
+TLD4,Lancashire,G-T,Services,2005,15927
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-F,Goods,2005,8753
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services,2005,20211
+TLF3,Lincolnshire,A-F,Goods,2005,3165
+TLF3,Lincolnshire,G-T,Services,2005,6783
+TLD7,Merseyside,A-F,Goods,2005,5379
+TLD7,Merseyside,G-T,Services,2005,18038
+TLM5,North Eastern Scotland,A-F,Goods,2005,3479
+TLM5,North Eastern Scotland,G-T,Services,2005,7213
+TLE2,North Yorkshire,A-F,Goods,2005,3761
+TLE2,North Yorkshire,G-T,Services,2005,11317
+TLN0,Northern Ireland,A-F,Goods,2005,8260
+TLN0,Northern Ireland,G-T,Services,2005,20496
+TLC2,"Northumberland, and Tyne and Wear",A-F,Goods,2005,5780
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services,2005,17689
+TLI5,Outer London - East and North East,A-F,Goods,2005,5032
+TLI5,Outer London - East and North East,G-T,Services,2005,21030
+TLI6,Outer London - South,A-F,Goods,2005,3000
+TLI6,Outer London - South,G-T,Services,2005,21078
+TLI7,Outer London - West and North West,A-F,Goods,2005,5879
+TLI7,Outer London - West and North West,G-T,Services,2005,39460
+TLG2,Shropshire and Staffordshire,A-F,Goods,2005,6784
+TLG2,Shropshire and Staffordshire,G-T,Services,2005,17383
+TLE3,South Yorkshire,A-F,Goods,2005,4969
+TLE3,South Yorkshire,G-T,Services,2005,14035
+TLM9,Southern Scotland,A-F,Goods,2005,4425
+TLM9,Southern Scotland,G-T,Services,2005,9343
+TLJ2,"Surrey, East and West Sussex",A-F,Goods,2005,9734
+TLJ2,"Surrey, East and West Sussex",G-T,Services,2005,46103
+TLC1,Tees Valley and Durham,A-F,Goods,2005,5240
+TLC1,Tees Valley and Durham,G-T,Services,2005,11494
+TLM8,West Central Scotland,A-F,Goods,2005,6086
+TLM8,West Central Scotland,G-T,Services,2005,21943
+TLG3,West Midlands,A-F,Goods,2005,12107
+TLG3,West Midlands,G-T,Services,2005,33856
+TLL1,West Wales and The Valleys,A-F,Goods,2005,6979
+TLL1,West Wales and The Valleys,G-T,Services,2005,17631
+TLE4,West Yorkshire,A-F,Goods,2005,9440
+TLE4,West Yorkshire,G-T,Services,2005,29602
+TLH2,Bedfordshire and Hertfordshire,A-F,Goods,2006,9025
+TLH2,Bedfordshire and Hertfordshire,G-T,Services,2006,29010
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-F,Goods,2006,11778
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services,2006,52434
+TLD6,Cheshire,A-F,Goods,2006,7226
+TLD6,Cheshire,G-T,Services,2006,14859
+TLK3,Cornwall and Isles of Scilly,A-F,Goods,2006,1806
+TLK3,Cornwall and Isles of Scilly,G-T,Services,2006,5980
+TLD1,Cumbria,A-F,Goods,2006,3214
+TLD1,Cumbria,G-T,Services,2006,5752
+TLF1,Derbyshire and Nottinghamshire,A-F,Goods,2006,11309
+TLF1,Derbyshire and Nottinghamshire,G-T,Services,2006,23587
+TLK4,Devon,A-F,Goods,2006,4407
+TLK4,Devon,G-T,Services,2006,14428
+TLK2,Dorset and Somerset,A-F,Goods,2006,5403
+TLK2,Dorset and Somerset,G-T,Services,2006,16383
+TLH1,East Anglia,A-F,Goods,2006,11214
+TLH1,East Anglia,G-T,Services,2006,33894
+TLL2,East Wales,A-F,Goods,2006,5943
+TLL2,East Wales,G-T,Services,2006,15058
+TLE1,East Yorkshire and Northern Lincolnshire,A-F,Goods,2006,5880
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services,2006,9752
+TLM7,Eastern Scotland,A-F,Goods,2006,9655
+TLM7,Eastern Scotland,G-T,Services,2006,29601
+TLH3,Essex,A-F,Goods,2006,7525
+TLH3,Essex,G-T,Services,2006,22181
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-F,Goods,2006,12956
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services,2006,37279
+TLD3,Greater Manchester,A-F,Goods,2006,10295
+TLD3,Greater Manchester,G-T,Services,2006,38905
+TLJ3,Hampshire and Isle of Wight,A-F,Goods,2006,8431
+TLJ3,Hampshire and Isle of Wight,G-T,Services,2006,31132
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-F,Goods,2006,6496
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services,2006,17356
+TLM6,Highlands and Islands,A-F,Goods,2006,2402
+TLM6,Highlands and Islands,G-T,Services,2006,5831
+TLI4,Inner London - East,A-F,Goods,2006,4609
+TLI4,Inner London - East,G-T,Services,2006,59395
+TLI3,Inner London - West,A-F,Goods,2006,4339
+TLI3,Inner London - West,G-T,Services,2006,110027
+TLJ4,Kent,A-F,Goods,2006,6992
+TLJ4,Kent,G-T,Services,2006,22334
+TLD4,Lancashire,A-F,Goods,2006,8231
+TLD4,Lancashire,G-T,Services,2006,16612
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-F,Goods,2006,8944
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services,2006,22113
+TLF3,Lincolnshire,A-F,Goods,2006,3219
+TLF3,Lincolnshire,G-T,Services,2006,7425
+TLD7,Merseyside,A-F,Goods,2006,6023
+TLD7,Merseyside,G-T,Services,2006,19214
+TLM5,North Eastern Scotland,A-F,Goods,2006,4023
+TLM5,North Eastern Scotland,G-T,Services,2006,8121
+TLE2,North Yorkshire,A-F,Goods,2006,4061
+TLE2,North Yorkshire,G-T,Services,2006,11646
+TLN0,Northern Ireland,A-F,Goods,2006,8774
+TLN0,Northern Ireland,G-T,Services,2006,21722
+TLC2,"Northumberland, and Tyne and Wear",A-F,Goods,2006,6157
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services,2006,18491
+TLI5,Outer London - East and North East,A-F,Goods,2006,5424
+TLI5,Outer London - East and North East,G-T,Services,2006,22250
+TLI6,Outer London - South,A-F,Goods,2006,3198
+TLI6,Outer London - South,G-T,Services,2006,22108
+TLI7,Outer London - West and North West,A-F,Goods,2006,6243
+TLI7,Outer London - West and North West,G-T,Services,2006,41887
+TLG2,Shropshire and Staffordshire,A-F,Goods,2006,6996
+TLG2,Shropshire and Staffordshire,G-T,Services,2006,17935
+TLE3,South Yorkshire,A-F,Goods,2006,5057
+TLE3,South Yorkshire,G-T,Services,2006,14985
+TLM9,Southern Scotland,A-F,Goods,2006,4904
+TLM9,Southern Scotland,G-T,Services,2006,9831
+TLJ2,"Surrey, East and West Sussex",A-F,Goods,2006,10273
+TLJ2,"Surrey, East and West Sussex",G-T,Services,2006,49367
+TLC1,Tees Valley and Durham,A-F,Goods,2006,5362
+TLC1,Tees Valley and Durham,G-T,Services,2006,12332
+TLM8,West Central Scotland,A-F,Goods,2006,6595
+TLM8,West Central Scotland,G-T,Services,2006,22831
+TLG3,West Midlands,A-F,Goods,2006,12038
+TLG3,West Midlands,G-T,Services,2006,35027
+TLL1,West Wales and The Valleys,A-F,Goods,2006,7155
+TLL1,West Wales and The Valleys,G-T,Services,2006,18648
+TLE4,West Yorkshire,A-F,Goods,2006,10026
+TLE4,West Yorkshire,G-T,Services,2006,30964
+TLH2,Bedfordshire and Hertfordshire,A-F,Goods,2007,9411
+TLH2,Bedfordshire and Hertfordshire,G-T,Services,2007,30392
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-F,Goods,2007,12275
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services,2007,55088
+TLD6,Cheshire,A-F,Goods,2007,7206
+TLD6,Cheshire,G-T,Services,2007,15890
+TLK3,Cornwall and Isles of Scilly,A-F,Goods,2007,1863
+TLK3,Cornwall and Isles of Scilly,G-T,Services,2007,6074
+TLD1,Cumbria,A-F,Goods,2007,3194
+TLD1,Cumbria,G-T,Services,2007,6014
+TLF1,Derbyshire and Nottinghamshire,A-F,Goods,2007,11303
+TLF1,Derbyshire and Nottinghamshire,G-T,Services,2007,24802
+TLK4,Devon,A-F,Goods,2007,4466
+TLK4,Devon,G-T,Services,2007,14625
+TLK2,Dorset and Somerset,A-F,Goods,2007,5319
+TLK2,Dorset and Somerset,G-T,Services,2007,16990
+TLH1,East Anglia,A-F,Goods,2007,11483
+TLH1,East Anglia,G-T,Services,2007,35009
+TLL2,East Wales,A-F,Goods,2007,6017
+TLL2,East Wales,G-T,Services,2007,16002
+TLE1,East Yorkshire and Northern Lincolnshire,A-F,Goods,2007,6091
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services,2007,10457
+TLM7,Eastern Scotland,A-F,Goods,2007,9935
+TLM7,Eastern Scotland,G-T,Services,2007,31135
+TLH3,Essex,A-F,Goods,2007,7803
+TLH3,Essex,G-T,Services,2007,22996
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-F,Goods,2007,13601
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services,2007,39661
+TLD3,Greater Manchester,A-F,Goods,2007,10746
+TLD3,Greater Manchester,G-T,Services,2007,40840
+TLJ3,Hampshire and Isle of Wight,A-F,Goods,2007,8767
+TLJ3,Hampshire and Isle of Wight,G-T,Services,2007,32949
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-F,Goods,2007,6607
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services,2007,17463
+TLM6,Highlands and Islands,A-F,Goods,2007,2470
+TLM6,Highlands and Islands,G-T,Services,2007,6031
+TLI4,Inner London - East,A-F,Goods,2007,5133
+TLI4,Inner London - East,G-T,Services,2007,65462
+TLI3,Inner London - West,A-F,Goods,2007,5011
+TLI3,Inner London - West,G-T,Services,2007,121205
+TLJ4,Kent,A-F,Goods,2007,7253
+TLJ4,Kent,G-T,Services,2007,23214
+TLD4,Lancashire,A-F,Goods,2007,8405
+TLD4,Lancashire,G-T,Services,2007,17538
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-F,Goods,2007,9432
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services,2007,23369
+TLF3,Lincolnshire,A-F,Goods,2007,3376
+TLF3,Lincolnshire,G-T,Services,2007,7828
+TLD7,Merseyside,A-F,Goods,2007,5760
+TLD7,Merseyside,G-T,Services,2007,19602
+TLM5,North Eastern Scotland,A-F,Goods,2007,4498
+TLM5,North Eastern Scotland,G-T,Services,2007,9096
+TLE2,North Yorkshire,A-F,Goods,2007,4146
+TLE2,North Yorkshire,G-T,Services,2007,12435
+TLN0,Northern Ireland,A-F,Goods,2007,9033
+TLN0,Northern Ireland,G-T,Services,2007,22544
+TLC2,"Northumberland, and Tyne and Wear",A-F,Goods,2007,6193
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services,2007,18762
+TLI5,Outer London - East and North East,A-F,Goods,2007,5736
+TLI5,Outer London - East and North East,G-T,Services,2007,23319
+TLI6,Outer London - South,A-F,Goods,2007,3366
+TLI6,Outer London - South,G-T,Services,2007,23432
+TLI7,Outer London - West and North West,A-F,Goods,2007,6475
+TLI7,Outer London - West and North West,G-T,Services,2007,44215
+TLG2,Shropshire and Staffordshire,A-F,Goods,2007,6917
+TLG2,Shropshire and Staffordshire,G-T,Services,2007,18612
+TLE3,South Yorkshire,A-F,Goods,2007,5415
+TLE3,South Yorkshire,G-T,Services,2007,16013
+TLM9,Southern Scotland,A-F,Goods,2007,4905
+TLM9,Southern Scotland,G-T,Services,2007,10037
+TLJ2,"Surrey, East and West Sussex",A-F,Goods,2007,11085
+TLJ2,"Surrey, East and West Sussex",G-T,Services,2007,50643
+TLC1,Tees Valley and Durham,A-F,Goods,2007,5663
+TLC1,Tees Valley and Durham,G-T,Services,2007,12595
+TLM8,West Central Scotland,A-F,Goods,2007,6474
+TLM8,West Central Scotland,G-T,Services,2007,23476
+TLG3,West Midlands,A-F,Goods,2007,12372
+TLG3,West Midlands,G-T,Services,2007,36597
+TLL1,West Wales and The Valleys,A-F,Goods,2007,7565
+TLL1,West Wales and The Valleys,G-T,Services,2007,19020
+TLE4,West Yorkshire,A-F,Goods,2007,10378
+TLE4,West Yorkshire,G-T,Services,2007,32703
+TLH2,Bedfordshire and Hertfordshire,A-F,Goods,2008,10331
+TLH2,Bedfordshire and Hertfordshire,G-T,Services,2008,31733
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-F,Goods,2008,12731
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services,2008,57975
+TLD6,Cheshire,A-F,Goods,2008,7099
+TLD6,Cheshire,G-T,Services,2008,16000
+TLK3,Cornwall and Isles of Scilly,A-F,Goods,2008,1982
+TLK3,Cornwall and Isles of Scilly,G-T,Services,2008,6400
+TLD1,Cumbria,A-F,Goods,2008,3583
+TLD1,Cumbria,G-T,Services,2008,6294
+TLF1,Derbyshire and Nottinghamshire,A-F,Goods,2008,11318
+TLF1,Derbyshire and Nottinghamshire,G-T,Services,2008,25892
+TLK4,Devon,A-F,Goods,2008,4656
+TLK4,Devon,G-T,Services,2008,15172
+TLK2,Dorset and Somerset,A-F,Goods,2008,5712
+TLK2,Dorset and Somerset,G-T,Services,2008,17886
+TLH1,East Anglia,A-F,Goods,2008,12184
+TLH1,East Anglia,G-T,Services,2008,35803
+TLL2,East Wales,A-F,Goods,2008,6094
+TLL2,East Wales,G-T,Services,2008,15853
+TLE1,East Yorkshire and Northern Lincolnshire,A-F,Goods,2008,6763
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services,2008,10735
+TLM7,Eastern Scotland,A-F,Goods,2008,10295
+TLM7,Eastern Scotland,G-T,Services,2008,31629
+TLH3,Essex,A-F,Goods,2008,7965
+TLH3,Essex,G-T,Services,2008,23776
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-F,Goods,2008,13984
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services,2008,41765
+TLD3,Greater Manchester,A-F,Goods,2008,11183
+TLD3,Greater Manchester,G-T,Services,2008,41278
+TLJ3,Hampshire and Isle of Wight,A-F,Goods,2008,8984
+TLJ3,Hampshire and Isle of Wight,G-T,Services,2008,34861
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-F,Goods,2008,6887
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services,2008,18282
+TLM6,Highlands and Islands,A-F,Goods,2008,2768
+TLM6,Highlands and Islands,G-T,Services,2008,6304
+TLI4,Inner London - East,A-F,Goods,2008,5387
+TLI4,Inner London - East,G-T,Services,2008,68824
+TLI3,Inner London - West,A-F,Goods,2008,5716
+TLI3,Inner London - West,G-T,Services,2008,123704
+TLJ4,Kent,A-F,Goods,2008,7719
+TLJ4,Kent,G-T,Services,2008,24881
+TLD4,Lancashire,A-F,Goods,2008,8171
+TLD4,Lancashire,G-T,Services,2008,18236
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-F,Goods,2008,9843
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services,2008,24498
+TLF3,Lincolnshire,A-F,Goods,2008,3616
+TLF3,Lincolnshire,G-T,Services,2008,8254
+TLD7,Merseyside,A-F,Goods,2008,6032
+TLD7,Merseyside,G-T,Services,2008,20505
+TLM5,North Eastern Scotland,A-F,Goods,2008,5162
+TLM5,North Eastern Scotland,G-T,Services,2008,9889
+TLE2,North Yorkshire,A-F,Goods,2008,4318
+TLE2,North Yorkshire,G-T,Services,2008,12572
+TLN0,Northern Ireland,A-F,Goods,2008,8985
+TLN0,Northern Ireland,G-T,Services,2008,22957
+TLC2,"Northumberland, and Tyne and Wear",A-F,Goods,2008,6371
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services,2008,19075
+TLI5,Outer London - East and North East,A-F,Goods,2008,5981
+TLI5,Outer London - East and North East,G-T,Services,2008,23557
+TLI6,Outer London - South,A-F,Goods,2008,3342
+TLI6,Outer London - South,G-T,Services,2008,23604
+TLI7,Outer London - West and North West,A-F,Goods,2008,6696
+TLI7,Outer London - West and North West,G-T,Services,2008,45031
+TLG2,Shropshire and Staffordshire,A-F,Goods,2008,7145
+TLG2,Shropshire and Staffordshire,G-T,Services,2008,19704
+TLE3,South Yorkshire,A-F,Goods,2008,5328
+TLE3,South Yorkshire,G-T,Services,2008,15921
+TLM9,Southern Scotland,A-F,Goods,2008,5155
+TLM9,Southern Scotland,G-T,Services,2008,10593
+TLJ2,"Surrey, East and West Sussex",A-F,Goods,2008,11570
+TLJ2,"Surrey, East and West Sussex",G-T,Services,2008,53696
+TLC1,Tees Valley and Durham,A-F,Goods,2008,5984
+TLC1,Tees Valley and Durham,G-T,Services,2008,12964
+TLM8,West Central Scotland,A-F,Goods,2008,6966
+TLM8,West Central Scotland,G-T,Services,2008,24421
+TLG3,West Midlands,A-F,Goods,2008,12367
+TLG3,West Midlands,G-T,Services,2008,37498
+TLL1,West Wales and The Valleys,A-F,Goods,2008,7681
+TLL1,West Wales and The Valleys,G-T,Services,2008,19472
+TLE4,West Yorkshire,A-F,Goods,2008,10591
+TLE4,West Yorkshire,G-T,Services,2008,32752
+TLH2,Bedfordshire and Hertfordshire,A-F,Goods,2009,9035
+TLH2,Bedfordshire and Hertfordshire,G-T,Services,2009,31203
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-F,Goods,2009,11959
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services,2009,57501
+TLD6,Cheshire,A-F,Goods,2009,6763
+TLD6,Cheshire,G-T,Services,2009,16158
+TLK3,Cornwall and Isles of Scilly,A-F,Goods,2009,1887
+TLK3,Cornwall and Isles of Scilly,G-T,Services,2009,6102
+TLD1,Cumbria,A-F,Goods,2009,3378
+TLD1,Cumbria,G-T,Services,2009,6264
+TLF1,Derbyshire and Nottinghamshire,A-F,Goods,2009,10231
+TLF1,Derbyshire and Nottinghamshire,G-T,Services,2009,25982
+TLK4,Devon,A-F,Goods,2009,4430
+TLK4,Devon,G-T,Services,2009,14986
+TLK2,Dorset and Somerset,A-F,Goods,2009,5231
+TLK2,Dorset and Somerset,G-T,Services,2009,17833
+TLH1,East Anglia,A-F,Goods,2009,11664
+TLH1,East Anglia,G-T,Services,2009,35832
+TLL2,East Wales,A-F,Goods,2009,5897
+TLL2,East Wales,G-T,Services,2009,16116
+TLE1,East Yorkshire and Northern Lincolnshire,A-F,Goods,2009,6272
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services,2009,10611
+TLM7,Eastern Scotland,A-F,Goods,2009,9487
+TLM7,Eastern Scotland,G-T,Services,2009,33000
+TLH3,Essex,A-F,Goods,2009,7245
+TLH3,Essex,G-T,Services,2009,23559
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-F,Goods,2009,12931
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services,2009,42649
+TLD3,Greater Manchester,A-F,Goods,2009,10292
+TLD3,Greater Manchester,G-T,Services,2009,42463
+TLJ3,Hampshire and Isle of Wight,A-F,Goods,2009,8441
+TLJ3,Hampshire and Isle of Wight,G-T,Services,2009,35121
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-F,Goods,2009,6140
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services,2009,18229
+TLM6,Highlands and Islands,A-F,Goods,2009,2720
+TLM6,Highlands and Islands,G-T,Services,2009,6273
+TLI4,Inner London - East,A-F,Goods,2009,5320
+TLI4,Inner London - East,G-T,Services,2009,69564
+TLI3,Inner London - West,A-F,Goods,2009,5285
+TLI3,Inner London - West,G-T,Services,2009,125407
+TLJ4,Kent,A-F,Goods,2009,6910
+TLJ4,Kent,G-T,Services,2009,24249
+TLD4,Lancashire,A-F,Goods,2009,6728
+TLD4,Lancashire,G-T,Services,2009,18389
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-F,Goods,2009,9285
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services,2009,24068
+TLF3,Lincolnshire,A-F,Goods,2009,3370
+TLF3,Lincolnshire,G-T,Services,2009,8124
+TLD7,Merseyside,A-F,Goods,2009,5962
+TLD7,Merseyside,G-T,Services,2009,21157
+TLM5,North Eastern Scotland,A-F,Goods,2009,4774
+TLM5,North Eastern Scotland,G-T,Services,2009,9995
+TLE2,North Yorkshire,A-F,Goods,2009,4038
+TLE2,North Yorkshire,G-T,Services,2009,12421
+TLN0,Northern Ireland,A-F,Goods,2009,8304
+TLN0,Northern Ireland,G-T,Services,2009,23062
+TLC2,"Northumberland, and Tyne and Wear",A-F,Goods,2009,6114
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services,2009,18972
+TLI5,Outer London - East and North East,A-F,Goods,2009,5414
+TLI5,Outer London - East and North East,G-T,Services,2009,22073
+TLI6,Outer London - South,A-F,Goods,2009,2831
+TLI6,Outer London - South,G-T,Services,2009,22517
+TLI7,Outer London - West and North West,A-F,Goods,2009,6341
+TLI7,Outer London - West and North West,G-T,Services,2009,42442
+TLG2,Shropshire and Staffordshire,A-F,Goods,2009,6192
+TLG2,Shropshire and Staffordshire,G-T,Services,2009,19436
+TLE3,South Yorkshire,A-F,Goods,2009,4676
+TLE3,South Yorkshire,G-T,Services,2009,16179
+TLM9,Southern Scotland,A-F,Goods,2009,4982
+TLM9,Southern Scotland,G-T,Services,2009,10511
+TLJ2,"Surrey, East and West Sussex",A-F,Goods,2009,10390
+TLJ2,"Surrey, East and West Sussex",G-T,Services,2009,53923
+TLC1,Tees Valley and Durham,A-F,Goods,2009,5827
+TLC1,Tees Valley and Durham,G-T,Services,2009,13265
+TLM8,West Central Scotland,A-F,Goods,2009,6407
+TLM8,West Central Scotland,G-T,Services,2009,24600
+TLG3,West Midlands,A-F,Goods,2009,11241
+TLG3,West Midlands,G-T,Services,2009,37308
+TLL1,West Wales and The Valleys,A-F,Goods,2009,7140
+TLL1,West Wales and The Valleys,G-T,Services,2009,19407
+TLE4,West Yorkshire,A-F,Goods,2009,9954
+TLE4,West Yorkshire,G-T,Services,2009,32998
+TLH2,Bedfordshire and Hertfordshire,A-F,Goods,2010,8876
+TLH2,Bedfordshire and Hertfordshire,G-T,Services,2010,30954
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-F,Goods,2010,11902
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services,2010,59094
+TLD6,Cheshire,A-F,Goods,2010,6900
+TLD6,Cheshire,G-T,Services,2010,16990
+TLK3,Cornwall and Isles of Scilly,A-F,Goods,2010,1877
+TLK3,Cornwall and Isles of Scilly,G-T,Services,2010,6212
+TLD1,Cumbria,A-F,Goods,2010,3384
+TLD1,Cumbria,G-T,Services,2010,6478
+TLF1,Derbyshire and Nottinghamshire,A-F,Goods,2010,10640
+TLF1,Derbyshire and Nottinghamshire,G-T,Services,2010,26999
+TLK4,Devon,A-F,Goods,2010,4556
+TLK4,Devon,G-T,Services,2010,15524
+TLK2,Dorset and Somerset,A-F,Goods,2010,5459
+TLK2,Dorset and Somerset,G-T,Services,2010,17861
+TLH1,East Anglia,A-F,Goods,2010,11924
+TLH1,East Anglia,G-T,Services,2010,36441
+TLL2,East Wales,A-F,Goods,2010,6089
+TLL2,East Wales,G-T,Services,2010,16330
+TLE1,East Yorkshire and Northern Lincolnshire,A-F,Goods,2010,6136
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services,2010,10483
+TLM7,Eastern Scotland,A-F,Goods,2010,9337
+TLM7,Eastern Scotland,G-T,Services,2010,33178
+TLH3,Essex,A-F,Goods,2010,7808
+TLH3,Essex,G-T,Services,2010,24044
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-F,Goods,2010,13263
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services,2010,44563
+TLD3,Greater Manchester,A-F,Goods,2010,10137
+TLD3,Greater Manchester,G-T,Services,2010,43496
+TLJ3,Hampshire and Isle of Wight,A-F,Goods,2010,8811
+TLJ3,Hampshire and Isle of Wight,G-T,Services,2010,36333
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-F,Goods,2010,6580
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services,2010,18535
+TLM6,Highlands and Islands,A-F,Goods,2010,2807
+TLM6,Highlands and Islands,G-T,Services,2010,6353
+TLI4,Inner London - East,A-F,Goods,2010,5423
+TLI4,Inner London - East,G-T,Services,2010,72984
+TLI3,Inner London - West,A-F,Goods,2010,4874
+TLI3,Inner London - West,G-T,Services,2010,132013
+TLJ4,Kent,A-F,Goods,2010,7073
+TLJ4,Kent,G-T,Services,2010,24984
+TLD4,Lancashire,A-F,Goods,2010,6857
+TLD4,Lancashire,G-T,Services,2010,18781
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-F,Goods,2010,9600
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services,2010,25076
+TLF3,Lincolnshire,A-F,Goods,2010,3398
+TLF3,Lincolnshire,G-T,Services,2010,8217
+TLD7,Merseyside,A-F,Goods,2010,5852
+TLD7,Merseyside,G-T,Services,2010,21574
+TLM5,North Eastern Scotland,A-F,Goods,2010,4866
+TLM5,North Eastern Scotland,G-T,Services,2010,10296
+TLE2,North Yorkshire,A-F,Goods,2010,3983
+TLE2,North Yorkshire,G-T,Services,2010,12496
+TLN0,Northern Ireland,A-F,Goods,2010,8217
+TLN0,Northern Ireland,G-T,Services,2010,22803
+TLC2,"Northumberland, and Tyne and Wear",A-F,Goods,2010,6301
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services,2010,19342
+TLI5,Outer London - East and North East,A-F,Goods,2010,5827
+TLI5,Outer London - East and North East,G-T,Services,2010,22751
+TLI6,Outer London - South,A-F,Goods,2010,2923
+TLI6,Outer London - South,G-T,Services,2010,22579
+TLI7,Outer London - West and North West,A-F,Goods,2010,6522
+TLI7,Outer London - West and North West,G-T,Services,2010,43299
+TLG2,Shropshire and Staffordshire,A-F,Goods,2010,6701
+TLG2,Shropshire and Staffordshire,G-T,Services,2010,19729
+TLE3,South Yorkshire,A-F,Goods,2010,4950
+TLE3,South Yorkshire,G-T,Services,2010,16466
+TLM9,Southern Scotland,A-F,Goods,2010,4815
+TLM9,Southern Scotland,G-T,Services,2010,10561
+TLJ2,"Surrey, East and West Sussex",A-F,Goods,2010,10981
+TLJ2,"Surrey, East and West Sussex",G-T,Services,2010,54777
+TLC1,Tees Valley and Durham,A-F,Goods,2010,5772
+TLC1,Tees Valley and Durham,G-T,Services,2010,13391
+TLM8,West Central Scotland,A-F,Goods,2010,6160
+TLM8,West Central Scotland,G-T,Services,2010,24296
+TLG3,West Midlands,A-F,Goods,2010,11678
+TLG3,West Midlands,G-T,Services,2010,38750
+TLL1,West Wales and The Valleys,A-F,Goods,2010,7656
+TLL1,West Wales and The Valleys,G-T,Services,2010,19733
+TLE4,West Yorkshire,A-F,Goods,2010,9847
+TLE4,West Yorkshire,G-T,Services,2010,33457
+TLH2,Bedfordshire and Hertfordshire,A-F,Goods,2011,8985
+TLH2,Bedfordshire and Hertfordshire,G-T,Services,2011,30758
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-F,Goods,2011,12416
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services,2011,61428
+TLD6,Cheshire,A-F,Goods,2011,7208
+TLD6,Cheshire,G-T,Services,2011,17133
+TLK3,Cornwall and Isles of Scilly,A-F,Goods,2011,1957
+TLK3,Cornwall and Isles of Scilly,G-T,Services,2011,6363
+TLD1,Cumbria,A-F,Goods,2011,3324
+TLD1,Cumbria,G-T,Services,2011,6468
+TLF1,Derbyshire and Nottinghamshire,A-F,Goods,2011,11304
+TLF1,Derbyshire and Nottinghamshire,G-T,Services,2011,27538
+TLK4,Devon,A-F,Goods,2011,4683
+TLK4,Devon,G-T,Services,2011,15740
+TLK2,Dorset and Somerset,A-F,Goods,2011,5705
+TLK2,Dorset and Somerset,G-T,Services,2011,18071
+TLH1,East Anglia,A-F,Goods,2011,12681
+TLH1,East Anglia,G-T,Services,2011,36688
+TLL2,East Wales,A-F,Goods,2011,6519
+TLL2,East Wales,G-T,Services,2011,16900
+TLE1,East Yorkshire and Northern Lincolnshire,A-F,Goods,2011,5657
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services,2011,10589
+TLM7,Eastern Scotland,A-F,Goods,2011,9011
+TLM7,Eastern Scotland,G-T,Services,2011,34041
+TLH3,Essex,A-F,Goods,2011,7827
+TLH3,Essex,G-T,Services,2011,23850
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-F,Goods,2011,13192
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services,2011,44892
+TLD3,Greater Manchester,A-F,Goods,2011,10120
+TLD3,Greater Manchester,G-T,Services,2011,43565
+TLJ3,Hampshire and Isle of Wight,A-F,Goods,2011,9260
+TLJ3,Hampshire and Isle of Wight,G-T,Services,2011,37357
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-F,Goods,2011,7130
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services,2011,19296
+TLM6,Highlands and Islands,A-F,Goods,2011,3028
+TLM6,Highlands and Islands,G-T,Services,2011,6655
+TLI4,Inner London - East,A-F,Goods,2011,5635
+TLI4,Inner London - East,G-T,Services,2011,78342
+TLI3,Inner London - West,A-F,Goods,2011,4877
+TLI3,Inner London - West,G-T,Services,2011,136784
+TLJ4,Kent,A-F,Goods,2011,7261
+TLJ4,Kent,G-T,Services,2011,25767
+TLD4,Lancashire,A-F,Goods,2011,7265
+TLD4,Lancashire,G-T,Services,2011,18858
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-F,Goods,2011,9586
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services,2011,24943
+TLF3,Lincolnshire,A-F,Goods,2011,3526
+TLF3,Lincolnshire,G-T,Services,2011,8303
+TLD7,Merseyside,A-F,Goods,2011,5972
+TLD7,Merseyside,G-T,Services,2011,21519
+TLM5,North Eastern Scotland,A-F,Goods,2011,4898
+TLM5,North Eastern Scotland,G-T,Services,2011,10762
+TLE2,North Yorkshire,A-F,Goods,2011,3999
+TLE2,North Yorkshire,G-T,Services,2011,13026
+TLN0,Northern Ireland,A-F,Goods,2011,7972
+TLN0,Northern Ireland,G-T,Services,2011,23684
+TLC2,"Northumberland, and Tyne and Wear",A-F,Goods,2011,6211
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services,2011,20211
+TLI5,Outer London - East and North East,A-F,Goods,2011,5884
+TLI5,Outer London - East and North East,G-T,Services,2011,22998
+TLI6,Outer London - South,A-F,Goods,2011,2923
+TLI6,Outer London - South,G-T,Services,2011,22601
+TLI7,Outer London - West and North West,A-F,Goods,2011,6566
+TLI7,Outer London - West and North West,G-T,Services,2011,44531
+TLG2,Shropshire and Staffordshire,A-F,Goods,2011,7071
+TLG2,Shropshire and Staffordshire,G-T,Services,2011,20174
+TLE3,South Yorkshire,A-F,Goods,2011,5114
+TLE3,South Yorkshire,G-T,Services,2011,16765
+TLM9,Southern Scotland,A-F,Goods,2011,4910
+TLM9,Southern Scotland,G-T,Services,2011,10834
+TLJ2,"Surrey, East and West Sussex",A-F,Goods,2011,11150
+TLJ2,"Surrey, East and West Sussex",G-T,Services,2011,55196
+TLC1,Tees Valley and Durham,A-F,Goods,2011,5439
+TLC1,Tees Valley and Durham,G-T,Services,2011,13736
+TLM8,West Central Scotland,A-F,Goods,2011,6376
+TLM8,West Central Scotland,G-T,Services,2011,25001
+TLG3,West Midlands,A-F,Goods,2011,11803
+TLG3,West Midlands,G-T,Services,2011,39721
+TLL1,West Wales and The Valleys,A-F,Goods,2011,7928
+TLL1,West Wales and The Valleys,G-T,Services,2011,20391
+TLE4,West Yorkshire,A-F,Goods,2011,9760
+TLE4,West Yorkshire,G-T,Services,2011,34486
+TLH2,Bedfordshire and Hertfordshire,A-F,Goods,2012,9231
+TLH2,Bedfordshire and Hertfordshire,G-T,Services,2012,31313
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-F,Goods,2012,12964
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services,2012,63502
+TLD6,Cheshire,A-F,Goods,2012,7747
+TLD6,Cheshire,G-T,Services,2012,17477
+TLK3,Cornwall and Isles of Scilly,A-F,Goods,2012,2035
+TLK3,Cornwall and Isles of Scilly,G-T,Services,2012,6551
+TLD1,Cumbria,A-F,Goods,2012,3425
+TLD1,Cumbria,G-T,Services,2012,6748
+TLF1,Derbyshire and Nottinghamshire,A-F,Goods,2012,12036
+TLF1,Derbyshire and Nottinghamshire,G-T,Services,2012,28148
+TLK4,Devon,A-F,Goods,2012,4784
+TLK4,Devon,G-T,Services,2012,16070
+TLK2,Dorset and Somerset,A-F,Goods,2012,6002
+TLK2,Dorset and Somerset,G-T,Services,2012,18307
+TLH1,East Anglia,A-F,Goods,2012,12994
+TLH1,East Anglia,G-T,Services,2012,38559
+TLL2,East Wales,A-F,Goods,2012,6652
+TLL2,East Wales,G-T,Services,2012,17795
+TLE1,East Yorkshire and Northern Lincolnshire,A-F,Goods,2012,5862
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services,2012,10649
+TLM7,Eastern Scotland,A-F,Goods,2012,9266
+TLM7,Eastern Scotland,G-T,Services,2012,35414
+TLH3,Essex,A-F,Goods,2012,7889
+TLH3,Essex,G-T,Services,2012,24713
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-F,Goods,2012,13611
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services,2012,46611
+TLD3,Greater Manchester,A-F,Goods,2012,10650
+TLD3,Greater Manchester,G-T,Services,2012,45398
+TLJ3,Hampshire and Isle of Wight,A-F,Goods,2012,9654
+TLJ3,Hampshire and Isle of Wight,G-T,Services,2012,38414
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-F,Goods,2012,7748
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services,2012,20295
+TLM6,Highlands and Islands,A-F,Goods,2012,3096
+TLM6,Highlands and Islands,G-T,Services,2012,6731
+TLI4,Inner London - East,A-F,Goods,2012,5838
+TLI4,Inner London - East,G-T,Services,2012,79857
+TLI3,Inner London - West,A-F,Goods,2012,5187
+TLI3,Inner London - West,G-T,Services,2012,142536
+TLJ4,Kent,A-F,Goods,2012,7516
+TLJ4,Kent,G-T,Services,2012,26282
+TLD4,Lancashire,A-F,Goods,2012,7495
+TLD4,Lancashire,G-T,Services,2012,19610
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-F,Goods,2012,10350
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services,2012,25505
+TLF3,Lincolnshire,A-F,Goods,2012,3666
+TLF3,Lincolnshire,G-T,Services,2012,8701
+TLD7,Merseyside,A-F,Goods,2012,5293
+TLD7,Merseyside,G-T,Services,2012,21913
+TLM5,North Eastern Scotland,A-F,Goods,2012,5391
+TLM5,North Eastern Scotland,G-T,Services,2012,11206
+TLE2,North Yorkshire,A-F,Goods,2012,4144
+TLE2,North Yorkshire,G-T,Services,2012,13309
+TLN0,Northern Ireland,A-F,Goods,2012,8417
+TLN0,Northern Ireland,G-T,Services,2012,24557
+TLC2,"Northumberland, and Tyne and Wear",A-F,Goods,2012,6419
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services,2012,20789
+TLI5,Outer London - East and North East,A-F,Goods,2012,6257
+TLI5,Outer London - East and North East,G-T,Services,2012,24387
+TLI6,Outer London - South,A-F,Goods,2012,3081
+TLI6,Outer London - South,G-T,Services,2012,23632
+TLI7,Outer London - West and North West,A-F,Goods,2012,6928
+TLI7,Outer London - West and North West,G-T,Services,2012,47376
+TLG2,Shropshire and Staffordshire,A-F,Goods,2012,7206
+TLG2,Shropshire and Staffordshire,G-T,Services,2012,20554
+TLE3,South Yorkshire,A-F,Goods,2012,5211
+TLE3,South Yorkshire,G-T,Services,2012,17361
+TLM9,Southern Scotland,A-F,Goods,2012,5055
+TLM9,Southern Scotland,G-T,Services,2012,10995
+TLJ2,"Surrey, East and West Sussex",A-F,Goods,2012,11522
+TLJ2,"Surrey, East and West Sussex",G-T,Services,2012,57721
+TLC1,Tees Valley and Durham,A-F,Goods,2012,5519
+TLC1,Tees Valley and Durham,G-T,Services,2012,14010
+TLM8,West Central Scotland,A-F,Goods,2012,6521
+TLM8,West Central Scotland,G-T,Services,2012,25426
+TLG3,West Midlands,A-F,Goods,2012,12285
+TLG3,West Midlands,G-T,Services,2012,40620
+TLL1,West Wales and The Valleys,A-F,Goods,2012,8119
+TLL1,West Wales and The Valleys,G-T,Services,2012,20905
+TLE4,West Yorkshire,A-F,Goods,2012,10228
+TLE4,West Yorkshire,G-T,Services,2012,35007
+TLH2,Bedfordshire and Hertfordshire,A-F,Goods,2013,10153
+TLH2,Bedfordshire and Hertfordshire,G-T,Services,2013,33093
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-F,Goods,2013,13849
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services,2013,65140
+TLD6,Cheshire,A-F,Goods,2013,8333
+TLD6,Cheshire,G-T,Services,2013,17838
+TLK3,Cornwall and Isles of Scilly,A-F,Goods,2013,2184
+TLK3,Cornwall and Isles of Scilly,G-T,Services,2013,6658
+TLD1,Cumbria,A-F,Goods,2013,3633
+TLD1,Cumbria,G-T,Services,2013,6897
+TLF1,Derbyshire and Nottinghamshire,A-F,Goods,2013,13106
+TLF1,Derbyshire and Nottinghamshire,G-T,Services,2013,28576
+TLK4,Devon,A-F,Goods,2013,5051
+TLK4,Devon,G-T,Services,2013,16578
+TLK2,Dorset and Somerset,A-F,Goods,2013,6245
+TLK2,Dorset and Somerset,G-T,Services,2013,18650
+TLH1,East Anglia,A-F,Goods,2013,13556
+TLH1,East Anglia,G-T,Services,2013,39789
+TLL2,East Wales,A-F,Goods,2013,7072
+TLL2,East Wales,G-T,Services,2013,17930
+TLE1,East Yorkshire and Northern Lincolnshire,A-F,Goods,2013,6095
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services,2013,10748
+TLM7,Eastern Scotland,A-F,Goods,2013,9920
+TLM7,Eastern Scotland,G-T,Services,2013,36628
+TLH3,Essex,A-F,Goods,2013,8362
+TLH3,Essex,G-T,Services,2013,25116
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-F,Goods,2013,14012
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services,2013,47822
+TLD3,Greater Manchester,A-F,Goods,2013,11149
+TLD3,Greater Manchester,G-T,Services,2013,47270
+TLJ3,Hampshire and Isle of Wight,A-F,Goods,2013,10387
+TLJ3,Hampshire and Isle of Wight,G-T,Services,2013,39440
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-F,Goods,2013,8623
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services,2013,21079
+TLM6,Highlands and Islands,A-F,Goods,2013,3219
+TLM6,Highlands and Islands,G-T,Services,2013,6952
+TLI4,Inner London - East,A-F,Goods,2013,6119
+TLI4,Inner London - East,G-T,Services,2013,82840
+TLI3,Inner London - West,A-F,Goods,2013,5979
+TLI3,Inner London - West,G-T,Services,2013,150865
+TLJ4,Kent,A-F,Goods,2013,8052
+TLJ4,Kent,G-T,Services,2013,26858
+TLD4,Lancashire,A-F,Goods,2013,8155
+TLD4,Lancashire,G-T,Services,2013,19655
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-F,Goods,2013,11079
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services,2013,26317
+TLF3,Lincolnshire,A-F,Goods,2013,4004
+TLF3,Lincolnshire,G-T,Services,2013,9021
+TLD7,Merseyside,A-F,Goods,2013,5493
+TLD7,Merseyside,G-T,Services,2013,22418
+TLM5,North Eastern Scotland,A-F,Goods,2013,5674
+TLM5,North Eastern Scotland,G-T,Services,2013,11983
+TLE2,North Yorkshire,A-F,Goods,2013,4316
+TLE2,North Yorkshire,G-T,Services,2013,13705
+TLN0,Northern Ireland,A-F,Goods,2013,9178
+TLN0,Northern Ireland,G-T,Services,2013,24863
+TLC2,"Northumberland, and Tyne and Wear",A-F,Goods,2013,6754
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services,2013,20721
+TLI5,Outer London - East and North East,A-F,Goods,2013,6715
+TLI5,Outer London - East and North East,G-T,Services,2013,25395
+TLI6,Outer London - South,A-F,Goods,2013,3122
+TLI6,Outer London - South,G-T,Services,2013,24195
+TLI7,Outer London - West and North West,A-F,Goods,2013,7345
+TLI7,Outer London - West and North West,G-T,Services,2013,49986
+TLG2,Shropshire and Staffordshire,A-F,Goods,2013,7860
+TLG2,Shropshire and Staffordshire,G-T,Services,2013,20940
+TLE3,South Yorkshire,A-F,Goods,2013,5370
+TLE3,South Yorkshire,G-T,Services,2013,17749
+TLM9,Southern Scotland,A-F,Goods,2013,5349
+TLM9,Southern Scotland,G-T,Services,2013,11360
+TLJ2,"Surrey, East and West Sussex",A-F,Goods,2013,12211
+TLJ2,"Surrey, East and West Sussex",G-T,Services,2013,59823
+TLC1,Tees Valley and Durham,A-F,Goods,2013,5637
+TLC1,Tees Valley and Durham,G-T,Services,2013,14306
+TLM8,West Central Scotland,A-F,Goods,2013,6740
+TLM8,West Central Scotland,G-T,Services,2013,26638
+TLG3,West Midlands,A-F,Goods,2013,13576
+TLG3,West Midlands,G-T,Services,2013,41690
+TLL1,West Wales and The Valleys,A-F,Goods,2013,8745
+TLL1,West Wales and The Valleys,G-T,Services,2013,21599
+TLE4,West Yorkshire,A-F,Goods,2013,10835
+TLE4,West Yorkshire,G-T,Services,2013,35656
+TLH2,Bedfordshire and Hertfordshire,A-F,Goods,2014,10980
+TLH2,Bedfordshire and Hertfordshire,G-T,Services,2014,35354
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-F,Goods,2014,14447
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services,2014,68410
+TLD6,Cheshire,A-F,Goods,2014,8665
+TLD6,Cheshire,G-T,Services,2014,18980
+TLK3,Cornwall and Isles of Scilly,A-F,Goods,2014,2384
+TLK3,Cornwall and Isles of Scilly,G-T,Services,2014,6804
+TLD1,Cumbria,A-F,Goods,2014,3987
+TLD1,Cumbria,G-T,Services,2014,7040
+TLF1,Derbyshire and Nottinghamshire,A-F,Goods,2014,13184
+TLF1,Derbyshire and Nottinghamshire,G-T,Services,2014,29571
+TLK4,Devon,A-F,Goods,2014,5261
+TLK4,Devon,G-T,Services,2014,17068
+TLK2,Dorset and Somerset,A-F,Goods,2014,6468
+TLK2,Dorset and Somerset,G-T,Services,2014,19760
+TLH1,East Anglia,A-F,Goods,2014,14399
+TLH1,East Anglia,G-T,Services,2014,40965
+TLL2,East Wales,A-F,Goods,2014,7202
+TLL2,East Wales,G-T,Services,2014,18242
+TLE1,East Yorkshire and Northern Lincolnshire,A-F,Goods,2014,6210
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services,2014,11193
+TLM7,Eastern Scotland,A-F,Goods,2014,10230
+TLM7,Eastern Scotland,G-T,Services,2014,38315
+TLH3,Essex,A-F,Goods,2014,8953
+TLH3,Essex,G-T,Services,2014,26416
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-F,Goods,2014,14767
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services,2014,50934
+TLD3,Greater Manchester,A-F,Goods,2014,11517
+TLD3,Greater Manchester,G-T,Services,2014,48503
+TLJ3,Hampshire and Isle of Wight,A-F,Goods,2014,10520
+TLJ3,Hampshire and Isle of Wight,G-T,Services,2014,40947
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-F,Goods,2014,9406
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services,2014,21954
+TLM6,Highlands and Islands,A-F,Goods,2014,3397
+TLM6,Highlands and Islands,G-T,Services,2014,7130
+TLI4,Inner London - East,A-F,Goods,2014,6069
+TLI4,Inner London - East,G-T,Services,2014,88277
+TLI3,Inner London - West,A-F,Goods,2014,6311
+TLI3,Inner London - West,G-T,Services,2014,162171
+TLJ4,Kent,A-F,Goods,2014,8215
+TLJ4,Kent,G-T,Services,2014,28138
+TLD4,Lancashire,A-F,Goods,2014,8497
+TLD4,Lancashire,G-T,Services,2014,20292
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-F,Goods,2014,11637
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services,2014,27690
+TLF3,Lincolnshire,A-F,Goods,2014,4086
+TLF3,Lincolnshire,G-T,Services,2014,9311
+TLD7,Merseyside,A-F,Goods,2014,5934
+TLD7,Merseyside,G-T,Services,2014,23344
+TLM5,North Eastern Scotland,A-F,Goods,2014,5960
+TLM5,North Eastern Scotland,G-T,Services,2014,12497
+TLE2,North Yorkshire,A-F,Goods,2014,4397
+TLE2,North Yorkshire,G-T,Services,2014,14003
+TLN0,Northern Ireland,A-F,Goods,2014,9353
+TLN0,Northern Ireland,G-T,Services,2014,25765
+TLC2,"Northumberland, and Tyne and Wear",A-F,Goods,2014,6983
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services,2014,21420
+TLI5,Outer London - East and North East,A-F,Goods,2014,6845
+TLI5,Outer London - East and North East,G-T,Services,2014,26453
+TLI6,Outer London - South,A-F,Goods,2014,3269
+TLI6,Outer London - South,G-T,Services,2014,25689
+TLI7,Outer London - West and North West,A-F,Goods,2014,7667
+TLI7,Outer London - West and North West,G-T,Services,2014,54324
+TLG2,Shropshire and Staffordshire,A-F,Goods,2014,8141
+TLG2,Shropshire and Staffordshire,G-T,Services,2014,21581
+TLE3,South Yorkshire,A-F,Goods,2014,5540
+TLE3,South Yorkshire,G-T,Services,2014,18313
+TLM9,Southern Scotland,A-F,Goods,2014,5724
+TLM9,Southern Scotland,G-T,Services,2014,11690
+TLJ2,"Surrey, East and West Sussex",A-F,Goods,2014,13015
+TLJ2,"Surrey, East and West Sussex",G-T,Services,2014,61757
+TLC1,Tees Valley and Durham,A-F,Goods,2014,5746
+TLC1,Tees Valley and Durham,G-T,Services,2014,14669
+TLM8,West Central Scotland,A-F,Goods,2014,7155
+TLM8,West Central Scotland,G-T,Services,2014,28204
+TLG3,West Midlands,A-F,Goods,2014,14896
+TLG3,West Midlands,G-T,Services,2014,43200
+TLL1,West Wales and The Valleys,A-F,Goods,2014,9220
+TLL1,West Wales and The Valleys,G-T,Services,2014,22078
+TLE4,West Yorkshire,A-F,Goods,2014,11105
+TLE4,West Yorkshire,G-T,Services,2014,36901
+TLH2,Bedfordshire and Hertfordshire,A-F,Goods,2015,11575
+TLH2,Bedfordshire and Hertfordshire,G-T,Services,2015,36704
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-F,Goods,2015,14700
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services,2015,71387
+TLD6,Cheshire,A-F,Goods,2015,8944
+TLD6,Cheshire,G-T,Services,2015,19327
+TLK3,Cornwall and Isles of Scilly,A-F,Goods,2015,2450
+TLK3,Cornwall and Isles of Scilly,G-T,Services,2015,7021
+TLD1,Cumbria,A-F,Goods,2015,4124
+TLD1,Cumbria,G-T,Services,2015,7314
+TLF1,Derbyshire and Nottinghamshire,A-F,Goods,2015,13061
+TLF1,Derbyshire and Nottinghamshire,G-T,Services,2015,30867
+TLK4,Devon,A-F,Goods,2015,5442
+TLK4,Devon,G-T,Services,2015,17594
+TLK2,Dorset and Somerset,A-F,Goods,2015,6572
+TLK2,Dorset and Somerset,G-T,Services,2015,20139
+TLH1,East Anglia,A-F,Goods,2015,14449
+TLH1,East Anglia,G-T,Services,2015,42247
+TLL2,East Wales,A-F,Goods,2015,7563
+TLL2,East Wales,G-T,Services,2015,18807
+TLE1,East Yorkshire and Northern Lincolnshire,A-F,Goods,2015,6848
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services,2015,11571
+TLM7,Eastern Scotland,A-F,Goods,2015,10632
+TLM7,Eastern Scotland,G-T,Services,2015,39307
+TLH3,Essex,A-F,Goods,2015,9245
+TLH3,Essex,G-T,Services,2015,27822
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-F,Goods,2015,15141
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services,2015,51776
+TLD3,Greater Manchester,A-F,Goods,2015,11674
+TLD3,Greater Manchester,G-T,Services,2015,50861
+TLJ3,Hampshire and Isle of Wight,A-F,Goods,2015,10816
+TLJ3,Hampshire and Isle of Wight,G-T,Services,2015,42171
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-F,Goods,2015,10079
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services,2015,22569
+TLM6,Highlands and Islands,A-F,Goods,2015,3408
+TLM6,Highlands and Islands,G-T,Services,2015,7217
+TLI4,Inner London - East,A-F,Goods,2015,6412
+TLI4,Inner London - East,G-T,Services,2015,91797
+TLI3,Inner London - West,A-F,Goods,2015,6839
+TLI3,Inner London - West,G-T,Services,2015,167203
+TLJ4,Kent,A-F,Goods,2015,8746
+TLJ4,Kent,G-T,Services,2015,29418
+TLD4,Lancashire,A-F,Goods,2015,9383
+TLD4,Lancashire,G-T,Services,2015,20943
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-F,Goods,2015,12088
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services,2015,28718
+TLF3,Lincolnshire,A-F,Goods,2015,4250
+TLF3,Lincolnshire,G-T,Services,2015,9385
+TLD7,Merseyside,A-F,Goods,2015,6238
+TLD7,Merseyside,G-T,Services,2015,24034
+TLM5,North Eastern Scotland,A-F,Goods,2015,5994
+TLM5,North Eastern Scotland,G-T,Services,2015,11952
+TLE2,North Yorkshire,A-F,Goods,2015,4482
+TLE2,North Yorkshire,G-T,Services,2015,14251
+TLN0,Northern Ireland,A-F,Goods,2015,10445
+TLN0,Northern Ireland,G-T,Services,2015,25958
+TLC2,"Northumberland, and Tyne and Wear",A-F,Goods,2015,7133
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services,2015,22279
+TLI5,Outer London - East and North East,A-F,Goods,2015,6845
+TLI5,Outer London - East and North East,G-T,Services,2015,27754
+TLI6,Outer London - South,A-F,Goods,2015,3219
+TLI6,Outer London - South,G-T,Services,2015,26095
+TLI7,Outer London - West and North West,A-F,Goods,2015,8042
+TLI7,Outer London - West and North West,G-T,Services,2015,56694
+TLG2,Shropshire and Staffordshire,A-F,Goods,2015,8493
+TLG2,Shropshire and Staffordshire,G-T,Services,2015,22241
+TLE3,South Yorkshire,A-F,Goods,2015,5583
+TLE3,South Yorkshire,G-T,Services,2015,19164
+TLM9,Southern Scotland,A-F,Goods,2015,5552
+TLM9,Southern Scotland,G-T,Services,2015,11941
+TLJ2,"Surrey, East and West Sussex",A-F,Goods,2015,13809
+TLJ2,"Surrey, East and West Sussex",G-T,Services,2015,63953
+TLC1,Tees Valley and Durham,A-F,Goods,2015,6057
+TLC1,Tees Valley and Durham,G-T,Services,2015,15081
+TLM8,West Central Scotland,A-F,Goods,2015,7133
+TLM8,West Central Scotland,G-T,Services,2015,28680
+TLG3,West Midlands,A-F,Goods,2015,15121
+TLG3,West Midlands,G-T,Services,2015,45137
+TLL1,West Wales and The Valleys,A-F,Goods,2015,9749
+TLL1,West Wales and The Valleys,G-T,Services,2015,22390
+TLE4,West Yorkshire,A-F,Goods,2015,11732
+TLE4,West Yorkshire,G-T,Services,2015,38687
+TLH2,Bedfordshire and Hertfordshire,A-F,Goods,2016,11974
+TLH2,Bedfordshire and Hertfordshire,G-T,Services,2016,38434
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-F,Goods,2016,14797
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services,2016,72471
+TLD6,Cheshire,A-F,Goods,2016,9696
+TLD6,Cheshire,G-T,Services,2016,20256
+TLK3,Cornwall and Isles of Scilly,A-F,Goods,2016,2492
+TLK3,Cornwall and Isles of Scilly,G-T,Services,2016,7445
+TLD1,Cumbria,A-F,Goods,2016,3850
+TLD1,Cumbria,G-T,Services,2016,7458
+TLF1,Derbyshire and Nottinghamshire,A-F,Goods,2016,13007
+TLF1,Derbyshire and Nottinghamshire,G-T,Services,2016,32103
+TLK4,Devon,A-F,Goods,2016,5481
+TLK4,Devon,G-T,Services,2016,18271
+TLK2,Dorset and Somerset,A-F,Goods,2016,6614
+TLK2,Dorset and Somerset,G-T,Services,2016,20954
+TLH1,East Anglia,A-F,Goods,2016,14525
+TLH1,East Anglia,G-T,Services,2016,44326
+TLL2,East Wales,A-F,Goods,2016,7887
+TLL2,East Wales,G-T,Services,2016,19751
+TLE1,East Yorkshire and Northern Lincolnshire,A-F,Goods,2016,6889
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services,2016,11837
+TLM7,Eastern Scotland,A-F,Goods,2016,11044
+TLM7,Eastern Scotland,G-T,Services,2016,41378
+TLH3,Essex,A-F,Goods,2016,9438
+TLH3,Essex,G-T,Services,2016,29504
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-F,Goods,2016,15045
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services,2016,54362
+TLD3,Greater Manchester,A-F,Goods,2016,11853
+TLD3,Greater Manchester,G-T,Services,2016,52737
+TLJ3,Hampshire and Isle of Wight,A-F,Goods,2016,10928
+TLJ3,Hampshire and Isle of Wight,G-T,Services,2016,43081
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-F,Goods,2016,10062
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services,2016,23037
+TLM6,Highlands and Islands,A-F,Goods,2016,3314
+TLM6,Highlands and Islands,G-T,Services,2016,7425
+TLI4,Inner London - East,A-F,Goods,2016,6306
+TLI4,Inner London - East,G-T,Services,2016,96678
+TLI3,Inner London - West,A-F,Goods,2016,6776
+TLI3,Inner London - West,G-T,Services,2016,182869
+TLJ4,Kent,A-F,Goods,2016,8983
+TLJ4,Kent,G-T,Services,2016,31026
+TLD4,Lancashire,A-F,Goods,2016,9601
+TLD4,Lancashire,G-T,Services,2016,22296
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-F,Goods,2016,11868
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services,2016,30178
+TLF3,Lincolnshire,A-F,Goods,2016,4386
+TLF3,Lincolnshire,G-T,Services,2016,9426
+TLD7,Merseyside,A-F,Goods,2016,6325
+TLD7,Merseyside,G-T,Services,2016,24503
+TLM5,North Eastern Scotland,A-F,Goods,2016,5142
+TLM5,North Eastern Scotland,G-T,Services,2016,11340
+TLE2,North Yorkshire,A-F,Goods,2016,4478
+TLE2,North Yorkshire,G-T,Services,2016,14848
+TLN0,Northern Ireland,A-F,Goods,2016,10617
+TLN0,Northern Ireland,G-T,Services,2016,27972
+TLC2,"Northumberland, and Tyne and Wear",A-F,Goods,2016,7182
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services,2016,22879
+TLI5,Outer London - East and North East,A-F,Goods,2016,6959
+TLI5,Outer London - East and North East,G-T,Services,2016,28924
+TLI6,Outer London - South,A-F,Goods,2016,3305
+TLI6,Outer London - South,G-T,Services,2016,27299
+TLI7,Outer London - West and North West,A-F,Goods,2016,8303
+TLI7,Outer London - West and North West,G-T,Services,2016,58654
+TLG2,Shropshire and Staffordshire,A-F,Goods,2016,8692
+TLG2,Shropshire and Staffordshire,G-T,Services,2016,23154
+TLE3,South Yorkshire,A-F,Goods,2016,5502
+TLE3,South Yorkshire,G-T,Services,2016,19632
+TLM9,Southern Scotland,A-F,Goods,2016,5428
+TLM9,Southern Scotland,G-T,Services,2016,12401
+TLJ2,"Surrey, East and West Sussex",A-F,Goods,2016,14074
+TLJ2,"Surrey, East and West Sussex",G-T,Services,2016,65780
+TLC1,Tees Valley and Durham,A-F,Goods,2016,6036
+TLC1,Tees Valley and Durham,G-T,Services,2016,15184
+TLM8,West Central Scotland,A-F,Goods,2016,6944
+TLM8,West Central Scotland,G-T,Services,2016,29568
+TLG3,West Midlands,A-F,Goods,2016,15810
+TLG3,West Midlands,G-T,Services,2016,48589
+TLL1,West Wales and The Valleys,A-F,Goods,2016,9748
+TLL1,West Wales and The Valleys,G-T,Services,2016,23447
+TLE4,West Yorkshire,A-F,Goods,2016,11582
+TLE4,West Yorkshire,G-T,Services,2016,39697
+TLH2,Bedfordshire and Hertfordshire,A-F,Goods,2017,12543
+TLH2,Bedfordshire and Hertfordshire,G-T,Services,2017,41890
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-F,Goods,2017,15575
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services,2017,74699
+TLD6,Cheshire,A-F,Goods,2017,9506
+TLD6,Cheshire,G-T,Services,2017,21837
+TLK3,Cornwall and Isles of Scilly,A-F,Goods,2017,2821
+TLK3,Cornwall and Isles of Scilly,G-T,Services,2017,8018
+TLD1,Cumbria,A-F,Goods,2017,3889
+TLD1,Cumbria,G-T,Services,2017,7638
+TLF1,Derbyshire and Nottinghamshire,A-F,Goods,2017,13125
+TLF1,Derbyshire and Nottinghamshire,G-T,Services,2017,33364
+TLK4,Devon,A-F,Goods,2017,5928
+TLK4,Devon,G-T,Services,2017,18851
+TLK2,Dorset and Somerset,A-F,Goods,2017,7123
+TLK2,Dorset and Somerset,G-T,Services,2017,22345
+TLH1,East Anglia,A-F,Goods,2017,15087
+TLH1,East Anglia,G-T,Services,2017,46842
+TLL2,East Wales,A-F,Goods,2017,8136
+TLL2,East Wales,G-T,Services,2017,20274
+TLE1,East Yorkshire and Northern Lincolnshire,A-F,Goods,2017,7249
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services,2017,12402
+TLM7,Eastern Scotland,A-F,Goods,2017,11350
+TLM7,Eastern Scotland,G-T,Services,2017,43719
+TLH3,Essex,A-F,Goods,2017,10115
+TLH3,Essex,G-T,Services,2017,31947
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-F,Goods,2017,15857
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services,2017,56375
+TLD3,Greater Manchester,A-F,Goods,2017,12801
+TLD3,Greater Manchester,G-T,Services,2017,56357
+TLJ3,Hampshire and Isle of Wight,A-F,Goods,2017,11693
+TLJ3,Hampshire and Isle of Wight,G-T,Services,2017,44919
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-F,Goods,2017,11427
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services,2017,24610
+TLM6,Highlands and Islands,A-F,Goods,2017,3661
+TLM6,Highlands and Islands,G-T,Services,2017,7894
+TLI4,Inner London - East,A-F,Goods,2017,6918
+TLI4,Inner London - East,G-T,Services,2017,100934
+TLI3,Inner London - West,A-F,Goods,2017,7105
+TLI3,Inner London - West,G-T,Services,2017,191443
+TLJ4,Kent,A-F,Goods,2017,9404
+TLJ4,Kent,G-T,Services,2017,31970
+TLD4,Lancashire,A-F,Goods,2017,9867
+TLD4,Lancashire,G-T,Services,2017,22912
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-F,Goods,2017,12379
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services,2017,31243
+TLF3,Lincolnshire,A-F,Goods,2017,4664
+TLF3,Lincolnshire,G-T,Services,2017,10071
+TLD7,Merseyside,A-F,Goods,2017,6749
+TLD7,Merseyside,G-T,Services,2017,25220
+TLM5,North Eastern Scotland,A-F,Goods,2017,5341
+TLM5,North Eastern Scotland,G-T,Services,2017,11141
+TLE2,North Yorkshire,A-F,Goods,2017,4668
+TLE2,North Yorkshire,G-T,Services,2017,15998
+TLN0,Northern Ireland,A-F,Goods,2017,10322
+TLN0,Northern Ireland,G-T,Services,2017,29844
+TLC2,"Northumberland, and Tyne and Wear",A-F,Goods,2017,7481
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services,2017,23780
+TLI5,Outer London - East and North East,A-F,Goods,2017,7181
+TLI5,Outer London - East and North East,G-T,Services,2017,28952
+TLI6,Outer London - South,A-F,Goods,2017,3669
+TLI6,Outer London - South,G-T,Services,2017,27279
+TLI7,Outer London - West and North West,A-F,Goods,2017,8801
+TLI7,Outer London - West and North West,G-T,Services,2017,59101
+TLG2,Shropshire and Staffordshire,A-F,Goods,2017,9138
+TLG2,Shropshire and Staffordshire,G-T,Services,2017,24176
+TLE3,South Yorkshire,A-F,Goods,2017,5891
+TLE3,South Yorkshire,G-T,Services,2017,20321
+TLM9,Southern Scotland,A-F,Goods,2017,5714
+TLM9,Southern Scotland,G-T,Services,2017,13104
+TLJ2,"Surrey, East and West Sussex",A-F,Goods,2017,15223
+TLJ2,"Surrey, East and West Sussex",G-T,Services,2017,67489
+TLC1,Tees Valley and Durham,A-F,Goods,2017,5906
+TLC1,Tees Valley and Durham,G-T,Services,2017,15522
+TLM8,West Central Scotland,A-F,Goods,2017,7532
+TLM8,West Central Scotland,G-T,Services,2017,31081
+TLG3,West Midlands,A-F,Goods,2017,15845
+TLG3,West Midlands,G-T,Services,2017,50776
+TLL1,West Wales and The Valleys,A-F,Goods,2017,10144
+TLL1,West Wales and The Valleys,G-T,Services,2017,24269
+TLE4,West Yorkshire,A-F,Goods,2017,12053
+TLE4,West Yorkshire,G-T,Services,2017,41522
+TLH2,Bedfordshire and Hertfordshire,A-F,Goods,2018,12461
+TLH2,Bedfordshire and Hertfordshire,G-T,Services,2018,43134
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-F,Goods,2018,16377
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services,2018,78357
+TLD6,Cheshire,A-F,Goods,2018,9462
+TLD6,Cheshire,G-T,Services,2018,22584
+TLK3,Cornwall and Isles of Scilly,A-F,Goods,2018,2805
+TLK3,Cornwall and Isles of Scilly,G-T,Services,2018,8311
+TLD1,Cumbria,A-F,Goods,2018,3944
+TLD1,Cumbria,G-T,Services,2018,7831
+TLF1,Derbyshire and Nottinghamshire,A-F,Goods,2018,13632
+TLF1,Derbyshire and Nottinghamshire,G-T,Services,2018,34822
+TLK4,Devon,A-F,Goods,2018,5953
+TLK4,Devon,G-T,Services,2018,19174
+TLK2,Dorset and Somerset,A-F,Goods,2018,7573
+TLK2,Dorset and Somerset,G-T,Services,2018,22837
+TLH1,East Anglia,A-F,Goods,2018,15247
+TLH1,East Anglia,G-T,Services,2018,47546
+TLL2,East Wales,A-F,Goods,2018,8649
+TLL2,East Wales,G-T,Services,2018,21026
+TLE1,East Yorkshire and Northern Lincolnshire,A-F,Goods,2018,7387
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services,2018,12729
+TLM7,Eastern Scotland,A-F,Goods,2018,11426
+TLM7,Eastern Scotland,G-T,Services,2018,45156
+TLH3,Essex,A-F,Goods,2018,10379
+TLH3,Essex,G-T,Services,2018,33073
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-F,Goods,2018,15919
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services,2018,58376
+TLD3,Greater Manchester,A-F,Goods,2018,13367
+TLD3,Greater Manchester,G-T,Services,2018,58807
+TLJ3,Hampshire and Isle of Wight,A-F,Goods,2018,11929
+TLJ3,Hampshire and Isle of Wight,G-T,Services,2018,46143
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-F,Goods,2018,11872
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services,2018,25417
+TLM6,Highlands and Islands,A-F,Goods,2018,3709
+TLM6,Highlands and Islands,G-T,Services,2018,8028
+TLI4,Inner London - East,A-F,Goods,2018,7395
+TLI4,Inner London - East,G-T,Services,2018,103415
+TLI3,Inner London - West,A-F,Goods,2018,7541
+TLI3,Inner London - West,G-T,Services,2018,201111
+TLJ4,Kent,A-F,Goods,2018,9649
+TLJ4,Kent,G-T,Services,2018,33278
+TLD4,Lancashire,A-F,Goods,2018,9724
+TLD4,Lancashire,G-T,Services,2018,23229
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-F,Goods,2018,12940
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services,2018,32840
+TLF3,Lincolnshire,A-F,Goods,2018,4715
+TLF3,Lincolnshire,G-T,Services,2018,10523
+TLD7,Merseyside,A-F,Goods,2018,6625
+TLD7,Merseyside,G-T,Services,2018,25685
+TLM5,North Eastern Scotland,A-F,Goods,2018,5197
+TLM5,North Eastern Scotland,G-T,Services,2018,11491
+TLE2,North Yorkshire,A-F,Goods,2018,4788
+TLE2,North Yorkshire,G-T,Services,2018,16078
+TLN0,Northern Ireland,A-F,Goods,2018,10713
+TLN0,Northern Ireland,G-T,Services,2018,30693
+TLC2,"Northumberland, and Tyne and Wear",A-F,Goods,2018,7350
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services,2018,24007
+TLI5,Outer London - East and North East,A-F,Goods,2018,7426
+TLI5,Outer London - East and North East,G-T,Services,2018,29940
+TLI6,Outer London - South,A-F,Goods,2018,3708
+TLI6,Outer London - South,G-T,Services,2018,28197
+TLI7,Outer London - West and North West,A-F,Goods,2018,9621
+TLI7,Outer London - West and North West,G-T,Services,2018,59726
+TLG2,Shropshire and Staffordshire,A-F,Goods,2018,9515
+TLG2,Shropshire and Staffordshire,G-T,Services,2018,25203
+TLE3,South Yorkshire,A-F,Goods,2018,6050
+TLE3,South Yorkshire,G-T,Services,2018,20486
+TLM9,Southern Scotland,A-F,Goods,2018,5689
+TLM9,Southern Scotland,G-T,Services,2018,13211
+TLJ2,"Surrey, East and West Sussex",A-F,Goods,2018,15778
+TLJ2,"Surrey, East and West Sussex",G-T,Services,2018,69025
+TLC1,Tees Valley and Durham,A-F,Goods,2018,6318
+TLC1,Tees Valley and Durham,G-T,Services,2018,15856
+TLM8,West Central Scotland,A-F,Goods,2018,7554
+TLM8,West Central Scotland,G-T,Services,2018,31882
+TLG3,West Midlands,A-F,Goods,2018,15749
+TLG3,West Midlands,G-T,Services,2018,52884
+TLL1,West Wales and The Valleys,A-F,Goods,2018,10107
+TLL1,West Wales and The Valleys,G-T,Services,2018,25406
+TLE4,West Yorkshire,A-F,Goods,2018,12634
+TLE4,West Yorkshire,G-T,Services,2018,43713
+TLH2,Bedfordshire and Hertfordshire,A-F,Goods,2019,12654
+TLH2,Bedfordshire and Hertfordshire,G-T,Services,2019,45148
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-F,Goods,2019,17543
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services,2019,82568
+TLD6,Cheshire,A-F,Goods,2019,9690
+TLD6,Cheshire,G-T,Services,2019,23996
+TLK3,Cornwall and Isles of Scilly,A-F,Goods,2019,2839
+TLK3,Cornwall and Isles of Scilly,G-T,Services,2019,8645
+TLD1,Cumbria,A-F,Goods,2019,4044
+TLD1,Cumbria,G-T,Services,2019,8372
+TLF1,Derbyshire and Nottinghamshire,A-F,Goods,2019,14794
+TLF1,Derbyshire and Nottinghamshire,G-T,Services,2019,35595
+TLK4,Devon,A-F,Goods,2019,6048
+TLK4,Devon,G-T,Services,2019,19971
+TLK2,Dorset and Somerset,A-F,Goods,2019,7581
+TLK2,Dorset and Somerset,G-T,Services,2019,23754
+TLH1,East Anglia,A-F,Goods,2019,16050
+TLH1,East Anglia,G-T,Services,2019,50465
+TLL2,East Wales,A-F,Goods,2019,8845
+TLL2,East Wales,G-T,Services,2019,21999
+TLE1,East Yorkshire and Northern Lincolnshire,A-F,Goods,2019,8196
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services,2019,13256
+TLM7,Eastern Scotland,A-F,Goods,2019,11812
+TLM7,Eastern Scotland,G-T,Services,2019,47312
+TLH3,Essex,A-F,Goods,2019,10376
+TLH3,Essex,G-T,Services,2019,34026
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-F,Goods,2019,16789
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services,2019,61226
+TLD3,Greater Manchester,A-F,Goods,2019,13320
+TLD3,Greater Manchester,G-T,Services,2019,61943
+TLJ3,Hampshire and Isle of Wight,A-F,Goods,2019,12901
+TLJ3,Hampshire and Isle of Wight,G-T,Services,2019,49118
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-F,Goods,2019,12042
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services,2019,25909
+TLM6,Highlands and Islands,A-F,Goods,2019,3926
+TLM6,Highlands and Islands,G-T,Services,2019,8301
+TLI4,Inner London - East,A-F,Goods,2019,7436
+TLI4,Inner London - East,G-T,Services,2019,106190
+TLI3,Inner London - West,A-F,Goods,2019,8277
+TLI3,Inner London - West,G-T,Services,2019,208973
+TLJ4,Kent,A-F,Goods,2019,10446
+TLJ4,Kent,G-T,Services,2019,34841
+TLD4,Lancashire,A-F,Goods,2019,9521
+TLD4,Lancashire,G-T,Services,2019,24668
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-F,Goods,2019,13473
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services,2019,33528
+TLF3,Lincolnshire,A-F,Goods,2019,4794
+TLF3,Lincolnshire,G-T,Services,2019,11182
+TLD7,Merseyside,A-F,Goods,2019,6804
+TLD7,Merseyside,G-T,Services,2019,27445
+TLM5,North Eastern Scotland,A-F,Goods,2019,5313
+TLM5,North Eastern Scotland,G-T,Services,2019,11619
+TLE2,North Yorkshire,A-F,Goods,2019,5015
+TLE2,North Yorkshire,G-T,Services,2019,16594
+TLN0,Northern Ireland,A-F,Goods,2019,11726
+TLN0,Northern Ireland,G-T,Services,2019,32091
+TLC2,"Northumberland, and Tyne and Wear",A-F,Goods,2019,7995
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services,2019,25014
+TLI5,Outer London - East and North East,A-F,Goods,2019,7513
+TLI5,Outer London - East and North East,G-T,Services,2019,31218
+TLI6,Outer London - South,A-F,Goods,2019,3838
+TLI6,Outer London - South,G-T,Services,2019,29056
+TLI7,Outer London - West and North West,A-F,Goods,2019,9673
+TLI7,Outer London - West and North West,G-T,Services,2019,61493
+TLG2,Shropshire and Staffordshire,A-F,Goods,2019,9639
+TLG2,Shropshire and Staffordshire,G-T,Services,2019,26070
+TLE3,South Yorkshire,A-F,Goods,2019,6323
+TLE3,South Yorkshire,G-T,Services,2019,21261
+TLM9,Southern Scotland,A-F,Goods,2019,5775
+TLM9,Southern Scotland,G-T,Services,2019,13613
+TLJ2,"Surrey, East and West Sussex",A-F,Goods,2019,16485
+TLJ2,"Surrey, East and West Sussex",G-T,Services,2019,72317
+TLC1,Tees Valley and Durham,A-F,Goods,2019,6579
+TLC1,Tees Valley and Durham,G-T,Services,2019,16338
+TLM8,West Central Scotland,A-F,Goods,2019,7988
+TLM8,West Central Scotland,G-T,Services,2019,33243
+TLG3,West Midlands,A-F,Goods,2019,15647
+TLG3,West Midlands,G-T,Services,2019,54123
+TLL1,West Wales and The Valleys,A-F,Goods,2019,10587
+TLL1,West Wales and The Valleys,G-T,Services,2019,26609
+TLE4,West Yorkshire,A-F,Goods,2019,12985
+TLE4,West Yorkshire,G-T,Services,2019,44823
+TLH2,Bedfordshire and Hertfordshire,A-F,Goods,2020,11798
+TLH2,Bedfordshire and Hertfordshire,G-T,Services,2020,42316
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-F,Goods,2020,18322
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services,2020,82842
+TLD6,Cheshire,A-F,Goods,2020,9465
+TLD6,Cheshire,G-T,Services,2020,22937
+TLK3,Cornwall and Isles of Scilly,A-F,Goods,2020,2845
+TLK3,Cornwall and Isles of Scilly,G-T,Services,2020,8105
+TLD1,Cumbria,A-F,Goods,2020,3978
+TLD1,Cumbria,G-T,Services,2020,7454
+TLF1,Derbyshire and Nottinghamshire,A-F,Goods,2020,14949
+TLF1,Derbyshire and Nottinghamshire,G-T,Services,2020,35502
+TLK4,Devon,A-F,Goods,2020,5460
+TLK4,Devon,G-T,Services,2020,18883
+TLK2,Dorset and Somerset,A-F,Goods,2020,7408
+TLK2,Dorset and Somerset,G-T,Services,2020,22779
+TLH1,East Anglia,A-F,Goods,2020,15602
+TLH1,East Anglia,G-T,Services,2020,49043
+TLL2,East Wales,A-F,Goods,2020,8511
+TLL2,East Wales,G-T,Services,2020,21417
+TLE1,East Yorkshire and Northern Lincolnshire,A-F,Goods,2020,7610
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services,2020,12461
+TLM7,Eastern Scotland,A-F,Goods,2020,10947
+TLM7,Eastern Scotland,G-T,Services,2020,44985
+TLH3,Essex,A-F,Goods,2020,8927
+TLH3,Essex,G-T,Services,2020,31865
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-F,Goods,2020,15268
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services,2020,59614
+TLD3,Greater Manchester,A-F,Goods,2020,13524
+TLD3,Greater Manchester,G-T,Services,2020,61871
+TLJ3,Hampshire and Isle of Wight,A-F,Goods,2020,13352
+TLJ3,Hampshire and Isle of Wight,G-T,Services,2020,46347
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-F,Goods,2020,10631
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services,2020,25689
+TLM6,Highlands and Islands,A-F,Goods,2020,3377
+TLM6,Highlands and Islands,G-T,Services,2020,8001
+TLI4,Inner London - East,A-F,Goods,2020,6191
+TLI4,Inner London - East,G-T,Services,2020,99793
+TLI3,Inner London - West,A-F,Goods,2020,7769
+TLI3,Inner London - West,G-T,Services,2020,199598
+TLJ4,Kent,A-F,Goods,2020,10209
+TLJ4,Kent,G-T,Services,2020,34353
+TLD4,Lancashire,A-F,Goods,2020,9763
+TLD4,Lancashire,G-T,Services,2020,23196
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-F,Goods,2020,11771
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services,2020,32982
+TLF3,Lincolnshire,A-F,Goods,2020,4609
+TLF3,Lincolnshire,G-T,Services,2020,10931
+TLD7,Merseyside,A-F,Goods,2020,6384
+TLD7,Merseyside,G-T,Services,2020,26878
+TLM5,North Eastern Scotland,A-F,Goods,2020,4662
+TLM5,North Eastern Scotland,G-T,Services,2020,10721
+TLE2,North Yorkshire,A-F,Goods,2020,4813
+TLE2,North Yorkshire,G-T,Services,2020,15722
+TLN0,Northern Ireland,A-F,Goods,2020,10883
+TLN0,Northern Ireland,G-T,Services,2020,31227
+TLC2,"Northumberland, and Tyne and Wear",A-F,Goods,2020,6707
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services,2020,23507
+TLI5,Outer London - East and North East,A-F,Goods,2020,6240
+TLI5,Outer London - East and North East,G-T,Services,2020,27554
+TLI6,Outer London - South,A-F,Goods,2020,3351
+TLI6,Outer London - South,G-T,Services,2020,26451
+TLI7,Outer London - West and North West,A-F,Goods,2020,8509
+TLI7,Outer London - West and North West,G-T,Services,2020,51824
+TLG2,Shropshire and Staffordshire,A-F,Goods,2020,8960
+TLG2,Shropshire and Staffordshire,G-T,Services,2020,25670
+TLE3,South Yorkshire,A-F,Goods,2020,5950
+TLE3,South Yorkshire,G-T,Services,2020,21555
+TLM9,Southern Scotland,A-F,Goods,2020,5435
+TLM9,Southern Scotland,G-T,Services,2020,12931
+TLJ2,"Surrey, East and West Sussex",A-F,Goods,2020,15154
+TLJ2,"Surrey, East and West Sussex",G-T,Services,2020,71387
+TLC1,Tees Valley and Durham,A-F,Goods,2020,6496
+TLC1,Tees Valley and Durham,G-T,Services,2020,16090
+TLM8,West Central Scotland,A-F,Goods,2020,8079
+TLM8,West Central Scotland,G-T,Services,2020,31585
+TLG3,West Midlands,A-F,Goods,2020,13804
+TLG3,West Midlands,G-T,Services,2020,51331
+TLL1,West Wales and The Valleys,A-F,Goods,2020,9506
+TLL1,West Wales and The Valleys,G-T,Services,2020,25407
+TLE4,West Yorkshire,A-F,Goods,2020,11569
+TLE4,West Yorkshire,G-T,Services,2020,44021
+TLH2,Bedfordshire and Hertfordshire,A-F,Goods,2021,12176
+TLH2,Bedfordshire and Hertfordshire,G-T,Services,2021,46607
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-F,Goods,2021,17868
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services,2021,88478
+TLD6,Cheshire,A-F,Goods,2021,9103
+TLD6,Cheshire,G-T,Services,2021,24937
+TLK3,Cornwall and Isles of Scilly,A-F,Goods,2021,2944
+TLK3,Cornwall and Isles of Scilly,G-T,Services,2021,9657
+TLD1,Cumbria,A-F,Goods,2021,4287
+TLD1,Cumbria,G-T,Services,2021,7924
+TLF1,Derbyshire and Nottinghamshire,A-F,Goods,2021,15428
+TLF1,Derbyshire and Nottinghamshire,G-T,Services,2021,37854
+TLK4,Devon,A-F,Goods,2021,6218
+TLK4,Devon,G-T,Services,2021,22251
+TLK2,Dorset and Somerset,A-F,Goods,2021,7686
+TLK2,Dorset and Somerset,G-T,Services,2021,25214
+TLH1,East Anglia,A-F,Goods,2021,16142
+TLH1,East Anglia,G-T,Services,2021,52762
+TLL2,East Wales,A-F,Goods,2021,8110
+TLL2,East Wales,G-T,Services,2021,23120
+TLE1,East Yorkshire and Northern Lincolnshire,A-F,Goods,2021,9549
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services,2021,14378
+TLM7,Eastern Scotland,A-F,Goods,2021,12227
+TLM7,Eastern Scotland,G-T,Services,2021,48810
+TLH3,Essex,A-F,Goods,2021,9906
+TLH3,Essex,G-T,Services,2021,35788
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-F,Goods,2021,16367
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services,2021,65951
+TLD3,Greater Manchester,A-F,Goods,2021,13443
+TLD3,Greater Manchester,G-T,Services,2021,67224
+TLJ3,Hampshire and Isle of Wight,A-F,Goods,2021,12907
+TLJ3,Hampshire and Isle of Wight,G-T,Services,2021,50101
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-F,Goods,2021,10805
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services,2021,26775
+TLM6,Highlands and Islands,A-F,Goods,2021,3803
+TLM6,Highlands and Islands,G-T,Services,2021,8362
+TLI4,Inner London - East,A-F,Goods,2021,6485
+TLI4,Inner London - East,G-T,Services,2021,105834
+TLI3,Inner London - West,A-F,Goods,2021,7786
+TLI3,Inner London - West,G-T,Services,2021,221446
+TLJ4,Kent,A-F,Goods,2021,10743
+TLJ4,Kent,G-T,Services,2021,35795
+TLD4,Lancashire,A-F,Goods,2021,10430
+TLD4,Lancashire,G-T,Services,2021,25741
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-F,Goods,2021,12867
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services,2021,36723
+TLF3,Lincolnshire,A-F,Goods,2021,4878
+TLF3,Lincolnshire,G-T,Services,2021,12070
+TLD7,Merseyside,A-F,Goods,2021,6565
+TLD7,Merseyside,G-T,Services,2021,30017
+TLM5,North Eastern Scotland,A-F,Goods,2021,4739
+TLM5,North Eastern Scotland,G-T,Services,2021,11349
+TLE2,North Yorkshire,A-F,Goods,2021,5314
+TLE2,North Yorkshire,G-T,Services,2021,18082
+TLN0,Northern Ireland,A-F,Goods,2021,11396
+TLN0,Northern Ireland,G-T,Services,2021,34798
+TLC2,"Northumberland, and Tyne and Wear",A-F,Goods,2021,7139
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services,2021,25985
+TLI5,Outer London - East and North East,A-F,Goods,2021,6830
+TLI5,Outer London - East and North East,G-T,Services,2021,29467
+TLI6,Outer London - South,A-F,Goods,2021,3211
+TLI6,Outer London - South,G-T,Services,2021,27527
+TLI7,Outer London - West and North West,A-F,Goods,2021,8981
+TLI7,Outer London - West and North West,G-T,Services,2021,52028
+TLG2,Shropshire and Staffordshire,A-F,Goods,2021,10180
+TLG2,Shropshire and Staffordshire,G-T,Services,2021,29815
+TLE3,South Yorkshire,A-F,Goods,2021,6197
+TLE3,South Yorkshire,G-T,Services,2021,23351
+TLM9,Southern Scotland,A-F,Goods,2021,5408
+TLM9,Southern Scotland,G-T,Services,2021,13813
+TLJ2,"Surrey, East and West Sussex",A-F,Goods,2021,15378
+TLJ2,"Surrey, East and West Sussex",G-T,Services,2021,75951
+TLC1,Tees Valley and Durham,A-F,Goods,2021,6852
+TLC1,Tees Valley and Durham,G-T,Services,2021,17359
+TLM8,West Central Scotland,A-F,Goods,2021,8465
+TLM8,West Central Scotland,G-T,Services,2021,34522
+TLG3,West Midlands,A-F,Goods,2021,13897
+TLG3,West Midlands,G-T,Services,2021,56090
+TLL1,West Wales and The Valleys,A-F,Goods,2021,9720
+TLL1,West Wales and The Valleys,G-T,Services,2021,27103
+TLE4,West Yorkshire,A-F,Goods,2021,12455
+TLE4,West Yorkshire,G-T,Services,2021,48586
+TLH2,Bedfordshire and Hertfordshire,A-F,Goods,2022,13404
+TLH2,Bedfordshire and Hertfordshire,G-T,Services,2022,50879
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-F,Goods,2022,19721
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services,2022,96279
+TLD6,Cheshire,A-F,Goods,2022,10681
+TLD6,Cheshire,G-T,Services,2022,27058
+TLK3,Cornwall and Isles of Scilly,A-F,Goods,2022,3298
+TLK3,Cornwall and Isles of Scilly,G-T,Services,2022,10554
+TLD1,Cumbria,A-F,Goods,2022,4599
+TLD1,Cumbria,G-T,Services,2022,8664
+TLF1,Derbyshire and Nottinghamshire,A-F,Goods,2022,15892
+TLF1,Derbyshire and Nottinghamshire,G-T,Services,2022,40402
+TLK4,Devon,A-F,Goods,2022,7001
+TLK4,Devon,G-T,Services,2022,24425
+TLK2,Dorset and Somerset,A-F,Goods,2022,8470
+TLK2,Dorset and Somerset,G-T,Services,2022,27574
+TLH1,East Anglia,A-F,Goods,2022,18004
+TLH1,East Anglia,G-T,Services,2022,56199
+TLL2,East Wales,A-F,Goods,2022,9011
+TLL2,East Wales,G-T,Services,2022,25125
+TLE1,East Yorkshire and Northern Lincolnshire,A-F,Goods,2022,11140
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services,2022,15578
+TLM7,Eastern Scotland,A-F,Goods,2022,13434
+TLM7,Eastern Scotland,G-T,Services,2022,53407
+TLH3,Essex,A-F,Goods,2022,11278
+TLH3,Essex,G-T,Services,2022,39539
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-F,Goods,2022,18306
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services,2022,72636
+TLD3,Greater Manchester,A-F,Goods,2022,14938
+TLD3,Greater Manchester,G-T,Services,2022,74577
+TLJ3,Hampshire and Isle of Wight,A-F,Goods,2022,14110
+TLJ3,Hampshire and Isle of Wight,G-T,Services,2022,55433
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-F,Goods,2022,10815
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services,2022,29708
+TLM6,Highlands and Islands,A-F,Goods,2022,4136
+TLM6,Highlands and Islands,G-T,Services,2022,9166
+TLI4,Inner London - East,A-F,Goods,2022,6939
+TLI4,Inner London - East,G-T,Services,2022,118917
+TLI3,Inner London - West,A-F,Goods,2022,9176
+TLI3,Inner London - West,G-T,Services,2022,244030
+TLJ4,Kent,A-F,Goods,2022,11005
+TLJ4,Kent,G-T,Services,2022,39688
+TLD4,Lancashire,A-F,Goods,2022,11701
+TLD4,Lancashire,G-T,Services,2022,27901
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-F,Goods,2022,14339
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services,2022,40031
+TLF3,Lincolnshire,A-F,Goods,2022,5240
+TLF3,Lincolnshire,G-T,Services,2022,12891
+TLD7,Merseyside,A-F,Goods,2022,7106
+TLD7,Merseyside,G-T,Services,2022,32483
+TLM5,North Eastern Scotland,A-F,Goods,2022,5251
+TLM5,North Eastern Scotland,G-T,Services,2022,12655
+TLE2,North Yorkshire,A-F,Goods,2022,5848
+TLE2,North Yorkshire,G-T,Services,2022,19874
+TLN0,Northern Ireland,A-F,Goods,2022,12624
+TLN0,Northern Ireland,G-T,Services,2022,37277
+TLC2,"Northumberland, and Tyne and Wear",A-F,Goods,2022,8019
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services,2022,28708
+TLI5,Outer London - East and North East,A-F,Goods,2022,7650
+TLI5,Outer London - East and North East,G-T,Services,2022,32403
+TLI6,Outer London - South,A-F,Goods,2022,3495
+TLI6,Outer London - South,G-T,Services,2022,29643
+TLI7,Outer London - West and North West,A-F,Goods,2022,10027
+TLI7,Outer London - West and North West,G-T,Services,2022,56900
+TLG2,Shropshire and Staffordshire,A-F,Goods,2022,11439
+TLG2,Shropshire and Staffordshire,G-T,Services,2022,32073
+TLE3,South Yorkshire,A-F,Goods,2022,6775
+TLE3,South Yorkshire,G-T,Services,2022,25384
+TLM9,Southern Scotland,A-F,Goods,2022,6128
+TLM9,Southern Scotland,G-T,Services,2022,14894
+TLJ2,"Surrey, East and West Sussex",A-F,Goods,2022,15768
+TLJ2,"Surrey, East and West Sussex",G-T,Services,2022,84214
+TLC1,Tees Valley and Durham,A-F,Goods,2022,7615
+TLC1,Tees Valley and Durham,G-T,Services,2022,18766
+TLM8,West Central Scotland,A-F,Goods,2022,9081
+TLM8,West Central Scotland,G-T,Services,2022,37561
+TLG3,West Midlands,A-F,Goods,2022,14852
+TLG3,West Midlands,G-T,Services,2022,61483
+TLL1,West Wales and The Valleys,A-F,Goods,2022,11012
+TLL1,West Wales and The Valleys,G-T,Services,2022,29396
+TLE4,West Yorkshire,A-F,Goods,2022,13627
+TLE4,West Yorkshire,G-T,Services,2022,53100
