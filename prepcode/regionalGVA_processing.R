@@ -19,9 +19,11 @@ download.file(url1, p1f, mode="wb")
 
 # ITL2 ZONES----
 
-## GOODS VS SERVICES (JUST TWO CATEGORIES)----
+## PRODUCTION VS CONSTRUCTION VS SERVICES----
 
 #Services is given; goods needs 'production' and 'construction' summing
+#But going to keep the three separate, because they can't be summed for chained volume
+#They can for current prices but will leave that to elsewhere (code below if needed)
 
 ### 1. CURRENT PRICES AT ITL2 LEVEL, GOODS VS SERVICES, WITH/WITHOUT IMPUTED RENT----
 
@@ -47,20 +49,20 @@ gva.all <- gva %>%
 
 #Sum production and construction
 #And add in / arrange fields to match others
-gva.goods_services <- gva.all %>% 
-  mutate(
-    SIC07_description = ifelse(SIC07_code %in% c('A-E','F (41-43)'), 'Goods','Services')
-    ) %>% #flag the two goods sectors for grouping / summarising
-  group_by(year, Region_name, SIC07_description) %>% 
-  summarise(value = sum(value)) %>% 
-  ungroup() %>% 
-  mutate(
-    SIC07_code = ifelse(SIC07_description == 'Goods','A-F','G-T')
-  ) %>% #merge in ITL code
-  left_join(
-    gva.all %>% select(ITL_code,Region_name) %>% distinct(ITL_code, .keep_all = T), by = 'Region_name'
-  ) %>% 
-  select(names(gva.all))#quick way to rearrange col names to same order as rest
+# gva.goods_services <- gva.all %>% 
+#   mutate(
+#     SIC07_description = ifelse(SIC07_code %in% c('A-E','F (41-43)'), 'Goods','Services')
+#     ) %>% #flag the two goods sectors for grouping / summarising
+#   group_by(year, Region_name, SIC07_description) %>% 
+#   summarise(value = sum(value)) %>% 
+#   ungroup() %>% 
+#   mutate(
+#     SIC07_code = ifelse(SIC07_description == 'Goods','A-F','G-T')
+#   ) %>% #merge in ITL code
+#   left_join(
+#     gva.all %>% select(ITL_code,Region_name) %>% distinct(ITL_code, .keep_all = T), by = 'Region_name'
+#   ) %>% 
+#   select(names(gva.all))#quick way to rearrange col names to same order as rest
 
   
   
@@ -68,7 +70,7 @@ gva.goods_services <- gva.all %>%
 # unique(gva.all$SIC07_description)
 
 #Save as CSV, with latest year as name
-write_csv(gva.goods_services, paste0('data/regionalGVA/regionalGVA_currentprices_ITL2_goods_v_services_',names(gva)[length(names(gva))],'.csv'))
+write_csv(gva.all, paste0('data/regionalGVA/regionalGVA_currentprices_ITL2_production_construction_services_',names(gva)[length(names(gva))],'.csv'))
 
 
 
@@ -95,30 +97,24 @@ gva.all <- gva %>%
 
 #Sum production and construction
 #And add in / arrange fields to match others
-gva.goods_services <- gva.all %>% 
-  mutate(
-    SIC07_description = ifelse(SIC07_code %in% c('A-E','F (41-43)'), 'Goods','Services')
-  ) %>% #flag the two goods sectors for grouping / summarising
-  group_by(year, Region_name, SIC07_description) %>% 
-  summarise(value = sum(value)) %>% 
-  ungroup() %>% 
-  mutate(
-    SIC07_code = ifelse(SIC07_description == 'Goods','A-F','G-T')
-  ) %>% #merge in ITL code
-  left_join(
-    gva.all %>% select(ITL_code,Region_name) %>% distinct(ITL_code, .keep_all = T), by = 'Region_name'
-  ) %>% 
-  select(names(gva.all))#quick way to rearrange col names to same order as rest
+# gva.goods_services <- gva.all %>% 
+#   mutate(
+#     SIC07_description = ifelse(SIC07_code %in% c('A-E','F (41-43)'), 'Goods','Services')
+#   ) %>% #flag the two goods sectors for grouping / summarising
+#   group_by(year, Region_name, SIC07_description) %>% 
+#   summarise(value = sum(value)) %>% 
+#   ungroup() %>% 
+#   mutate(
+#     SIC07_code = ifelse(SIC07_description == 'Goods','A-F','G-T')
+#   ) %>% #merge in ITL code
+#   left_join(
+#     gva.all %>% select(ITL_code,Region_name) %>% distinct(ITL_code, .keep_all = T), by = 'Region_name'
+#   ) %>% 
+#   select(names(gva.all))#quick way to rearrange col names to same order as rest
 
 
 #Save as CSV, with latest year as name
-write_csv(gva.goods_services, paste0('data/regionalGVA/regionalGVA_chainedvolume_ITL2_goods_v_services_',names(gva)[length(names(gva))],'.csv'))
-
-
-
-
-
-
+write_csv(gva.all, paste0('data/regionalGVA/regionalGVA_chainedvolume_ITL2_production_construction_services_',names(gva)[length(names(gva))],'.csv'))
 
 
 
@@ -332,9 +328,11 @@ write_csv(gva.all, paste0('data/regionalGVA/regionalGVA_chainedvolume_ITL2_allav
 
 # ITL3 ZONES----
 
-## GOODS VS SERVICES (JUST TWO CATEGORIES)----
+## PRODUCTION VS CONSTRUCTION VS SERVICES----
 
 #Services is given; goods needs 'production' and 'construction' summing
+#But going to keep the three separate, because they can't be summed for chained volume
+#They can for current prices but will leave that to elsewhere (code below if needed)
 
 ### 1. CURRENT PRICES AT ITL3 LEVEL, GOODS VS SERVICES, WITH/WITHOUT IMPUTED RENT----
 
@@ -360,20 +358,20 @@ gva.all <- gva %>%
 
 #Sum production and construction
 #And add in / arrange fields to match others
-gva.goods_services <- gva.all %>% 
-  mutate(
-    SIC07_description = ifelse(SIC07_code %in% c('A-E','F (41-43)'), 'Goods','Services')
-  ) %>% #flag the two goods sectors for grouping / summarising
-  group_by(year, Region_name, SIC07_description) %>% 
-  summarise(value = sum(value)) %>% 
-  ungroup() %>% 
-  mutate(
-    SIC07_code = ifelse(SIC07_description == 'Goods','A-F','G-T')
-  ) %>% #merge in ITL code
-  left_join(
-    gva.all %>% select(ITL_code,Region_name) %>% distinct(ITL_code, .keep_all = T), by = 'Region_name'
-  ) %>% 
-  select(names(gva.all))#quick way to rearrange col names to same order as rest
+# gva.goods_services <- gva.all %>% 
+#   mutate(
+#     SIC07_description = ifelse(SIC07_code %in% c('A-E','F (41-43)'), 'Goods','Services')
+#   ) %>% #flag the two goods sectors for grouping / summarising
+#   group_by(year, Region_name, SIC07_description) %>% 
+#   summarise(value = sum(value)) %>% 
+#   ungroup() %>% 
+#   mutate(
+#     SIC07_code = ifelse(SIC07_description == 'Goods','A-F','G-T')
+#   ) %>% #merge in ITL code
+#   left_join(
+#     gva.all %>% select(ITL_code,Region_name) %>% distinct(ITL_code, .keep_all = T), by = 'Region_name'
+#   ) %>% 
+#   select(names(gva.all))#quick way to rearrange col names to same order as rest
 
 
 
@@ -381,7 +379,7 @@ gva.goods_services <- gva.all %>%
 # unique(gva.all$SIC07_description)
 
 #Save as CSV, with latest year as name
-write_csv(gva.goods_services, paste0('data/regionalGVA/regionalGVA_currentprices_ITL3_goods_v_services_',names(gva)[length(names(gva))],'.csv'))
+write_csv(gva.all, paste0('data/regionalGVA/regionalGVA_currentprices_ITL3_production_construction_services_',names(gva)[length(names(gva))],'.csv'))
 
 
 
@@ -408,24 +406,24 @@ gva.all <- gva %>%
 
 #Sum production and construction
 #And add in / arrange fields to match others
-gva.goods_services <- gva.all %>% 
-  mutate(
-    SIC07_description = ifelse(SIC07_code %in% c('A-E','F (41-43)'), 'Goods','Services')
-  ) %>% #flag the two goods sectors for grouping / summarising
-  group_by(year, Region_name, SIC07_description) %>% 
-  summarise(value = sum(value)) %>% 
-  ungroup() %>% 
-  mutate(
-    SIC07_code = ifelse(SIC07_description == 'Goods','A-F','G-T')
-  ) %>% #merge in ITL code
-  left_join(
-    gva.all %>% select(ITL_code,Region_name) %>% distinct(ITL_code, .keep_all = T), by = 'Region_name'
-  ) %>% 
-  select(names(gva.all))#quick way to rearrange col names to same order as rest
+# gva.goods_services <- gva.all %>% 
+#   mutate(
+#     SIC07_description = ifelse(SIC07_code %in% c('A-E','F (41-43)'), 'Goods','Services')
+#   ) %>% #flag the two goods sectors for grouping / summarising
+#   group_by(year, Region_name, SIC07_description) %>% 
+#   summarise(value = sum(value)) %>% 
+#   ungroup() %>% 
+#   mutate(
+#     SIC07_code = ifelse(SIC07_description == 'Goods','A-F','G-T')
+#   ) %>% #merge in ITL code
+#   left_join(
+#     gva.all %>% select(ITL_code,Region_name) %>% distinct(ITL_code, .keep_all = T), by = 'Region_name'
+#   ) %>% 
+#   select(names(gva.all))#quick way to rearrange col names to same order as rest
 
 
 #Save as CSV, with latest year as name
-write_csv(gva.goods_services, paste0('data/regionalGVA/regionalGVA_chainedvolume_ITL3_goods_v_services_',names(gva)[length(names(gva))],'.csv'))
+write_csv(gva.all, paste0('data/regionalGVA/regionalGVA_chainedvolume_ITL3_production_construction_services_',names(gva)[length(names(gva))],'.csv'))
 
 
 

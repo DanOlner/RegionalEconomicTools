@@ -1,0 +1,3076 @@
+ITL_code,Region_name,SIC07_code,SIC07_description,year,value
+TLC1,Tees Valley and Durham,A-E,Production sector,1998,3750
+TLC1,Tees Valley and Durham,A-E,Production sector,1999,3708
+TLC1,Tees Valley and Durham,A-E,Production sector,2000,3677
+TLC1,Tees Valley and Durham,A-E,Production sector,2001,3348
+TLC1,Tees Valley and Durham,A-E,Production sector,2002,3634
+TLC1,Tees Valley and Durham,A-E,Production sector,2003,4023
+TLC1,Tees Valley and Durham,A-E,Production sector,2004,4013
+TLC1,Tees Valley and Durham,A-E,Production sector,2005,3998
+TLC1,Tees Valley and Durham,A-E,Production sector,2006,4136
+TLC1,Tees Valley and Durham,A-E,Production sector,2007,4270
+TLC1,Tees Valley and Durham,A-E,Production sector,2008,4644
+TLC1,Tees Valley and Durham,A-E,Production sector,2009,4564
+TLC1,Tees Valley and Durham,A-E,Production sector,2010,4647
+TLC1,Tees Valley and Durham,A-E,Production sector,2011,4260
+TLC1,Tees Valley and Durham,A-E,Production sector,2012,4315
+TLC1,Tees Valley and Durham,A-E,Production sector,2013,4412
+TLC1,Tees Valley and Durham,A-E,Production sector,2014,4418
+TLC1,Tees Valley and Durham,A-E,Production sector,2015,4649
+TLC1,Tees Valley and Durham,A-E,Production sector,2016,4629
+TLC1,Tees Valley and Durham,A-E,Production sector,2017,4516
+TLC1,Tees Valley and Durham,A-E,Production sector,2018,4789
+TLC1,Tees Valley and Durham,A-E,Production sector,2019,4957
+TLC1,Tees Valley and Durham,A-E,Production sector,2020,5218
+TLC1,Tees Valley and Durham,A-E,Production sector,2021,5255
+TLC1,Tees Valley and Durham,A-E,Production sector,2022,5820
+TLC1,Tees Valley and Durham,F (41-43),Construction,1998,631
+TLC1,Tees Valley and Durham,F (41-43),Construction,1999,756
+TLC1,Tees Valley and Durham,F (41-43),Construction,2000,875
+TLC1,Tees Valley and Durham,F (41-43),Construction,2001,880
+TLC1,Tees Valley and Durham,F (41-43),Construction,2002,915
+TLC1,Tees Valley and Durham,F (41-43),Construction,2003,1106
+TLC1,Tees Valley and Durham,F (41-43),Construction,2004,1134
+TLC1,Tees Valley and Durham,F (41-43),Construction,2005,1242
+TLC1,Tees Valley and Durham,F (41-43),Construction,2006,1226
+TLC1,Tees Valley and Durham,F (41-43),Construction,2007,1393
+TLC1,Tees Valley and Durham,F (41-43),Construction,2008,1340
+TLC1,Tees Valley and Durham,F (41-43),Construction,2009,1263
+TLC1,Tees Valley and Durham,F (41-43),Construction,2010,1125
+TLC1,Tees Valley and Durham,F (41-43),Construction,2011,1179
+TLC1,Tees Valley and Durham,F (41-43),Construction,2012,1204
+TLC1,Tees Valley and Durham,F (41-43),Construction,2013,1225
+TLC1,Tees Valley and Durham,F (41-43),Construction,2014,1328
+TLC1,Tees Valley and Durham,F (41-43),Construction,2015,1408
+TLC1,Tees Valley and Durham,F (41-43),Construction,2016,1407
+TLC1,Tees Valley and Durham,F (41-43),Construction,2017,1390
+TLC1,Tees Valley and Durham,F (41-43),Construction,2018,1529
+TLC1,Tees Valley and Durham,F (41-43),Construction,2019,1622
+TLC1,Tees Valley and Durham,F (41-43),Construction,2020,1278
+TLC1,Tees Valley and Durham,F (41-43),Construction,2021,1597
+TLC1,Tees Valley and Durham,F (41-43),Construction,2022,1795
+TLC1,Tees Valley and Durham,G-T,Services sector,1998,7830
+TLC1,Tees Valley and Durham,G-T,Services sector,1999,8245
+TLC1,Tees Valley and Durham,G-T,Services sector,2000,8578
+TLC1,Tees Valley and Durham,G-T,Services sector,2001,9137
+TLC1,Tees Valley and Durham,G-T,Services sector,2002,9511
+TLC1,Tees Valley and Durham,G-T,Services sector,2003,9942
+TLC1,Tees Valley and Durham,G-T,Services sector,2004,10991
+TLC1,Tees Valley and Durham,G-T,Services sector,2005,11494
+TLC1,Tees Valley and Durham,G-T,Services sector,2006,12332
+TLC1,Tees Valley and Durham,G-T,Services sector,2007,12595
+TLC1,Tees Valley and Durham,G-T,Services sector,2008,12964
+TLC1,Tees Valley and Durham,G-T,Services sector,2009,13265
+TLC1,Tees Valley and Durham,G-T,Services sector,2010,13391
+TLC1,Tees Valley and Durham,G-T,Services sector,2011,13736
+TLC1,Tees Valley and Durham,G-T,Services sector,2012,14010
+TLC1,Tees Valley and Durham,G-T,Services sector,2013,14306
+TLC1,Tees Valley and Durham,G-T,Services sector,2014,14669
+TLC1,Tees Valley and Durham,G-T,Services sector,2015,15081
+TLC1,Tees Valley and Durham,G-T,Services sector,2016,15184
+TLC1,Tees Valley and Durham,G-T,Services sector,2017,15522
+TLC1,Tees Valley and Durham,G-T,Services sector,2018,15856
+TLC1,Tees Valley and Durham,G-T,Services sector,2019,16338
+TLC1,Tees Valley and Durham,G-T,Services sector,2020,16090
+TLC1,Tees Valley and Durham,G-T,Services sector,2021,17359
+TLC1,Tees Valley and Durham,G-T,Services sector,2022,18766
+TLC2,"Northumberland, and Tyne and Wear",A-E,Production sector,1998,4016
+TLC2,"Northumberland, and Tyne and Wear",A-E,Production sector,1999,3729
+TLC2,"Northumberland, and Tyne and Wear",A-E,Production sector,2000,3800
+TLC2,"Northumberland, and Tyne and Wear",A-E,Production sector,2001,3759
+TLC2,"Northumberland, and Tyne and Wear",A-E,Production sector,2002,4105
+TLC2,"Northumberland, and Tyne and Wear",A-E,Production sector,2003,4079
+TLC2,"Northumberland, and Tyne and Wear",A-E,Production sector,2004,4167
+TLC2,"Northumberland, and Tyne and Wear",A-E,Production sector,2005,4215
+TLC2,"Northumberland, and Tyne and Wear",A-E,Production sector,2006,4519
+TLC2,"Northumberland, and Tyne and Wear",A-E,Production sector,2007,4600
+TLC2,"Northumberland, and Tyne and Wear",A-E,Production sector,2008,4776
+TLC2,"Northumberland, and Tyne and Wear",A-E,Production sector,2009,4819
+TLC2,"Northumberland, and Tyne and Wear",A-E,Production sector,2010,4961
+TLC2,"Northumberland, and Tyne and Wear",A-E,Production sector,2011,4790
+TLC2,"Northumberland, and Tyne and Wear",A-E,Production sector,2012,5061
+TLC2,"Northumberland, and Tyne and Wear",A-E,Production sector,2013,5326
+TLC2,"Northumberland, and Tyne and Wear",A-E,Production sector,2014,5453
+TLC2,"Northumberland, and Tyne and Wear",A-E,Production sector,2015,5452
+TLC2,"Northumberland, and Tyne and Wear",A-E,Production sector,2016,5526
+TLC2,"Northumberland, and Tyne and Wear",A-E,Production sector,2017,5753
+TLC2,"Northumberland, and Tyne and Wear",A-E,Production sector,2018,5584
+TLC2,"Northumberland, and Tyne and Wear",A-E,Production sector,2019,6057
+TLC2,"Northumberland, and Tyne and Wear",A-E,Production sector,2020,5326
+TLC2,"Northumberland, and Tyne and Wear",A-E,Production sector,2021,5310
+TLC2,"Northumberland, and Tyne and Wear",A-E,Production sector,2022,5850
+TLC2,"Northumberland, and Tyne and Wear",F (41-43),Construction,1998,912
+TLC2,"Northumberland, and Tyne and Wear",F (41-43),Construction,1999,988
+TLC2,"Northumberland, and Tyne and Wear",F (41-43),Construction,2000,991
+TLC2,"Northumberland, and Tyne and Wear",F (41-43),Construction,2001,1078
+TLC2,"Northumberland, and Tyne and Wear",F (41-43),Construction,2002,1247
+TLC2,"Northumberland, and Tyne and Wear",F (41-43),Construction,2003,1273
+TLC2,"Northumberland, and Tyne and Wear",F (41-43),Construction,2004,1418
+TLC2,"Northumberland, and Tyne and Wear",F (41-43),Construction,2005,1565
+TLC2,"Northumberland, and Tyne and Wear",F (41-43),Construction,2006,1638
+TLC2,"Northumberland, and Tyne and Wear",F (41-43),Construction,2007,1593
+TLC2,"Northumberland, and Tyne and Wear",F (41-43),Construction,2008,1595
+TLC2,"Northumberland, and Tyne and Wear",F (41-43),Construction,2009,1295
+TLC2,"Northumberland, and Tyne and Wear",F (41-43),Construction,2010,1340
+TLC2,"Northumberland, and Tyne and Wear",F (41-43),Construction,2011,1421
+TLC2,"Northumberland, and Tyne and Wear",F (41-43),Construction,2012,1358
+TLC2,"Northumberland, and Tyne and Wear",F (41-43),Construction,2013,1428
+TLC2,"Northumberland, and Tyne and Wear",F (41-43),Construction,2014,1530
+TLC2,"Northumberland, and Tyne and Wear",F (41-43),Construction,2015,1681
+TLC2,"Northumberland, and Tyne and Wear",F (41-43),Construction,2016,1656
+TLC2,"Northumberland, and Tyne and Wear",F (41-43),Construction,2017,1728
+TLC2,"Northumberland, and Tyne and Wear",F (41-43),Construction,2018,1766
+TLC2,"Northumberland, and Tyne and Wear",F (41-43),Construction,2019,1938
+TLC2,"Northumberland, and Tyne and Wear",F (41-43),Construction,2020,1381
+TLC2,"Northumberland, and Tyne and Wear",F (41-43),Construction,2021,1829
+TLC2,"Northumberland, and Tyne and Wear",F (41-43),Construction,2022,2169
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services sector,1998,11676
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services sector,1999,11825
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services sector,2000,12217
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services sector,2001,13188
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services sector,2002,14097
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services sector,2003,15011
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services sector,2004,16662
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services sector,2005,17689
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services sector,2006,18491
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services sector,2007,18762
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services sector,2008,19075
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services sector,2009,18972
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services sector,2010,19342
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services sector,2011,20211
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services sector,2012,20789
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services sector,2013,20721
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services sector,2014,21420
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services sector,2015,22279
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services sector,2016,22879
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services sector,2017,23780
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services sector,2018,24007
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services sector,2019,25014
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services sector,2020,23507
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services sector,2021,25985
+TLC2,"Northumberland, and Tyne and Wear",G-T,Services sector,2022,28708
+TLD1,Cumbria,A-E,Production sector,1998,2433
+TLD1,Cumbria,A-E,Production sector,1999,2430
+TLD1,Cumbria,A-E,Production sector,2000,2132
+TLD1,Cumbria,A-E,Production sector,2001,2043
+TLD1,Cumbria,A-E,Production sector,2002,2185
+TLD1,Cumbria,A-E,Production sector,2003,2237
+TLD1,Cumbria,A-E,Production sector,2004,2232
+TLD1,Cumbria,A-E,Production sector,2005,2419
+TLD1,Cumbria,A-E,Production sector,2006,2592
+TLD1,Cumbria,A-E,Production sector,2007,2491
+TLD1,Cumbria,A-E,Production sector,2008,2825
+TLD1,Cumbria,A-E,Production sector,2009,2746
+TLD1,Cumbria,A-E,Production sector,2010,2768
+TLD1,Cumbria,A-E,Production sector,2011,2673
+TLD1,Cumbria,A-E,Production sector,2012,2776
+TLD1,Cumbria,A-E,Production sector,2013,2940
+TLD1,Cumbria,A-E,Production sector,2014,3311
+TLD1,Cumbria,A-E,Production sector,2015,3360
+TLD1,Cumbria,A-E,Production sector,2016,3098
+TLD1,Cumbria,A-E,Production sector,2017,3145
+TLD1,Cumbria,A-E,Production sector,2018,3165
+TLD1,Cumbria,A-E,Production sector,2019,3290
+TLD1,Cumbria,A-E,Production sector,2020,3386
+TLD1,Cumbria,A-E,Production sector,2021,3470
+TLD1,Cumbria,A-E,Production sector,2022,3638
+TLD1,Cumbria,F (41-43),Construction,1998,315
+TLD1,Cumbria,F (41-43),Construction,1999,361
+TLD1,Cumbria,F (41-43),Construction,2000,396
+TLD1,Cumbria,F (41-43),Construction,2001,378
+TLD1,Cumbria,F (41-43),Construction,2002,431
+TLD1,Cumbria,F (41-43),Construction,2003,504
+TLD1,Cumbria,F (41-43),Construction,2004,549
+TLD1,Cumbria,F (41-43),Construction,2005,571
+TLD1,Cumbria,F (41-43),Construction,2006,622
+TLD1,Cumbria,F (41-43),Construction,2007,703
+TLD1,Cumbria,F (41-43),Construction,2008,758
+TLD1,Cumbria,F (41-43),Construction,2009,632
+TLD1,Cumbria,F (41-43),Construction,2010,616
+TLD1,Cumbria,F (41-43),Construction,2011,651
+TLD1,Cumbria,F (41-43),Construction,2012,649
+TLD1,Cumbria,F (41-43),Construction,2013,693
+TLD1,Cumbria,F (41-43),Construction,2014,676
+TLD1,Cumbria,F (41-43),Construction,2015,764
+TLD1,Cumbria,F (41-43),Construction,2016,752
+TLD1,Cumbria,F (41-43),Construction,2017,744
+TLD1,Cumbria,F (41-43),Construction,2018,779
+TLD1,Cumbria,F (41-43),Construction,2019,754
+TLD1,Cumbria,F (41-43),Construction,2020,592
+TLD1,Cumbria,F (41-43),Construction,2021,817
+TLD1,Cumbria,F (41-43),Construction,2022,961
+TLD1,Cumbria,G-T,Services sector,1998,3803
+TLD1,Cumbria,G-T,Services sector,1999,3967
+TLD1,Cumbria,G-T,Services sector,2000,4175
+TLD1,Cumbria,G-T,Services sector,2001,4309
+TLD1,Cumbria,G-T,Services sector,2002,4534
+TLD1,Cumbria,G-T,Services sector,2003,4917
+TLD1,Cumbria,G-T,Services sector,2004,5128
+TLD1,Cumbria,G-T,Services sector,2005,5304
+TLD1,Cumbria,G-T,Services sector,2006,5752
+TLD1,Cumbria,G-T,Services sector,2007,6014
+TLD1,Cumbria,G-T,Services sector,2008,6294
+TLD1,Cumbria,G-T,Services sector,2009,6264
+TLD1,Cumbria,G-T,Services sector,2010,6478
+TLD1,Cumbria,G-T,Services sector,2011,6468
+TLD1,Cumbria,G-T,Services sector,2012,6748
+TLD1,Cumbria,G-T,Services sector,2013,6897
+TLD1,Cumbria,G-T,Services sector,2014,7040
+TLD1,Cumbria,G-T,Services sector,2015,7314
+TLD1,Cumbria,G-T,Services sector,2016,7458
+TLD1,Cumbria,G-T,Services sector,2017,7638
+TLD1,Cumbria,G-T,Services sector,2018,7831
+TLD1,Cumbria,G-T,Services sector,2019,8372
+TLD1,Cumbria,G-T,Services sector,2020,7454
+TLD1,Cumbria,G-T,Services sector,2021,7924
+TLD1,Cumbria,G-T,Services sector,2022,8664
+TLD3,Greater Manchester,A-E,Production sector,1998,6765
+TLD3,Greater Manchester,A-E,Production sector,1999,7088
+TLD3,Greater Manchester,A-E,Production sector,2000,7111
+TLD3,Greater Manchester,A-E,Production sector,2001,6907
+TLD3,Greater Manchester,A-E,Production sector,2002,6832
+TLD3,Greater Manchester,A-E,Production sector,2003,6872
+TLD3,Greater Manchester,A-E,Production sector,2004,6728
+TLD3,Greater Manchester,A-E,Production sector,2005,6744
+TLD3,Greater Manchester,A-E,Production sector,2006,6884
+TLD3,Greater Manchester,A-E,Production sector,2007,6908
+TLD3,Greater Manchester,A-E,Production sector,2008,7162
+TLD3,Greater Manchester,A-E,Production sector,2009,6976
+TLD3,Greater Manchester,A-E,Production sector,2010,7197
+TLD3,Greater Manchester,A-E,Production sector,2011,7181
+TLD3,Greater Manchester,A-E,Production sector,2012,7504
+TLD3,Greater Manchester,A-E,Production sector,2013,7889
+TLD3,Greater Manchester,A-E,Production sector,2014,8194
+TLD3,Greater Manchester,A-E,Production sector,2015,8169
+TLD3,Greater Manchester,A-E,Production sector,2016,8137
+TLD3,Greater Manchester,A-E,Production sector,2017,8753
+TLD3,Greater Manchester,A-E,Production sector,2018,8975
+TLD3,Greater Manchester,A-E,Production sector,2019,9095
+TLD3,Greater Manchester,A-E,Production sector,2020,9603
+TLD3,Greater Manchester,A-E,Production sector,2021,8800
+TLD3,Greater Manchester,A-E,Production sector,2022,9508
+TLD3,Greater Manchester,F (41-43),Construction,1998,2028
+TLD3,Greater Manchester,F (41-43),Construction,1999,2128
+TLD3,Greater Manchester,F (41-43),Construction,2000,2221
+TLD3,Greater Manchester,F (41-43),Construction,2001,2400
+TLD3,Greater Manchester,F (41-43),Construction,2002,2551
+TLD3,Greater Manchester,F (41-43),Construction,2003,2770
+TLD3,Greater Manchester,F (41-43),Construction,2004,3219
+TLD3,Greater Manchester,F (41-43),Construction,2005,3410
+TLD3,Greater Manchester,F (41-43),Construction,2006,3411
+TLD3,Greater Manchester,F (41-43),Construction,2007,3838
+TLD3,Greater Manchester,F (41-43),Construction,2008,4021
+TLD3,Greater Manchester,F (41-43),Construction,2009,3316
+TLD3,Greater Manchester,F (41-43),Construction,2010,2940
+TLD3,Greater Manchester,F (41-43),Construction,2011,2939
+TLD3,Greater Manchester,F (41-43),Construction,2012,3146
+TLD3,Greater Manchester,F (41-43),Construction,2013,3260
+TLD3,Greater Manchester,F (41-43),Construction,2014,3323
+TLD3,Greater Manchester,F (41-43),Construction,2015,3505
+TLD3,Greater Manchester,F (41-43),Construction,2016,3716
+TLD3,Greater Manchester,F (41-43),Construction,2017,4048
+TLD3,Greater Manchester,F (41-43),Construction,2018,4392
+TLD3,Greater Manchester,F (41-43),Construction,2019,4225
+TLD3,Greater Manchester,F (41-43),Construction,2020,3921
+TLD3,Greater Manchester,F (41-43),Construction,2021,4643
+TLD3,Greater Manchester,F (41-43),Construction,2022,5430
+TLD3,Greater Manchester,G-T,Services sector,1998,24419
+TLD3,Greater Manchester,G-T,Services sector,1999,25629
+TLD3,Greater Manchester,G-T,Services sector,2000,26461
+TLD3,Greater Manchester,G-T,Services sector,2001,28663
+TLD3,Greater Manchester,G-T,Services sector,2002,30371
+TLD3,Greater Manchester,G-T,Services sector,2003,31872
+TLD3,Greater Manchester,G-T,Services sector,2004,33867
+TLD3,Greater Manchester,G-T,Services sector,2005,36544
+TLD3,Greater Manchester,G-T,Services sector,2006,38905
+TLD3,Greater Manchester,G-T,Services sector,2007,40840
+TLD3,Greater Manchester,G-T,Services sector,2008,41278
+TLD3,Greater Manchester,G-T,Services sector,2009,42463
+TLD3,Greater Manchester,G-T,Services sector,2010,43496
+TLD3,Greater Manchester,G-T,Services sector,2011,43565
+TLD3,Greater Manchester,G-T,Services sector,2012,45398
+TLD3,Greater Manchester,G-T,Services sector,2013,47270
+TLD3,Greater Manchester,G-T,Services sector,2014,48503
+TLD3,Greater Manchester,G-T,Services sector,2015,50861
+TLD3,Greater Manchester,G-T,Services sector,2016,52737
+TLD3,Greater Manchester,G-T,Services sector,2017,56357
+TLD3,Greater Manchester,G-T,Services sector,2018,58807
+TLD3,Greater Manchester,G-T,Services sector,2019,61943
+TLD3,Greater Manchester,G-T,Services sector,2020,61871
+TLD3,Greater Manchester,G-T,Services sector,2021,67224
+TLD3,Greater Manchester,G-T,Services sector,2022,74577
+TLD4,Lancashire,A-E,Production sector,1998,5677
+TLD4,Lancashire,A-E,Production sector,1999,5882
+TLD4,Lancashire,A-E,Production sector,2000,5872
+TLD4,Lancashire,A-E,Production sector,2001,5757
+TLD4,Lancashire,A-E,Production sector,2002,5887
+TLD4,Lancashire,A-E,Production sector,2003,6085
+TLD4,Lancashire,A-E,Production sector,2004,6251
+TLD4,Lancashire,A-E,Production sector,2005,6677
+TLD4,Lancashire,A-E,Production sector,2006,6611
+TLD4,Lancashire,A-E,Production sector,2007,6679
+TLD4,Lancashire,A-E,Production sector,2008,6370
+TLD4,Lancashire,A-E,Production sector,2009,5182
+TLD4,Lancashire,A-E,Production sector,2010,5219
+TLD4,Lancashire,A-E,Production sector,2011,5497
+TLD4,Lancashire,A-E,Production sector,2012,5822
+TLD4,Lancashire,A-E,Production sector,2013,6378
+TLD4,Lancashire,A-E,Production sector,2014,6670
+TLD4,Lancashire,A-E,Production sector,2015,7295
+TLD4,Lancashire,A-E,Production sector,2016,7426
+TLD4,Lancashire,A-E,Production sector,2017,7621
+TLD4,Lancashire,A-E,Production sector,2018,7472
+TLD4,Lancashire,A-E,Production sector,2019,7190
+TLD4,Lancashire,A-E,Production sector,2020,7580
+TLD4,Lancashire,A-E,Production sector,2021,7938
+TLD4,Lancashire,A-E,Production sector,2022,8934
+TLD4,Lancashire,F (41-43),Construction,1998,966
+TLD4,Lancashire,F (41-43),Construction,1999,1010
+TLD4,Lancashire,F (41-43),Construction,2000,1178
+TLD4,Lancashire,F (41-43),Construction,2001,1189
+TLD4,Lancashire,F (41-43),Construction,2002,1318
+TLD4,Lancashire,F (41-43),Construction,2003,1463
+TLD4,Lancashire,F (41-43),Construction,2004,1614
+TLD4,Lancashire,F (41-43),Construction,2005,1650
+TLD4,Lancashire,F (41-43),Construction,2006,1620
+TLD4,Lancashire,F (41-43),Construction,2007,1726
+TLD4,Lancashire,F (41-43),Construction,2008,1801
+TLD4,Lancashire,F (41-43),Construction,2009,1546
+TLD4,Lancashire,F (41-43),Construction,2010,1638
+TLD4,Lancashire,F (41-43),Construction,2011,1768
+TLD4,Lancashire,F (41-43),Construction,2012,1673
+TLD4,Lancashire,F (41-43),Construction,2013,1777
+TLD4,Lancashire,F (41-43),Construction,2014,1827
+TLD4,Lancashire,F (41-43),Construction,2015,2088
+TLD4,Lancashire,F (41-43),Construction,2016,2175
+TLD4,Lancashire,F (41-43),Construction,2017,2246
+TLD4,Lancashire,F (41-43),Construction,2018,2252
+TLD4,Lancashire,F (41-43),Construction,2019,2331
+TLD4,Lancashire,F (41-43),Construction,2020,2183
+TLD4,Lancashire,F (41-43),Construction,2021,2492
+TLD4,Lancashire,F (41-43),Construction,2022,2767
+TLD4,Lancashire,G-T,Services sector,1998,11043
+TLD4,Lancashire,G-T,Services sector,1999,11543
+TLD4,Lancashire,G-T,Services sector,2000,11783
+TLD4,Lancashire,G-T,Services sector,2001,12532
+TLD4,Lancashire,G-T,Services sector,2002,13204
+TLD4,Lancashire,G-T,Services sector,2003,14527
+TLD4,Lancashire,G-T,Services sector,2004,15565
+TLD4,Lancashire,G-T,Services sector,2005,15927
+TLD4,Lancashire,G-T,Services sector,2006,16612
+TLD4,Lancashire,G-T,Services sector,2007,17538
+TLD4,Lancashire,G-T,Services sector,2008,18236
+TLD4,Lancashire,G-T,Services sector,2009,18389
+TLD4,Lancashire,G-T,Services sector,2010,18781
+TLD4,Lancashire,G-T,Services sector,2011,18858
+TLD4,Lancashire,G-T,Services sector,2012,19610
+TLD4,Lancashire,G-T,Services sector,2013,19655
+TLD4,Lancashire,G-T,Services sector,2014,20292
+TLD4,Lancashire,G-T,Services sector,2015,20943
+TLD4,Lancashire,G-T,Services sector,2016,22296
+TLD4,Lancashire,G-T,Services sector,2017,22912
+TLD4,Lancashire,G-T,Services sector,2018,23229
+TLD4,Lancashire,G-T,Services sector,2019,24668
+TLD4,Lancashire,G-T,Services sector,2020,23196
+TLD4,Lancashire,G-T,Services sector,2021,25741
+TLD4,Lancashire,G-T,Services sector,2022,27901
+TLD6,Cheshire,A-E,Production sector,1998,4310
+TLD6,Cheshire,A-E,Production sector,1999,4407
+TLD6,Cheshire,A-E,Production sector,2000,4377
+TLD6,Cheshire,A-E,Production sector,2001,5249
+TLD6,Cheshire,A-E,Production sector,2002,4954
+TLD6,Cheshire,A-E,Production sector,2003,4503
+TLD6,Cheshire,A-E,Production sector,2004,5248
+TLD6,Cheshire,A-E,Production sector,2005,5637
+TLD6,Cheshire,A-E,Production sector,2006,5838
+TLD6,Cheshire,A-E,Production sector,2007,5748
+TLD6,Cheshire,A-E,Production sector,2008,5603
+TLD6,Cheshire,A-E,Production sector,2009,5574
+TLD6,Cheshire,A-E,Production sector,2010,5769
+TLD6,Cheshire,A-E,Production sector,2011,6008
+TLD6,Cheshire,A-E,Production sector,2012,6567
+TLD6,Cheshire,A-E,Production sector,2013,7043
+TLD6,Cheshire,A-E,Production sector,2014,7293
+TLD6,Cheshire,A-E,Production sector,2015,7519
+TLD6,Cheshire,A-E,Production sector,2016,8168
+TLD6,Cheshire,A-E,Production sector,2017,7871
+TLD6,Cheshire,A-E,Production sector,2018,7594
+TLD6,Cheshire,A-E,Production sector,2019,7817
+TLD6,Cheshire,A-E,Production sector,2020,7575
+TLD6,Cheshire,A-E,Production sector,2021,6877
+TLD6,Cheshire,A-E,Production sector,2022,8207
+TLD6,Cheshire,F (41-43),Construction,1998,751
+TLD6,Cheshire,F (41-43),Construction,1999,861
+TLD6,Cheshire,F (41-43),Construction,2000,891
+TLD6,Cheshire,F (41-43),Construction,2001,942
+TLD6,Cheshire,F (41-43),Construction,2002,974
+TLD6,Cheshire,F (41-43),Construction,2003,1083
+TLD6,Cheshire,F (41-43),Construction,2004,1096
+TLD6,Cheshire,F (41-43),Construction,2005,1258
+TLD6,Cheshire,F (41-43),Construction,2006,1388
+TLD6,Cheshire,F (41-43),Construction,2007,1458
+TLD6,Cheshire,F (41-43),Construction,2008,1496
+TLD6,Cheshire,F (41-43),Construction,2009,1189
+TLD6,Cheshire,F (41-43),Construction,2010,1131
+TLD6,Cheshire,F (41-43),Construction,2011,1200
+TLD6,Cheshire,F (41-43),Construction,2012,1180
+TLD6,Cheshire,F (41-43),Construction,2013,1290
+TLD6,Cheshire,F (41-43),Construction,2014,1372
+TLD6,Cheshire,F (41-43),Construction,2015,1425
+TLD6,Cheshire,F (41-43),Construction,2016,1528
+TLD6,Cheshire,F (41-43),Construction,2017,1635
+TLD6,Cheshire,F (41-43),Construction,2018,1868
+TLD6,Cheshire,F (41-43),Construction,2019,1873
+TLD6,Cheshire,F (41-43),Construction,2020,1890
+TLD6,Cheshire,F (41-43),Construction,2021,2226
+TLD6,Cheshire,F (41-43),Construction,2022,2474
+TLD6,Cheshire,G-T,Services sector,1998,9399
+TLD6,Cheshire,G-T,Services sector,1999,9908
+TLD6,Cheshire,G-T,Services sector,2000,10273
+TLD6,Cheshire,G-T,Services sector,2001,11324
+TLD6,Cheshire,G-T,Services sector,2002,12103
+TLD6,Cheshire,G-T,Services sector,2003,12715
+TLD6,Cheshire,G-T,Services sector,2004,13167
+TLD6,Cheshire,G-T,Services sector,2005,13734
+TLD6,Cheshire,G-T,Services sector,2006,14859
+TLD6,Cheshire,G-T,Services sector,2007,15890
+TLD6,Cheshire,G-T,Services sector,2008,16000
+TLD6,Cheshire,G-T,Services sector,2009,16158
+TLD6,Cheshire,G-T,Services sector,2010,16990
+TLD6,Cheshire,G-T,Services sector,2011,17133
+TLD6,Cheshire,G-T,Services sector,2012,17477
+TLD6,Cheshire,G-T,Services sector,2013,17838
+TLD6,Cheshire,G-T,Services sector,2014,18980
+TLD6,Cheshire,G-T,Services sector,2015,19327
+TLD6,Cheshire,G-T,Services sector,2016,20256
+TLD6,Cheshire,G-T,Services sector,2017,21837
+TLD6,Cheshire,G-T,Services sector,2018,22584
+TLD6,Cheshire,G-T,Services sector,2019,23996
+TLD6,Cheshire,G-T,Services sector,2020,22937
+TLD6,Cheshire,G-T,Services sector,2021,24937
+TLD6,Cheshire,G-T,Services sector,2022,27058
+TLD7,Merseyside,A-E,Production sector,1998,3441
+TLD7,Merseyside,A-E,Production sector,1999,3477
+TLD7,Merseyside,A-E,Production sector,2000,3479
+TLD7,Merseyside,A-E,Production sector,2001,3529
+TLD7,Merseyside,A-E,Production sector,2002,3545
+TLD7,Merseyside,A-E,Production sector,2003,4113
+TLD7,Merseyside,A-E,Production sector,2004,3929
+TLD7,Merseyside,A-E,Production sector,2005,3983
+TLD7,Merseyside,A-E,Production sector,2006,4518
+TLD7,Merseyside,A-E,Production sector,2007,4191
+TLD7,Merseyside,A-E,Production sector,2008,4480
+TLD7,Merseyside,A-E,Production sector,2009,4559
+TLD7,Merseyside,A-E,Production sector,2010,4533
+TLD7,Merseyside,A-E,Production sector,2011,4583
+TLD7,Merseyside,A-E,Production sector,2012,3970
+TLD7,Merseyside,A-E,Production sector,2013,4095
+TLD7,Merseyside,A-E,Production sector,2014,4430
+TLD7,Merseyside,A-E,Production sector,2015,4591
+TLD7,Merseyside,A-E,Production sector,2016,4577
+TLD7,Merseyside,A-E,Production sector,2017,4821
+TLD7,Merseyside,A-E,Production sector,2018,4693
+TLD7,Merseyside,A-E,Production sector,2019,4845
+TLD7,Merseyside,A-E,Production sector,2020,4591
+TLD7,Merseyside,A-E,Production sector,2021,4778
+TLD7,Merseyside,A-E,Production sector,2022,4994
+TLD7,Merseyside,F (41-43),Construction,1998,775
+TLD7,Merseyside,F (41-43),Construction,1999,859
+TLD7,Merseyside,F (41-43),Construction,2000,938
+TLD7,Merseyside,F (41-43),Construction,2001,970
+TLD7,Merseyside,F (41-43),Construction,2002,1091
+TLD7,Merseyside,F (41-43),Construction,2003,1142
+TLD7,Merseyside,F (41-43),Construction,2004,1235
+TLD7,Merseyside,F (41-43),Construction,2005,1396
+TLD7,Merseyside,F (41-43),Construction,2006,1505
+TLD7,Merseyside,F (41-43),Construction,2007,1569
+TLD7,Merseyside,F (41-43),Construction,2008,1552
+TLD7,Merseyside,F (41-43),Construction,2009,1403
+TLD7,Merseyside,F (41-43),Construction,2010,1319
+TLD7,Merseyside,F (41-43),Construction,2011,1389
+TLD7,Merseyside,F (41-43),Construction,2012,1323
+TLD7,Merseyside,F (41-43),Construction,2013,1398
+TLD7,Merseyside,F (41-43),Construction,2014,1504
+TLD7,Merseyside,F (41-43),Construction,2015,1647
+TLD7,Merseyside,F (41-43),Construction,2016,1748
+TLD7,Merseyside,F (41-43),Construction,2017,1928
+TLD7,Merseyside,F (41-43),Construction,2018,1932
+TLD7,Merseyside,F (41-43),Construction,2019,1959
+TLD7,Merseyside,F (41-43),Construction,2020,1793
+TLD7,Merseyside,F (41-43),Construction,2021,1787
+TLD7,Merseyside,F (41-43),Construction,2022,2112
+TLD7,Merseyside,G-T,Services sector,1998,11964
+TLD7,Merseyside,G-T,Services sector,1999,12747
+TLD7,Merseyside,G-T,Services sector,2000,13374
+TLD7,Merseyside,G-T,Services sector,2001,14322
+TLD7,Merseyside,G-T,Services sector,2002,15204
+TLD7,Merseyside,G-T,Services sector,2003,16190
+TLD7,Merseyside,G-T,Services sector,2004,17388
+TLD7,Merseyside,G-T,Services sector,2005,18038
+TLD7,Merseyside,G-T,Services sector,2006,19214
+TLD7,Merseyside,G-T,Services sector,2007,19602
+TLD7,Merseyside,G-T,Services sector,2008,20505
+TLD7,Merseyside,G-T,Services sector,2009,21157
+TLD7,Merseyside,G-T,Services sector,2010,21574
+TLD7,Merseyside,G-T,Services sector,2011,21519
+TLD7,Merseyside,G-T,Services sector,2012,21913
+TLD7,Merseyside,G-T,Services sector,2013,22418
+TLD7,Merseyside,G-T,Services sector,2014,23344
+TLD7,Merseyside,G-T,Services sector,2015,24034
+TLD7,Merseyside,G-T,Services sector,2016,24503
+TLD7,Merseyside,G-T,Services sector,2017,25220
+TLD7,Merseyside,G-T,Services sector,2018,25685
+TLD7,Merseyside,G-T,Services sector,2019,27445
+TLD7,Merseyside,G-T,Services sector,2020,26878
+TLD7,Merseyside,G-T,Services sector,2021,30017
+TLD7,Merseyside,G-T,Services sector,2022,32483
+TLE1,East Yorkshire and Northern Lincolnshire,A-E,Production sector,1998,3882
+TLE1,East Yorkshire and Northern Lincolnshire,A-E,Production sector,1999,3766
+TLE1,East Yorkshire and Northern Lincolnshire,A-E,Production sector,2000,3960
+TLE1,East Yorkshire and Northern Lincolnshire,A-E,Production sector,2001,3786
+TLE1,East Yorkshire and Northern Lincolnshire,A-E,Production sector,2002,3866
+TLE1,East Yorkshire and Northern Lincolnshire,A-E,Production sector,2003,4212
+TLE1,East Yorkshire and Northern Lincolnshire,A-E,Production sector,2004,4427
+TLE1,East Yorkshire and Northern Lincolnshire,A-E,Production sector,2005,4526
+TLE1,East Yorkshire and Northern Lincolnshire,A-E,Production sector,2006,4742
+TLE1,East Yorkshire and Northern Lincolnshire,A-E,Production sector,2007,4950
+TLE1,East Yorkshire and Northern Lincolnshire,A-E,Production sector,2008,5620
+TLE1,East Yorkshire and Northern Lincolnshire,A-E,Production sector,2009,5412
+TLE1,East Yorkshire and Northern Lincolnshire,A-E,Production sector,2010,5197
+TLE1,East Yorkshire and Northern Lincolnshire,A-E,Production sector,2011,4751
+TLE1,East Yorkshire and Northern Lincolnshire,A-E,Production sector,2012,4932
+TLE1,East Yorkshire and Northern Lincolnshire,A-E,Production sector,2013,5114
+TLE1,East Yorkshire and Northern Lincolnshire,A-E,Production sector,2014,5111
+TLE1,East Yorkshire and Northern Lincolnshire,A-E,Production sector,2015,5684
+TLE1,East Yorkshire and Northern Lincolnshire,A-E,Production sector,2016,5789
+TLE1,East Yorkshire and Northern Lincolnshire,A-E,Production sector,2017,6053
+TLE1,East Yorkshire and Northern Lincolnshire,A-E,Production sector,2018,6128
+TLE1,East Yorkshire and Northern Lincolnshire,A-E,Production sector,2019,6918
+TLE1,East Yorkshire and Northern Lincolnshire,A-E,Production sector,2020,6447
+TLE1,East Yorkshire and Northern Lincolnshire,A-E,Production sector,2021,8063
+TLE1,East Yorkshire and Northern Lincolnshire,A-E,Production sector,2022,9346
+TLE1,East Yorkshire and Northern Lincolnshire,F (41-43),Construction,1998,559
+TLE1,East Yorkshire and Northern Lincolnshire,F (41-43),Construction,1999,638
+TLE1,East Yorkshire and Northern Lincolnshire,F (41-43),Construction,2000,646
+TLE1,East Yorkshire and Northern Lincolnshire,F (41-43),Construction,2001,655
+TLE1,East Yorkshire and Northern Lincolnshire,F (41-43),Construction,2002,791
+TLE1,East Yorkshire and Northern Lincolnshire,F (41-43),Construction,2003,919
+TLE1,East Yorkshire and Northern Lincolnshire,F (41-43),Construction,2004,940
+TLE1,East Yorkshire and Northern Lincolnshire,F (41-43),Construction,2005,1094
+TLE1,East Yorkshire and Northern Lincolnshire,F (41-43),Construction,2006,1138
+TLE1,East Yorkshire and Northern Lincolnshire,F (41-43),Construction,2007,1141
+TLE1,East Yorkshire and Northern Lincolnshire,F (41-43),Construction,2008,1143
+TLE1,East Yorkshire and Northern Lincolnshire,F (41-43),Construction,2009,860
+TLE1,East Yorkshire and Northern Lincolnshire,F (41-43),Construction,2010,939
+TLE1,East Yorkshire and Northern Lincolnshire,F (41-43),Construction,2011,906
+TLE1,East Yorkshire and Northern Lincolnshire,F (41-43),Construction,2012,930
+TLE1,East Yorkshire and Northern Lincolnshire,F (41-43),Construction,2013,981
+TLE1,East Yorkshire and Northern Lincolnshire,F (41-43),Construction,2014,1099
+TLE1,East Yorkshire and Northern Lincolnshire,F (41-43),Construction,2015,1164
+TLE1,East Yorkshire and Northern Lincolnshire,F (41-43),Construction,2016,1100
+TLE1,East Yorkshire and Northern Lincolnshire,F (41-43),Construction,2017,1196
+TLE1,East Yorkshire and Northern Lincolnshire,F (41-43),Construction,2018,1259
+TLE1,East Yorkshire and Northern Lincolnshire,F (41-43),Construction,2019,1278
+TLE1,East Yorkshire and Northern Lincolnshire,F (41-43),Construction,2020,1163
+TLE1,East Yorkshire and Northern Lincolnshire,F (41-43),Construction,2021,1486
+TLE1,East Yorkshire and Northern Lincolnshire,F (41-43),Construction,2022,1794
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services sector,1998,6344
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services sector,1999,6425
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services sector,2000,6745
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services sector,2001,7457
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services sector,2002,7940
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services sector,2003,8444
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services sector,2004,8938
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services sector,2005,9250
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services sector,2006,9752
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services sector,2007,10457
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services sector,2008,10735
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services sector,2009,10611
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services sector,2010,10483
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services sector,2011,10589
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services sector,2012,10649
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services sector,2013,10748
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services sector,2014,11193
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services sector,2015,11571
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services sector,2016,11837
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services sector,2017,12402
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services sector,2018,12729
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services sector,2019,13256
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services sector,2020,12461
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services sector,2021,14378
+TLE1,East Yorkshire and Northern Lincolnshire,G-T,Services sector,2022,15578
+TLE2,North Yorkshire,A-E,Production sector,1998,2493
+TLE2,North Yorkshire,A-E,Production sector,1999,2402
+TLE2,North Yorkshire,A-E,Production sector,2000,2544
+TLE2,North Yorkshire,A-E,Production sector,2001,2451
+TLE2,North Yorkshire,A-E,Production sector,2002,2734
+TLE2,North Yorkshire,A-E,Production sector,2003,2783
+TLE2,North Yorkshire,A-E,Production sector,2004,2690
+TLE2,North Yorkshire,A-E,Production sector,2005,2738
+TLE2,North Yorkshire,A-E,Production sector,2006,2973
+TLE2,North Yorkshire,A-E,Production sector,2007,3065
+TLE2,North Yorkshire,A-E,Production sector,2008,3203
+TLE2,North Yorkshire,A-E,Production sector,2009,3146
+TLE2,North Yorkshire,A-E,Production sector,2010,3060
+TLE2,North Yorkshire,A-E,Production sector,2011,3151
+TLE2,North Yorkshire,A-E,Production sector,2012,3246
+TLE2,North Yorkshire,A-E,Production sector,2013,3385
+TLE2,North Yorkshire,A-E,Production sector,2014,3432
+TLE2,North Yorkshire,A-E,Production sector,2015,3423
+TLE2,North Yorkshire,A-E,Production sector,2016,3390
+TLE2,North Yorkshire,A-E,Production sector,2017,3558
+TLE2,North Yorkshire,A-E,Production sector,2018,3645
+TLE2,North Yorkshire,A-E,Production sector,2019,3801
+TLE2,North Yorkshire,A-E,Production sector,2020,3884
+TLE2,North Yorkshire,A-E,Production sector,2021,4093
+TLE2,North Yorkshire,A-E,Production sector,2022,4492
+TLE2,North Yorkshire,F (41-43),Construction,1998,665
+TLE2,North Yorkshire,F (41-43),Construction,1999,737
+TLE2,North Yorkshire,F (41-43),Construction,2000,748
+TLE2,North Yorkshire,F (41-43),Construction,2001,814
+TLE2,North Yorkshire,F (41-43),Construction,2002,846
+TLE2,North Yorkshire,F (41-43),Construction,2003,892
+TLE2,North Yorkshire,F (41-43),Construction,2004,909
+TLE2,North Yorkshire,F (41-43),Construction,2005,1023
+TLE2,North Yorkshire,F (41-43),Construction,2006,1088
+TLE2,North Yorkshire,F (41-43),Construction,2007,1081
+TLE2,North Yorkshire,F (41-43),Construction,2008,1115
+TLE2,North Yorkshire,F (41-43),Construction,2009,892
+TLE2,North Yorkshire,F (41-43),Construction,2010,923
+TLE2,North Yorkshire,F (41-43),Construction,2011,848
+TLE2,North Yorkshire,F (41-43),Construction,2012,898
+TLE2,North Yorkshire,F (41-43),Construction,2013,931
+TLE2,North Yorkshire,F (41-43),Construction,2014,965
+TLE2,North Yorkshire,F (41-43),Construction,2015,1059
+TLE2,North Yorkshire,F (41-43),Construction,2016,1088
+TLE2,North Yorkshire,F (41-43),Construction,2017,1110
+TLE2,North Yorkshire,F (41-43),Construction,2018,1143
+TLE2,North Yorkshire,F (41-43),Construction,2019,1214
+TLE2,North Yorkshire,F (41-43),Construction,2020,929
+TLE2,North Yorkshire,F (41-43),Construction,2021,1221
+TLE2,North Yorkshire,F (41-43),Construction,2022,1356
+TLE2,North Yorkshire,G-T,Services sector,1998,7436
+TLE2,North Yorkshire,G-T,Services sector,1999,7742
+TLE2,North Yorkshire,G-T,Services sector,2000,8106
+TLE2,North Yorkshire,G-T,Services sector,2001,8798
+TLE2,North Yorkshire,G-T,Services sector,2002,9646
+TLE2,North Yorkshire,G-T,Services sector,2003,10330
+TLE2,North Yorkshire,G-T,Services sector,2004,11035
+TLE2,North Yorkshire,G-T,Services sector,2005,11317
+TLE2,North Yorkshire,G-T,Services sector,2006,11646
+TLE2,North Yorkshire,G-T,Services sector,2007,12435
+TLE2,North Yorkshire,G-T,Services sector,2008,12572
+TLE2,North Yorkshire,G-T,Services sector,2009,12421
+TLE2,North Yorkshire,G-T,Services sector,2010,12496
+TLE2,North Yorkshire,G-T,Services sector,2011,13026
+TLE2,North Yorkshire,G-T,Services sector,2012,13309
+TLE2,North Yorkshire,G-T,Services sector,2013,13705
+TLE2,North Yorkshire,G-T,Services sector,2014,14003
+TLE2,North Yorkshire,G-T,Services sector,2015,14251
+TLE2,North Yorkshire,G-T,Services sector,2016,14848
+TLE2,North Yorkshire,G-T,Services sector,2017,15998
+TLE2,North Yorkshire,G-T,Services sector,2018,16078
+TLE2,North Yorkshire,G-T,Services sector,2019,16594
+TLE2,North Yorkshire,G-T,Services sector,2020,15722
+TLE2,North Yorkshire,G-T,Services sector,2021,18082
+TLE2,North Yorkshire,G-T,Services sector,2022,19874
+TLE3,South Yorkshire,A-E,Production sector,1998,3255
+TLE3,South Yorkshire,A-E,Production sector,1999,3081
+TLE3,South Yorkshire,A-E,Production sector,2000,3163
+TLE3,South Yorkshire,A-E,Production sector,2001,3166
+TLE3,South Yorkshire,A-E,Production sector,2002,3344
+TLE3,South Yorkshire,A-E,Production sector,2003,3453
+TLE3,South Yorkshire,A-E,Production sector,2004,3197
+TLE3,South Yorkshire,A-E,Production sector,2005,3304
+TLE3,South Yorkshire,A-E,Production sector,2006,3260
+TLE3,South Yorkshire,A-E,Production sector,2007,3482
+TLE3,South Yorkshire,A-E,Production sector,2008,3381
+TLE3,South Yorkshire,A-E,Production sector,2009,3153
+TLE3,South Yorkshire,A-E,Production sector,2010,3471
+TLE3,South Yorkshire,A-E,Production sector,2011,3568
+TLE3,South Yorkshire,A-E,Production sector,2012,3652
+TLE3,South Yorkshire,A-E,Production sector,2013,3735
+TLE3,South Yorkshire,A-E,Production sector,2014,3786
+TLE3,South Yorkshire,A-E,Production sector,2015,3778
+TLE3,South Yorkshire,A-E,Production sector,2016,3628
+TLE3,South Yorkshire,A-E,Production sector,2017,3857
+TLE3,South Yorkshire,A-E,Production sector,2018,3997
+TLE3,South Yorkshire,A-E,Production sector,2019,4159
+TLE3,South Yorkshire,A-E,Production sector,2020,4118
+TLE3,South Yorkshire,A-E,Production sector,2021,4140
+TLE3,South Yorkshire,A-E,Production sector,2022,4341
+TLE3,South Yorkshire,F (41-43),Construction,1998,890
+TLE3,South Yorkshire,F (41-43),Construction,1999,905
+TLE3,South Yorkshire,F (41-43),Construction,2000,1068
+TLE3,South Yorkshire,F (41-43),Construction,2001,1167
+TLE3,South Yorkshire,F (41-43),Construction,2002,1294
+TLE3,South Yorkshire,F (41-43),Construction,2003,1386
+TLE3,South Yorkshire,F (41-43),Construction,2004,1477
+TLE3,South Yorkshire,F (41-43),Construction,2005,1665
+TLE3,South Yorkshire,F (41-43),Construction,2006,1797
+TLE3,South Yorkshire,F (41-43),Construction,2007,1933
+TLE3,South Yorkshire,F (41-43),Construction,2008,1947
+TLE3,South Yorkshire,F (41-43),Construction,2009,1523
+TLE3,South Yorkshire,F (41-43),Construction,2010,1479
+TLE3,South Yorkshire,F (41-43),Construction,2011,1546
+TLE3,South Yorkshire,F (41-43),Construction,2012,1559
+TLE3,South Yorkshire,F (41-43),Construction,2013,1635
+TLE3,South Yorkshire,F (41-43),Construction,2014,1754
+TLE3,South Yorkshire,F (41-43),Construction,2015,1805
+TLE3,South Yorkshire,F (41-43),Construction,2016,1874
+TLE3,South Yorkshire,F (41-43),Construction,2017,2034
+TLE3,South Yorkshire,F (41-43),Construction,2018,2053
+TLE3,South Yorkshire,F (41-43),Construction,2019,2164
+TLE3,South Yorkshire,F (41-43),Construction,2020,1832
+TLE3,South Yorkshire,F (41-43),Construction,2021,2057
+TLE3,South Yorkshire,F (41-43),Construction,2022,2434
+TLE3,South Yorkshire,G-T,Services sector,1998,9397
+TLE3,South Yorkshire,G-T,Services sector,1999,9640
+TLE3,South Yorkshire,G-T,Services sector,2000,9946
+TLE3,South Yorkshire,G-T,Services sector,2001,10864
+TLE3,South Yorkshire,G-T,Services sector,2002,11474
+TLE3,South Yorkshire,G-T,Services sector,2003,12345
+TLE3,South Yorkshire,G-T,Services sector,2004,13534
+TLE3,South Yorkshire,G-T,Services sector,2005,14035
+TLE3,South Yorkshire,G-T,Services sector,2006,14985
+TLE3,South Yorkshire,G-T,Services sector,2007,16013
+TLE3,South Yorkshire,G-T,Services sector,2008,15921
+TLE3,South Yorkshire,G-T,Services sector,2009,16179
+TLE3,South Yorkshire,G-T,Services sector,2010,16466
+TLE3,South Yorkshire,G-T,Services sector,2011,16765
+TLE3,South Yorkshire,G-T,Services sector,2012,17361
+TLE3,South Yorkshire,G-T,Services sector,2013,17749
+TLE3,South Yorkshire,G-T,Services sector,2014,18313
+TLE3,South Yorkshire,G-T,Services sector,2015,19164
+TLE3,South Yorkshire,G-T,Services sector,2016,19632
+TLE3,South Yorkshire,G-T,Services sector,2017,20321
+TLE3,South Yorkshire,G-T,Services sector,2018,20486
+TLE3,South Yorkshire,G-T,Services sector,2019,21261
+TLE3,South Yorkshire,G-T,Services sector,2020,21555
+TLE3,South Yorkshire,G-T,Services sector,2021,23351
+TLE3,South Yorkshire,G-T,Services sector,2022,25384
+TLE4,West Yorkshire,A-E,Production sector,1998,6660
+TLE4,West Yorkshire,A-E,Production sector,1999,6589
+TLE4,West Yorkshire,A-E,Production sector,2000,6501
+TLE4,West Yorkshire,A-E,Production sector,2001,6726
+TLE4,West Yorkshire,A-E,Production sector,2002,6686
+TLE4,West Yorkshire,A-E,Production sector,2003,6680
+TLE4,West Yorkshire,A-E,Production sector,2004,6409
+TLE4,West Yorkshire,A-E,Production sector,2005,6614
+TLE4,West Yorkshire,A-E,Production sector,2006,6980
+TLE4,West Yorkshire,A-E,Production sector,2007,7396
+TLE4,West Yorkshire,A-E,Production sector,2008,7785
+TLE4,West Yorkshire,A-E,Production sector,2009,7714
+TLE4,West Yorkshire,A-E,Production sector,2010,7667
+TLE4,West Yorkshire,A-E,Production sector,2011,7443
+TLE4,West Yorkshire,A-E,Production sector,2012,7916
+TLE4,West Yorkshire,A-E,Production sector,2013,8345
+TLE4,West Yorkshire,A-E,Production sector,2014,8526
+TLE4,West Yorkshire,A-E,Production sector,2015,8860
+TLE4,West Yorkshire,A-E,Production sector,2016,8611
+TLE4,West Yorkshire,A-E,Production sector,2017,8881
+TLE4,West Yorkshire,A-E,Production sector,2018,9210
+TLE4,West Yorkshire,A-E,Production sector,2019,9380
+TLE4,West Yorkshire,A-E,Production sector,2020,8727
+TLE4,West Yorkshire,A-E,Production sector,2021,9038
+TLE4,West Yorkshire,A-E,Production sector,2022,9571
+TLE4,West Yorkshire,F (41-43),Construction,1998,1508
+TLE4,West Yorkshire,F (41-43),Construction,1999,1757
+TLE4,West Yorkshire,F (41-43),Construction,2000,1864
+TLE4,West Yorkshire,F (41-43),Construction,2001,1888
+TLE4,West Yorkshire,F (41-43),Construction,2002,2013
+TLE4,West Yorkshire,F (41-43),Construction,2003,2208
+TLE4,West Yorkshire,F (41-43),Construction,2004,2439
+TLE4,West Yorkshire,F (41-43),Construction,2005,2826
+TLE4,West Yorkshire,F (41-43),Construction,2006,3046
+TLE4,West Yorkshire,F (41-43),Construction,2007,2982
+TLE4,West Yorkshire,F (41-43),Construction,2008,2806
+TLE4,West Yorkshire,F (41-43),Construction,2009,2240
+TLE4,West Yorkshire,F (41-43),Construction,2010,2180
+TLE4,West Yorkshire,F (41-43),Construction,2011,2317
+TLE4,West Yorkshire,F (41-43),Construction,2012,2312
+TLE4,West Yorkshire,F (41-43),Construction,2013,2490
+TLE4,West Yorkshire,F (41-43),Construction,2014,2579
+TLE4,West Yorkshire,F (41-43),Construction,2015,2872
+TLE4,West Yorkshire,F (41-43),Construction,2016,2971
+TLE4,West Yorkshire,F (41-43),Construction,2017,3172
+TLE4,West Yorkshire,F (41-43),Construction,2018,3424
+TLE4,West Yorkshire,F (41-43),Construction,2019,3605
+TLE4,West Yorkshire,F (41-43),Construction,2020,2842
+TLE4,West Yorkshire,F (41-43),Construction,2021,3417
+TLE4,West Yorkshire,F (41-43),Construction,2022,4056
+TLE4,West Yorkshire,G-T,Services sector,1998,19544
+TLE4,West Yorkshire,G-T,Services sector,1999,20912
+TLE4,West Yorkshire,G-T,Services sector,2000,21570
+TLE4,West Yorkshire,G-T,Services sector,2001,22504
+TLE4,West Yorkshire,G-T,Services sector,2002,23597
+TLE4,West Yorkshire,G-T,Services sector,2003,25634
+TLE4,West Yorkshire,G-T,Services sector,2004,27768
+TLE4,West Yorkshire,G-T,Services sector,2005,29602
+TLE4,West Yorkshire,G-T,Services sector,2006,30964
+TLE4,West Yorkshire,G-T,Services sector,2007,32703
+TLE4,West Yorkshire,G-T,Services sector,2008,32752
+TLE4,West Yorkshire,G-T,Services sector,2009,32998
+TLE4,West Yorkshire,G-T,Services sector,2010,33457
+TLE4,West Yorkshire,G-T,Services sector,2011,34486
+TLE4,West Yorkshire,G-T,Services sector,2012,35007
+TLE4,West Yorkshire,G-T,Services sector,2013,35656
+TLE4,West Yorkshire,G-T,Services sector,2014,36901
+TLE4,West Yorkshire,G-T,Services sector,2015,38687
+TLE4,West Yorkshire,G-T,Services sector,2016,39697
+TLE4,West Yorkshire,G-T,Services sector,2017,41522
+TLE4,West Yorkshire,G-T,Services sector,2018,43713
+TLE4,West Yorkshire,G-T,Services sector,2019,44823
+TLE4,West Yorkshire,G-T,Services sector,2020,44021
+TLE4,West Yorkshire,G-T,Services sector,2021,48586
+TLE4,West Yorkshire,G-T,Services sector,2022,53100
+TLF1,Derbyshire and Nottinghamshire,A-E,Production sector,1998,7485
+TLF1,Derbyshire and Nottinghamshire,A-E,Production sector,1999,7930
+TLF1,Derbyshire and Nottinghamshire,A-E,Production sector,2000,7848
+TLF1,Derbyshire and Nottinghamshire,A-E,Production sector,2001,7582
+TLF1,Derbyshire and Nottinghamshire,A-E,Production sector,2002,7782
+TLF1,Derbyshire and Nottinghamshire,A-E,Production sector,2003,7910
+TLF1,Derbyshire and Nottinghamshire,A-E,Production sector,2004,8151
+TLF1,Derbyshire and Nottinghamshire,A-E,Production sector,2005,8308
+TLF1,Derbyshire and Nottinghamshire,A-E,Production sector,2006,8544
+TLF1,Derbyshire and Nottinghamshire,A-E,Production sector,2007,8448
+TLF1,Derbyshire and Nottinghamshire,A-E,Production sector,2008,8354
+TLF1,Derbyshire and Nottinghamshire,A-E,Production sector,2009,7921
+TLF1,Derbyshire and Nottinghamshire,A-E,Production sector,2010,8392
+TLF1,Derbyshire and Nottinghamshire,A-E,Production sector,2011,8845
+TLF1,Derbyshire and Nottinghamshire,A-E,Production sector,2012,9509
+TLF1,Derbyshire and Nottinghamshire,A-E,Production sector,2013,10488
+TLF1,Derbyshire and Nottinghamshire,A-E,Production sector,2014,10494
+TLF1,Derbyshire and Nottinghamshire,A-E,Production sector,2015,10175
+TLF1,Derbyshire and Nottinghamshire,A-E,Production sector,2016,9991
+TLF1,Derbyshire and Nottinghamshire,A-E,Production sector,2017,10001
+TLF1,Derbyshire and Nottinghamshire,A-E,Production sector,2018,10438
+TLF1,Derbyshire and Nottinghamshire,A-E,Production sector,2019,11440
+TLF1,Derbyshire and Nottinghamshire,A-E,Production sector,2020,11710
+TLF1,Derbyshire and Nottinghamshire,A-E,Production sector,2021,11878
+TLF1,Derbyshire and Nottinghamshire,A-E,Production sector,2022,11853
+TLF1,Derbyshire and Nottinghamshire,F (41-43),Construction,1998,1435
+TLF1,Derbyshire and Nottinghamshire,F (41-43),Construction,1999,1589
+TLF1,Derbyshire and Nottinghamshire,F (41-43),Construction,2000,1616
+TLF1,Derbyshire and Nottinghamshire,F (41-43),Construction,2001,1700
+TLF1,Derbyshire and Nottinghamshire,F (41-43),Construction,2002,1947
+TLF1,Derbyshire and Nottinghamshire,F (41-43),Construction,2003,1987
+TLF1,Derbyshire and Nottinghamshire,F (41-43),Construction,2004,2114
+TLF1,Derbyshire and Nottinghamshire,F (41-43),Construction,2005,2555
+TLF1,Derbyshire and Nottinghamshire,F (41-43),Construction,2006,2765
+TLF1,Derbyshire and Nottinghamshire,F (41-43),Construction,2007,2855
+TLF1,Derbyshire and Nottinghamshire,F (41-43),Construction,2008,2964
+TLF1,Derbyshire and Nottinghamshire,F (41-43),Construction,2009,2310
+TLF1,Derbyshire and Nottinghamshire,F (41-43),Construction,2010,2248
+TLF1,Derbyshire and Nottinghamshire,F (41-43),Construction,2011,2459
+TLF1,Derbyshire and Nottinghamshire,F (41-43),Construction,2012,2527
+TLF1,Derbyshire and Nottinghamshire,F (41-43),Construction,2013,2618
+TLF1,Derbyshire and Nottinghamshire,F (41-43),Construction,2014,2690
+TLF1,Derbyshire and Nottinghamshire,F (41-43),Construction,2015,2886
+TLF1,Derbyshire and Nottinghamshire,F (41-43),Construction,2016,3016
+TLF1,Derbyshire and Nottinghamshire,F (41-43),Construction,2017,3124
+TLF1,Derbyshire and Nottinghamshire,F (41-43),Construction,2018,3194
+TLF1,Derbyshire and Nottinghamshire,F (41-43),Construction,2019,3354
+TLF1,Derbyshire and Nottinghamshire,F (41-43),Construction,2020,3239
+TLF1,Derbyshire and Nottinghamshire,F (41-43),Construction,2021,3550
+TLF1,Derbyshire and Nottinghamshire,F (41-43),Construction,2022,4039
+TLF1,Derbyshire and Nottinghamshire,G-T,Services sector,1998,16085
+TLF1,Derbyshire and Nottinghamshire,G-T,Services sector,1999,16381
+TLF1,Derbyshire and Nottinghamshire,G-T,Services sector,2000,16840
+TLF1,Derbyshire and Nottinghamshire,G-T,Services sector,2001,18061
+TLF1,Derbyshire and Nottinghamshire,G-T,Services sector,2002,18819
+TLF1,Derbyshire and Nottinghamshire,G-T,Services sector,2003,19752
+TLF1,Derbyshire and Nottinghamshire,G-T,Services sector,2004,21251
+TLF1,Derbyshire and Nottinghamshire,G-T,Services sector,2005,22792
+TLF1,Derbyshire and Nottinghamshire,G-T,Services sector,2006,23587
+TLF1,Derbyshire and Nottinghamshire,G-T,Services sector,2007,24802
+TLF1,Derbyshire and Nottinghamshire,G-T,Services sector,2008,25892
+TLF1,Derbyshire and Nottinghamshire,G-T,Services sector,2009,25982
+TLF1,Derbyshire and Nottinghamshire,G-T,Services sector,2010,26999
+TLF1,Derbyshire and Nottinghamshire,G-T,Services sector,2011,27538
+TLF1,Derbyshire and Nottinghamshire,G-T,Services sector,2012,28148
+TLF1,Derbyshire and Nottinghamshire,G-T,Services sector,2013,28576
+TLF1,Derbyshire and Nottinghamshire,G-T,Services sector,2014,29571
+TLF1,Derbyshire and Nottinghamshire,G-T,Services sector,2015,30867
+TLF1,Derbyshire and Nottinghamshire,G-T,Services sector,2016,32103
+TLF1,Derbyshire and Nottinghamshire,G-T,Services sector,2017,33364
+TLF1,Derbyshire and Nottinghamshire,G-T,Services sector,2018,34822
+TLF1,Derbyshire and Nottinghamshire,G-T,Services sector,2019,35595
+TLF1,Derbyshire and Nottinghamshire,G-T,Services sector,2020,35502
+TLF1,Derbyshire and Nottinghamshire,G-T,Services sector,2021,37854
+TLF1,Derbyshire and Nottinghamshire,G-T,Services sector,2022,40402
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-E,Production sector,1998,5908
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-E,Production sector,1999,5616
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-E,Production sector,2000,6002
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-E,Production sector,2001,5986
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-E,Production sector,2002,6124
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-E,Production sector,2003,6288
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-E,Production sector,2004,6381
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-E,Production sector,2005,6195
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-E,Production sector,2006,6457
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-E,Production sector,2007,6825
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-E,Production sector,2008,7413
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-E,Production sector,2009,7221
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-E,Production sector,2010,7600
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-E,Production sector,2011,7551
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-E,Production sector,2012,8321
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-E,Production sector,2013,8851
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-E,Production sector,2014,9142
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-E,Production sector,2015,9164
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-E,Production sector,2016,8933
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-E,Production sector,2017,9262
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-E,Production sector,2018,9508
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-E,Production sector,2019,9812
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-E,Production sector,2020,8919
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-E,Production sector,2021,9344
+TLF2,"Leicestershire, Rutland and Northamptonshire",A-E,Production sector,2022,10129
+TLF2,"Leicestershire, Rutland and Northamptonshire",F (41-43),Construction,1998,1408
+TLF2,"Leicestershire, Rutland and Northamptonshire",F (41-43),Construction,1999,1544
+TLF2,"Leicestershire, Rutland and Northamptonshire",F (41-43),Construction,2000,1848
+TLF2,"Leicestershire, Rutland and Northamptonshire",F (41-43),Construction,2001,1836
+TLF2,"Leicestershire, Rutland and Northamptonshire",F (41-43),Construction,2002,1886
+TLF2,"Leicestershire, Rutland and Northamptonshire",F (41-43),Construction,2003,1946
+TLF2,"Leicestershire, Rutland and Northamptonshire",F (41-43),Construction,2004,2252
+TLF2,"Leicestershire, Rutland and Northamptonshire",F (41-43),Construction,2005,2558
+TLF2,"Leicestershire, Rutland and Northamptonshire",F (41-43),Construction,2006,2487
+TLF2,"Leicestershire, Rutland and Northamptonshire",F (41-43),Construction,2007,2607
+TLF2,"Leicestershire, Rutland and Northamptonshire",F (41-43),Construction,2008,2430
+TLF2,"Leicestershire, Rutland and Northamptonshire",F (41-43),Construction,2009,2064
+TLF2,"Leicestershire, Rutland and Northamptonshire",F (41-43),Construction,2010,2000
+TLF2,"Leicestershire, Rutland and Northamptonshire",F (41-43),Construction,2011,2035
+TLF2,"Leicestershire, Rutland and Northamptonshire",F (41-43),Construction,2012,2029
+TLF2,"Leicestershire, Rutland and Northamptonshire",F (41-43),Construction,2013,2228
+TLF2,"Leicestershire, Rutland and Northamptonshire",F (41-43),Construction,2014,2495
+TLF2,"Leicestershire, Rutland and Northamptonshire",F (41-43),Construction,2015,2924
+TLF2,"Leicestershire, Rutland and Northamptonshire",F (41-43),Construction,2016,2935
+TLF2,"Leicestershire, Rutland and Northamptonshire",F (41-43),Construction,2017,3117
+TLF2,"Leicestershire, Rutland and Northamptonshire",F (41-43),Construction,2018,3432
+TLF2,"Leicestershire, Rutland and Northamptonshire",F (41-43),Construction,2019,3661
+TLF2,"Leicestershire, Rutland and Northamptonshire",F (41-43),Construction,2020,2852
+TLF2,"Leicestershire, Rutland and Northamptonshire",F (41-43),Construction,2021,3523
+TLF2,"Leicestershire, Rutland and Northamptonshire",F (41-43),Construction,2022,4210
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services sector,1998,14196
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services sector,1999,14815
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services sector,2000,15411
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services sector,2001,16169
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services sector,2002,16724
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services sector,2003,18022
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services sector,2004,19058
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services sector,2005,20211
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services sector,2006,22113
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services sector,2007,23369
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services sector,2008,24498
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services sector,2009,24068
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services sector,2010,25076
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services sector,2011,24943
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services sector,2012,25505
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services sector,2013,26317
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services sector,2014,27690
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services sector,2015,28718
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services sector,2016,30178
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services sector,2017,31243
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services sector,2018,32840
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services sector,2019,33528
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services sector,2020,32982
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services sector,2021,36723
+TLF2,"Leicestershire, Rutland and Northamptonshire",G-T,Services sector,2022,40031
+TLF3,Lincolnshire,A-E,Production sector,1998,2556
+TLF3,Lincolnshire,A-E,Production sector,1999,2527
+TLF3,Lincolnshire,A-E,Production sector,2000,2576
+TLF3,Lincolnshire,A-E,Production sector,2001,2583
+TLF3,Lincolnshire,A-E,Production sector,2002,2745
+TLF3,Lincolnshire,A-E,Production sector,2003,2796
+TLF3,Lincolnshire,A-E,Production sector,2004,2469
+TLF3,Lincolnshire,A-E,Production sector,2005,2370
+TLF3,Lincolnshire,A-E,Production sector,2006,2360
+TLF3,Lincolnshire,A-E,Production sector,2007,2531
+TLF3,Lincolnshire,A-E,Production sector,2008,2727
+TLF3,Lincolnshire,A-E,Production sector,2009,2635
+TLF3,Lincolnshire,A-E,Production sector,2010,2633
+TLF3,Lincolnshire,A-E,Production sector,2011,2781
+TLF3,Lincolnshire,A-E,Production sector,2012,2927
+TLF3,Lincolnshire,A-E,Production sector,2013,3162
+TLF3,Lincolnshire,A-E,Production sector,2014,3225
+TLF3,Lincolnshire,A-E,Production sector,2015,3259
+TLF3,Lincolnshire,A-E,Production sector,2016,3386
+TLF3,Lincolnshire,A-E,Production sector,2017,3601
+TLF3,Lincolnshire,A-E,Production sector,2018,3722
+TLF3,Lincolnshire,A-E,Production sector,2019,3734
+TLF3,Lincolnshire,A-E,Production sector,2020,3648
+TLF3,Lincolnshire,A-E,Production sector,2021,3805
+TLF3,Lincolnshire,A-E,Production sector,2022,4015
+TLF3,Lincolnshire,F (41-43),Construction,1998,430
+TLF3,Lincolnshire,F (41-43),Construction,1999,514
+TLF3,Lincolnshire,F (41-43),Construction,2000,548
+TLF3,Lincolnshire,F (41-43),Construction,2001,624
+TLF3,Lincolnshire,F (41-43),Construction,2002,666
+TLF3,Lincolnshire,F (41-43),Construction,2003,733
+TLF3,Lincolnshire,F (41-43),Construction,2004,798
+TLF3,Lincolnshire,F (41-43),Construction,2005,795
+TLF3,Lincolnshire,F (41-43),Construction,2006,859
+TLF3,Lincolnshire,F (41-43),Construction,2007,845
+TLF3,Lincolnshire,F (41-43),Construction,2008,889
+TLF3,Lincolnshire,F (41-43),Construction,2009,735
+TLF3,Lincolnshire,F (41-43),Construction,2010,765
+TLF3,Lincolnshire,F (41-43),Construction,2011,745
+TLF3,Lincolnshire,F (41-43),Construction,2012,739
+TLF3,Lincolnshire,F (41-43),Construction,2013,842
+TLF3,Lincolnshire,F (41-43),Construction,2014,861
+TLF3,Lincolnshire,F (41-43),Construction,2015,991
+TLF3,Lincolnshire,F (41-43),Construction,2016,1000
+TLF3,Lincolnshire,F (41-43),Construction,2017,1063
+TLF3,Lincolnshire,F (41-43),Construction,2018,993
+TLF3,Lincolnshire,F (41-43),Construction,2019,1060
+TLF3,Lincolnshire,F (41-43),Construction,2020,961
+TLF3,Lincolnshire,F (41-43),Construction,2021,1073
+TLF3,Lincolnshire,F (41-43),Construction,2022,1225
+TLF3,Lincolnshire,G-T,Services sector,1998,4765
+TLF3,Lincolnshire,G-T,Services sector,1999,4825
+TLF3,Lincolnshire,G-T,Services sector,2000,5115
+TLF3,Lincolnshire,G-T,Services sector,2001,5615
+TLF3,Lincolnshire,G-T,Services sector,2002,5878
+TLF3,Lincolnshire,G-T,Services sector,2003,6283
+TLF3,Lincolnshire,G-T,Services sector,2004,6466
+TLF3,Lincolnshire,G-T,Services sector,2005,6783
+TLF3,Lincolnshire,G-T,Services sector,2006,7425
+TLF3,Lincolnshire,G-T,Services sector,2007,7828
+TLF3,Lincolnshire,G-T,Services sector,2008,8254
+TLF3,Lincolnshire,G-T,Services sector,2009,8124
+TLF3,Lincolnshire,G-T,Services sector,2010,8217
+TLF3,Lincolnshire,G-T,Services sector,2011,8303
+TLF3,Lincolnshire,G-T,Services sector,2012,8701
+TLF3,Lincolnshire,G-T,Services sector,2013,9021
+TLF3,Lincolnshire,G-T,Services sector,2014,9311
+TLF3,Lincolnshire,G-T,Services sector,2015,9385
+TLF3,Lincolnshire,G-T,Services sector,2016,9426
+TLF3,Lincolnshire,G-T,Services sector,2017,10071
+TLF3,Lincolnshire,G-T,Services sector,2018,10523
+TLF3,Lincolnshire,G-T,Services sector,2019,11182
+TLF3,Lincolnshire,G-T,Services sector,2020,10931
+TLF3,Lincolnshire,G-T,Services sector,2021,12070
+TLF3,Lincolnshire,G-T,Services sector,2022,12891
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-E,Production sector,1998,4147
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-E,Production sector,1999,4090
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-E,Production sector,2000,4511
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-E,Production sector,2001,4271
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-E,Production sector,2002,4283
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-E,Production sector,2003,4345
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-E,Production sector,2004,4324
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-E,Production sector,2005,4306
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-E,Production sector,2006,4720
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-E,Production sector,2007,4712
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-E,Production sector,2008,4957
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-E,Production sector,2009,4656
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-E,Production sector,2010,5105
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-E,Production sector,2011,5548
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-E,Production sector,2012,6075
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-E,Production sector,2013,6751
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-E,Production sector,2014,7469
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-E,Production sector,2015,8009
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-E,Production sector,2016,8006
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-E,Production sector,2017,9100
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-E,Production sector,2018,9499
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-E,Production sector,2019,9434
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-E,Production sector,2020,8552
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-E,Production sector,2021,8545
+TLG1,"Herefordshire, Worcestershire and Warwickshire",A-E,Production sector,2022,8235
+TLG1,"Herefordshire, Worcestershire and Warwickshire",F (41-43),Construction,1998,943
+TLG1,"Herefordshire, Worcestershire and Warwickshire",F (41-43),Construction,1999,1151
+TLG1,"Herefordshire, Worcestershire and Warwickshire",F (41-43),Construction,2000,1199
+TLG1,"Herefordshire, Worcestershire and Warwickshire",F (41-43),Construction,2001,1264
+TLG1,"Herefordshire, Worcestershire and Warwickshire",F (41-43),Construction,2002,1278
+TLG1,"Herefordshire, Worcestershire and Warwickshire",F (41-43),Construction,2003,1408
+TLG1,"Herefordshire, Worcestershire and Warwickshire",F (41-43),Construction,2004,1676
+TLG1,"Herefordshire, Worcestershire and Warwickshire",F (41-43),Construction,2005,1725
+TLG1,"Herefordshire, Worcestershire and Warwickshire",F (41-43),Construction,2006,1776
+TLG1,"Herefordshire, Worcestershire and Warwickshire",F (41-43),Construction,2007,1895
+TLG1,"Herefordshire, Worcestershire and Warwickshire",F (41-43),Construction,2008,1930
+TLG1,"Herefordshire, Worcestershire and Warwickshire",F (41-43),Construction,2009,1484
+TLG1,"Herefordshire, Worcestershire and Warwickshire",F (41-43),Construction,2010,1475
+TLG1,"Herefordshire, Worcestershire and Warwickshire",F (41-43),Construction,2011,1582
+TLG1,"Herefordshire, Worcestershire and Warwickshire",F (41-43),Construction,2012,1673
+TLG1,"Herefordshire, Worcestershire and Warwickshire",F (41-43),Construction,2013,1872
+TLG1,"Herefordshire, Worcestershire and Warwickshire",F (41-43),Construction,2014,1937
+TLG1,"Herefordshire, Worcestershire and Warwickshire",F (41-43),Construction,2015,2070
+TLG1,"Herefordshire, Worcestershire and Warwickshire",F (41-43),Construction,2016,2056
+TLG1,"Herefordshire, Worcestershire and Warwickshire",F (41-43),Construction,2017,2327
+TLG1,"Herefordshire, Worcestershire and Warwickshire",F (41-43),Construction,2018,2373
+TLG1,"Herefordshire, Worcestershire and Warwickshire",F (41-43),Construction,2019,2608
+TLG1,"Herefordshire, Worcestershire and Warwickshire",F (41-43),Construction,2020,2079
+TLG1,"Herefordshire, Worcestershire and Warwickshire",F (41-43),Construction,2021,2260
+TLG1,"Herefordshire, Worcestershire and Warwickshire",F (41-43),Construction,2022,2580
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services sector,1998,11755
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services sector,1999,12621
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services sector,2000,12974
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services sector,2001,13474
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services sector,2002,14041
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services sector,2003,14985
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services sector,2004,15655
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services sector,2005,16475
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services sector,2006,17356
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services sector,2007,17463
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services sector,2008,18282
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services sector,2009,18229
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services sector,2010,18535
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services sector,2011,19296
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services sector,2012,20295
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services sector,2013,21079
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services sector,2014,21954
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services sector,2015,22569
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services sector,2016,23037
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services sector,2017,24610
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services sector,2018,25417
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services sector,2019,25909
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services sector,2020,25689
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services sector,2021,26775
+TLG1,"Herefordshire, Worcestershire and Warwickshire",G-T,Services sector,2022,29708
+TLG2,Shropshire and Staffordshire,A-E,Production sector,1998,5378
+TLG2,Shropshire and Staffordshire,A-E,Production sector,1999,5160
+TLG2,Shropshire and Staffordshire,A-E,Production sector,2000,5124
+TLG2,Shropshire and Staffordshire,A-E,Production sector,2001,5057
+TLG2,Shropshire and Staffordshire,A-E,Production sector,2002,5307
+TLG2,Shropshire and Staffordshire,A-E,Production sector,2003,5222
+TLG2,Shropshire and Staffordshire,A-E,Production sector,2004,4956
+TLG2,Shropshire and Staffordshire,A-E,Production sector,2005,4874
+TLG2,Shropshire and Staffordshire,A-E,Production sector,2006,4947
+TLG2,Shropshire and Staffordshire,A-E,Production sector,2007,4942
+TLG2,Shropshire and Staffordshire,A-E,Production sector,2008,5217
+TLG2,Shropshire and Staffordshire,A-E,Production sector,2009,4633
+TLG2,Shropshire and Staffordshire,A-E,Production sector,2010,5098
+TLG2,Shropshire and Staffordshire,A-E,Production sector,2011,5343
+TLG2,Shropshire and Staffordshire,A-E,Production sector,2012,5538
+TLG2,Shropshire and Staffordshire,A-E,Production sector,2013,5984
+TLG2,Shropshire and Staffordshire,A-E,Production sector,2014,6166
+TLG2,Shropshire and Staffordshire,A-E,Production sector,2015,6199
+TLG2,Shropshire and Staffordshire,A-E,Production sector,2016,6282
+TLG2,Shropshire and Staffordshire,A-E,Production sector,2017,6600
+TLG2,Shropshire and Staffordshire,A-E,Production sector,2018,6958
+TLG2,Shropshire and Staffordshire,A-E,Production sector,2019,7017
+TLG2,Shropshire and Staffordshire,A-E,Production sector,2020,6739
+TLG2,Shropshire and Staffordshire,A-E,Production sector,2021,7703
+TLG2,Shropshire and Staffordshire,A-E,Production sector,2022,8609
+TLG2,Shropshire and Staffordshire,F (41-43),Construction,1998,1179
+TLG2,Shropshire and Staffordshire,F (41-43),Construction,1999,1155
+TLG2,Shropshire and Staffordshire,F (41-43),Construction,2000,1316
+TLG2,Shropshire and Staffordshire,F (41-43),Construction,2001,1367
+TLG2,Shropshire and Staffordshire,F (41-43),Construction,2002,1491
+TLG2,Shropshire and Staffordshire,F (41-43),Construction,2003,1616
+TLG2,Shropshire and Staffordshire,F (41-43),Construction,2004,1700
+TLG2,Shropshire and Staffordshire,F (41-43),Construction,2005,1910
+TLG2,Shropshire and Staffordshire,F (41-43),Construction,2006,2049
+TLG2,Shropshire and Staffordshire,F (41-43),Construction,2007,1975
+TLG2,Shropshire and Staffordshire,F (41-43),Construction,2008,1928
+TLG2,Shropshire and Staffordshire,F (41-43),Construction,2009,1559
+TLG2,Shropshire and Staffordshire,F (41-43),Construction,2010,1603
+TLG2,Shropshire and Staffordshire,F (41-43),Construction,2011,1728
+TLG2,Shropshire and Staffordshire,F (41-43),Construction,2012,1668
+TLG2,Shropshire and Staffordshire,F (41-43),Construction,2013,1876
+TLG2,Shropshire and Staffordshire,F (41-43),Construction,2014,1975
+TLG2,Shropshire and Staffordshire,F (41-43),Construction,2015,2294
+TLG2,Shropshire and Staffordshire,F (41-43),Construction,2016,2410
+TLG2,Shropshire and Staffordshire,F (41-43),Construction,2017,2538
+TLG2,Shropshire and Staffordshire,F (41-43),Construction,2018,2557
+TLG2,Shropshire and Staffordshire,F (41-43),Construction,2019,2622
+TLG2,Shropshire and Staffordshire,F (41-43),Construction,2020,2221
+TLG2,Shropshire and Staffordshire,F (41-43),Construction,2021,2477
+TLG2,Shropshire and Staffordshire,F (41-43),Construction,2022,2830
+TLG2,Shropshire and Staffordshire,G-T,Services sector,1998,11803
+TLG2,Shropshire and Staffordshire,G-T,Services sector,1999,12293
+TLG2,Shropshire and Staffordshire,G-T,Services sector,2000,12558
+TLG2,Shropshire and Staffordshire,G-T,Services sector,2001,13329
+TLG2,Shropshire and Staffordshire,G-T,Services sector,2002,14026
+TLG2,Shropshire and Staffordshire,G-T,Services sector,2003,15083
+TLG2,Shropshire and Staffordshire,G-T,Services sector,2004,16563
+TLG2,Shropshire and Staffordshire,G-T,Services sector,2005,17383
+TLG2,Shropshire and Staffordshire,G-T,Services sector,2006,17935
+TLG2,Shropshire and Staffordshire,G-T,Services sector,2007,18612
+TLG2,Shropshire and Staffordshire,G-T,Services sector,2008,19704
+TLG2,Shropshire and Staffordshire,G-T,Services sector,2009,19436
+TLG2,Shropshire and Staffordshire,G-T,Services sector,2010,19729
+TLG2,Shropshire and Staffordshire,G-T,Services sector,2011,20174
+TLG2,Shropshire and Staffordshire,G-T,Services sector,2012,20554
+TLG2,Shropshire and Staffordshire,G-T,Services sector,2013,20940
+TLG2,Shropshire and Staffordshire,G-T,Services sector,2014,21581
+TLG2,Shropshire and Staffordshire,G-T,Services sector,2015,22241
+TLG2,Shropshire and Staffordshire,G-T,Services sector,2016,23154
+TLG2,Shropshire and Staffordshire,G-T,Services sector,2017,24176
+TLG2,Shropshire and Staffordshire,G-T,Services sector,2018,25203
+TLG2,Shropshire and Staffordshire,G-T,Services sector,2019,26070
+TLG2,Shropshire and Staffordshire,G-T,Services sector,2020,25670
+TLG2,Shropshire and Staffordshire,G-T,Services sector,2021,29815
+TLG2,Shropshire and Staffordshire,G-T,Services sector,2022,32073
+TLG3,West Midlands,A-E,Production sector,1998,10051
+TLG3,West Midlands,A-E,Production sector,1999,9762
+TLG3,West Midlands,A-E,Production sector,2000,9986
+TLG3,West Midlands,A-E,Production sector,2001,9690
+TLG3,West Midlands,A-E,Production sector,2002,9389
+TLG3,West Midlands,A-E,Production sector,2003,9388
+TLG3,West Midlands,A-E,Production sector,2004,8983
+TLG3,West Midlands,A-E,Production sector,2005,8883
+TLG3,West Midlands,A-E,Production sector,2006,8607
+TLG3,West Midlands,A-E,Production sector,2007,8628
+TLG3,West Midlands,A-E,Production sector,2008,8843
+TLG3,West Midlands,A-E,Production sector,2009,8455
+TLG3,West Midlands,A-E,Production sector,2010,8832
+TLG3,West Midlands,A-E,Production sector,2011,9139
+TLG3,West Midlands,A-E,Production sector,2012,9603
+TLG3,West Midlands,A-E,Production sector,2013,10737
+TLG3,West Midlands,A-E,Production sector,2014,11641
+TLG3,West Midlands,A-E,Production sector,2015,11820
+TLG3,West Midlands,A-E,Production sector,2016,12278
+TLG3,West Midlands,A-E,Production sector,2017,12266
+TLG3,West Midlands,A-E,Production sector,2018,11943
+TLG3,West Midlands,A-E,Production sector,2019,11619
+TLG3,West Midlands,A-E,Production sector,2020,10004
+TLG3,West Midlands,A-E,Production sector,2021,9783
+TLG3,West Midlands,A-E,Production sector,2022,10076
+TLG3,West Midlands,F (41-43),Construction,1998,1735
+TLG3,West Midlands,F (41-43),Construction,1999,1906
+TLG3,West Midlands,F (41-43),Construction,2000,2000
+TLG3,West Midlands,F (41-43),Construction,2001,2213
+TLG3,West Midlands,F (41-43),Construction,2002,2621
+TLG3,West Midlands,F (41-43),Construction,2003,2673
+TLG3,West Midlands,F (41-43),Construction,2004,2868
+TLG3,West Midlands,F (41-43),Construction,2005,3224
+TLG3,West Midlands,F (41-43),Construction,2006,3431
+TLG3,West Midlands,F (41-43),Construction,2007,3744
+TLG3,West Midlands,F (41-43),Construction,2008,3524
+TLG3,West Midlands,F (41-43),Construction,2009,2786
+TLG3,West Midlands,F (41-43),Construction,2010,2846
+TLG3,West Midlands,F (41-43),Construction,2011,2664
+TLG3,West Midlands,F (41-43),Construction,2012,2682
+TLG3,West Midlands,F (41-43),Construction,2013,2839
+TLG3,West Midlands,F (41-43),Construction,2014,3255
+TLG3,West Midlands,F (41-43),Construction,2015,3301
+TLG3,West Midlands,F (41-43),Construction,2016,3532
+TLG3,West Midlands,F (41-43),Construction,2017,3579
+TLG3,West Midlands,F (41-43),Construction,2018,3806
+TLG3,West Midlands,F (41-43),Construction,2019,4028
+TLG3,West Midlands,F (41-43),Construction,2020,3800
+TLG3,West Midlands,F (41-43),Construction,2021,4114
+TLG3,West Midlands,F (41-43),Construction,2022,4776
+TLG3,West Midlands,G-T,Services sector,1998,23557
+TLG3,West Midlands,G-T,Services sector,1999,24553
+TLG3,West Midlands,G-T,Services sector,2000,25213
+TLG3,West Midlands,G-T,Services sector,2001,27084
+TLG3,West Midlands,G-T,Services sector,2002,28209
+TLG3,West Midlands,G-T,Services sector,2003,29955
+TLG3,West Midlands,G-T,Services sector,2004,31966
+TLG3,West Midlands,G-T,Services sector,2005,33856
+TLG3,West Midlands,G-T,Services sector,2006,35027
+TLG3,West Midlands,G-T,Services sector,2007,36597
+TLG3,West Midlands,G-T,Services sector,2008,37498
+TLG3,West Midlands,G-T,Services sector,2009,37308
+TLG3,West Midlands,G-T,Services sector,2010,38750
+TLG3,West Midlands,G-T,Services sector,2011,39721
+TLG3,West Midlands,G-T,Services sector,2012,40620
+TLG3,West Midlands,G-T,Services sector,2013,41690
+TLG3,West Midlands,G-T,Services sector,2014,43200
+TLG3,West Midlands,G-T,Services sector,2015,45137
+TLG3,West Midlands,G-T,Services sector,2016,48589
+TLG3,West Midlands,G-T,Services sector,2017,50776
+TLG3,West Midlands,G-T,Services sector,2018,52884
+TLG3,West Midlands,G-T,Services sector,2019,54123
+TLG3,West Midlands,G-T,Services sector,2020,51331
+TLG3,West Midlands,G-T,Services sector,2021,56090
+TLG3,West Midlands,G-T,Services sector,2022,61483
+TLH1,East Anglia,A-E,Production sector,1998,7509
+TLH1,East Anglia,A-E,Production sector,1999,7235
+TLH1,East Anglia,A-E,Production sector,2000,7499
+TLH1,East Anglia,A-E,Production sector,2001,7458
+TLH1,East Anglia,A-E,Production sector,2002,7845
+TLH1,East Anglia,A-E,Production sector,2003,7870
+TLH1,East Anglia,A-E,Production sector,2004,7509
+TLH1,East Anglia,A-E,Production sector,2005,7453
+TLH1,East Anglia,A-E,Production sector,2006,7992
+TLH1,East Anglia,A-E,Production sector,2007,8242
+TLH1,East Anglia,A-E,Production sector,2008,8961
+TLH1,East Anglia,A-E,Production sector,2009,8759
+TLH1,East Anglia,A-E,Production sector,2010,9059
+TLH1,East Anglia,A-E,Production sector,2011,9639
+TLH1,East Anglia,A-E,Production sector,2012,10037
+TLH1,East Anglia,A-E,Production sector,2013,10436
+TLH1,East Anglia,A-E,Production sector,2014,10918
+TLH1,East Anglia,A-E,Production sector,2015,10643
+TLH1,East Anglia,A-E,Production sector,2016,10416
+TLH1,East Anglia,A-E,Production sector,2017,10856
+TLH1,East Anglia,A-E,Production sector,2018,10740
+TLH1,East Anglia,A-E,Production sector,2019,11270
+TLH1,East Anglia,A-E,Production sector,2020,11004
+TLH1,East Anglia,A-E,Production sector,2021,11432
+TLH1,East Anglia,A-E,Production sector,2022,12384
+TLH1,East Anglia,F (41-43),Construction,1998,1625
+TLH1,East Anglia,F (41-43),Construction,1999,1841
+TLH1,East Anglia,F (41-43),Construction,2000,1994
+TLH1,East Anglia,F (41-43),Construction,2001,2135
+TLH1,East Anglia,F (41-43),Construction,2002,2381
+TLH1,East Anglia,F (41-43),Construction,2003,2568
+TLH1,East Anglia,F (41-43),Construction,2004,2701
+TLH1,East Anglia,F (41-43),Construction,2005,2856
+TLH1,East Anglia,F (41-43),Construction,2006,3222
+TLH1,East Anglia,F (41-43),Construction,2007,3241
+TLH1,East Anglia,F (41-43),Construction,2008,3223
+TLH1,East Anglia,F (41-43),Construction,2009,2905
+TLH1,East Anglia,F (41-43),Construction,2010,2865
+TLH1,East Anglia,F (41-43),Construction,2011,3042
+TLH1,East Anglia,F (41-43),Construction,2012,2957
+TLH1,East Anglia,F (41-43),Construction,2013,3120
+TLH1,East Anglia,F (41-43),Construction,2014,3481
+TLH1,East Anglia,F (41-43),Construction,2015,3806
+TLH1,East Anglia,F (41-43),Construction,2016,4109
+TLH1,East Anglia,F (41-43),Construction,2017,4231
+TLH1,East Anglia,F (41-43),Construction,2018,4507
+TLH1,East Anglia,F (41-43),Construction,2019,4780
+TLH1,East Anglia,F (41-43),Construction,2020,4598
+TLH1,East Anglia,F (41-43),Construction,2021,4710
+TLH1,East Anglia,F (41-43),Construction,2022,5620
+TLH1,East Anglia,G-T,Services sector,1998,21185
+TLH1,East Anglia,G-T,Services sector,1999,22531
+TLH1,East Anglia,G-T,Services sector,2000,23732
+TLH1,East Anglia,G-T,Services sector,2001,25197
+TLH1,East Anglia,G-T,Services sector,2002,26210
+TLH1,East Anglia,G-T,Services sector,2003,27797
+TLH1,East Anglia,G-T,Services sector,2004,29516
+TLH1,East Anglia,G-T,Services sector,2005,31644
+TLH1,East Anglia,G-T,Services sector,2006,33894
+TLH1,East Anglia,G-T,Services sector,2007,35009
+TLH1,East Anglia,G-T,Services sector,2008,35803
+TLH1,East Anglia,G-T,Services sector,2009,35832
+TLH1,East Anglia,G-T,Services sector,2010,36441
+TLH1,East Anglia,G-T,Services sector,2011,36688
+TLH1,East Anglia,G-T,Services sector,2012,38559
+TLH1,East Anglia,G-T,Services sector,2013,39789
+TLH1,East Anglia,G-T,Services sector,2014,40965
+TLH1,East Anglia,G-T,Services sector,2015,42247
+TLH1,East Anglia,G-T,Services sector,2016,44326
+TLH1,East Anglia,G-T,Services sector,2017,46842
+TLH1,East Anglia,G-T,Services sector,2018,47546
+TLH1,East Anglia,G-T,Services sector,2019,50465
+TLH1,East Anglia,G-T,Services sector,2020,49043
+TLH1,East Anglia,G-T,Services sector,2021,52762
+TLH1,East Anglia,G-T,Services sector,2022,56199
+TLH2,Bedfordshire and Hertfordshire,A-E,Production sector,1998,4893
+TLH2,Bedfordshire and Hertfordshire,A-E,Production sector,1999,4987
+TLH2,Bedfordshire and Hertfordshire,A-E,Production sector,2000,5098
+TLH2,Bedfordshire and Hertfordshire,A-E,Production sector,2001,4915
+TLH2,Bedfordshire and Hertfordshire,A-E,Production sector,2002,4949
+TLH2,Bedfordshire and Hertfordshire,A-E,Production sector,2003,5170
+TLH2,Bedfordshire and Hertfordshire,A-E,Production sector,2004,5033
+TLH2,Bedfordshire and Hertfordshire,A-E,Production sector,2005,5577
+TLH2,Bedfordshire and Hertfordshire,A-E,Production sector,2006,5929
+TLH2,Bedfordshire and Hertfordshire,A-E,Production sector,2007,6138
+TLH2,Bedfordshire and Hertfordshire,A-E,Production sector,2008,6891
+TLH2,Bedfordshire and Hertfordshire,A-E,Production sector,2009,6282
+TLH2,Bedfordshire and Hertfordshire,A-E,Production sector,2010,6057
+TLH2,Bedfordshire and Hertfordshire,A-E,Production sector,2011,5856
+TLH2,Bedfordshire and Hertfordshire,A-E,Production sector,2012,5913
+TLH2,Bedfordshire and Hertfordshire,A-E,Production sector,2013,6436
+TLH2,Bedfordshire and Hertfordshire,A-E,Production sector,2014,6833
+TLH2,Bedfordshire and Hertfordshire,A-E,Production sector,2015,6854
+TLH2,Bedfordshire and Hertfordshire,A-E,Production sector,2016,7132
+TLH2,Bedfordshire and Hertfordshire,A-E,Production sector,2017,7414
+TLH2,Bedfordshire and Hertfordshire,A-E,Production sector,2018,7197
+TLH2,Bedfordshire and Hertfordshire,A-E,Production sector,2019,7396
+TLH2,Bedfordshire and Hertfordshire,A-E,Production sector,2020,7237
+TLH2,Bedfordshire and Hertfordshire,A-E,Production sector,2021,7438
+TLH2,Bedfordshire and Hertfordshire,A-E,Production sector,2022,7924
+TLH2,Bedfordshire and Hertfordshire,F (41-43),Construction,1998,1803
+TLH2,Bedfordshire and Hertfordshire,F (41-43),Construction,1999,2063
+TLH2,Bedfordshire and Hertfordshire,F (41-43),Construction,2000,2350
+TLH2,Bedfordshire and Hertfordshire,F (41-43),Construction,2001,2418
+TLH2,Bedfordshire and Hertfordshire,F (41-43),Construction,2002,2679
+TLH2,Bedfordshire and Hertfordshire,F (41-43),Construction,2003,2734
+TLH2,Bedfordshire and Hertfordshire,F (41-43),Construction,2004,2805
+TLH2,Bedfordshire and Hertfordshire,F (41-43),Construction,2005,3196
+TLH2,Bedfordshire and Hertfordshire,F (41-43),Construction,2006,3096
+TLH2,Bedfordshire and Hertfordshire,F (41-43),Construction,2007,3273
+TLH2,Bedfordshire and Hertfordshire,F (41-43),Construction,2008,3440
+TLH2,Bedfordshire and Hertfordshire,F (41-43),Construction,2009,2753
+TLH2,Bedfordshire and Hertfordshire,F (41-43),Construction,2010,2819
+TLH2,Bedfordshire and Hertfordshire,F (41-43),Construction,2011,3129
+TLH2,Bedfordshire and Hertfordshire,F (41-43),Construction,2012,3318
+TLH2,Bedfordshire and Hertfordshire,F (41-43),Construction,2013,3717
+TLH2,Bedfordshire and Hertfordshire,F (41-43),Construction,2014,4147
+TLH2,Bedfordshire and Hertfordshire,F (41-43),Construction,2015,4721
+TLH2,Bedfordshire and Hertfordshire,F (41-43),Construction,2016,4842
+TLH2,Bedfordshire and Hertfordshire,F (41-43),Construction,2017,5129
+TLH2,Bedfordshire and Hertfordshire,F (41-43),Construction,2018,5264
+TLH2,Bedfordshire and Hertfordshire,F (41-43),Construction,2019,5258
+TLH2,Bedfordshire and Hertfordshire,F (41-43),Construction,2020,4561
+TLH2,Bedfordshire and Hertfordshire,F (41-43),Construction,2021,4738
+TLH2,Bedfordshire and Hertfordshire,F (41-43),Construction,2022,5480
+TLH2,Bedfordshire and Hertfordshire,G-T,Services sector,1998,19615
+TLH2,Bedfordshire and Hertfordshire,G-T,Services sector,1999,20743
+TLH2,Bedfordshire and Hertfordshire,G-T,Services sector,2000,21904
+TLH2,Bedfordshire and Hertfordshire,G-T,Services sector,2001,23370
+TLH2,Bedfordshire and Hertfordshire,G-T,Services sector,2002,24144
+TLH2,Bedfordshire and Hertfordshire,G-T,Services sector,2003,25674
+TLH2,Bedfordshire and Hertfordshire,G-T,Services sector,2004,26840
+TLH2,Bedfordshire and Hertfordshire,G-T,Services sector,2005,28290
+TLH2,Bedfordshire and Hertfordshire,G-T,Services sector,2006,29010
+TLH2,Bedfordshire and Hertfordshire,G-T,Services sector,2007,30392
+TLH2,Bedfordshire and Hertfordshire,G-T,Services sector,2008,31733
+TLH2,Bedfordshire and Hertfordshire,G-T,Services sector,2009,31203
+TLH2,Bedfordshire and Hertfordshire,G-T,Services sector,2010,30954
+TLH2,Bedfordshire and Hertfordshire,G-T,Services sector,2011,30758
+TLH2,Bedfordshire and Hertfordshire,G-T,Services sector,2012,31313
+TLH2,Bedfordshire and Hertfordshire,G-T,Services sector,2013,33093
+TLH2,Bedfordshire and Hertfordshire,G-T,Services sector,2014,35354
+TLH2,Bedfordshire and Hertfordshire,G-T,Services sector,2015,36704
+TLH2,Bedfordshire and Hertfordshire,G-T,Services sector,2016,38434
+TLH2,Bedfordshire and Hertfordshire,G-T,Services sector,2017,41890
+TLH2,Bedfordshire and Hertfordshire,G-T,Services sector,2018,43134
+TLH2,Bedfordshire and Hertfordshire,G-T,Services sector,2019,45148
+TLH2,Bedfordshire and Hertfordshire,G-T,Services sector,2020,42316
+TLH2,Bedfordshire and Hertfordshire,G-T,Services sector,2021,46607
+TLH2,Bedfordshire and Hertfordshire,G-T,Services sector,2022,50879
+TLH3,Essex,A-E,Production sector,1998,4758
+TLH3,Essex,A-E,Production sector,1999,4388
+TLH3,Essex,A-E,Production sector,2000,4418
+TLH3,Essex,A-E,Production sector,2001,4393
+TLH3,Essex,A-E,Production sector,2002,4302
+TLH3,Essex,A-E,Production sector,2003,4456
+TLH3,Essex,A-E,Production sector,2004,4353
+TLH3,Essex,A-E,Production sector,2005,4440
+TLH3,Essex,A-E,Production sector,2006,4663
+TLH3,Essex,A-E,Production sector,2007,4679
+TLH3,Essex,A-E,Production sector,2008,4924
+TLH3,Essex,A-E,Production sector,2009,4414
+TLH3,Essex,A-E,Production sector,2010,4853
+TLH3,Essex,A-E,Production sector,2011,4702
+TLH3,Essex,A-E,Production sector,2012,4924
+TLH3,Essex,A-E,Production sector,2013,5092
+TLH3,Essex,A-E,Production sector,2014,5144
+TLH3,Essex,A-E,Production sector,2015,5025
+TLH3,Essex,A-E,Production sector,2016,5165
+TLH3,Essex,A-E,Production sector,2017,5266
+TLH3,Essex,A-E,Production sector,2018,5284
+TLH3,Essex,A-E,Production sector,2019,5226
+TLH3,Essex,A-E,Production sector,2020,4927
+TLH3,Essex,A-E,Production sector,2021,5073
+TLH3,Essex,A-E,Production sector,2022,5649
+TLH3,Essex,F (41-43),Construction,1998,1696
+TLH3,Essex,F (41-43),Construction,1999,1791
+TLH3,Essex,F (41-43),Construction,2000,1906
+TLH3,Essex,F (41-43),Construction,2001,2149
+TLH3,Essex,F (41-43),Construction,2002,2341
+TLH3,Essex,F (41-43),Construction,2003,2604
+TLH3,Essex,F (41-43),Construction,2004,2551
+TLH3,Essex,F (41-43),Construction,2005,2813
+TLH3,Essex,F (41-43),Construction,2006,2862
+TLH3,Essex,F (41-43),Construction,2007,3124
+TLH3,Essex,F (41-43),Construction,2008,3041
+TLH3,Essex,F (41-43),Construction,2009,2831
+TLH3,Essex,F (41-43),Construction,2010,2955
+TLH3,Essex,F (41-43),Construction,2011,3125
+TLH3,Essex,F (41-43),Construction,2012,2965
+TLH3,Essex,F (41-43),Construction,2013,3270
+TLH3,Essex,F (41-43),Construction,2014,3809
+TLH3,Essex,F (41-43),Construction,2015,4220
+TLH3,Essex,F (41-43),Construction,2016,4273
+TLH3,Essex,F (41-43),Construction,2017,4849
+TLH3,Essex,F (41-43),Construction,2018,5095
+TLH3,Essex,F (41-43),Construction,2019,5150
+TLH3,Essex,F (41-43),Construction,2020,4000
+TLH3,Essex,F (41-43),Construction,2021,4833
+TLH3,Essex,F (41-43),Construction,2022,5629
+TLH3,Essex,G-T,Services sector,1998,14467
+TLH3,Essex,G-T,Services sector,1999,15016
+TLH3,Essex,G-T,Services sector,2000,16042
+TLH3,Essex,G-T,Services sector,2001,17393
+TLH3,Essex,G-T,Services sector,2002,17998
+TLH3,Essex,G-T,Services sector,2003,19917
+TLH3,Essex,G-T,Services sector,2004,20668
+TLH3,Essex,G-T,Services sector,2005,21288
+TLH3,Essex,G-T,Services sector,2006,22181
+TLH3,Essex,G-T,Services sector,2007,22996
+TLH3,Essex,G-T,Services sector,2008,23776
+TLH3,Essex,G-T,Services sector,2009,23559
+TLH3,Essex,G-T,Services sector,2010,24044
+TLH3,Essex,G-T,Services sector,2011,23850
+TLH3,Essex,G-T,Services sector,2012,24713
+TLH3,Essex,G-T,Services sector,2013,25116
+TLH3,Essex,G-T,Services sector,2014,26416
+TLH3,Essex,G-T,Services sector,2015,27822
+TLH3,Essex,G-T,Services sector,2016,29504
+TLH3,Essex,G-T,Services sector,2017,31947
+TLH3,Essex,G-T,Services sector,2018,33073
+TLH3,Essex,G-T,Services sector,2019,34026
+TLH3,Essex,G-T,Services sector,2020,31865
+TLH3,Essex,G-T,Services sector,2021,35788
+TLH3,Essex,G-T,Services sector,2022,39539
+TLI3,Inner London - West,A-E,Production sector,1998,1887
+TLI3,Inner London - West,A-E,Production sector,1999,1954
+TLI3,Inner London - West,A-E,Production sector,2000,2056
+TLI3,Inner London - West,A-E,Production sector,2001,1977
+TLI3,Inner London - West,A-E,Production sector,2002,2053
+TLI3,Inner London - West,A-E,Production sector,2003,1905
+TLI3,Inner London - West,A-E,Production sector,2004,2040
+TLI3,Inner London - West,A-E,Production sector,2005,1949
+TLI3,Inner London - West,A-E,Production sector,2006,2166
+TLI3,Inner London - West,A-E,Production sector,2007,2393
+TLI3,Inner London - West,A-E,Production sector,2008,2361
+TLI3,Inner London - West,A-E,Production sector,2009,2541
+TLI3,Inner London - West,A-E,Production sector,2010,2171
+TLI3,Inner London - West,A-E,Production sector,2011,1975
+TLI3,Inner London - West,A-E,Production sector,2012,1863
+TLI3,Inner London - West,A-E,Production sector,2013,1985
+TLI3,Inner London - West,A-E,Production sector,2014,2112
+TLI3,Inner London - West,A-E,Production sector,2015,2394
+TLI3,Inner London - West,A-E,Production sector,2016,2342
+TLI3,Inner London - West,A-E,Production sector,2017,2632
+TLI3,Inner London - West,A-E,Production sector,2018,2870
+TLI3,Inner London - West,A-E,Production sector,2019,3390
+TLI3,Inner London - West,A-E,Production sector,2020,3800
+TLI3,Inner London - West,A-E,Production sector,2021,3560
+TLI3,Inner London - West,A-E,Production sector,2022,3924
+TLI3,Inner London - West,F (41-43),Construction,1998,1284
+TLI3,Inner London - West,F (41-43),Construction,1999,1481
+TLI3,Inner London - West,F (41-43),Construction,2000,1914
+TLI3,Inner London - West,F (41-43),Construction,2001,2032
+TLI3,Inner London - West,F (41-43),Construction,2002,1846
+TLI3,Inner London - West,F (41-43),Construction,2003,1961
+TLI3,Inner London - West,F (41-43),Construction,2004,1922
+TLI3,Inner London - West,F (41-43),Construction,2005,1932
+TLI3,Inner London - West,F (41-43),Construction,2006,2173
+TLI3,Inner London - West,F (41-43),Construction,2007,2618
+TLI3,Inner London - West,F (41-43),Construction,2008,3355
+TLI3,Inner London - West,F (41-43),Construction,2009,2744
+TLI3,Inner London - West,F (41-43),Construction,2010,2703
+TLI3,Inner London - West,F (41-43),Construction,2011,2902
+TLI3,Inner London - West,F (41-43),Construction,2012,3324
+TLI3,Inner London - West,F (41-43),Construction,2013,3994
+TLI3,Inner London - West,F (41-43),Construction,2014,4199
+TLI3,Inner London - West,F (41-43),Construction,2015,4445
+TLI3,Inner London - West,F (41-43),Construction,2016,4434
+TLI3,Inner London - West,F (41-43),Construction,2017,4473
+TLI3,Inner London - West,F (41-43),Construction,2018,4671
+TLI3,Inner London - West,F (41-43),Construction,2019,4887
+TLI3,Inner London - West,F (41-43),Construction,2020,3969
+TLI3,Inner London - West,F (41-43),Construction,2021,4226
+TLI3,Inner London - West,F (41-43),Construction,2022,5252
+TLI3,Inner London - West,G-T,Services sector,1998,67475
+TLI3,Inner London - West,G-T,Services sector,1999,70209
+TLI3,Inner London - West,G-T,Services sector,2000,76397
+TLI3,Inner London - West,G-T,Services sector,2001,79218
+TLI3,Inner London - West,G-T,Services sector,2002,82849
+TLI3,Inner London - West,G-T,Services sector,2003,88439
+TLI3,Inner London - West,G-T,Services sector,2004,93680
+TLI3,Inner London - West,G-T,Services sector,2005,103731
+TLI3,Inner London - West,G-T,Services sector,2006,110027
+TLI3,Inner London - West,G-T,Services sector,2007,121205
+TLI3,Inner London - West,G-T,Services sector,2008,123704
+TLI3,Inner London - West,G-T,Services sector,2009,125407
+TLI3,Inner London - West,G-T,Services sector,2010,132013
+TLI3,Inner London - West,G-T,Services sector,2011,136784
+TLI3,Inner London - West,G-T,Services sector,2012,142536
+TLI3,Inner London - West,G-T,Services sector,2013,150865
+TLI3,Inner London - West,G-T,Services sector,2014,162171
+TLI3,Inner London - West,G-T,Services sector,2015,167203
+TLI3,Inner London - West,G-T,Services sector,2016,182869
+TLI3,Inner London - West,G-T,Services sector,2017,191443
+TLI3,Inner London - West,G-T,Services sector,2018,201111
+TLI3,Inner London - West,G-T,Services sector,2019,208973
+TLI3,Inner London - West,G-T,Services sector,2020,199598
+TLI3,Inner London - West,G-T,Services sector,2021,221446
+TLI3,Inner London - West,G-T,Services sector,2022,244030
+TLI4,Inner London - East,A-E,Production sector,1998,2499
+TLI4,Inner London - East,A-E,Production sector,1999,2555
+TLI4,Inner London - East,A-E,Production sector,2000,2620
+TLI4,Inner London - East,A-E,Production sector,2001,2472
+TLI4,Inner London - East,A-E,Production sector,2002,2508
+TLI4,Inner London - East,A-E,Production sector,2003,2335
+TLI4,Inner London - East,A-E,Production sector,2004,2380
+TLI4,Inner London - East,A-E,Production sector,2005,2334
+TLI4,Inner London - East,A-E,Production sector,2006,2417
+TLI4,Inner London - East,A-E,Production sector,2007,2581
+TLI4,Inner London - East,A-E,Production sector,2008,2579
+TLI4,Inner London - East,A-E,Production sector,2009,2781
+TLI4,Inner London - East,A-E,Production sector,2010,2641
+TLI4,Inner London - East,A-E,Production sector,2011,2690
+TLI4,Inner London - East,A-E,Production sector,2012,2823
+TLI4,Inner London - East,A-E,Production sector,2013,2884
+TLI4,Inner London - East,A-E,Production sector,2014,2670
+TLI4,Inner London - East,A-E,Production sector,2015,2613
+TLI4,Inner London - East,A-E,Production sector,2016,2516
+TLI4,Inner London - East,A-E,Production sector,2017,2688
+TLI4,Inner London - East,A-E,Production sector,2018,2756
+TLI4,Inner London - East,A-E,Production sector,2019,2854
+TLI4,Inner London - East,A-E,Production sector,2020,3005
+TLI4,Inner London - East,A-E,Production sector,2021,3243
+TLI4,Inner London - East,A-E,Production sector,2022,3300
+TLI4,Inner London - East,F (41-43),Construction,1998,1235
+TLI4,Inner London - East,F (41-43),Construction,1999,1388
+TLI4,Inner London - East,F (41-43),Construction,2000,1723
+TLI4,Inner London - East,F (41-43),Construction,2001,1798
+TLI4,Inner London - East,F (41-43),Construction,2002,1696
+TLI4,Inner London - East,F (41-43),Construction,2003,1783
+TLI4,Inner London - East,F (41-43),Construction,2004,1839
+TLI4,Inner London - East,F (41-43),Construction,2005,1932
+TLI4,Inner London - East,F (41-43),Construction,2006,2192
+TLI4,Inner London - East,F (41-43),Construction,2007,2552
+TLI4,Inner London - East,F (41-43),Construction,2008,2808
+TLI4,Inner London - East,F (41-43),Construction,2009,2539
+TLI4,Inner London - East,F (41-43),Construction,2010,2782
+TLI4,Inner London - East,F (41-43),Construction,2011,2945
+TLI4,Inner London - East,F (41-43),Construction,2012,3015
+TLI4,Inner London - East,F (41-43),Construction,2013,3235
+TLI4,Inner London - East,F (41-43),Construction,2014,3399
+TLI4,Inner London - East,F (41-43),Construction,2015,3799
+TLI4,Inner London - East,F (41-43),Construction,2016,3790
+TLI4,Inner London - East,F (41-43),Construction,2017,4230
+TLI4,Inner London - East,F (41-43),Construction,2018,4639
+TLI4,Inner London - East,F (41-43),Construction,2019,4582
+TLI4,Inner London - East,F (41-43),Construction,2020,3186
+TLI4,Inner London - East,F (41-43),Construction,2021,3242
+TLI4,Inner London - East,F (41-43),Construction,2022,3639
+TLI4,Inner London - East,G-T,Services sector,1998,35977
+TLI4,Inner London - East,G-T,Services sector,1999,37712
+TLI4,Inner London - East,G-T,Services sector,2000,41358
+TLI4,Inner London - East,G-T,Services sector,2001,43293
+TLI4,Inner London - East,G-T,Services sector,2002,45144
+TLI4,Inner London - East,G-T,Services sector,2003,48142
+TLI4,Inner London - East,G-T,Services sector,2004,51120
+TLI4,Inner London - East,G-T,Services sector,2005,56274
+TLI4,Inner London - East,G-T,Services sector,2006,59395
+TLI4,Inner London - East,G-T,Services sector,2007,65462
+TLI4,Inner London - East,G-T,Services sector,2008,68824
+TLI4,Inner London - East,G-T,Services sector,2009,69564
+TLI4,Inner London - East,G-T,Services sector,2010,72984
+TLI4,Inner London - East,G-T,Services sector,2011,78342
+TLI4,Inner London - East,G-T,Services sector,2012,79857
+TLI4,Inner London - East,G-T,Services sector,2013,82840
+TLI4,Inner London - East,G-T,Services sector,2014,88277
+TLI4,Inner London - East,G-T,Services sector,2015,91797
+TLI4,Inner London - East,G-T,Services sector,2016,96678
+TLI4,Inner London - East,G-T,Services sector,2017,100934
+TLI4,Inner London - East,G-T,Services sector,2018,103415
+TLI4,Inner London - East,G-T,Services sector,2019,106190
+TLI4,Inner London - East,G-T,Services sector,2020,99793
+TLI4,Inner London - East,G-T,Services sector,2021,105834
+TLI4,Inner London - East,G-T,Services sector,2022,118917
+TLI5,Outer London - East and North East,A-E,Production sector,1998,3131
+TLI5,Outer London - East and North East,A-E,Production sector,1999,3164
+TLI5,Outer London - East and North East,A-E,Production sector,2000,3120
+TLI5,Outer London - East and North East,A-E,Production sector,2001,3028
+TLI5,Outer London - East and North East,A-E,Production sector,2002,2870
+TLI5,Outer London - East and North East,A-E,Production sector,2003,2745
+TLI5,Outer London - East and North East,A-E,Production sector,2004,2750
+TLI5,Outer London - East and North East,A-E,Production sector,2005,2746
+TLI5,Outer London - East and North East,A-E,Production sector,2006,2972
+TLI5,Outer London - East and North East,A-E,Production sector,2007,3024
+TLI5,Outer London - East and North East,A-E,Production sector,2008,3131
+TLI5,Outer London - East and North East,A-E,Production sector,2009,3115
+TLI5,Outer London - East and North East,A-E,Production sector,2010,3215
+TLI5,Outer London - East and North East,A-E,Production sector,2011,3205
+TLI5,Outer London - East and North East,A-E,Production sector,2012,3450
+TLI5,Outer London - East and North East,A-E,Production sector,2013,3713
+TLI5,Outer London - East and North East,A-E,Production sector,2014,3668
+TLI5,Outer London - East and North East,A-E,Production sector,2015,3388
+TLI5,Outer London - East and North East,A-E,Production sector,2016,3179
+TLI5,Outer London - East and North East,A-E,Production sector,2017,3218
+TLI5,Outer London - East and North East,A-E,Production sector,2018,3224
+TLI5,Outer London - East and North East,A-E,Production sector,2019,3266
+TLI5,Outer London - East and North East,A-E,Production sector,2020,2735
+TLI5,Outer London - East and North East,A-E,Production sector,2021,2733
+TLI5,Outer London - East and North East,A-E,Production sector,2022,3023
+TLI5,Outer London - East and North East,F (41-43),Construction,1998,1438
+TLI5,Outer London - East and North East,F (41-43),Construction,1999,1587
+TLI5,Outer London - East and North East,F (41-43),Construction,2000,1685
+TLI5,Outer London - East and North East,F (41-43),Construction,2001,1828
+TLI5,Outer London - East and North East,F (41-43),Construction,2002,1965
+TLI5,Outer London - East and North East,F (41-43),Construction,2003,2118
+TLI5,Outer London - East and North East,F (41-43),Construction,2004,2148
+TLI5,Outer London - East and North East,F (41-43),Construction,2005,2286
+TLI5,Outer London - East and North East,F (41-43),Construction,2006,2452
+TLI5,Outer London - East and North East,F (41-43),Construction,2007,2712
+TLI5,Outer London - East and North East,F (41-43),Construction,2008,2850
+TLI5,Outer London - East and North East,F (41-43),Construction,2009,2299
+TLI5,Outer London - East and North East,F (41-43),Construction,2010,2612
+TLI5,Outer London - East and North East,F (41-43),Construction,2011,2679
+TLI5,Outer London - East and North East,F (41-43),Construction,2012,2807
+TLI5,Outer London - East and North East,F (41-43),Construction,2013,3002
+TLI5,Outer London - East and North East,F (41-43),Construction,2014,3177
+TLI5,Outer London - East and North East,F (41-43),Construction,2015,3457
+TLI5,Outer London - East and North East,F (41-43),Construction,2016,3780
+TLI5,Outer London - East and North East,F (41-43),Construction,2017,3963
+TLI5,Outer London - East and North East,F (41-43),Construction,2018,4202
+TLI5,Outer London - East and North East,F (41-43),Construction,2019,4247
+TLI5,Outer London - East and North East,F (41-43),Construction,2020,3505
+TLI5,Outer London - East and North East,F (41-43),Construction,2021,4097
+TLI5,Outer London - East and North East,F (41-43),Construction,2022,4627
+TLI5,Outer London - East and North East,G-T,Services sector,1998,14627
+TLI5,Outer London - East and North East,G-T,Services sector,1999,15374
+TLI5,Outer London - East and North East,G-T,Services sector,2000,16044
+TLI5,Outer London - East and North East,G-T,Services sector,2001,16742
+TLI5,Outer London - East and North East,G-T,Services sector,2002,17568
+TLI5,Outer London - East and North East,G-T,Services sector,2003,18866
+TLI5,Outer London - East and North East,G-T,Services sector,2004,19847
+TLI5,Outer London - East and North East,G-T,Services sector,2005,21030
+TLI5,Outer London - East and North East,G-T,Services sector,2006,22250
+TLI5,Outer London - East and North East,G-T,Services sector,2007,23319
+TLI5,Outer London - East and North East,G-T,Services sector,2008,23557
+TLI5,Outer London - East and North East,G-T,Services sector,2009,22073
+TLI5,Outer London - East and North East,G-T,Services sector,2010,22751
+TLI5,Outer London - East and North East,G-T,Services sector,2011,22998
+TLI5,Outer London - East and North East,G-T,Services sector,2012,24387
+TLI5,Outer London - East and North East,G-T,Services sector,2013,25395
+TLI5,Outer London - East and North East,G-T,Services sector,2014,26453
+TLI5,Outer London - East and North East,G-T,Services sector,2015,27754
+TLI5,Outer London - East and North East,G-T,Services sector,2016,28924
+TLI5,Outer London - East and North East,G-T,Services sector,2017,28952
+TLI5,Outer London - East and North East,G-T,Services sector,2018,29940
+TLI5,Outer London - East and North East,G-T,Services sector,2019,31218
+TLI5,Outer London - East and North East,G-T,Services sector,2020,27554
+TLI5,Outer London - East and North East,G-T,Services sector,2021,29467
+TLI5,Outer London - East and North East,G-T,Services sector,2022,32403
+TLI6,Outer London - South,A-E,Production sector,1998,1465
+TLI6,Outer London - South,A-E,Production sector,1999,1473
+TLI6,Outer London - South,A-E,Production sector,2000,1466
+TLI6,Outer London - South,A-E,Production sector,2001,1412
+TLI6,Outer London - South,A-E,Production sector,2002,1327
+TLI6,Outer London - South,A-E,Production sector,2003,1279
+TLI6,Outer London - South,A-E,Production sector,2004,1242
+TLI6,Outer London - South,A-E,Production sector,2005,1262
+TLI6,Outer London - South,A-E,Production sector,2006,1333
+TLI6,Outer London - South,A-E,Production sector,2007,1277
+TLI6,Outer London - South,A-E,Production sector,2008,1160
+TLI6,Outer London - South,A-E,Production sector,2009,1071
+TLI6,Outer London - South,A-E,Production sector,2010,1063
+TLI6,Outer London - South,A-E,Production sector,2011,980
+TLI6,Outer London - South,A-E,Production sector,2012,1000
+TLI6,Outer London - South,A-E,Production sector,2013,1033
+TLI6,Outer London - South,A-E,Production sector,2014,1018
+TLI6,Outer London - South,A-E,Production sector,2015,952
+TLI6,Outer London - South,A-E,Production sector,2016,945
+TLI6,Outer London - South,A-E,Production sector,2017,1011
+TLI6,Outer London - South,A-E,Production sector,2018,1014
+TLI6,Outer London - South,A-E,Production sector,2019,1074
+TLI6,Outer London - South,A-E,Production sector,2020,1086
+TLI6,Outer London - South,A-E,Production sector,2021,936
+TLI6,Outer London - South,A-E,Production sector,2022,971
+TLI6,Outer London - South,F (41-43),Construction,1998,1128
+TLI6,Outer London - South,F (41-43),Construction,1999,1245
+TLI6,Outer London - South,F (41-43),Construction,2000,1331
+TLI6,Outer London - South,F (41-43),Construction,2001,1423
+TLI6,Outer London - South,F (41-43),Construction,2002,1501
+TLI6,Outer London - South,F (41-43),Construction,2003,1597
+TLI6,Outer London - South,F (41-43),Construction,2004,1628
+TLI6,Outer London - South,F (41-43),Construction,2005,1738
+TLI6,Outer London - South,F (41-43),Construction,2006,1865
+TLI6,Outer London - South,F (41-43),Construction,2007,2089
+TLI6,Outer London - South,F (41-43),Construction,2008,2182
+TLI6,Outer London - South,F (41-43),Construction,2009,1760
+TLI6,Outer London - South,F (41-43),Construction,2010,1860
+TLI6,Outer London - South,F (41-43),Construction,2011,1943
+TLI6,Outer London - South,F (41-43),Construction,2012,2081
+TLI6,Outer London - South,F (41-43),Construction,2013,2089
+TLI6,Outer London - South,F (41-43),Construction,2014,2251
+TLI6,Outer London - South,F (41-43),Construction,2015,2267
+TLI6,Outer London - South,F (41-43),Construction,2016,2360
+TLI6,Outer London - South,F (41-43),Construction,2017,2658
+TLI6,Outer London - South,F (41-43),Construction,2018,2694
+TLI6,Outer London - South,F (41-43),Construction,2019,2764
+TLI6,Outer London - South,F (41-43),Construction,2020,2265
+TLI6,Outer London - South,F (41-43),Construction,2021,2275
+TLI6,Outer London - South,F (41-43),Construction,2022,2524
+TLI6,Outer London - South,G-T,Services sector,1998,14960
+TLI6,Outer London - South,G-T,Services sector,1999,15848
+TLI6,Outer London - South,G-T,Services sector,2000,16568
+TLI6,Outer London - South,G-T,Services sector,2001,17169
+TLI6,Outer London - South,G-T,Services sector,2002,17849
+TLI6,Outer London - South,G-T,Services sector,2003,18986
+TLI6,Outer London - South,G-T,Services sector,2004,19939
+TLI6,Outer London - South,G-T,Services sector,2005,21078
+TLI6,Outer London - South,G-T,Services sector,2006,22108
+TLI6,Outer London - South,G-T,Services sector,2007,23432
+TLI6,Outer London - South,G-T,Services sector,2008,23604
+TLI6,Outer London - South,G-T,Services sector,2009,22517
+TLI6,Outer London - South,G-T,Services sector,2010,22579
+TLI6,Outer London - South,G-T,Services sector,2011,22601
+TLI6,Outer London - South,G-T,Services sector,2012,23632
+TLI6,Outer London - South,G-T,Services sector,2013,24195
+TLI6,Outer London - South,G-T,Services sector,2014,25689
+TLI6,Outer London - South,G-T,Services sector,2015,26095
+TLI6,Outer London - South,G-T,Services sector,2016,27299
+TLI6,Outer London - South,G-T,Services sector,2017,27279
+TLI6,Outer London - South,G-T,Services sector,2018,28197
+TLI6,Outer London - South,G-T,Services sector,2019,29056
+TLI6,Outer London - South,G-T,Services sector,2020,26451
+TLI6,Outer London - South,G-T,Services sector,2021,27527
+TLI6,Outer London - South,G-T,Services sector,2022,29643
+TLI7,Outer London - West and North West,A-E,Production sector,1998,3139
+TLI7,Outer London - West and North West,A-E,Production sector,1999,3363
+TLI7,Outer London - West and North West,A-E,Production sector,2000,3454
+TLI7,Outer London - West and North West,A-E,Production sector,2001,3444
+TLI7,Outer London - West and North West,A-E,Production sector,2002,3405
+TLI7,Outer London - West and North West,A-E,Production sector,2003,3180
+TLI7,Outer London - West and North West,A-E,Production sector,2004,3082
+TLI7,Outer London - West and North West,A-E,Production sector,2005,3157
+TLI7,Outer London - West and North West,A-E,Production sector,2006,3327
+TLI7,Outer London - West and North West,A-E,Production sector,2007,3229
+TLI7,Outer London - West and North West,A-E,Production sector,2008,3231
+TLI7,Outer London - West and North West,A-E,Production sector,2009,3461
+TLI7,Outer London - West and North West,A-E,Production sector,2010,3460
+TLI7,Outer London - West and North West,A-E,Production sector,2011,3382
+TLI7,Outer London - West and North West,A-E,Production sector,2012,3494
+TLI7,Outer London - West and North West,A-E,Production sector,2013,3656
+TLI7,Outer London - West and North West,A-E,Production sector,2014,3564
+TLI7,Outer London - West and North West,A-E,Production sector,2015,3453
+TLI7,Outer London - West and North West,A-E,Production sector,2016,3408
+TLI7,Outer London - West and North West,A-E,Production sector,2017,3565
+TLI7,Outer London - West and North West,A-E,Production sector,2018,3871
+TLI7,Outer London - West and North West,A-E,Production sector,2019,3990
+TLI7,Outer London - West and North West,A-E,Production sector,2020,3767
+TLI7,Outer London - West and North West,A-E,Production sector,2021,3864
+TLI7,Outer London - West and North West,A-E,Production sector,2022,4212
+TLI7,Outer London - West and North West,F (41-43),Construction,1998,1725
+TLI7,Outer London - West and North West,F (41-43),Construction,1999,1916
+TLI7,Outer London - West and North West,F (41-43),Construction,2000,2052
+TLI7,Outer London - West and North West,F (41-43),Construction,2001,2207
+TLI7,Outer London - West and North West,F (41-43),Construction,2002,2354
+TLI7,Outer London - West and North West,F (41-43),Construction,2003,2518
+TLI7,Outer London - West and North West,F (41-43),Construction,2004,2564
+TLI7,Outer London - West and North West,F (41-43),Construction,2005,2722
+TLI7,Outer London - West and North West,F (41-43),Construction,2006,2916
+TLI7,Outer London - West and North West,F (41-43),Construction,2007,3246
+TLI7,Outer London - West and North West,F (41-43),Construction,2008,3465
+TLI7,Outer London - West and North West,F (41-43),Construction,2009,2880
+TLI7,Outer London - West and North West,F (41-43),Construction,2010,3062
+TLI7,Outer London - West and North West,F (41-43),Construction,2011,3184
+TLI7,Outer London - West and North West,F (41-43),Construction,2012,3434
+TLI7,Outer London - West and North West,F (41-43),Construction,2013,3689
+TLI7,Outer London - West and North West,F (41-43),Construction,2014,4103
+TLI7,Outer London - West and North West,F (41-43),Construction,2015,4589
+TLI7,Outer London - West and North West,F (41-43),Construction,2016,4895
+TLI7,Outer London - West and North West,F (41-43),Construction,2017,5236
+TLI7,Outer London - West and North West,F (41-43),Construction,2018,5750
+TLI7,Outer London - West and North West,F (41-43),Construction,2019,5683
+TLI7,Outer London - West and North West,F (41-43),Construction,2020,4742
+TLI7,Outer London - West and North West,F (41-43),Construction,2021,5117
+TLI7,Outer London - West and North West,F (41-43),Construction,2022,5815
+TLI7,Outer London - West and North West,G-T,Services sector,1998,28860
+TLI7,Outer London - West and North West,G-T,Services sector,1999,30668
+TLI7,Outer London - West and North West,G-T,Services sector,2000,32353
+TLI7,Outer London - West and North West,G-T,Services sector,2001,33321
+TLI7,Outer London - West and North West,G-T,Services sector,2002,34367
+TLI7,Outer London - West and North West,G-T,Services sector,2003,36243
+TLI7,Outer London - West and North West,G-T,Services sector,2004,37582
+TLI7,Outer London - West and North West,G-T,Services sector,2005,39460
+TLI7,Outer London - West and North West,G-T,Services sector,2006,41887
+TLI7,Outer London - West and North West,G-T,Services sector,2007,44215
+TLI7,Outer London - West and North West,G-T,Services sector,2008,45031
+TLI7,Outer London - West and North West,G-T,Services sector,2009,42442
+TLI7,Outer London - West and North West,G-T,Services sector,2010,43299
+TLI7,Outer London - West and North West,G-T,Services sector,2011,44531
+TLI7,Outer London - West and North West,G-T,Services sector,2012,47376
+TLI7,Outer London - West and North West,G-T,Services sector,2013,49986
+TLI7,Outer London - West and North West,G-T,Services sector,2014,54324
+TLI7,Outer London - West and North West,G-T,Services sector,2015,56694
+TLI7,Outer London - West and North West,G-T,Services sector,2016,58654
+TLI7,Outer London - West and North West,G-T,Services sector,2017,59101
+TLI7,Outer London - West and North West,G-T,Services sector,2018,59726
+TLI7,Outer London - West and North West,G-T,Services sector,2019,61493
+TLI7,Outer London - West and North West,G-T,Services sector,2020,51824
+TLI7,Outer London - West and North West,G-T,Services sector,2021,52028
+TLI7,Outer London - West and North West,G-T,Services sector,2022,56900
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-E,Production sector,1998,7895
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-E,Production sector,1999,7678
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-E,Production sector,2000,7876
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-E,Production sector,2001,7590
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-E,Production sector,2002,7968
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-E,Production sector,2003,8241
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-E,Production sector,2004,7985
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-E,Production sector,2005,8390
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-E,Production sector,2006,8375
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-E,Production sector,2007,8405
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-E,Production sector,2008,8805
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-E,Production sector,2009,8751
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-E,Production sector,2010,8600
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-E,Production sector,2011,8847
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-E,Production sector,2012,9305
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-E,Production sector,2013,9736
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-E,Production sector,2014,10303
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-E,Production sector,2015,10178
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-E,Production sector,2016,10254
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-E,Production sector,2017,10965
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-E,Production sector,2018,11485
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-E,Production sector,2019,12262
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-E,Production sector,2020,12643
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-E,Production sector,2021,12541
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",A-E,Production sector,2022,13473
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",F (41-43),Construction,1998,1837
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",F (41-43),Construction,1999,2165
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",F (41-43),Construction,2000,2439
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",F (41-43),Construction,2001,2700
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",F (41-43),Construction,2002,2793
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",F (41-43),Construction,2003,2949
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",F (41-43),Construction,2004,2946
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",F (41-43),Construction,2005,3370
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",F (41-43),Construction,2006,3403
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",F (41-43),Construction,2007,3870
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",F (41-43),Construction,2008,3926
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",F (41-43),Construction,2009,3208
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",F (41-43),Construction,2010,3302
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",F (41-43),Construction,2011,3569
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",F (41-43),Construction,2012,3659
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",F (41-43),Construction,2013,4113
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",F (41-43),Construction,2014,4144
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",F (41-43),Construction,2015,4522
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",F (41-43),Construction,2016,4543
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",F (41-43),Construction,2017,4610
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",F (41-43),Construction,2018,4892
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",F (41-43),Construction,2019,5281
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",F (41-43),Construction,2020,5679
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",F (41-43),Construction,2021,5327
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",F (41-43),Construction,2022,6248
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services sector,1998,35199
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services sector,1999,37599
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services sector,2000,39816
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services sector,2001,41344
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services sector,2002,43392
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services sector,2003,46500
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services sector,2004,47761
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services sector,2005,50162
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services sector,2006,52434
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services sector,2007,55088
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services sector,2008,57975
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services sector,2009,57501
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services sector,2010,59094
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services sector,2011,61428
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services sector,2012,63502
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services sector,2013,65140
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services sector,2014,68410
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services sector,2015,71387
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services sector,2016,72471
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services sector,2017,74699
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services sector,2018,78357
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services sector,2019,82568
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services sector,2020,82842
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services sector,2021,88478
+TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",G-T,Services sector,2022,96279
+TLJ2,"Surrey, East and West Sussex",A-E,Production sector,1998,5708
+TLJ2,"Surrey, East and West Sussex",A-E,Production sector,1999,6190
+TLJ2,"Surrey, East and West Sussex",A-E,Production sector,2000,6209
+TLJ2,"Surrey, East and West Sussex",A-E,Production sector,2001,5815
+TLJ2,"Surrey, East and West Sussex",A-E,Production sector,2002,6256
+TLJ2,"Surrey, East and West Sussex",A-E,Production sector,2003,6433
+TLJ2,"Surrey, East and West Sussex",A-E,Production sector,2004,6145
+TLJ2,"Surrey, East and West Sussex",A-E,Production sector,2005,6023
+TLJ2,"Surrey, East and West Sussex",A-E,Production sector,2006,6266
+TLJ2,"Surrey, East and West Sussex",A-E,Production sector,2007,6541
+TLJ2,"Surrey, East and West Sussex",A-E,Production sector,2008,6909
+TLJ2,"Surrey, East and West Sussex",A-E,Production sector,2009,6538
+TLJ2,"Surrey, East and West Sussex",A-E,Production sector,2010,6935
+TLJ2,"Surrey, East and West Sussex",A-E,Production sector,2011,7029
+TLJ2,"Surrey, East and West Sussex",A-E,Production sector,2012,7455
+TLJ2,"Surrey, East and West Sussex",A-E,Production sector,2013,7864
+TLJ2,"Surrey, East and West Sussex",A-E,Production sector,2014,8100
+TLJ2,"Surrey, East and West Sussex",A-E,Production sector,2015,8425
+TLJ2,"Surrey, East and West Sussex",A-E,Production sector,2016,8870
+TLJ2,"Surrey, East and West Sussex",A-E,Production sector,2017,9739
+TLJ2,"Surrey, East and West Sussex",A-E,Production sector,2018,9994
+TLJ2,"Surrey, East and West Sussex",A-E,Production sector,2019,10143
+TLJ2,"Surrey, East and West Sussex",A-E,Production sector,2020,9829
+TLJ2,"Surrey, East and West Sussex",A-E,Production sector,2021,9454
+TLJ2,"Surrey, East and West Sussex",A-E,Production sector,2022,8981
+TLJ2,"Surrey, East and West Sussex",F (41-43),Construction,1998,2188
+TLJ2,"Surrey, East and West Sussex",F (41-43),Construction,1999,2587
+TLJ2,"Surrey, East and West Sussex",F (41-43),Construction,2000,2847
+TLJ2,"Surrey, East and West Sussex",F (41-43),Construction,2001,2917
+TLJ2,"Surrey, East and West Sussex",F (41-43),Construction,2002,3387
+TLJ2,"Surrey, East and West Sussex",F (41-43),Construction,2003,3421
+TLJ2,"Surrey, East and West Sussex",F (41-43),Construction,2004,3558
+TLJ2,"Surrey, East and West Sussex",F (41-43),Construction,2005,3711
+TLJ2,"Surrey, East and West Sussex",F (41-43),Construction,2006,4007
+TLJ2,"Surrey, East and West Sussex",F (41-43),Construction,2007,4544
+TLJ2,"Surrey, East and West Sussex",F (41-43),Construction,2008,4661
+TLJ2,"Surrey, East and West Sussex",F (41-43),Construction,2009,3852
+TLJ2,"Surrey, East and West Sussex",F (41-43),Construction,2010,4046
+TLJ2,"Surrey, East and West Sussex",F (41-43),Construction,2011,4121
+TLJ2,"Surrey, East and West Sussex",F (41-43),Construction,2012,4067
+TLJ2,"Surrey, East and West Sussex",F (41-43),Construction,2013,4347
+TLJ2,"Surrey, East and West Sussex",F (41-43),Construction,2014,4915
+TLJ2,"Surrey, East and West Sussex",F (41-43),Construction,2015,5384
+TLJ2,"Surrey, East and West Sussex",F (41-43),Construction,2016,5204
+TLJ2,"Surrey, East and West Sussex",F (41-43),Construction,2017,5484
+TLJ2,"Surrey, East and West Sussex",F (41-43),Construction,2018,5784
+TLJ2,"Surrey, East and West Sussex",F (41-43),Construction,2019,6342
+TLJ2,"Surrey, East and West Sussex",F (41-43),Construction,2020,5325
+TLJ2,"Surrey, East and West Sussex",F (41-43),Construction,2021,5924
+TLJ2,"Surrey, East and West Sussex",F (41-43),Construction,2022,6787
+TLJ2,"Surrey, East and West Sussex",G-T,Services sector,1998,33960
+TLJ2,"Surrey, East and West Sussex",G-T,Services sector,1999,35752
+TLJ2,"Surrey, East and West Sussex",G-T,Services sector,2000,37556
+TLJ2,"Surrey, East and West Sussex",G-T,Services sector,2001,39666
+TLJ2,"Surrey, East and West Sussex",G-T,Services sector,2002,40577
+TLJ2,"Surrey, East and West Sussex",G-T,Services sector,2003,42193
+TLJ2,"Surrey, East and West Sussex",G-T,Services sector,2004,43663
+TLJ2,"Surrey, East and West Sussex",G-T,Services sector,2005,46103
+TLJ2,"Surrey, East and West Sussex",G-T,Services sector,2006,49367
+TLJ2,"Surrey, East and West Sussex",G-T,Services sector,2007,50643
+TLJ2,"Surrey, East and West Sussex",G-T,Services sector,2008,53696
+TLJ2,"Surrey, East and West Sussex",G-T,Services sector,2009,53923
+TLJ2,"Surrey, East and West Sussex",G-T,Services sector,2010,54777
+TLJ2,"Surrey, East and West Sussex",G-T,Services sector,2011,55196
+TLJ2,"Surrey, East and West Sussex",G-T,Services sector,2012,57721
+TLJ2,"Surrey, East and West Sussex",G-T,Services sector,2013,59823
+TLJ2,"Surrey, East and West Sussex",G-T,Services sector,2014,61757
+TLJ2,"Surrey, East and West Sussex",G-T,Services sector,2015,63953
+TLJ2,"Surrey, East and West Sussex",G-T,Services sector,2016,65780
+TLJ2,"Surrey, East and West Sussex",G-T,Services sector,2017,67489
+TLJ2,"Surrey, East and West Sussex",G-T,Services sector,2018,69025
+TLJ2,"Surrey, East and West Sussex",G-T,Services sector,2019,72317
+TLJ2,"Surrey, East and West Sussex",G-T,Services sector,2020,71387
+TLJ2,"Surrey, East and West Sussex",G-T,Services sector,2021,75951
+TLJ2,"Surrey, East and West Sussex",G-T,Services sector,2022,84214
+TLJ3,Hampshire and Isle of Wight,A-E,Production sector,1998,5557
+TLJ3,Hampshire and Isle of Wight,A-E,Production sector,1999,5453
+TLJ3,Hampshire and Isle of Wight,A-E,Production sector,2000,5520
+TLJ3,Hampshire and Isle of Wight,A-E,Production sector,2001,5155
+TLJ3,Hampshire and Isle of Wight,A-E,Production sector,2002,5367
+TLJ3,Hampshire and Isle of Wight,A-E,Production sector,2003,5684
+TLJ3,Hampshire and Isle of Wight,A-E,Production sector,2004,5671
+TLJ3,Hampshire and Isle of Wight,A-E,Production sector,2005,5654
+TLJ3,Hampshire and Isle of Wight,A-E,Production sector,2006,5567
+TLJ3,Hampshire and Isle of Wight,A-E,Production sector,2007,5733
+TLJ3,Hampshire and Isle of Wight,A-E,Production sector,2008,6011
+TLJ3,Hampshire and Isle of Wight,A-E,Production sector,2009,5950
+TLJ3,Hampshire and Isle of Wight,A-E,Production sector,2010,6286
+TLJ3,Hampshire and Isle of Wight,A-E,Production sector,2011,6555
+TLJ3,Hampshire and Isle of Wight,A-E,Production sector,2012,6841
+TLJ3,Hampshire and Isle of Wight,A-E,Production sector,2013,7395
+TLJ3,Hampshire and Isle of Wight,A-E,Production sector,2014,7294
+TLJ3,Hampshire and Isle of Wight,A-E,Production sector,2015,7381
+TLJ3,Hampshire and Isle of Wight,A-E,Production sector,2016,7273
+TLJ3,Hampshire and Isle of Wight,A-E,Production sector,2017,7718
+TLJ3,Hampshire and Isle of Wight,A-E,Production sector,2018,7969
+TLJ3,Hampshire and Isle of Wight,A-E,Production sector,2019,8726
+TLJ3,Hampshire and Isle of Wight,A-E,Production sector,2020,9549
+TLJ3,Hampshire and Isle of Wight,A-E,Production sector,2021,9058
+TLJ3,Hampshire and Isle of Wight,A-E,Production sector,2022,9540
+TLJ3,Hampshire and Isle of Wight,F (41-43),Construction,1998,1526
+TLJ3,Hampshire and Isle of Wight,F (41-43),Construction,1999,1622
+TLJ3,Hampshire and Isle of Wight,F (41-43),Construction,2000,1852
+TLJ3,Hampshire and Isle of Wight,F (41-43),Construction,2001,2027
+TLJ3,Hampshire and Isle of Wight,F (41-43),Construction,2002,2255
+TLJ3,Hampshire and Isle of Wight,F (41-43),Construction,2003,2455
+TLJ3,Hampshire and Isle of Wight,F (41-43),Construction,2004,2554
+TLJ3,Hampshire and Isle of Wight,F (41-43),Construction,2005,2915
+TLJ3,Hampshire and Isle of Wight,F (41-43),Construction,2006,2864
+TLJ3,Hampshire and Isle of Wight,F (41-43),Construction,2007,3034
+TLJ3,Hampshire and Isle of Wight,F (41-43),Construction,2008,2973
+TLJ3,Hampshire and Isle of Wight,F (41-43),Construction,2009,2491
+TLJ3,Hampshire and Isle of Wight,F (41-43),Construction,2010,2525
+TLJ3,Hampshire and Isle of Wight,F (41-43),Construction,2011,2705
+TLJ3,Hampshire and Isle of Wight,F (41-43),Construction,2012,2813
+TLJ3,Hampshire and Isle of Wight,F (41-43),Construction,2013,2992
+TLJ3,Hampshire and Isle of Wight,F (41-43),Construction,2014,3226
+TLJ3,Hampshire and Isle of Wight,F (41-43),Construction,2015,3435
+TLJ3,Hampshire and Isle of Wight,F (41-43),Construction,2016,3655
+TLJ3,Hampshire and Isle of Wight,F (41-43),Construction,2017,3975
+TLJ3,Hampshire and Isle of Wight,F (41-43),Construction,2018,3960
+TLJ3,Hampshire and Isle of Wight,F (41-43),Construction,2019,4175
+TLJ3,Hampshire and Isle of Wight,F (41-43),Construction,2020,3803
+TLJ3,Hampshire and Isle of Wight,F (41-43),Construction,2021,3849
+TLJ3,Hampshire and Isle of Wight,F (41-43),Construction,2022,4570
+TLJ3,Hampshire and Isle of Wight,G-T,Services sector,1998,20837
+TLJ3,Hampshire and Isle of Wight,G-T,Services sector,1999,21385
+TLJ3,Hampshire and Isle of Wight,G-T,Services sector,2000,22653
+TLJ3,Hampshire and Isle of Wight,G-T,Services sector,2001,24445
+TLJ3,Hampshire and Isle of Wight,G-T,Services sector,2002,25649
+TLJ3,Hampshire and Isle of Wight,G-T,Services sector,2003,26413
+TLJ3,Hampshire and Isle of Wight,G-T,Services sector,2004,28320
+TLJ3,Hampshire and Isle of Wight,G-T,Services sector,2005,29838
+TLJ3,Hampshire and Isle of Wight,G-T,Services sector,2006,31132
+TLJ3,Hampshire and Isle of Wight,G-T,Services sector,2007,32949
+TLJ3,Hampshire and Isle of Wight,G-T,Services sector,2008,34861
+TLJ3,Hampshire and Isle of Wight,G-T,Services sector,2009,35121
+TLJ3,Hampshire and Isle of Wight,G-T,Services sector,2010,36333
+TLJ3,Hampshire and Isle of Wight,G-T,Services sector,2011,37357
+TLJ3,Hampshire and Isle of Wight,G-T,Services sector,2012,38414
+TLJ3,Hampshire and Isle of Wight,G-T,Services sector,2013,39440
+TLJ3,Hampshire and Isle of Wight,G-T,Services sector,2014,40947
+TLJ3,Hampshire and Isle of Wight,G-T,Services sector,2015,42171
+TLJ3,Hampshire and Isle of Wight,G-T,Services sector,2016,43081
+TLJ3,Hampshire and Isle of Wight,G-T,Services sector,2017,44919
+TLJ3,Hampshire and Isle of Wight,G-T,Services sector,2018,46143
+TLJ3,Hampshire and Isle of Wight,G-T,Services sector,2019,49118
+TLJ3,Hampshire and Isle of Wight,G-T,Services sector,2020,46347
+TLJ3,Hampshire and Isle of Wight,G-T,Services sector,2021,50101
+TLJ3,Hampshire and Isle of Wight,G-T,Services sector,2022,55433
+TLJ4,Kent,A-E,Production sector,1998,4276
+TLJ4,Kent,A-E,Production sector,1999,4411
+TLJ4,Kent,A-E,Production sector,2000,4229
+TLJ4,Kent,A-E,Production sector,2001,4071
+TLJ4,Kent,A-E,Production sector,2002,4284
+TLJ4,Kent,A-E,Production sector,2003,4462
+TLJ4,Kent,A-E,Production sector,2004,4331
+TLJ4,Kent,A-E,Production sector,2005,4374
+TLJ4,Kent,A-E,Production sector,2006,4286
+TLJ4,Kent,A-E,Production sector,2007,4342
+TLJ4,Kent,A-E,Production sector,2008,4704
+TLJ4,Kent,A-E,Production sector,2009,4310
+TLJ4,Kent,A-E,Production sector,2010,4387
+TLJ4,Kent,A-E,Production sector,2011,4433
+TLJ4,Kent,A-E,Production sector,2012,4651
+TLJ4,Kent,A-E,Production sector,2013,4812
+TLJ4,Kent,A-E,Production sector,2014,4890
+TLJ4,Kent,A-E,Production sector,2015,5004
+TLJ4,Kent,A-E,Production sector,2016,5104
+TLJ4,Kent,A-E,Production sector,2017,5216
+TLJ4,Kent,A-E,Production sector,2018,5318
+TLJ4,Kent,A-E,Production sector,2019,5830
+TLJ4,Kent,A-E,Production sector,2020,5887
+TLJ4,Kent,A-E,Production sector,2021,5908
+TLJ4,Kent,A-E,Production sector,2022,5428
+TLJ4,Kent,F (41-43),Construction,1998,1477
+TLJ4,Kent,F (41-43),Construction,1999,1668
+TLJ4,Kent,F (41-43),Construction,2000,1676
+TLJ4,Kent,F (41-43),Construction,2001,1846
+TLJ4,Kent,F (41-43),Construction,2002,1980
+TLJ4,Kent,F (41-43),Construction,2003,2258
+TLJ4,Kent,F (41-43),Construction,2004,2300
+TLJ4,Kent,F (41-43),Construction,2005,2675
+TLJ4,Kent,F (41-43),Construction,2006,2706
+TLJ4,Kent,F (41-43),Construction,2007,2911
+TLJ4,Kent,F (41-43),Construction,2008,3015
+TLJ4,Kent,F (41-43),Construction,2009,2600
+TLJ4,Kent,F (41-43),Construction,2010,2686
+TLJ4,Kent,F (41-43),Construction,2011,2828
+TLJ4,Kent,F (41-43),Construction,2012,2865
+TLJ4,Kent,F (41-43),Construction,2013,3240
+TLJ4,Kent,F (41-43),Construction,2014,3325
+TLJ4,Kent,F (41-43),Construction,2015,3742
+TLJ4,Kent,F (41-43),Construction,2016,3879
+TLJ4,Kent,F (41-43),Construction,2017,4188
+TLJ4,Kent,F (41-43),Construction,2018,4331
+TLJ4,Kent,F (41-43),Construction,2019,4616
+TLJ4,Kent,F (41-43),Construction,2020,4322
+TLJ4,Kent,F (41-43),Construction,2021,4835
+TLJ4,Kent,F (41-43),Construction,2022,5577
+TLJ4,Kent,G-T,Services sector,1998,15323
+TLJ4,Kent,G-T,Services sector,1999,15742
+TLJ4,Kent,G-T,Services sector,2000,16466
+TLJ4,Kent,G-T,Services sector,2001,17383
+TLJ4,Kent,G-T,Services sector,2002,18079
+TLJ4,Kent,G-T,Services sector,2003,18984
+TLJ4,Kent,G-T,Services sector,2004,20342
+TLJ4,Kent,G-T,Services sector,2005,21497
+TLJ4,Kent,G-T,Services sector,2006,22334
+TLJ4,Kent,G-T,Services sector,2007,23214
+TLJ4,Kent,G-T,Services sector,2008,24881
+TLJ4,Kent,G-T,Services sector,2009,24249
+TLJ4,Kent,G-T,Services sector,2010,24984
+TLJ4,Kent,G-T,Services sector,2011,25767
+TLJ4,Kent,G-T,Services sector,2012,26282
+TLJ4,Kent,G-T,Services sector,2013,26858
+TLJ4,Kent,G-T,Services sector,2014,28138
+TLJ4,Kent,G-T,Services sector,2015,29418
+TLJ4,Kent,G-T,Services sector,2016,31026
+TLJ4,Kent,G-T,Services sector,2017,31970
+TLJ4,Kent,G-T,Services sector,2018,33278
+TLJ4,Kent,G-T,Services sector,2019,34841
+TLJ4,Kent,G-T,Services sector,2020,34353
+TLJ4,Kent,G-T,Services sector,2021,35795
+TLJ4,Kent,G-T,Services sector,2022,39688
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-E,Production sector,1998,7850
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-E,Production sector,1999,7988
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-E,Production sector,2000,8035
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-E,Production sector,2001,7814
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-E,Production sector,2002,8412
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-E,Production sector,2003,8917
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-E,Production sector,2004,8913
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-E,Production sector,2005,9266
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-E,Production sector,2006,9864
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-E,Production sector,2007,10271
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-E,Production sector,2008,10698
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-E,Production sector,2009,10160
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-E,Production sector,2010,10370
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-E,Production sector,2011,10207
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-E,Production sector,2012,10557
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-E,Production sector,2013,10697
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-E,Production sector,2014,11071
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-E,Production sector,2015,10995
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-E,Production sector,2016,10851
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-E,Production sector,2017,11310
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-E,Production sector,2018,11430
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-E,Production sector,2019,12077
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-E,Production sector,2020,11185
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-E,Production sector,2021,11255
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",A-E,Production sector,2022,12441
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",F (41-43),Construction,1998,1672
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",F (41-43),Construction,1999,1873
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",F (41-43),Construction,2000,2064
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",F (41-43),Construction,2001,2580
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",F (41-43),Construction,2002,2708
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",F (41-43),Construction,2003,2770
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",F (41-43),Construction,2004,2827
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",F (41-43),Construction,2005,3015
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",F (41-43),Construction,2006,3092
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",F (41-43),Construction,2007,3330
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",F (41-43),Construction,2008,3286
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",F (41-43),Construction,2009,2771
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",F (41-43),Construction,2010,2893
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",F (41-43),Construction,2011,2985
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",F (41-43),Construction,2012,3054
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",F (41-43),Construction,2013,3315
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",F (41-43),Construction,2014,3696
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",F (41-43),Construction,2015,4146
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",F (41-43),Construction,2016,4194
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",F (41-43),Construction,2017,4547
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",F (41-43),Construction,2018,4489
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",F (41-43),Construction,2019,4712
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",F (41-43),Construction,2020,4083
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",F (41-43),Construction,2021,5112
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",F (41-43),Construction,2022,5865
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services sector,1998,24802
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services sector,1999,26047
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services sector,2000,27579
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services sector,2001,30172
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services sector,2002,31149
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services sector,2003,32715
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services sector,2004,34712
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services sector,2005,36022
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services sector,2006,37279
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services sector,2007,39661
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services sector,2008,41765
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services sector,2009,42649
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services sector,2010,44563
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services sector,2011,44892
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services sector,2012,46611
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services sector,2013,47822
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services sector,2014,50934
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services sector,2015,51776
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services sector,2016,54362
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services sector,2017,56375
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services sector,2018,58376
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services sector,2019,61226
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services sector,2020,59614
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services sector,2021,65951
+TLK1,"Gloucestershire, Wiltshire and Bath/Bristol Area",G-T,Services sector,2022,72636
+TLK2,Dorset and Somerset,A-E,Production sector,1998,3477
+TLK2,Dorset and Somerset,A-E,Production sector,1999,3660
+TLK2,Dorset and Somerset,A-E,Production sector,2000,3647
+TLK2,Dorset and Somerset,A-E,Production sector,2001,3482
+TLK2,Dorset and Somerset,A-E,Production sector,2002,3623
+TLK2,Dorset and Somerset,A-E,Production sector,2003,3552
+TLK2,Dorset and Somerset,A-E,Production sector,2004,3712
+TLK2,Dorset and Somerset,A-E,Production sector,2005,3765
+TLK2,Dorset and Somerset,A-E,Production sector,2006,3914
+TLK2,Dorset and Somerset,A-E,Production sector,2007,3805
+TLK2,Dorset and Somerset,A-E,Production sector,2008,4108
+TLK2,Dorset and Somerset,A-E,Production sector,2009,3831
+TLK2,Dorset and Somerset,A-E,Production sector,2010,4038
+TLK2,Dorset and Somerset,A-E,Production sector,2011,4261
+TLK2,Dorset and Somerset,A-E,Production sector,2012,4536
+TLK2,Dorset and Somerset,A-E,Production sector,2013,4653
+TLK2,Dorset and Somerset,A-E,Production sector,2014,4782
+TLK2,Dorset and Somerset,A-E,Production sector,2015,4701
+TLK2,Dorset and Somerset,A-E,Production sector,2016,4673
+TLK2,Dorset and Somerset,A-E,Production sector,2017,4972
+TLK2,Dorset and Somerset,A-E,Production sector,2018,5308
+TLK2,Dorset and Somerset,A-E,Production sector,2019,5390
+TLK2,Dorset and Somerset,A-E,Production sector,2020,5466
+TLK2,Dorset and Somerset,A-E,Production sector,2021,5488
+TLK2,Dorset and Somerset,A-E,Production sector,2022,5923
+TLK2,Dorset and Somerset,F (41-43),Construction,1998,815
+TLK2,Dorset and Somerset,F (41-43),Construction,1999,966
+TLK2,Dorset and Somerset,F (41-43),Construction,2000,1077
+TLK2,Dorset and Somerset,F (41-43),Construction,2001,1094
+TLK2,Dorset and Somerset,F (41-43),Construction,2002,1214
+TLK2,Dorset and Somerset,F (41-43),Construction,2003,1404
+TLK2,Dorset and Somerset,F (41-43),Construction,2004,1426
+TLK2,Dorset and Somerset,F (41-43),Construction,2005,1575
+TLK2,Dorset and Somerset,F (41-43),Construction,2006,1489
+TLK2,Dorset and Somerset,F (41-43),Construction,2007,1514
+TLK2,Dorset and Somerset,F (41-43),Construction,2008,1604
+TLK2,Dorset and Somerset,F (41-43),Construction,2009,1400
+TLK2,Dorset and Somerset,F (41-43),Construction,2010,1421
+TLK2,Dorset and Somerset,F (41-43),Construction,2011,1444
+TLK2,Dorset and Somerset,F (41-43),Construction,2012,1466
+TLK2,Dorset and Somerset,F (41-43),Construction,2013,1592
+TLK2,Dorset and Somerset,F (41-43),Construction,2014,1686
+TLK2,Dorset and Somerset,F (41-43),Construction,2015,1871
+TLK2,Dorset and Somerset,F (41-43),Construction,2016,1941
+TLK2,Dorset and Somerset,F (41-43),Construction,2017,2151
+TLK2,Dorset and Somerset,F (41-43),Construction,2018,2265
+TLK2,Dorset and Somerset,F (41-43),Construction,2019,2191
+TLK2,Dorset and Somerset,F (41-43),Construction,2020,1942
+TLK2,Dorset and Somerset,F (41-43),Construction,2021,2198
+TLK2,Dorset and Somerset,F (41-43),Construction,2022,2547
+TLK2,Dorset and Somerset,G-T,Services sector,1998,10919
+TLK2,Dorset and Somerset,G-T,Services sector,1999,11501
+TLK2,Dorset and Somerset,G-T,Services sector,2000,12302
+TLK2,Dorset and Somerset,G-T,Services sector,2001,12761
+TLK2,Dorset and Somerset,G-T,Services sector,2002,13025
+TLK2,Dorset and Somerset,G-T,Services sector,2003,13744
+TLK2,Dorset and Somerset,G-T,Services sector,2004,14476
+TLK2,Dorset and Somerset,G-T,Services sector,2005,15482
+TLK2,Dorset and Somerset,G-T,Services sector,2006,16383
+TLK2,Dorset and Somerset,G-T,Services sector,2007,16990
+TLK2,Dorset and Somerset,G-T,Services sector,2008,17886
+TLK2,Dorset and Somerset,G-T,Services sector,2009,17833
+TLK2,Dorset and Somerset,G-T,Services sector,2010,17861
+TLK2,Dorset and Somerset,G-T,Services sector,2011,18071
+TLK2,Dorset and Somerset,G-T,Services sector,2012,18307
+TLK2,Dorset and Somerset,G-T,Services sector,2013,18650
+TLK2,Dorset and Somerset,G-T,Services sector,2014,19760
+TLK2,Dorset and Somerset,G-T,Services sector,2015,20139
+TLK2,Dorset and Somerset,G-T,Services sector,2016,20954
+TLK2,Dorset and Somerset,G-T,Services sector,2017,22345
+TLK2,Dorset and Somerset,G-T,Services sector,2018,22837
+TLK2,Dorset and Somerset,G-T,Services sector,2019,23754
+TLK2,Dorset and Somerset,G-T,Services sector,2020,22779
+TLK2,Dorset and Somerset,G-T,Services sector,2021,25214
+TLK2,Dorset and Somerset,G-T,Services sector,2022,27574
+TLK3,Cornwall and Isles of Scilly,A-E,Production sector,1998,993
+TLK3,Cornwall and Isles of Scilly,A-E,Production sector,1999,956
+TLK3,Cornwall and Isles of Scilly,A-E,Production sector,2000,974
+TLK3,Cornwall and Isles of Scilly,A-E,Production sector,2001,988
+TLK3,Cornwall and Isles of Scilly,A-E,Production sector,2002,1097
+TLK3,Cornwall and Isles of Scilly,A-E,Production sector,2003,1178
+TLK3,Cornwall and Isles of Scilly,A-E,Production sector,2004,1165
+TLK3,Cornwall and Isles of Scilly,A-E,Production sector,2005,1170
+TLK3,Cornwall and Isles of Scilly,A-E,Production sector,2006,1186
+TLK3,Cornwall and Isles of Scilly,A-E,Production sector,2007,1207
+TLK3,Cornwall and Isles of Scilly,A-E,Production sector,2008,1346
+TLK3,Cornwall and Isles of Scilly,A-E,Production sector,2009,1323
+TLK3,Cornwall and Isles of Scilly,A-E,Production sector,2010,1288
+TLK3,Cornwall and Isles of Scilly,A-E,Production sector,2011,1358
+TLK3,Cornwall and Isles of Scilly,A-E,Production sector,2012,1412
+TLK3,Cornwall and Isles of Scilly,A-E,Production sector,2013,1497
+TLK3,Cornwall and Isles of Scilly,A-E,Production sector,2014,1639
+TLK3,Cornwall and Isles of Scilly,A-E,Production sector,2015,1612
+TLK3,Cornwall and Isles of Scilly,A-E,Production sector,2016,1613
+TLK3,Cornwall and Isles of Scilly,A-E,Production sector,2017,1833
+TLK3,Cornwall and Isles of Scilly,A-E,Production sector,2018,1814
+TLK3,Cornwall and Isles of Scilly,A-E,Production sector,2019,1819
+TLK3,Cornwall and Isles of Scilly,A-E,Production sector,2020,1813
+TLK3,Cornwall and Isles of Scilly,A-E,Production sector,2021,1894
+TLK3,Cornwall and Isles of Scilly,A-E,Production sector,2022,2058
+TLK3,Cornwall and Isles of Scilly,F (41-43),Construction,1998,314
+TLK3,Cornwall and Isles of Scilly,F (41-43),Construction,1999,347
+TLK3,Cornwall and Isles of Scilly,F (41-43),Construction,2000,389
+TLK3,Cornwall and Isles of Scilly,F (41-43),Construction,2001,390
+TLK3,Cornwall and Isles of Scilly,F (41-43),Construction,2002,451
+TLK3,Cornwall and Isles of Scilly,F (41-43),Construction,2003,482
+TLK3,Cornwall and Isles of Scilly,F (41-43),Construction,2004,519
+TLK3,Cornwall and Isles of Scilly,F (41-43),Construction,2005,606
+TLK3,Cornwall and Isles of Scilly,F (41-43),Construction,2006,620
+TLK3,Cornwall and Isles of Scilly,F (41-43),Construction,2007,656
+TLK3,Cornwall and Isles of Scilly,F (41-43),Construction,2008,636
+TLK3,Cornwall and Isles of Scilly,F (41-43),Construction,2009,564
+TLK3,Cornwall and Isles of Scilly,F (41-43),Construction,2010,589
+TLK3,Cornwall and Isles of Scilly,F (41-43),Construction,2011,599
+TLK3,Cornwall and Isles of Scilly,F (41-43),Construction,2012,623
+TLK3,Cornwall and Isles of Scilly,F (41-43),Construction,2013,687
+TLK3,Cornwall and Isles of Scilly,F (41-43),Construction,2014,745
+TLK3,Cornwall and Isles of Scilly,F (41-43),Construction,2015,838
+TLK3,Cornwall and Isles of Scilly,F (41-43),Construction,2016,879
+TLK3,Cornwall and Isles of Scilly,F (41-43),Construction,2017,988
+TLK3,Cornwall and Isles of Scilly,F (41-43),Construction,2018,991
+TLK3,Cornwall and Isles of Scilly,F (41-43),Construction,2019,1020
+TLK3,Cornwall and Isles of Scilly,F (41-43),Construction,2020,1032
+TLK3,Cornwall and Isles of Scilly,F (41-43),Construction,2021,1050
+TLK3,Cornwall and Isles of Scilly,F (41-43),Construction,2022,1240
+TLK3,Cornwall and Isles of Scilly,G-T,Services sector,1998,3621
+TLK3,Cornwall and Isles of Scilly,G-T,Services sector,1999,3777
+TLK3,Cornwall and Isles of Scilly,G-T,Services sector,2000,4010
+TLK3,Cornwall and Isles of Scilly,G-T,Services sector,2001,4289
+TLK3,Cornwall and Isles of Scilly,G-T,Services sector,2002,4574
+TLK3,Cornwall and Isles of Scilly,G-T,Services sector,2003,4990
+TLK3,Cornwall and Isles of Scilly,G-T,Services sector,2004,5216
+TLK3,Cornwall and Isles of Scilly,G-T,Services sector,2005,5494
+TLK3,Cornwall and Isles of Scilly,G-T,Services sector,2006,5980
+TLK3,Cornwall and Isles of Scilly,G-T,Services sector,2007,6074
+TLK3,Cornwall and Isles of Scilly,G-T,Services sector,2008,6400
+TLK3,Cornwall and Isles of Scilly,G-T,Services sector,2009,6102
+TLK3,Cornwall and Isles of Scilly,G-T,Services sector,2010,6212
+TLK3,Cornwall and Isles of Scilly,G-T,Services sector,2011,6363
+TLK3,Cornwall and Isles of Scilly,G-T,Services sector,2012,6551
+TLK3,Cornwall and Isles of Scilly,G-T,Services sector,2013,6658
+TLK3,Cornwall and Isles of Scilly,G-T,Services sector,2014,6804
+TLK3,Cornwall and Isles of Scilly,G-T,Services sector,2015,7021
+TLK3,Cornwall and Isles of Scilly,G-T,Services sector,2016,7445
+TLK3,Cornwall and Isles of Scilly,G-T,Services sector,2017,8018
+TLK3,Cornwall and Isles of Scilly,G-T,Services sector,2018,8311
+TLK3,Cornwall and Isles of Scilly,G-T,Services sector,2019,8645
+TLK3,Cornwall and Isles of Scilly,G-T,Services sector,2020,8105
+TLK3,Cornwall and Isles of Scilly,G-T,Services sector,2021,9657
+TLK3,Cornwall and Isles of Scilly,G-T,Services sector,2022,10554
+TLK4,Devon,A-E,Production sector,1998,2775
+TLK4,Devon,A-E,Production sector,1999,2786
+TLK4,Devon,A-E,Production sector,2000,2716
+TLK4,Devon,A-E,Production sector,2001,2802
+TLK4,Devon,A-E,Production sector,2002,2841
+TLK4,Devon,A-E,Production sector,2003,2742
+TLK4,Devon,A-E,Production sector,2004,2760
+TLK4,Devon,A-E,Production sector,2005,2690
+TLK4,Devon,A-E,Production sector,2006,2917
+TLK4,Devon,A-E,Production sector,2007,2955
+TLK4,Devon,A-E,Production sector,2008,3172
+TLK4,Devon,A-E,Production sector,2009,3097
+TLK4,Devon,A-E,Production sector,2010,3143
+TLK4,Devon,A-E,Production sector,2011,3316
+TLK4,Devon,A-E,Production sector,2012,3434
+TLK4,Devon,A-E,Production sector,2013,3599
+TLK4,Devon,A-E,Production sector,2014,3731
+TLK4,Devon,A-E,Production sector,2015,3659
+TLK4,Devon,A-E,Production sector,2016,3695
+TLK4,Devon,A-E,Production sector,2017,4058
+TLK4,Devon,A-E,Production sector,2018,4021
+TLK4,Devon,A-E,Production sector,2019,4013
+TLK4,Devon,A-E,Production sector,2020,3848
+TLK4,Devon,A-E,Production sector,2021,4261
+TLK4,Devon,A-E,Production sector,2022,4744
+TLK4,Devon,F (41-43),Construction,1998,715
+TLK4,Devon,F (41-43),Construction,1999,862
+TLK4,Devon,F (41-43),Construction,2000,903
+TLK4,Devon,F (41-43),Construction,2001,914
+TLK4,Devon,F (41-43),Construction,2002,1087
+TLK4,Devon,F (41-43),Construction,2003,1287
+TLK4,Devon,F (41-43),Construction,2004,1422
+TLK4,Devon,F (41-43),Construction,2005,1446
+TLK4,Devon,F (41-43),Construction,2006,1490
+TLK4,Devon,F (41-43),Construction,2007,1511
+TLK4,Devon,F (41-43),Construction,2008,1484
+TLK4,Devon,F (41-43),Construction,2009,1333
+TLK4,Devon,F (41-43),Construction,2010,1413
+TLK4,Devon,F (41-43),Construction,2011,1367
+TLK4,Devon,F (41-43),Construction,2012,1350
+TLK4,Devon,F (41-43),Construction,2013,1452
+TLK4,Devon,F (41-43),Construction,2014,1530
+TLK4,Devon,F (41-43),Construction,2015,1783
+TLK4,Devon,F (41-43),Construction,2016,1786
+TLK4,Devon,F (41-43),Construction,2017,1870
+TLK4,Devon,F (41-43),Construction,2018,1932
+TLK4,Devon,F (41-43),Construction,2019,2035
+TLK4,Devon,F (41-43),Construction,2020,1612
+TLK4,Devon,F (41-43),Construction,2021,1957
+TLK4,Devon,F (41-43),Construction,2022,2257
+TLK4,Devon,G-T,Services sector,1998,9125
+TLK4,Devon,G-T,Services sector,1999,9593
+TLK4,Devon,G-T,Services sector,2000,9948
+TLK4,Devon,G-T,Services sector,2001,10472
+TLK4,Devon,G-T,Services sector,2002,10983
+TLK4,Devon,G-T,Services sector,2003,11743
+TLK4,Devon,G-T,Services sector,2004,12967
+TLK4,Devon,G-T,Services sector,2005,13677
+TLK4,Devon,G-T,Services sector,2006,14428
+TLK4,Devon,G-T,Services sector,2007,14625
+TLK4,Devon,G-T,Services sector,2008,15172
+TLK4,Devon,G-T,Services sector,2009,14986
+TLK4,Devon,G-T,Services sector,2010,15524
+TLK4,Devon,G-T,Services sector,2011,15740
+TLK4,Devon,G-T,Services sector,2012,16070
+TLK4,Devon,G-T,Services sector,2013,16578
+TLK4,Devon,G-T,Services sector,2014,17068
+TLK4,Devon,G-T,Services sector,2015,17594
+TLK4,Devon,G-T,Services sector,2016,18271
+TLK4,Devon,G-T,Services sector,2017,18851
+TLK4,Devon,G-T,Services sector,2018,19174
+TLK4,Devon,G-T,Services sector,2019,19971
+TLK4,Devon,G-T,Services sector,2020,18883
+TLK4,Devon,G-T,Services sector,2021,22251
+TLK4,Devon,G-T,Services sector,2022,24425
+TLL1,West Wales and The Valleys,A-E,Production sector,1998,5115
+TLL1,West Wales and The Valleys,A-E,Production sector,1999,4887
+TLL1,West Wales and The Valleys,A-E,Production sector,2000,5134
+TLL1,West Wales and The Valleys,A-E,Production sector,2001,4859
+TLL1,West Wales and The Valleys,A-E,Production sector,2002,5107
+TLL1,West Wales and The Valleys,A-E,Production sector,2003,5306
+TLL1,West Wales and The Valleys,A-E,Production sector,2004,5436
+TLL1,West Wales and The Valleys,A-E,Production sector,2005,5320
+TLL1,West Wales and The Valleys,A-E,Production sector,2006,5387
+TLL1,West Wales and The Valleys,A-E,Production sector,2007,5643
+TLL1,West Wales and The Valleys,A-E,Production sector,2008,5799
+TLL1,West Wales and The Valleys,A-E,Production sector,2009,5548
+TLL1,West Wales and The Valleys,A-E,Production sector,2010,6033
+TLL1,West Wales and The Valleys,A-E,Production sector,2011,6264
+TLL1,West Wales and The Valleys,A-E,Production sector,2012,6422
+TLL1,West Wales and The Valleys,A-E,Production sector,2013,6942
+TLL1,West Wales and The Valleys,A-E,Production sector,2014,7229
+TLL1,West Wales and The Valleys,A-E,Production sector,2015,7632
+TLL1,West Wales and The Valleys,A-E,Production sector,2016,7548
+TLL1,West Wales and The Valleys,A-E,Production sector,2017,7796
+TLL1,West Wales and The Valleys,A-E,Production sector,2018,7584
+TLL1,West Wales and The Valleys,A-E,Production sector,2019,7980
+TLL1,West Wales and The Valleys,A-E,Production sector,2020,7376
+TLL1,West Wales and The Valleys,A-E,Production sector,2021,7214
+TLL1,West Wales and The Valleys,A-E,Production sector,2022,8061
+TLL1,West Wales and The Valleys,F (41-43),Construction,1998,1055
+TLL1,West Wales and The Valleys,F (41-43),Construction,1999,1095
+TLL1,West Wales and The Valleys,F (41-43),Construction,2000,1122
+TLL1,West Wales and The Valleys,F (41-43),Construction,2001,1233
+TLL1,West Wales and The Valleys,F (41-43),Construction,2002,1314
+TLL1,West Wales and The Valleys,F (41-43),Construction,2003,1384
+TLL1,West Wales and The Valleys,F (41-43),Construction,2004,1437
+TLL1,West Wales and The Valleys,F (41-43),Construction,2005,1659
+TLL1,West Wales and The Valleys,F (41-43),Construction,2006,1768
+TLL1,West Wales and The Valleys,F (41-43),Construction,2007,1922
+TLL1,West Wales and The Valleys,F (41-43),Construction,2008,1882
+TLL1,West Wales and The Valleys,F (41-43),Construction,2009,1592
+TLL1,West Wales and The Valleys,F (41-43),Construction,2010,1623
+TLL1,West Wales and The Valleys,F (41-43),Construction,2011,1664
+TLL1,West Wales and The Valleys,F (41-43),Construction,2012,1697
+TLL1,West Wales and The Valleys,F (41-43),Construction,2013,1803
+TLL1,West Wales and The Valleys,F (41-43),Construction,2014,1991
+TLL1,West Wales and The Valleys,F (41-43),Construction,2015,2117
+TLL1,West Wales and The Valleys,F (41-43),Construction,2016,2200
+TLL1,West Wales and The Valleys,F (41-43),Construction,2017,2348
+TLL1,West Wales and The Valleys,F (41-43),Construction,2018,2523
+TLL1,West Wales and The Valleys,F (41-43),Construction,2019,2607
+TLL1,West Wales and The Valleys,F (41-43),Construction,2020,2130
+TLL1,West Wales and The Valleys,F (41-43),Construction,2021,2506
+TLL1,West Wales and The Valleys,F (41-43),Construction,2022,2951
+TLL1,West Wales and The Valleys,G-T,Services sector,1998,12233
+TLL1,West Wales and The Valleys,G-T,Services sector,1999,12502
+TLL1,West Wales and The Valleys,G-T,Services sector,2000,12976
+TLL1,West Wales and The Valleys,G-T,Services sector,2001,13732
+TLL1,West Wales and The Valleys,G-T,Services sector,2002,14363
+TLL1,West Wales and The Valleys,G-T,Services sector,2003,15361
+TLL1,West Wales and The Valleys,G-T,Services sector,2004,16711
+TLL1,West Wales and The Valleys,G-T,Services sector,2005,17631
+TLL1,West Wales and The Valleys,G-T,Services sector,2006,18648
+TLL1,West Wales and The Valleys,G-T,Services sector,2007,19020
+TLL1,West Wales and The Valleys,G-T,Services sector,2008,19472
+TLL1,West Wales and The Valleys,G-T,Services sector,2009,19407
+TLL1,West Wales and The Valleys,G-T,Services sector,2010,19733
+TLL1,West Wales and The Valleys,G-T,Services sector,2011,20391
+TLL1,West Wales and The Valleys,G-T,Services sector,2012,20905
+TLL1,West Wales and The Valleys,G-T,Services sector,2013,21599
+TLL1,West Wales and The Valleys,G-T,Services sector,2014,22078
+TLL1,West Wales and The Valleys,G-T,Services sector,2015,22390
+TLL1,West Wales and The Valleys,G-T,Services sector,2016,23447
+TLL1,West Wales and The Valleys,G-T,Services sector,2017,24269
+TLL1,West Wales and The Valleys,G-T,Services sector,2018,25406
+TLL1,West Wales and The Valleys,G-T,Services sector,2019,26609
+TLL1,West Wales and The Valleys,G-T,Services sector,2020,25407
+TLL1,West Wales and The Valleys,G-T,Services sector,2021,27103
+TLL1,West Wales and The Valleys,G-T,Services sector,2022,29396
+TLL2,East Wales,A-E,Production sector,1998,3907
+TLL2,East Wales,A-E,Production sector,1999,3904
+TLL2,East Wales,A-E,Production sector,2000,4100
+TLL2,East Wales,A-E,Production sector,2001,3875
+TLL2,East Wales,A-E,Production sector,2002,3890
+TLL2,East Wales,A-E,Production sector,2003,4006
+TLL2,East Wales,A-E,Production sector,2004,4023
+TLL2,East Wales,A-E,Production sector,2005,4144
+TLL2,East Wales,A-E,Production sector,2006,4531
+TLL2,East Wales,A-E,Production sector,2007,4615
+TLL2,East Wales,A-E,Production sector,2008,4620
+TLL2,East Wales,A-E,Production sector,2009,4703
+TLL2,East Wales,A-E,Production sector,2010,4864
+TLL2,East Wales,A-E,Production sector,2011,5263
+TLL2,East Wales,A-E,Production sector,2012,5510
+TLL2,East Wales,A-E,Production sector,2013,5876
+TLL2,East Wales,A-E,Production sector,2014,5956
+TLL2,East Wales,A-E,Production sector,2015,6185
+TLL2,East Wales,A-E,Production sector,2016,6386
+TLL2,East Wales,A-E,Production sector,2017,6628
+TLL2,East Wales,A-E,Production sector,2018,7014
+TLL2,East Wales,A-E,Production sector,2019,7193
+TLL2,East Wales,A-E,Production sector,2020,6857
+TLL2,East Wales,A-E,Production sector,2021,6529
+TLL2,East Wales,A-E,Production sector,2022,7216
+TLL2,East Wales,F (41-43),Construction,1998,741
+TLL2,East Wales,F (41-43),Construction,1999,823
+TLL2,East Wales,F (41-43),Construction,2000,857
+TLL2,East Wales,F (41-43),Construction,2001,983
+TLL2,East Wales,F (41-43),Construction,2002,1051
+TLL2,East Wales,F (41-43),Construction,2003,1132
+TLL2,East Wales,F (41-43),Construction,2004,1165
+TLL2,East Wales,F (41-43),Construction,2005,1378
+TLL2,East Wales,F (41-43),Construction,2006,1412
+TLL2,East Wales,F (41-43),Construction,2007,1402
+TLL2,East Wales,F (41-43),Construction,2008,1474
+TLL2,East Wales,F (41-43),Construction,2009,1194
+TLL2,East Wales,F (41-43),Construction,2010,1225
+TLL2,East Wales,F (41-43),Construction,2011,1256
+TLL2,East Wales,F (41-43),Construction,2012,1142
+TLL2,East Wales,F (41-43),Construction,2013,1196
+TLL2,East Wales,F (41-43),Construction,2014,1246
+TLL2,East Wales,F (41-43),Construction,2015,1378
+TLL2,East Wales,F (41-43),Construction,2016,1501
+TLL2,East Wales,F (41-43),Construction,2017,1508
+TLL2,East Wales,F (41-43),Construction,2018,1635
+TLL2,East Wales,F (41-43),Construction,2019,1652
+TLL2,East Wales,F (41-43),Construction,2020,1654
+TLL2,East Wales,F (41-43),Construction,2021,1581
+TLL2,East Wales,F (41-43),Construction,2022,1795
+TLL2,East Wales,G-T,Services sector,1998,9664
+TLL2,East Wales,G-T,Services sector,1999,10178
+TLL2,East Wales,G-T,Services sector,2000,10820
+TLL2,East Wales,G-T,Services sector,2001,11467
+TLL2,East Wales,G-T,Services sector,2002,12056
+TLL2,East Wales,G-T,Services sector,2003,13086
+TLL2,East Wales,G-T,Services sector,2004,13900
+TLL2,East Wales,G-T,Services sector,2005,14398
+TLL2,East Wales,G-T,Services sector,2006,15058
+TLL2,East Wales,G-T,Services sector,2007,16002
+TLL2,East Wales,G-T,Services sector,2008,15853
+TLL2,East Wales,G-T,Services sector,2009,16116
+TLL2,East Wales,G-T,Services sector,2010,16330
+TLL2,East Wales,G-T,Services sector,2011,16900
+TLL2,East Wales,G-T,Services sector,2012,17795
+TLL2,East Wales,G-T,Services sector,2013,17930
+TLL2,East Wales,G-T,Services sector,2014,18242
+TLL2,East Wales,G-T,Services sector,2015,18807
+TLL2,East Wales,G-T,Services sector,2016,19751
+TLL2,East Wales,G-T,Services sector,2017,20274
+TLL2,East Wales,G-T,Services sector,2018,21026
+TLL2,East Wales,G-T,Services sector,2019,21999
+TLL2,East Wales,G-T,Services sector,2020,21417
+TLL2,East Wales,G-T,Services sector,2021,23120
+TLL2,East Wales,G-T,Services sector,2022,25125
+TLM5,North Eastern Scotland,A-E,Production sector,1998,2695
+TLM5,North Eastern Scotland,A-E,Production sector,1999,2541
+TLM5,North Eastern Scotland,A-E,Production sector,2000,2450
+TLM5,North Eastern Scotland,A-E,Production sector,2001,2570
+TLM5,North Eastern Scotland,A-E,Production sector,2002,2676
+TLM5,North Eastern Scotland,A-E,Production sector,2003,2450
+TLM5,North Eastern Scotland,A-E,Production sector,2004,2522
+TLM5,North Eastern Scotland,A-E,Production sector,2005,2769
+TLM5,North Eastern Scotland,A-E,Production sector,2006,3273
+TLM5,North Eastern Scotland,A-E,Production sector,2007,3682
+TLM5,North Eastern Scotland,A-E,Production sector,2008,4227
+TLM5,North Eastern Scotland,A-E,Production sector,2009,4047
+TLM5,North Eastern Scotland,A-E,Production sector,2010,4107
+TLM5,North Eastern Scotland,A-E,Production sector,2011,4100
+TLM5,North Eastern Scotland,A-E,Production sector,2012,4584
+TLM5,North Eastern Scotland,A-E,Production sector,2013,4831
+TLM5,North Eastern Scotland,A-E,Production sector,2014,5098
+TLM5,North Eastern Scotland,A-E,Production sector,2015,5066
+TLM5,North Eastern Scotland,A-E,Production sector,2016,4212
+TLM5,North Eastern Scotland,A-E,Production sector,2017,4328
+TLM5,North Eastern Scotland,A-E,Production sector,2018,4226
+TLM5,North Eastern Scotland,A-E,Production sector,2019,4341
+TLM5,North Eastern Scotland,A-E,Production sector,2020,3864
+TLM5,North Eastern Scotland,A-E,Production sector,2021,4049
+TLM5,North Eastern Scotland,A-E,Production sector,2022,4481
+TLM5,North Eastern Scotland,F (41-43),Construction,1998,520
+TLM5,North Eastern Scotland,F (41-43),Construction,1999,490
+TLM5,North Eastern Scotland,F (41-43),Construction,2000,519
+TLM5,North Eastern Scotland,F (41-43),Construction,2001,536
+TLM5,North Eastern Scotland,F (41-43),Construction,2002,561
+TLM5,North Eastern Scotland,F (41-43),Construction,2003,589
+TLM5,North Eastern Scotland,F (41-43),Construction,2004,676
+TLM5,North Eastern Scotland,F (41-43),Construction,2005,710
+TLM5,North Eastern Scotland,F (41-43),Construction,2006,750
+TLM5,North Eastern Scotland,F (41-43),Construction,2007,816
+TLM5,North Eastern Scotland,F (41-43),Construction,2008,935
+TLM5,North Eastern Scotland,F (41-43),Construction,2009,727
+TLM5,North Eastern Scotland,F (41-43),Construction,2010,759
+TLM5,North Eastern Scotland,F (41-43),Construction,2011,798
+TLM5,North Eastern Scotland,F (41-43),Construction,2012,807
+TLM5,North Eastern Scotland,F (41-43),Construction,2013,843
+TLM5,North Eastern Scotland,F (41-43),Construction,2014,862
+TLM5,North Eastern Scotland,F (41-43),Construction,2015,928
+TLM5,North Eastern Scotland,F (41-43),Construction,2016,930
+TLM5,North Eastern Scotland,F (41-43),Construction,2017,1013
+TLM5,North Eastern Scotland,F (41-43),Construction,2018,971
+TLM5,North Eastern Scotland,F (41-43),Construction,2019,972
+TLM5,North Eastern Scotland,F (41-43),Construction,2020,798
+TLM5,North Eastern Scotland,F (41-43),Construction,2021,690
+TLM5,North Eastern Scotland,F (41-43),Construction,2022,770
+TLM5,North Eastern Scotland,G-T,Services sector,1998,5018
+TLM5,North Eastern Scotland,G-T,Services sector,1999,5183
+TLM5,North Eastern Scotland,G-T,Services sector,2000,5442
+TLM5,North Eastern Scotland,G-T,Services sector,2001,5963
+TLM5,North Eastern Scotland,G-T,Services sector,2002,6227
+TLM5,North Eastern Scotland,G-T,Services sector,2003,6532
+TLM5,North Eastern Scotland,G-T,Services sector,2004,6926
+TLM5,North Eastern Scotland,G-T,Services sector,2005,7213
+TLM5,North Eastern Scotland,G-T,Services sector,2006,8121
+TLM5,North Eastern Scotland,G-T,Services sector,2007,9096
+TLM5,North Eastern Scotland,G-T,Services sector,2008,9889
+TLM5,North Eastern Scotland,G-T,Services sector,2009,9995
+TLM5,North Eastern Scotland,G-T,Services sector,2010,10296
+TLM5,North Eastern Scotland,G-T,Services sector,2011,10762
+TLM5,North Eastern Scotland,G-T,Services sector,2012,11206
+TLM5,North Eastern Scotland,G-T,Services sector,2013,11983
+TLM5,North Eastern Scotland,G-T,Services sector,2014,12497
+TLM5,North Eastern Scotland,G-T,Services sector,2015,11952
+TLM5,North Eastern Scotland,G-T,Services sector,2016,11340
+TLM5,North Eastern Scotland,G-T,Services sector,2017,11141
+TLM5,North Eastern Scotland,G-T,Services sector,2018,11491
+TLM5,North Eastern Scotland,G-T,Services sector,2019,11619
+TLM5,North Eastern Scotland,G-T,Services sector,2020,10721
+TLM5,North Eastern Scotland,G-T,Services sector,2021,11349
+TLM5,North Eastern Scotland,G-T,Services sector,2022,12655
+TLM6,Highlands and Islands,A-E,Production sector,1998,1411
+TLM6,Highlands and Islands,A-E,Production sector,1999,1325
+TLM6,Highlands and Islands,A-E,Production sector,2000,1335
+TLM6,Highlands and Islands,A-E,Production sector,2001,1295
+TLM6,Highlands and Islands,A-E,Production sector,2002,1379
+TLM6,Highlands and Islands,A-E,Production sector,2003,1438
+TLM6,Highlands and Islands,A-E,Production sector,2004,1550
+TLM6,Highlands and Islands,A-E,Production sector,2005,1648
+TLM6,Highlands and Islands,A-E,Production sector,2006,1752
+TLM6,Highlands and Islands,A-E,Production sector,2007,1773
+TLM6,Highlands and Islands,A-E,Production sector,2008,2022
+TLM6,Highlands and Islands,A-E,Production sector,2009,2099
+TLM6,Highlands and Islands,A-E,Production sector,2010,2171
+TLM6,Highlands and Islands,A-E,Production sector,2011,2376
+TLM6,Highlands and Islands,A-E,Production sector,2012,2442
+TLM6,Highlands and Islands,A-E,Production sector,2013,2478
+TLM6,Highlands and Islands,A-E,Production sector,2014,2601
+TLM6,Highlands and Islands,A-E,Production sector,2015,2580
+TLM6,Highlands and Islands,A-E,Production sector,2016,2494
+TLM6,Highlands and Islands,A-E,Production sector,2017,2818
+TLM6,Highlands and Islands,A-E,Production sector,2018,2841
+TLM6,Highlands and Islands,A-E,Production sector,2019,3037
+TLM6,Highlands and Islands,A-E,Production sector,2020,2701
+TLM6,Highlands and Islands,A-E,Production sector,2021,2922
+TLM6,Highlands and Islands,A-E,Production sector,2022,3112
+TLM6,Highlands and Islands,F (41-43),Construction,1998,371
+TLM6,Highlands and Islands,F (41-43),Construction,1999,427
+TLM6,Highlands and Islands,F (41-43),Construction,2000,443
+TLM6,Highlands and Islands,F (41-43),Construction,2001,421
+TLM6,Highlands and Islands,F (41-43),Construction,2002,447
+TLM6,Highlands and Islands,F (41-43),Construction,2003,540
+TLM6,Highlands and Islands,F (41-43),Construction,2004,570
+TLM6,Highlands and Islands,F (41-43),Construction,2005,634
+TLM6,Highlands and Islands,F (41-43),Construction,2006,650
+TLM6,Highlands and Islands,F (41-43),Construction,2007,697
+TLM6,Highlands and Islands,F (41-43),Construction,2008,746
+TLM6,Highlands and Islands,F (41-43),Construction,2009,621
+TLM6,Highlands and Islands,F (41-43),Construction,2010,636
+TLM6,Highlands and Islands,F (41-43),Construction,2011,652
+TLM6,Highlands and Islands,F (41-43),Construction,2012,654
+TLM6,Highlands and Islands,F (41-43),Construction,2013,741
+TLM6,Highlands and Islands,F (41-43),Construction,2014,796
+TLM6,Highlands and Islands,F (41-43),Construction,2015,828
+TLM6,Highlands and Islands,F (41-43),Construction,2016,820
+TLM6,Highlands and Islands,F (41-43),Construction,2017,843
+TLM6,Highlands and Islands,F (41-43),Construction,2018,868
+TLM6,Highlands and Islands,F (41-43),Construction,2019,889
+TLM6,Highlands and Islands,F (41-43),Construction,2020,676
+TLM6,Highlands and Islands,F (41-43),Construction,2021,881
+TLM6,Highlands and Islands,F (41-43),Construction,2022,1024
+TLM6,Highlands and Islands,G-T,Services sector,1998,3615
+TLM6,Highlands and Islands,G-T,Services sector,1999,3906
+TLM6,Highlands and Islands,G-T,Services sector,2000,4064
+TLM6,Highlands and Islands,G-T,Services sector,2001,4395
+TLM6,Highlands and Islands,G-T,Services sector,2002,4409
+TLM6,Highlands and Islands,G-T,Services sector,2003,4857
+TLM6,Highlands and Islands,G-T,Services sector,2004,5270
+TLM6,Highlands and Islands,G-T,Services sector,2005,5602
+TLM6,Highlands and Islands,G-T,Services sector,2006,5831
+TLM6,Highlands and Islands,G-T,Services sector,2007,6031
+TLM6,Highlands and Islands,G-T,Services sector,2008,6304
+TLM6,Highlands and Islands,G-T,Services sector,2009,6273
+TLM6,Highlands and Islands,G-T,Services sector,2010,6353
+TLM6,Highlands and Islands,G-T,Services sector,2011,6655
+TLM6,Highlands and Islands,G-T,Services sector,2012,6731
+TLM6,Highlands and Islands,G-T,Services sector,2013,6952
+TLM6,Highlands and Islands,G-T,Services sector,2014,7130
+TLM6,Highlands and Islands,G-T,Services sector,2015,7217
+TLM6,Highlands and Islands,G-T,Services sector,2016,7425
+TLM6,Highlands and Islands,G-T,Services sector,2017,7894
+TLM6,Highlands and Islands,G-T,Services sector,2018,8028
+TLM6,Highlands and Islands,G-T,Services sector,2019,8301
+TLM6,Highlands and Islands,G-T,Services sector,2020,8001
+TLM6,Highlands and Islands,G-T,Services sector,2021,8362
+TLM6,Highlands and Islands,G-T,Services sector,2022,9166
+TLM7,Eastern Scotland,A-E,Production sector,1998,6692
+TLM7,Eastern Scotland,A-E,Production sector,1999,6298
+TLM7,Eastern Scotland,A-E,Production sector,2000,6181
+TLM7,Eastern Scotland,A-E,Production sector,2001,5875
+TLM7,Eastern Scotland,A-E,Production sector,2002,5868
+TLM7,Eastern Scotland,A-E,Production sector,2003,6072
+TLM7,Eastern Scotland,A-E,Production sector,2004,6299
+TLM7,Eastern Scotland,A-E,Production sector,2005,6354
+TLM7,Eastern Scotland,A-E,Production sector,2006,7084
+TLM7,Eastern Scotland,A-E,Production sector,2007,7147
+TLM7,Eastern Scotland,A-E,Production sector,2008,7643
+TLM7,Eastern Scotland,A-E,Production sector,2009,7391
+TLM7,Eastern Scotland,A-E,Production sector,2010,7314
+TLM7,Eastern Scotland,A-E,Production sector,2011,6934
+TLM7,Eastern Scotland,A-E,Production sector,2012,7087
+TLM7,Eastern Scotland,A-E,Production sector,2013,7455
+TLM7,Eastern Scotland,A-E,Production sector,2014,7658
+TLM7,Eastern Scotland,A-E,Production sector,2015,7988
+TLM7,Eastern Scotland,A-E,Production sector,2016,8363
+TLM7,Eastern Scotland,A-E,Production sector,2017,8383
+TLM7,Eastern Scotland,A-E,Production sector,2018,8400
+TLM7,Eastern Scotland,A-E,Production sector,2019,8878
+TLM7,Eastern Scotland,A-E,Production sector,2020,8561
+TLM7,Eastern Scotland,A-E,Production sector,2021,9315
+TLM7,Eastern Scotland,A-E,Production sector,2022,10000
+TLM7,Eastern Scotland,F (41-43),Construction,1998,1273
+TLM7,Eastern Scotland,F (41-43),Construction,1999,1497
+TLM7,Eastern Scotland,F (41-43),Construction,2000,1538
+TLM7,Eastern Scotland,F (41-43),Construction,2001,1614
+TLM7,Eastern Scotland,F (41-43),Construction,2002,1827
+TLM7,Eastern Scotland,F (41-43),Construction,2003,1896
+TLM7,Eastern Scotland,F (41-43),Construction,2004,2185
+TLM7,Eastern Scotland,F (41-43),Construction,2005,2323
+TLM7,Eastern Scotland,F (41-43),Construction,2006,2571
+TLM7,Eastern Scotland,F (41-43),Construction,2007,2788
+TLM7,Eastern Scotland,F (41-43),Construction,2008,2652
+TLM7,Eastern Scotland,F (41-43),Construction,2009,2096
+TLM7,Eastern Scotland,F (41-43),Construction,2010,2023
+TLM7,Eastern Scotland,F (41-43),Construction,2011,2077
+TLM7,Eastern Scotland,F (41-43),Construction,2012,2179
+TLM7,Eastern Scotland,F (41-43),Construction,2013,2465
+TLM7,Eastern Scotland,F (41-43),Construction,2014,2572
+TLM7,Eastern Scotland,F (41-43),Construction,2015,2644
+TLM7,Eastern Scotland,F (41-43),Construction,2016,2681
+TLM7,Eastern Scotland,F (41-43),Construction,2017,2967
+TLM7,Eastern Scotland,F (41-43),Construction,2018,3026
+TLM7,Eastern Scotland,F (41-43),Construction,2019,2934
+TLM7,Eastern Scotland,F (41-43),Construction,2020,2386
+TLM7,Eastern Scotland,F (41-43),Construction,2021,2912
+TLM7,Eastern Scotland,F (41-43),Construction,2022,3434
+TLM7,Eastern Scotland,G-T,Services sector,1998,17916
+TLM7,Eastern Scotland,G-T,Services sector,1999,18323
+TLM7,Eastern Scotland,G-T,Services sector,2000,19742
+TLM7,Eastern Scotland,G-T,Services sector,2001,21436
+TLM7,Eastern Scotland,G-T,Services sector,2002,22900
+TLM7,Eastern Scotland,G-T,Services sector,2003,24868
+TLM7,Eastern Scotland,G-T,Services sector,2004,26618
+TLM7,Eastern Scotland,G-T,Services sector,2005,28236
+TLM7,Eastern Scotland,G-T,Services sector,2006,29601
+TLM7,Eastern Scotland,G-T,Services sector,2007,31135
+TLM7,Eastern Scotland,G-T,Services sector,2008,31629
+TLM7,Eastern Scotland,G-T,Services sector,2009,33000
+TLM7,Eastern Scotland,G-T,Services sector,2010,33178
+TLM7,Eastern Scotland,G-T,Services sector,2011,34041
+TLM7,Eastern Scotland,G-T,Services sector,2012,35414
+TLM7,Eastern Scotland,G-T,Services sector,2013,36628
+TLM7,Eastern Scotland,G-T,Services sector,2014,38315
+TLM7,Eastern Scotland,G-T,Services sector,2015,39307
+TLM7,Eastern Scotland,G-T,Services sector,2016,41378
+TLM7,Eastern Scotland,G-T,Services sector,2017,43719
+TLM7,Eastern Scotland,G-T,Services sector,2018,45156
+TLM7,Eastern Scotland,G-T,Services sector,2019,47312
+TLM7,Eastern Scotland,G-T,Services sector,2020,44985
+TLM7,Eastern Scotland,G-T,Services sector,2021,48810
+TLM7,Eastern Scotland,G-T,Services sector,2022,53407
+TLM8,West Central Scotland,A-E,Production sector,1998,4087
+TLM8,West Central Scotland,A-E,Production sector,1999,3688
+TLM8,West Central Scotland,A-E,Production sector,2000,3665
+TLM8,West Central Scotland,A-E,Production sector,2001,3644
+TLM8,West Central Scotland,A-E,Production sector,2002,3756
+TLM8,West Central Scotland,A-E,Production sector,2003,3879
+TLM8,West Central Scotland,A-E,Production sector,2004,4089
+TLM8,West Central Scotland,A-E,Production sector,2005,4210
+TLM8,West Central Scotland,A-E,Production sector,2006,4557
+TLM8,West Central Scotland,A-E,Production sector,2007,4329
+TLM8,West Central Scotland,A-E,Production sector,2008,4660
+TLM8,West Central Scotland,A-E,Production sector,2009,4550
+TLM8,West Central Scotland,A-E,Production sector,2010,4278
+TLM8,West Central Scotland,A-E,Production sector,2011,4436
+TLM8,West Central Scotland,A-E,Production sector,2012,4581
+TLM8,West Central Scotland,A-E,Production sector,2013,4688
+TLM8,West Central Scotland,A-E,Production sector,2014,5004
+TLM8,West Central Scotland,A-E,Production sector,2015,4798
+TLM8,West Central Scotland,A-E,Production sector,2016,4622
+TLM8,West Central Scotland,A-E,Production sector,2017,5029
+TLM8,West Central Scotland,A-E,Production sector,2018,5111
+TLM8,West Central Scotland,A-E,Production sector,2019,5494
+TLM8,West Central Scotland,A-E,Production sector,2020,5946
+TLM8,West Central Scotland,A-E,Production sector,2021,6016
+TLM8,West Central Scotland,A-E,Production sector,2022,6264
+TLM8,West Central Scotland,F (41-43),Construction,1998,1269
+TLM8,West Central Scotland,F (41-43),Construction,1999,1370
+TLM8,West Central Scotland,F (41-43),Construction,2000,1483
+TLM8,West Central Scotland,F (41-43),Construction,2001,1465
+TLM8,West Central Scotland,F (41-43),Construction,2002,1529
+TLM8,West Central Scotland,F (41-43),Construction,2003,1680
+TLM8,West Central Scotland,F (41-43),Construction,2004,1667
+TLM8,West Central Scotland,F (41-43),Construction,2005,1876
+TLM8,West Central Scotland,F (41-43),Construction,2006,2038
+TLM8,West Central Scotland,F (41-43),Construction,2007,2145
+TLM8,West Central Scotland,F (41-43),Construction,2008,2306
+TLM8,West Central Scotland,F (41-43),Construction,2009,1857
+TLM8,West Central Scotland,F (41-43),Construction,2010,1882
+TLM8,West Central Scotland,F (41-43),Construction,2011,1940
+TLM8,West Central Scotland,F (41-43),Construction,2012,1940
+TLM8,West Central Scotland,F (41-43),Construction,2013,2052
+TLM8,West Central Scotland,F (41-43),Construction,2014,2151
+TLM8,West Central Scotland,F (41-43),Construction,2015,2335
+TLM8,West Central Scotland,F (41-43),Construction,2016,2322
+TLM8,West Central Scotland,F (41-43),Construction,2017,2503
+TLM8,West Central Scotland,F (41-43),Construction,2018,2443
+TLM8,West Central Scotland,F (41-43),Construction,2019,2494
+TLM8,West Central Scotland,F (41-43),Construction,2020,2133
+TLM8,West Central Scotland,F (41-43),Construction,2021,2449
+TLM8,West Central Scotland,F (41-43),Construction,2022,2817
+TLM8,West Central Scotland,G-T,Services sector,1998,14716
+TLM8,West Central Scotland,G-T,Services sector,1999,15366
+TLM8,West Central Scotland,G-T,Services sector,2000,16013
+TLM8,West Central Scotland,G-T,Services sector,2001,17454
+TLM8,West Central Scotland,G-T,Services sector,2002,17888
+TLM8,West Central Scotland,G-T,Services sector,2003,18864
+TLM8,West Central Scotland,G-T,Services sector,2004,20398
+TLM8,West Central Scotland,G-T,Services sector,2005,21943
+TLM8,West Central Scotland,G-T,Services sector,2006,22831
+TLM8,West Central Scotland,G-T,Services sector,2007,23476
+TLM8,West Central Scotland,G-T,Services sector,2008,24421
+TLM8,West Central Scotland,G-T,Services sector,2009,24600
+TLM8,West Central Scotland,G-T,Services sector,2010,24296
+TLM8,West Central Scotland,G-T,Services sector,2011,25001
+TLM8,West Central Scotland,G-T,Services sector,2012,25426
+TLM8,West Central Scotland,G-T,Services sector,2013,26638
+TLM8,West Central Scotland,G-T,Services sector,2014,28204
+TLM8,West Central Scotland,G-T,Services sector,2015,28680
+TLM8,West Central Scotland,G-T,Services sector,2016,29568
+TLM8,West Central Scotland,G-T,Services sector,2017,31081
+TLM8,West Central Scotland,G-T,Services sector,2018,31882
+TLM8,West Central Scotland,G-T,Services sector,2019,33243
+TLM8,West Central Scotland,G-T,Services sector,2020,31585
+TLM8,West Central Scotland,G-T,Services sector,2021,34522
+TLM8,West Central Scotland,G-T,Services sector,2022,37561
+TLM9,Southern Scotland,A-E,Production sector,1998,3371
+TLM9,Southern Scotland,A-E,Production sector,1999,3217
+TLM9,Southern Scotland,A-E,Production sector,2000,3304
+TLM9,Southern Scotland,A-E,Production sector,2001,3241
+TLM9,Southern Scotland,A-E,Production sector,2002,3303
+TLM9,Southern Scotland,A-E,Production sector,2003,3442
+TLM9,Southern Scotland,A-E,Production sector,2004,3451
+TLM9,Southern Scotland,A-E,Production sector,2005,3468
+TLM9,Southern Scotland,A-E,Production sector,2006,3851
+TLM9,Southern Scotland,A-E,Production sector,2007,3806
+TLM9,Southern Scotland,A-E,Production sector,2008,3976
+TLM9,Southern Scotland,A-E,Production sector,2009,4004
+TLM9,Southern Scotland,A-E,Production sector,2010,3834
+TLM9,Southern Scotland,A-E,Production sector,2011,3906
+TLM9,Southern Scotland,A-E,Production sector,2012,4031
+TLM9,Southern Scotland,A-E,Production sector,2013,4224
+TLM9,Southern Scotland,A-E,Production sector,2014,4529
+TLM9,Southern Scotland,A-E,Production sector,2015,4260
+TLM9,Southern Scotland,A-E,Production sector,2016,4034
+TLM9,Southern Scotland,A-E,Production sector,2017,4268
+TLM9,Southern Scotland,A-E,Production sector,2018,4302
+TLM9,Southern Scotland,A-E,Production sector,2019,4374
+TLM9,Southern Scotland,A-E,Production sector,2020,4214
+TLM9,Southern Scotland,A-E,Production sector,2021,4046
+TLM9,Southern Scotland,A-E,Production sector,2022,4588
+TLM9,Southern Scotland,F (41-43),Construction,1998,629
+TLM9,Southern Scotland,F (41-43),Construction,1999,686
+TLM9,Southern Scotland,F (41-43),Construction,2000,739
+TLM9,Southern Scotland,F (41-43),Construction,2001,730
+TLM9,Southern Scotland,F (41-43),Construction,2002,765
+TLM9,Southern Scotland,F (41-43),Construction,2003,841
+TLM9,Southern Scotland,F (41-43),Construction,2004,858
+TLM9,Southern Scotland,F (41-43),Construction,2005,957
+TLM9,Southern Scotland,F (41-43),Construction,2006,1053
+TLM9,Southern Scotland,F (41-43),Construction,2007,1099
+TLM9,Southern Scotland,F (41-43),Construction,2008,1179
+TLM9,Southern Scotland,F (41-43),Construction,2009,978
+TLM9,Southern Scotland,F (41-43),Construction,2010,981
+TLM9,Southern Scotland,F (41-43),Construction,2011,1004
+TLM9,Southern Scotland,F (41-43),Construction,2012,1024
+TLM9,Southern Scotland,F (41-43),Construction,2013,1125
+TLM9,Southern Scotland,F (41-43),Construction,2014,1195
+TLM9,Southern Scotland,F (41-43),Construction,2015,1292
+TLM9,Southern Scotland,F (41-43),Construction,2016,1394
+TLM9,Southern Scotland,F (41-43),Construction,2017,1446
+TLM9,Southern Scotland,F (41-43),Construction,2018,1387
+TLM9,Southern Scotland,F (41-43),Construction,2019,1401
+TLM9,Southern Scotland,F (41-43),Construction,2020,1221
+TLM9,Southern Scotland,F (41-43),Construction,2021,1362
+TLM9,Southern Scotland,F (41-43),Construction,2022,1540
+TLM9,Southern Scotland,G-T,Services sector,1998,6382
+TLM9,Southern Scotland,G-T,Services sector,1999,6670
+TLM9,Southern Scotland,G-T,Services sector,2000,6951
+TLM9,Southern Scotland,G-T,Services sector,2001,7559
+TLM9,Southern Scotland,G-T,Services sector,2002,7795
+TLM9,Southern Scotland,G-T,Services sector,2003,8194
+TLM9,Southern Scotland,G-T,Services sector,2004,8732
+TLM9,Southern Scotland,G-T,Services sector,2005,9343
+TLM9,Southern Scotland,G-T,Services sector,2006,9831
+TLM9,Southern Scotland,G-T,Services sector,2007,10037
+TLM9,Southern Scotland,G-T,Services sector,2008,10593
+TLM9,Southern Scotland,G-T,Services sector,2009,10511
+TLM9,Southern Scotland,G-T,Services sector,2010,10561
+TLM9,Southern Scotland,G-T,Services sector,2011,10834
+TLM9,Southern Scotland,G-T,Services sector,2012,10995
+TLM9,Southern Scotland,G-T,Services sector,2013,11360
+TLM9,Southern Scotland,G-T,Services sector,2014,11690
+TLM9,Southern Scotland,G-T,Services sector,2015,11941
+TLM9,Southern Scotland,G-T,Services sector,2016,12401
+TLM9,Southern Scotland,G-T,Services sector,2017,13104
+TLM9,Southern Scotland,G-T,Services sector,2018,13211
+TLM9,Southern Scotland,G-T,Services sector,2019,13613
+TLM9,Southern Scotland,G-T,Services sector,2020,12931
+TLM9,Southern Scotland,G-T,Services sector,2021,13813
+TLM9,Southern Scotland,G-T,Services sector,2022,14894
+TLN0,Northern Ireland,A-E,Production sector,1998,4831
+TLN0,Northern Ireland,A-E,Production sector,1999,4980
+TLN0,Northern Ireland,A-E,Production sector,2000,5322
+TLN0,Northern Ireland,A-E,Production sector,2001,5164
+TLN0,Northern Ireland,A-E,Production sector,2002,5225
+TLN0,Northern Ireland,A-E,Production sector,2003,5394
+TLN0,Northern Ireland,A-E,Production sector,2004,5492
+TLN0,Northern Ireland,A-E,Production sector,2005,5565
+TLN0,Northern Ireland,A-E,Production sector,2006,5811
+TLN0,Northern Ireland,A-E,Production sector,2007,5925
+TLN0,Northern Ireland,A-E,Production sector,2008,6165
+TLN0,Northern Ireland,A-E,Production sector,2009,6164
+TLN0,Northern Ireland,A-E,Production sector,2010,6183
+TLN0,Northern Ireland,A-E,Production sector,2011,5964
+TLN0,Northern Ireland,A-E,Production sector,2012,6570
+TLN0,Northern Ireland,A-E,Production sector,2013,7226
+TLN0,Northern Ireland,A-E,Production sector,2014,7207
+TLN0,Northern Ireland,A-E,Production sector,2015,7946
+TLN0,Northern Ireland,A-E,Production sector,2016,7926
+TLN0,Northern Ireland,A-E,Production sector,2017,7521
+TLN0,Northern Ireland,A-E,Production sector,2018,7609
+TLN0,Northern Ireland,A-E,Production sector,2019,8301
+TLN0,Northern Ireland,A-E,Production sector,2020,7895
+TLN0,Northern Ireland,A-E,Production sector,2021,7917
+TLN0,Northern Ireland,A-E,Production sector,2022,8557
+TLN0,Northern Ireland,F (41-43),Construction,1998,1202
+TLN0,Northern Ireland,F (41-43),Construction,1999,1427
+TLN0,Northern Ireland,F (41-43),Construction,2000,1660
+TLN0,Northern Ireland,F (41-43),Construction,2001,1859
+TLN0,Northern Ireland,F (41-43),Construction,2002,1937
+TLN0,Northern Ireland,F (41-43),Construction,2003,2184
+TLN0,Northern Ireland,F (41-43),Construction,2004,2345
+TLN0,Northern Ireland,F (41-43),Construction,2005,2695
+TLN0,Northern Ireland,F (41-43),Construction,2006,2963
+TLN0,Northern Ireland,F (41-43),Construction,2007,3108
+TLN0,Northern Ireland,F (41-43),Construction,2008,2820
+TLN0,Northern Ireland,F (41-43),Construction,2009,2140
+TLN0,Northern Ireland,F (41-43),Construction,2010,2034
+TLN0,Northern Ireland,F (41-43),Construction,2011,2008
+TLN0,Northern Ireland,F (41-43),Construction,2012,1847
+TLN0,Northern Ireland,F (41-43),Construction,2013,1952
+TLN0,Northern Ireland,F (41-43),Construction,2014,2146
+TLN0,Northern Ireland,F (41-43),Construction,2015,2499
+TLN0,Northern Ireland,F (41-43),Construction,2016,2691
+TLN0,Northern Ireland,F (41-43),Construction,2017,2801
+TLN0,Northern Ireland,F (41-43),Construction,2018,3104
+TLN0,Northern Ireland,F (41-43),Construction,2019,3425
+TLN0,Northern Ireland,F (41-43),Construction,2020,2988
+TLN0,Northern Ireland,F (41-43),Construction,2021,3479
+TLN0,Northern Ireland,F (41-43),Construction,2022,4067
+TLN0,Northern Ireland,G-T,Services sector,1998,13581
+TLN0,Northern Ireland,G-T,Services sector,1999,14314
+TLN0,Northern Ireland,G-T,Services sector,2000,15375
+TLN0,Northern Ireland,G-T,Services sector,2001,16251
+TLN0,Northern Ireland,G-T,Services sector,2002,16883
+TLN0,Northern Ireland,G-T,Services sector,2003,18388
+TLN0,Northern Ireland,G-T,Services sector,2004,19404
+TLN0,Northern Ireland,G-T,Services sector,2005,20496
+TLN0,Northern Ireland,G-T,Services sector,2006,21722
+TLN0,Northern Ireland,G-T,Services sector,2007,22544
+TLN0,Northern Ireland,G-T,Services sector,2008,22957
+TLN0,Northern Ireland,G-T,Services sector,2009,23062
+TLN0,Northern Ireland,G-T,Services sector,2010,22803
+TLN0,Northern Ireland,G-T,Services sector,2011,23684
+TLN0,Northern Ireland,G-T,Services sector,2012,24557
+TLN0,Northern Ireland,G-T,Services sector,2013,24863
+TLN0,Northern Ireland,G-T,Services sector,2014,25765
+TLN0,Northern Ireland,G-T,Services sector,2015,25958
+TLN0,Northern Ireland,G-T,Services sector,2016,27972
+TLN0,Northern Ireland,G-T,Services sector,2017,29844
+TLN0,Northern Ireland,G-T,Services sector,2018,30693
+TLN0,Northern Ireland,G-T,Services sector,2019,32091
+TLN0,Northern Ireland,G-T,Services sector,2020,31227
+TLN0,Northern Ireland,G-T,Services sector,2021,34798
+TLN0,Northern Ireland,G-T,Services sector,2022,37277
