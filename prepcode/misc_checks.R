@@ -314,4 +314,10 @@ interz <- interz %>%
 
 
 
+#CHECK BRES DOWNLOAD FUNCTIONS-----
+
+debugonce(download_BRES)
+download_BRES(2022,geography = "TYPE438", EMPLOYMENT_STATUS = 2)
+
+
 
