@@ -2,9 +2,18 @@
 library(tidyverse)
 library(ggrepel)
 
+#HELPER FUNCTIONS
 #reduce need to type glimpse every time...
 g <- function(x) glimpse(x)
 v <- function(x) View(x)
+
+#Wrap grepl to do tidier version of this when e.g. filtering for terms
+#gq = "grepl quick!"
+qg <- function(...) grepl(..., ignore.case = T)
+
+
+
+#The rest...
 
 #Compute series of slopes within groups safely, returning 0 if can't calculate
 compute_slope_or_zero <- function(data, ..., y, x) {
