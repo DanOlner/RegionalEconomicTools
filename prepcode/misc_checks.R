@@ -1020,4 +1020,17 @@ gva.n.bres.2digit.tweakedITL3 <- gva.n.bres.2digit.geogedit %>%
 
 
 
+# DO GEOG NAME CHECKS ON BRES NUTS2 AND GVA ITL2----
+
+#A few are wonky
+#Get one of the relevant BRES's...
+bres.chk <- read_csv("data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE438_nuts2016level2_2_Fulltimeemployees_2015_2022_SIC_2DIGIT.csv")
+
+gva.chk <- read_csv("data/regionalGVA/regionalGVA_currentprices_ITL2_SIC_SECTION_LONG_2022.csv")
+
+table(unique(bres.chk$GEOGRAPHY_NAME) %in% gva.chk$Region_name)
+unique(bres.chk$GEOGRAPHY_NAME)[!unique(bres.chk$GEOGRAPHY_NAME) %in% gva.chk$Region_name]
+unique(gva.chk$Region_name)[!unique(gva.chk$Region_name) %in% bres.chk$GEOGRAPHY_NAME]
+
+
 
