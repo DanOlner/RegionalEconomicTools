@@ -757,7 +757,7 @@ bres.2digit.wlookup.summed <- bres.2digit.wlookup %>%
 
 #Already have correct gva from above
 #Yep, this joins on all years, 2015 to 2022 currently
-gva.n.bres.2digit <- bres.2digit.wlookup.summed %>%
+gva.n.bres.2digit.itl2 <- bres.2digit.wlookup.summed %>%
   reduce(~ .x %>% inner_join(
     .y,
     by = c('GEOGRAPHY_NAME', 'DATE', 'SIC07_code_fromGVAdata')),
@@ -770,7 +770,7 @@ gva.n.bres.2digit <- bres.2digit.wlookup.summed %>%
   select(-c(type.x,type.y))
 
 #Check dropped sectors when that join is done... yep, just that one
-unique(gva$SIC07_description)[!unique(gva$SIC07_code) %in% gva.n.bres.2digit$SIC07_code_fromGVAdata]
+unique(gva$SIC07_description)[!unique(gva$SIC07_code) %in% gva.n.bres.2digit.itl2$SIC07_code_fromGVAdata]
 
 
 
@@ -783,14 +783,239 @@ unique(gva$SIC07_description)[!unique(gva$SIC07_code) %in% gva.n.bres.2digit$SIC
 #This deals with that one tiny changing geography in the south
 #(If ONS changed the GVA vals accordingly into the past, which I wonder about...)
 
+#There's an option to aggregate Dorset + Bournemouth/Poole/Christchurch
+#(Christchurch is the only bit changing between those two zones)
+#But that won't work for chained volume cos that can't be summed
+#So for consistency, prob going to stick to the
+#"use ITL2 zone that overlaps them all" plan
+
+#Which we now have from above, so can test what that looks like.
+#Issue is the need for a bespoke geography to be able to map as well, but will mull that
+
+#Another option is just to caveat with 
+#"Bournemouth etc will be wrong, watch those numbers"
+
+#Remove "CC" from end of names
+#And fix that one "and"
+#Remaining non matches will be Northern Ireland, as BRES data via NOMIS doesn't have it
+gva.itl3 <- read_csv("data/regionalGVA/regionalGVA_currentprices_ITL3_allavailableSICs_LONG_2022.csv") %>% 
+  mutate(
+    Region_name = gsub(' CC','',Region_name),
+    Region_name = ifelse(Region_name == "Inverness and Nairn, Moray, Badenoch and Strathspey",
+                         "Inverness and Nairn, Moray, and Badenoch and Strathspey",#spot the difference!
+                         Region_name
+                         )
+    )
+  
+
+bres.2digit.ft <- read_csv("data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE428_internationalterritoriallevelslevel3asofJan2021_2_Fulltimeemployees_2022_2023_SIC_2DIGIT.csv") %>% 
+  mutate(
+    type = 'FULL TIME',
+    GEOGRAPHY_NAME = gsub(' CC','',GEOGRAPHY_NAME)
+    )
+
+bres.2digit.pt <- read_csv("data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE428_internationalterritoriallevelslevel3asofJan2021_3_Parttimeemployees_2022_2023_SIC_2DIGIT.csv") %>% 
+  mutate(
+    type = 'PART TIME',
+    GEOGRAPHY_NAME = gsub(' CC','',GEOGRAPHY_NAME)
+  )
+
+#Check geography matches
+table(unique(gva.itl3$Region_name) %in% bres.2digit.ft$GEOGRAPHY_NAME)
+
+#After fixes, just NI doesn't match
+#Those will get dropped during join
+unique(gva.itl3$Region_name)[!unique(gva.itl3$Region_name) %in% bres.2digit.ft$GEOGRAPHY_NAME]
+unique(bres.2digit.ft$GEOGRAPHY_NAME)[!unique(bres.2digit.ft$GEOGRAPHY_NAME) %in% gva.itl3$Region_name]
+
+
+
+#Get itl3 bespoke SIC lookup
+#Reminder, the SIC list differs in the GVA data for iTL2 and 3
+#Just for extra fun
+sics.forBRESjoin.itl3 <- make.GVA.SICs.long(gva.itl3)
+
+
+#All same code works nicely
+
+#Merge in the bespoke SIC lookup for summing up job counts by them
+#This time we *do* want map
+#Returns a list with both those dfs in
+bres.2digit.wlookup <- list(bres.2digit.ft,bres.2digit.pt) %>% 
+  map(~ .x %>% 
+        left_join(sics.forBRESjoin.itl3, by = c('SIC_2DIGIT_CODE_NUMERIC' = 'SIC07_code_numeric'))
+  )
+
+#Sum! Get jobcount totals summed to the GVA bespoke SIC 2 digits 
+bres.2digit.wlookup.summed <- bres.2digit.wlookup %>% 
+  map(~ .x %>% 
+        group_by(DATE,GEOGRAPHY_NAME,SIC07_code_fromGVAdata) %>% 
+        summarise(
+          JOBCOUNT = sum(JOBCOUNT),#Why we need this field to remain same for both for now
+          type = max(type)#keep job FT/PT type for later
+        ) %>% 
+        ungroup() %>% 
+        filter(!is.na(SIC07_code_fromGVAdata))
+  )
+
+
+#Yep, this joins on all years, 2015 to 2022 currently
+gva.n.bres.2digit <- bres.2digit.wlookup.summed %>%
+  reduce(~ .x %>% inner_join(
+    .y,
+    by = c('GEOGRAPHY_NAME', 'DATE', 'SIC07_code_fromGVAdata')),
+    .init = gva.itl3 %>% rename(GEOGRAPHY_NAME = Region_name, DATE = year,
+                           SIC07_code_fromGVAdata = SIC07_code ,gva = value)) %>% #temp gva code rename for ease of join
+  relocate(DATE, .before = ITL_code) %>% 
+  rename(
+    JOBCOUNT_FT = JOBCOUNT.x, JOBCOUNT_PT = JOBCOUNT.y
+  ) %>% 
+  select(-c(type.x,type.y))#prob not necessary; FT and PT is in the correct order, would be fine to not do that
+
+#Check dropped sectors when that join is done... yep, just that one
+unique(gva.itl3$SIC07_description)[!unique(gva.itl3$SIC07_code) %in% gva.n.bres.2digit$SIC07_code_fromGVAdata]
+
+#Check no missing vals... tick
+table(is.na(gva.n.bres.2digit$gva))
+table(is.na(gva.n.bres.2digit$JOBCOUNT_FT))
+table(is.na(gva.n.bres.2digit$JOBCOUNT_PT))
 
 
 
 
+## NUTS3 INCLUDING GEOG FIDDLY BITS----
+
+#Then onto NUTS3 check for same GVA file
+#Where we have to do something about the altered Dorset geog
+#i.e. replace with ITL2 larger zone
+#Can definitely come up with a better way to do this! Code lookup e.g.
+gva.itl3.forNUTS3match <- read_csv("data/regionalGVA/regionalGVA_currentprices_ITL3_allavailableSICs_LONG_2022.csv") %>%
+  mutate(
+    Region_name = gsub(' CC','',Region_name),
+    Region_name = case_when(
+      Region_name == "Inverness and Nairn, Moray, Badenoch and Strathspey" ~ "Inverness & Nairn and Moray, Badenoch & Strathspey",
+      Region_name == 'Caithness and Sutherland, and Ross and Cromarty' ~ 'Caithness & Sutherland and Ross & Cromarty',
+      Region_name == 'Lochaber, Skye and Lochalsh, Arran and Cumbrae, and Argyll and Bute' ~ 'Lochaber, Skye & Lochalsh, Arran & Cumbrae and Argyll & Bute',
+      Region_name == 'Na h-Eileanan Siar' ~ 'Na h-Eileanan Siar (Western Isles)',
+      Region_name == 'City of Edinburgh' ~ 'Edinburgh, City of',
+      Region_name == 'Perth and Kinross, and Stirling' ~ 'Perth & Kinross and Stirling',
+      Region_name == 'East Dunbartonshire, West Dunbartonshire, and Helensburgh and Lomond' ~ 'East Dunbartonshire, West Dunbartonshire and Helensburgh & Lomond',
+      Region_name == 'Inverclyde, East Renfrewshire, and Renfrewshire' ~ 'Inverclyde, East Renfrewshire and Renfrewshire',
+      Region_name == 'Dumfries and Galloway' ~ 'Dumfries & Galloway',
+      .default = Region_name
+    ),
+    
+  )
 
 
+bres.2digit.ft <- read_csv("data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE437_nuts2016level3_2_Fulltimeemployees_2015_2022_SIC_2DIGIT.csv") %>% 
+  mutate(
+    type = 'FULL TIME',
+    GEOGRAPHY_NAME = gsub(' CC','',GEOGRAPHY_NAME)
+  )
+
+bres.2digit.pt <- read_csv("data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE437_nuts2016level3_3_Parttimeemployees_2015_2023_SIC_2DIGIT.csv") %>% 
+  mutate(
+    type = 'PART TIME',
+    GEOGRAPHY_NAME = gsub(' CC','',GEOGRAPHY_NAME)
+  )
+
+#Check geography matches
+table(unique(gva.itl3.forNUTS3match$Region_name) %in% bres.2digit.ft$GEOGRAPHY_NAME)
+
+#After fixes, just NI doesn't match
+#Those will get dropped during join
+
+#A few other differences here, including the Bournemouth/Poole issue
+#But let's fix just the various "same place different text" issues
+unique(gva.itl3.forNUTS3match$Region_name)[!unique(gva.itl3.forNUTS3match$Region_name) %in% bres.2digit.ft$GEOGRAPHY_NAME]
+unique(bres.2digit.ft$GEOGRAPHY_NAME)[!unique(bres.2digit.ft$GEOGRAPHY_NAME) %in% gva.itl3.forNUTS3match$Region_name]
 
 
+#ALL the same code works...
+#Merge in the bespoke SIC lookup for summing up job counts by them
+#This time we *do* want map
+#Returns a list with both those dfs in
+bres.2digit.wlookup <- list(bres.2digit.ft,bres.2digit.pt) %>% 
+  map(~ .x %>% 
+        left_join(sics.forBRESjoin.itl3, by = c('SIC_2DIGIT_CODE_NUMERIC' = 'SIC07_code_numeric'))
+  )
+
+#Sum! Get jobcount totals summed to the GVA bespoke SIC 2 digits 
+bres.2digit.wlookup.summed <- bres.2digit.wlookup %>% 
+  map(~ .x %>% 
+        group_by(DATE,GEOGRAPHY_NAME,SIC07_code_fromGVAdata) %>% 
+        summarise(
+          JOBCOUNT = sum(JOBCOUNT),#Why we need this field to remain same for both for now
+          type = max(type)#keep job FT/PT type for later
+        ) %>% 
+        ungroup() %>% 
+        filter(!is.na(SIC07_code_fromGVAdata))
+  )
+
+
+#Yep, this joins on all years, 2015 to 2022 currently
+gva.n.bres.2digit <- bres.2digit.wlookup.summed %>%
+  reduce(~ .x %>% inner_join(
+    .y,
+    by = c('GEOGRAPHY_NAME', 'DATE', 'SIC07_code_fromGVAdata')),
+    .init = gva.itl3.forNUTS3match %>% rename(GEOGRAPHY_NAME = Region_name, DATE = year,
+                                SIC07_code_fromGVAdata = SIC07_code ,gva = value)) %>% #temp gva code rename for ease of join
+  relocate(DATE, .before = ITL_code) %>% 
+  rename(
+    JOBCOUNT_FT = JOBCOUNT.x, JOBCOUNT_PT = JOBCOUNT.y
+  ) %>% 
+  select(-c(type.x,type.y))#prob not necessary; FT and PT is in the correct order, would be fine to not do that
+
+#Check dropped sectors when that join is done... yep, just that one
+unique(gva.itl3$SIC07_description)[!unique(gva.itl3$SIC07_code) %in% gva.n.bres.2digit$SIC07_code_fromGVAdata]
+
+#Check no missing vals... tick
+table(is.na(gva.n.bres.2digit$gva))
+table(is.na(gva.n.bres.2digit$JOBCOUNT_FT))
+table(is.na(gva.n.bres.2digit$JOBCOUNT_PT))
+
+#With that join, we should only have Bournemouth...etc missing (plus NI zones)
+#As no inner join match on the name
+#TICK
+unique(gva.itl3.forNUTS3match$Region_name)[!unique(gva.itl3.forNUTS3match$Region_name) %in% gva.n.bres.2digit$GEOGRAPHY_NAME]
+
+
+#So then one job here, one somewhere else:
+#1. Substitute in the Dorset ITL2 for Dorset + Somerset + B/C/Poole
+#2. Make a bespoke ITL3 geography that does the same, for mapping
+
+#So for the dorset sub - the above leaves BCR out, just have to remove the others 
+#Then add in that ITL2
+
+#Confirm which zones to remove to be replaced with the ITL2 values
+#(Looking at the zones in QGIS)
+#Bath and north east somerset is a different zone, can leave that one...
+unique(gva.n.bres.2digit$GEOGRAPHY_NAME)[qg('bourne|dorset|somerset',unique(gva.n.bres.2digit$GEOGRAPHY_NAME))]
+
+#So, doing carefully first to check...
+#Version with those areas removed:
+gva.n.bres.2digit.geogedit <- gva.n.bres.2digit %>% 
+  filter(
+    !GEOGRAPHY_NAME %in% c('Somerset','Dorset')
+  )
+
+#tick
+unique(gva.n.bres.2digit.geogedit$GEOGRAPHY_NAME)[qg('bourne|dorset|somerset',unique(gva.n.bres.2digit.geogedit$GEOGRAPHY_NAME))]
+
+
+#This has the dorset/somerset ITL2 zone we want to drop in (from above)
+gva.n.bres.2digit.itl2
+
+#col names all good? Tick.
+# table(names(gva.n.bres.2digit.geogedit) %in% names(gva.n.bres.2digit.itl2))
+
+gva.n.bres.2digit.tweakedITL3 <- gva.n.bres.2digit.geogedit %>% 
+  bind_rows(
+    gva.n.bres.2digit.itl2 %>% filter(GEOGRAPHY_NAME == 'Dorset and Somerset')
+  )
+
+#Tick. And that'll work for current prices and chained volume
 
 
 
