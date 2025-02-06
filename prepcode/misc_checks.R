@@ -314,10 +314,485 @@ interz <- interz %>%
 
 
 
-#CHECK BRES DOWNLOAD FUNCTIONS-----
 
-debugonce(download_BRES)
-download_BRES(2022,geography = "TYPE438", EMPLOYMENT_STATUS = 2)
+
+
+#COMPARE BRES AND REGIONAL GVA DOWNLOADS, WORKING TOWARDS SIC CODE MATCH/MERGE----  
+
+#Probably also some geography fettling but let's do SIC first
+#SIC sections should be nice and easy
+
+#The tricky bit is GVA summed categories at different levels
+#Which I did wrangle in previous code, but let's see again
+
+#GVA data is a bespoke version of 2-digit SICs, where some are combined e.g. "CB (13-15)"
+
+#Just need one year to check, let's use ITL2
+bres.itl2 <- readRDS('data/BRES/BRES_ALLYEARSWITHDATA_TYPE429_internationalterritoriallevelslevel2asofJan2021_2_Fulltimeemployees_2022_2023.rds')
+
+#The industry codes are also in the name, just need to separate off the first part of the string...
+#(The INDUSTRY_CODE field is just this, no point downloading)
+#https://www.r-bloggers.com/2024/07/extracting-strings-before-a-space-in-r/
+bres.itl2 <- bres.itl2 %>% 
+  mutate(
+    INDUSTRY_CODE = stringr::str_extract(INDUSTRY_NAME, "^[^ ]+")
+  )
+
+#ALso - take 5 digit job counts and sum those to the 2 digit categories
+#Because they're likely more accurate / granular
+#Due to odd choice to apply rounding in the same way at all levels:
+#See - https://www.nomisweb.co.uk/articles/1103.aspx
+
+
+#Run though of the plan here, to deconfuse!
+#1. Keep only 5 digit BRES data, because the counts are more granular
+#2. Merge in the 2 digit SIC code (and elsewhere the sections etc)
+#3. Sum job counts to the 2 digit SIC codes
+
+#And somewhere else, do some sanity checks to see if this is returning better numbers
+#Than just using the BRES own 2 digit counts
+#Given all this effort!
+
+
+#Only need to keep the BRES 5 digit to sum...
+# bres.itl2.5digit <- bres.itl2 %>% filter(INDUSTRY_TYPE == 'SIC 2007 division (2 digit)')
+bres.itl2.5digit <- bres.itl2 %>% filter(INDUSTRY_TYPE == 'SIC 2007 subclass (5 digit)')
+
+#Get SIC lookup
+SIClookup <- read_csv('data/SIClookup.csv')
+
+#Check 5 digit name match... tick!
+table(unique(bres.itl2.5digit$INDUSTRY_NAME) %in% unique(SIClookup$SIC_5DIGIT_NAME))
+# table(unique(bres.itl2.2digit$INDUSTRY_NAME) %in% unique(SIClookup$SIC_2DIGIT_NAME))
+
+#Join on 5 digit name
+#Keep 2 digit and section codes - will sum job counts in both of these, taken from 5 digit
+bres.itl2.5digit <- bres.itl2.5digit %>% 
+  left_join(
+    SIClookup %>% select(SIC_5DIGIT_NAME,SIC_2DIGIT_NAME,SIC_2DIGIT_CODE,SIC_SECTION_NAME,SIC_SECTION_CODE),
+    by = c('INDUSTRY_NAME' = 'SIC_5DIGIT_NAME')
+  )
+
+
+#Sum 5 digit full time time job counts to 2 digit SICs 
+bres.itl2.2digit.summed <- bres.itl2.5digit %>% 
+  group_by(DATE,GEOGRAPHY_NAME,SIC_2DIGIT_CODE) %>% 
+  summarise(
+    JOBCOUNT = sum(OBS_VALUE),
+    SIC_2DIGIT_NAME = max(SIC_2DIGIT_NAME)#will keep matching name
+    ) %>% 
+  ungroup() %>% 
+  mutate(
+    SIC_2DIGIT_CODE_NUMERIC = as.numeric(SIC_2DIGIT_CODE)#For matching later
+  )
+
+#Same for SIC sections
+bres.itl2.sections.summed <- bres.itl2.5digit %>% 
+  group_by(DATE,GEOGRAPHY_NAME,SIC_SECTION_CODE) %>% 
+  summarise(COUNT = sum(OBS_VALUE)) %>% 
+  ungroup() 
+
+
+
+
+#CHECK HOW THE "SECTION AND 2 DIGIT JOBCOUNTS SUMMED FROM 5 DIGIT" #compare tothe BRES original versions of 2 DIG and Sections----
+
+chk.2digit <- bres.itl2.2digit.summed %>% 
+  left_join(
+    bres.itl2 %>% filter(qg('2 dig',INDUSTRY_TYPE)) %>% rename(ORIG_COUNT = OBS_VALUE),
+    by = c('DATE','GEOGRAPHY_NAME','SIC_2DIGIT_CODE' = 'INDUSTRY_CODE')
+  )
+
+#Find count % of orig count
+#And look at spread around that
+chk.2digit <- chk.2digit %>% 
+  mutate(percent_of_orig = (ORIG_COUNT / COUNT) * 100 )
+
+#Generally great - evenly spread around 100% - 
+#though there are a few outliers...
+#Eyeballing, those all make sense. Mainly very low numbers
+ggplot(chk.2digit, aes(x = percent_of_orig)) +
+  geom_density()
+
+
+#CAN'T CHECK SECTIONS AS THE ORIG BRES INDUSTRY TYPES DOESN'T INCLUDE IT AS A CATEGORY
+#2 Digit is as close as we get, and just checked that...
+
+
+
+#Then! -->
+
+#Regional GVA
+gva.itl2 <- read_csv('data/regionalGVA/regionalGVA_currentprices_ITL2_allavailableSICs_LONG_2022.csv')
+gva.itl3 <- read_csv('data/regionalGVA/regionalGVA_currentprices_ITL3_allavailableSICs_LONG_2022.csv')
+
+#So yes, previous code for this is in ukcompare/explore_code/GVA_region_by_sector_explore.R
+#Section: Linking BRES EMPLOYMENT TO GVA----
+#Currently here: https://github.com/DanOlner/ukcompare/blob/08ce5c1c75b27755ceb56cb23e9ff353e5d16031/explore_code/GVA_region_by_sector_explore.R#L1991 
+
+#Copying rationale:
+#PLAN:
+#if we mark the bres categories with group names
+#Such that ones that need collating are in the same group
+#Can then just do easily with dplyr
+
+#Create a copy of GV where the codes are expanded to 1 each per row
+#But the names will be duplicates
+#Can then merge on the codes, and then group by these names to create the groups
+#Is the theory
+
+#So:
+#In the GVA data, some SIC two digit codes are combined:
+#unique(gva.itl2$SIC07_code)
+#unique(gva.itl3$SIC07_code)
+
+#ITL2 & 3 have different numbers of SIC catagories, with different combos
+#Fewer at more granular geography
+length(unique(gva.itl2$SIC07_code))#72
+length(unique(gva.itl3$SIC07_code))#48
+
+
+#Expand those GVA SIC combos onto their own rows
+#We'll only need a smaller number of columns
+#To then merge in the BRES data, to sum by SIC grouping once there
+
+#Key point: we will NOT be summing GVA values here at all
+#We just sum up the jobcounts for these SIC combos
+#Then can link to the combo codes in the GVA file
+
+#Why go on about that? 
+#Cos it means BRES job totals can be connected to chained volume measures
+#(Which wouldn't be true if we were summing GVA vals, that's only valid for current prices)
+
+
+
+#In theory, this should work for ITL2 and 3...
+#Get distinct list of the GVA codes
+
+#Drop imputed rent also - 
+#BRES job count data doesn't have any jobs for that sector, of course
+df <- gva.itl2 %>% select(SIC07_description,SIC07_code) %>% 
+  distinct(SIC07_description, .keep_all = T) %>% 
+  filter(!qg('imp',SIC07_code))
+
+#Pull out numbers in brackets, don't need the rest
+#Can then split into separate SIC codes next...
+#https://stackoverflow.com/a/8613332
+repl <- regmatches(df$SIC07_code, gregexpr("(?<=\\().*?(?=\\))", df$SIC07_code, perl=T))
+repl[lengths(repl) == 0] <- NA
+repl <- unlist(repl)
+
+df$SIC07_code <- ifelse(is.na(repl), df$SIC07_code, repl)
+
+
+
+# Split the rows with hyphenated codes
+split_rows <- function(row) {
+  start_code <- as.numeric(strsplit(row$SIC07_code, "-")[[1]][1])
+  end_code <- as.numeric(strsplit(row$SIC07_code, "-")[[1]][2])
+  
+  codes <- as.character(start_code:end_code)
+  data.frame(
+    SIC07_description = rep(row$SIC07_description, length(codes)),
+    SIC07_code = codes,
+    stringsAsFactors = FALSE
+  )
+}
+
+# Identify the rows to be split
+rows_to_split <- grepl("-", df$SIC07_code)
+
+# Use lapply to preserve dataframe structure and then rbind to combine the rows
+expanded_rows <- do.call(rbind, lapply(1:nrow(df), function(i) {
+  if (rows_to_split[i]) {
+    split_rows(df[i, , drop = FALSE])
+  }
+}))
+
+# Remove the hyphenated rows from the original dataframe
+df <- df[!rows_to_split, ]
+
+# Combine the two dataframes
+df <- rbind(df, expanded_rows)
+
+df <- df %>% mutate(SIC07_code_numeric = as.numeric(SIC07_code))
+
+
+#Check matches... tick
+#Other way round, we lose 99 - see below (no job count, doesn't matter)
+table(unique(df$SIC07_code_numeric) %in% unique(bres.itl2.2digit.summed$SIC_2DIGIT_CODE_NUMERIC))
+
+
+
+
+
+#Join them
+#Inner join loses one BRES category that has no job count
+#"99 : Activities of extraterritorial organisations and bodies"
+both <- bres.itl2.2digit.summed %>% 
+  inner_join(
+    df,
+    by = c('SIC_2DIGIT_CODE_NUMERIC' = 'SIC07_code_numeric')
+  )
+
+
+#Can now group by GVA industry name and sum the counts
+bres_w_gvacodes <- both %>% 
+  group_by(SIC07_description, GEOGRAPHY_NAME, DATE) %>%
+  summarise(
+    COUNT = sum(COUNT, na.rm=T)
+  ) %>% ungroup()
+
+#All that needs now is the original number code merged back in, so we have those labelled
+
+
+#... but we need the correct code to do that
+#Which we removed earlier
+#get back
+df_w <- gva.itl2 %>% select(SIC07_description,SIC07_code) %>% 
+  distinct(SIC07_description, .keep_all = T) %>% 
+  filter(!qg('imp',SIC07_code))
+
+table(unique(bres_w_gvacodes$SIC07_description) %in% df_w$SIC07_description)
+
+bres_w_gvacodes <- bres_w_gvacodes %>% 
+  left_join(
+    df_w,
+    by = 'SIC07_description'
+  ) 
+# %>% 
+#   select(-INDUSTRY_CODE) %>% 
+#   rename(INDUSTRY_CODE = GVA_INDUSTRY_CODE, INDUSTRY_NAME = GVA_INDUSTRY_NAME)
+
+
+
+
+
+# TEST FUNCTIONAL VERSION OF THE ABOVE BRES/GVA LINK CODE----
+
+#All good for getting BRES join file!
+# debugonce(make.GVA.SICs.long)
+sics.forBRESjoin.itl2 <- make.GVA.SICs.long(gva.itl2)
+sics.forBRESjoin.itl3 <- make.GVA.SICs.long(gva.itl3)
+
+
+
+#TEST COMBINING THE PRODUCED GVA AND BRES DATA----
+
+## FOR ITL2 / NUTS2----
+
+#Each now created separately, BRES aggd from 5 digit into each SIC band we want 
+#Add in both a full time and part time job count column
+#So many files - how to efficiently combine?
+#Possibly may require matching filenames over both, which currently I have not done
+
+#But let's look at a sample.
+#Start with the easy? SIC sections.
+#And ITL2 so no worries about the non-matching single geography for now
+#But we do need to change that one upper/lower case letter mismatch!
+#(Which will need to be done as ITL and NUTS codes don't match, need to use names)
+gva <- read_csv("data/regionalGVA/regionalGVA_currentprices_ITL2_SICsections_LONG_2022.csv") %>%
+  mutate(
+    Region_name = gsub('Bristol Area','Bristol area',Region_name)#see below, upper vs lower case non match
+  )
+
+#Only has the one matching year... ooo catchy name!
+bres.ft <- read_csv("data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE429_internationalterritoriallevelslevel2asofJan2021_2_Fulltimeemployees_2022_2023_SIC_SECTION.csv") %>% rename(JOBCOUNT_FULLTIME = JOBCOUNT)
+
+bres.pt <- read_csv("data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE429_internationalterritoriallevelslevel2asofJan2021_3_Parttimeemployees_2022_2023_SIC_SECTION.csv") %>% rename(JOBCOUNT_PARTTIME = JOBCOUNT)
+
+#SIC section match? Tick.
+table(unique(gva$SIC07_code) %in% bres.ft$SIC_SECTION_CODE)
+
+#Geography name match?
+table(unique(gva$Region_name) %in% bres.ft$GEOGRAPHY_NAME)
+
+#Date matches... ah yes, just the one year here
+table(unique(gva$year) %in% bres.ft$DATE)
+
+#OK...
+#Northern Ireland isn't in this BRES data, so that will go when joining anyway
+
+#The other non match is a lower vs upper case "A"...
+#Let's just fix that on import (done above)
+# unique(gva$Region_name)[!unique(gva$Region_name) %in% bres.ft$GEOGRAPHY_NAME]
+# unique(bres.ft$GEOGRAPHY_NAME)[!unique(bres.ft$GEOGRAPHY_NAME) %in% gva$Region_name]
+
+#So now... join!
+#Inner join so we drop NI
+#FULL TIME
+# gva.n.bres <- bres.ft %>% 
+#   inner_join(
+#     gva %>% rename(gva = value),
+#     by = c('GEOGRAPHY_NAME' = 'Region_name', 'DATE' = 'year', 'SIC_SECTION_CODE' = 'SIC07_code')
+#     )
+# 
+# #PART TIME
+# gva.n.bres <- gva.n.bres %>% 
+#   inner_join(
+#     bres.pt %>% select(-SIC_SECTION_NAME),
+#     by = c('GEOGRAPHY_NAME', 'DATE', 'SIC_SECTION_CODE')
+#   ) %>% 
+#   relocate(JOBCOUNT_FULLTIME, .before = JOBCOUNT_PARTTIME)
+
+
+#Using reduce to do in one... which is not terribly readable but works
+#.init is the first df to join (gva)
+#The list of BRES data then joins each in turn to that
+gva.n.bres <- list(bres.ft %>% select(-SIC_SECTION_NAME),bres.pt %>% select(-SIC_SECTION_NAME)) %>%
+  reduce(~ .x %>% inner_join(
+                       .y,
+                       by = c('GEOGRAPHY_NAME', 'DATE', 'SIC_SECTION_CODE')),
+                   .init = gva %>% rename(GEOGRAPHY_NAME = Region_name, DATE = year,
+                                          SIC_SECTION_CODE = SIC07_code ,gva = value)) %>% 
+  relocate(DATE, .before = ITL_code)
+  
+  
+
+
+
+
+#So that's an example of an easy one
+#Three sector groupings should be the same
+
+#Let's see how we get on with the tricky one
+#That needs a pre-stage of summing BRES job counts by the GVA bespoke 2-digit SICs
+
+#We have a nice function to get the correct lookup! 
+#Hiding the horrible code underneath, phew
+sics.forBRESjoin.itl2 <- make.GVA.SICs.long(gva.itl2)
+
+#Get one of the relevant BRES's...
+bres.2digit.ft <- read_csv("data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE429_internationalterritoriallevelslevel2asofJan2021_2_Fulltimeemployees_2022_2023_SIC_2DIGIT.csv") %>% mutate(type = 'FULL TIME')
+
+bres.2digit.pt <- read_csv("data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE429_internationalterritoriallevelslevel2asofJan2021_3_Parttimeemployees_2022_2023_SIC_2DIGIT.csv") %>% mutate(type = 'PART TIME')
+
+#Merge in the bespoke SIC lookup for summing up job counts by them
+#This time we *do* want map
+#Returns a list with both those dfs in
+bres.2digit.wlookup <- list(bres.2digit.ft,bres.2digit.pt) %>% 
+  map(~ .x %>% 
+        left_join(sics.forBRESjoin.itl2, by = c('SIC_2DIGIT_CODE_NUMERIC' = 'SIC07_code_numeric'))
+  )
+
+#Sum! Get jobcount totals summed to the GVA bespoke SIC 2 digits 
+bres.2digit.wlookup.summed <- bres.2digit.wlookup %>% 
+  map(~ .x %>% 
+        group_by(DATE,GEOGRAPHY_NAME,SIC07_code_fromGVAdata) %>% 
+        summarise(
+          JOBCOUNT = sum(JOBCOUNT),#Why we need this field to remain same for both for now
+          type = max(type)#keep job FT/PT type for later
+          ) %>% 
+        ungroup() %>% 
+        filter(!is.na(SIC07_code_fromGVAdata))
+  )
+  
+
+#... Which can then be joined with the GVA data by the SIC code it's been summe into
+gva <- read_csv("data/regionalGVA/regionalGVA_currentprices_ITL2_allavailableSICs_LONG_2022.csv") %>%
+  mutate(
+    Region_name = gsub('Bristol Area','Bristol area',Region_name)#see below, upper vs lower case non match
+  )
+
+#Check match with one of them... tick
+table(unique(bres.2digit.wlookup.summed[[1]]$SIC07_code_fromGVAdata) %in% gva$SIC07_code)
+
+
+#Join
+#Note imputed rent gets dropped as it's not in the BRES data
+gva.n.bres.2digit <- bres.2digit.wlookup.summed %>%
+  reduce(~ .x %>% inner_join(
+    .y,
+    by = c('GEOGRAPHY_NAME', 'DATE', 'SIC07_code_fromGVAdata')),
+    .init = gva %>% rename(GEOGRAPHY_NAME = Region_name, DATE = year,
+                           SIC07_code_fromGVAdata = SIC07_code ,gva = value)) %>% #temp gva code rename for ease of join
+  relocate(DATE, .before = ITL_code) %>% 
+  rename(
+    JOBCOUNT_FT = JOBCOUNT.x, JOBCOUNT_PT = JOBCOUNT.y
+  ) %>% 
+  select(-c(type.x,type.y))
+
+#Check dropped sectors when that join is done... yep, just that one
+unique(gva$SIC07_description)[!unique(gva$SIC07_code) %in% gva.n.bres.2digit$SIC07_code_fromGVAdata]
+
+#There will be some others with zero job counts...
+#Activities of households, no jobs there
+
+
+
+
+
+
+
+
+#Check the bespoke SICs also work for the NUTS geogs over more years
+#The above is just the one year...
+#Looking at geog level 2 again
+
+#Should be same code?
+bres.2digit.ft <- read_csv("data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE438_nuts2016level2_2_Fulltimeemployees_2015_2022_SIC_2DIGIT.csv") %>% mutate(type = 'FULL TIME')
+
+bres.2digit.pt <- read_csv("data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE438_nuts2016level2_3_Parttimeemployees_2015_2022_SIC_2DIGIT.csv") %>% mutate(type = 'PART TIME')
+
+#Merge in the bespoke SIC lookup for summing up job counts by them
+#This time we *do* want map
+#Returns a list with both those dfs in
+bres.2digit.wlookup <- list(bres.2digit.ft,bres.2digit.pt) %>% 
+  map(~ .x %>% 
+        left_join(sics.forBRESjoin.itl2, by = c('SIC_2DIGIT_CODE_NUMERIC' = 'SIC07_code_numeric'))
+  )
+
+#Sum! Get jobcount totals summed to the GVA bespoke SIC 2 digits 
+bres.2digit.wlookup.summed <- bres.2digit.wlookup %>% 
+  map(~ .x %>% 
+        group_by(DATE,GEOGRAPHY_NAME,SIC07_code_fromGVAdata) %>% 
+        summarise(
+          JOBCOUNT = sum(JOBCOUNT),#Why we need this field to remain same for both for now
+          type = max(type)#keep job FT/PT type for later
+        ) %>% 
+        ungroup() %>% 
+        filter(!is.na(SIC07_code_fromGVAdata))
+  )
+
+
+#Already have correct gva from above
+#Yep, this joins on all years, 2015 to 2022 currently
+gva.n.bres.2digit <- bres.2digit.wlookup.summed %>%
+  reduce(~ .x %>% inner_join(
+    .y,
+    by = c('GEOGRAPHY_NAME', 'DATE', 'SIC07_code_fromGVAdata')),
+    .init = gva %>% rename(GEOGRAPHY_NAME = Region_name, DATE = year,
+                           SIC07_code_fromGVAdata = SIC07_code ,gva = value)) %>% #temp gva code rename for ease of join
+  relocate(DATE, .before = ITL_code) %>% 
+  rename(
+    JOBCOUNT_FT = JOBCOUNT.x, JOBCOUNT_PT = JOBCOUNT.y
+  ) %>% 
+  select(-c(type.x,type.y))
+
+#Check dropped sectors when that join is done... yep, just that one
+unique(gva$SIC07_description)[!unique(gva$SIC07_code) %in% gva.n.bres.2digit$SIC07_code_fromGVAdata]
+
+
+
+## FOR ITL3 / NUTS3----
+
+#Where the plan is:
+#Replace entire of Somerset, Dorset, Bournemouth/Poole/Christchurch
+#With "Dorset / Somerset" ITL2 zone
+
+#This deals with that one tiny changing geography in the south
+#(If ONS changed the GVA vals accordingly into the past, which I wonder about...)
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,0 +1,1681 @@
+DATE,GEOGRAPHY_NAME,SIC_SECTION_NAME,SIC_SECTION_CODE,JOBCOUNT
+2022,Bedfordshire and Hertfordshire,"Agriculture, forestry and fishing",A (1-3),715
+2022,Bedfordshire and Hertfordshire,Mining and quarrying,B (5-9),0
+2022,Bedfordshire and Hertfordshire,Manufacturing,C (10-33),5775
+2022,Bedfordshire and Hertfordshire,"Electricity, gas, steam and air conditioning supply",D (35),50
+2022,Bedfordshire and Hertfordshire,Water supply; sewerage and waste management,E (36-39),495
+2022,Bedfordshire and Hertfordshire,Construction,F (41-43),9550
+2022,Bedfordshire and Hertfordshire,Wholesale and retail trade; repair of motor vehicles,G (45-47),51230
+2022,Bedfordshire and Hertfordshire,Transportation and storage,H (49-53),5715
+2022,Bedfordshire and Hertfordshire,Accommodation and food service activities,I (55-56),39695
+2022,Bedfordshire and Hertfordshire,Information and communication,J (58-63),6615
+2022,Bedfordshire and Hertfordshire,Financial and insurance activities,K (64-66),2970
+2022,Bedfordshire and Hertfordshire,Real estate activities,L (68),5725
+2022,Bedfordshire and Hertfordshire,"Professional, scientific and technical activities",M (69-75),19185
+2022,Bedfordshire and Hertfordshire,Administrative and support service activities,N (77-82),36235
+2022,Bedfordshire and Hertfordshire,Public administration and defence,O (84),4240
+2022,Bedfordshire and Hertfordshire,Education,P (85),35550
+2022,Bedfordshire and Hertfordshire,Human health and social work activities,Q (86-88),35150
+2022,Bedfordshire and Hertfordshire,"Arts, entertainment and recreation",R (90-93),11375
+2022,Bedfordshire and Hertfordshire,Other service activities,S (94-96),5170
+2022,Bedfordshire and Hertfordshire,Activities of households,T (97-98),0
+2022,Bedfordshire and Hertfordshire,Activities of extraterritorial organisations and bodies,U (99),0
+2022,"Berkshire, Buckinghamshire and Oxfordshire","Agriculture, forestry and fishing",A (1-3),1180
+2022,"Berkshire, Buckinghamshire and Oxfordshire",Mining and quarrying,B (5-9),5
+2022,"Berkshire, Buckinghamshire and Oxfordshire",Manufacturing,C (10-33),6920
+2022,"Berkshire, Buckinghamshire and Oxfordshire","Electricity, gas, steam and air conditioning supply",D (35),135
+2022,"Berkshire, Buckinghamshire and Oxfordshire",Water supply; sewerage and waste management,E (36-39),715
+2022,"Berkshire, Buckinghamshire and Oxfordshire",Construction,F (41-43),7895
+2022,"Berkshire, Buckinghamshire and Oxfordshire",Wholesale and retail trade; repair of motor vehicles,G (45-47),64860
+2022,"Berkshire, Buckinghamshire and Oxfordshire",Transportation and storage,H (49-53),9125
+2022,"Berkshire, Buckinghamshire and Oxfordshire",Accommodation and food service activities,I (55-56),44935
+2022,"Berkshire, Buckinghamshire and Oxfordshire",Information and communication,J (58-63),13410
+2022,"Berkshire, Buckinghamshire and Oxfordshire",Financial and insurance activities,K (64-66),4115
+2022,"Berkshire, Buckinghamshire and Oxfordshire",Real estate activities,L (68),5215
+2022,"Berkshire, Buckinghamshire and Oxfordshire","Professional, scientific and technical activities",M (69-75),28665
+2022,"Berkshire, Buckinghamshire and Oxfordshire",Administrative and support service activities,N (77-82),36210
+2022,"Berkshire, Buckinghamshire and Oxfordshire",Public administration and defence,O (84),6775
+2022,"Berkshire, Buckinghamshire and Oxfordshire",Education,P (85),60925
+2022,"Berkshire, Buckinghamshire and Oxfordshire",Human health and social work activities,Q (86-88),49800
+2022,"Berkshire, Buckinghamshire and Oxfordshire","Arts, entertainment and recreation",R (90-93),16420
+2022,"Berkshire, Buckinghamshire and Oxfordshire",Other service activities,S (94-96),7405
+2022,"Berkshire, Buckinghamshire and Oxfordshire",Activities of households,T (97-98),0
+2022,"Berkshire, Buckinghamshire and Oxfordshire",Activities of extraterritorial organisations and bodies,U (99),0
+2022,Cheshire,"Agriculture, forestry and fishing",A (1-3),810
+2022,Cheshire,Mining and quarrying,B (5-9),10
+2022,Cheshire,Manufacturing,C (10-33),3220
+2022,Cheshire,"Electricity, gas, steam and air conditioning supply",D (35),150
+2022,Cheshire,Water supply; sewerage and waste management,E (36-39),485
+2022,Cheshire,Construction,F (41-43),2685
+2022,Cheshire,Wholesale and retail trade; repair of motor vehicles,G (45-47),29250
+2022,Cheshire,Transportation and storage,H (49-53),2680
+2022,Cheshire,Accommodation and food service activities,I (55-56),25615
+2022,Cheshire,Information and communication,J (58-63),2410
+2022,Cheshire,Financial and insurance activities,K (64-66),2940
+2022,Cheshire,Real estate activities,L (68),1800
+2022,Cheshire,"Professional, scientific and technical activities",M (69-75),9265
+2022,Cheshire,Administrative and support service activities,N (77-82),16825
+2022,Cheshire,Public administration and defence,O (84),3625
+2022,Cheshire,Education,P (85),14905
+2022,Cheshire,Human health and social work activities,Q (86-88),24550
+2022,Cheshire,"Arts, entertainment and recreation",R (90-93),5995
+2022,Cheshire,Other service activities,S (94-96),3245
+2022,Cheshire,Activities of households,T (97-98),0
+2022,Cheshire,Activities of extraterritorial organisations and bodies,U (99),0
+2022,Cornwall and Isles of Scilly,"Agriculture, forestry and fishing",A (1-3),1085
+2022,Cornwall and Isles of Scilly,Mining and quarrying,B (5-9),0
+2022,Cornwall and Isles of Scilly,Manufacturing,C (10-33),1675
+2022,Cornwall and Isles of Scilly,"Electricity, gas, steam and air conditioning supply",D (35),15
+2022,Cornwall and Isles of Scilly,Water supply; sewerage and waste management,E (36-39),110
+2022,Cornwall and Isles of Scilly,Construction,F (41-43),2510
+2022,Cornwall and Isles of Scilly,Wholesale and retail trade; repair of motor vehicles,G (45-47),18120
+2022,Cornwall and Isles of Scilly,Transportation and storage,H (49-53),1690
+2022,Cornwall and Isles of Scilly,Accommodation and food service activities,I (55-56),20850
+2022,Cornwall and Isles of Scilly,Information and communication,J (58-63),600
+2022,Cornwall and Isles of Scilly,Financial and insurance activities,K (64-66),430
+2022,Cornwall and Isles of Scilly,Real estate activities,L (68),1125
+2022,Cornwall and Isles of Scilly,"Professional, scientific and technical activities",M (69-75),3285
+2022,Cornwall and Isles of Scilly,Administrative and support service activities,N (77-82),4930
+2022,Cornwall and Isles of Scilly,Public administration and defence,O (84),1890
+2022,Cornwall and Isles of Scilly,Education,P (85),8870
+2022,Cornwall and Isles of Scilly,Human health and social work activities,Q (86-88),15400
+2022,Cornwall and Isles of Scilly,"Arts, entertainment and recreation",R (90-93),4200
+2022,Cornwall and Isles of Scilly,Other service activities,S (94-96),2015
+2022,Cornwall and Isles of Scilly,Activities of households,T (97-98),0
+2022,Cornwall and Isles of Scilly,Activities of extraterritorial organisations and bodies,U (99),0
+2022,Cumbria,"Agriculture, forestry and fishing",A (1-3),1015
+2022,Cumbria,Mining and quarrying,B (5-9),10
+2022,Cumbria,Manufacturing,C (10-33),2865
+2022,Cumbria,"Electricity, gas, steam and air conditioning supply",D (35),30
+2022,Cumbria,Water supply; sewerage and waste management,E (36-39),115
+2022,Cumbria,Construction,F (41-43),1710
+2022,Cumbria,Wholesale and retail trade; repair of motor vehicles,G (45-47),15370
+2022,Cumbria,Transportation and storage,H (49-53),1205
+2022,Cumbria,Accommodation and food service activities,I (55-56),16650
+2022,Cumbria,Information and communication,J (58-63),445
+2022,Cumbria,Financial and insurance activities,K (64-66),520
+2022,Cumbria,Real estate activities,L (68),800
+2022,Cumbria,"Professional, scientific and technical activities",M (69-75),2810
+2022,Cumbria,Administrative and support service activities,N (77-82),3265
+2022,Cumbria,Public administration and defence,O (84),2785
+2022,Cumbria,Education,P (85),7565
+2022,Cumbria,Human health and social work activities,Q (86-88),14225
+2022,Cumbria,"Arts, entertainment and recreation",R (90-93),2785
+2022,Cumbria,Other service activities,S (94-96),1760
+2022,Cumbria,Activities of households,T (97-98),0
+2022,Cumbria,Activities of extraterritorial organisations and bodies,U (99),0
+2022,Derbyshire and Nottinghamshire,"Agriculture, forestry and fishing",A (1-3),965
+2022,Derbyshire and Nottinghamshire,Mining and quarrying,B (5-9),55
+2022,Derbyshire and Nottinghamshire,Manufacturing,C (10-33),9480
+2022,Derbyshire and Nottinghamshire,"Electricity, gas, steam and air conditioning supply",D (35),465
+2022,Derbyshire and Nottinghamshire,Water supply; sewerage and waste management,E (36-39),600
+2022,Derbyshire and Nottinghamshire,Construction,F (41-43),8070
+2022,Derbyshire and Nottinghamshire,Wholesale and retail trade; repair of motor vehicles,G (45-47),58410
+2022,Derbyshire and Nottinghamshire,Transportation and storage,H (49-53),9180
+2022,Derbyshire and Nottinghamshire,Accommodation and food service activities,I (55-56),51675
+2022,Derbyshire and Nottinghamshire,Information and communication,J (58-63),3855
+2022,Derbyshire and Nottinghamshire,Financial and insurance activities,K (64-66),2855
+2022,Derbyshire and Nottinghamshire,Real estate activities,L (68),4050
+2022,Derbyshire and Nottinghamshire,"Professional, scientific and technical activities",M (69-75),15795
+2022,Derbyshire and Nottinghamshire,Administrative and support service activities,N (77-82),27170
+2022,Derbyshire and Nottinghamshire,Public administration and defence,O (84),8740
+2022,Derbyshire and Nottinghamshire,Education,P (85),40235
+2022,Derbyshire and Nottinghamshire,Human health and social work activities,Q (86-88),60950
+2022,Derbyshire and Nottinghamshire,"Arts, entertainment and recreation",R (90-93),13310
+2022,Derbyshire and Nottinghamshire,Other service activities,S (94-96),4995
+2022,Derbyshire and Nottinghamshire,Activities of households,T (97-98),0
+2022,Derbyshire and Nottinghamshire,Activities of extraterritorial organisations and bodies,U (99),0
+2022,Devon,"Agriculture, forestry and fishing",A (1-3),1960
+2022,Devon,Mining and quarrying,B (5-9),0
+2022,Devon,Manufacturing,C (10-33),4270
+2022,Devon,"Electricity, gas, steam and air conditioning supply",D (35),200
+2022,Devon,Water supply; sewerage and waste management,E (36-39),305
+2022,Devon,Construction,F (41-43),4570
+2022,Devon,Wholesale and retail trade; repair of motor vehicles,G (45-47),34835
+2022,Devon,Transportation and storage,H (49-53),3885
+2022,Devon,Accommodation and food service activities,I (55-56),32750
+2022,Devon,Information and communication,J (58-63),2170
+2022,Devon,Financial and insurance activities,K (64-66),1165
+2022,Devon,Real estate activities,L (68),2725
+2022,Devon,"Professional, scientific and technical activities",M (69-75),7740
+2022,Devon,Administrative and support service activities,N (77-82),9700
+2022,Devon,Public administration and defence,O (84),5075
+2022,Devon,Education,P (85),25750
+2022,Devon,Human health and social work activities,Q (86-88),32800
+2022,Devon,"Arts, entertainment and recreation",R (90-93),8270
+2022,Devon,Other service activities,S (94-96),4535
+2022,Devon,Activities of households,T (97-98),0
+2022,Devon,Activities of extraterritorial organisations and bodies,U (99),0
+2022,Dorset and Somerset,"Agriculture, forestry and fishing",A (1-3),1680
+2022,Dorset and Somerset,Mining and quarrying,B (5-9),5
+2022,Dorset and Somerset,Manufacturing,C (10-33),4590
+2022,Dorset and Somerset,"Electricity, gas, steam and air conditioning supply",D (35),10
+2022,Dorset and Somerset,Water supply; sewerage and waste management,E (36-39),150
+2022,Dorset and Somerset,Construction,F (41-43),3315
+2022,Dorset and Somerset,Wholesale and retail trade; repair of motor vehicles,G (45-47),23730
+2022,Dorset and Somerset,Transportation and storage,H (49-53),2115
+2022,Dorset and Somerset,Accommodation and food service activities,I (55-56),17510
+2022,Dorset and Somerset,Information and communication,J (58-63),995
+2022,Dorset and Somerset,Financial and insurance activities,K (64-66),540
+2022,Dorset and Somerset,Real estate activities,L (68),2600
+2022,Dorset and Somerset,"Professional, scientific and technical activities",M (69-75),5860
+2022,Dorset and Somerset,Administrative and support service activities,N (77-82),9735
+2022,Dorset and Somerset,Public administration and defence,O (84),2540
+2022,Dorset and Somerset,Education,P (85),19380
+2022,Dorset and Somerset,Human health and social work activities,Q (86-88),21325
+2022,Dorset and Somerset,"Arts, entertainment and recreation",R (90-93),4995
+2022,Dorset and Somerset,Other service activities,S (94-96),3605
+2022,Dorset and Somerset,Activities of households,T (97-98),0
+2022,Dorset and Somerset,Activities of extraterritorial organisations and bodies,U (99),0
+2022,East Anglia,"Agriculture, forestry and fishing",A (1-3),3220
+2022,East Anglia,Mining and quarrying,B (5-9),0
+2022,East Anglia,Manufacturing,C (10-33),9575
+2022,East Anglia,"Electricity, gas, steam and air conditioning supply",D (35),155
+2022,East Anglia,Water supply; sewerage and waste management,E (36-39),885
+2022,East Anglia,Construction,F (41-43),9460
+2022,East Anglia,Wholesale and retail trade; repair of motor vehicles,G (45-47),62685
+2022,East Anglia,Transportation and storage,H (49-53),6745
+2022,East Anglia,Accommodation and food service activities,I (55-56),48770
+2022,East Anglia,Information and communication,J (58-63),5675
+2022,East Anglia,Financial and insurance activities,K (64-66),4800
+2022,East Anglia,Real estate activities,L (68),5175
+2022,East Anglia,"Professional, scientific and technical activities",M (69-75),16580
+2022,East Anglia,Administrative and support service activities,N (77-82),24265
+2022,East Anglia,Public administration and defence,O (84),10800
+2022,East Anglia,Education,P (85),47050
+2022,East Anglia,Human health and social work activities,Q (86-88),58050
+2022,East Anglia,"Arts, entertainment and recreation",R (90-93),12570
+2022,East Anglia,Other service activities,S (94-96),6135
+2022,East Anglia,Activities of households,T (97-98),0
+2022,East Anglia,Activities of extraterritorial organisations and bodies,U (99),0
+2022,East Wales,"Agriculture, forestry and fishing",A (1-3),1245
+2022,East Wales,Mining and quarrying,B (5-9),10
+2022,East Wales,Manufacturing,C (10-33),4190
+2022,East Wales,"Electricity, gas, steam and air conditioning supply",D (35),750
+2022,East Wales,Water supply; sewerage and waste management,E (36-39),305
+2022,East Wales,Construction,F (41-43),3245
+2022,East Wales,Wholesale and retail trade; repair of motor vehicles,G (45-47),33645
+2022,East Wales,Transportation and storage,H (49-53),3835
+2022,East Wales,Accommodation and food service activities,I (55-56),26400
+2022,East Wales,Information and communication,J (58-63),2350
+2022,East Wales,Financial and insurance activities,K (64-66),2940
+2022,East Wales,Real estate activities,L (68),1455
+2022,East Wales,"Professional, scientific and technical activities",M (69-75),9120
+2022,East Wales,Administrative and support service activities,N (77-82),15735
+2022,East Wales,Public administration and defence,O (84),8475
+2022,East Wales,Education,P (85),19540
+2022,East Wales,Human health and social work activities,Q (86-88),30025
+2022,East Wales,"Arts, entertainment and recreation",R (90-93),8255
+2022,East Wales,Other service activities,S (94-96),5375
+2022,East Wales,Activities of households,T (97-98),0
+2022,East Wales,Activities of extraterritorial organisations and bodies,U (99),0
+2022,East Yorkshire and Northern Lincolnshire,"Agriculture, forestry and fishing",A (1-3),580
+2022,East Yorkshire and Northern Lincolnshire,Mining and quarrying,B (5-9),5
+2022,East Yorkshire and Northern Lincolnshire,Manufacturing,C (10-33),5430
+2022,East Yorkshire and Northern Lincolnshire,"Electricity, gas, steam and air conditioning supply",D (35),20
+2022,East Yorkshire and Northern Lincolnshire,Water supply; sewerage and waste management,E (36-39),680
+2022,East Yorkshire and Northern Lincolnshire,Construction,F (41-43),2160
+2022,East Yorkshire and Northern Lincolnshire,Wholesale and retail trade; repair of motor vehicles,G (45-47),27170
+2022,East Yorkshire and Northern Lincolnshire,Transportation and storage,H (49-53),3200
+2022,East Yorkshire and Northern Lincolnshire,Accommodation and food service activities,I (55-56),17275
+2022,East Yorkshire and Northern Lincolnshire,Information and communication,J (58-63),1215
+2022,East Yorkshire and Northern Lincolnshire,Financial and insurance activities,K (64-66),935
+2022,East Yorkshire and Northern Lincolnshire,Real estate activities,L (68),1525
+2022,East Yorkshire and Northern Lincolnshire,"Professional, scientific and technical activities",M (69-75),4595
+2022,East Yorkshire and Northern Lincolnshire,Administrative and support service activities,N (77-82),9125
+2022,East Yorkshire and Northern Lincolnshire,Public administration and defence,O (84),5250
+2022,East Yorkshire and Northern Lincolnshire,Education,P (85),14585
+2022,East Yorkshire and Northern Lincolnshire,Human health and social work activities,Q (86-88),23625
+2022,East Yorkshire and Northern Lincolnshire,"Arts, entertainment and recreation",R (90-93),5045
+2022,East Yorkshire and Northern Lincolnshire,Other service activities,S (94-96),2220
+2022,East Yorkshire and Northern Lincolnshire,Activities of households,T (97-98),0
+2022,East Yorkshire and Northern Lincolnshire,Activities of extraterritorial organisations and bodies,U (99),0
+2022,Eastern Scotland,"Agriculture, forestry and fishing",A (1-3),6585
+2022,Eastern Scotland,Mining and quarrying,B (5-9),25
+2022,Eastern Scotland,Manufacturing,C (10-33),5225
+2022,Eastern Scotland,"Electricity, gas, steam and air conditioning supply",D (35),575
+2022,Eastern Scotland,Water supply; sewerage and waste management,E (36-39),600
+2022,Eastern Scotland,Construction,F (41-43),5995
+2022,Eastern Scotland,Wholesale and retail trade; repair of motor vehicles,G (45-47),53885
+2022,Eastern Scotland,Transportation and storage,H (49-53),5045
+2022,Eastern Scotland,Accommodation and food service activities,I (55-56),46840
+2022,Eastern Scotland,Information and communication,J (58-63),5285
+2022,Eastern Scotland,Financial and insurance activities,K (64-66),6085
+2022,Eastern Scotland,Real estate activities,L (68),3375
+2022,Eastern Scotland,"Professional, scientific and technical activities",M (69-75),11360
+2022,Eastern Scotland,Administrative and support service activities,N (77-82),19205
+2022,Eastern Scotland,Public administration and defence,O (84),11600
+2022,Eastern Scotland,Education,P (85),39300
+2022,Eastern Scotland,Human health and social work activities,Q (86-88),64800
+2022,Eastern Scotland,"Arts, entertainment and recreation",R (90-93),14610
+2022,Eastern Scotland,Other service activities,S (94-96),6205
+2022,Eastern Scotland,Activities of households,T (97-98),0
+2022,Eastern Scotland,Activities of extraterritorial organisations and bodies,U (99),0
+2022,Essex,"Agriculture, forestry and fishing",A (1-3),1100
+2022,Essex,Mining and quarrying,B (5-9),0
+2022,Essex,Manufacturing,C (10-33),5480
+2022,Essex,"Electricity, gas, steam and air conditioning supply",D (35),15
+2022,Essex,Water supply; sewerage and waste management,E (36-39),890
+2022,Essex,Construction,F (41-43),10450
+2022,Essex,Wholesale and retail trade; repair of motor vehicles,G (45-47),52570
+2022,Essex,Transportation and storage,H (49-53),8205
+2022,Essex,Accommodation and food service activities,I (55-56),38210
+2022,Essex,Information and communication,J (58-63),3535
+2022,Essex,Financial and insurance activities,K (64-66),4315
+2022,Essex,Real estate activities,L (68),4100
+2022,Essex,"Professional, scientific and technical activities",M (69-75),12055
+2022,Essex,Administrative and support service activities,N (77-82),21405
+2022,Essex,Public administration and defence,O (84),8440
+2022,Essex,Education,P (85),28405
+2022,Essex,Human health and social work activities,Q (86-88),35300
+2022,Essex,"Arts, entertainment and recreation",R (90-93),10225
+2022,Essex,Other service activities,S (94-96),4375
+2022,Essex,Activities of households,T (97-98),0
+2022,Essex,Activities of extraterritorial organisations and bodies,U (99),0
+2022,"Gloucestershire, Wiltshire and Bath/Bristol area","Agriculture, forestry and fishing",A (1-3),1720
+2022,"Gloucestershire, Wiltshire and Bath/Bristol area",Mining and quarrying,B (5-9),0
+2022,"Gloucestershire, Wiltshire and Bath/Bristol area",Manufacturing,C (10-33),8765
+2022,"Gloucestershire, Wiltshire and Bath/Bristol area","Electricity, gas, steam and air conditioning supply",D (35),195
+2022,"Gloucestershire, Wiltshire and Bath/Bristol area",Water supply; sewerage and waste management,E (36-39),770
+2022,"Gloucestershire, Wiltshire and Bath/Bristol area",Construction,F (41-43),10295
+2022,"Gloucestershire, Wiltshire and Bath/Bristol area",Wholesale and retail trade; repair of motor vehicles,G (45-47),69335
+2022,"Gloucestershire, Wiltshire and Bath/Bristol area",Transportation and storage,H (49-53),11065
+2022,"Gloucestershire, Wiltshire and Bath/Bristol area",Accommodation and food service activities,I (55-56),58475
+2022,"Gloucestershire, Wiltshire and Bath/Bristol area",Information and communication,J (58-63),7485
+2022,"Gloucestershire, Wiltshire and Bath/Bristol area",Financial and insurance activities,K (64-66),8405
+2022,"Gloucestershire, Wiltshire and Bath/Bristol area",Real estate activities,L (68),6005
+2022,"Gloucestershire, Wiltshire and Bath/Bristol area","Professional, scientific and technical activities",M (69-75),28015
+2022,"Gloucestershire, Wiltshire and Bath/Bristol area",Administrative and support service activities,N (77-82),29380
+2022,"Gloucestershire, Wiltshire and Bath/Bristol area",Public administration and defence,O (84),13450
+2022,"Gloucestershire, Wiltshire and Bath/Bristol area",Education,P (85),58725
+2022,"Gloucestershire, Wiltshire and Bath/Bristol area",Human health and social work activities,Q (86-88),79650
+2022,"Gloucestershire, Wiltshire and Bath/Bristol area","Arts, entertainment and recreation",R (90-93),17885
+2022,"Gloucestershire, Wiltshire and Bath/Bristol area",Other service activities,S (94-96),9800
+2022,"Gloucestershire, Wiltshire and Bath/Bristol area",Activities of households,T (97-98),0
+2022,"Gloucestershire, Wiltshire and Bath/Bristol area",Activities of extraterritorial organisations and bodies,U (99),0
+2022,Greater Manchester,"Agriculture, forestry and fishing",A (1-3),150
+2022,Greater Manchester,Mining and quarrying,B (5-9),0
+2022,Greater Manchester,Manufacturing,C (10-33),10385
+2022,Greater Manchester,"Electricity, gas, steam and air conditioning supply",D (35),570
+2022,Greater Manchester,Water supply; sewerage and waste management,E (36-39),470
+2022,Greater Manchester,Construction,F (41-43),8075
+2022,Greater Manchester,Wholesale and retail trade; repair of motor vehicles,G (45-47),78195
+2022,Greater Manchester,Transportation and storage,H (49-53),8850
+2022,Greater Manchester,Accommodation and food service activities,I (55-56),61550
+2022,Greater Manchester,Information and communication,J (58-63),7405
+2022,Greater Manchester,Financial and insurance activities,K (64-66),5070
+2022,Greater Manchester,Real estate activities,L (68),7175
+2022,Greater Manchester,"Professional, scientific and technical activities",M (69-75),26445
+2022,Greater Manchester,Administrative and support service activities,N (77-82),45320
+2022,Greater Manchester,Public administration and defence,O (84),16750
+2022,Greater Manchester,Education,P (85),53235
+2022,Greater Manchester,Human health and social work activities,Q (86-88),69850
+2022,Greater Manchester,"Arts, entertainment and recreation",R (90-93),16005
+2022,Greater Manchester,Other service activities,S (94-96),9645
+2022,Greater Manchester,Activities of households,T (97-98),0
+2022,Greater Manchester,Activities of extraterritorial organisations and bodies,U (99),0
+2022,Hampshire and Isle of Wight,"Agriculture, forestry and fishing",A (1-3),1095
+2022,Hampshire and Isle of Wight,Mining and quarrying,B (5-9),15
+2022,Hampshire and Isle of Wight,Manufacturing,C (10-33),6410
+2022,Hampshire and Isle of Wight,"Electricity, gas, steam and air conditioning supply",D (35),420
+2022,Hampshire and Isle of Wight,Water supply; sewerage and waste management,E (36-39),480
+2022,Hampshire and Isle of Wight,Construction,F (41-43),7785
+2022,Hampshire and Isle of Wight,Wholesale and retail trade; repair of motor vehicles,G (45-47),57045
+2022,Hampshire and Isle of Wight,Transportation and storage,H (49-53),6640
+2022,Hampshire and Isle of Wight,Accommodation and food service activities,I (55-56),41130
+2022,Hampshire and Isle of Wight,Information and communication,J (58-63),5920
+2022,Hampshire and Isle of Wight,Financial and insurance activities,K (64-66),4195
+2022,Hampshire and Isle of Wight,Real estate activities,L (68),4485
+2022,Hampshire and Isle of Wight,"Professional, scientific and technical activities",M (69-75),14455
+2022,Hampshire and Isle of Wight,Administrative and support service activities,N (77-82),23085
+2022,Hampshire and Isle of Wight,Public administration and defence,O (84),15125
+2022,Hampshire and Isle of Wight,Education,P (85),29415
+2022,Hampshire and Isle of Wight,Human health and social work activities,Q (86-88),47450
+2022,Hampshire and Isle of Wight,"Arts, entertainment and recreation",R (90-93),13805
+2022,Hampshire and Isle of Wight,Other service activities,S (94-96),5610
+2022,Hampshire and Isle of Wight,Activities of households,T (97-98),0
+2022,Hampshire and Isle of Wight,Activities of extraterritorial organisations and bodies,U (99),0
+2022,"Herefordshire, Worcestershire and Warwickshire","Agriculture, forestry and fishing",A (1-3),1290
+2022,"Herefordshire, Worcestershire and Warwickshire",Mining and quarrying,B (5-9),10
+2022,"Herefordshire, Worcestershire and Warwickshire",Manufacturing,C (10-33),8470
+2022,"Herefordshire, Worcestershire and Warwickshire","Electricity, gas, steam and air conditioning supply",D (35),300
+2022,"Herefordshire, Worcestershire and Warwickshire",Water supply; sewerage and waste management,E (36-39),310
+2022,"Herefordshire, Worcestershire and Warwickshire",Construction,F (41-43),3950
+2022,"Herefordshire, Worcestershire and Warwickshire",Wholesale and retail trade; repair of motor vehicles,G (45-47),36815
+2022,"Herefordshire, Worcestershire and Warwickshire",Transportation and storage,H (49-53),7990
+2022,"Herefordshire, Worcestershire and Warwickshire",Accommodation and food service activities,I (55-56),28630
+2022,"Herefordshire, Worcestershire and Warwickshire",Information and communication,J (58-63),4485
+2022,"Herefordshire, Worcestershire and Warwickshire",Financial and insurance activities,K (64-66),1565
+2022,"Herefordshire, Worcestershire and Warwickshire",Real estate activities,L (68),4875
+2022,"Herefordshire, Worcestershire and Warwickshire","Professional, scientific and technical activities",M (69-75),12875
+2022,"Herefordshire, Worcestershire and Warwickshire",Administrative and support service activities,N (77-82),16555
+2022,"Herefordshire, Worcestershire and Warwickshire",Public administration and defence,O (84),4965
+2022,"Herefordshire, Worcestershire and Warwickshire",Education,P (85),24470
+2022,"Herefordshire, Worcestershire and Warwickshire",Human health and social work activities,Q (86-88),35075
+2022,"Herefordshire, Worcestershire and Warwickshire","Arts, entertainment and recreation",R (90-93),6540
+2022,"Herefordshire, Worcestershire and Warwickshire",Other service activities,S (94-96),8860
+2022,"Herefordshire, Worcestershire and Warwickshire",Activities of households,T (97-98),0
+2022,"Herefordshire, Worcestershire and Warwickshire",Activities of extraterritorial organisations and bodies,U (99),0
+2022,Highlands and Islands,"Agriculture, forestry and fishing",A (1-3),4695
+2022,Highlands and Islands,Mining and quarrying,B (5-9),35
+2022,Highlands and Islands,Manufacturing,C (10-33),2115
+2022,Highlands and Islands,"Electricity, gas, steam and air conditioning supply",D (35),200
+2022,Highlands and Islands,Water supply; sewerage and waste management,E (36-39),270
+2022,Highlands and Islands,Construction,F (41-43),1785
+2022,Highlands and Islands,Wholesale and retail trade; repair of motor vehicles,G (45-47),13640
+2022,Highlands and Islands,Transportation and storage,H (49-53),1695
+2022,Highlands and Islands,Accommodation and food service activities,I (55-56),12925
+2022,Highlands and Islands,Information and communication,J (58-63),835
+2022,Highlands and Islands,Financial and insurance activities,K (64-66),375
+2022,Highlands and Islands,Real estate activities,L (68),770
+2022,Highlands and Islands,"Professional, scientific and technical activities",M (69-75),2020
+2022,Highlands and Islands,Administrative and support service activities,N (77-82),3205
+2022,Highlands and Islands,Public administration and defence,O (84),4690
+2022,Highlands and Islands,Education,P (85),10425
+2022,Highlands and Islands,Human health and social work activities,Q (86-88),16375
+2022,Highlands and Islands,"Arts, entertainment and recreation",R (90-93),3960
+2022,Highlands and Islands,Other service activities,S (94-96),1370
+2022,Highlands and Islands,Activities of households,T (97-98),0
+2022,Highlands and Islands,Activities of extraterritorial organisations and bodies,U (99),0
+2022,Inner London - East,"Agriculture, forestry and fishing",A (1-3),220
+2022,Inner London - East,Mining and quarrying,B (5-9),0
+2022,Inner London - East,Manufacturing,C (10-33),2960
+2022,Inner London - East,"Electricity, gas, steam and air conditioning supply",D (35),195
+2022,Inner London - East,Water supply; sewerage and waste management,E (36-39),250
+2022,Inner London - East,Construction,F (41-43),9280
+2022,Inner London - East,Wholesale and retail trade; repair of motor vehicles,G (45-47),57980
+2022,Inner London - East,Transportation and storage,H (49-53),6590
+2022,Inner London - East,Accommodation and food service activities,I (55-56),58145
+2022,Inner London - East,Information and communication,J (58-63),11440
+2022,Inner London - East,Financial and insurance activities,K (64-66),6750
+2022,Inner London - East,Real estate activities,L (68),9300
+2022,Inner London - East,"Professional, scientific and technical activities",M (69-75),35245
+2022,Inner London - East,Administrative and support service activities,N (77-82),49035
+2022,Inner London - East,Public administration and defence,O (84),8525
+2022,Inner London - East,Education,P (85),39110
+2022,Inner London - East,Human health and social work activities,Q (86-88),46750
+2022,Inner London - East,"Arts, entertainment and recreation",R (90-93),11540
+2022,Inner London - East,Other service activities,S (94-96),9300
+2022,Inner London - East,Activities of households,T (97-98),0
+2022,Inner London - East,Activities of extraterritorial organisations and bodies,U (99),0
+2022,Inner London - West,"Agriculture, forestry and fishing",A (1-3),330
+2022,Inner London - West,Mining and quarrying,B (5-9),50
+2022,Inner London - West,Manufacturing,C (10-33),3280
+2022,Inner London - West,"Electricity, gas, steam and air conditioning supply",D (35),755
+2022,Inner London - West,Water supply; sewerage and waste management,E (36-39),385
+2022,Inner London - West,Construction,F (41-43),8045
+2022,Inner London - West,Wholesale and retail trade; repair of motor vehicles,G (45-47),59450
+2022,Inner London - West,Transportation and storage,H (49-53),5190
+2022,Inner London - West,Accommodation and food service activities,I (55-56),82700
+2022,Inner London - West,Information and communication,J (58-63),20740
+2022,Inner London - West,Financial and insurance activities,K (64-66),20690
+2022,Inner London - West,Real estate activities,L (68),15850
+2022,Inner London - West,"Professional, scientific and technical activities",M (69-75),47445
+2022,Inner London - West,Administrative and support service activities,N (77-82),55270
+2022,Inner London - West,Public administration and defence,O (84),9865
+2022,Inner London - West,Education,P (85),38200
+2022,Inner London - West,Human health and social work activities,Q (86-88),47900
+2022,Inner London - West,"Arts, entertainment and recreation",R (90-93),17360
+2022,Inner London - West,Other service activities,S (94-96),12585
+2022,Inner London - West,Activities of households,T (97-98),0
+2022,Inner London - West,Activities of extraterritorial organisations and bodies,U (99),0
+2022,Kent,"Agriculture, forestry and fishing",A (1-3),920
+2022,Kent,Mining and quarrying,B (5-9),0
+2022,Kent,Manufacturing,C (10-33),5230
+2022,Kent,"Electricity, gas, steam and air conditioning supply",D (35),75
+2022,Kent,Water supply; sewerage and waste management,E (36-39),605
+2022,Kent,Construction,F (41-43),9125
+2022,Kent,Wholesale and retail trade; repair of motor vehicles,G (45-47),49925
+2022,Kent,Transportation and storage,H (49-53),6640
+2022,Kent,Accommodation and food service activities,I (55-56),33635
+2022,Kent,Information and communication,J (58-63),3200
+2022,Kent,Financial and insurance activities,K (64-66),3065
+2022,Kent,Real estate activities,L (68),3150
+2022,Kent,"Professional, scientific and technical activities",M (69-75),10355
+2022,Kent,Administrative and support service activities,N (77-82),24715
+2022,Kent,Public administration and defence,O (84),6475
+2022,Kent,Education,P (85),30595
+2022,Kent,Human health and social work activities,Q (86-88),41050
+2022,Kent,"Arts, entertainment and recreation",R (90-93),10810
+2022,Kent,Other service activities,S (94-96),4940
+2022,Kent,Activities of households,T (97-98),0
+2022,Kent,Activities of extraterritorial organisations and bodies,U (99),0
+2022,Lancashire,"Agriculture, forestry and fishing",A (1-3),905
+2022,Lancashire,Mining and quarrying,B (5-9),5
+2022,Lancashire,Manufacturing,C (10-33),7580
+2022,Lancashire,"Electricity, gas, steam and air conditioning supply",D (35),95
+2022,Lancashire,Water supply; sewerage and waste management,E (36-39),220
+2022,Lancashire,Construction,F (41-43),4135
+2022,Lancashire,Wholesale and retail trade; repair of motor vehicles,G (45-47),40595
+2022,Lancashire,Transportation and storage,H (49-53),3275
+2022,Lancashire,Accommodation and food service activities,I (55-56),35220
+2022,Lancashire,Information and communication,J (58-63),2415
+2022,Lancashire,Financial and insurance activities,K (64-66),1345
+2022,Lancashire,Real estate activities,L (68),2340
+2022,Lancashire,"Professional, scientific and technical activities",M (69-75),6770
+2022,Lancashire,Administrative and support service activities,N (77-82),11395
+2022,Lancashire,Public administration and defence,O (84),10240
+2022,Lancashire,Education,P (85),23910
+2022,Lancashire,Human health and social work activities,Q (86-88),38375
+2022,Lancashire,"Arts, entertainment and recreation",R (90-93),8575
+2022,Lancashire,Other service activities,S (94-96),4320
+2022,Lancashire,Activities of households,T (97-98),0
+2022,Lancashire,Activities of extraterritorial organisations and bodies,U (99),0
+2022,"Leicestershire, Rutland and Northamptonshire","Agriculture, forestry and fishing",A (1-3),975
+2022,"Leicestershire, Rutland and Northamptonshire",Mining and quarrying,B (5-9),100
+2022,"Leicestershire, Rutland and Northamptonshire",Manufacturing,C (10-33),10065
+2022,"Leicestershire, Rutland and Northamptonshire","Electricity, gas, steam and air conditioning supply",D (35),725
+2022,"Leicestershire, Rutland and Northamptonshire",Water supply; sewerage and waste management,E (36-39),480
+2022,"Leicestershire, Rutland and Northamptonshire",Construction,F (41-43),7200
+2022,"Leicestershire, Rutland and Northamptonshire",Wholesale and retail trade; repair of motor vehicles,G (45-47),51225
+2022,"Leicestershire, Rutland and Northamptonshire",Transportation and storage,H (49-53),9460
+2022,"Leicestershire, Rutland and Northamptonshire",Accommodation and food service activities,I (55-56),37965
+2022,"Leicestershire, Rutland and Northamptonshire",Information and communication,J (58-63),3210
+2022,"Leicestershire, Rutland and Northamptonshire",Financial and insurance activities,K (64-66),4285
+2022,"Leicestershire, Rutland and Northamptonshire",Real estate activities,L (68),3930
+2022,"Leicestershire, Rutland and Northamptonshire","Professional, scientific and technical activities",M (69-75),13650
+2022,"Leicestershire, Rutland and Northamptonshire",Administrative and support service activities,N (77-82),27390
+2022,"Leicestershire, Rutland and Northamptonshire",Public administration and defence,O (84),8150
+2022,"Leicestershire, Rutland and Northamptonshire",Education,P (85),33035
+2022,"Leicestershire, Rutland and Northamptonshire",Human health and social work activities,Q (86-88),46275
+2022,"Leicestershire, Rutland and Northamptonshire","Arts, entertainment and recreation",R (90-93),10340
+2022,"Leicestershire, Rutland and Northamptonshire",Other service activities,S (94-96),5225
+2022,"Leicestershire, Rutland and Northamptonshire",Activities of households,T (97-98),0
+2022,"Leicestershire, Rutland and Northamptonshire",Activities of extraterritorial organisations and bodies,U (99),0
+2022,Lincolnshire,"Agriculture, forestry and fishing",A (1-3),1310
+2022,Lincolnshire,Mining and quarrying,B (5-9),25
+2022,Lincolnshire,Manufacturing,C (10-33),2335
+2022,Lincolnshire,"Electricity, gas, steam and air conditioning supply",D (35),10
+2022,Lincolnshire,Water supply; sewerage and waste management,E (36-39),280
+2022,Lincolnshire,Construction,F (41-43),2845
+2022,Lincolnshire,Wholesale and retail trade; repair of motor vehicles,G (45-47),21465
+2022,Lincolnshire,Transportation and storage,H (49-53),2405
+2022,Lincolnshire,Accommodation and food service activities,I (55-56),17405
+2022,Lincolnshire,Information and communication,J (58-63),930
+2022,Lincolnshire,Financial and insurance activities,K (64-66),605
+2022,Lincolnshire,Real estate activities,L (68),1420
+2022,Lincolnshire,"Professional, scientific and technical activities",M (69-75),3440
+2022,Lincolnshire,Administrative and support service activities,N (77-82),9865
+2022,Lincolnshire,Public administration and defence,O (84),2525
+2022,Lincolnshire,Education,P (85),9915
+2022,Lincolnshire,Human health and social work activities,Q (86-88),18450
+2022,Lincolnshire,"Arts, entertainment and recreation",R (90-93),3805
+2022,Lincolnshire,Other service activities,S (94-96),1730
+2022,Lincolnshire,Activities of households,T (97-98),0
+2022,Lincolnshire,Activities of extraterritorial organisations and bodies,U (99),0
+2022,Merseyside,"Agriculture, forestry and fishing",A (1-3),60
+2022,Merseyside,Mining and quarrying,B (5-9),10
+2022,Merseyside,Manufacturing,C (10-33),4295
+2022,Merseyside,"Electricity, gas, steam and air conditioning supply",D (35),35
+2022,Merseyside,Water supply; sewerage and waste management,E (36-39),285
+2022,Merseyside,Construction,F (41-43),4150
+2022,Merseyside,Wholesale and retail trade; repair of motor vehicles,G (45-47),39995
+2022,Merseyside,Transportation and storage,H (49-53),3450
+2022,Merseyside,Accommodation and food service activities,I (55-56),33375
+2022,Merseyside,Information and communication,J (58-63),2370
+2022,Merseyside,Financial and insurance activities,K (64-66),2780
+2022,Merseyside,Real estate activities,L (68),2500
+2022,Merseyside,"Professional, scientific and technical activities",M (69-75),11500
+2022,Merseyside,Administrative and support service activities,N (77-82),17915
+2022,Merseyside,Public administration and defence,O (84),9100
+2022,Merseyside,Education,P (85),25300
+2022,Merseyside,Human health and social work activities,Q (86-88),54075
+2022,Merseyside,"Arts, entertainment and recreation",R (90-93),10160
+2022,Merseyside,Other service activities,S (94-96),4855
+2022,Merseyside,Activities of households,T (97-98),0
+2022,Merseyside,Activities of extraterritorial organisations and bodies,U (99),0
+2022,North Eastern Scotland,"Agriculture, forestry and fishing",A (1-3),2180
+2022,North Eastern Scotland,Mining and quarrying,B (5-9),555
+2022,North Eastern Scotland,Manufacturing,C (10-33),2270
+2022,North Eastern Scotland,"Electricity, gas, steam and air conditioning supply",D (35),60
+2022,North Eastern Scotland,Water supply; sewerage and waste management,E (36-39),125
+2022,North Eastern Scotland,Construction,F (41-43),1525
+2022,North Eastern Scotland,Wholesale and retail trade; repair of motor vehicles,G (45-47),13185
+2022,North Eastern Scotland,Transportation and storage,H (49-53),1525
+2022,North Eastern Scotland,Accommodation and food service activities,I (55-56),11585
+2022,North Eastern Scotland,Information and communication,J (58-63),750
+2022,North Eastern Scotland,Financial and insurance activities,K (64-66),460
+2022,North Eastern Scotland,Real estate activities,L (68),790
+2022,North Eastern Scotland,"Professional, scientific and technical activities",M (69-75),4720
+2022,North Eastern Scotland,Administrative and support service activities,N (77-82),5150
+2022,North Eastern Scotland,Public administration and defence,O (84),2870
+2022,North Eastern Scotland,Education,P (85),8580
+2022,North Eastern Scotland,Human health and social work activities,Q (86-88),20650
+2022,North Eastern Scotland,"Arts, entertainment and recreation",R (90-93),3455
+2022,North Eastern Scotland,Other service activities,S (94-96),1325
+2022,North Eastern Scotland,Activities of households,T (97-98),0
+2022,North Eastern Scotland,Activities of extraterritorial organisations and bodies,U (99),0
+2022,North Yorkshire,"Agriculture, forestry and fishing",A (1-3),1775
+2022,North Yorkshire,Mining and quarrying,B (5-9),20
+2022,North Yorkshire,Manufacturing,C (10-33),3465
+2022,North Yorkshire,"Electricity, gas, steam and air conditioning supply",D (35),40
+2022,North Yorkshire,Water supply; sewerage and waste management,E (36-39),320
+2022,North Yorkshire,Construction,F (41-43),1645
+2022,North Yorkshire,Wholesale and retail trade; repair of motor vehicles,G (45-47),25465
+2022,North Yorkshire,Transportation and storage,H (49-53),1855
+2022,North Yorkshire,Accommodation and food service activities,I (55-56),27000
+2022,North Yorkshire,Information and communication,J (58-63),1175
+2022,North Yorkshire,Financial and insurance activities,K (64-66),1815
+2022,North Yorkshire,Real estate activities,L (68),2550
+2022,North Yorkshire,"Professional, scientific and technical activities",M (69-75),6325
+2022,North Yorkshire,Administrative and support service activities,N (77-82),13850
+2022,North Yorkshire,Public administration and defence,O (84),4545
+2022,North Yorkshire,Education,P (85),15130
+2022,North Yorkshire,Human health and social work activities,Q (86-88),21725
+2022,North Yorkshire,"Arts, entertainment and recreation",R (90-93),5705
+2022,North Yorkshire,Other service activities,S (94-96),2800
+2022,North Yorkshire,Activities of households,T (97-98),0
+2022,North Yorkshire,Activities of extraterritorial organisations and bodies,U (99),0
+2022,"Northumberland, and Tyne and Wear","Agriculture, forestry and fishing",A (1-3),820
+2022,"Northumberland, and Tyne and Wear",Mining and quarrying,B (5-9),5
+2022,"Northumberland, and Tyne and Wear",Manufacturing,C (10-33),4110
+2022,"Northumberland, and Tyne and Wear","Electricity, gas, steam and air conditioning supply",D (35),585
+2022,"Northumberland, and Tyne and Wear",Water supply; sewerage and waste management,E (36-39),370
+2022,"Northumberland, and Tyne and Wear",Construction,F (41-43),1815
+2022,"Northumberland, and Tyne and Wear",Wholesale and retail trade; repair of motor vehicles,G (45-47),42510
+2022,"Northumberland, and Tyne and Wear",Transportation and storage,H (49-53),3260
+2022,"Northumberland, and Tyne and Wear",Accommodation and food service activities,I (55-56),32095
+2022,"Northumberland, and Tyne and Wear",Information and communication,J (58-63),2490
+2022,"Northumberland, and Tyne and Wear",Financial and insurance activities,K (64-66),2835
+2022,"Northumberland, and Tyne and Wear",Real estate activities,L (68),2405
+2022,"Northumberland, and Tyne and Wear","Professional, scientific and technical activities",M (69-75),7405
+2022,"Northumberland, and Tyne and Wear",Administrative and support service activities,N (77-82),14275
+2022,"Northumberland, and Tyne and Wear",Public administration and defence,O (84),10150
+2022,"Northumberland, and Tyne and Wear",Education,P (85),21680
+2022,"Northumberland, and Tyne and Wear",Human health and social work activities,Q (86-88),37850
+2022,"Northumberland, and Tyne and Wear","Arts, entertainment and recreation",R (90-93),7710
+2022,"Northumberland, and Tyne and Wear",Other service activities,S (94-96),5755
+2022,"Northumberland, and Tyne and Wear",Activities of households,T (97-98),0
+2022,"Northumberland, and Tyne and Wear",Activities of extraterritorial organisations and bodies,U (99),0
+2022,Outer London - East and North East,"Agriculture, forestry and fishing",A (1-3),185
+2022,Outer London - East and North East,Mining and quarrying,B (5-9),10
+2022,Outer London - East and North East,Manufacturing,C (10-33),3085
+2022,Outer London - East and North East,"Electricity, gas, steam and air conditioning supply",D (35),15
+2022,Outer London - East and North East,Water supply; sewerage and waste management,E (36-39),805
+2022,Outer London - East and North East,Construction,F (41-43),11110
+2022,Outer London - East and North East,Wholesale and retail trade; repair of motor vehicles,G (45-47),41895
+2022,Outer London - East and North East,Transportation and storage,H (49-53),6250
+2022,Outer London - East and North East,Accommodation and food service activities,I (55-56),25610
+2022,Outer London - East and North East,Information and communication,J (58-63),1900
+2022,Outer London - East and North East,Financial and insurance activities,K (64-66),1000
+2022,Outer London - East and North East,Real estate activities,L (68),3760
+2022,Outer London - East and North East,"Professional, scientific and technical activities",M (69-75),5865
+2022,Outer London - East and North East,Administrative and support service activities,N (77-82),20575
+2022,Outer London - East and North East,Public administration and defence,O (84),3620
+2022,Outer London - East and North East,Education,P (85),29035
+2022,Outer London - East and North East,Human health and social work activities,Q (86-88),32900
+2022,Outer London - East and North East,"Arts, entertainment and recreation",R (90-93),6870
+2022,Outer London - East and North East,Other service activities,S (94-96),4450
+2022,Outer London - East and North East,Activities of households,T (97-98),0
+2022,Outer London - East and North East,Activities of extraterritorial organisations and bodies,U (99),0
+2022,Outer London - South,"Agriculture, forestry and fishing",A (1-3),165
+2022,Outer London - South,Mining and quarrying,B (5-9),0
+2022,Outer London - South,Manufacturing,C (10-33),1225
+2022,Outer London - South,"Electricity, gas, steam and air conditioning supply",D (35),30
+2022,Outer London - South,Water supply; sewerage and waste management,E (36-39),290
+2022,Outer London - South,Construction,F (41-43),6555
+2022,Outer London - South,Wholesale and retail trade; repair of motor vehicles,G (45-47),32160
+2022,Outer London - South,Transportation and storage,H (49-53),2885
+2022,Outer London - South,Accommodation and food service activities,I (55-56),18160
+2022,Outer London - South,Information and communication,J (58-63),2085
+2022,Outer London - South,Financial and insurance activities,K (64-66),1645
+2022,Outer London - South,Real estate activities,L (68),2055
+2022,Outer London - South,"Professional, scientific and technical activities",M (69-75),6415
+2022,Outer London - South,Administrative and support service activities,N (77-82),22105
+2022,Outer London - South,Public administration and defence,O (84),3570
+2022,Outer London - South,Education,P (85),22000
+2022,Outer London - South,Human health and social work activities,Q (86-88),26975
+2022,Outer London - South,"Arts, entertainment and recreation",R (90-93),6715
+2022,Outer London - South,Other service activities,S (94-96),4025
+2022,Outer London - South,Activities of households,T (97-98),0
+2022,Outer London - South,Activities of extraterritorial organisations and bodies,U (99),0
+2022,Outer London - West and North West,"Agriculture, forestry and fishing",A (1-3),175
+2022,Outer London - West and North West,Mining and quarrying,B (5-9),10
+2022,Outer London - West and North West,Manufacturing,C (10-33),3800
+2022,Outer London - West and North West,"Electricity, gas, steam and air conditioning supply",D (35),60
+2022,Outer London - West and North West,Water supply; sewerage and waste management,E (36-39),760
+2022,Outer London - West and North West,Construction,F (41-43),11425
+2022,Outer London - West and North West,Wholesale and retail trade; repair of motor vehicles,G (45-47),51075
+2022,Outer London - West and North West,Transportation and storage,H (49-53),28130
+2022,Outer London - West and North West,Accommodation and food service activities,I (55-56),34610
+2022,Outer London - West and North West,Information and communication,J (58-63),5445
+2022,Outer London - West and North West,Financial and insurance activities,K (64-66),1480
+2022,Outer London - West and North West,Real estate activities,L (68),6605
+2022,Outer London - West and North West,"Professional, scientific and technical activities",M (69-75),11500
+2022,Outer London - West and North West,Administrative and support service activities,N (77-82),28210
+2022,Outer London - West and North West,Public administration and defence,O (84),4675
+2022,Outer London - West and North West,Education,P (85),34575
+2022,Outer London - West and North West,Human health and social work activities,Q (86-88),35300
+2022,Outer London - West and North West,"Arts, entertainment and recreation",R (90-93),8340
+2022,Outer London - West and North West,Other service activities,S (94-96),6335
+2022,Outer London - West and North West,Activities of households,T (97-98),0
+2022,Outer London - West and North West,Activities of extraterritorial organisations and bodies,U (99),0
+2022,Shropshire and Staffordshire,"Agriculture, forestry and fishing",A (1-3),1550
+2022,Shropshire and Staffordshire,Mining and quarrying,B (5-9),15
+2022,Shropshire and Staffordshire,Manufacturing,C (10-33),10210
+2022,Shropshire and Staffordshire,"Electricity, gas, steam and air conditioning supply",D (35),10
+2022,Shropshire and Staffordshire,Water supply; sewerage and waste management,E (36-39),440
+2022,Shropshire and Staffordshire,Construction,F (41-43),4520
+2022,Shropshire and Staffordshire,Wholesale and retail trade; repair of motor vehicles,G (45-47),43715
+2022,Shropshire and Staffordshire,Transportation and storage,H (49-53),11820
+2022,Shropshire and Staffordshire,Accommodation and food service activities,I (55-56),29080
+2022,Shropshire and Staffordshire,Information and communication,J (58-63),3035
+2022,Shropshire and Staffordshire,Financial and insurance activities,K (64-66),1485
+2022,Shropshire and Staffordshire,Real estate activities,L (68),4325
+2022,Shropshire and Staffordshire,"Professional, scientific and technical activities",M (69-75),8650
+2022,Shropshire and Staffordshire,Administrative and support service activities,N (77-82),16240
+2022,Shropshire and Staffordshire,Public administration and defence,O (84),6975
+2022,Shropshire and Staffordshire,Education,P (85),22580
+2022,Shropshire and Staffordshire,Human health and social work activities,Q (86-88),40925
+2022,Shropshire and Staffordshire,"Arts, entertainment and recreation",R (90-93),8900
+2022,Shropshire and Staffordshire,Other service activities,S (94-96),8180
+2022,Shropshire and Staffordshire,Activities of households,T (97-98),0
+2022,Shropshire and Staffordshire,Activities of extraterritorial organisations and bodies,U (99),0
+2022,South Yorkshire,"Agriculture, forestry and fishing",A (1-3),215
+2022,South Yorkshire,Mining and quarrying,B (5-9),0
+2022,South Yorkshire,Manufacturing,C (10-33),5180
+2022,South Yorkshire,"Electricity, gas, steam and air conditioning supply",D (35),30
+2022,South Yorkshire,Water supply; sewerage and waste management,E (36-39),705
+2022,South Yorkshire,Construction,F (41-43),3025
+2022,South Yorkshire,Wholesale and retail trade; repair of motor vehicles,G (45-47),40020
+2022,South Yorkshire,Transportation and storage,H (49-53),6485
+2022,South Yorkshire,Accommodation and food service activities,I (55-56),24440
+2022,South Yorkshire,Information and communication,J (58-63),2430
+2022,South Yorkshire,Financial and insurance activities,K (64-66),2980
+2022,South Yorkshire,Real estate activities,L (68),2230
+2022,South Yorkshire,"Professional, scientific and technical activities",M (69-75),8495
+2022,South Yorkshire,Administrative and support service activities,N (77-82),18075
+2022,South Yorkshire,Public administration and defence,O (84),8790
+2022,South Yorkshire,Education,P (85),23950
+2022,South Yorkshire,Human health and social work activities,Q (86-88),40600
+2022,South Yorkshire,"Arts, entertainment and recreation",R (90-93),8000
+2022,South Yorkshire,Other service activities,S (94-96),3790
+2022,South Yorkshire,Activities of households,T (97-98),0
+2022,South Yorkshire,Activities of extraterritorial organisations and bodies,U (99),0
+2022,Southern Scotland,"Agriculture, forestry and fishing",A (1-3),3810
+2022,Southern Scotland,Mining and quarrying,B (5-9),10
+2022,Southern Scotland,Manufacturing,C (10-33),3175
+2022,Southern Scotland,"Electricity, gas, steam and air conditioning supply",D (35),350
+2022,Southern Scotland,Water supply; sewerage and waste management,E (36-39),365
+2022,Southern Scotland,Construction,F (41-43),2780
+2022,Southern Scotland,Wholesale and retail trade; repair of motor vehicles,G (45-47),24095
+2022,Southern Scotland,Transportation and storage,H (49-53),1995
+2022,Southern Scotland,Accommodation and food service activities,I (55-56),16405
+2022,Southern Scotland,Information and communication,J (58-63),790
+2022,Southern Scotland,Financial and insurance activities,K (64-66),1000
+2022,Southern Scotland,Real estate activities,L (68),1415
+2022,Southern Scotland,"Professional, scientific and technical activities",M (69-75),3185
+2022,Southern Scotland,Administrative and support service activities,N (77-82),7730
+2022,Southern Scotland,Public administration and defence,O (84),5150
+2022,Southern Scotland,Education,P (85),11730
+2022,Southern Scotland,Human health and social work activities,Q (86-88),27425
+2022,Southern Scotland,"Arts, entertainment and recreation",R (90-93),6475
+2022,Southern Scotland,Other service activities,S (94-96),2120
+2022,Southern Scotland,Activities of households,T (97-98),0
+2022,Southern Scotland,Activities of extraterritorial organisations and bodies,U (99),0
+2022,"Surrey, East and West Sussex","Agriculture, forestry and fishing",A (1-3),1620
+2022,"Surrey, East and West Sussex",Mining and quarrying,B (5-9),15
+2022,"Surrey, East and West Sussex",Manufacturing,C (10-33),7505
+2022,"Surrey, East and West Sussex","Electricity, gas, steam and air conditioning supply",D (35),270
+2022,"Surrey, East and West Sussex",Water supply; sewerage and waste management,E (36-39),665
+2022,"Surrey, East and West Sussex",Construction,F (41-43),12240
+2022,"Surrey, East and West Sussex",Wholesale and retail trade; repair of motor vehicles,G (45-47),75355
+2022,"Surrey, East and West Sussex",Transportation and storage,H (49-53),8390
+2022,"Surrey, East and West Sussex",Accommodation and food service activities,I (55-56),59950
+2022,"Surrey, East and West Sussex",Information and communication,J (58-63),10105
+2022,"Surrey, East and West Sussex",Financial and insurance activities,K (64-66),5540
+2022,"Surrey, East and West Sussex",Real estate activities,L (68),6500
+2022,"Surrey, East and West Sussex","Professional, scientific and technical activities",M (69-75),26120
+2022,"Surrey, East and West Sussex",Administrative and support service activities,N (77-82),37205
+2022,"Surrey, East and West Sussex",Public administration and defence,O (84),9925
+2022,"Surrey, East and West Sussex",Education,P (85),58180
+2022,"Surrey, East and West Sussex",Human health and social work activities,Q (86-88),76950
+2022,"Surrey, East and West Sussex","Arts, entertainment and recreation",R (90-93),26680
+2022,"Surrey, East and West Sussex",Other service activities,S (94-96),9045
+2022,"Surrey, East and West Sussex",Activities of households,T (97-98),0
+2022,"Surrey, East and West Sussex",Activities of extraterritorial organisations and bodies,U (99),0
+2022,Tees Valley and Durham,"Agriculture, forestry and fishing",A (1-3),560
+2022,Tees Valley and Durham,Mining and quarrying,B (5-9),75
+2022,Tees Valley and Durham,Manufacturing,C (10-33),4735
+2022,Tees Valley and Durham,"Electricity, gas, steam and air conditioning supply",D (35),355
+2022,Tees Valley and Durham,Water supply; sewerage and waste management,E (36-39),470
+2022,Tees Valley and Durham,Construction,F (41-43),1750
+2022,Tees Valley and Durham,Wholesale and retail trade; repair of motor vehicles,G (45-47),31400
+2022,Tees Valley and Durham,Transportation and storage,H (49-53),3060
+2022,Tees Valley and Durham,Accommodation and food service activities,I (55-56),20585
+2022,Tees Valley and Durham,Information and communication,J (58-63),1290
+2022,Tees Valley and Durham,Financial and insurance activities,K (64-66),1240
+2022,Tees Valley and Durham,Real estate activities,L (68),1755
+2022,Tees Valley and Durham,"Professional, scientific and technical activities",M (69-75),4695
+2022,Tees Valley and Durham,Administrative and support service activities,N (77-82),8520
+2022,Tees Valley and Durham,Public administration and defence,O (84),7150
+2022,Tees Valley and Durham,Education,P (85),19885
+2022,Tees Valley and Durham,Human health and social work activities,Q (86-88),27475
+2022,Tees Valley and Durham,"Arts, entertainment and recreation",R (90-93),4795
+2022,Tees Valley and Durham,Other service activities,S (94-96),3615
+2022,Tees Valley and Durham,Activities of households,T (97-98),0
+2022,Tees Valley and Durham,Activities of extraterritorial organisations and bodies,U (99),0
+2022,West Central Scotland,"Agriculture, forestry and fishing",A (1-3),505
+2022,West Central Scotland,Mining and quarrying,B (5-9),0
+2022,West Central Scotland,Manufacturing,C (10-33),3720
+2022,West Central Scotland,"Electricity, gas, steam and air conditioning supply",D (35),445
+2022,West Central Scotland,Water supply; sewerage and waste management,E (36-39),345
+2022,West Central Scotland,Construction,F (41-43),4660
+2022,West Central Scotland,Wholesale and retail trade; repair of motor vehicles,G (45-47),42540
+2022,West Central Scotland,Transportation and storage,H (49-53),4690
+2022,West Central Scotland,Accommodation and food service activities,I (55-56),29650
+2022,West Central Scotland,Information and communication,J (58-63),3660
+2022,West Central Scotland,Financial and insurance activities,K (64-66),4925
+2022,West Central Scotland,Real estate activities,L (68),2900
+2022,West Central Scotland,"Professional, scientific and technical activities",M (69-75),9400
+2022,West Central Scotland,Administrative and support service activities,N (77-82),32410
+2022,West Central Scotland,Public administration and defence,O (84),12915
+2022,West Central Scotland,Education,P (85),24225
+2022,West Central Scotland,Human health and social work activities,Q (86-88),44950
+2022,West Central Scotland,"Arts, entertainment and recreation",R (90-93),11045
+2022,West Central Scotland,Other service activities,S (94-96),4080
+2022,West Central Scotland,Activities of households,T (97-98),0
+2022,West Central Scotland,Activities of extraterritorial organisations and bodies,U (99),0
+2022,West Midlands,"Agriculture, forestry and fishing",A (1-3),55
+2022,West Midlands,Mining and quarrying,B (5-9),0
+2022,West Midlands,Manufacturing,C (10-33),14145
+2022,West Midlands,"Electricity, gas, steam and air conditioning supply",D (35),360
+2022,West Midlands,Water supply; sewerage and waste management,E (36-39),520
+2022,West Midlands,Construction,F (41-43),6585
+2022,West Midlands,Wholesale and retail trade; repair of motor vehicles,G (45-47),73190
+2022,West Midlands,Transportation and storage,H (49-53),16805
+2022,West Midlands,Accommodation and food service activities,I (55-56),44085
+2022,West Midlands,Information and communication,J (58-63),5690
+2022,West Midlands,Financial and insurance activities,K (64-66),5420
+2022,West Midlands,Real estate activities,L (68),8975
+2022,West Midlands,"Professional, scientific and technical activities",M (69-75),20680
+2022,West Midlands,Administrative and support service activities,N (77-82),48420
+2022,West Midlands,Public administration and defence,O (84),10530
+2022,West Midlands,Education,P (85),47500
+2022,West Midlands,Human health and social work activities,Q (86-88),78350
+2022,West Midlands,"Arts, entertainment and recreation",R (90-93),10405
+2022,West Midlands,Other service activities,S (94-96),12800
+2022,West Midlands,Activities of households,T (97-98),0
+2022,West Midlands,Activities of extraterritorial organisations and bodies,U (99),0
+2022,West Wales and The Valleys,"Agriculture, forestry and fishing",A (1-3),2190
+2022,West Wales and The Valleys,Mining and quarrying,B (5-9),40
+2022,West Wales and The Valleys,Manufacturing,C (10-33),5565
+2022,West Wales and The Valleys,"Electricity, gas, steam and air conditioning supply",D (35),65
+2022,West Wales and The Valleys,Water supply; sewerage and waste management,E (36-39),1165
+2022,West Wales and The Valleys,Construction,F (41-43),5830
+2022,West Wales and The Valleys,Wholesale and retail trade; repair of motor vehicles,G (45-47),52675
+2022,West Wales and The Valleys,Transportation and storage,H (49-53),5635
+2022,West Wales and The Valleys,Accommodation and food service activities,I (55-56),40650
+2022,West Wales and The Valleys,Information and communication,J (58-63),2070
+2022,West Wales and The Valleys,Financial and insurance activities,K (64-66),2055
+2022,West Wales and The Valleys,Real estate activities,L (68),1750
+2022,West Wales and The Valleys,"Professional, scientific and technical activities",M (69-75),7905
+2022,West Wales and The Valleys,Administrative and support service activities,N (77-82),17540
+2022,West Wales and The Valleys,Public administration and defence,O (84),17870
+2022,West Wales and The Valleys,Education,P (85),33110
+2022,West Wales and The Valleys,Human health and social work activities,Q (86-88),50900
+2022,West Wales and The Valleys,"Arts, entertainment and recreation",R (90-93),10905
+2022,West Wales and The Valleys,Other service activities,S (94-96),6700
+2022,West Wales and The Valleys,Activities of households,T (97-98),0
+2022,West Wales and The Valleys,Activities of extraterritorial organisations and bodies,U (99),0
+2022,West Yorkshire,"Agriculture, forestry and fishing",A (1-3),350
+2022,West Yorkshire,Mining and quarrying,B (5-9),15
+2022,West Yorkshire,Manufacturing,C (10-33),10685
+2022,West Yorkshire,"Electricity, gas, steam and air conditioning supply",D (35),405
+2022,West Yorkshire,Water supply; sewerage and waste management,E (36-39),1300
+2022,West Yorkshire,Construction,F (41-43),5035
+2022,West Yorkshire,Wholesale and retail trade; repair of motor vehicles,G (45-47),65420
+2022,West Yorkshire,Transportation and storage,H (49-53),10055
+2022,West Yorkshire,Accommodation and food service activities,I (55-56),43270
+2022,West Yorkshire,Information and communication,J (58-63),4885
+2022,West Yorkshire,Financial and insurance activities,K (64-66),7860
+2022,West Yorkshire,Real estate activities,L (68),5720
+2022,West Yorkshire,"Professional, scientific and technical activities",M (69-75),16050
+2022,West Yorkshire,Administrative and support service activities,N (77-82),46995
+2022,West Yorkshire,Public administration and defence,O (84),10950
+2022,West Yorkshire,Education,P (85),40040
+2022,West Yorkshire,Human health and social work activities,Q (86-88),65000
+2022,West Yorkshire,"Arts, entertainment and recreation",R (90-93),13490
+2022,West Yorkshire,Other service activities,S (94-96),7565
+2022,West Yorkshire,Activities of households,T (97-98),0
+2022,West Yorkshire,Activities of extraterritorial organisations and bodies,U (99),0
+2023,Bedfordshire and Hertfordshire,"Agriculture, forestry and fishing",A (1-3),440
+2023,Bedfordshire and Hertfordshire,Mining and quarrying,B (5-9),5
+2023,Bedfordshire and Hertfordshire,Manufacturing,C (10-33),5980
+2023,Bedfordshire and Hertfordshire,"Electricity, gas, steam and air conditioning supply",D (35),50
+2023,Bedfordshire and Hertfordshire,Water supply; sewerage and waste management,E (36-39),220
+2023,Bedfordshire and Hertfordshire,Construction,F (41-43),7345
+2023,Bedfordshire and Hertfordshire,Wholesale and retail trade; repair of motor vehicles,G (45-47),52370
+2023,Bedfordshire and Hertfordshire,Transportation and storage,H (49-53),9535
+2023,Bedfordshire and Hertfordshire,Accommodation and food service activities,I (55-56),37660
+2023,Bedfordshire and Hertfordshire,Information and communication,J (58-63),6230
+2023,Bedfordshire and Hertfordshire,Financial and insurance activities,K (64-66),2475
+2023,Bedfordshire and Hertfordshire,Real estate activities,L (68),5440
+2023,Bedfordshire and Hertfordshire,"Professional, scientific and technical activities",M (69-75),17965
+2023,Bedfordshire and Hertfordshire,Administrative and support service activities,N (77-82),93825
+2023,Bedfordshire and Hertfordshire,Public administration and defence,O (84),4625
+2023,Bedfordshire and Hertfordshire,Education,P (85),37950
+2023,Bedfordshire and Hertfordshire,Human health and social work activities,Q (86-88),38675
+2023,Bedfordshire and Hertfordshire,"Arts, entertainment and recreation",R (90-93),12850
+2023,Bedfordshire and Hertfordshire,Other service activities,S (94-96),6645
+2023,Bedfordshire and Hertfordshire,Activities of households,T (97-98),0
+2023,Bedfordshire and Hertfordshire,Activities of extraterritorial organisations and bodies,U (99),0
+2023,"Berkshire, Buckinghamshire and Oxfordshire","Agriculture, forestry and fishing",A (1-3),1195
+2023,"Berkshire, Buckinghamshire and Oxfordshire",Mining and quarrying,B (5-9),5
+2023,"Berkshire, Buckinghamshire and Oxfordshire",Manufacturing,C (10-33),6310
+2023,"Berkshire, Buckinghamshire and Oxfordshire","Electricity, gas, steam and air conditioning supply",D (35),170
+2023,"Berkshire, Buckinghamshire and Oxfordshire",Water supply; sewerage and waste management,E (36-39),775
+2023,"Berkshire, Buckinghamshire and Oxfordshire",Construction,F (41-43),6190
+2023,"Berkshire, Buckinghamshire and Oxfordshire",Wholesale and retail trade; repair of motor vehicles,G (45-47),64490
+2023,"Berkshire, Buckinghamshire and Oxfordshire",Transportation and storage,H (49-53),8795
+2023,"Berkshire, Buckinghamshire and Oxfordshire",Accommodation and food service activities,I (55-56),51690
+2023,"Berkshire, Buckinghamshire and Oxfordshire",Information and communication,J (58-63),18445
+2023,"Berkshire, Buckinghamshire and Oxfordshire",Financial and insurance activities,K (64-66),4260
+2023,"Berkshire, Buckinghamshire and Oxfordshire",Real estate activities,L (68),5750
+2023,"Berkshire, Buckinghamshire and Oxfordshire","Professional, scientific and technical activities",M (69-75),29560
+2023,"Berkshire, Buckinghamshire and Oxfordshire",Administrative and support service activities,N (77-82),36545
+2023,"Berkshire, Buckinghamshire and Oxfordshire",Public administration and defence,O (84),5875
+2023,"Berkshire, Buckinghamshire and Oxfordshire",Education,P (85),60275
+2023,"Berkshire, Buckinghamshire and Oxfordshire",Human health and social work activities,Q (86-88),59750
+2023,"Berkshire, Buckinghamshire and Oxfordshire","Arts, entertainment and recreation",R (90-93),17800
+2023,"Berkshire, Buckinghamshire and Oxfordshire",Other service activities,S (94-96),7980
+2023,"Berkshire, Buckinghamshire and Oxfordshire",Activities of households,T (97-98),0
+2023,"Berkshire, Buckinghamshire and Oxfordshire",Activities of extraterritorial organisations and bodies,U (99),0
+2023,Cheshire,"Agriculture, forestry and fishing",A (1-3),885
+2023,Cheshire,Mining and quarrying,B (5-9),10
+2023,Cheshire,Manufacturing,C (10-33),3045
+2023,Cheshire,"Electricity, gas, steam and air conditioning supply",D (35),130
+2023,Cheshire,Water supply; sewerage and waste management,E (36-39),640
+2023,Cheshire,Construction,F (41-43),3385
+2023,Cheshire,Wholesale and retail trade; repair of motor vehicles,G (45-47),29120
+2023,Cheshire,Transportation and storage,H (49-53),3235
+2023,Cheshire,Accommodation and food service activities,I (55-56),23420
+2023,Cheshire,Information and communication,J (58-63),1765
+2023,Cheshire,Financial and insurance activities,K (64-66),2505
+2023,Cheshire,Real estate activities,L (68),1950
+2023,Cheshire,"Professional, scientific and technical activities",M (69-75),13790
+2023,Cheshire,Administrative and support service activities,N (77-82),21970
+2023,Cheshire,Public administration and defence,O (84),3075
+2023,Cheshire,Education,P (85),13815
+2023,Cheshire,Human health and social work activities,Q (86-88),25260
+2023,Cheshire,"Arts, entertainment and recreation",R (90-93),7590
+2023,Cheshire,Other service activities,S (94-96),3595
+2023,Cheshire,Activities of households,T (97-98),0
+2023,Cheshire,Activities of extraterritorial organisations and bodies,U (99),0
+2023,Cornwall and Isles of Scilly,"Agriculture, forestry and fishing",A (1-3),960
+2023,Cornwall and Isles of Scilly,Mining and quarrying,B (5-9),0
+2023,Cornwall and Isles of Scilly,Manufacturing,C (10-33),2180
+2023,Cornwall and Isles of Scilly,"Electricity, gas, steam and air conditioning supply",D (35),95
+2023,Cornwall and Isles of Scilly,Water supply; sewerage and waste management,E (36-39),230
+2023,Cornwall and Isles of Scilly,Construction,F (41-43),2060
+2023,Cornwall and Isles of Scilly,Wholesale and retail trade; repair of motor vehicles,G (45-47),18270
+2023,Cornwall and Isles of Scilly,Transportation and storage,H (49-53),1580
+2023,Cornwall and Isles of Scilly,Accommodation and food service activities,I (55-56),20550
+2023,Cornwall and Isles of Scilly,Information and communication,J (58-63),760
+2023,Cornwall and Isles of Scilly,Financial and insurance activities,K (64-66),435
+2023,Cornwall and Isles of Scilly,Real estate activities,L (68),1230
+2023,Cornwall and Isles of Scilly,"Professional, scientific and technical activities",M (69-75),3510
+2023,Cornwall and Isles of Scilly,Administrative and support service activities,N (77-82),5425
+2023,Cornwall and Isles of Scilly,Public administration and defence,O (84),1820
+2023,Cornwall and Isles of Scilly,Education,P (85),7695
+2023,Cornwall and Isles of Scilly,Human health and social work activities,Q (86-88),14645
+2023,Cornwall and Isles of Scilly,"Arts, entertainment and recreation",R (90-93),3800
+2023,Cornwall and Isles of Scilly,Other service activities,S (94-96),1440
+2023,Cornwall and Isles of Scilly,Activities of households,T (97-98),0
+2023,Cornwall and Isles of Scilly,Activities of extraterritorial organisations and bodies,U (99),0
+2023,Cumbria,"Agriculture, forestry and fishing",A (1-3),1170
+2023,Cumbria,Mining and quarrying,B (5-9),0
+2023,Cumbria,Manufacturing,C (10-33),2830
+2023,Cumbria,"Electricity, gas, steam and air conditioning supply",D (35),30
+2023,Cumbria,Water supply; sewerage and waste management,E (36-39),200
+2023,Cumbria,Construction,F (41-43),1950
+2023,Cumbria,Wholesale and retail trade; repair of motor vehicles,G (45-47),14375
+2023,Cumbria,Transportation and storage,H (49-53),1050
+2023,Cumbria,Accommodation and food service activities,I (55-56),16050
+2023,Cumbria,Information and communication,J (58-63),490
+2023,Cumbria,Financial and insurance activities,K (64-66),535
+2023,Cumbria,Real estate activities,L (68),1010
+2023,Cumbria,"Professional, scientific and technical activities",M (69-75),2840
+2023,Cumbria,Administrative and support service activities,N (77-82),4025
+2023,Cumbria,Public administration and defence,O (84),2410
+2023,Cumbria,Education,P (85),8080
+2023,Cumbria,Human health and social work activities,Q (86-88),13210
+2023,Cumbria,"Arts, entertainment and recreation",R (90-93),3005
+2023,Cumbria,Other service activities,S (94-96),1750
+2023,Cumbria,Activities of households,T (97-98),0
+2023,Cumbria,Activities of extraterritorial organisations and bodies,U (99),0
+2023,Derbyshire and Nottinghamshire,"Agriculture, forestry and fishing",A (1-3),765
+2023,Derbyshire and Nottinghamshire,Mining and quarrying,B (5-9),70
+2023,Derbyshire and Nottinghamshire,Manufacturing,C (10-33),10870
+2023,Derbyshire and Nottinghamshire,"Electricity, gas, steam and air conditioning supply",D (35),575
+2023,Derbyshire and Nottinghamshire,Water supply; sewerage and waste management,E (36-39),515
+2023,Derbyshire and Nottinghamshire,Construction,F (41-43),5700
+2023,Derbyshire and Nottinghamshire,Wholesale and retail trade; repair of motor vehicles,G (45-47),56670
+2023,Derbyshire and Nottinghamshire,Transportation and storage,H (49-53),8145
+2023,Derbyshire and Nottinghamshire,Accommodation and food service activities,I (55-56),46975
+2023,Derbyshire and Nottinghamshire,Information and communication,J (58-63),4600
+2023,Derbyshire and Nottinghamshire,Financial and insurance activities,K (64-66),1990
+2023,Derbyshire and Nottinghamshire,Real estate activities,L (68),5500
+2023,Derbyshire and Nottinghamshire,"Professional, scientific and technical activities",M (69-75),16180
+2023,Derbyshire and Nottinghamshire,Administrative and support service activities,N (77-82),25785
+2023,Derbyshire and Nottinghamshire,Public administration and defence,O (84),9925
+2023,Derbyshire and Nottinghamshire,Education,P (85),39040
+2023,Derbyshire and Nottinghamshire,Human health and social work activities,Q (86-88),64700
+2023,Derbyshire and Nottinghamshire,"Arts, entertainment and recreation",R (90-93),16495
+2023,Derbyshire and Nottinghamshire,Other service activities,S (94-96),4900
+2023,Derbyshire and Nottinghamshire,Activities of households,T (97-98),0
+2023,Derbyshire and Nottinghamshire,Activities of extraterritorial organisations and bodies,U (99),0
+2023,Devon,"Agriculture, forestry and fishing",A (1-3),1905
+2023,Devon,Mining and quarrying,B (5-9),5
+2023,Devon,Manufacturing,C (10-33),4435
+2023,Devon,"Electricity, gas, steam and air conditioning supply",D (35),280
+2023,Devon,Water supply; sewerage and waste management,E (36-39),475
+2023,Devon,Construction,F (41-43),3750
+2023,Devon,Wholesale and retail trade; repair of motor vehicles,G (45-47),36380
+2023,Devon,Transportation and storage,H (49-53),3325
+2023,Devon,Accommodation and food service activities,I (55-56),30350
+2023,Devon,Information and communication,J (58-63),2130
+2023,Devon,Financial and insurance activities,K (64-66),1155
+2023,Devon,Real estate activities,L (68),2780
+2023,Devon,"Professional, scientific and technical activities",M (69-75),7930
+2023,Devon,Administrative and support service activities,N (77-82),11605
+2023,Devon,Public administration and defence,O (84),5675
+2023,Devon,Education,P (85),21500
+2023,Devon,Human health and social work activities,Q (86-88),36500
+2023,Devon,"Arts, entertainment and recreation",R (90-93),7100
+2023,Devon,Other service activities,S (94-96),3765
+2023,Devon,Activities of households,T (97-98),0
+2023,Devon,Activities of extraterritorial organisations and bodies,U (99),0
+2023,Dorset and Somerset,"Agriculture, forestry and fishing",A (1-3),1600
+2023,Dorset and Somerset,Mining and quarrying,B (5-9),5
+2023,Dorset and Somerset,Manufacturing,C (10-33),4945
+2023,Dorset and Somerset,"Electricity, gas, steam and air conditioning supply",D (35),65
+2023,Dorset and Somerset,Water supply; sewerage and waste management,E (36-39),280
+2023,Dorset and Somerset,Construction,F (41-43),2785
+2023,Dorset and Somerset,Wholesale and retail trade; repair of motor vehicles,G (45-47),25630
+2023,Dorset and Somerset,Transportation and storage,H (49-53),2210
+2023,Dorset and Somerset,Accommodation and food service activities,I (55-56),18185
+2023,Dorset and Somerset,Information and communication,J (58-63),1375
+2023,Dorset and Somerset,Financial and insurance activities,K (64-66),550
+2023,Dorset and Somerset,Real estate activities,L (68),2350
+2023,Dorset and Somerset,"Professional, scientific and technical activities",M (69-75),6355
+2023,Dorset and Somerset,Administrative and support service activities,N (77-82),10395
+2023,Dorset and Somerset,Public administration and defence,O (84),2530
+2023,Dorset and Somerset,Education,P (85),16565
+2023,Dorset and Somerset,Human health and social work activities,Q (86-88),19925
+2023,Dorset and Somerset,"Arts, entertainment and recreation",R (90-93),4050
+2023,Dorset and Somerset,Other service activities,S (94-96),2410
+2023,Dorset and Somerset,Activities of households,T (97-98),0
+2023,Dorset and Somerset,Activities of extraterritorial organisations and bodies,U (99),0
+2023,East Anglia,"Agriculture, forestry and fishing",A (1-3),2370
+2023,East Anglia,Mining and quarrying,B (5-9),40
+2023,East Anglia,Manufacturing,C (10-33),10135
+2023,East Anglia,"Electricity, gas, steam and air conditioning supply",D (35),420
+2023,East Anglia,Water supply; sewerage and waste management,E (36-39),545
+2023,East Anglia,Construction,F (41-43),7800
+2023,East Anglia,Wholesale and retail trade; repair of motor vehicles,G (45-47),64445
+2023,East Anglia,Transportation and storage,H (49-53),8930
+2023,East Anglia,Accommodation and food service activities,I (55-56),48355
+2023,East Anglia,Information and communication,J (58-63),5375
+2023,East Anglia,Financial and insurance activities,K (64-66),3920
+2023,East Anglia,Real estate activities,L (68),4575
+2023,East Anglia,"Professional, scientific and technical activities",M (69-75),18575
+2023,East Anglia,Administrative and support service activities,N (77-82),27120
+2023,East Anglia,Public administration and defence,O (84),10675
+2023,East Anglia,Education,P (85),48400
+2023,East Anglia,Human health and social work activities,Q (86-88),62950
+2023,East Anglia,"Arts, entertainment and recreation",R (90-93),14590
+2023,East Anglia,Other service activities,S (94-96),7370
+2023,East Anglia,Activities of households,T (97-98),0
+2023,East Anglia,Activities of extraterritorial organisations and bodies,U (99),0
+2023,East Wales,"Agriculture, forestry and fishing",A (1-3),1125
+2023,East Wales,Mining and quarrying,B (5-9),10
+2023,East Wales,Manufacturing,C (10-33),4840
+2023,East Wales,"Electricity, gas, steam and air conditioning supply",D (35),695
+2023,East Wales,Water supply; sewerage and waste management,E (36-39),235
+2023,East Wales,Construction,F (41-43),2820
+2023,East Wales,Wholesale and retail trade; repair of motor vehicles,G (45-47),32865
+2023,East Wales,Transportation and storage,H (49-53),2985
+2023,East Wales,Accommodation and food service activities,I (55-56),28800
+2023,East Wales,Information and communication,J (58-63),2395
+2023,East Wales,Financial and insurance activities,K (64-66),2800
+2023,East Wales,Real estate activities,L (68),1860
+2023,East Wales,"Professional, scientific and technical activities",M (69-75),6670
+2023,East Wales,Administrative and support service activities,N (77-82),14150
+2023,East Wales,Public administration and defence,O (84),9375
+2023,East Wales,Education,P (85),18870
+2023,East Wales,Human health and social work activities,Q (86-88),33900
+2023,East Wales,"Arts, entertainment and recreation",R (90-93),6995
+2023,East Wales,Other service activities,S (94-96),4260
+2023,East Wales,Activities of households,T (97-98),0
+2023,East Wales,Activities of extraterritorial organisations and bodies,U (99),0
+2023,East Yorkshire and Northern Lincolnshire,"Agriculture, forestry and fishing",A (1-3),635
+2023,East Yorkshire and Northern Lincolnshire,Mining and quarrying,B (5-9),15
+2023,East Yorkshire and Northern Lincolnshire,Manufacturing,C (10-33),4110
+2023,East Yorkshire and Northern Lincolnshire,"Electricity, gas, steam and air conditioning supply",D (35),60
+2023,East Yorkshire and Northern Lincolnshire,Water supply; sewerage and waste management,E (36-39),490
+2023,East Yorkshire and Northern Lincolnshire,Construction,F (41-43),4090
+2023,East Yorkshire and Northern Lincolnshire,Wholesale and retail trade; repair of motor vehicles,G (45-47),25860
+2023,East Yorkshire and Northern Lincolnshire,Transportation and storage,H (49-53),3780
+2023,East Yorkshire and Northern Lincolnshire,Accommodation and food service activities,I (55-56),18375
+2023,East Yorkshire and Northern Lincolnshire,Information and communication,J (58-63),1160
+2023,East Yorkshire and Northern Lincolnshire,Financial and insurance activities,K (64-66),1060
+2023,East Yorkshire and Northern Lincolnshire,Real estate activities,L (68),1325
+2023,East Yorkshire and Northern Lincolnshire,"Professional, scientific and technical activities",M (69-75),4335
+2023,East Yorkshire and Northern Lincolnshire,Administrative and support service activities,N (77-82),8620
+2023,East Yorkshire and Northern Lincolnshire,Public administration and defence,O (84),4710
+2023,East Yorkshire and Northern Lincolnshire,Education,P (85),14455
+2023,East Yorkshire and Northern Lincolnshire,Human health and social work activities,Q (86-88),24875
+2023,East Yorkshire and Northern Lincolnshire,"Arts, entertainment and recreation",R (90-93),4880
+2023,East Yorkshire and Northern Lincolnshire,Other service activities,S (94-96),2605
+2023,East Yorkshire and Northern Lincolnshire,Activities of households,T (97-98),0
+2023,East Yorkshire and Northern Lincolnshire,Activities of extraterritorial organisations and bodies,U (99),0
+2023,Eastern Scotland,"Agriculture, forestry and fishing",A (1-3),7545
+2023,Eastern Scotland,Mining and quarrying,B (5-9),10
+2023,Eastern Scotland,Manufacturing,C (10-33),4880
+2023,Eastern Scotland,"Electricity, gas, steam and air conditioning supply",D (35),280
+2023,Eastern Scotland,Water supply; sewerage and waste management,E (36-39),645
+2023,Eastern Scotland,Construction,F (41-43),5180
+2023,Eastern Scotland,Wholesale and retail trade; repair of motor vehicles,G (45-47),56595
+2023,Eastern Scotland,Transportation and storage,H (49-53),6555
+2023,Eastern Scotland,Accommodation and food service activities,I (55-56),47415
+2023,Eastern Scotland,Information and communication,J (58-63),5350
+2023,Eastern Scotland,Financial and insurance activities,K (64-66),5780
+2023,Eastern Scotland,Real estate activities,L (68),4425
+2023,Eastern Scotland,"Professional, scientific and technical activities",M (69-75),13075
+2023,Eastern Scotland,Administrative and support service activities,N (77-82),16865
+2023,Eastern Scotland,Public administration and defence,O (84),10775
+2023,Eastern Scotland,Education,P (85),36130
+2023,Eastern Scotland,Human health and social work activities,Q (86-88),67575
+2023,Eastern Scotland,"Arts, entertainment and recreation",R (90-93),13275
+2023,Eastern Scotland,Other service activities,S (94-96),6835
+2023,Eastern Scotland,Activities of households,T (97-98),0
+2023,Eastern Scotland,Activities of extraterritorial organisations and bodies,U (99),0
+2023,Essex,"Agriculture, forestry and fishing",A (1-3),695
+2023,Essex,Mining and quarrying,B (5-9),25
+2023,Essex,Manufacturing,C (10-33),5540
+2023,Essex,"Electricity, gas, steam and air conditioning supply",D (35),40
+2023,Essex,Water supply; sewerage and waste management,E (36-39),485
+2023,Essex,Construction,F (41-43),8105
+2023,Essex,Wholesale and retail trade; repair of motor vehicles,G (45-47),53315
+2023,Essex,Transportation and storage,H (49-53),11255
+2023,Essex,Accommodation and food service activities,I (55-56),35215
+2023,Essex,Information and communication,J (58-63),3625
+2023,Essex,Financial and insurance activities,K (64-66),2740
+2023,Essex,Real estate activities,L (68),3800
+2023,Essex,"Professional, scientific and technical activities",M (69-75),12765
+2023,Essex,Administrative and support service activities,N (77-82),25685
+2023,Essex,Public administration and defence,O (84),7050
+2023,Essex,Education,P (85),29055
+2023,Essex,Human health and social work activities,Q (86-88),36725
+2023,Essex,"Arts, entertainment and recreation",R (90-93),11185
+2023,Essex,Other service activities,S (94-96),5395
+2023,Essex,Activities of households,T (97-98),0
+2023,Essex,Activities of extraterritorial organisations and bodies,U (99),0
+2023,"Gloucestershire, Wiltshire and Bath/Bristol area","Agriculture, forestry and fishing",A (1-3),1730
+2023,"Gloucestershire, Wiltshire and Bath/Bristol area",Mining and quarrying,B (5-9),0
+2023,"Gloucestershire, Wiltshire and Bath/Bristol area",Manufacturing,C (10-33),9525
+2023,"Gloucestershire, Wiltshire and Bath/Bristol area","Electricity, gas, steam and air conditioning supply",D (35),400
+2023,"Gloucestershire, Wiltshire and Bath/Bristol area",Water supply; sewerage and waste management,E (36-39),1555
+2023,"Gloucestershire, Wiltshire and Bath/Bristol area",Construction,F (41-43),7855
+2023,"Gloucestershire, Wiltshire and Bath/Bristol area",Wholesale and retail trade; repair of motor vehicles,G (45-47),73080
+2023,"Gloucestershire, Wiltshire and Bath/Bristol area",Transportation and storage,H (49-53),10630
+2023,"Gloucestershire, Wiltshire and Bath/Bristol area",Accommodation and food service activities,I (55-56),58375
+2023,"Gloucestershire, Wiltshire and Bath/Bristol area",Information and communication,J (58-63),9570
+2023,"Gloucestershire, Wiltshire and Bath/Bristol area",Financial and insurance activities,K (64-66),7800
+2023,"Gloucestershire, Wiltshire and Bath/Bristol area",Real estate activities,L (68),6190
+2023,"Gloucestershire, Wiltshire and Bath/Bristol area","Professional, scientific and technical activities",M (69-75),28250
+2023,"Gloucestershire, Wiltshire and Bath/Bristol area",Administrative and support service activities,N (77-82),32340
+2023,"Gloucestershire, Wiltshire and Bath/Bristol area",Public administration and defence,O (84),13700
+2023,"Gloucestershire, Wiltshire and Bath/Bristol area",Education,P (85),49085
+2023,"Gloucestershire, Wiltshire and Bath/Bristol area",Human health and social work activities,Q (86-88),78000
+2023,"Gloucestershire, Wiltshire and Bath/Bristol area","Arts, entertainment and recreation",R (90-93),15795
+2023,"Gloucestershire, Wiltshire and Bath/Bristol area",Other service activities,S (94-96),7500
+2023,"Gloucestershire, Wiltshire and Bath/Bristol area",Activities of households,T (97-98),0
+2023,"Gloucestershire, Wiltshire and Bath/Bristol area",Activities of extraterritorial organisations and bodies,U (99),0
+2023,Greater Manchester,"Agriculture, forestry and fishing",A (1-3),250
+2023,Greater Manchester,Mining and quarrying,B (5-9),0
+2023,Greater Manchester,Manufacturing,C (10-33),8965
+2023,Greater Manchester,"Electricity, gas, steam and air conditioning supply",D (35),275
+2023,Greater Manchester,Water supply; sewerage and waste management,E (36-39),335
+2023,Greater Manchester,Construction,F (41-43),10370
+2023,Greater Manchester,Wholesale and retail trade; repair of motor vehicles,G (45-47),79650
+2023,Greater Manchester,Transportation and storage,H (49-53),9310
+2023,Greater Manchester,Accommodation and food service activities,I (55-56),58340
+2023,Greater Manchester,Information and communication,J (58-63),7000
+2023,Greater Manchester,Financial and insurance activities,K (64-66),5785
+2023,Greater Manchester,Real estate activities,L (68),7275
+2023,Greater Manchester,"Professional, scientific and technical activities",M (69-75),28410
+2023,Greater Manchester,Administrative and support service activities,N (77-82),50095
+2023,Greater Manchester,Public administration and defence,O (84),13450
+2023,Greater Manchester,Education,P (85),52155
+2023,Greater Manchester,Human health and social work activities,Q (86-88),73700
+2023,Greater Manchester,"Arts, entertainment and recreation",R (90-93),17165
+2023,Greater Manchester,Other service activities,S (94-96),10250
+2023,Greater Manchester,Activities of households,T (97-98),0
+2023,Greater Manchester,Activities of extraterritorial organisations and bodies,U (99),0
+2023,Hampshire and Isle of Wight,"Agriculture, forestry and fishing",A (1-3),1065
+2023,Hampshire and Isle of Wight,Mining and quarrying,B (5-9),10
+2023,Hampshire and Isle of Wight,Manufacturing,C (10-33),6475
+2023,Hampshire and Isle of Wight,"Electricity, gas, steam and air conditioning supply",D (35),200
+2023,Hampshire and Isle of Wight,Water supply; sewerage and waste management,E (36-39),615
+2023,Hampshire and Isle of Wight,Construction,F (41-43),5705
+2023,Hampshire and Isle of Wight,Wholesale and retail trade; repair of motor vehicles,G (45-47),54965
+2023,Hampshire and Isle of Wight,Transportation and storage,H (49-53),6530
+2023,Hampshire and Isle of Wight,Accommodation and food service activities,I (55-56),44660
+2023,Hampshire and Isle of Wight,Information and communication,J (58-63),6310
+2023,Hampshire and Isle of Wight,Financial and insurance activities,K (64-66),3750
+2023,Hampshire and Isle of Wight,Real estate activities,L (68),4195
+2023,Hampshire and Isle of Wight,"Professional, scientific and technical activities",M (69-75),15010
+2023,Hampshire and Isle of Wight,Administrative and support service activities,N (77-82),23615
+2023,Hampshire and Isle of Wight,Public administration and defence,O (84),13050
+2023,Hampshire and Isle of Wight,Education,P (85),30945
+2023,Hampshire and Isle of Wight,Human health and social work activities,Q (86-88),52350
+2023,Hampshire and Isle of Wight,"Arts, entertainment and recreation",R (90-93),14345
+2023,Hampshire and Isle of Wight,Other service activities,S (94-96),5820
+2023,Hampshire and Isle of Wight,Activities of households,T (97-98),0
+2023,Hampshire and Isle of Wight,Activities of extraterritorial organisations and bodies,U (99),0
+2023,"Herefordshire, Worcestershire and Warwickshire","Agriculture, forestry and fishing",A (1-3),1595
+2023,"Herefordshire, Worcestershire and Warwickshire",Mining and quarrying,B (5-9),5
+2023,"Herefordshire, Worcestershire and Warwickshire",Manufacturing,C (10-33),5540
+2023,"Herefordshire, Worcestershire and Warwickshire","Electricity, gas, steam and air conditioning supply",D (35),400
+2023,"Herefordshire, Worcestershire and Warwickshire",Water supply; sewerage and waste management,E (36-39),335
+2023,"Herefordshire, Worcestershire and Warwickshire",Construction,F (41-43),3400
+2023,"Herefordshire, Worcestershire and Warwickshire",Wholesale and retail trade; repair of motor vehicles,G (45-47),39850
+2023,"Herefordshire, Worcestershire and Warwickshire",Transportation and storage,H (49-53),5625
+2023,"Herefordshire, Worcestershire and Warwickshire",Accommodation and food service activities,I (55-56),32855
+2023,"Herefordshire, Worcestershire and Warwickshire",Information and communication,J (58-63),2790
+2023,"Herefordshire, Worcestershire and Warwickshire",Financial and insurance activities,K (64-66),1545
+2023,"Herefordshire, Worcestershire and Warwickshire",Real estate activities,L (68),3275
+2023,"Herefordshire, Worcestershire and Warwickshire","Professional, scientific and technical activities",M (69-75),13200
+2023,"Herefordshire, Worcestershire and Warwickshire",Administrative and support service activities,N (77-82),17265
+2023,"Herefordshire, Worcestershire and Warwickshire",Public administration and defence,O (84),4965
+2023,"Herefordshire, Worcestershire and Warwickshire",Education,P (85),23550
+2023,"Herefordshire, Worcestershire and Warwickshire",Human health and social work activities,Q (86-88),31700
+2023,"Herefordshire, Worcestershire and Warwickshire","Arts, entertainment and recreation",R (90-93),10460
+2023,"Herefordshire, Worcestershire and Warwickshire",Other service activities,S (94-96),7040
+2023,"Herefordshire, Worcestershire and Warwickshire",Activities of households,T (97-98),0
+2023,"Herefordshire, Worcestershire and Warwickshire",Activities of extraterritorial organisations and bodies,U (99),0
+2023,Highlands and Islands,"Agriculture, forestry and fishing",A (1-3),6700
+2023,Highlands and Islands,Mining and quarrying,B (5-9),60
+2023,Highlands and Islands,Manufacturing,C (10-33),1885
+2023,Highlands and Islands,"Electricity, gas, steam and air conditioning supply",D (35),120
+2023,Highlands and Islands,Water supply; sewerage and waste management,E (36-39),280
+2023,Highlands and Islands,Construction,F (41-43),1455
+2023,Highlands and Islands,Wholesale and retail trade; repair of motor vehicles,G (45-47),13435
+2023,Highlands and Islands,Transportation and storage,H (49-53),2430
+2023,Highlands and Islands,Accommodation and food service activities,I (55-56),13125
+2023,Highlands and Islands,Information and communication,J (58-63),785
+2023,Highlands and Islands,Financial and insurance activities,K (64-66),350
+2023,Highlands and Islands,Real estate activities,L (68),970
+2023,Highlands and Islands,"Professional, scientific and technical activities",M (69-75),2310
+2023,Highlands and Islands,Administrative and support service activities,N (77-82),2645
+2023,Highlands and Islands,Public administration and defence,O (84),4650
+2023,Highlands and Islands,Education,P (85),10480
+2023,Highlands and Islands,Human health and social work activities,Q (86-88),15325
+2023,Highlands and Islands,"Arts, entertainment and recreation",R (90-93),3720
+2023,Highlands and Islands,Other service activities,S (94-96),1645
+2023,Highlands and Islands,Activities of households,T (97-98),0
+2023,Highlands and Islands,Activities of extraterritorial organisations and bodies,U (99),0
+2023,Inner London - East,"Agriculture, forestry and fishing",A (1-3),35
+2023,Inner London - East,Mining and quarrying,B (5-9),0
+2023,Inner London - East,Manufacturing,C (10-33),4105
+2023,Inner London - East,"Electricity, gas, steam and air conditioning supply",D (35),205
+2023,Inner London - East,Water supply; sewerage and waste management,E (36-39),290
+2023,Inner London - East,Construction,F (41-43),8405
+2023,Inner London - East,Wholesale and retail trade; repair of motor vehicles,G (45-47),48600
+2023,Inner London - East,Transportation and storage,H (49-53),9085
+2023,Inner London - East,Accommodation and food service activities,I (55-56),51235
+2023,Inner London - East,Information and communication,J (58-63),12760
+2023,Inner London - East,Financial and insurance activities,K (64-66),5230
+2023,Inner London - East,Real estate activities,L (68),7875
+2023,Inner London - East,"Professional, scientific and technical activities",M (69-75),37000
+2023,Inner London - East,Administrative and support service activities,N (77-82),47810
+2023,Inner London - East,Public administration and defence,O (84),8050
+2023,Inner London - East,Education,P (85),37720
+2023,Inner London - East,Human health and social work activities,Q (86-88),54350
+2023,Inner London - East,"Arts, entertainment and recreation",R (90-93),14695
+2023,Inner London - East,Other service activities,S (94-96),10695
+2023,Inner London - East,Activities of households,T (97-98),0
+2023,Inner London - East,Activities of extraterritorial organisations and bodies,U (99),0
+2023,Inner London - West,"Agriculture, forestry and fishing",A (1-3),125
+2023,Inner London - West,Mining and quarrying,B (5-9),55
+2023,Inner London - West,Manufacturing,C (10-33),3980
+2023,Inner London - West,"Electricity, gas, steam and air conditioning supply",D (35),580
+2023,Inner London - West,Water supply; sewerage and waste management,E (36-39),130
+2023,Inner London - West,Construction,F (41-43),9420
+2023,Inner London - West,Wholesale and retail trade; repair of motor vehicles,G (45-47),57065
+2023,Inner London - West,Transportation and storage,H (49-53),5105
+2023,Inner London - West,Accommodation and food service activities,I (55-56),77375
+2023,Inner London - West,Information and communication,J (58-63),21985
+2023,Inner London - West,Financial and insurance activities,K (64-66),17520
+2023,Inner London - West,Real estate activities,L (68),18200
+2023,Inner London - West,"Professional, scientific and technical activities",M (69-75),47925
+2023,Inner London - West,Administrative and support service activities,N (77-82),54850
+2023,Inner London - West,Public administration and defence,O (84),9520
+2023,Inner London - West,Education,P (85),37115
+2023,Inner London - West,Human health and social work activities,Q (86-88),47575
+2023,Inner London - West,"Arts, entertainment and recreation",R (90-93),23985
+2023,Inner London - West,Other service activities,S (94-96),14630
+2023,Inner London - West,Activities of households,T (97-98),0
+2023,Inner London - West,Activities of extraterritorial organisations and bodies,U (99),0
+2023,Kent,"Agriculture, forestry and fishing",A (1-3),980
+2023,Kent,Mining and quarrying,B (5-9),10
+2023,Kent,Manufacturing,C (10-33),4650
+2023,Kent,"Electricity, gas, steam and air conditioning supply",D (35),110
+2023,Kent,Water supply; sewerage and waste management,E (36-39),690
+2023,Kent,Construction,F (41-43),6530
+2023,Kent,Wholesale and retail trade; repair of motor vehicles,G (45-47),48515
+2023,Kent,Transportation and storage,H (49-53),7510
+2023,Kent,Accommodation and food service activities,I (55-56),37515
+2023,Kent,Information and communication,J (58-63),3490
+2023,Kent,Financial and insurance activities,K (64-66),3500
+2023,Kent,Real estate activities,L (68),3665
+2023,Kent,"Professional, scientific and technical activities",M (69-75),10740
+2023,Kent,Administrative and support service activities,N (77-82),21920
+2023,Kent,Public administration and defence,O (84),6380
+2023,Kent,Education,P (85),30880
+2023,Kent,Human health and social work activities,Q (86-88),47700
+2023,Kent,"Arts, entertainment and recreation",R (90-93),11020
+2023,Kent,Other service activities,S (94-96),5015
+2023,Kent,Activities of households,T (97-98),0
+2023,Kent,Activities of extraterritorial organisations and bodies,U (99),0
+2023,Lancashire,"Agriculture, forestry and fishing",A (1-3),1050
+2023,Lancashire,Mining and quarrying,B (5-9),5
+2023,Lancashire,Manufacturing,C (10-33),6960
+2023,Lancashire,"Electricity, gas, steam and air conditioning supply",D (35),85
+2023,Lancashire,Water supply; sewerage and waste management,E (36-39),260
+2023,Lancashire,Construction,F (41-43),5075
+2023,Lancashire,Wholesale and retail trade; repair of motor vehicles,G (45-47),39905
+2023,Lancashire,Transportation and storage,H (49-53),2925
+2023,Lancashire,Accommodation and food service activities,I (55-56),32650
+2023,Lancashire,Information and communication,J (58-63),1690
+2023,Lancashire,Financial and insurance activities,K (64-66),1485
+2023,Lancashire,Real estate activities,L (68),2375
+2023,Lancashire,"Professional, scientific and technical activities",M (69-75),7675
+2023,Lancashire,Administrative and support service activities,N (77-82),14955
+2023,Lancashire,Public administration and defence,O (84),9690
+2023,Lancashire,Education,P (85),24325
+2023,Lancashire,Human health and social work activities,Q (86-88),40800
+2023,Lancashire,"Arts, entertainment and recreation",R (90-93),8900
+2023,Lancashire,Other service activities,S (94-96),4345
+2023,Lancashire,Activities of households,T (97-98),0
+2023,Lancashire,Activities of extraterritorial organisations and bodies,U (99),0
+2023,"Leicestershire, Rutland and Northamptonshire","Agriculture, forestry and fishing",A (1-3),885
+2023,"Leicestershire, Rutland and Northamptonshire",Mining and quarrying,B (5-9),160
+2023,"Leicestershire, Rutland and Northamptonshire",Manufacturing,C (10-33),12505
+2023,"Leicestershire, Rutland and Northamptonshire","Electricity, gas, steam and air conditioning supply",D (35),1095
+2023,"Leicestershire, Rutland and Northamptonshire",Water supply; sewerage and waste management,E (36-39),335
+2023,"Leicestershire, Rutland and Northamptonshire",Construction,F (41-43),4615
+2023,"Leicestershire, Rutland and Northamptonshire",Wholesale and retail trade; repair of motor vehicles,G (45-47),48870
+2023,"Leicestershire, Rutland and Northamptonshire",Transportation and storage,H (49-53),10855
+2023,"Leicestershire, Rutland and Northamptonshire",Accommodation and food service activities,I (55-56),33495
+2023,"Leicestershire, Rutland and Northamptonshire",Information and communication,J (58-63),3470
+2023,"Leicestershire, Rutland and Northamptonshire",Financial and insurance activities,K (64-66),2925
+2023,"Leicestershire, Rutland and Northamptonshire",Real estate activities,L (68),5185
+2023,"Leicestershire, Rutland and Northamptonshire","Professional, scientific and technical activities",M (69-75),16205
+2023,"Leicestershire, Rutland and Northamptonshire",Administrative and support service activities,N (77-82),24985
+2023,"Leicestershire, Rutland and Northamptonshire",Public administration and defence,O (84),7275
+2023,"Leicestershire, Rutland and Northamptonshire",Education,P (85),34165
+2023,"Leicestershire, Rutland and Northamptonshire",Human health and social work activities,Q (86-88),43600
+2023,"Leicestershire, Rutland and Northamptonshire","Arts, entertainment and recreation",R (90-93),11860
+2023,"Leicestershire, Rutland and Northamptonshire",Other service activities,S (94-96),4495
+2023,"Leicestershire, Rutland and Northamptonshire",Activities of households,T (97-98),0
+2023,"Leicestershire, Rutland and Northamptonshire",Activities of extraterritorial organisations and bodies,U (99),0
+2023,Lincolnshire,"Agriculture, forestry and fishing",A (1-3),1120
+2023,Lincolnshire,Mining and quarrying,B (5-9),25
+2023,Lincolnshire,Manufacturing,C (10-33),2620
+2023,Lincolnshire,"Electricity, gas, steam and air conditioning supply",D (35),110
+2023,Lincolnshire,Water supply; sewerage and waste management,E (36-39),230
+2023,Lincolnshire,Construction,F (41-43),1775
+2023,Lincolnshire,Wholesale and retail trade; repair of motor vehicles,G (45-47),20455
+2023,Lincolnshire,Transportation and storage,H (49-53),2215
+2023,Lincolnshire,Accommodation and food service activities,I (55-56),15255
+2023,Lincolnshire,Information and communication,J (58-63),960
+2023,Lincolnshire,Financial and insurance activities,K (64-66),455
+2023,Lincolnshire,Real estate activities,L (68),1935
+2023,Lincolnshire,"Professional, scientific and technical activities",M (69-75),3610
+2023,Lincolnshire,Administrative and support service activities,N (77-82),8365
+2023,Lincolnshire,Public administration and defence,O (84),2375
+2023,Lincolnshire,Education,P (85),10015
+2023,Lincolnshire,Human health and social work activities,Q (86-88),20025
+2023,Lincolnshire,"Arts, entertainment and recreation",R (90-93),4545
+2023,Lincolnshire,Other service activities,S (94-96),1555
+2023,Lincolnshire,Activities of households,T (97-98),0
+2023,Lincolnshire,Activities of extraterritorial organisations and bodies,U (99),0
+2023,Merseyside,"Agriculture, forestry and fishing",A (1-3),100
+2023,Merseyside,Mining and quarrying,B (5-9),10
+2023,Merseyside,Manufacturing,C (10-33),3570
+2023,Merseyside,"Electricity, gas, steam and air conditioning supply",D (35),20
+2023,Merseyside,Water supply; sewerage and waste management,E (36-39),365
+2023,Merseyside,Construction,F (41-43),4250
+2023,Merseyside,Wholesale and retail trade; repair of motor vehicles,G (45-47),42160
+2023,Merseyside,Transportation and storage,H (49-53),5465
+2023,Merseyside,Accommodation and food service activities,I (55-56),34810
+2023,Merseyside,Information and communication,J (58-63),2355
+2023,Merseyside,Financial and insurance activities,K (64-66),2725
+2023,Merseyside,Real estate activities,L (68),2875
+2023,Merseyside,"Professional, scientific and technical activities",M (69-75),8550
+2023,Merseyside,Administrative and support service activities,N (77-82),19560
+2023,Merseyside,Public administration and defence,O (84),8590
+2023,Merseyside,Education,P (85),25370
+2023,Merseyside,Human health and social work activities,Q (86-88),51850
+2023,Merseyside,"Arts, entertainment and recreation",R (90-93),11540
+2023,Merseyside,Other service activities,S (94-96),5315
+2023,Merseyside,Activities of households,T (97-98),0
+2023,Merseyside,Activities of extraterritorial organisations and bodies,U (99),0
+2023,North Eastern Scotland,"Agriculture, forestry and fishing",A (1-3),3660
+2023,North Eastern Scotland,Mining and quarrying,B (5-9),920
+2023,North Eastern Scotland,Manufacturing,C (10-33),1790
+2023,North Eastern Scotland,"Electricity, gas, steam and air conditioning supply",D (35),25
+2023,North Eastern Scotland,Water supply; sewerage and waste management,E (36-39),85
+2023,North Eastern Scotland,Construction,F (41-43),1460
+2023,North Eastern Scotland,Wholesale and retail trade; repair of motor vehicles,G (45-47),13905
+2023,North Eastern Scotland,Transportation and storage,H (49-53),1790
+2023,North Eastern Scotland,Accommodation and food service activities,I (55-56),10965
+2023,North Eastern Scotland,Information and communication,J (58-63),660
+2023,North Eastern Scotland,Financial and insurance activities,K (64-66),370
+2023,North Eastern Scotland,Real estate activities,L (68),930
+2023,North Eastern Scotland,"Professional, scientific and technical activities",M (69-75),6105
+2023,North Eastern Scotland,Administrative and support service activities,N (77-82),4845
+2023,North Eastern Scotland,Public administration and defence,O (84),2795
+2023,North Eastern Scotland,Education,P (85),8490
+2023,North Eastern Scotland,Human health and social work activities,Q (86-88),21950
+2023,North Eastern Scotland,"Arts, entertainment and recreation",R (90-93),3275
+2023,North Eastern Scotland,Other service activities,S (94-96),1480
+2023,North Eastern Scotland,Activities of households,T (97-98),0
+2023,North Eastern Scotland,Activities of extraterritorial organisations and bodies,U (99),0
+2023,North Yorkshire,"Agriculture, forestry and fishing",A (1-3),1880
+2023,North Yorkshire,Mining and quarrying,B (5-9),15
+2023,North Yorkshire,Manufacturing,C (10-33),3305
+2023,North Yorkshire,"Electricity, gas, steam and air conditioning supply",D (35),60
+2023,North Yorkshire,Water supply; sewerage and waste management,E (36-39),135
+2023,North Yorkshire,Construction,F (41-43),3180
+2023,North Yorkshire,Wholesale and retail trade; repair of motor vehicles,G (45-47),23770
+2023,North Yorkshire,Transportation and storage,H (49-53),2135
+2023,North Yorkshire,Accommodation and food service activities,I (55-56),29625
+2023,North Yorkshire,Information and communication,J (58-63),1220
+2023,North Yorkshire,Financial and insurance activities,K (64-66),1695
+2023,North Yorkshire,Real estate activities,L (68),1900
+2023,North Yorkshire,"Professional, scientific and technical activities",M (69-75),5635
+2023,North Yorkshire,Administrative and support service activities,N (77-82),13775
+2023,North Yorkshire,Public administration and defence,O (84),4100
+2023,North Yorkshire,Education,P (85),15085
+2023,North Yorkshire,Human health and social work activities,Q (86-88),22870
+2023,North Yorkshire,"Arts, entertainment and recreation",R (90-93),5425
+2023,North Yorkshire,Other service activities,S (94-96),3155
+2023,North Yorkshire,Activities of households,T (97-98),0
+2023,North Yorkshire,Activities of extraterritorial organisations and bodies,U (99),0
+2023,"Northumberland, and Tyne and Wear","Agriculture, forestry and fishing",A (1-3),480
+2023,"Northumberland, and Tyne and Wear",Mining and quarrying,B (5-9),0
+2023,"Northumberland, and Tyne and Wear",Manufacturing,C (10-33),5195
+2023,"Northumberland, and Tyne and Wear","Electricity, gas, steam and air conditioning supply",D (35),320
+2023,"Northumberland, and Tyne and Wear",Water supply; sewerage and waste management,E (36-39),525
+2023,"Northumberland, and Tyne and Wear",Construction,F (41-43),4380
+2023,"Northumberland, and Tyne and Wear",Wholesale and retail trade; repair of motor vehicles,G (45-47),39400
+2023,"Northumberland, and Tyne and Wear",Transportation and storage,H (49-53),5735
+2023,"Northumberland, and Tyne and Wear",Accommodation and food service activities,I (55-56),32425
+2023,"Northumberland, and Tyne and Wear",Information and communication,J (58-63),3700
+2023,"Northumberland, and Tyne and Wear",Financial and insurance activities,K (64-66),2110
+2023,"Northumberland, and Tyne and Wear",Real estate activities,L (68),2710
+2023,"Northumberland, and Tyne and Wear","Professional, scientific and technical activities",M (69-75),6240
+2023,"Northumberland, and Tyne and Wear",Administrative and support service activities,N (77-82),15010
+2023,"Northumberland, and Tyne and Wear",Public administration and defence,O (84),11280
+2023,"Northumberland, and Tyne and Wear",Education,P (85),20660
+2023,"Northumberland, and Tyne and Wear",Human health and social work activities,Q (86-88),38400
+2023,"Northumberland, and Tyne and Wear","Arts, entertainment and recreation",R (90-93),9885
+2023,"Northumberland, and Tyne and Wear",Other service activities,S (94-96),5530
+2023,"Northumberland, and Tyne and Wear",Activities of households,T (97-98),0
+2023,"Northumberland, and Tyne and Wear",Activities of extraterritorial organisations and bodies,U (99),0
+2023,Outer London - East and North East,"Agriculture, forestry and fishing",A (1-3),60
+2023,Outer London - East and North East,Mining and quarrying,B (5-9),0
+2023,Outer London - East and North East,Manufacturing,C (10-33),2880
+2023,Outer London - East and North East,"Electricity, gas, steam and air conditioning supply",D (35),40
+2023,Outer London - East and North East,Water supply; sewerage and waste management,E (36-39),380
+2023,Outer London - East and North East,Construction,F (41-43),9895
+2023,Outer London - East and North East,Wholesale and retail trade; repair of motor vehicles,G (45-47),39605
+2023,Outer London - East and North East,Transportation and storage,H (49-53),8000
+2023,Outer London - East and North East,Accommodation and food service activities,I (55-56),21670
+2023,Outer London - East and North East,Information and communication,J (58-63),2240
+2023,Outer London - East and North East,Financial and insurance activities,K (64-66),1060
+2023,Outer London - East and North East,Real estate activities,L (68),2970
+2023,Outer London - East and North East,"Professional, scientific and technical activities",M (69-75),6170
+2023,Outer London - East and North East,Administrative and support service activities,N (77-82),27075
+2023,Outer London - East and North East,Public administration and defence,O (84),3660
+2023,Outer London - East and North East,Education,P (85),26980
+2023,Outer London - East and North East,Human health and social work activities,Q (86-88),35050
+2023,Outer London - East and North East,"Arts, entertainment and recreation",R (90-93),8670
+2023,Outer London - East and North East,Other service activities,S (94-96),4890
+2023,Outer London - East and North East,Activities of households,T (97-98),0
+2023,Outer London - East and North East,Activities of extraterritorial organisations and bodies,U (99),0
+2023,Outer London - South,"Agriculture, forestry and fishing",A (1-3),65
+2023,Outer London - South,Mining and quarrying,B (5-9),0
+2023,Outer London - South,Manufacturing,C (10-33),1915
+2023,Outer London - South,"Electricity, gas, steam and air conditioning supply",D (35),25
+2023,Outer London - South,Water supply; sewerage and waste management,E (36-39),180
+2023,Outer London - South,Construction,F (41-43),6270
+2023,Outer London - South,Wholesale and retail trade; repair of motor vehicles,G (45-47),31095
+2023,Outer London - South,Transportation and storage,H (49-53),4705
+2023,Outer London - South,Accommodation and food service activities,I (55-56),19365
+2023,Outer London - South,Information and communication,J (58-63),2195
+2023,Outer London - South,Financial and insurance activities,K (64-66),1260
+2023,Outer London - South,Real estate activities,L (68),2085
+2023,Outer London - South,"Professional, scientific and technical activities",M (69-75),6295
+2023,Outer London - South,Administrative and support service activities,N (77-82),19420
+2023,Outer London - South,Public administration and defence,O (84),3780
+2023,Outer London - South,Education,P (85),20315
+2023,Outer London - South,Human health and social work activities,Q (86-88),24575
+2023,Outer London - South,"Arts, entertainment and recreation",R (90-93),9305
+2023,Outer London - South,Other service activities,S (94-96),4535
+2023,Outer London - South,Activities of households,T (97-98),0
+2023,Outer London - South,Activities of extraterritorial organisations and bodies,U (99),0
+2023,Outer London - West and North West,"Agriculture, forestry and fishing",A (1-3),50
+2023,Outer London - West and North West,Mining and quarrying,B (5-9),0
+2023,Outer London - West and North West,Manufacturing,C (10-33),4875
+2023,Outer London - West and North West,"Electricity, gas, steam and air conditioning supply",D (35),65
+2023,Outer London - West and North West,Water supply; sewerage and waste management,E (36-39),320
+2023,Outer London - West and North West,Construction,F (41-43),11055
+2023,Outer London - West and North West,Wholesale and retail trade; repair of motor vehicles,G (45-47),46900
+2023,Outer London - West and North West,Transportation and storage,H (49-53),30360
+2023,Outer London - West and North West,Accommodation and food service activities,I (55-56),33520
+2023,Outer London - West and North West,Information and communication,J (58-63),6290
+2023,Outer London - West and North West,Financial and insurance activities,K (64-66),1650
+2023,Outer London - West and North West,Real estate activities,L (68),6605
+2023,Outer London - West and North West,"Professional, scientific and technical activities",M (69-75),10795
+2023,Outer London - West and North West,Administrative and support service activities,N (77-82),28870
+2023,Outer London - West and North West,Public administration and defence,O (84),4625
+2023,Outer London - West and North West,Education,P (85),31615
+2023,Outer London - West and North West,Human health and social work activities,Q (86-88),35450
+2023,Outer London - West and North West,"Arts, entertainment and recreation",R (90-93),12525
+2023,Outer London - West and North West,Other service activities,S (94-96),6805
+2023,Outer London - West and North West,Activities of households,T (97-98),0
+2023,Outer London - West and North West,Activities of extraterritorial organisations and bodies,U (99),0
+2023,Shropshire and Staffordshire,"Agriculture, forestry and fishing",A (1-3),1970
+2023,Shropshire and Staffordshire,Mining and quarrying,B (5-9),5
+2023,Shropshire and Staffordshire,Manufacturing,C (10-33),7725
+2023,Shropshire and Staffordshire,"Electricity, gas, steam and air conditioning supply",D (35),40
+2023,Shropshire and Staffordshire,Water supply; sewerage and waste management,E (36-39),275
+2023,Shropshire and Staffordshire,Construction,F (41-43),3620
+2023,Shropshire and Staffordshire,Wholesale and retail trade; repair of motor vehicles,G (45-47),46610
+2023,Shropshire and Staffordshire,Transportation and storage,H (49-53),7060
+2023,Shropshire and Staffordshire,Accommodation and food service activities,I (55-56),32870
+2023,Shropshire and Staffordshire,Information and communication,J (58-63),2530
+2023,Shropshire and Staffordshire,Financial and insurance activities,K (64-66),1675
+2023,Shropshire and Staffordshire,Real estate activities,L (68),2800
+2023,Shropshire and Staffordshire,"Professional, scientific and technical activities",M (69-75),8675
+2023,Shropshire and Staffordshire,Administrative and support service activities,N (77-82),16995
+2023,Shropshire and Staffordshire,Public administration and defence,O (84),6825
+2023,Shropshire and Staffordshire,Education,P (85),23465
+2023,Shropshire and Staffordshire,Human health and social work activities,Q (86-88),39875
+2023,Shropshire and Staffordshire,"Arts, entertainment and recreation",R (90-93),10715
+2023,Shropshire and Staffordshire,Other service activities,S (94-96),6020
+2023,Shropshire and Staffordshire,Activities of households,T (97-98),0
+2023,Shropshire and Staffordshire,Activities of extraterritorial organisations and bodies,U (99),0
+2023,South Yorkshire,"Agriculture, forestry and fishing",A (1-3),240
+2023,South Yorkshire,Mining and quarrying,B (5-9),0
+2023,South Yorkshire,Manufacturing,C (10-33),4140
+2023,South Yorkshire,"Electricity, gas, steam and air conditioning supply",D (35),35
+2023,South Yorkshire,Water supply; sewerage and waste management,E (36-39),235
+2023,South Yorkshire,Construction,F (41-43),4360
+2023,South Yorkshire,Wholesale and retail trade; repair of motor vehicles,G (45-47),37415
+2023,South Yorkshire,Transportation and storage,H (49-53),5850
+2023,South Yorkshire,Accommodation and food service activities,I (55-56),27130
+2023,South Yorkshire,Information and communication,J (58-63),2375
+2023,South Yorkshire,Financial and insurance activities,K (64-66),3090
+2023,South Yorkshire,Real estate activities,L (68),1835
+2023,South Yorkshire,"Professional, scientific and technical activities",M (69-75),6795
+2023,South Yorkshire,Administrative and support service activities,N (77-82),15675
+2023,South Yorkshire,Public administration and defence,O (84),8515
+2023,South Yorkshire,Education,P (85),25180
+2023,South Yorkshire,Human health and social work activities,Q (86-88),40200
+2023,South Yorkshire,"Arts, entertainment and recreation",R (90-93),8150
+2023,South Yorkshire,Other service activities,S (94-96),3925
+2023,South Yorkshire,Activities of households,T (97-98),0
+2023,South Yorkshire,Activities of extraterritorial organisations and bodies,U (99),0
+2023,Southern Scotland,"Agriculture, forestry and fishing",A (1-3),5370
+2023,Southern Scotland,Mining and quarrying,B (5-9),5
+2023,Southern Scotland,Manufacturing,C (10-33),3080
+2023,Southern Scotland,"Electricity, gas, steam and air conditioning supply",D (35),115
+2023,Southern Scotland,Water supply; sewerage and waste management,E (36-39),350
+2023,Southern Scotland,Construction,F (41-43),2455
+2023,Southern Scotland,Wholesale and retail trade; repair of motor vehicles,G (45-47),25075
+2023,Southern Scotland,Transportation and storage,H (49-53),2465
+2023,Southern Scotland,Accommodation and food service activities,I (55-56),16855
+2023,Southern Scotland,Information and communication,J (58-63),610
+2023,Southern Scotland,Financial and insurance activities,K (64-66),895
+2023,Southern Scotland,Real estate activities,L (68),1490
+2023,Southern Scotland,"Professional, scientific and technical activities",M (69-75),3605
+2023,Southern Scotland,Administrative and support service activities,N (77-82),8070
+2023,Southern Scotland,Public administration and defence,O (84),4625
+2023,Southern Scotland,Education,P (85),11520
+2023,Southern Scotland,Human health and social work activities,Q (86-88),29025
+2023,Southern Scotland,"Arts, entertainment and recreation",R (90-93),5575
+2023,Southern Scotland,Other service activities,S (94-96),2445
+2023,Southern Scotland,Activities of households,T (97-98),0
+2023,Southern Scotland,Activities of extraterritorial organisations and bodies,U (99),0
+2023,"Surrey, East and West Sussex","Agriculture, forestry and fishing",A (1-3),1750
+2023,"Surrey, East and West Sussex",Mining and quarrying,B (5-9),10
+2023,"Surrey, East and West Sussex",Manufacturing,C (10-33),6595
+2023,"Surrey, East and West Sussex","Electricity, gas, steam and air conditioning supply",D (35),275
+2023,"Surrey, East and West Sussex",Water supply; sewerage and waste management,E (36-39),795
+2023,"Surrey, East and West Sussex",Construction,F (41-43),8910
+2023,"Surrey, East and West Sussex",Wholesale and retail trade; repair of motor vehicles,G (45-47),72385
+2023,"Surrey, East and West Sussex",Transportation and storage,H (49-53),9145
+2023,"Surrey, East and West Sussex",Accommodation and food service activities,I (55-56),75625
+2023,"Surrey, East and West Sussex",Information and communication,J (58-63),9600
+2023,"Surrey, East and West Sussex",Financial and insurance activities,K (64-66),5590
+2023,"Surrey, East and West Sussex",Real estate activities,L (68),7700
+2023,"Surrey, East and West Sussex","Professional, scientific and technical activities",M (69-75),25015
+2023,"Surrey, East and West Sussex",Administrative and support service activities,N (77-82),33155
+2023,"Surrey, East and West Sussex",Public administration and defence,O (84),9325
+2023,"Surrey, East and West Sussex",Education,P (85),56585
+2023,"Surrey, East and West Sussex",Human health and social work activities,Q (86-88),81500
+2023,"Surrey, East and West Sussex","Arts, entertainment and recreation",R (90-93),25535
+2023,"Surrey, East and West Sussex",Other service activities,S (94-96),10235
+2023,"Surrey, East and West Sussex",Activities of households,T (97-98),0
+2023,"Surrey, East and West Sussex",Activities of extraterritorial organisations and bodies,U (99),0
+2023,Tees Valley and Durham,"Agriculture, forestry and fishing",A (1-3),385
+2023,Tees Valley and Durham,Mining and quarrying,B (5-9),10
+2023,Tees Valley and Durham,Manufacturing,C (10-33),4255
+2023,Tees Valley and Durham,"Electricity, gas, steam and air conditioning supply",D (35),45
+2023,Tees Valley and Durham,Water supply; sewerage and waste management,E (36-39),705
+2023,Tees Valley and Durham,Construction,F (41-43),4490
+2023,Tees Valley and Durham,Wholesale and retail trade; repair of motor vehicles,G (45-47),29195
+2023,Tees Valley and Durham,Transportation and storage,H (49-53),5570
+2023,Tees Valley and Durham,Accommodation and food service activities,I (55-56),18370
+2023,Tees Valley and Durham,Information and communication,J (58-63),1730
+2023,Tees Valley and Durham,Financial and insurance activities,K (64-66),875
+2023,Tees Valley and Durham,Real estate activities,L (68),1530
+2023,Tees Valley and Durham,"Professional, scientific and technical activities",M (69-75),3940
+2023,Tees Valley and Durham,Administrative and support service activities,N (77-82),9615
+2023,Tees Valley and Durham,Public administration and defence,O (84),6900
+2023,Tees Valley and Durham,Education,P (85),18900
+2023,Tees Valley and Durham,Human health and social work activities,Q (86-88),29900
+2023,Tees Valley and Durham,"Arts, entertainment and recreation",R (90-93),5760
+2023,Tees Valley and Durham,Other service activities,S (94-96),3365
+2023,Tees Valley and Durham,Activities of households,T (97-98),0
+2023,Tees Valley and Durham,Activities of extraterritorial organisations and bodies,U (99),0
+2023,West Central Scotland,"Agriculture, forestry and fishing",A (1-3),695
+2023,West Central Scotland,Mining and quarrying,B (5-9),0
+2023,West Central Scotland,Manufacturing,C (10-33),3165
+2023,West Central Scotland,"Electricity, gas, steam and air conditioning supply",D (35),210
+2023,West Central Scotland,Water supply; sewerage and waste management,E (36-39),435
+2023,West Central Scotland,Construction,F (41-43),3645
+2023,West Central Scotland,Wholesale and retail trade; repair of motor vehicles,G (45-47),43855
+2023,West Central Scotland,Transportation and storage,H (49-53),5355
+2023,West Central Scotland,Accommodation and food service activities,I (55-56),33235
+2023,West Central Scotland,Information and communication,J (58-63),3500
+2023,West Central Scotland,Financial and insurance activities,K (64-66),3980
+2023,West Central Scotland,Real estate activities,L (68),3855
+2023,West Central Scotland,"Professional, scientific and technical activities",M (69-75),10610
+2023,West Central Scotland,Administrative and support service activities,N (77-82),29485
+2023,West Central Scotland,Public administration and defence,O (84),12375
+2023,West Central Scotland,Education,P (85),23640
+2023,West Central Scotland,Human health and social work activities,Q (86-88),45500
+2023,West Central Scotland,"Arts, entertainment and recreation",R (90-93),10495
+2023,West Central Scotland,Other service activities,S (94-96),4585
+2023,West Central Scotland,Activities of households,T (97-98),0
+2023,West Central Scotland,Activities of extraterritorial organisations and bodies,U (99),0
+2023,West Midlands,"Agriculture, forestry and fishing",A (1-3),165
+2023,West Midlands,Mining and quarrying,B (5-9),0
+2023,West Midlands,Manufacturing,C (10-33),9395
+2023,West Midlands,"Electricity, gas, steam and air conditioning supply",D (35),430
+2023,West Midlands,Water supply; sewerage and waste management,E (36-39),660
+2023,West Midlands,Construction,F (41-43),5070
+2023,West Midlands,Wholesale and retail trade; repair of motor vehicles,G (45-47),79455
+2023,West Midlands,Transportation and storage,H (49-53),11955
+2023,West Midlands,Accommodation and food service activities,I (55-56),71615
+2023,West Midlands,Information and communication,J (58-63),4385
+2023,West Midlands,Financial and insurance activities,K (64-66),5580
+2023,West Midlands,Real estate activities,L (68),5895
+2023,West Midlands,"Professional, scientific and technical activities",M (69-75),20250
+2023,West Midlands,Administrative and support service activities,N (77-82),45505
+2023,West Midlands,Public administration and defence,O (84),11970
+2023,West Midlands,Education,P (85),47975
+2023,West Midlands,Human health and social work activities,Q (86-88),75350
+2023,West Midlands,"Arts, entertainment and recreation",R (90-93),14325
+2023,West Midlands,Other service activities,S (94-96),9985
+2023,West Midlands,Activities of households,T (97-98),0
+2023,West Midlands,Activities of extraterritorial organisations and bodies,U (99),0
+2023,West Wales and The Valleys,"Agriculture, forestry and fishing",A (1-3),2245
+2023,West Wales and The Valleys,Mining and quarrying,B (5-9),45
+2023,West Wales and The Valleys,Manufacturing,C (10-33),6295
+2023,West Wales and The Valleys,"Electricity, gas, steam and air conditioning supply",D (35),170
+2023,West Wales and The Valleys,Water supply; sewerage and waste management,E (36-39),770
+2023,West Wales and The Valleys,Construction,F (41-43),4860
+2023,West Wales and The Valleys,Wholesale and retail trade; repair of motor vehicles,G (45-47),50175
+2023,West Wales and The Valleys,Transportation and storage,H (49-53),4585
+2023,West Wales and The Valleys,Accommodation and food service activities,I (55-56),42400
+2023,West Wales and The Valleys,Information and communication,J (58-63),2125
+2023,West Wales and The Valleys,Financial and insurance activities,K (64-66),1570
+2023,West Wales and The Valleys,Real estate activities,L (68),2450
+2023,West Wales and The Valleys,"Professional, scientific and technical activities",M (69-75),5860
+2023,West Wales and The Valleys,Administrative and support service activities,N (77-82),16930
+2023,West Wales and The Valleys,Public administration and defence,O (84),15930
+2023,West Wales and The Valleys,Education,P (85),34305
+2023,West Wales and The Valleys,Human health and social work activities,Q (86-88),55675
+2023,West Wales and The Valleys,"Arts, entertainment and recreation",R (90-93),10140
+2023,West Wales and The Valleys,Other service activities,S (94-96),4830
+2023,West Wales and The Valleys,Activities of households,T (97-98),0
+2023,West Wales and The Valleys,Activities of extraterritorial organisations and bodies,U (99),0
+2023,West Yorkshire,"Agriculture, forestry and fishing",A (1-3),400
+2023,West Yorkshire,Mining and quarrying,B (5-9),5
+2023,West Yorkshire,Manufacturing,C (10-33),10030
+2023,West Yorkshire,"Electricity, gas, steam and air conditioning supply",D (35),330
+2023,West Yorkshire,Water supply; sewerage and waste management,E (36-39),565
+2023,West Yorkshire,Construction,F (41-43),8065
+2023,West Yorkshire,Wholesale and retail trade; repair of motor vehicles,G (45-47),61790
+2023,West Yorkshire,Transportation and storage,H (49-53),10905
+2023,West Yorkshire,Accommodation and food service activities,I (55-56),44585
+2023,West Yorkshire,Information and communication,J (58-63),4235
+2023,West Yorkshire,Financial and insurance activities,K (64-66),7150
+2023,West Yorkshire,Real estate activities,L (68),5000
+2023,West Yorkshire,"Professional, scientific and technical activities",M (69-75),16585
+2023,West Yorkshire,Administrative and support service activities,N (77-82),39705
+2023,West Yorkshire,Public administration and defence,O (84),8600
+2023,West Yorkshire,Education,P (85),47290
+2023,West Yorkshire,Human health and social work activities,Q (86-88),58950
+2023,West Yorkshire,"Arts, entertainment and recreation",R (90-93),12795
+2023,West Yorkshire,Other service activities,S (94-96),7410
+2023,West Yorkshire,Activities of households,T (97-98),0
+2023,West Yorkshire,Activities of extraterritorial organisations and bodies,U (99),0

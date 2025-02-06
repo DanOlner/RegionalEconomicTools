@@ -1,0 +1,241 @@
+DATE,GEOGRAPHY_NAME,SIC_3GROUP_NAME,SIC_3GROUP_CODE,JOBCOUNT
+2022,Bedfordshire and Hertfordshire,Production sector,A-E,60405
+2022,Bedfordshire and Hertfordshire,Construction,F (41-43),53840
+2022,Bedfordshire and Hertfordshire,Services sector,G-T,534935
+2022,"Berkshire, Buckinghamshire and Oxfordshire",Production sector,A-E,88160
+2022,"Berkshire, Buckinghamshire and Oxfordshire",Construction,F (41-43),37410
+2022,"Berkshire, Buckinghamshire and Oxfordshire",Services sector,G-T,801530
+2022,Cheshire,Production sector,A-E,47975
+2022,Cheshire,Construction,F (41-43),23655
+2022,Cheshire,Services sector,G-T,282030
+2022,Cornwall and Isles of Scilly,Production sector,A-E,22410
+2022,Cornwall and Isles of Scilly,Construction,F (41-43),12165
+2022,Cornwall and Isles of Scilly,Services sector,G-T,104975
+2022,Cumbria,Production sector,A-E,41145
+2022,Cumbria,Construction,F (41-43),13095
+2022,Cumbria,Services sector,G-T,100000
+2022,Derbyshire and Nottinghamshire,Production sector,A-E,117365
+2022,Derbyshire and Nottinghamshire,Construction,F (41-43),47430
+2022,Derbyshire and Nottinghamshire,Services sector,G-T,478215
+2022,Devon,Production sector,A-E,53295
+2022,Devon,Construction,F (41-43),23695
+2022,Devon,Services sector,G-T,245390
+2022,Dorset and Somerset,Production sector,A-E,65120
+2022,Dorset and Somerset,Construction,F (41-43),16660
+2022,Dorset and Somerset,Services sector,G-T,162535
+2022,East Anglia,Production sector,A-E,116035
+2022,East Anglia,Construction,F (41-43),54470
+2022,East Anglia,Services sector,G-T,549270
+2022,East Wales,Production sector,A-E,68205
+2022,East Wales,Construction,F (41-43),19420
+2022,East Wales,Services sector,G-T,283405
+2022,East Yorkshire and Northern Lincolnshire,Production sector,A-E,77540
+2022,East Yorkshire and Northern Lincolnshire,Construction,F (41-43),19000
+2022,East Yorkshire and Northern Lincolnshire,Services sector,G-T,174885
+2022,Eastern Scotland,Production sector,A-E,72070
+2022,Eastern Scotland,Construction,F (41-43),40055
+2022,Eastern Scotland,Services sector,G-T,521060
+2022,Essex,Production sector,A-E,53355
+2022,Essex,Construction,F (41-43),52505
+2022,Essex,Services sector,G-T,379255
+2022,"Gloucestershire, Wiltshire and Bath/Bristol area",Production sector,A-E,115425
+2022,"Gloucestershire, Wiltshire and Bath/Bristol area",Construction,F (41-43),53340
+2022,"Gloucestershire, Wiltshire and Bath/Bristol area",Services sector,G-T,673695
+2022,Greater Manchester,Production sector,A-E,100390
+2022,Greater Manchester,Construction,F (41-43),61015
+2022,Greater Manchester,Services sector,G-T,841600
+2022,Hampshire and Isle of Wight,Production sector,A-E,71010
+2022,Hampshire and Isle of Wight,Construction,F (41-43),36115
+2022,Hampshire and Isle of Wight,Services sector,G-T,496820
+2022,"Herefordshire, Worcestershire and Warwickshire",Production sector,A-E,94370
+2022,"Herefordshire, Worcestershire and Warwickshire",Construction,F (41-43),25530
+2022,"Herefordshire, Worcestershire and Warwickshire",Services sector,G-T,324805
+2022,Highlands and Islands,Production sector,A-E,26180
+2022,Highlands and Islands,Construction,F (41-43),13510
+2022,Highlands and Islands,Services sector,G-T,97930
+2022,Inner London - East,Production sector,A-E,25385
+2022,Inner London - East,Construction,F (41-43),30015
+2022,Inner London - East,Services sector,G-T,1039360
+2022,Inner London - West,Production sector,A-E,30890
+2022,Inner London - West,Construction,F (41-43),33670
+2022,Inner London - West,Services sector,G-T,1683185
+2022,Kent,Production sector,A-E,59285
+2022,Kent,Construction,F (41-43),42660
+2022,Kent,Services sector,G-T,391795
+2022,Lancashire,Production sector,A-E,86955
+2022,Lancashire,Construction,F (41-43),31815
+2022,Lancashire,Services sector,G-T,330230
+2022,"Leicestershire, Rutland and Northamptonshire",Production sector,A-E,100650
+2022,"Leicestershire, Rutland and Northamptonshire",Construction,F (41-43),37370
+2022,"Leicestershire, Rutland and Northamptonshire",Services sector,G-T,489275
+2022,Lincolnshire,Production sector,A-E,44540
+2022,Lincolnshire,Construction,F (41-43),14205
+2022,Lincolnshire,Services sector,G-T,141685
+2022,Merseyside,Production sector,A-E,48200
+2022,Merseyside,Construction,F (41-43),28235
+2022,Merseyside,Services sector,G-T,367830
+2022,North Eastern Scotland,Production sector,A-E,47065
+2022,North Eastern Scotland,Construction,F (41-43),11880
+2022,North Eastern Scotland,Services sector,G-T,119430
+2022,North Yorkshire,Production sector,A-E,43345
+2022,North Yorkshire,Construction,F (41-43),14805
+2022,North Yorkshire,Services sector,G-T,187710
+2022,"Northumberland, and Tyne and Wear",Production sector,A-E,60865
+2022,"Northumberland, and Tyne and Wear",Construction,F (41-43),22170
+2022,"Northumberland, and Tyne and Wear",Services sector,G-T,343850
+2022,Outer London - East and North East,Production sector,A-E,27410
+2022,Outer London - East and North East,Construction,F (41-43),27720
+2022,Outer London - East and North East,Services sector,G-T,322515
+2022,Outer London - South,Production sector,A-E,12450
+2022,Outer London - South,Construction,F (41-43),18585
+2022,Outer London - South,Services sector,G-T,284255
+2022,Outer London - West and North West,Production sector,A-E,39275
+2022,Outer London - West and North West,Construction,F (41-43),30965
+2022,Outer London - West and North West,Services sector,G-T,564275
+2022,Shropshire and Staffordshire,Production sector,A-E,94085
+2022,Shropshire and Staffordshire,Construction,F (41-43),27595
+2022,Shropshire and Staffordshire,Services sector,G-T,358030
+2022,South Yorkshire,Production sector,A-E,60265
+2022,South Yorkshire,Construction,F (41-43),26385
+2022,South Yorkshire,Services sector,G-T,302515
+2022,Southern Scotland,Production sector,A-E,40865
+2022,Southern Scotland,Construction,F (41-43),20590
+2022,Southern Scotland,Services sector,G-T,160570
+2022,"Surrey, East and West Sussex",Production sector,A-E,77910
+2022,"Surrey, East and West Sussex",Construction,F (41-43),50925
+2022,"Surrey, East and West Sussex",Services sector,G-T,717665
+2022,Tees Valley and Durham,Production sector,A-E,50055
+2022,Tees Valley and Durham,Construction,F (41-43),21070
+2022,Tees Valley and Durham,Services sector,G-T,225805
+2022,West Central Scotland,Production sector,A-E,51735
+2022,West Central Scotland,Construction,F (41-43),38415
+2022,West Central Scotland,Services sector,G-T,433375
+2022,West Midlands,Production sector,A-E,128555
+2022,West Midlands,Construction,F (41-43),42210
+2022,West Midlands,Services sector,G-T,727910
+2022,West Wales and The Valleys,Production sector,A-E,90405
+2022,West Wales and The Valleys,Construction,F (41-43),33500
+2022,West Wales and The Valleys,Services sector,G-T,339465
+2022,West Yorkshire,Production sector,A-E,114460
+2022,West Yorkshire,Construction,F (41-43),41460
+2022,West Yorkshire,Services sector,G-T,594790
+2023,Bedfordshire and Hertfordshire,Production sector,A-E,57970
+2023,Bedfordshire and Hertfordshire,Construction,F (41-43),51270
+2023,Bedfordshire and Hertfordshire,Services sector,G-T,496170
+2023,"Berkshire, Buckinghamshire and Oxfordshire",Production sector,A-E,89165
+2023,"Berkshire, Buckinghamshire and Oxfordshire",Construction,F (41-43),39010
+2023,"Berkshire, Buckinghamshire and Oxfordshire",Services sector,G-T,810315
+2023,Cheshire,Production sector,A-E,53560
+2023,Cheshire,Construction,F (41-43),23145
+2023,Cheshire,Services sector,G-T,294505
+2023,Cornwall and Isles of Scilly,Production sector,A-E,20950
+2023,Cornwall and Isles of Scilly,Construction,F (41-43),13915
+2023,Cornwall and Isles of Scilly,Services sector,G-T,108195
+2023,Cumbria,Production sector,A-E,44875
+2023,Cumbria,Construction,F (41-43),12135
+2023,Cumbria,Services sector,G-T,101835
+2023,Derbyshire and Nottinghamshire,Production sector,A-E,127795
+2023,Derbyshire and Nottinghamshire,Construction,F (41-43),36430
+2023,Derbyshire and Nottinghamshire,Services sector,G-T,477800
+2023,Devon,Production sector,A-E,51105
+2023,Devon,Construction,F (41-43),28035
+2023,Devon,Services sector,G-T,246500
+2023,Dorset and Somerset,Production sector,A-E,59890
+2023,Dorset and Somerset,Construction,F (41-43),20305
+2023,Dorset and Somerset,Services sector,G-T,167465
+2023,East Anglia,Production sector,A-E,115455
+2023,East Anglia,Construction,F (41-43),49180
+2023,East Anglia,Services sector,G-T,559590
+2023,East Wales,Production sector,A-E,68915
+2023,East Wales,Construction,F (41-43),21625
+2023,East Wales,Services sector,G-T,297330
+2023,East Yorkshire and Northern Lincolnshire,Production sector,A-E,71525
+2023,East Yorkshire and Northern Lincolnshire,Construction,F (41-43),18895
+2023,East Yorkshire and Northern Lincolnshire,Services sector,G-T,184730
+2023,Eastern Scotland,Production sector,A-E,75095
+2023,Eastern Scotland,Construction,F (41-43),36300
+2023,Eastern Scotland,Services sector,G-T,535740
+2023,Essex,Production sector,A-E,51335
+2023,Essex,Construction,F (41-43),48950
+2023,Essex,Services sector,G-T,389705
+2023,"Gloucestershire, Wiltshire and Bath/Bristol area",Production sector,A-E,110640
+2023,"Gloucestershire, Wiltshire and Bath/Bristol area",Construction,F (41-43),61805
+2023,"Gloucestershire, Wiltshire and Bath/Bristol area",Services sector,G-T,695140
+2023,Greater Manchester,Production sector,A-E,103810
+2023,Greater Manchester,Construction,F (41-43),56550
+2023,Greater Manchester,Services sector,G-T,862370
+2023,Hampshire and Isle of Wight,Production sector,A-E,71155
+2023,Hampshire and Isle of Wight,Construction,F (41-43),36845
+2023,Hampshire and Isle of Wight,Services sector,G-T,498255
+2023,"Herefordshire, Worcestershire and Warwickshire",Production sector,A-E,83770
+2023,"Herefordshire, Worcestershire and Warwickshire",Construction,F (41-43),27365
+2023,"Herefordshire, Worcestershire and Warwickshire",Services sector,G-T,338580
+2023,Highlands and Islands,Production sector,A-E,27625
+2023,Highlands and Islands,Construction,F (41-43),12275
+2023,Highlands and Islands,Services sector,G-T,98180
+2023,Inner London - East,Production sector,A-E,25775
+2023,Inner London - East,Construction,F (41-43),31210
+2023,Inner London - East,Services sector,G-T,1062225
+2023,Inner London - West,Production sector,A-E,28390
+2023,Inner London - West,Construction,F (41-43),35620
+2023,Inner London - West,Services sector,G-T,1758265
+2023,Kent,Production sector,A-E,59590
+2023,Kent,Construction,F (41-43),43655
+2023,Kent,Services sector,G-T,394305
+2023,Lancashire,Production sector,A-E,89785
+2023,Lancashire,Construction,F (41-43),31930
+2023,Lancashire,Services sector,G-T,332630
+2023,"Leicestershire, Rutland and Northamptonshire",Production sector,A-E,106670
+2023,"Leicestershire, Rutland and Northamptonshire",Construction,F (41-43),29445
+2023,"Leicestershire, Rutland and Northamptonshire",Services sector,G-T,480870
+2023,Lincolnshire,Production sector,A-E,42840
+2023,Lincolnshire,Construction,F (41-43),12080
+2023,Lincolnshire,Services sector,G-T,141995
+2023,Merseyside,Production sector,A-E,49685
+2023,Merseyside,Construction,F (41-43),26485
+2023,Merseyside,Services sector,G-T,373285
+2023,North Eastern Scotland,Production sector,A-E,47275
+2023,North Eastern Scotland,Construction,F (41-43),11255
+2023,North Eastern Scotland,Services sector,G-T,119015
+2023,North Yorkshire,Production sector,A-E,42580
+2023,North Yorkshire,Construction,F (41-43),16245
+2023,North Yorkshire,Services sector,G-T,200660
+2023,"Northumberland, and Tyne and Wear",Production sector,A-E,64670
+2023,"Northumberland, and Tyne and Wear",Construction,F (41-43),23885
+2023,"Northumberland, and Tyne and Wear",Services sector,G-T,359500
+2023,Outer London - East and North East,Production sector,A-E,28330
+2023,Outer London - East and North East,Construction,F (41-43),32250
+2023,Outer London - East and North East,Services sector,G-T,332130
+2023,Outer London - South,Production sector,A-E,13040
+2023,Outer London - South,Construction,F (41-43),20520
+2023,Outer London - South,Services sector,G-T,263665
+2023,Outer London - West and North West,Production sector,A-E,39280
+2023,Outer London - West and North West,Construction,F (41-43),33510
+2023,Outer London - West and North West,Services sector,G-T,547880
+2023,Shropshire and Staffordshire,Production sector,A-E,88990
+2023,Shropshire and Staffordshire,Construction,F (41-43),31480
+2023,Shropshire and Staffordshire,Services sector,G-T,363520
+2023,South Yorkshire,Production sector,A-E,57565
+2023,South Yorkshire,Construction,F (41-43),23665
+2023,South Yorkshire,Services sector,G-T,310420
+2023,Southern Scotland,Production sector,A-E,41545
+2023,Southern Scotland,Construction,F (41-43),18490
+2023,Southern Scotland,Services sector,G-T,165795
+2023,"Surrey, East and West Sussex",Production sector,A-E,76350
+2023,"Surrey, East and West Sussex",Construction,F (41-43),54450
+2023,"Surrey, East and West Sussex",Services sector,G-T,724460
+2023,Tees Valley and Durham,Production sector,A-E,53410
+2023,Tees Valley and Durham,Construction,F (41-43),22345
+2023,Tees Valley and Durham,Services sector,G-T,229685
+2023,West Central Scotland,Production sector,A-E,58480
+2023,West Central Scotland,Construction,F (41-43),37645
+2023,West Central Scotland,Services sector,G-T,435760
+2023,West Midlands,Production sector,A-E,127745
+2023,West Midlands,Construction,F (41-43),46835
+2023,West Midlands,Services sector,G-T,735320
+2023,West Wales and The Valleys,Production sector,A-E,88810
+2023,West Wales and The Valleys,Construction,F (41-43),35475
+2023,West Wales and The Valleys,Services sector,G-T,350815
+2023,West Yorkshire,Production sector,A-E,111790
+2023,West Yorkshire,Construction,F (41-43),42735
+2023,West Yorkshire,Services sector,G-T,609190
