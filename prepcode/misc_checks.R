@@ -1020,7 +1020,7 @@ gva.n.bres.2digit.tweakedITL3 <- gva.n.bres.2digit.geogedit %>%
 
 
 
-# DO GEOG NAME CHECKS ON BRES NUTS2 AND GVA ITL2----
+# DO GEOG NAME CHECKS ON BRES NUTS AND GVA ITL----
 
 #A few are wonky
 #Get one of the relevant BRES's...
