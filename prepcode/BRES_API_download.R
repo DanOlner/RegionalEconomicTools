@@ -47,12 +47,16 @@ yearstoget = 2015:latestyear
 runBRESdownloader.fortheseyears(years = yearstoget, geography = "TYPE438", EMPLOYMENT_STATUS = 2)
 #PART TIME
 runBRESdownloader.fortheseyears(years = yearstoget, geography = "TYPE438", EMPLOYMENT_STATUS = 3)
+#"EMPLOYEES"
+runBRESdownloader.fortheseyears(years = yearstoget, geography = "TYPE438", EMPLOYMENT_STATUS = 4)
 
 #TYPE437 is nuts 2016 level 3 - geography only doesn't match ITL3 for Bournemouth/Poole/Christchurch, rest does
 #FULL TIME
 runBRESdownloader.fortheseyears(years = yearstoget, geography = "TYPE437", EMPLOYMENT_STATUS = 2)
 #PART TIME
 runBRESdownloader.fortheseyears(years = yearstoget, geography = "TYPE437", EMPLOYMENT_STATUS = 3)
+#"EMPLOYEES"
+runBRESdownloader.fortheseyears(years = yearstoget, geography = "TYPE437", EMPLOYMENT_STATUS = 4)
 
 #ITL2 and 3 (data only available for 2022 and 2023)
 #Full time for both
@@ -63,10 +67,19 @@ runBRESdownloader.fortheseyears(years = yearstoget, geography = "TYPE437", EMPLO
 runBRESdownloader.fortheseyears(years = 2022:latestyear, geography = "TYPE429", EMPLOYMENT_STATUS = 2)
 #PART TIME
 runBRESdownloader.fortheseyears(years = 2022:latestyear, geography = "TYPE429", EMPLOYMENT_STATUS = 3)
+
+runBRESdownloader.fortheseyears(years = 2022:latestyear, geography = "TYPE429", EMPLOYMENT_STATUS = 4)
+
+
 #FULL TIME
 runBRESdownloader.fortheseyears(years = 2022:latestyear, geography = "TYPE428", EMPLOYMENT_STATUS = 2)
 #PART TIME
 runBRESdownloader.fortheseyears(years = 2022:latestyear, geography = "TYPE428", EMPLOYMENT_STATUS = 3)
+#"EMPLOYEES"
+runBRESdownloader.fortheseyears(years = 2022:latestyear, geography = "TYPE428", EMPLOYMENT_STATUS = 4)
+
+
+
 
 
 

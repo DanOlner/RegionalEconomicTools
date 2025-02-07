@@ -65,6 +65,9 @@ z <- nomis_get_data(id = "NM_189_1",  time = "2023", geography = placeid
 )
 
 
+
+
+
 #That data method is seeming different to how it was...
 #Is it the same for others?
 #ITL3
@@ -78,6 +81,48 @@ z <- nomis_get_data(id = "NM_189_1",  time = "2023",
 
 
 
+
+
+
+#While here, compare the employment number type (while keeping just the measures we want, straight count)
+#Reminder of employee cats in the BRES data
+## Employees: An employee is anyone aged 16 years or over that an organisation directly pays from its payroll(s), in return for carrying out a full-time or part-time job or being on a training scheme. It excludes voluntary workers, self-employed, working owners who are not paid via PAYE. 
+# Full-time employees: those working more than 30 hours per week.
+# Part-time employees: those working 30 hours or less per week.
+# Employment includes employees plus the number of working owners. BRES therefore includes self-employed workers as long as they are registered for VAT or Pay-As-You-Earn (PAYE) schemes. Self employed people not registered for these, along with HM Forces and Government Supported trainees are excluded.
+#And note, no gig economy jobs: 
+#https://www.ons.gov.uk/aboutus/transparencyandgovernance/freedomofinformationfoi/workersinthegigeconomy
+
+z <- nomis_get_data(id = "NM_189_1",  time = "2022", 
+                    geography = 'TYPE429',
+                    MEASURE = 1,
+                    MEASURES = 20100,
+                    select = c('DATE','GEOGRAPHY_NAME','INDUSTRY_NAME','INDUSTRY_TYPE','EMPLOYMENT_STATUS_NAME','OBS_VALUE')
+                    # EMPLOYMENT_STATUS = 1
+)
+
+unique(z$EMPLOYMENT_STATUS_NAME)
+unique(z$INDUSTRY_TYPE)
+
+#Compare side by side
+chk <- z %>% 
+  filter(INDUSTRY_NAME != 'Total', qg('2 digit',INDUSTRY_TYPE)) %>% 
+  pivot_wider(
+    names_from = EMPLOYMENT_STATUS_NAME, values_from = OBS_VALUE
+  ) %>% 
+  mutate(
+    employment_as_percent_of_employees = (Employment / Employees) * 100
+  )
+  
+
+ggplot(chk, aes(x = employment_as_percent_of_employees)) +
+  geom_histogram(binwidth = 10) +
+  coord_cartesian(xlim = c(90,300))
+
+#Difference by sector?
+ggplot(chk, aes(y = employment_as_percent_of_employees, x = INDUSTRY_NAME)) +
+  geom_boxplot() +
+  coord_flip(ylim = c(90,300)) 
 
 
 # CHECK BRES GEOGRAPHIES' MATCH TO OTHERS----

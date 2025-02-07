@@ -137,6 +137,13 @@ for(SICgrouping in c('3GROUPS','SIC_SECTION','SIC_2DIGIT')){
   #reduce iterates over the BRES files (full and part time)
   #And joins both to each gva file (passed in as the reduce .init argument)
   #Returns a list of each GVA/bres FT/bres PT combo
+  
+  #Reminder (for the last rename line)
+  # Employees: An employee is anyone aged 16 years or over that an organisation directly pays from its payroll(s), in return for carrying out a full-time or part-time job or being on a training scheme. It excludes voluntary workers, self-employed, working owners who are not paid via PAYE. 
+  # Full-time employees: those working more than 30 hours per week.
+  # Part-time employees: those working 30 hours or less per week.
+  # (Full and part time sum to 'employees', unlike the next one...)
+  # Employment includes employees plus the number of working owners. BRES therefore includes self-employed workers as long as they are registered for VAT or Pay-As-You-Earn (PAYE) schemes. Self employed people not registered for these, along with HM Forces and Government Supported trainees are excluded.
   gva.n.bres <- map(all.gva, function(gva_df) {
     all.bres %>%
     reduce(~ .x %>% inner_join(
@@ -145,7 +152,7 @@ for(SICgrouping in c('3GROUPS','SIC_SECTION','SIC_2DIGIT')){
       .init = gva_df %>% rename(GEOGRAPHY_NAME = Region_name, DATE = year,
                              SIC_CODE = SIC07_code ,gva = value)) %>% 
     relocate(DATE, .before = ITL_code) %>% 
-    rename(JOBCOUNT_FULLTIME = JOBCOUNT.x, JOBCOUNT_PARTTIME = JOBCOUNT.y)
+    rename(JOBCOUNT_FULLTIME = JOBCOUNT.x, JOBCOUNT_PARTTIME = JOBCOUNT.y, JOBCOUNT_ALLINEMPLOYMENT = JOBCOUNT)
   })
   
   #Tweak filenames
@@ -301,7 +308,13 @@ for(SICgrouping in c('3GROUPS','SIC_SECTION','SIC_2DIGIT')){
   #reduce iterates over the BRES files (full and part time)
   #And joins both to each gva file
   #Returns a list of each GVA/bres FT/bres PT combo
-  #Is also, as a bonus, horribly unreadable
+  
+  #Reminder (for the last rename line)
+  # Employees: An employee is anyone aged 16 years or over that an organisation directly pays from its payroll(s), in return for carrying out a full-time or part-time job or being on a training scheme. It excludes voluntary workers, self-employed, working owners who are not paid via PAYE. 
+  # Full-time employees: those working more than 30 hours per week.
+  # Part-time employees: those working 30 hours or less per week.
+  # (Full and part time sum to 'employees', unlike the next one...)
+  # Employment includes employees plus the number of working owners. BRES therefore includes self-employed workers as long as they are registered for VAT or Pay-As-You-Earn (PAYE) schemes. Self employed people not registered for these, along with HM Forces and Government Supported trainees are excluded.
   gva.n.bres <- map(all.gva, function(gva_df) {
     all.bres %>%
     reduce(~ .x %>% inner_join(
@@ -309,8 +322,8 @@ for(SICgrouping in c('3GROUPS','SIC_SECTION','SIC_2DIGIT')){
       by = c('GEOGRAPHY_NAME', 'DATE', 'SIC_CODE')),
       .init = gva_df %>% rename(GEOGRAPHY_NAME = Region_name, DATE = year,
                              SIC_CODE = SIC07_code ,gva = value)) %>% 
-    relocate(DATE, .before = ITL_code) %>% 
-    rename(JOBCOUNT_FULLTIME = JOBCOUNT.x, JOBCOUNT_PARTTIME = JOBCOUNT.y)
+    relocate(DATE, .before = ITL_code) %>%
+      rename(JOBCOUNT_FULLTIME = JOBCOUNT.x, JOBCOUNT_PARTTIME = JOBCOUNT.y, JOBCOUNT_ALLINEMPLOYMENT = JOBCOUNT)
   })
   
   
