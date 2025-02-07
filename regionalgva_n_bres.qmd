@@ -19,39 +19,37 @@ library(tidyverse)
 
 ## What's this?
 
-* Easy-access ONS regional GVA by SIC sector data
-* Same for BRES (the Business Register and Employment Survey) region-by-sector job count data
-* Linked GVA and BRES data
+* Easy-access ONS regional GVA by SIC sector data: ITL2 & 3 geographies, SIC 2-digit, Section and Production/Construction/Services, 1998 to latest
+* Same for BRES (the Business Register and Employment Survey) region-by-sector job count data, with extra-bonus higher accuracy values. 2015 to latest.
+* Those two linked together into single GVA/jobcount datasets (so 2015 to latest)
 
 ### Why?
 
 * The ONS publish **regional GVA data for the UK**, covering a range of SIC sectors (2022 is the latest available year at time of writing - the [data's here](https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry)). But it's a faff to extract data from the excel sheets, especially for use in R or similar.
-* This page **provides easy-to-access copies from that dataset**, with each useful dataset in its own CSV. It'll be **updated when the latest GVA data comes out.
+* This page **provides easy-to-access copies from that dataset**, with each useful dataset in its own CSV. It'll be **updated when the latest GVA data comes out.**
 * This data also feeds into other tools/code on this website like sector analysis, GVA gap analysis. (See left-hand bar.)
 
 ### Also:
 
 * **UK regional/sectoral job count data** is available via BRES (the Business Register and Employment Survey) [on NOMIS](https://www.nomisweb.co.uk/sources/bres), but again not in the most easily-useable form. (E.g. the website's query form will separate out different fields into their own chunk in the file.)
+* It's also possible to extract more accurate job count numbers by **aggregating up from the most granular sector counts** (see the related [blog post]() for more on this.) The BRES data below uses these more accurate counts.
 * So there's also **quick-access versions of all the most useful versions of the latest BRES data, including previously available years**.
 
 ### Also also:
 
 * It's useful to have **both regional GVA and job count values combined** (for e.g. GVA per job analysis, or to have gva and job analysis using the same SIC categories and places) - this page also has **linked GVA and job count data**. 
 * There are several wrinkles with this data to get them to play nicely together that anyone using should be aware of - **see details below.**
-
+* Or for even more horrific detail, see [this blog post]() on what the code's doing and what data shaping choices have gone into the GVA / BRES join. Any thoughts on things I've stuffed up or that could be improved, let me know in the [github issues](https://github.com/DanOlner/RegionalEconomicTools/issues).
+* The blog post also **explains details you may need if new to this data**, like the difference between Current Prices and Chained Volume prices (and why each has to be treated very differently in analysis e.g. don't sum chained volume...)
 
 
 ## Automate!
 
 **Every step - from downloading the data to creating the link tables below - is automated.**
 
-Making data processing like this as **automated and repeatable as possible** makes it **as open and useable as possible** As soon as new GVA or BRES data comes out, [code from the repo](https://github.com/DanOlner/RegionalEconomicTools/tree/gh-pages/prepcode) can be re-run painlessly. (Other datasets and linking will be added to this process.)
+Making data processing like this as **automated and repeatable as possible** makes it **as open and useable as possible**. As soon as new GVA or BRES data comes out, [code from the repo](https://github.com/DanOlner/RegionalEconomicTools/tree/gh-pages/prepcode) can be re-run painlessly[^1]. (Other datasets and linking will be added to this process.)
 
-[This blog post]() goes into horrifically too much detail on what the code's doing and what data shaping choices have gone into the GVA / BRES join. Any thoughts on things I've stuffed up, let me know in the [github issues](https://github.com/DanOlner/RegionalEconomicTools/issues).
-
-That blog post also **explains details you may need if new to this data**, like the difference between Current Prices and Chained Volume prices (and why each has to be treated very differently in analysis e.g. don't sum chained volume...)
-
-
+[^1]: Hah. Hopefully. We'll see what else changes...
 
 ## GET THE DATA --->
 
@@ -314,6 +312,192 @@ kable(download_links, escape = FALSE, caption = "")
 
 
 ```
+
+
+
+
+### COMBINED GVA + BRES DATA *excluding* imputed rent
+
+
+
+
+
+```{r create-download-table-comboexir, message=FALSE, warning=FALSE}
+# ```{r create-download-table-combo}
+
+
+#Set GitHub base URL
+base_url <- "https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/"
+
+#list files
+files <- list.files(path = "data/regionalGVA_plus_BRESjobcounts", pattern = "\\.csv$", full.names = FALSE)
+
+#Filter down to ones we want initially
+#Add in related others when making the link text
+files <-files[qg('currentprices',files)]
+files <-files[qg('imputed',files)]
+
+
+#Define the row and column terms.
+#No SIC 2 digit data here - user can just remove that row
+row_terms <- c("3GROUPS", "SIC_SECTION")
+col_terms <- c("ITL2", "ITL3")
+
+#Create an empty data frame to store your links.
+#Use row_terms as row names and col_terms as column names.
+download_links <- matrix(NA, nrow = length(row_terms), ncol = length(col_terms),
+                         dimnames = list(row_terms, col_terms))
+download_links <- as.data.frame(download_links)
+
+#Populate the table by searching for files that contain both the column and row keywords.
+for (row in row_terms) {
+  for (col in col_terms) {
+    # Use stringr's str_detect to filter file names for both patterns (case-insensitive)
+    matching_files <- files[
+      str_detect(files, fixed(col, ignore_case = TRUE)) &
+      str_detect(files, fixed(row, ignore_case = TRUE))
+    ]
+    
+    if (length(matching_files) > 0) {
+      # If multiple files match, take the first one:
+      file_name <- matching_files[1]
+      
+      full_url_cp <- paste0(base_url, file_name)
+      
+      full_url_cv <- gsub('currentprices','chainedvolume',full_url_cp) 
+      
+      # cat("Base URL: ", full_url_with_ir, '\n')
+      
+      # #slightly fiddly, have to insert in exact location
+      # #Backtracking from end
+      # full_url_minusimputedrent <- paste0(
+      #   base_url, 
+      #   str_sub(file_name,1,-9),
+      #   'MINUSimputedrent_',
+      #   str_sub(file_name,-8,-1)
+      #   )
+      
+      # cat("Base URL2: ", full_url_minusimputedrent, '\n')
+      
+      # full_url_with_ir <- gsub('MINUSimputedrent_','',full_url_FT) 
+      # 
+      # full_url_minusimputedrent <- paste0(base_url, file_name)
+      # 
+      
+      
+      download_links[row, col] <- sprintf("[CP](%s), [CV](%s)", 
+                                          full_url_cp,
+                                          full_url_cv
+                                          )
+      
+    } else {
+      download_links[row, col] <- " ---- "
+    }
+  }
+}
+
+#Render
+#escape = FALSE so that markdown in the cells (the links) is rendered correctly.
+kable(download_links, escape = FALSE, caption = "")
+# kable(download_links, escape = FALSE, caption = "Download Links for ITL2 and ITL3 Files")
+
+
+```
+
+
+
+
+
+### COMBINED GVA + BRES DATA (with imputed rent included as row)
+
+
+
+
+
+```{r create-download-table-combo, message=FALSE, warning=FALSE}
+# ```{r create-download-table-combo}
+
+
+#Set GitHub base URL
+base_url <- "https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/"
+
+#list files
+files <- list.files(path = "data/regionalGVA_plus_BRESjobcounts", pattern = "\\.csv$", full.names = FALSE)
+
+#Filter down to ones we want initially
+#Add in related others when making the link text
+files <-files[qg('currentprices',files)]
+files <-files[!qg('imputed',files)]
+
+
+#Define the row and column terms.
+#ONLY SIC 2 digit data here - rest is all exc imputed rent
+row_terms <- c("SIC_2DIGIT")
+col_terms <- c("ITL2", "ITL3")
+
+#Create an empty data frame to store your links.
+#Use row_terms as row names and col_terms as column names.
+download_links <- matrix(NA, nrow = length(row_terms), ncol = length(col_terms),
+                         dimnames = list(row_terms, col_terms))
+download_links <- as.data.frame(download_links)
+
+#Populate the table by searching for files that contain both the column and row keywords.
+for (row in row_terms) {
+  for (col in col_terms) {
+    # Use stringr's str_detect to filter file names for both patterns (case-insensitive)
+    matching_files <- files[
+      str_detect(files, fixed(col, ignore_case = TRUE)) &
+      str_detect(files, fixed(row, ignore_case = TRUE))
+    ]
+    
+    if (length(matching_files) > 0) {
+      # If multiple files match, take the first one:
+      file_name <- matching_files[1]
+      
+      full_url_cp <- paste0(base_url, file_name)
+      
+      full_url_cv <- gsub('currentprices','chainedvolume',full_url_cp) 
+      
+      # cat("Base URL: ", full_url_with_ir, '\n')
+      
+      # #slightly fiddly, have to insert in exact location
+      # #Backtracking from end
+      # full_url_minusimputedrent <- paste0(
+      #   base_url, 
+      #   str_sub(file_name,1,-9),
+      #   'MINUSimputedrent_',
+      #   str_sub(file_name,-8,-1)
+      #   )
+      
+      # cat("Base URL2: ", full_url_minusimputedrent, '\n')
+      
+      # full_url_with_ir <- gsub('MINUSimputedrent_','',full_url_FT) 
+      # 
+      # full_url_minusimputedrent <- paste0(base_url, file_name)
+      # 
+      
+      
+      download_links[row, col] <- sprintf("[CP](%s), [CV](%s)", 
+                                          full_url_cp,
+                                          full_url_cv
+                                          )
+      
+    } else {
+      download_links[row, col] <- " ---- "
+    }
+  }
+}
+
+#Render
+#escape = FALSE so that markdown in the cells (the links) is rendered correctly.
+kable(download_links, escape = FALSE, caption = "")
+# kable(download_links, escape = FALSE, caption = "Download Links for ITL2 and ITL3 Files")
+
+
+```
+
+
+
 
 
 
