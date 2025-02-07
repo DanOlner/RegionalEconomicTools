@@ -281,8 +281,21 @@ make.GVA.SICs.long <- function(ITL.df){
 
 
 
-
-
+#Take in filenames, load the RDS and - assuming it's a dataframe/tibble - 
+#Resave as zipped CSV (so can be accessed by non-R-users)
+#Will need to save temp CSV in same folder then delete
+Convert.RDS.to.zipped.CSV <- function(filenames){
+  
+  filenames %>% walk(~ {
+    
+  }
+  )
+  
+  
+  #Use the zip library for system-agnostic zipping
+  
+  
+}
 
 
 

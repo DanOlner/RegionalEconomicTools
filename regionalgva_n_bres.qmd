@@ -1,0 +1,66 @@
+---
+title: "Regional GVA and job count data: easy squeezy versions"
+code-overflow: wrap
+execute:
+  echo: true
+  warning: false
+  error: false
+---
+
+```{r}
+
+
+
+```
+
+
+
+# What's this?
+
+* Easy-access ONS regional GVA by SIC sector data
+* Same for BRES (the Business Register and Employment Survey) region-by-sector job count data
+* Linked GVA and BRES data
+
+## Why?
+
+* The ONS publish **regional GVA data for the UK**, covering a range of SIC sectors (2022 is the latest available year at time of writing - the [data's here](https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry)). But it's a faff to extract data from the excel sheets, especially for use in R or similar.
+* This page **provides easy-to-access copies from that dataset**, with each useful dataset in its own CSV. It'll be **updated when the latest GVA data comes out.
+* This data also feeds into other tools/code on this website like sector analysis, GVA gap analysis. (See left-hand bar.)
+
+## Also:
+
+* There's **UK regional job count data** available via BRES (the Business Register and Employment Survey) [on NOMIS](https://www.nomisweb.co.uk/sources/bres), but again not in the most easily-useable form. (E.g. the website's query form will separate out different fields into their own chunk in the file.)
+* So there's also **quick-access versions of all the most useful versions of the latest BRES data, including previously available years**.
+
+## Also also:
+
+* It's useful to have **both regional GVA and job count values combined** (for e.g. GVA per job analysis, or to have gva and job analysis using the same SIC categories and places) - this page also has **linked GVA and job count data**. 
+* There are several wrinkles with this data to get them to play nicely together that anyone using should be aware of - **see details below.**
+
+
+
+# Automate!
+
+The larger aim is to make processing and accessing data like this as **automated and repeatable as possible**, so it can be **as open and useable as possible** As soon as new GVA or BRES data comes out, [code from the repo](https://github.com/DanOlner/RegionalEconomicTools/tree/gh-pages/prepcode) can be re-run painlessly. (Other datasets and linking will be added to this process.)
+
+[This blog post]() goes into horrifically too much detail on what the code's doing and what data shaping choices have gone into the GVA / BRES join. Any thoughts on things I've stuffed up, let me know in the [github issues](https://github.com/DanOlner/RegionalEconomicTools/issues).
+
+That blog post also **explains details you may need if new to this data**, like the difference between Current Prices and Chained Volume prices (and why each has to be treated very differently in analysis e.g. don't sum chained volume...)
+
+
+
+# The data
+
+The data is all in the [github repo data folder](https://github.com/DanOlner/RegionalEconomicTools/tree/gh-pages/data) in separate subfolders.
+
+Ways to get:
+
+* Look in [the data folder](https://github.com/DanOlner/RegionalEconomicTools/tree/gh-pages/data) on the repo - there are separate subfolders for each group of data. Details for each of those **are explained below.**
+* **To get ALL the data in one go:** download (or [clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)) the entire repo. To download - see the **green "CODE" button** on [the main page](https://github.com/DanOlner/RegionalEconomicTools)? Click there and use the 'download ZIP' option, then look in the data folder after unzipping.
+
+
+## GVA
+
+
+
+

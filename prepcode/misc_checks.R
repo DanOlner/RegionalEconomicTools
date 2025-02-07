@@ -1079,3 +1079,28 @@ unique(gva.chk$Region_name)[!unique(gva.chk$Region_name) %in% bres.chk$GEOGRAPHY
 
 
 
+# CHECK RESAVING BRES DATA AS ZIPPED CSV ACTUALLY IS SMALL ENOUGH FILE----
+
+#Output from BRES_API_DOWNLOAD
+#Picking on the biggest one in the folder
+chk <- readRDS("data/BRES/BRES_ALLYEARSWITHDATA_TYPE437_nuts2016level3_3_Parttimeemployees_2015_2023.rds")
+
+#need to save the CSV first...
+#300mb vs 42mb for RDS compressed object
+write_csv(chk,"local/cuttings/test.csv")
+
+#Yep, goes down to same compressed size as RDS
+zip::zip("local/cuttings/test.zip", "local/cuttings/test.csv")
+
+
+
+
+
+
+
+
+
+
+
+
+
