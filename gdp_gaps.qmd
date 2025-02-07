@@ -42,14 +42,14 @@ Then load in the data for both ITL2 and ITL3 regions:
 #ONS link to the Excel sheets: https://www.ons.gov.uk/economy/grossdomesticproductgdp/datasets/regionalgrossdomesticproductallnutslevelregions
 #Data folder name of downloaded Excel sheets (from which the CSVs below have been exported)
 #itlproductivity.xlsx
-perhourworked <- read_csv('data/Table A4 Current Price unsmoothed GVA B per hour worked £ ITL2 and ITL3 subregions 2004 to 2021.csv') %>% 
+perhourworked <- read_csv('data/misc/Table A4 Current Price unsmoothed GVA B per hour worked £ ITL2 and ITL3 subregions 2004 to 2021.csv') %>% 
 rename(ITL = `ITL level`, ITLcode = `ITL code`, region = `Region name`) %>% 
   filter(ITL == 'ITL2') %>% 
   pivot_longer(cols = `2004`:`2021`, names_to = 'year', values_to = 'gva') %>% 
   mutate(year = as.numeric(year))
 
 #Repeat for ITL3
-perhourworked.itl3 <- read_csv('data/Table A4 Current Price unsmoothed GVA B per hour worked £ ITL2 and ITL3 subregions 2004 to 2021.csv') %>% 
+perhourworked.itl3 <- read_csv('data/misc/Table A4 Current Price unsmoothed GVA B per hour worked £ ITL2 and ITL3 subregions 2004 to 2021.csv') %>% 
   rename(ITL = `ITL level`, ITLcode = `ITL code`, region = `Region name`) %>% 
   filter(ITL == 'ITL3') %>% 
   pivot_longer(cols = `2004`:`2021`, names_to = 'year', values_to = 'gva') %>% 
@@ -184,14 +184,14 @@ After the gap closed toward 2010, has opened up again and sloped up since. Avera
 #Using number of hours worked per ITL2
 
 #Get hours worked per week total for ITL2
-totalhoursperweek <- read_csv('data/Productivity Hours Worked per Week ITL2 and ITL3 subregions constrained to ITL1 2004 2021.csv') %>%
+totalhoursperweek <- read_csv('data/misc/Productivity Hours Worked per Week ITL2 and ITL3 subregions constrained to ITL1 2004 2021.csv') %>%
   rename(ITL = `ITL level`, ITLcode = `ITL code`, region = `Region name`) %>% 
   filter(ITL == 'ITL2') %>% 
   pivot_longer(cols = `2004`:`2021`, names_to = 'year', values_to = 'hours_per_week') %>% 
   mutate(year = as.numeric(year))
 
 #And same for ITL3 regions
-totalhoursperweek.itl3 <- read_csv('data/Productivity Hours Worked per Week ITL2 and ITL3 subregions constrained to ITL1 2004 2021.csv') %>%
+totalhoursperweek.itl3 <- read_csv('data/misc/Productivity Hours Worked per Week ITL2 and ITL3 subregions constrained to ITL1 2004 2021.csv') %>%
   rename(ITL = `ITL level`, ITLcode = `ITL code`, region = `Region name`) %>% 
   filter(ITL == 'ITL3') %>% 
   pivot_longer(cols = `2004`:`2021`, names_to = 'year', values_to = 'hours_per_week') %>% 
@@ -391,16 +391,16 @@ Similar opening gap to other regions, but in the few (COVID?) years, that gap in
 #ONS mid year population estimates
 #Table 6 (not sure where they got consistent ITL2 geogs from...)
 #NOTE: UNCERTAINTY ISSUES IN LATEST DATA, DON'T USE FOR NOW. SEE ORIG EXCEL:
-# personcounts <- read_csv('data/Table 6 Total resident population numbers persons Apr2024.csv') %>% 
-personcounts <- read_csv('data/Table 6 Total resident population numbers persons.csv') %>%
+# personcounts <- read_csv('data/misc/Table 6 Total resident population numbers persons Apr2024.csv') %>% 
+personcounts <- read_csv('data/misc/Table 6 Total resident population numbers persons.csv') %>%
   rename(ITLcode = `ITL code`, region = `Region name`) %>% 
   filter(ITL == 'ITL2') %>% 
   pivot_longer(cols = `1998`:`2021`, names_to = 'year', values_to = 'personcount') %>% 
   mutate(year = as.numeric(year))
 
 #Total GVA in current basic prices from the same source
-# gva.cp <- read_csv('data/Table 1 GVA balanced at current basic prices millions Apr2024.csv') %>% 
-gva.cp <- read_csv('data/Table 1 GVA balanced at current basic prices millions.csv') %>%
+# gva.cp <- read_csv('data/misc/Table 1 GVA balanced at current basic prices millions Apr2024.csv') %>% 
+gva.cp <- read_csv('data/misc/Table 1 GVA balanced at current basic prices millions.csv') %>%
   rename(ITLcode = `ITL code`, region = `Region name`) %>% 
   filter(ITL == 'ITL2') %>% 
   pivot_longer(cols = `1998`:`2021`, names_to = 'year', values_to = 'gva') %>% 
@@ -778,16 +778,16 @@ Note also: the weighted average GVA per capita for the 'core cities' has the **l
 #From regionalgrossvalueaddedbalancedbyindustryandallitlregions.xlsx
 #ONS mid year population estimates
 #Table 6 (not sure where they got consistent ITL2 geogs from...)
-# personcounts.itl3 <- read_csv('data/Table 6 Total resident population numbers persons Apr2024.csv') %>% 
-personcounts.itl3 <- read_csv('data/Table 6 Total resident population numbers persons.csv') %>%
+# personcounts.itl3 <- read_csv('data/misc/Table 6 Total resident population numbers persons Apr2024.csv') %>% 
+personcounts.itl3 <- read_csv('data/misc/Table 6 Total resident population numbers persons.csv') %>%
   rename(ITLcode = `ITL code`, region = `Region name`) %>% 
   filter(ITL == 'ITL3') %>% 
   pivot_longer(cols = `1998`:`2021`, names_to = 'year', values_to = 'personcount') %>% 
   mutate(year = as.numeric(year))
 
 #Total GVA in current basic prices from the same source
-# gva.cp.itl3 <- read_csv('data/Table 1 GVA balanced at current basic prices millions Apr2024.csv') %>% 
-gva.cp.itl3 <- read_csv('data/Table 1 GVA balanced at current basic prices millions.csv') %>%
+# gva.cp.itl3 <- read_csv('data/misc/Table 1 GVA balanced at current basic prices millions Apr2024.csv') %>% 
+gva.cp.itl3 <- read_csv('data/misc/Table 1 GVA balanced at current basic prices millions.csv') %>%
   rename(ITLcode = `ITL code`, region = `Region name`) %>% 
   filter(ITL == 'ITL3') %>% 
   pivot_longer(cols = `1998`:`2021`, names_to = 'year', values_to = 'gva') %>% 

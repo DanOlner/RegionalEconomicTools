@@ -2,46 +2,50 @@
 title: "Regional GVA and job count data: easy squeezy versions"
 code-overflow: wrap
 execute:
-  echo: true
+  echo: false
   warning: false
   error: false
 ---
 
 ```{r}
+source('functions/misc_functions.R')
 
-
+library(knitr)
+library(tidyverse)
 
 ```
 
 
 
-# What's this?
+## What's this?
 
 * Easy-access ONS regional GVA by SIC sector data
 * Same for BRES (the Business Register and Employment Survey) region-by-sector job count data
 * Linked GVA and BRES data
 
-## Why?
+### Why?
 
 * The ONS publish **regional GVA data for the UK**, covering a range of SIC sectors (2022 is the latest available year at time of writing - the [data's here](https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry)). But it's a faff to extract data from the excel sheets, especially for use in R or similar.
 * This page **provides easy-to-access copies from that dataset**, with each useful dataset in its own CSV. It'll be **updated when the latest GVA data comes out.
 * This data also feeds into other tools/code on this website like sector analysis, GVA gap analysis. (See left-hand bar.)
 
-## Also:
+### Also:
 
-* There's **UK regional job count data** available via BRES (the Business Register and Employment Survey) [on NOMIS](https://www.nomisweb.co.uk/sources/bres), but again not in the most easily-useable form. (E.g. the website's query form will separate out different fields into their own chunk in the file.)
+* **UK regional/sectoral job count data** is available via BRES (the Business Register and Employment Survey) [on NOMIS](https://www.nomisweb.co.uk/sources/bres), but again not in the most easily-useable form. (E.g. the website's query form will separate out different fields into their own chunk in the file.)
 * So there's also **quick-access versions of all the most useful versions of the latest BRES data, including previously available years**.
 
-## Also also:
+### Also also:
 
 * It's useful to have **both regional GVA and job count values combined** (for e.g. GVA per job analysis, or to have gva and job analysis using the same SIC categories and places) - this page also has **linked GVA and job count data**. 
 * There are several wrinkles with this data to get them to play nicely together that anyone using should be aware of - **see details below.**
 
 
 
-# Automate!
+## Automate!
 
-The larger aim is to make processing and accessing data like this as **automated and repeatable as possible**, so it can be **as open and useable as possible** As soon as new GVA or BRES data comes out, [code from the repo](https://github.com/DanOlner/RegionalEconomicTools/tree/gh-pages/prepcode) can be re-run painlessly. (Other datasets and linking will be added to this process.)
+**Every step - from downloading the data to creating the link tables below - is automated.**
+
+Making data processing like this as **automated and repeatable as possible** makes it **as open and useable as possible** As soon as new GVA or BRES data comes out, [code from the repo](https://github.com/DanOlner/RegionalEconomicTools/tree/gh-pages/prepcode) can be re-run painlessly. (Other datasets and linking will be added to this process.)
 
 [This blog post]() goes into horrifically too much detail on what the code's doing and what data shaping choices have gone into the GVA / BRES join. Any thoughts on things I've stuffed up, let me know in the [github issues](https://github.com/DanOlner/RegionalEconomicTools/issues).
 
@@ -49,17 +53,289 @@ That blog post also **explains details you may need if new to this data**, like 
 
 
 
-# The data
+## GET THE DATA --->
 
-The data is all in the [github repo data folder](https://github.com/DanOlner/RegionalEconomicTools/tree/gh-pages/data) in separate subfolders.
+* **Use the links below** to access CSVs (and RDSs for the larger BRES files, R's own compressed object format).
+* These are all in the [github repo data folder](https://github.com/DanOlner/RegionalEconomicTools/tree/gh-pages/data) in separate subfolders - see below for more download options using github.
 
-Ways to get:
+### REGIONAL GVA
+
+```{r create-download-table-regionalGVA, message=FALSE, warning=FALSE}
+
+#Set GitHub base URL
+base_url <- "https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/"
+
+#list files
+files <- list.files(path = "data/regionalGVA", pattern = "\\.csv$", full.names = FALSE)
+
+#Filter down to ones we want initially
+#Add in related others when making the link text
+files <-files[qg('long',files)]
+files <-files[!qg('imputed',files)]
+files <-files[qg('current',files)]
+
+
+#Define the row and column terms.
+row_terms <- c("3GROUPS", "SIC_SECTION", "SIC_2DIGIT")
+col_terms <- c("ITL2", "ITL3")
+
+#Create an empty data frame to store your links.
+#Use row_terms as row names and col_terms as column names.
+download_links <- matrix(NA, nrow = length(row_terms), ncol = length(col_terms),
+                         dimnames = list(row_terms, col_terms))
+download_links <- as.data.frame(download_links)
+
+#Populate the table by searching for files that contain both the column and row keywords.
+for (row in row_terms) {
+  for (col in col_terms) {
+    # Use stringr's str_detect to filter file names for both patterns (case-insensitive)
+    matching_files <- files[
+      str_detect(files, fixed(col, ignore_case = TRUE)) &
+      str_detect(files, fixed(row, ignore_case = TRUE))
+    ]
+    
+    if (length(matching_files) > 0) {
+      # If multiple files match, take the first one:
+      file_name <- matching_files[1]
+      
+      # Build the full URLs (base + file name)
+      #FOR LONG, WIDE, CP AND CV together
+      #Long CP is orig
+      full_url_long_CP <- paste0(base_url, file_name)
+      
+      #Stick wide version in, CP
+      full_url_wide_CP <- gsub('LONG','WIDE',full_url_long_CP) 
+      
+      #Long CV
+      full_url_long_CV <- gsub('currentprices','chainedvolume',full_url_long_CP) 
+      
+      #Wide CV
+      full_url_wide_CV <- gsub('currentprices','chainedvolume',full_url_wide_CP) 
+      
+      # Create markdown link
+      # download_links[row, col] <- paste0(
+      #   ""
+      # )
+      
+      download_links[row, col] <- sprintf("[long CP](%s), [wide CP](%s) -- [long CV](%s), [wide CV](%s)", 
+                                          full_url_long_CP, 
+                                          full_url_wide_CP,
+                                          full_url_long_CV, 
+                                          full_url_wide_CV
+                                          )
+      
+      # download_links[row, col] <- sprintf("[%s](%s)", file_name, full_url)
+      # download_links[row, col] <- sprintf("[long](%s)", full_url)
+      
+      
+      
+    } else {
+      download_links[row, col] <- "Not found"
+    }
+  }
+}
+
+#Render
+#escape = FALSE so that markdown in the cells (the links) is rendered correctly.
+kable(download_links, escape = FALSE, caption = "")
+# kable(download_links, escape = FALSE, caption = "Download Links for ITL2 and ITL3 Files")
+
+
+```
+
+### REGIONAL GVA *excluding* imputed rent
+
+```{r create-download-table-regionalGVAeximputedrent, message=FALSE, warning=FALSE}
+
+#Set GitHub base URL
+base_url <- "https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/"
+
+#list files
+files <- list.files(path = "data/regionalGVA", pattern = "\\.csv$", full.names = FALSE)
+
+#Filter down to ones we want initially
+#Add in related others when making the link text
+files <-files[qg('long',files)]
+files <-files[qg('imputed',files)]
+files <-files[qg('current',files)]
+
+
+#Define the row and column terms.
+#No SIC 2 digit data here - user can just remove that row
+row_terms <- c("3GROUPS", "SIC_SECTION")
+col_terms <- c("ITL2", "ITL3")
+
+#Create an empty data frame to store your links.
+#Use row_terms as row names and col_terms as column names.
+download_links <- matrix(NA, nrow = length(row_terms), ncol = length(col_terms),
+                         dimnames = list(row_terms, col_terms))
+download_links <- as.data.frame(download_links)
+
+#Populate the table by searching for files that contain both the column and row keywords.
+for (row in row_terms) {
+  for (col in col_terms) {
+    # Use stringr's str_detect to filter file names for both patterns (case-insensitive)
+    matching_files <- files[
+      str_detect(files, fixed(col, ignore_case = TRUE)) &
+      str_detect(files, fixed(row, ignore_case = TRUE))
+    ]
+    
+    if (length(matching_files) > 0) {
+      # If multiple files match, take the first one:
+      file_name <- matching_files[1]
+      
+      # Build the full URLs (base + file name)
+      #FOR LONG, WIDE, CP AND CV together
+      #Long CP is orig
+      full_url_long_CP <- paste0(base_url, file_name)
+      
+      #Stick wide version in, CP
+      full_url_wide_CP <- gsub('LONG','WIDE',full_url_long_CP) 
+      
+      #Long CV
+      full_url_long_CV <- gsub('currentprices','chainedvolume',full_url_long_CP) 
+      
+      #Wide CV
+      full_url_wide_CV <- gsub('currentprices','chainedvolume',full_url_wide_CP) 
+      
+      # Create markdown link
+      # download_links[row, col] <- paste0(
+      #   ""
+      # )
+      
+      download_links[row, col] <- sprintf("[long CP](%s), [wide CP](%s) -- [long CV](%s), [wide CV](%s)", 
+                                          full_url_long_CP, 
+                                          full_url_wide_CP,
+                                          full_url_long_CV, 
+                                          full_url_wide_CV
+                                          )
+      
+      # download_links[row, col] <- sprintf("[%s](%s)", file_name, full_url)
+      # download_links[row, col] <- sprintf("[long](%s)", full_url)
+      
+      
+      
+    } else {
+      download_links[row, col] <- "Not found"
+    }
+  }
+}
+
+#Render
+#escape = FALSE so that markdown in the cells (the links) is rendered correctly.
+kable(download_links, escape = FALSE, caption = "")
+# kable(download_links, escape = FALSE, caption = "Download Links for ITL2 and ITL3 Files")
+
+
+```
+
+
+
+
+
+### BRES DATA (with tweaks)
+
+
+
+```{r create-download-table-BRESdata, message=FALSE, warning=FALSE}
+
+#Set GitHub base URL
+base_url <- "https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/BRES/separate_SIC_types_summedfrom5digitSIC/"
+
+#list files
+files <- list.files(path = "data/BRES/separate_SIC_types_summedfrom5digitSIC", pattern = "\\.csv$", full.names = FALSE)
+
+#Filter down to ones we want initially
+#Add in related others when making the link text
+files <-files[qg('fulltime',files)]
+
+
+#Define the row and column terms.
+#No SIC 2 digit data here - user can just remove that row
+row_terms <- c("3GROUPS", "SIC_SECTION", "SIC_2DIGIT")
+col_terms <- c("level2asofJan2021", "level3asofJan2021", "nuts2016level2", "nuts2016level3")
+
+#Create an empty data frame to store your links.
+#Use row_terms as row names and col_terms as column names.
+download_links <- matrix(NA, nrow = length(row_terms), ncol = length(col_terms),
+                         dimnames = list(row_terms, col_terms))
+download_links <- as.data.frame(download_links)
+
+#Populate the table by searching for files that contain both the column and row keywords.
+for (row in row_terms) {
+  for (col in col_terms) {
+    # Use stringr's str_detect to filter file names for both patterns (case-insensitive)
+    matching_files <- files[
+      str_detect(files, fixed(col, ignore_case = TRUE)) &
+      str_detect(files, fixed(row, ignore_case = TRUE))
+    ]
+    
+    if (length(matching_files) > 0) {
+      # If multiple files match, take the first one:
+      file_name <- matching_files[1]
+      
+      # Build the full URLs (base + file name)
+      #Full time by default
+      full_url_FT <- paste0(base_url, file_name)
+      
+      #Tweak to get PT link
+      full_url_PT <- gsub('2_Full','3_Part',full_url_FT) 
+      
+      #Tweak to get "in employment" link
+      full_url_emp <- gsub('2_Fulltimeemployees','4_Employment',full_url_FT) 
+      
+      
+      # Create markdown link
+      # download_links[row, col] <- paste0(
+      #   ""
+      # )
+      
+      download_links[row, col] <- sprintf("[Full time](%s), [Part time](%s), [In emp](%s)", 
+                                          full_url_FT, 
+                                          full_url_PT, 
+                                          full_url_emp 
+                                          )
+      
+      # download_links[row, col] <- sprintf("[%s](%s)", file_name, full_url)
+      # download_links[row, col] <- sprintf("[long](%s)", full_url)
+      
+      
+      
+    } else {
+      download_links[row, col] <- "Not found"
+    }
+  }
+}
+
+#Render
+#escape = FALSE so that markdown in the cells (the links) is rendered correctly.
+kable(download_links, escape = FALSE, caption = "")
+# kable(download_links, escape = FALSE, caption = "Download Links for ITL2 and ITL3 Files")
+
+
+```
+
+
+
+
+
+
+
+## Other ways to get the data -->
 
 * Look in [the data folder](https://github.com/DanOlner/RegionalEconomicTools/tree/gh-pages/data) on the repo - there are separate subfolders for each group of data. Details for each of those **are explained below.**
-* **To get ALL the data in one go:** download (or [clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)) the entire repo. To download - see the **green "CODE" button** on [the main page](https://github.com/DanOlner/RegionalEconomicTools)? Click there and use the 'download ZIP' option, then look in the data folder after unzipping.
+* Github has 4 options to access/download the files: download a single CSV, download the whole thing, get raw data (and its URL), copy to clipboard. 
+* So e.g. **after clicking on a CSV** there are **three small buttons in the top right that look like this**:
+
+![](miscimages/github_downloadbuttons.png)
+
+* **Use 'raw'** to get the URL for raw CSV data (to e.g. get directly from URL in code)
+* The **rightmost button** will download the CSV.
+* The **middle button** will copy the data to the clipboard.
+
+* **To get ALL the data in one go:** download (or [clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)) the entire repo. To download - see the **green "CODE" button** on [the main page](https://github.com/DanOlner/RegionalEconomicTools)? Use that for the 'download ZIP' option, then look in the data folder after unzipping.
 
 
-## GVA
 
 
 
