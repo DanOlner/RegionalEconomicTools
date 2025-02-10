@@ -77,7 +77,7 @@ files <-files[qg('current',files)]
 row_terms <- c("3GROUPS", "SIC_SECTION", "SIC_2DIGIT")
 col_terms <- c("ITL2", "ITL3")
 
-#Create an empty data frame to store your links.
+#Create an empty data frame to store links.
 #Use row_terms as row names and col_terms as column names.
 download_links <- matrix(NA, nrow = length(row_terms), ncol = length(col_terms),
                          dimnames = list(row_terms, col_terms))
@@ -163,7 +163,7 @@ files <-files[qg('current',files)]
 row_terms <- c("3GROUPS", "SIC_SECTION")
 col_terms <- c("ITL2", "ITL3")
 
-#Create an empty data frame to store your links.
+#Create an empty data frame to store links.
 #Use row_terms as row names and col_terms as column names.
 download_links <- matrix(NA, nrow = length(row_terms), ncol = length(col_terms),
                          dimnames = list(row_terms, col_terms))
@@ -253,7 +253,7 @@ files <-files[qg('fulltime',files)]
 row_terms <- c("3GROUPS", "SIC_SECTION", "SIC_2DIGIT")
 col_terms <- c("level2asofJan2021", "level3asofJan2021", "nuts2016level2", "nuts2016level3")
 
-#Create an empty data frame to store your links.
+#Create an empty data frame to store links.
 #Use row_terms as row names and col_terms as column names.
 download_links <- matrix(NA, nrow = length(row_terms), ncol = length(col_terms),
                          dimnames = list(row_terms, col_terms))
@@ -325,7 +325,6 @@ kable(download_links, escape = FALSE, caption = "")
 ```{r create-download-table-comboexir, message=FALSE, warning=FALSE}
 # ```{r create-download-table-combo}
 
-
 #Set GitHub base URL
 base_url <- "https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/"
 
@@ -334,16 +333,16 @@ files <- list.files(path = "data/regionalGVA_plus_BRESjobcounts", pattern = "\\.
 
 #Filter down to ones we want initially
 #Add in related others when making the link text
-files <-files[qg('currentprices',files)]
-files <-files[qg('imputed',files)]
+# files <-files[qg('currentprices',files)]
+files <-files[qg('MINUSimputed',files)]
 
 
 #Define the row and column terms.
-#No SIC 2 digit data here - user can just remove that row
+#No SIC 2 digit data here - user can just remove the exc. imputed rent version themselves
 row_terms <- c("3GROUPS", "SIC_SECTION")
 col_terms <- c("ITL2", "ITL3")
 
-#Create an empty data frame to store your links.
+#Create an empty data frame to store links.
 #Use row_terms as row names and col_terms as column names.
 download_links <- matrix(NA, nrow = length(row_terms), ncol = length(col_terms),
                          dimnames = list(row_terms, col_terms))
@@ -359,36 +358,28 @@ for (row in row_terms) {
     ]
     
     if (length(matching_files) > 0) {
-      # If multiple files match, take the first one:
-      file_name <- matching_files[1]
       
-      full_url_cp <- paste0(base_url, file_name)
+      # If multiple files match, we have both CV and CP, add both to link
       
-      full_url_cv <- gsub('currentprices','chainedvolume',full_url_cp) 
+      # cat("filename length:", length(matching_files),"\n")
       
-      # cat("Base URL: ", full_url_with_ir, '\n')
+      #Create full markdown text for each here, combine below
+      full_url_1 <- sprintf("[CP](%s)",paste0(base_url, matching_files[1]))
       
-      # #slightly fiddly, have to insert in exact location
-      # #Backtracking from end
-      # full_url_minusimputedrent <- paste0(
-      #   base_url, 
-      #   str_sub(file_name,1,-9),
-      #   'MINUSimputedrent_',
-      #   str_sub(file_name,-8,-1)
-      #   )
+      # full_url_cv <- gsub('currentprices','chainedvolume',full_url_cp) 
       
-      # cat("Base URL2: ", full_url_minusimputedrent, '\n')
+      #If just one file, second is empty, no CV, leave a blank
+      full_url_2 <- if_else(
+        length(matching_files) == 2,
+        sprintf("[CV](%s)",paste0(base_url, matching_files[2])),
+        " -- "
+      )
       
-      # full_url_with_ir <- gsub('MINUSimputedrent_','',full_url_FT) 
-      # 
-      # full_url_minusimputedrent <- paste0(base_url, file_name)
-      # 
-      
-      
-      download_links[row, col] <- sprintf("[CP](%s), [CV](%s)", 
-                                          full_url_cp,
-                                          full_url_cv
-                                          )
+      download_links[row, col] <- paste0(
+        full_url_1, 
+        ", ", 
+        full_url_2
+      )                                    
       
     } else {
       download_links[row, col] <- " ---- "
@@ -414,9 +405,9 @@ kable(download_links, escape = FALSE, caption = "")
 
 
 
-```{r create-download-table-combo, message=FALSE, warning=FALSE}
-# ```{r create-download-table-combo}
 
+```{r create-download-table-combwithir, message=FALSE, warning=FALSE}
+# ```{r create-download-table-combo}
 
 #Set GitHub base URL
 base_url <- "https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/"
@@ -426,16 +417,16 @@ files <- list.files(path = "data/regionalGVA_plus_BRESjobcounts", pattern = "\\.
 
 #Filter down to ones we want initially
 #Add in related others when making the link text
-files <-files[qg('currentprices',files)]
-files <-files[!qg('imputed',files)]
+# files <-files[qg('currentprices',files)]
+files <-files[!qg('MINUSimputed',files)]
 
 
 #Define the row and column terms.
-#ONLY SIC 2 digit data here - rest is all exc imputed rent
+#No SIC 2 digit data here - user can just remove the exc. imputed rent version themselves
 row_terms <- c("SIC_2DIGIT")
 col_terms <- c("ITL2", "ITL3")
 
-#Create an empty data frame to store your links.
+#Create an empty data frame to store links.
 #Use row_terms as row names and col_terms as column names.
 download_links <- matrix(NA, nrow = length(row_terms), ncol = length(col_terms),
                          dimnames = list(row_terms, col_terms))
@@ -451,36 +442,28 @@ for (row in row_terms) {
     ]
     
     if (length(matching_files) > 0) {
-      # If multiple files match, take the first one:
-      file_name <- matching_files[1]
       
-      full_url_cp <- paste0(base_url, file_name)
+      # If multiple files match, we have both CV and CP, add both to link
       
-      full_url_cv <- gsub('currentprices','chainedvolume',full_url_cp) 
+      # cat("filename length:", length(matching_files),"\n")
       
-      # cat("Base URL: ", full_url_with_ir, '\n')
+      #Create full markdown text for each here, combine below
+      full_url_1 <- sprintf("[CP](%s)",paste0(base_url, matching_files[1]))
       
-      # #slightly fiddly, have to insert in exact location
-      # #Backtracking from end
-      # full_url_minusimputedrent <- paste0(
-      #   base_url, 
-      #   str_sub(file_name,1,-9),
-      #   'MINUSimputedrent_',
-      #   str_sub(file_name,-8,-1)
-      #   )
+      # full_url_cv <- gsub('currentprices','chainedvolume',full_url_cp) 
       
-      # cat("Base URL2: ", full_url_minusimputedrent, '\n')
+      #If just one file, second is empty, no CV, leave a blank
+      full_url_2 <- if_else(
+        length(matching_files) == 2,
+        sprintf("[CV](%s)",paste0(base_url, matching_files[2])),
+        " -- "
+      )
       
-      # full_url_with_ir <- gsub('MINUSimputedrent_','',full_url_FT) 
-      # 
-      # full_url_minusimputedrent <- paste0(base_url, file_name)
-      # 
-      
-      
-      download_links[row, col] <- sprintf("[CP](%s), [CV](%s)", 
-                                          full_url_cp,
-                                          full_url_cv
-                                          )
+      download_links[row, col] <- paste0(
+        full_url_1, 
+        ", ", 
+        full_url_2
+      )                                    
       
     } else {
       download_links[row, col] <- " ---- "
@@ -495,7 +478,6 @@ kable(download_links, escape = FALSE, caption = "")
 
 
 ```
-
 
 
 
