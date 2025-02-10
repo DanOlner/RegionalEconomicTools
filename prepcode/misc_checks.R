@@ -1094,8 +1094,17 @@ zip::zip("local/cuttings/test.zip", "local/cuttings/test.csv")
 
 
 
+# HOW MANY SIC CATEGORIES IN SIC 2 DIGIT BESPOKES IN THE GVA DATA?----
 
+# ONS combined some of them - more at ITL3 level.
 
+itl2 <- read_csv('data/regionalGVA/regionalGVA_chainedvolume_ITL2_SIC_2DIGIT_LONG_2022.csv')
+itl3 <- read_csv('data/regionalGVA/regionalGVA_chainedvolume_ITL3_SIC_2DIGIT_LONG_2022.csv')
+
+#72 for ITL2
+length(unique(itl2$SIC07_description))
+#48 for ITL3
+length(unique(itl3$SIC07_description))
 
 
 

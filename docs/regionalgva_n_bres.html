@@ -205,10 +205,13 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#regional-gva" id="toc-regional-gva" class="nav-link" data-scroll-target="#regional-gva">REGIONAL GVA</a></li>
   <li><a href="#regional-gva-excluding-imputed-rent" id="toc-regional-gva-excluding-imputed-rent" class="nav-link" data-scroll-target="#regional-gva-excluding-imputed-rent">REGIONAL GVA <em>excluding</em> imputed rent</a></li>
-  <li><a href="#bres-data-with-tweaks" id="toc-bres-data-with-tweaks" class="nav-link" data-scroll-target="#bres-data-with-tweaks">BRES DATA (with tweaks)</a></li>
-  <li><a href="#combined-gva-bres-data" id="toc-combined-gva-bres-data" class="nav-link" data-scroll-target="#combined-gva-bres-data">COMBINED GVA + BRES DATA</a></li>
   </ul></li>
+  <li><a href="#xxxxxxx-not-this-one" id="toc-xxxxxxx-not-this-one" class="nav-link" data-scroll-target="#xxxxxxx-not-this-one">XXXXXXX NOT THIS ONE!</a>
+  <ul class="collapse">
+  <li><a href="#bres-job-count-data-with-tweaks" id="toc-bres-job-count-data-with-tweaks" class="nav-link" data-scroll-target="#bres-job-count-data-with-tweaks">BRES JOB COUNT DATA (with tweaks)</a></li>
+  <li><a href="#combined-gva-bres-job-count-data" id="toc-combined-gva-bres-job-count-data" class="nav-link" data-scroll-target="#combined-gva-bres-job-count-data">COMBINED GVA + BRES JOB COUNT DATA</a></li>
   <li><a href="#other-ways-to-get-the-data" id="toc-other-ways-to-get-the-data" class="nav-link" data-scroll-target="#other-ways-to-get-the-data">Other ways to get the data –&gt;</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -237,16 +240,17 @@ ul.task-list li input[type="checkbox"] {
 <section id="whats-this" class="level2">
 <h2 class="anchored" data-anchor-id="whats-this">What’s this?</h2>
 <ul>
-<li>Easy-access ONS regional GVA by SIC sector data: ITL2 &amp; 3 geographies, SIC 2-digit, Section and Production/Construction/Services, 1998 to latest</li>
-<li>Same for BRES (the Business Register and Employment Survey) region-by-sector job count data, with extra-bonus higher accuracy values. 2015 to latest.</li>
-<li>Those two linked together into single GVA/jobcount datasets (so 2015 to latest)</li>
+<li>Easy-access ONS regional <strong>gross value added (GVA)</strong> by SIC sector data: ITL2 &amp; 3 geographies, and SIC industrial codes at 2-digit, Section (20 categories) and Production/Construction/Services, 1998 to latest.</li>
+<li>Same for BRES (the Business Register and Employment Survey) region-by-sector <strong>job count data</strong>, with extra-bonus higher accuracy values. 2015 to latest.</li>
+<li>Those two <strong>linked together into single GVA/jobcount datasets</strong> (2015 to latest).</li>
 </ul>
 <section id="why" class="level3">
 <h3 class="anchored" data-anchor-id="why">Why?</h3>
 <ul>
+<li>Main reason: try to <strong>reduce the effort and wrangling needed to analyse regional economic data</strong>, make that all just a little bit smoother.</li>
 <li>The ONS publish <strong>regional GVA data for the UK</strong>, covering a range of SIC sectors (2022 is the latest available year at time of writing - the <a href="https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry">data’s here</a>). But it’s a faff to extract data from the excel sheets, especially for use in R or similar.</li>
 <li>This page <strong>provides easy-to-access copies from that dataset</strong>, with each useful dataset in its own CSV. It’ll be <strong>updated when the latest GVA data comes out.</strong></li>
-<li>This data also feeds into other tools/code on this website like sector analysis, GVA gap analysis. (See left-hand bar.)</li>
+<li>This data also feeds into other tools/code on this website like sector and jobs analysis, and GVA gap analysis. (See left-hand bar.)</li>
 </ul>
 </section>
 <section id="also" class="level3">
@@ -254,13 +258,13 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><strong>UK regional/sectoral job count data</strong> is available via BRES (the Business Register and Employment Survey) <a href="https://www.nomisweb.co.uk/sources/bres">on NOMIS</a>, but again not in the most easily-useable form. (E.g. the website’s query form will separate out different fields into their own chunk in the file.)</li>
 <li>It’s also possible to extract more accurate job count numbers by <strong>aggregating up from the most granular sector counts</strong> (see the related <a href="">blog post</a> for more on this.) The BRES data below uses these more accurate counts.</li>
-<li>So there’s also <strong>quick-access versions of all the most useful versions of the latest BRES data, including previously available years</strong>.</li>
+<li>So this page also has <strong>quick-access versions of all the most useful versions of the latest BRES data, including previously available years</strong>.</li>
 </ul>
 </section>
 <section id="also-also" class="level3">
 <h3 class="anchored" data-anchor-id="also-also">Also also:</h3>
 <ul>
-<li>It’s useful to have <strong>both regional GVA and job count values combined</strong> (for e.g.&nbsp;GVA per job analysis, or to have gva and job analysis using the same SIC categories and places) - this page also has <strong>linked GVA and job count data</strong>.</li>
+<li>It’s useful to have <strong>both regional GVA and job count values combined</strong> (for e.g.&nbsp;GVA per job analysis, or to have gva and job analysis using the same SIC categories and places) - so this page also has <strong>linked GVA and job count data</strong>.</li>
 <li>There are several wrinkles with this data to get them to play nicely together that anyone using should be aware of - <strong>see details below.</strong></li>
 <li>Or for even more horrific detail, see <a href="">this blog post</a> on what the code’s doing and what data shaping choices have gone into the GVA / BRES join. Any thoughts on things I’ve stuffed up or that could be improved, let me know in the <a href="https://github.com/DanOlner/RegionalEconomicTools/issues">github issues</a>.</li>
 <li>The blog post also <strong>explains details you may need if new to this data</strong>, like the difference between Current Prices and Chained Volume prices (and why each has to be treated very differently in analysis e.g.&nbsp;don’t sum chained volume…)</li>
@@ -269,17 +273,34 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="automate" class="level2">
 <h2 class="anchored" data-anchor-id="automate">Automate!</h2>
-<p><strong>Every step - from downloading the data to creating the link tables below - is automated.</strong></p>
 <p>Making data processing like this as <strong>automated and repeatable as possible</strong> makes it <strong>as open and useable as possible</strong>. As soon as new GVA or BRES data comes out, <a href="https://github.com/DanOlner/RegionalEconomicTools/tree/gh-pages/prepcode">code from the repo</a> can be re-run painlessly<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. (Other datasets and linking will be added to this process.)</p>
 </section>
 <section id="get-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="get-the-data">GET THE DATA —&gt;</h2>
 <ul>
-<li><strong>Use the links below</strong> to access CSVs (and RDSs for the larger BRES files, R’s own compressed object format).</li>
-<li>These are all in the <a href="https://github.com/DanOlner/RegionalEconomicTools/tree/gh-pages/data">github repo data folder</a> in separate subfolders - see below for more download options using github.</li>
+<li><strong>Use the links below</strong> to access CSVs (click to get URL, right-click for download option).</li>
+<li>These are all in the <a href="https://github.com/DanOlner/RegionalEconomicTools/tree/gh-pages/data">github repo data folder</a> in separate subfolders - see end of page for more on downloading direct from github.</li>
 </ul>
 <section id="regional-gva" class="level3">
 <h3 class="anchored" data-anchor-id="regional-gva">REGIONAL GVA</h3>
+<p>These CSVs are closest to the original ONS excel sheet. Apart from ITL2 and ITL3 zones, there’s:</p>
+<ul>
+<li>“3GROUPS”: SIC sectoral groupings for <strong>production, construction</strong> and <strong>services</strong> separately.</li>
+<li>“SIC_SECTION”: 20 SIC top-level sections (SIC codes with letters A to T) (see <a href="https://onsdigital.github.io/dp-classification-tools/standard-industrial-classification/ONS_SIC_hierarchy_view.html">SIC hierarchy</a>).</li>
+<li>“SIC_2DIGIT”: 2 digit codes, the most granular level available in the regional GVA data. <strong>NOTE HOWEVER:</strong> here, ONS combine a few of them, so these are are a <strong>smaller</strong> bespoke list in the GVA data. For ITL2 zones, there are <strong>72 SIC categories</strong>. For ITL3 zones, there are <strong>48 SIC categories.</strong></li>
+</ul>
+<p>There a couple of other choices of CSV type:</p>
+<ul>
+<li>CP is “<strong>current prices</strong>”, CV is “<strong>chained volume</strong>”.</li>
+<li>“Current prices” gives pound values at <strong>the time the data was collected</strong>, without inflation accounted for. Useful for analysing relative change and comparing places. And because it’s the actual price values at the time, your own groupings of places and sectors <strong>can be summed</strong> without problems.</li>
+<li>“<a href="https://www.ons.gov.uk/economy/nationalaccounts/uksectoraccounts/methodologies/chainlinkingmethodsusedwithintheuknationalaccounts">Chained Volume</a>” adjusts for inflation - “by calculating the production volume for each year in the prices of a reference year. The resultant time-series of production figures has the effects of price changes removed.” Prices are set relative to 2019. So, <strong>absolute</strong> change over time can be analysed - e.g.&nbsp;“has sector x in place y grown at a more rapid rate than others?” (With current price data, we can only ask, “has sector x / place y grown <em>relative to others</em>? The entire sector may have shrunk, but one sector/place may still have relatively increased its proportion.)</li>
+<li>Chained volume data <strong>cannot be summed by the user</strong>, you can’t add places or sectors together, as each has been chained together to produce values relative to the reference year. This means that for some of the groupings here, it’s <strong>not possible to supply a CV version</strong> because it relies on being able to add up values.</li>
+</ul>
+<p>Lastly:</p>
+<ul>
+<li><strong>Long</strong> data has a single “year” column containing all years.</li>
+<li><strong>Wide</strong> data is in the same format as the original Excel sheet, with a column for each year.</li>
+</ul>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -313,6 +334,37 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="regional-gva-excluding-imputed-rent" class="level3">
 <h3 class="anchored" data-anchor-id="regional-gva-excluding-imputed-rent">REGIONAL GVA <em>excluding</em> imputed rent</h3>
+<p>The only difference here to the datasets above: <strong><a href="https://www.ons.gov.uk/economy/nationalaccounts/uksectoraccounts/articles/changestonationalaccounts/imputedrental">imputed rent</a> has been removed</strong>.</p>
+<p>This list only includes</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">ITL2</th>
+<th style="text-align: left;">ITL3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">3GROUPS</td>
+<td style="text-align: left;"><a href="https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/regionalGVA_currentprices_ITL2_SIC_3GROUPS_MINUSimputedrent_LONG_2022.csv">CP</a>, –</td>
+<td style="text-align: left;"><a href="https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/regionalGVA_currentprices_ITL3_SIC_3GROUPS_MINUSimputedrent_LONG_2022.csv">CP</a>, –</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SIC_SECTION</td>
+<td style="text-align: left;"><a href="https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/regionalGVA_chainedvolume_ITL2_SIC_SECTION_MINUSimputedrent_LONG_2022.csv">CV</a>, <a href="https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/regionalGVA_currentprices_ITL2_SIC_SECTION_MINUSimputedrent_LONG_2022.csv">CP</a></td>
+<td style="text-align: left;"><a href="https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/regionalGVA_chainedvolume_ITL3_SIC_SECTION_MINUSimputedrent_LONG_2022.csv">CV</a>, <a href="https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/regionalGVA_currentprices_ITL3_SIC_SECTION_MINUSimputedrent_LONG_2022.csv">CP</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+<section id="xxxxxxx-not-this-one" class="level1">
+<h1>XXXXXXX NOT THIS ONE!</h1>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -338,9 +390,8 @@ ul.task-list li input[type="checkbox"] {
 </table>
 </div>
 </div>
-</section>
-<section id="bres-data-with-tweaks" class="level3">
-<h3 class="anchored" data-anchor-id="bres-data-with-tweaks">BRES DATA (with tweaks)</h3>
+<section id="bres-job-count-data-with-tweaks" class="level3">
+<h3 class="anchored" data-anchor-id="bres-job-count-data-with-tweaks">BRES JOB COUNT DATA (with tweaks)</h3>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -380,8 +431,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="combined-gva-bres-data" class="level3">
-<h3 class="anchored" data-anchor-id="combined-gva-bres-data">COMBINED GVA + BRES DATA</h3>
+<section id="combined-gva-bres-job-count-data" class="level3">
+<h3 class="anchored" data-anchor-id="combined-gva-bres-job-count-data">COMBINED GVA + BRES JOB COUNT DATA</h3>
 <p>Which has to exclude imputed rent…</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -401,22 +452,22 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 <tr class="even">
 <td style="text-align: left;">SIC_SECTION</td>
-<td style="text-align: left;"><a href="https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_chainedvolume_ITL2_SIC_SECTION_MINUSimputedrent_2022.csv">CP</a>, <a href="https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_currentprices_ITL2_SIC_SECTION_MINUSimputedrent_2022.csv">CV</a></td>
-<td style="text-align: left;"><a href="https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_chainedvolume_ITL3_SIC_SECTION_MINUSimputedrent_2022.csv">CP</a>, <a href="https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_currentprices_ITL3_SIC_SECTION_MINUSimputedrent_2022.csv">CV</a></td>
+<td style="text-align: left;"><a href="https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_chainedvolume_ITL2_SIC_SECTION_MINUSimputedrent_2022.csv">CV</a>, <a href="https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_currentprices_ITL2_SIC_SECTION_MINUSimputedrent_2022.csv">CP</a></td>
+<td style="text-align: left;"><a href="https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_chainedvolume_ITL3_SIC_SECTION_MINUSimputedrent_2022.csv">CV</a>, <a href="https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_currentprices_ITL3_SIC_SECTION_MINUSimputedrent_2022.csv">CP</a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">SIC_2DIGIT</td>
-<td style="text-align: left;"><a href="https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_chainedvolume_ITL2_SIC_2DIGIT_2022.csv">CP</a>, <a href="https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_currentprices_ITL2_SIC_2DIGIT_2022.csv">CV</a></td>
-<td style="text-align: left;"><a href="https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_chainedvolume_ITL3_SIC_2DIGIT_2022.csv">CP</a>, <a href="https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_currentprices_ITL3_SIC_2DIGIT_2022.csv">CV</a></td>
+<td style="text-align: left;"><a href="https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_chainedvolume_ITL2_SIC_2DIGIT_2022.csv">CV</a>, <a href="https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_currentprices_ITL2_SIC_2DIGIT_2022.csv">CP</a></td>
+<td style="text-align: left;"><a href="https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_chainedvolume_ITL3_SIC_2DIGIT_2022.csv">CV</a>, <a href="https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_currentprices_ITL3_SIC_2DIGIT_2022.csv">CP</a></td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </section>
-</section>
 <section id="other-ways-to-get-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="other-ways-to-get-the-data">Other ways to get the data –&gt;</h2>
+<p>(For the original ONS / NOMIS datasets, see the links at the top of this page.)</p>
 <ul>
 <li>Look in <a href="https://github.com/DanOlner/RegionalEconomicTools/tree/gh-pages/data">the data folder</a> on the repo - there are separate subfolders for each group of data. Details for each of those <strong>are explained below.</strong></li>
 <li>Github has 4 options to access/download the files: download a single CSV, download the whole thing, get raw data (and its URL), copy to clipboard.</li>
@@ -432,12 +483,13 @@ ul.task-list li input[type="checkbox"] {
 
 
 </section>
+</section>
 
 
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>Hah. Hopefully. We’ll see what else changes…<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Well, that’s the theory anyway. We’ll see what changes to the underlying data happen…<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
