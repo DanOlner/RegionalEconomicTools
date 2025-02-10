@@ -372,7 +372,7 @@ for(SICgrouping in c('3GROUPS','SIC_SECTION','SIC_2DIGIT')){
   
   #Unless SIC 2 digit because the join will take care of it!
   if(!SICgrouping == 'SIC_2DIGIT'){
-    match.filenames <- match.filenames[qg('imputed',match.filenames)]
+    match.filenames <- match.filenames[qg('imputed',match.filenames)]#This get MINUS imputed
   }
   
   #And only ITL2
@@ -424,3 +424,19 @@ for(SICgrouping in c('3GROUPS','SIC_SECTION','SIC_2DIGIT')){
   
   
 }#end ITL3 SICgrouping for
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

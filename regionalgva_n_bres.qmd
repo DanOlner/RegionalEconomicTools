@@ -231,7 +231,7 @@ kable(download_links, escape = FALSE, caption = "")
 
 
 
-### BRES DATA (with tweaks)
+### BRES JOB COUNT DATA (with tweaks)
 
 
 
@@ -316,10 +316,9 @@ kable(download_links, escape = FALSE, caption = "")
 
 
 
-### COMBINED GVA + BRES DATA *excluding* imputed rent
+### COMBINED GVA + BRES JOB COUNT DATA
 
-
-
+Which has to exclude imputed rent...
 
 
 ```{r create-download-table-comboexir, message=FALSE, warning=FALSE}
@@ -334,96 +333,12 @@ files <- list.files(path = "data/regionalGVA_plus_BRESjobcounts", pattern = "\\.
 #Filter down to ones we want initially
 #Add in related others when making the link text
 # files <-files[qg('currentprices',files)]
-files <-files[qg('MINUSimputed',files)]
+# files <-files[qg('MINUSimputed',files)]
 
 
 #Define the row and column terms.
 #No SIC 2 digit data here - user can just remove the exc. imputed rent version themselves
-row_terms <- c("3GROUPS", "SIC_SECTION")
-col_terms <- c("ITL2", "ITL3")
-
-#Create an empty data frame to store links.
-#Use row_terms as row names and col_terms as column names.
-download_links <- matrix(NA, nrow = length(row_terms), ncol = length(col_terms),
-                         dimnames = list(row_terms, col_terms))
-download_links <- as.data.frame(download_links)
-
-#Populate the table by searching for files that contain both the column and row keywords.
-for (row in row_terms) {
-  for (col in col_terms) {
-    # Use stringr's str_detect to filter file names for both patterns (case-insensitive)
-    matching_files <- files[
-      str_detect(files, fixed(col, ignore_case = TRUE)) &
-      str_detect(files, fixed(row, ignore_case = TRUE))
-    ]
-    
-    if (length(matching_files) > 0) {
-      
-      # If multiple files match, we have both CV and CP, add both to link
-      
-      # cat("filename length:", length(matching_files),"\n")
-      
-      #Create full markdown text for each here, combine below
-      full_url_1 <- sprintf("[CP](%s)",paste0(base_url, matching_files[1]))
-      
-      # full_url_cv <- gsub('currentprices','chainedvolume',full_url_cp) 
-      
-      #If just one file, second is empty, no CV, leave a blank
-      full_url_2 <- if_else(
-        length(matching_files) == 2,
-        sprintf("[CV](%s)",paste0(base_url, matching_files[2])),
-        " -- "
-      )
-      
-      download_links[row, col] <- paste0(
-        full_url_1, 
-        ", ", 
-        full_url_2
-      )                                    
-      
-    } else {
-      download_links[row, col] <- " ---- "
-    }
-  }
-}
-
-#Render
-#escape = FALSE so that markdown in the cells (the links) is rendered correctly.
-kable(download_links, escape = FALSE, caption = "")
-# kable(download_links, escape = FALSE, caption = "Download Links for ITL2 and ITL3 Files")
-
-
-```
-
-
-
-
-
-### COMBINED GVA + BRES DATA (with imputed rent included as row)
-
-
-
-
-
-
-```{r create-download-table-combwithir, message=FALSE, warning=FALSE}
-# ```{r create-download-table-combo}
-
-#Set GitHub base URL
-base_url <- "https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/"
-
-#list files
-files <- list.files(path = "data/regionalGVA_plus_BRESjobcounts", pattern = "\\.csv$", full.names = FALSE)
-
-#Filter down to ones we want initially
-#Add in related others when making the link text
-# files <-files[qg('currentprices',files)]
-files <-files[!qg('MINUSimputed',files)]
-
-
-#Define the row and column terms.
-#No SIC 2 digit data here - user can just remove the exc. imputed rent version themselves
-row_terms <- c("SIC_2DIGIT")
+row_terms <- c("3GROUPS", "SIC_SECTION","SIC_2DIGIT")
 col_terms <- c("ITL2", "ITL3")
 
 #Create an empty data frame to store links.
@@ -488,6 +403,8 @@ kable(download_links, escape = FALSE, caption = "")
 
 
 ## Other ways to get the data -->
+
+(For the original ONS / NOMIS datasets, see the links at the top of this page.)
 
 * Look in [the data folder](https://github.com/DanOlner/RegionalEconomicTools/tree/gh-pages/data) on the repo - there are separate subfolders for each group of data. Details for each of those **are explained below.**
 * Github has 4 options to access/download the files: download a single CSV, download the whole thing, get raw data (and its URL), copy to clipboard. 
