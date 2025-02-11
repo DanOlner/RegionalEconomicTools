@@ -161,7 +161,7 @@
     "href": "regionalgva_n_bres.html",
     "title": "Regional GVA and job count data: easy squeezy versions",
     "section": "",
-    "text": "Easy-access ONS regional gross value added (GVA) by SIC sector data, supplied as tidy CSVs: ITL2 & 3 geographies, and SIC industrial codes at 2-digit, Section (20 categories) and Production/Construction/Services, 1998 to most recent available year, 2022. (Orig excel, code.)\nSame for BRES (the Business Register and Employment Survey) region-by-sector job count data, with extra-bonus higher accuracy values (see below). 2015 to latest year, 2023. (NOMIS page, code for API & wrangling.)\nThose two linked together into single GVA/jobcount datasets (2015 to 2022). (Code.)\n\n\n\nSee below the data for ‘Why’s this?’",
+    "text": "Easy-access ONS regional gross value added (GVA) by SIC sector data, supplied as tidy CSVs: ITL2 & 3 geographies, and SIC industrial codes at 2-digit, Section (20 categories) and Production/Construction/Services, 1998 to most recent available year, 2022. (Original ONS excel, code.)\nSame for BRES (the Business Register and Employment Survey) region-by-sector job count data, with extra-bonus higher accuracy values (see below). 2015 to latest year, 2023. (NOMIS page, code for API & wrangling.)\nThose two linked together into single GVA/jobcount datasets (2015 to 2022). (Code.)\n\n\n\nSee below the data for ‘Why’s this?’",
     "crumbs": [
       "Home",
       "Resources",
@@ -221,7 +221,7 @@
     "href": "regionalgva_n_bres.html#whats-this",
     "title": "Regional GVA and job count data: easy squeezy versions",
     "section": "",
-    "text": "Easy-access ONS regional gross value added (GVA) by SIC sector data, supplied as tidy CSVs: ITL2 & 3 geographies, and SIC industrial codes at 2-digit, Section (20 categories) and Production/Construction/Services, 1998 to most recent available year, 2022. (Orig excel, code.)\nSame for BRES (the Business Register and Employment Survey) region-by-sector job count data, with extra-bonus higher accuracy values (see below). 2015 to latest year, 2023. (NOMIS page, code for API & wrangling.)\nThose two linked together into single GVA/jobcount datasets (2015 to 2022). (Code.)\n\n\n\nSee below the data for ‘Why’s this?’",
+    "text": "Easy-access ONS regional gross value added (GVA) by SIC sector data, supplied as tidy CSVs: ITL2 & 3 geographies, and SIC industrial codes at 2-digit, Section (20 categories) and Production/Construction/Services, 1998 to most recent available year, 2022. (Original ONS excel, code.)\nSame for BRES (the Business Register and Employment Survey) region-by-sector job count data, with extra-bonus higher accuracy values (see below). 2015 to latest year, 2023. (NOMIS page, code for API & wrangling.)\nThose two linked together into single GVA/jobcount datasets (2015 to 2022). (Code.)\n\n\n\nSee below the data for ‘Why’s this?’",
     "crumbs": [
       "Home",
       "Resources",
