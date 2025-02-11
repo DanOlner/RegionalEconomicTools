@@ -237,7 +237,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="whats-this" class="level2">
 <h2 class="anchored" data-anchor-id="whats-this">What’s this?</h2>
 <ul>
-<li>Easy-access ONS regional <strong>gross value added (GVA)</strong> by SIC sector data (machine-readable CSVs): ITL2 &amp; 3 geographies, and SIC industrial codes at 2-digit, Section (20 categories) and Production/Construction/Services, 1998 to most recent available year, 2022. (<a href="https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry">Orig excel</a>, <a href="https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/regionalGVA_processing.R">code</a>.)</li>
+<li>Easy-access ONS regional <strong>gross value added (GVA)</strong> by SIC sector data, supplied as tidy CSVs: ITL2 &amp; 3 geographies, and SIC industrial codes at 2-digit, Section (20 categories) and Production/Construction/Services, 1998 to most recent available year, 2022. (<a href="https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry">Orig excel</a>, <a href="https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/regionalGVA_processing.R">code</a>.)</li>
 <li>Same for BRES (the Business Register and Employment Survey) region-by-sector <strong>job count data</strong>, with extra-bonus higher accuracy values (see below). 2015 to latest year, 2023. (<a href="https://www.nomisweb.co.uk/datasets/newbres6pub">NOMIS page</a>, code for <a href="https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/BRES_API_download.R">API</a> &amp; <a href="https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/BRES_sum_SIC5digit_to_otherSICcategories.R">wrangling</a>.)</li>
 <li>Those two <strong>linked together into single GVA/jobcount datasets</strong> (2015 to 2022). (<a href="https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/combine_regGVA_and_BRES.R">Code</a>.)</li>
 </ul>
@@ -340,7 +340,7 @@ See below the data for ‘<a href="http://localhost:3241/regionalgva_n_bres.html
 </div>
 <p><br></p>
 <p>The only difference here to the datasets above is that <strong><a href="https://www.ons.gov.uk/economy/nationalaccounts/uksectoraccounts/articles/changestonationalaccounts/imputedrental">imputed rent</a> has been removed</strong>.</p>
-<p>There are various reasons to examine the data without imputed rent, especially for productivity and jobs analysis. For the data here, it’s necessary remove it for linking to BRES: job count data doesn’t include it by default, as of course “imputed rent” has no jobs.</p>
+<p>There are various reasons leave imputed rent out, especially for productivity and jobs analysis. For the data here, it’s necessary remove it for linking to BRES: job count data doesn’t include it by default, as of course “imputed rent” has no jobs.</p>
 <p>This list <strong>doesn’t include 2 digit SICs</strong> as you can just remove the “imputed rent” row yourself from the <a href="http://localhost:3241/regionalgva_n_bres.html#regional-gva">first lot of data</a> if you don’t want it. For SIC Sections, the real estate section (L 68) only has two sub-rows, one with and one without imputed rent - so the ‘excluding imputed rent’ row can just be dropped in without having to sum. The 3GROUPS groupings, however, <strong>need summing</strong>, which isn’t valid for chained volume prices, so those aren’t present.</p>
 <hr>
 </section>
@@ -461,14 +461,14 @@ See below the data for ‘<a href="http://localhost:3241/regionalgva_n_bres.html
 <h2 class="anchored" data-anchor-id="why">Why?</h2>
 <ul>
 <li>Main reason: contribute to <strong>reducing the effort / wrangling / wheel-reinventing needed to analyse UK regional economic data</strong>.</li>
-<li>The ONS publish <strong>regional GVA data for the UK</strong>, covering a range of SIC sectors (2022 is the latest available year - the <a href="https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry">data’s here</a>). But it’s a faff to extract data from the excel sheets, especially for use in R or similar.</li>
+<li>The ONS publish <strong>regional GVA data for the UK</strong>, covering a range of SIC sectors (2022 is the latest available year - the <a href="https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry">data’s here</a>). It’s amazing data, presented in one handy place - but it needs some wrangling to get into an analyseable form, especially for use in R or similar.</li>
 <li>This page <strong>provides easy-to-access copies from that dataset</strong>, with each useful dataset in its own CSV. It’ll be <strong>updated when the latest GVA data comes out.</strong></li>
 <li>This data also feeds into other tools/code on this website like sector and jobs analysis, and GVA gap analysis. (See left-hand bar.)</li>
 </ul>
 <section id="also" class="level3">
 <h3 class="anchored" data-anchor-id="also">Also:</h3>
 <ul>
-<li><strong>UK regional/sectoral job count data</strong> is available via BRES (the Business Register and Employment Survey) <a href="https://www.nomisweb.co.uk/sources/bres">on NOMIS</a>, but again not in the most easily-useable form. (E.g. the website’s query form will separate out different fields into their own chunk in the file.)</li>
+<li><strong>UK regional/sectoral job count data</strong> is available via BRES (the Business Register and Employment Survey) <a href="https://www.nomisweb.co.uk/sources/bres">on NOMIS</a>. NOMIS is a brilliant platform, but again there are repeated steps usually needed before it’s in good shape for use. (And here we can also use <a href="https://cran.r-project.org/web/packages/nomisr/vignettes/introduction.html">NOMISR</a> to get directly.)</li>
 <li>It’s also possible to extract more accurate job count numbers by <strong>aggregating up from the most granular sector counts</strong> The BRES data below uses these more accurate counts.</li>
 <li>So this page also has <strong>quick-access versions of all the most useful versions of the latest BRES data, including previously available years</strong>.</li>
 </ul>

@@ -26,7 +26,7 @@ nuts.latest <- read_csv('data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_A
 
 ## What's this?
 
-* Easy-access ONS regional **gross value added (GVA)** by SIC sector data (machine-readable CSVs): ITL2 & 3 geographies, and SIC industrial codes at 2-digit, Section (20 categories) and Production/Construction/Services, 1998 to most recent available year, `r gva.latest`. ([Orig excel](https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry), [code](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/regionalGVA_processing.R).)
+* Easy-access ONS regional **gross value added (GVA)** by SIC sector data, supplied as tidy CSVs: ITL2 & 3 geographies, and SIC industrial codes at 2-digit, Section (20 categories) and Production/Construction/Services, 1998 to most recent available year, `r gva.latest`. ([Orig excel](https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry), [code](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/regionalGVA_processing.R).)
 * Same for BRES (the Business Register and Employment Survey) region-by-sector **job count data**, with extra-bonus higher accuracy values (see below). 2015 to latest year, `r itl.latest`. ([NOMIS page](https://www.nomisweb.co.uk/datasets/newbres6pub), code for [API](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/BRES_API_download.R) & [wrangling](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/BRES_sum_SIC5digit_to_otherSICcategories.R).)
 * Those two **linked together into single GVA/jobcount datasets** (2015 to `r gva.latest`). ([Code](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/combine_regGVA_and_BRES.R).)
 
@@ -267,7 +267,7 @@ kable(download_links, escape = FALSE, caption = "Table: regional GVA excluding i
 
 The only difference here to the datasets above is that **[imputed rent](https://www.ons.gov.uk/economy/nationalaccounts/uksectoraccounts/articles/changestonationalaccounts/imputedrental) has been removed**.
 
-There are various reasons to examine the data without imputed rent, especially for productivity and jobs analysis. For the data here, it's necessary remove it for linking to BRES: job count data doesn't include it by default, as of course "imputed rent" has no jobs.
+There are various reasons leave imputed rent out, especially for productivity and jobs analysis. For the data here, it's necessary remove it for linking to BRES: job count data doesn't include it by default, as of course "imputed rent" has no jobs.
 
 This list **doesn't include 2 digit SICs** as you can just remove the "imputed rent" row yourself from the [first lot of data](http://localhost:3241/regionalgva_n_bres.html#regional-gva) if you don't want it. For SIC Sections, the real estate section (L 68) only has two sub-rows, one with and one without imputed rent - so the 'excluding imputed rent' row can just be dropped in without having to sum. The 3GROUPS groupings, however, **need summing**, which isn't valid for chained volume prices, so those aren't present.
 
@@ -505,13 +505,13 @@ Or to get individual files via github:
 ## Why?
 
 * Main reason: contribute to **reducing the effort / wrangling / wheel-reinventing needed to analyse UK regional economic data**.
-* The ONS publish **regional GVA data for the UK**, covering a range of SIC sectors (`r gva.latest` is the latest available year - the [data's here](https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry)). But it's a faff to extract data from the excel sheets, especially for use in R or similar.
+* The ONS publish **regional GVA data for the UK**, covering a range of SIC sectors (`r gva.latest` is the latest available year - the [data's here](https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry)). It's amazing data, presented in one handy place - but it needs some wrangling to get into an analyseable form, especially for use in R or similar.
 * This page **provides easy-to-access copies from that dataset**, with each useful dataset in its own CSV. It'll be **updated when the latest GVA data comes out.**
 * This data also feeds into other tools/code on this website like sector and jobs analysis, and GVA gap analysis. (See left-hand bar.)
 
 ### Also:
 
-* **UK regional/sectoral job count data** is available via BRES (the Business Register and Employment Survey) [on NOMIS](https://www.nomisweb.co.uk/sources/bres), but again not in the most easily-useable form. (E.g. the website's query form will separate out different fields into their own chunk in the file.) 
+* **UK regional/sectoral job count data** is available via BRES (the Business Register and Employment Survey) [on NOMIS](https://www.nomisweb.co.uk/sources/bres). NOMIS is a brilliant platform, but again there are repeated steps usually needed before it's in good shape for use. (And here we can also use [NOMISR](https://cran.r-project.org/web/packages/nomisr/vignettes/introduction.html) to get directly.)
 * It's also possible to extract more accurate job count numbers by **aggregating up from the most granular sector counts** The BRES data below uses these more accurate counts.
 * So this page also has **quick-access versions of all the most useful versions of the latest BRES data, including previously available years**.
 
