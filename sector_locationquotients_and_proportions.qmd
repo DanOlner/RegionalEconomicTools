@@ -18,7 +18,7 @@ The ONS produces an [Excel document](https://www.ons.gov.uk/economy/grossvaluead
 
 IT2 level data includes several zones that match existing mayoral authorities. ITL3 data has zones matching **local** authorities - but neither perfectly. Some are grouped. For example, ITL3 zones in South Yorkshire separate Sheffield from the other three local authorities in South Yorkshire grouped into one zone (Rotherham, Barnsley, Doncaster).
 
-Here, we'll explore some ways to analyse this data using R. The data has been processed to make it more useable in R - see the [process_from_excel.R](process_from_excel.R) script and its comments for an explanation of how to get from the Excel sheet to the datasets used here. All of the derived files (and the original ONS excel sheet downloaded from the above page, current version dated 25th April 2023) are included in this repository in the [data folder](data). 
+Here, we'll explore some ways to analyse this data using R. (This and a tonne of other related data are available on this site, at the *[regional GVA and job-count data](regionalgva_n_bres.html)* page, which also explains how it's been wrangled.)
 
 We'll look at the **current prices** data, not the chained volume data. We'll be making **location quotients**, which require being able to sum different regions in different ways; chained volume measures can't be summed. Current price data (prices at the time point of the data) can't be used to measure nominal growth as it's not inflation adjusted, but as long as we're working with proportional change over time (which as we'll see, LQs are), they're fine.
 
@@ -32,7 +32,7 @@ knitr::purl(input = "sector_locationquotients_and_proportions.qmd", output = "LQ
 
 ## Loading in data and finding location quotients
 
-First, load the libraries we'll be using, and get the ITL2 level data. (If you haven't already, install the libraries/packages with e.g. `install.packages("tidyverse")` before loading here.) Also, load some functions that include an LQ function.
+First, load the libraries we'll be using, and get the ITL2 level data. (If you haven't already, install the libraries/packages with e.g. `install.packages("tidyverse")` before loading here.) Also, we'll load some functions that include an LQ function.
 
 ```{r loadITL2}
 library(tidyverse)
@@ -44,13 +44,16 @@ library(ggrepel)#For self-adjusting plot labels
 source('functions/misc_functions.R')
 options(scipen = 99)#Avoids scientific notation
 
-itl2.cp <- read_csv('data/regionalGVA/regionalGVA_currentprices_ITL2_SIC_2DIGIT_LONG_2022.csv')
+#Load if repo is stored locally
+# itl2.cp <- read_csv('data/regionalGVA/regionalGVA_currentprices_ITL2_SIC_2DIGIT_LONG_2022.csv')
+
+#Load from github repo directly
+itl2.cp <- read_csv("https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/regionalGVA_currentprices_ITL2_SIC_2DIGIT_LONG_2022.csv")
+
 
 ```
 
 In this dataframe, we have: ITL2 regions, SIC sectors and year - ranging from `r min(itl2.cp$year)` to `r max(itl2.cp$year)` in the current data - and finally the current price GVA value.
-
-**(Note: this and a tonne of other related data are available on this site, at the *[regional GVA and job-count data](regionalgva_n_bres.html)* page.)**
 
 Then we'll find the **location quotients** for the whole dataset. The [Excel sheet here](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/datasets/locationquotientdataandindustrialspecialisationforlocalauthorities) from the ONS has an excellent explanation of location quotients in its notes, I won't repeat all of that here. But a quick word on what the location quotient is showing for this data:
 
