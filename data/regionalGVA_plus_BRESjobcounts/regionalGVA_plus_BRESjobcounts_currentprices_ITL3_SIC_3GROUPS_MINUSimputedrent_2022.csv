@@ -3023,54 +3023,6 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLK15,Wiltshire,G-T,Services sector,7967,104490,63580,173215
 2021,TLK15,Wiltshire,G-T,Services sector,8638,103530,65590,173670
 2022,TLK15,Wiltshire,G-T,Services sector,9748,105305,65805,174220
-2015,TLK23,Somerset,A-E,Production sector,2491,31860,8340,43750
-2016,TLK23,Somerset,A-E,Production sector,2439,34630,4155,45925
-2017,TLK23,Somerset,A-E,Production sector,2586,31915,3340,42875
-2018,TLK23,Somerset,A-E,Production sector,2657,32615,3685,45385
-2019,TLK23,Somerset,A-E,Production sector,2732,30575,5030,44195
-2020,TLK23,Somerset,A-E,Production sector,2931,31370,3545,43655
-2021,TLK23,Somerset,A-E,Production sector,2817,31425,4460,45160
-2022,TLK23,Somerset,A-E,Production sector,2991,30920,3320,39445
-2015,TLK23,Somerset,F (41-43),Construction,712,10710,2430,12945
-2016,TLK23,Somerset,F (41-43),Construction,697,10600,1390,13050
-2017,TLK23,Somerset,F (41-43),Construction,806,10170,1715,12700
-2018,TLK23,Somerset,F (41-43),Construction,872,10375,2030,14115
-2019,TLK23,Somerset,F (41-43),Construction,846,11280,1445,14285
-2020,TLK23,Somerset,F (41-43),Construction,758,9280,1915,12940
-2021,TLK23,Somerset,F (41-43),Construction,813,9700,1630,12355
-2022,TLK23,Somerset,F (41-43),Construction,921,11195,2060,14535
-2015,TLK23,Somerset,G-T,Services sector,6307,101055,144740,182605
-2016,TLK23,Somerset,G-T,Services sector,6441,101400,74570,183510
-2017,TLK23,Somerset,G-T,Services sector,6914,103220,77205,186460
-2018,TLK23,Somerset,G-T,Services sector,7103,103920,80565,188055
-2019,TLK23,Somerset,G-T,Services sector,7238,103080,78330,187815
-2020,TLK23,Somerset,G-T,Services sector,6850,106370,75735,186300
-2021,TLK23,Somerset,G-T,Services sector,7592,106235,73980,185215
-2022,TLK23,Somerset,G-T,Services sector,8512,111380,74800,194100
-2015,TLK25,Dorset,A-E,Production sector,1184,19010,4930,25895
-2016,TLK25,Dorset,A-E,Production sector,1219,19270,2645,26025
-2017,TLK25,Dorset,A-E,Production sector,1249,19040,2255,25100
-2018,TLK25,Dorset,A-E,Production sector,1520,19105,2235,26215
-2019,TLK25,Dorset,A-E,Production sector,1504,19585,2720,27570
-2020,TLK25,Dorset,A-E,Production sector,1470,19390,2380,27285
-2021,TLK25,Dorset,A-E,Production sector,1589,20235,3085,27820
-2022,TLK25,Dorset,A-E,Production sector,1806,18485,1930,20775
-2015,TLK25,Dorset,F (41-43),Construction,530,8600,2080,10750
-2016,TLK25,Dorset,F (41-43),Construction,528,8950,1240,10865
-2017,TLK25,Dorset,F (41-43),Construction,563,8650,1500,10810
-2018,TLK25,Dorset,F (41-43),Construction,602,8450,1880,11535
-2019,TLK25,Dorset,F (41-43),Construction,629,9790,1395,12075
-2020,TLK25,Dorset,F (41-43),Construction,538,8325,1615,10625
-2021,TLK25,Dorset,F (41-43),Construction,653,8135,1390,10420
-2022,TLK25,Dorset,F (41-43),Construction,748,8560,1920,11665
-2015,TLK25,Dorset,G-T,Services sector,4182,76055,108710,134040
-2016,TLK25,Dorset,G-T,Services sector,4177,74205,57490,137445
-2017,TLK25,Dorset,G-T,Services sector,4424,74605,57810,137100
-2018,TLK25,Dorset,G-T,Services sector,4586,75130,59915,139755
-2019,TLK25,Dorset,G-T,Services sector,4766,74130,60255,140220
-2020,TLK25,Dorset,G-T,Services sector,4558,74905,54140,132175
-2021,TLK25,Dorset,G-T,Services sector,5068,76630,56150,139105
-2022,TLK25,Dorset,G-T,Services sector,5529,77780,57450,139575
 2015,TLK30,Cornwall and Isles of Scilly,A-E,Production sector,1612,19995,6630,31615
 2016,TLK30,Cornwall and Isles of Scilly,A-E,Production sector,1613,20990,3255,33990
 2017,TLK30,Cornwall and Isles of Scilly,A-E,Production sector,1833,19050,2975,31295
@@ -4007,3 +3959,27 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLM95,South Lanarkshire,G-T,Services sector,3985,55600,37340,95060
 2021,TLM95,South Lanarkshire,G-T,Services sector,4273,55030,38755,96565
 2022,TLM95,South Lanarkshire,G-T,Services sector,4662,56485,35085,92975
+2015,TLK2,Dorset and Somerset,A-E,Production sector,4701,62370,7455,82155
+2016,TLK2,Dorset and Somerset,A-E,Production sector,4673,65565,8220,86230
+2017,TLK2,Dorset and Somerset,A-E,Production sector,4972,63575,6690,83075
+2018,TLK2,Dorset and Somerset,A-E,Production sector,5308,63965,6890,84035
+2019,TLK2,Dorset and Somerset,A-E,Production sector,5390,61965,9000,84600
+2020,TLK2,Dorset and Somerset,A-E,Production sector,5466,61555,6780,82965
+2021,TLK2,Dorset and Somerset,A-E,Production sector,5488,65155,8885,88210
+2022,TLK2,Dorset and Somerset,A-E,Production sector,5923,63395,7265,82910
+2015,TLK2,Dorset and Somerset,F (41-43),Construction,1871,25340,2980,29490
+2016,TLK2,Dorset and Somerset,F (41-43),Construction,1941,25310,3540,30905
+2017,TLK2,Dorset and Somerset,F (41-43),Construction,2151,25195,4195,32050
+2018,TLK2,Dorset and Somerset,F (41-43),Construction,2265,25200,5300,33390
+2019,TLK2,Dorset and Somerset,F (41-43),Construction,2191,28725,3805,35735
+2020,TLK2,Dorset and Somerset,F (41-43),Construction,1942,23490,4910,31485
+2021,TLK2,Dorset and Somerset,F (41-43),Construction,2198,23595,4045,30175
+2022,TLK2,Dorset and Somerset,F (41-43),Construction,2547,26385,5435,34655
+2015,TLK2,Dorset and Somerset,G-T,Services sector,16895,264305,179550,460210
+2016,TLK2,Dorset and Somerset,G-T,Services sector,17403,261780,187890,464040
+2017,TLK2,Dorset and Somerset,G-T,Services sector,18682,265205,193385,473795
+2018,TLK2,Dorset and Somerset,G-T,Services sector,18945,264820,200735,480345
+2019,TLK2,Dorset and Somerset,G-T,Services sector,19615,262500,196680,476575
+2020,TLK2,Dorset and Somerset,G-T,Services sector,18804,267565,187530,469475
+2021,TLK2,Dorset and Somerset,G-T,Services sector,20937,273560,188440,478795
+2022,TLK2,Dorset and Somerset,G-T,Services sector,22897,278500,190380,483505

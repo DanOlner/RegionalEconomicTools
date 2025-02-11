@@ -15119,246 +15119,6 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLK15,Wiltshire,T (97-98),Activities of households,43,0,0,0
 2021,TLK15,Wiltshire,T (97-98),Activities of households,36,0,0,0
 2022,TLK15,Wiltshire,T (97-98),Activities of households,33,0,0,0
-2015,TLK23,Somerset,C (10-33),Manufacturing,1729,24990,5760,28280
-2016,TLK23,Somerset,C (10-33),Manufacturing,1717,27165,2695,29695
-2017,TLK23,Somerset,C (10-33),Manufacturing,1868,24320,2090,27190
-2018,TLK23,Somerset,C (10-33),Manufacturing,1975,24645,2155,28255
-2019,TLK23,Somerset,C (10-33),Manufacturing,1990,23030,3750,26960
-2020,TLK23,Somerset,C (10-33),Manufacturing,2147,24770,2340,27425
-2021,TLK23,Somerset,C (10-33),Manufacturing,2127,25015,3145,29550
-2022,TLK23,Somerset,C (10-33),Manufacturing,2196,25400,2455,28815
-2015,TLK23,Somerset,F (41-43),Construction,712,10710,2430,12945
-2016,TLK23,Somerset,F (41-43),Construction,697,10600,1390,13050
-2017,TLK23,Somerset,F (41-43),Construction,806,10170,1715,12700
-2018,TLK23,Somerset,F (41-43),Construction,872,10375,2030,14115
-2019,TLK23,Somerset,F (41-43),Construction,846,11280,1445,14285
-2020,TLK23,Somerset,F (41-43),Construction,758,9280,1915,12940
-2021,TLK23,Somerset,F (41-43),Construction,813,9700,1630,12355
-2022,TLK23,Somerset,F (41-43),Construction,921,11195,2060,14535
-2015,TLK23,Somerset,G (45-47),Wholesale and retail trade; repair of motor vehicles,1164,22355,34200,42110
-2016,TLK23,Somerset,G (45-47),Wholesale and retail trade; repair of motor vehicles,1192,22910,17365,42470
-2017,TLK23,Somerset,G (45-47),Wholesale and retail trade; repair of motor vehicles,1314,19615,18315,39250
-2018,TLK23,Somerset,G (45-47),Wholesale and retail trade; repair of motor vehicles,1345,21500,17385,40870
-2019,TLK23,Somerset,G (45-47),Wholesale and retail trade; repair of motor vehicles,1418,20170,18060,40320
-2020,TLK23,Somerset,G (45-47),Wholesale and retail trade; repair of motor vehicles,1261,19780,16950,38265
-2021,TLK23,Somerset,G (45-47),Wholesale and retail trade; repair of motor vehicles,1362,20460,18170,39660
-2022,TLK23,Somerset,G (45-47),Wholesale and retail trade; repair of motor vehicles,1557,18000,15355,35085
-2015,TLK23,Somerset,H (49-53),Transportation and storage,326,8295,3440,10885
-2016,TLK23,Somerset,H (49-53),Transportation and storage,323,6665,1400,8725
-2017,TLK23,Somerset,H (49-53),Transportation and storage,333,7505,1345,9695
-2018,TLK23,Somerset,H (49-53),Transportation and storage,400,7795,1765,10700
-2019,TLK23,Somerset,H (49-53),Transportation and storage,384,8705,1460,10805
-2020,TLK23,Somerset,H (49-53),Transportation and storage,371,10135,1580,12170
-2021,TLK23,Somerset,H (49-53),Transportation and storage,471,9290,1745,11665
-2022,TLK23,Somerset,H (49-53),Transportation and storage,510,8745,1470,11050
-2015,TLK23,Somerset,I (55-56),Accommodation and food service activities,393,7820,19220,18685
-2016,TLK23,Somerset,I (55-56),Accommodation and food service activities,415,8750,10535,20910
-2017,TLK23,Somerset,I (55-56),Accommodation and food service activities,469,9550,11560,22110
-2018,TLK23,Somerset,I (55-56),Accommodation and food service activities,453,9300,11835,21435
-2019,TLK23,Somerset,I (55-56),Accommodation and food service activities,451,8300,12510,22185
-2020,TLK23,Somerset,I (55-56),Accommodation and food service activities,312,8425,11325,20485
-2021,TLK23,Somerset,I (55-56),Accommodation and food service activities,439,9550,12585,22960
-2022,TLK23,Somerset,I (55-56),Accommodation and food service activities,587,8950,13085,22760
-2015,TLK23,Somerset,J (58-63),Information and communication,227,3440,1150,4000
-2016,TLK23,Somerset,J (58-63),Information and communication,262,3505,710,4425
-2017,TLK23,Somerset,J (58-63),Information and communication,238,4370,740,5055
-2018,TLK23,Somerset,J (58-63),Information and communication,241,4105,745,5065
-2019,TLK23,Somerset,J (58-63),Information and communication,250,2975,765,3860
-2020,TLK23,Somerset,J (58-63),Information and communication,277,4095,1150,5160
-2021,TLK23,Somerset,J (58-63),Information and communication,249,3265,585,4190
-2022,TLK23,Somerset,J (58-63),Information and communication,268,3570,635,4270
-2015,TLK23,Somerset,K (64-66),Financial and insurance activities,373,2070,1360,2780
-2016,TLK23,Somerset,K (64-66),Financial and insurance activities,381,2035,1015,3165
-2017,TLK23,Somerset,K (64-66),Financial and insurance activities,371,3590,750,4430
-2018,TLK23,Somerset,K (64-66),Financial and insurance activities,395,1835,705,2615
-2019,TLK23,Somerset,K (64-66),Financial and insurance activities,288,2075,685,2820
-2020,TLK23,Somerset,K (64-66),Financial and insurance activities,283,1825,655,2495
-2021,TLK23,Somerset,K (64-66),Financial and insurance activities,305,1450,505,2020
-2022,TLK23,Somerset,K (64-66),Financial and insurance activities,318,1910,585,2645
-2015,TLK23,Somerset,M (69-75),"Professional, scientific and technical activities",489,12415,7290,16885
-2016,TLK23,Somerset,M (69-75),"Professional, scientific and technical activities",521,10420,2600,13610
-2017,TLK23,Somerset,M (69-75),"Professional, scientific and technical activities",587,10735,3495,14925
-2018,TLK23,Somerset,M (69-75),"Professional, scientific and technical activities",547,10395,3305,14335
-2019,TLK23,Somerset,M (69-75),"Professional, scientific and technical activities",585,12215,4480,17160
-2020,TLK23,Somerset,M (69-75),"Professional, scientific and technical activities",615,11925,4585,16875
-2021,TLK23,Somerset,M (69-75),"Professional, scientific and technical activities",627,10835,4125,15210
-2022,TLK23,Somerset,M (69-75),"Professional, scientific and technical activities",696,12870,3525,16490
-2015,TLK23,Somerset,N (77-82),Administrative and support service activities,339,7375,8460,11965
-2016,TLK23,Somerset,N (77-82),Administrative and support service activities,330,7330,4015,12620
-2017,TLK23,Somerset,N (77-82),Administrative and support service activities,392,8960,5525,14830
-2018,TLK23,Somerset,N (77-82),Administrative and support service activities,426,7915,5355,13120
-2019,TLK23,Somerset,N (77-82),Administrative and support service activities,438,8495,4780,13770
-2020,TLK23,Somerset,N (77-82),Administrative and support service activities,403,10260,5140,16230
-2021,TLK23,Somerset,N (77-82),Administrative and support service activities,505,9440,4995,14665
-2022,TLK23,Somerset,N (77-82),Administrative and support service activities,611,14340,5475,20380
-2015,TLK23,Somerset,O (84),Public administration and defence,562,5060,3470,7020
-2016,TLK23,Somerset,O (84),Public administration and defence,561,5260,1700,6610
-2017,TLK23,Somerset,O (84),Public administration and defence,657,5910,1760,7470
-2018,TLK23,Somerset,O (84),Public administration and defence,672,5890,2070,8000
-2019,TLK23,Somerset,O (84),Public administration and defence,726,5570,2575,8080
-2020,TLK23,Somerset,O (84),Public administration and defence,732,5660,2495,7590
-2021,TLK23,Somerset,O (84),Public administration and defence,756,6745,1995,8350
-2022,TLK23,Somerset,O (84),Public administration and defence,842,6395,2115,8750
-2015,TLK23,Somerset,P (85),Education,665,8685,21210,20270
-2016,TLK23,Somerset,P (85),Education,637,10000,11705,22070
-2017,TLK23,Somerset,P (85),Education,626,10010,10655,21550
-2018,TLK23,Somerset,P (85),Education,662,9700,11430,20140
-2019,TLK23,Somerset,P (85),Education,709,9690,11015,20040
-2020,TLK23,Somerset,P (85),Education,719,9700,10690,21110
-2021,TLK23,Somerset,P (85),Education,748,10605,10535,21690
-2022,TLK23,Somerset,P (85),Education,846,10375,11380,22990
-2015,TLK23,Somerset,Q (86-88),Human health and social work activities,1003,17045,34300,34600
-2016,TLK23,Somerset,Q (86-88),Human health and social work activities,1014,18045,17375,35625
-2017,TLK23,Somerset,Q (86-88),Human health and social work activities,1062,16050,17050,32650
-2018,TLK23,Somerset,Q (86-88),Human health and social work activities,1048,17400,19725,36500
-2019,TLK23,Somerset,Q (86-88),Human health and social work activities,1080,17965,16300,33775
-2020,TLK23,Somerset,Q (86-88),Human health and social work activities,1116,17085,16275,32525
-2021,TLK23,Somerset,Q (86-88),Human health and social work activities,1199,17790,14200,32050
-2022,TLK23,Somerset,Q (86-88),Human health and social work activities,1203,17795,14375,33575
-2015,TLK23,Somerset,R (90-93),"Arts, entertainment and recreation",136,2035,5240,4940
-2016,TLK23,Somerset,R (90-93),"Arts, entertainment and recreation",115,1705,3215,4940
-2017,TLK23,Somerset,R (90-93),"Arts, entertainment and recreation",136,2200,3730,5890
-2018,TLK23,Somerset,R (90-93),"Arts, entertainment and recreation",140,2740,3600,6515
-2019,TLK23,Somerset,R (90-93),"Arts, entertainment and recreation",138,2125,2925,5435
-2020,TLK23,Somerset,R (90-93),"Arts, entertainment and recreation",91,2005,2225,4200
-2021,TLK23,Somerset,R (90-93),"Arts, entertainment and recreation",157,2130,2430,4660
-2022,TLK23,Somerset,R (90-93),"Arts, entertainment and recreation",162,2875,3205,6180
-2015,TLK23,Somerset,S (94-96),Other service activities,187,2600,3820,5090
-2016,TLK23,Somerset,S (94-96),Other service activities,188,2440,2130,4990
-2017,TLK23,Somerset,S (94-96),Other service activities,214,2740,1595,5060
-2018,TLK23,Somerset,S (94-96),Other service activities,233,2870,1680,4960
-2019,TLK23,Somerset,S (94-96),Other service activities,229,2445,1790,4605
-2020,TLK23,Somerset,S (94-96),Other service activities,169,2375,1415,4145
-2021,TLK23,Somerset,S (94-96),Other service activities,283,2475,1235,4120
-2022,TLK23,Somerset,S (94-96),Other service activities,354,2755,2170,5275
-2015,TLK23,Somerset,T (97-98),Activities of households,25,0,0,0
-2016,TLK23,Somerset,T (97-98),Activities of households,26,0,0,0
-2017,TLK23,Somerset,T (97-98),Activities of households,24,0,0,0
-2018,TLK23,Somerset,T (97-98),Activities of households,36,0,0,0
-2019,TLK23,Somerset,T (97-98),Activities of households,42,0,0,0
-2020,TLK23,Somerset,T (97-98),Activities of households,31,0,0,0
-2021,TLK23,Somerset,T (97-98),Activities of households,25,0,0,0
-2022,TLK23,Somerset,T (97-98),Activities of households,25,0,0,0
-2015,TLK25,Dorset,C (10-33),Manufacturing,799,15360,3110,17385
-2016,TLK25,Dorset,C (10-33),Manufacturing,816,15715,1635,17585
-2017,TLK25,Dorset,C (10-33),Manufacturing,855,15295,1415,16995
-2018,TLK25,Dorset,C (10-33),Manufacturing,911,15250,1340,17070
-2019,TLK25,Dorset,C (10-33),Manufacturing,935,15815,1810,17840
-2020,TLK25,Dorset,C (10-33),Manufacturing,1001,15370,1485,17510
-2021,TLK25,Dorset,C (10-33),Manufacturing,1002,16055,2275,19075
-2022,TLK25,Dorset,C (10-33),Manufacturing,1023,16465,1780,18445
-2015,TLK25,Dorset,F (41-43),Construction,530,8600,2080,10750
-2016,TLK25,Dorset,F (41-43),Construction,528,8950,1240,10865
-2017,TLK25,Dorset,F (41-43),Construction,563,8650,1500,10810
-2018,TLK25,Dorset,F (41-43),Construction,602,8450,1880,11535
-2019,TLK25,Dorset,F (41-43),Construction,629,9790,1395,12075
-2020,TLK25,Dorset,F (41-43),Construction,538,8325,1615,10625
-2021,TLK25,Dorset,F (41-43),Construction,653,8135,1390,10420
-2022,TLK25,Dorset,F (41-43),Construction,748,8560,1920,11665
-2015,TLK25,Dorset,G (45-47),Wholesale and retail trade; repair of motor vehicles,666,15870,23440,28450
-2016,TLK25,Dorset,G (45-47),Wholesale and retail trade; repair of motor vehicles,665,16150,11855,29580
-2017,TLK25,Dorset,G (45-47),Wholesale and retail trade; repair of motor vehicles,726,14260,11980,27410
-2018,TLK25,Dorset,G (45-47),Wholesale and retail trade; repair of motor vehicles,715,14810,11360,27550
-2019,TLK25,Dorset,G (45-47),Wholesale and retail trade; repair of motor vehicles,766,14685,12960,28985
-2020,TLK25,Dorset,G (45-47),Wholesale and retail trade; repair of motor vehicles,735,14330,11180,26225
-2021,TLK25,Dorset,G (45-47),Wholesale and retail trade; repair of motor vehicles,797,14920,12710,29465
-2022,TLK25,Dorset,G (45-47),Wholesale and retail trade; repair of motor vehicles,799,13175,10770,24645
-2015,TLK25,Dorset,H (49-53),Transportation and storage,115,3925,1930,4955
-2016,TLK25,Dorset,H (49-53),Transportation and storage,99,2505,775,3480
-2017,TLK25,Dorset,H (49-53),Transportation and storage,94,2595,685,3355
-2018,TLK25,Dorset,H (49-53),Transportation and storage,109,3115,960,4295
-2019,TLK25,Dorset,H (49-53),Transportation and storage,116,2650,960,3905
-2020,TLK25,Dorset,H (49-53),Transportation and storage,105,3145,850,4380
-2021,TLK25,Dorset,H (49-53),Transportation and storage,122,3795,870,5355
-2022,TLK25,Dorset,H (49-53),Transportation and storage,124,3450,1175,4955
-2015,TLK25,Dorset,I (55-56),Accommodation and food service activities,289,6705,17910,16145
-2016,TLK25,Dorset,I (55-56),Accommodation and food service activities,303,7325,10240,18580
-2017,TLK25,Dorset,I (55-56),Accommodation and food service activities,353,8210,10765,19745
-2018,TLK25,Dorset,I (55-56),Accommodation and food service activities,338,8435,10905,19930
-2019,TLK25,Dorset,I (55-56),Accommodation and food service activities,337,7545,11380,19820
-2020,TLK25,Dorset,I (55-56),Accommodation and food service activities,267,7720,9860,18235
-2021,TLK25,Dorset,I (55-56),Accommodation and food service activities,381,8630,11480,21260
-2022,TLK25,Dorset,I (55-56),Accommodation and food service activities,456,8820,11860,22445
-2015,TLK25,Dorset,J (58-63),Information and communication,93,2750,980,3450
-2016,TLK25,Dorset,J (58-63),Information and communication,135,3370,595,3805
-2017,TLK25,Dorset,J (58-63),Information and communication,144,3870,570,4465
-2018,TLK25,Dorset,J (58-63),Information and communication,168,3370,600,3795
-2019,TLK25,Dorset,J (58-63),Information and communication,154,2540,625,3095
-2020,TLK25,Dorset,J (58-63),Information and communication,181,3230,965,4420
-2021,TLK25,Dorset,J (58-63),Information and communication,176,2870,495,3515
-2022,TLK25,Dorset,J (58-63),Information and communication,212,2970,585,3390
-2015,TLK25,Dorset,K (64-66),Financial and insurance activities,147,1225,880,1735
-2016,TLK25,Dorset,K (64-66),Financial and insurance activities,140,1465,720,2285
-2017,TLK25,Dorset,K (64-66),Financial and insurance activities,95,2010,520,2510
-2018,TLK25,Dorset,K (64-66),Financial and insurance activities,103,1005,340,1450
-2019,TLK25,Dorset,K (64-66),Financial and insurance activities,87,1420,330,1805
-2020,TLK25,Dorset,K (64-66),Financial and insurance activities,101,720,245,1015
-2021,TLK25,Dorset,K (64-66),Financial and insurance activities,97,830,290,1130
-2022,TLK25,Dorset,K (64-66),Financial and insurance activities,66,1160,355,1710
-2015,TLK25,Dorset,M (69-75),"Professional, scientific and technical activities",496,12040,5530,14750
-2016,TLK25,Dorset,M (69-75),"Professional, scientific and technical activities",458,10305,2430,13050
-2017,TLK25,Dorset,M (69-75),"Professional, scientific and technical activities",490,10610,2495,13950
-2018,TLK25,Dorset,M (69-75),"Professional, scientific and technical activities",534,9755,3045,13195
-2019,TLK25,Dorset,M (69-75),"Professional, scientific and technical activities",533,11725,3275,15355
-2020,TLK25,Dorset,M (69-75),"Professional, scientific and technical activities",546,10125,3120,13490
-2021,TLK25,Dorset,M (69-75),"Professional, scientific and technical activities",586,10725,3315,14215
-2022,TLK25,Dorset,M (69-75),"Professional, scientific and technical activities",722,12200,2675,16020
-2015,TLK25,Dorset,N (77-82),Administrative and support service activities,137,4020,5020,6975
-2016,TLK25,Dorset,N (77-82),Administrative and support service activities,146,4325,2320,7245
-2017,TLK25,Dorset,N (77-82),Administrative and support service activities,153,4100,2955,7590
-2018,TLK25,Dorset,N (77-82),Administrative and support service activities,138,3680,2600,6470
-2019,TLK25,Dorset,N (77-82),Administrative and support service activities,162,4970,2625,7950
-2020,TLK25,Dorset,N (77-82),Administrative and support service activities,141,5255,2915,8765
-2021,TLK25,Dorset,N (77-82),Administrative and support service activities,177,4475,2470,7355
-2022,TLK25,Dorset,N (77-82),Administrative and support service activities,210,5235,2235,7680
-2015,TLK25,Dorset,O (84),Public administration and defence,538,5720,4120,8000
-2016,TLK25,Dorset,O (84),Public administration and defence,528,5500,2050,7480
-2017,TLK25,Dorset,O (84),Public administration and defence,591,5760,2300,7940
-2018,TLK25,Dorset,O (84),Public administration and defence,598,5860,2650,8150
-2019,TLK25,Dorset,O (84),Public administration and defence,599,5170,2315,7690
-2020,TLK25,Dorset,O (84),Public administration and defence,592,5320,2130,6980
-2021,TLK25,Dorset,O (84),Public administration and defence,611,5630,2140,7940
-2022,TLK25,Dorset,O (84),Public administration and defence,685,5675,2115,7735
-2015,TLK25,Dorset,P (85),Education,491,7540,15070,15015
-2016,TLK25,Dorset,P (85),Education,486,7005,8430,15350
-2017,TLK25,Dorset,P (85),Education,475,7170,8160,15330
-2018,TLK25,Dorset,P (85),Education,495,7060,7625,15075
-2019,TLK25,Dorset,P (85),Education,550,7355,7185,15000
-2020,TLK25,Dorset,P (85),Education,544,7850,7440,15125
-2021,TLK25,Dorset,P (85),Education,547,7515,7395,15125
-2022,TLK25,Dorset,P (85),Education,614,7340,8930,15765
-2015,TLK25,Dorset,Q (86-88),Human health and social work activities,544,10470,24050,22300
-2016,TLK25,Dorset,Q (86-88),Human health and social work activities,573,10370,12880,24550
-2017,TLK25,Dorset,Q (86-88),Human health and social work activities,618,10065,11945,21790
-2018,TLK25,Dorset,Q (86-88),Human health and social work activities,661,10630,14225,25550
-2019,TLK25,Dorset,Q (86-88),Human health and social work activities,683,9700,12935,22600
-2020,TLK25,Dorset,Q (86-88),Human health and social work activities,667,10490,10680,20645
-2021,TLK25,Dorset,Q (86-88),Human health and social work activities,768,11415,10720,22040
-2022,TLK25,Dorset,Q (86-88),Human health and social work activities,754,10825,10565,21225
-2015,TLK25,Dorset,R (90-93),"Arts, entertainment and recreation",85,1700,4910,4415
-2016,TLK25,Dorset,R (90-93),"Arts, entertainment and recreation",75,1530,2560,4305
-2017,TLK25,Dorset,R (90-93),"Arts, entertainment and recreation",84,1875,3260,5300
-2018,TLK25,Dorset,R (90-93),"Arts, entertainment and recreation",79,2490,3270,6325
-2019,TLK25,Dorset,R (90-93),"Arts, entertainment and recreation",73,1800,3170,5095
-2020,TLK25,Dorset,R (90-93),"Arts, entertainment and recreation",72,1715,2345,4250
-2021,TLK25,Dorset,R (90-93),"Arts, entertainment and recreation",87,1790,2400,4405
-2022,TLK25,Dorset,R (90-93),"Arts, entertainment and recreation",95,2275,3350,5605
-2015,TLK25,Dorset,S (94-96),Other service activities,171,2150,3240,4350
-2016,TLK25,Dorset,S (94-96),Other service activities,203,2080,1850,4310
-2017,TLK25,Dorset,S (94-96),Other service activities,216,2150,1540,4125
-2018,TLK25,Dorset,S (94-96),Other service activities,230,2620,1410,4445
-2019,TLK25,Dorset,S (94-96),Other service activities,235,2420,1610,4245
-2020,TLK25,Dorset,S (94-96),Other service activities,169,2230,1330,3935
-2021,TLK25,Dorset,S (94-96),Other service activities,284,2185,1120,3575
-2022,TLK25,Dorset,S (94-96),Other service activities,358,2455,1760,4525
-2015,TLK25,Dorset,T (97-98),Activities of households,17,0,0,0
-2016,TLK25,Dorset,T (97-98),Activities of households,17,0,0,0
-2017,TLK25,Dorset,T (97-98),Activities of households,16,0,0,0
-2018,TLK25,Dorset,T (97-98),Activities of households,24,0,0,0
-2019,TLK25,Dorset,T (97-98),Activities of households,28,0,0,0
-2020,TLK25,Dorset,T (97-98),Activities of households,21,0,0,0
-2021,TLK25,Dorset,T (97-98),Activities of households,17,0,0,0
-2022,TLK25,Dorset,T (97-98),Activities of households,17,0,0,0
 2015,TLK30,Cornwall and Isles of Scilly,C (10-33),Manufacturing,788,14205,3460,16565
 2016,TLK30,Cornwall and Isles of Scilly,C (10-33),Manufacturing,818,15300,1865,17810
 2017,TLK30,Cornwall and Isles of Scilly,C (10-33),Manufacturing,889,13350,1485,15625
@@ -20039,3 +19799,155 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLM95,South Lanarkshire,T (97-98),Activities of households,3,0,0,0
 2021,TLM95,South Lanarkshire,T (97-98),Activities of households,4,0,0,0
 2022,TLM95,South Lanarkshire,T (97-98),Activities of households,5,0,0,0
+2015,TLK2,Dorset and Somerset,A (1-3),"Agriculture, forestry and fishing",436,5645,2090,19105
+2016,TLK2,Dorset and Somerset,A (1-3),"Agriculture, forestry and fishing",371,5430,1950,18350
+2017,TLK2,Dorset and Somerset,A (1-3),"Agriculture, forestry and fishing",412,5410,1980,18955
+2018,TLK2,Dorset and Somerset,A (1-3),"Agriculture, forestry and fishing",383,5465,1855,18860
+2019,TLK2,Dorset and Somerset,A (1-3),"Agriculture, forestry and fishing",441,5760,2020,19735
+2020,TLK2,Dorset and Somerset,A (1-3),"Agriculture, forestry and fishing",434,5935,1975,20975
+2021,TLK2,Dorset and Somerset,A (1-3),"Agriculture, forestry and fishing",481,4985,1995,19515
+2022,TLK2,Dorset and Somerset,A (1-3),"Agriculture, forestry and fishing",626,5045,1695,19145
+2015,TLK2,Dorset and Somerset,B (5-9),Mining and quarrying,146,955,45,1205
+2016,TLK2,Dorset and Somerset,B (5-9),Mining and quarrying,181,630,25,680
+2017,TLK2,Dorset and Somerset,B (5-9),Mining and quarrying,191,745,20,750
+2018,TLK2,Dorset and Somerset,B (5-9),Mining and quarrying,436,1035,35,1070
+2019,TLK2,Dorset and Somerset,B (5-9),Mining and quarrying,372,1405,45,1630
+2020,TLK2,Dorset and Somerset,B (5-9),Mining and quarrying,332,735,20,770
+2021,TLK2,Dorset and Somerset,B (5-9),Mining and quarrying,383,1150,25,1150
+2022,TLK2,Dorset and Somerset,B (5-9),Mining and quarrying,512,625,5,625
+2015,TLK2,Dorset and Somerset,C (10-33),Manufacturing,3280,50855,5100,56830
+2016,TLK2,Dorset and Somerset,C (10-33),Manufacturing,3256,53045,5485,59615
+2017,TLK2,Dorset and Somerset,C (10-33),Manufacturing,3526,50665,4505,56540
+2018,TLK2,Dorset and Somerset,C (10-33),Manufacturing,3706,51215,4305,56850
+2019,TLK2,Dorset and Somerset,C (10-33),Manufacturing,3753,48620,6655,56755
+2020,TLK2,Dorset and Somerset,C (10-33),Manufacturing,3939,49455,4550,55235
+2021,TLK2,Dorset and Somerset,C (10-33),Manufacturing,3949,52215,6500,60390
+2022,TLK2,Dorset and Somerset,C (10-33),Manufacturing,4086,51300,5160,56565
+2015,TLK2,Dorset and Somerset,D (35),"Electricity, gas, steam and air conditioning supply",452,1660,60,1660
+2016,TLK2,Dorset and Somerset,D (35),"Electricity, gas, steam and air conditioning supply",449,1740,45,1840
+2017,TLK2,Dorset and Somerset,D (35),"Electricity, gas, steam and air conditioning supply",445,2775,55,2775
+2018,TLK2,Dorset and Somerset,D (35),"Electricity, gas, steam and air conditioning supply",394,2740,170,2990
+2019,TLK2,Dorset and Somerset,D (35),"Electricity, gas, steam and air conditioning supply",463,2475,75,2575
+2020,TLK2,Dorset and Somerset,D (35),"Electricity, gas, steam and air conditioning supply",397,1790,55,1890
+2021,TLK2,Dorset and Somerset,D (35),"Electricity, gas, steam and air conditioning supply",260,2440,60,2440
+2022,TLK2,Dorset and Somerset,D (35),"Electricity, gas, steam and air conditioning supply",266,2275,215,2175
+2015,TLK2,Dorset and Somerset,E (36-39),Water supply; sewerage and waste management,386,3255,160,3355
+2016,TLK2,Dorset and Somerset,E (36-39),Water supply; sewerage and waste management,418,4720,715,5745
+2017,TLK2,Dorset and Somerset,E (36-39),Water supply; sewerage and waste management,398,3980,130,4055
+2018,TLK2,Dorset and Somerset,E (36-39),Water supply; sewerage and waste management,389,3510,525,4265
+2019,TLK2,Dorset and Somerset,E (36-39),Water supply; sewerage and waste management,362,3705,205,3905
+2020,TLK2,Dorset and Somerset,E (36-39),Water supply; sewerage and waste management,364,3640,180,4095
+2021,TLK2,Dorset and Somerset,E (36-39),Water supply; sewerage and waste management,415,4365,305,4715
+2022,TLK2,Dorset and Somerset,E (36-39),Water supply; sewerage and waste management,434,4150,190,4400
+2015,TLK2,Dorset and Somerset,F (41-43),Construction,1871,25340,2980,29490
+2016,TLK2,Dorset and Somerset,F (41-43),Construction,1941,25310,3540,30905
+2017,TLK2,Dorset and Somerset,F (41-43),Construction,2151,25195,4195,32050
+2018,TLK2,Dorset and Somerset,F (41-43),Construction,2265,25200,5300,33390
+2019,TLK2,Dorset and Somerset,F (41-43),Construction,2191,28725,3805,35735
+2020,TLK2,Dorset and Somerset,F (41-43),Construction,1942,23490,4910,31485
+2021,TLK2,Dorset and Somerset,F (41-43),Construction,2198,23595,4045,30175
+2022,TLK2,Dorset and Somerset,F (41-43),Construction,2547,26385,5435,34655
+2015,TLK2,Dorset and Somerset,G (45-47),Wholesale and retail trade; repair of motor vehicles,2820,53665,41245,98875
+2016,TLK2,Dorset and Somerset,G (45-47),Wholesale and retail trade; repair of motor vehicles,2875,52370,41205,98485
+2017,TLK2,Dorset and Somerset,G (45-47),Wholesale and retail trade; repair of motor vehicles,3091,47385,42595,92535
+2018,TLK2,Dorset and Somerset,G (45-47),Wholesale and retail trade; repair of motor vehicles,3065,49365,40335,94750
+2019,TLK2,Dorset and Somerset,G (45-47),Wholesale and retail trade; repair of motor vehicles,3247,47390,43455,94090
+2020,TLK2,Dorset and Somerset,G (45-47),Wholesale and retail trade; repair of motor vehicles,3013,45565,38590,89040
+2021,TLK2,Dorset and Somerset,G (45-47),Wholesale and retail trade; repair of motor vehicles,3265,46940,43555,93445
+2022,TLK2,Dorset and Somerset,G (45-47),Wholesale and retail trade; repair of motor vehicles,3455,42955,37080,82670
+2015,TLK2,Dorset and Somerset,H (49-53),Transportation and storage,712,16670,3740,21880
+2016,TLK2,Dorset and Somerset,H (49-53),Transportation and storage,681,13450,2900,17040
+2017,TLK2,Dorset and Somerset,H (49-53),Transportation and storage,672,14020,2670,16770
+2018,TLK2,Dorset and Somerset,H (49-53),Transportation and storage,730,14870,3545,19420
+2019,TLK2,Dorset and Somerset,H (49-53),Transportation and storage,734,15085,3315,18740
+2020,TLK2,Dorset and Somerset,H (49-53),Transportation and storage,658,16830,3360,20800
+2021,TLK2,Dorset and Somerset,H (49-53),Transportation and storage,836,17875,3475,22695
+2022,TLK2,Dorset and Somerset,H (49-53),Transportation and storage,920,16080,3710,21215
+2015,TLK2,Dorset and Somerset,I (55-56),Accommodation and food service activities,986,20960,25470,48980
+2016,TLK2,Dorset and Somerset,I (55-56),Accommodation and food service activities,1045,22060,28830,52990
+2017,TLK2,Dorset and Somerset,I (55-56),Accommodation and food service activities,1187,24585,30295,57530
+2018,TLK2,Dorset and Somerset,I (55-56),Accommodation and food service activities,1151,24860,31145,58180
+2019,TLK2,Dorset and Somerset,I (55-56),Accommodation and food service activities,1129,21485,31805,55780
+2020,TLK2,Dorset and Somerset,I (55-56),Accommodation and food service activities,827,21435,29735,52370
+2021,TLK2,Dorset and Somerset,I (55-56),Accommodation and food service activities,1172,25410,31935,60620
+2022,TLK2,Dorset and Somerset,I (55-56),Accommodation and food service activities,1514,24275,34705,61830
+2015,TLK2,Dorset and Somerset,J (58-63),Information and communication,680,9790,1845,12150
+2016,TLK2,Dorset and Somerset,J (58-63),Information and communication,791,11480,2145,13685
+2017,TLK2,Dorset and Somerset,J (58-63),Information and communication,834,12715,2075,15315
+2018,TLK2,Dorset and Somerset,J (58-63),Information and communication,882,12080,2150,14245
+2019,TLK2,Dorset and Somerset,J (58-63),Information and communication,830,9645,2485,12515
+2020,TLK2,Dorset and Somerset,J (58-63),Information and communication,964,13235,3660,16815
+2021,TLK2,Dorset and Somerset,J (58-63),Information and communication,869,11315,1875,13865
+2022,TLK2,Dorset and Somerset,J (58-63),Information and communication,948,11360,1935,13420
+2015,TLK2,Dorset and Somerset,K (64-66),Financial and insurance activities,1688,13510,2545,16785
+2016,TLK2,Dorset and Somerset,K (64-66),Financial and insurance activities,1796,14830,3400,18570
+2017,TLK2,Dorset and Somerset,K (64-66),Financial and insurance activities,1994,17410,2995,20495
+2018,TLK2,Dorset and Somerset,K (64-66),Financial and insurance activities,2042,13960,2625,17245
+2019,TLK2,Dorset and Somerset,K (64-66),Financial and insurance activities,2013,16405,2675,19110
+2020,TLK2,Dorset and Somerset,K (64-66),Financial and insurance activities,1982,14390,2425,17305
+2021,TLK2,Dorset and Somerset,K (64-66),Financial and insurance activities,2306,14175,2540,17255
+2022,TLK2,Dorset and Somerset,K (64-66),Financial and insurance activities,2355,13410,2480,16630
+2015,TLK2,Dorset and Somerset,M (69-75),"Professional, scientific and technical activities",1459,32475,7985,42360
+2016,TLK2,Dorset and Somerset,M (69-75),"Professional, scientific and technical activities",1483,26510,6510,34820
+2017,TLK2,Dorset and Somerset,M (69-75),"Professional, scientific and technical activities",1645,29215,8340,40230
+2018,TLK2,Dorset and Somerset,M (69-75),"Professional, scientific and technical activities",1592,28065,8900,38260
+2019,TLK2,Dorset and Somerset,M (69-75),"Professional, scientific and technical activities",1686,32595,10995,45475
+2020,TLK2,Dorset and Somerset,M (69-75),"Professional, scientific and technical activities",1683,29060,10465,40325
+2021,TLK2,Dorset and Somerset,M (69-75),"Professional, scientific and technical activities",1786,29545,9860,39690
+2022,TLK2,Dorset and Somerset,M (69-75),"Professional, scientific and technical activities",2016,33055,8660,43295
+2015,TLK2,Dorset and Somerset,N (77-82),Administrative and support service activities,765,19700,11350,31760
+2016,TLK2,Dorset and Somerset,N (77-82),Administrative and support service activities,786,19995,11750,32850
+2017,TLK2,Dorset and Somerset,N (77-82),Administrative and support service activities,846,20655,14930,37130
+2018,TLK2,Dorset and Somerset,N (77-82),Administrative and support service activities,877,18775,13420,32780
+2019,TLK2,Dorset and Somerset,N (77-82),Administrative and support service activities,940,21345,12195,35045
+2020,TLK2,Dorset and Somerset,N (77-82),Administrative and support service activities,831,25090,13040,38470
+2021,TLK2,Dorset and Somerset,N (77-82),Administrative and support service activities,1019,21820,11910,34580
+2022,TLK2,Dorset and Somerset,N (77-82),Administrative and support service activities,1204,27575,10720,39945
+2015,TLK2,Dorset and Somerset,O (84),Public administration and defence,1436,14100,5260,20100
+2016,TLK2,Dorset and Somerset,O (84),Public administration and defence,1429,12935,5740,19200
+2017,TLK2,Dorset and Somerset,O (84),Public administration and defence,1620,14290,5805,20075
+2018,TLK2,Dorset and Somerset,O (84),Public administration and defence,1631,14450,6425,20400
+2019,TLK2,Dorset and Somerset,O (84),Public administration and defence,1707,13175,6400,20700
+2020,TLK2,Dorset and Somerset,O (84),Public administration and defence,1708,13675,6100,19375
+2021,TLK2,Dorset and Somerset,O (84),Public administration and defence,1735,14800,5275,20225
+2022,TLK2,Dorset and Somerset,O (84),Public administration and defence,1947,15300,5330,20975
+2015,TLK2,Dorset and Somerset,P (85),Education,1757,22920,24705,47810
+2016,TLK2,Dorset and Somerset,P (85),Education,1731,25145,27525,50785
+2017,TLK2,Dorset and Somerset,P (85),Education,1695,25275,26225,51760
+2018,TLK2,Dorset and Somerset,P (85),Education,1767,23425,25550,50150
+2019,TLK2,Dorset and Somerset,P (85),Education,1936,23650,23875,49825
+2020,TLK2,Dorset and Somerset,P (85),Education,1986,25880,24905,51310
+2021,TLK2,Dorset and Somerset,P (85),Education,2037,26685,24755,51690
+2022,TLK2,Dorset and Somerset,P (85),Education,2296,26155,28460,53320
+2015,TLK2,Dorset and Somerset,Q (86-88),Human health and social work activities,2431,42650,40025,83000
+2016,TLK2,Dorset and Somerset,Q (86-88),Human health and social work activities,2500,45300,41200,87750
+2017,TLK2,Dorset and Somerset,Q (86-88),Human health and social work activities,2648,40750,40950,82175
+2018,TLK2,Dorset and Somerset,Q (86-88),Human health and social work activities,2701,43500,48400,92150
+2019,TLK2,Dorset and Somerset,Q (86-88),Human health and social work activities,2828,42300,42350,82950
+2020,TLK2,Dorset and Somerset,Q (86-88),Human health and social work activities,2871,41925,39825,84000
+2021,TLK2,Dorset and Somerset,Q (86-88),Human health and social work activities,3280,46975,39250,87925
+2022,TLK2,Dorset and Somerset,Q (86-88),Human health and social work activities,3238,47400,38275,87050
+2015,TLK2,Dorset and Somerset,R (90-93),"Arts, entertainment and recreation",345,5260,7705,13175
+2016,TLK2,Dorset and Somerset,R (90-93),"Arts, entertainment and recreation",335,4930,8565,13965
+2017,TLK2,Dorset and Somerset,R (90-93),"Arts, entertainment and recreation",377,5560,9800,15915
+2018,TLK2,Dorset and Somerset,R (90-93),"Arts, entertainment and recreation",363,6920,10185,17670
+2019,TLK2,Dorset and Somerset,R (90-93),"Arts, entertainment and recreation",350,5710,9160,15345
+2020,TLK2,Dorset and Somerset,R (90-93),"Arts, entertainment and recreation",253,5045,7385,13075
+2021,TLK2,Dorset and Somerset,R (90-93),"Arts, entertainment and recreation",361,5340,7725,13655
+2022,TLK2,Dorset and Somerset,R (90-93),"Arts, entertainment and recreation",413,6860,10195,17950
+2015,TLK2,Dorset and Somerset,S (94-96),Other service activities,511,6505,4785,12660
+2016,TLK2,Dorset and Somerset,S (94-96),Other service activities,557,6110,5290,12455
+2017,TLK2,Dorset and Somerset,S (94-96),Other service activities,619,6990,4180,12345
+2018,TLK2,Dorset and Somerset,S (94-96),Other service activities,657,7145,4330,12535
+2019,TLK2,Dorset and Somerset,S (94-96),Other service activities,643,6310,4520,11990
+2020,TLK2,Dorset and Somerset,S (94-96),Other service activities,464,5930,3560,10680
+2021,TLK2,Dorset and Somerset,S (94-96),Other service activities,777,6025,3010,10340
+2022,TLK2,Dorset and Somerset,S (94-96),Other service activities,1020,7045,5350,12995
+2015,TLK2,Dorset and Somerset,T (97-98),Activities of households,59,0,0,0
+2016,TLK2,Dorset and Somerset,T (97-98),Activities of households,61,0,0,0
+2017,TLK2,Dorset and Somerset,T (97-98),Activities of households,57,0,0,0
+2018,TLK2,Dorset and Somerset,T (97-98),Activities of households,87,0,0,0
+2019,TLK2,Dorset and Somerset,T (97-98),Activities of households,99,0,0,0
+2020,TLK2,Dorset and Somerset,T (97-98),Activities of households,73,0,0,0
+2021,TLK2,Dorset and Somerset,T (97-98),Activities of households,60,0,0,0
+2022,TLK2,Dorset and Somerset,T (97-98),Activities of households,59,0,0,0

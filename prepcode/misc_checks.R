@@ -440,7 +440,7 @@ bres.itl2.sections.summed <- bres.itl2.5digit %>%
 
 
 
-#CHECK HOW THE "SECTION AND 2 DIGIT JOBCOUNTS SUMMED FROM 5 DIGIT" #compare tothe BRES original versions of 2 DIG and Sections----
+#CHECK HOW THE "SECTION AND 2 DIGIT JOBCOUNTS SUMMED FROM 5 DIGIT" compare to the BRES original versions of 2 DIG and Sections----
 
 chk.2digit <- bres.itl2.2digit.summed %>% 
   left_join(
@@ -1108,6 +1108,17 @@ length(unique(itl3$SIC07_description))
 
 
 
+#How many in the BRES 5 digit summed data?
+chk <- read_csv('data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE428_internationalterritoriallevelslevel3asofJan2021_2_Fulltimeemployees_2022_2023_SIC_2DIGIT.csv')
+
+#88
+length(unique(chk$SIC_2DIGIT_NAME))
+
+#Which is close to the full list, yes?
+SIClookup <- read_csv('data/SIClookup.csv')
+
+#Is in fact full list... though SIC lookup doesn't have imputed rent, which it should
+length(unique(SIClookup$SIC_2DIGIT_NAME))
 
 
 

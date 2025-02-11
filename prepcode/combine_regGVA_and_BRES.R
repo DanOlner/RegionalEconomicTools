@@ -385,8 +385,11 @@ for(SICgrouping in c('3GROUPS','SIC_SECTION','SIC_2DIGIT')){
   #Get matching ITL2 files
   #(Which will of course only work if the ITL2 loop above is run first)
   match.gva <- match.filenames %>% map(read_csv, show_col_types = F)
-    
-    
+  
+  #Tick... just got "Dorset and Somerset" single ITL2 in
+  # walk(match.gva, ~{
+  #       print(unique(.x$GEOGRAPHY_NAME)[qg('bourne|dorset|somerset',unique(.x$GEOGRAPHY_NAME))])
+  #     })
   
   #col names all good? Tick.
   # walk2(match.gva, gva.n.bres.geogedit, ~{
@@ -417,7 +420,7 @@ for(SICgrouping in c('3GROUPS','SIC_SECTION','SIC_2DIGIT')){
     gsub('regionalGVA_','data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_',.)
   
   #saaaave
-  gva.n.bres %>% walk2(newnames, ~ {
+  gva.n.bres.tweakedITL3 %>% walk2(newnames, ~ {
     .x %>% write_csv(file = .y)
   })
     

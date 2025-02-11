@@ -13,74 +13,37 @@ source('functions/misc_functions.R')
 library(knitr)
 library(tidyverse)
 
+#Get latest NUTS and ITL dates
+gva.latest <- read_csv('data/regionalGVA/regionalGVA_chainedvolume_ITL2_SIC_2DIGIT_LONG_2022.csv') %>% select(year) %>% filter(year==max(year)) %>% distinct() %>% pull
+
+itl.latest <- read_csv('data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE428_internationalterritoriallevelslevel3asofJan2021_2_Fulltimeemployees_2022_2023_SIC_3GROUPS.csv') %>% select(DATE) %>% filter(DATE==max(DATE)) %>% distinct() %>% pull
+
+nuts.latest <- read_csv('data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE428_internationalterritoriallevelslevel3asofJan2021_2_Fulltimeemployees_2022_2023_SIC_3GROUPS.csv') %>% select(DATE) %>% filter(DATE==max(DATE)) %>% distinct() %>% pull
+
 ```
 
 
 
 ## What's this?
 
-* Easy-access ONS regional **gross value added (GVA)** by SIC sector data: ITL2 & 3 geographies, and SIC industrial codes at 2-digit, Section (20 categories) and Production/Construction/Services, 1998 to latest.
-* Same for BRES (the Business Register and Employment Survey) region-by-sector **job count data**, with extra-bonus higher accuracy values. 2015 to latest.
-* Those two **linked together into single GVA/jobcount datasets** (2015 to latest).
-
-### Why?
-
-* Main reason: try to **reduce the effort and wrangling needed to analyse regional economic data**, make that all just a little bit smoother.
-* The ONS publish **regional GVA data for the UK**, covering a range of SIC sectors (2022 is the latest available year at time of writing - the [data's here](https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry)). But it's a faff to extract data from the excel sheets, especially for use in R or similar.
-* This page **provides easy-to-access copies from that dataset**, with each useful dataset in its own CSV. It'll be **updated when the latest GVA data comes out.**
-* This data also feeds into other tools/code on this website like sector and jobs analysis, and GVA gap analysis. (See left-hand bar.)
-
-### Also:
-
-* **UK regional/sectoral job count data** is available via BRES (the Business Register and Employment Survey) [on NOMIS](https://www.nomisweb.co.uk/sources/bres), but again not in the most easily-useable form. (E.g. the website's query form will separate out different fields into their own chunk in the file.) 
-* It's also possible to extract more accurate job count numbers by **aggregating up from the most granular sector counts** (see the related [blog post]() for more on this.) The BRES data below uses these more accurate counts.
-* So this page also has **quick-access versions of all the most useful versions of the latest BRES data, including previously available years**.
-
-### Also also:
-
-* It's useful to have **both regional GVA and job count values combined** (for e.g. GVA per job analysis, or to have gva and job analysis using the same SIC categories and places) - so this page also has **linked GVA and job count data**. 
-* There are several wrinkles with this data to get them to play nicely together that anyone using should be aware of - **see details below.**
-* Or for even more horrific detail, see [this blog post]() on what the code's doing and what data shaping choices have gone into the GVA / BRES join. Any thoughts on things I've stuffed up or that could be improved, let me know in the [github issues](https://github.com/DanOlner/RegionalEconomicTools/issues).
-* The blog post also **explains details you may need if new to this data**, like the difference between Current Prices and Chained Volume prices (and why each has to be treated very differently in analysis e.g. don't sum chained volume...)
-
-
-## Automate!
-
-Making data processing like this as **automated and repeatable as possible** makes it **as open and useable as possible**. As soon as new GVA or BRES data comes out, [code from the repo](https://github.com/DanOlner/RegionalEconomicTools/tree/gh-pages/prepcode) can be re-run painlessly[^1]. (Other datasets and linking will be added to this process.)
-
-[^1]: Well, that's the theory anyway. We'll see what changes to the underlying data happen...
+* Easy-access ONS regional **gross value added (GVA)** by SIC sector data (machine-readable CSVs): ITL2 & 3 geographies, and SIC industrial codes at 2-digit, Section (20 categories) and Production/Construction/Services, 1998 to most recent available year, `r gva.latest`. ([Orig excel](https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry), [code](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/regionalGVA_processing.R).)
+* Same for BRES (the Business Register and Employment Survey) region-by-sector **job count data**, with extra-bonus higher accuracy values (see below). 2015 to latest year, `r itl.latest`. ([NOMIS page](https://www.nomisweb.co.uk/datasets/newbres6pub), code for [API](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/BRES_API_download.R) & [wrangling](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/BRES_sum_SIC5digit_to_otherSICcategories.R).)
+* Those two **linked together into single GVA/jobcount datasets** (2015 to `r gva.latest`). ([Code](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/combine_regGVA_and_BRES.R).)
 
 
 
+<big><center>See below the data for '[Why's this](http://localhost:3241/regionalgva_n_bres.html#why)?'</center></big>
 
 
 
 ## GET THE DATA --->
 
 * **Use the links below** to access CSVs (click to get URL, right-click for download option).
-* These are all in the [github repo data folder](https://github.com/DanOlner/RegionalEconomicTools/tree/gh-pages/data) in separate subfolders - see end of page for more on downloading direct from github.
+* These are all in the [github repo data folder](https://github.com/DanOlner/RegionalEconomicTools/tree/gh-pages/data) in separate subfolders - see '[other ways to get the data](http://localhost:3241/regionalgva_n_bres.html#other-ways-to-get-the-data)' for more on downloading direct from github.
 
+****
 
 ### REGIONAL GVA
-
-These CSVs are closest to the original ONS excel sheet. Apart from ITL2 and ITL3 zones, there's:
-
-* "3GROUPS": SIC sectoral groupings for **production, construction** and **services** separately.
-* "SIC_SECTION": 20 SIC top-level sections (SIC codes with letters A to T) (see [SIC hierarchy](https://onsdigital.github.io/dp-classification-tools/standard-industrial-classification/ONS_SIC_hierarchy_view.html)).
-* "SIC_2DIGIT": 2 digit codes, the most granular level available in the regional GVA data. **NOTE HOWEVER:** here, ONS combine a few of them, so these are are a **smaller** bespoke list in the GVA data. For ITL2 zones, there are **72 SIC categories**. For ITL3 zones, there are **48 SIC categories.**
-
-There a couple of other choices of CSV type:
-
-* CP is "**current prices**", CV is "**chained volume**". 
-* "Current prices" gives pound values at **the time the data was collected**, without inflation accounted for. Useful for analysing relative change and comparing places. And because it's the actual price values at the time, your own groupings of places and sectors **can be summed** without problems.
-* "[Chained Volume](https://www.ons.gov.uk/economy/nationalaccounts/uksectoraccounts/methodologies/chainlinkingmethodsusedwithintheuknationalaccounts)" adjusts for inflation - "by calculating the production volume for each year in the prices of a reference year. The resultant time-series of production figures has the effects of price changes removed." Prices are set relative to 2019. So, **absolute** change over time can be analysed - e.g. "has sector x in place y grown at a more rapid rate than others?" (With current price data, we can only ask, "has sector x / place y grown *relative to others*? The entire sector may have shrunk, but one sector/place may still have relatively increased its proportion.)
-* Chained volume data **cannot be summed by the user**, you can't add places or sectors together, as each has been chained together to produce values relative to the reference year. This means that for some of the groupings here, it's **not possible to supply a CV version** because it relies on being able to add up values.
-
-Lastly:
-
-* **Long** data has a single "year" column containing all years.
-* **Wide** data is in the same format as the original Excel sheet, with a column for each year.
-
 
 ```{r create-download-table-regionalGVA, message=FALSE, warning=FALSE}
 
@@ -159,20 +122,39 @@ for (row in row_terms) {
 
 #Render
 #escape = FALSE so that markdown in the cells (the links) is rendered correctly.
-kable(download_links, escape = FALSE, caption = "")
+kable(download_links, escape = FALSE, caption = "Table: regional GVA")
 # kable(download_links, escape = FALSE, caption = "Download Links for ITL2 and ITL3 Files")
 
 
 ```
 
+<br>
 
+These CSVs are closest to the original ONS excel sheet. Code going from the xls to these is [here](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/regionalGVA_processing.R).
+
+GVA values are **all in millions of pounds**, same as the original.
+
+As well as ITL2 and ITL3 geographical zones, there's:
+
+* "3GROUPS": SIC sectoral groupings for **production, construction** and **services** separately.
+* "SIC_SECTION": 20 SIC top-level sections (SIC codes with letters A to T) (see [SIC hierarchy](https://onsdigital.github.io/dp-classification-tools/standard-industrial-classification/ONS_SIC_hierarchy_view.html)).
+* "SIC_2DIGIT": 2 digit codes, the most granular level available in the regional GVA data. **NOTE HOWEVER:** here, ONS combine a few of them, so these are are a **smaller** bespoke list in the GVA data. For ITL2 zones, there are **72 SIC categories**. For ITL3 zones, there are **48 SIC categories.**
+
+There a couple of other choices of CSV type:
+
+* **CP** is "**current prices**", **CV** is "**chained volume**". 
+* "Current prices" gives pound values at **the time the data was collected**, without inflation accounted for. Useful for analysing relative change and comparing places. And because it's the actual price values at the time, your own groupings of places and sectors **can be summed** without problems.
+* "[Chained Volume](https://www.ons.gov.uk/economy/nationalaccounts/uksectoraccounts/methodologies/chainlinkingmethodsusedwithintheuknationalaccounts)" adjusts for inflation - "by calculating the production volume for each year in the prices of a reference year. The resultant time-series of production figures has the effects of price changes removed." Prices are set relative to 2019. So, **absolute** change over time can be analysed - e.g. "has sector x in place y grown at a more rapid rate than others?" (With current price data, we can only ask, "has sector x / place y grown *relative to others*? An entire sector may have shrunk, but one sector/place may still have relatively increased its proportion.)
+* Chained volume data **cannot be summed by the user**, you can't add places or sectors together, as each has been chained together to produce values relative to the reference year. This means that for some of the data below, it's **not possible to supply a chained volume (CV) version** because it relies on being able to add up values. CV is included **where possible**.
+
+Lastly:
+
+* **Long** data has a single "year" column containing all years.
+* **Wide** data is in the same format as the original Excel sheet, with a column for each year.
+
+****
 
 ### REGIONAL GVA *excluding* imputed rent
-
-The only difference here to the datasets above: **[imputed rent](https://www.ons.gov.uk/economy/nationalaccounts/uksectoraccounts/articles/changestonationalaccounts/imputedrental) has been removed**.
-
-This list only includes 
-
 
 
 ```{r gva_excimputedrent, message=FALSE, warning=FALSE}
@@ -275,125 +257,25 @@ for (row in row_terms) {
 
 #Render
 #escape = FALSE so that markdown in the cells (the links) is rendered correctly.
-kable(download_links, escape = FALSE, caption = "")
+kable(download_links, escape = FALSE, caption = "Table: regional GVA excluding imputed rent")
 # kable(download_links, escape = FALSE, caption = "Download Links for ITL2 and ITL3 Files")
 
 
 ```
 
+<br>
+
+The only difference here to the datasets above is that **[imputed rent](https://www.ons.gov.uk/economy/nationalaccounts/uksectoraccounts/articles/changestonationalaccounts/imputedrental) has been removed**.
+
+There are various reasons to examine the data without imputed rent, especially for productivity and jobs analysis. For the data here, it's necessary remove it for linking to BRES: job count data doesn't include it by default, as of course "imputed rent" has no jobs.
+
+This list **doesn't include 2 digit SICs** as you can just remove the "imputed rent" row yourself from the [first lot of data](http://localhost:3241/regionalgva_n_bres.html#regional-gva) if you don't want it. For SIC Sections, the real estate section (L 68) only has two sub-rows, one with and one without imputed rent - so the 'excluding imputed rent' row can just be dropped in without having to sum. The 3GROUPS groupings, however, **need summing**, which isn't valid for chained volume prices, so those aren't present.
 
 
+****
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# XXXXXXX NOT THIS ONE!
-
-
-```{r create-download-table-regionalGVAeximputedrent, message=FALSE, warning=FALSE}
-
-#Set GitHub base URL
-base_url <- "https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/"
-
-#list files
-files <- list.files(path = "data/regionalGVA", pattern = "\\.csv$", full.names = FALSE)
-
-#Filter down to ones we want initially
-#Add in related others when making the link text
-files <-files[qg('long',files)]
-files <-files[qg('imputed',files)]
-files <-files[qg('current',files)]
-
-
-#Define the row and column terms.
-#No SIC 2 digit data here - user can just remove that row
-row_terms <- c("3GROUPS", "SIC_SECTION")
-col_terms <- c("ITL2", "ITL3")
-
-#Create an empty data frame to store links.
-#Use row_terms as row names and col_terms as column names.
-download_links <- matrix(NA, nrow = length(row_terms), ncol = length(col_terms),
-                         dimnames = list(row_terms, col_terms))
-download_links <- as.data.frame(download_links)
-
-#Populate the table by searching for files that contain both the column and row keywords.
-for (row in row_terms) {
-  for (col in col_terms) {
-    # Use stringr's str_detect to filter file names for both patterns (case-insensitive)
-    matching_files <- files[
-      str_detect(files, fixed(col, ignore_case = TRUE)) &
-      str_detect(files, fixed(row, ignore_case = TRUE))
-    ]
-    
-    if (length(matching_files) > 0) {
-      # If multiple files match, take the first one:
-      file_name <- matching_files[1]
-      
-      # Build the full URLs (base + file name)
-      #FOR LONG, WIDE, CP AND CV together
-      #Long CP is orig
-      full_url_long_CP <- paste0(base_url, file_name)
-      
-      #Stick wide version in, CP
-      full_url_wide_CP <- gsub('LONG','WIDE',full_url_long_CP) 
-      
-      #Long CV
-      full_url_long_CV <- gsub('currentprices','chainedvolume',full_url_long_CP) 
-      
-      #Wide CV
-      full_url_wide_CV <- gsub('currentprices','chainedvolume',full_url_wide_CP) 
-      
-      # Create markdown link
-      # download_links[row, col] <- paste0(
-      #   ""
-      # )
-      
-      download_links[row, col] <- sprintf("[long CP](%s), [wide CP](%s) -- [long CV](%s), [wide CV](%s)", 
-                                          full_url_long_CP, 
-                                          full_url_wide_CP,
-                                          full_url_long_CV, 
-                                          full_url_wide_CV
-                                          )
-      
-      # download_links[row, col] <- sprintf("[%s](%s)", file_name, full_url)
-      # download_links[row, col] <- sprintf("[long](%s)", full_url)
-      
-      
-      
-    } else {
-      download_links[row, col] <- "Not found"
-    }
-  }
-}
-
-#Render
-#escape = FALSE so that markdown in the cells (the links) is rendered correctly.
-kable(download_links, escape = FALSE, caption = "")
-# kable(download_links, escape = FALSE, caption = "Download Links for ITL2 and ITL3 Files")
-
-
-```
-
-
-
-
-
-### BRES JOB COUNT DATA (with tweaks)
-
-
+### BRES JOB COUNT DATA (with more granular count values)
 
 ```{r create-download-table-BRESdata, message=FALSE, warning=FALSE}
 
@@ -465,21 +347,41 @@ for (row in row_terms) {
   }
 }
 
+#Change col names to ITL etc
+names(download_links) <- c('ITL2','ITL3','NUTS 2016 level 2', 'NUTS 2016 level 3')
+
 #Render
 #escape = FALSE so that markdown in the cells (the links) is rendered correctly.
-kable(download_links, escape = FALSE, caption = "")
+kable(download_links, escape = FALSE, caption = "Table: BRES job count data")
 # kable(download_links, escape = FALSE, caption = "Download Links for ITL2 and ITL3 Files")
 
 
 ```
 
+<br>
 
+These CSVs are collated from the [BRES dataset](https://www.nomisweb.co.uk/sources/bres) (using the [API](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/BRES_API_download.R) and wrangled [here](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/BRES_sum_SIC5digit_to_otherSICcategories.R)). They are broken into the following categories, a file for each combination:
+
+* Count of jobs for **full time**, **part time** and **"in employment"**[^2]. Full and part-time summed is the same as the "employees" category, so that isn't included - hover/click the footnote for details on what "employment" includes (a slightly larger number than 'employees').
+* ITL2 and ITL3 geography (2022 to `r itl.latest`), and NUTS2 and 3 geography (2015 to 2022).[^3]
+* The same three SIC sector groupings used above: **"Production, construction and services"** in 3GROUP, then **SIC Sections** and **2-digit SIC codes**. The BRES data by itself has the **full list of 2-digit sectors**, not the cut-down version used in the GVA data. (Apart from imputed rent - this is true of the underlying data too.)
+
+This version of the BRES data has **slightly more accurate job counts**[^4] than the original data, at these SIC group levels.
+
+
+
+[^2]: The split between full and part-time is more/less than 30 hours a week. The "in employment" category  "[includes](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/employeesintheukbyregion/2023) employees plus the number of working owners. BRES therefore includes self-employed workers as long as they are registered for VAT or Pay-As-You-Earn (PAYE) schemes. Self employed people not registered for these, along with HM Forces and Government Supported trainees are excluded."
+
+[^3]: Apart from one tiny difference - see the section describing the GVA/BRES joined datasets for more info - ITL and the most recent NUTS zones are the same, but the NUTS zones don't have data past 2022, and the ITL zones have none prior to 2022 (they overlap one year).
+
+[^4]: Or I think so anyway. How come? The [BRES rounding rules](https://www.nomisweb.co.uk/articles/1103.aspx) are applied to every SIC hierarchy the same - so 5 digit SICs are rounded the same as sections. Summing from 5-digit upwards - smaller average values here means smaller roundings applied - thus gives more granular job values. I've tested by checking the spread of the newer job counts around the original values, so e.g. comparing 2 digit SIC sums from this version and the values for 2 digit jobs in BRES itself. The new values spread evenly either side of the old, suggesting no introduced bias. Code for that test is in [this script](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/misc_checks.R), in this section: 'CHECK HOW THE "SECTION AND 2 DIGIT JOBCOUNTS SUMMED FROM 5 DIGIT" compare to the BRES original versions of 2 DIG and Sections'.
+
+
+
+****
 
 
 ### COMBINED GVA + BRES JOB COUNT DATA
-
-Which has to exclude imputed rent...
-
 
 ```{r create-download-table-comboexir, message=FALSE, warning=FALSE}
 # ```{r create-download-table-combo}
@@ -549,26 +451,7 @@ for (row in row_terms) {
       )
     
     full_url_2 <- matching_files[[2]] %>% full_url_2_catch()
-    
-    
-    # if (length(matching_files) > 0) {
-    #   
-    #   # If multiple files match, we have both CV and CP, add both to link
-    #   
-    #   # cat("filename length:", length(matching_files),"\n")
-    #   
-    #   #Create full markdown text for each here, combine below
-    #   full_url_1 <- sprintf("[CP](%s)",paste0(base_url, matching_files[1]))
-    #   
-    #   # full_url_cv <- gsub('currentprices','chainedvolume',full_url_cp) 
-    #   
-    #   #If just one file, second is empty, no CV, leave a blank
-    #   full_url_2 <- if_else(
-    #     length(matching_files) == 2,
-    #     sprintf("[CV](%s)",paste0(base_url, matching_files[2])),
-    #     " -- "
-    #   )
-    #   
+   
       download_links[row, col] <- paste0(
         full_url_1,
         ", ",
@@ -580,18 +463,22 @@ for (row in row_terms) {
 
 #Render
 #escape = FALSE so that markdown in the cells (the links) is rendered correctly.
-kable(download_links, escape = FALSE, caption = "")
+kable(download_links, escape = FALSE, caption = "Table: combined GVA and BRES data")
 # kable(download_links, escape = FALSE, caption = "Download Links for ITL2 and ITL3 Files")
 
 
 ```
 
+<br>
+
+These datasets combine regional GVA and BRES job count data into single CSVs. They contain the same fields as the separate datasets above, but note these two points:
 
 
+1. The newer post-Brexit ITL geographies for 2021 are the same as the previous EU-wide NUTS 2016 ones - **apart from one small difference**: ITL3 has "Bournemouth, Christchurch and Poole", NUTS 3 has "Bournemouth and Poole". Christchurch moved from "Dorset" in the data in 2021. Due to the "chained volume GVA can't be summed" issue, the solution used here is this: **The ITL3 zones for "Bournemouth, Christchurch and Poole" / "Dorset" / "Somerset" are replaced with the ITL2 zone that overlaps them all ("Dorset and Somerset").** Apologies to those zones affected, this is a less-than-ideal solution to keep the time series[^itl].
+2. BRES job count data has been summed to match the bespoke SIC 2 digit lists in the GVA data. For ITL2 zones, there are **72 SIC categories**. For ITL3 zones, there are **48 SIC categories.**
 
 
-
-
+[^itl]: The current price data could be summed, but the best that could be achieved there to keep a consistent time series would be a zone combining Dorset with Bournemouth, Christchurch and Poole. For chained volume values, it has to be the larger ITL2 zone, for the reasons given. Rather than do both, here I've just used the one approach so all data is comparable directly.
 
 
 ## Other ways to get the data -->
@@ -609,6 +496,36 @@ kable(download_links, escape = FALSE, caption = "")
 * The **middle button** will copy the data to the clipboard.
 
 * **To get ALL the data in one go:** download (or [clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)) the entire repo. To download - see the **green "CODE" button** on [the main page](https://github.com/DanOlner/RegionalEconomicTools)? Use that for the 'download ZIP' option, then look in the data folder after unzipping.
+
+
+****
+
+### Why?
+
+* Main reason: try to **reduce the effort / wrangling / wheel-reinventing needed to analyse UK regional economic data**.
+* The ONS publish **regional GVA data for the UK**, covering a range of SIC sectors (`r gva.latest` is the latest available year - the [data's here](https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry)). But it's a faff to extract data from the excel sheets, especially for use in R or similar.
+* This page **provides easy-to-access copies from that dataset**, with each useful dataset in its own CSV. It'll be **updated when the latest GVA data comes out.**
+* This data also feeds into other tools/code on this website like sector and jobs analysis, and GVA gap analysis. (See left-hand bar.)
+
+### Also:
+
+* **UK regional/sectoral job count data** is available via BRES (the Business Register and Employment Survey) [on NOMIS](https://www.nomisweb.co.uk/sources/bres), but again not in the most easily-useable form. (E.g. the website's query form will separate out different fields into their own chunk in the file.) 
+* It's also possible to extract more accurate job count numbers by **aggregating up from the most granular sector counts** (see the related [blog post]() for more on this.) The BRES data below uses these more accurate counts.
+* So this page also has **quick-access versions of all the most useful versions of the latest BRES data, including previously available years**.
+
+### Also also:
+
+* It's useful to have **both regional GVA and job count values combined** (for e.g. GVA per job analysis, or to have gva and job analysis using the same SIC categories and places) - so this page also has **linked GVA and job count data**. 
+* There are several wrinkles with this data to get them to play nicely together that anyone using should be aware of - **see details below.**
+* Or for even more horrific detail, see [this blog post]() on what the code's doing and what data shaping choices have gone into the GVA / BRES join. Any thoughts on things I've stuffed up or that could be improved, let me know in the [github issues](https://github.com/DanOlner/RegionalEconomicTools/issues).
+* The blog post also **explains details you may need if new to this data**, like the difference between Current Prices and Chained Volume prices (and why each has to be treated very differently in analysis e.g. don't sum chained volume...)
+
+
+### Automate!
+
+Making data processing like this as **automated and repeatable as possible** makes it **as open and useable as possible**. As soon as new GVA or BRES data comes out, [code from the repo](https://github.com/DanOlner/RegionalEconomicTools/tree/gh-pages/prepcode) can (hopefully!) be re-run painlessly[^1].
+
+[^1]: Well, that's the theory. The underlying data structures *might* stay the same, you never know...
 
 
 
