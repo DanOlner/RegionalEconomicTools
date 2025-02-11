@@ -526,6 +526,8 @@ Or to get individual files via github:
 
 Making data processing like this as **automated and repeatable as possible** makes it **as open and useable as possible**, which is a step towards **quicker, more shareable analyses**. As soon as new GVA or BRES data comes out, [code from the repo](https://github.com/DanOlner/RegionalEconomicTools/tree/gh-pages/prepcode) can (hopefully!) be re-run painlessly[^1].
 
+Quarto doc for this page is [here](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/regionalgva_n_bres.qmd).
+
 [^1]: Well, that's the theory. The underlying data structures *might* stay the same, you never know...
 
 
