@@ -202,9 +202,9 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#bres-job-count-data-with-more-granular-count-values" id="toc-bres-job-count-data-with-more-granular-count-values" class="nav-link" data-scroll-target="#bres-job-count-data-with-more-granular-count-values">BRES JOB COUNT DATA (with more granular count values)</a></li>
   <li><a href="#combined-gva-bres-job-count-data" id="toc-combined-gva-bres-job-count-data" class="nav-link" data-scroll-target="#combined-gva-bres-job-count-data">COMBINED GVA + BRES JOB COUNT DATA</a></li>
   </ul></li>
-  <li><a href="#other-ways-to-get-the-data" id="toc-other-ways-to-get-the-data" class="nav-link" data-scroll-target="#other-ways-to-get-the-data">Other ways to get the data –&gt;</a>
+  <li><a href="#other-ways-to-get-the-data" id="toc-other-ways-to-get-the-data" class="nav-link" data-scroll-target="#other-ways-to-get-the-data">Other ways to get the data –&gt;</a></li>
+  <li><a href="#why" id="toc-why" class="nav-link" data-scroll-target="#why">Why?</a>
   <ul class="collapse">
-  <li><a href="#why" id="toc-why" class="nav-link" data-scroll-target="#why">Why?</a></li>
   <li><a href="#also" id="toc-also" class="nav-link" data-scroll-target="#also">Also:</a></li>
   <li><a href="#also-also" id="toc-also-also" class="nav-link" data-scroll-target="#also-also">Also also:</a></li>
   <li><a href="#automate" id="toc-automate" class="nav-link" data-scroll-target="#automate">Automate!</a></li>
@@ -289,6 +289,7 @@ See below the data for ‘<a href="http://localhost:3241/regionalgva_n_bres.html
 </div>
 <p><br></p>
 <p>These CSVs are closest to the original ONS excel sheet. Code going from the xls to these is <a href="https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/regionalGVA_processing.R">here</a>.</p>
+<p>GVA values are <strong>all in millions of pounds</strong>, same as the original.</p>
 <p>As well as ITL2 and ITL3 geographical zones, there’s:</p>
 <ul>
 <li>“3GROUPS”: SIC sectoral groupings for <strong>production, construction</strong> and <strong>services</strong> separately.</li>
@@ -391,7 +392,7 @@ See below the data for ‘<a href="http://localhost:3241/regionalgva_n_bres.html
 <li>ITL2 and ITL3 geography (2022 to 2023), and NUTS2 and 3 geography (2015 to 2022).<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
 <li>The same three SIC sector groupings used above: <strong>“Production, construction and services”</strong> in 3GROUP, then <strong>SIC Sections</strong> and <strong>2-digit SIC codes</strong>. The BRES data by itself has the <strong>full list of 2-digit sectors</strong>, not the cut-down version used in the GVA data. (Apart from imputed rent - this is true of the underlying data too.)</li>
 </ul>
-<p>This version of the BRES data has slightly more accurate job counts<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> than the original data, at these SIC group levels.</p>
+<p>This version of the BRES data has <strong>slightly more accurate job counts</strong><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> than the original data, at these SIC group levels.</p>
 <hr>
 </section>
 <section id="combined-gva-bres-job-count-data" class="level3">
@@ -430,14 +431,19 @@ See below the data for ‘<a href="http://localhost:3241/regionalgva_n_bres.html
 <p><br></p>
 <p>These datasets combine regional GVA and BRES job count data into single CSVs. They contain the same fields as the separate datasets above, but note these two points:</p>
 <ol type="1">
-<li></li>
-<li>BRES job count data has been summed to match the bespoke SIC 2 digit lists in the GVA data (For ITL2 zones, there are <strong>72 SIC categories</strong>. For ITL3 zones, there are <strong>48 SIC categories.</strong>)</li>
+<li>The newer post-Brexit ITL geographies for 2021 are the same as the previous EU-wide NUTS 2016 ones - <strong>apart from one small difference</strong>: ITL3 has “Bournemouth, Christchurch and Poole”, NUTS 3 has “Bournemouth and Poole”. Christchurch moved from “Dorset” in the data in 2021. Due to the “chained volume GVA can’t be summed” issue, the solution used here is this: <strong>The ITL3 zones for “Bournemouth, Christchurch and Poole” / “Dorset” / “Somerset” are replaced with the ITL2 zone that overlaps them all (“Dorset and Somerset”).</strong> Apologies to those zones affected, this is a less-than-ideal solution to keep the time series<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</li>
+<li>BRES job count data has been summed to match the bespoke SIC 2 digit lists in the GVA data. For ITL2 zones, there are <strong>72 SIC categories</strong>. For ITL3 zones, there are <strong>48 SIC categories.</strong></li>
 </ol>
+<p>In the repo, there is a <strong>bespoke ITL3 geo-file reflecting point #1</strong> with the Dorset / Somerset / Bournemouth+Poole zones replaced with the ITL2 for Dorset/Somerset. The geojson file (~1.6mb) is <a href="https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/data/ITL_geographies/ITL3_bespokeforGVA_BRESjoin.geojson">here on github</a> (download button, top right) or raw <a href="https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/ITL_geographies/ITL3_bespokeforGVA_BRESjoin.geojson">here</a>. It will join on either zone ID or zone name to the BRES + GVA combo CSVs above.</p>
 </section>
 </section>
 <section id="other-ways-to-get-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="other-ways-to-get-the-data">Other ways to get the data –&gt;</h2>
 <p>(For the original ONS / NOMIS datasets, see the links at the top of this page.)</p>
+<ul>
+<li><strong>To get ALL the data in one go:</strong> download (or <a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository">clone</a>) the entire repo. To download - see the <strong>green “CODE” button</strong> on <a href="https://github.com/DanOlner/RegionalEconomicTools">the main page</a>? Use that for the ‘download ZIP’ option, then look in the data folder after unzipping.</li>
+</ul>
+<p>Or to get individual files via github:</p>
 <ul>
 <li>Look in <a href="https://github.com/DanOlner/RegionalEconomicTools/tree/gh-pages/data">the data folder</a> on the repo - there are separate subfolders for each group of data. Details for each of those <strong>are explained below.</strong></li>
 <li>Github has 4 options to access/download the files: download a single CSV, download the whole thing, get raw data (and its URL), copy to clipboard.</li>
@@ -445,26 +451,25 @@ See below the data for ‘<a href="http://localhost:3241/regionalgva_n_bres.html
 </ul>
 <p><img src="miscimages/github_downloadbuttons.png" class="img-fluid"></p>
 <ul>
-<li><p><strong>Use ‘raw’</strong> to get the URL for raw CSV data (to e.g.&nbsp;get directly from URL in code)</p></li>
-<li><p>The <strong>rightmost button</strong> will download the CSV.</p></li>
-<li><p>The <strong>middle button</strong> will copy the data to the clipboard.</p></li>
-<li><p><strong>To get ALL the data in one go:</strong> download (or <a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository">clone</a>) the entire repo. To download - see the <strong>green “CODE” button</strong> on <a href="https://github.com/DanOlner/RegionalEconomicTools">the main page</a>? Use that for the ‘download ZIP’ option, then look in the data folder after unzipping.</p></li>
+<li><strong>Use ‘raw’</strong> to get the URL for raw CSV data (to e.g.&nbsp;get directly from URL in code)</li>
+<li>The <strong>rightmost button</strong> will download the CSV.</li>
+<li>The <strong>middle button</strong> will copy the data to the clipboard.</li>
 </ul>
 <hr>
-<section id="why" class="level3">
-<h3 class="anchored" data-anchor-id="why">Why?</h3>
+</section>
+<section id="why" class="level2">
+<h2 class="anchored" data-anchor-id="why">Why?</h2>
 <ul>
-<li>Main reason: try to <strong>reduce the effort / wrangling / wheel-reinventing needed to analyse UK regional economic data</strong>.</li>
+<li>Main reason: contribute to <strong>reducing the effort / wrangling / wheel-reinventing needed to analyse UK regional economic data</strong>.</li>
 <li>The ONS publish <strong>regional GVA data for the UK</strong>, covering a range of SIC sectors (2022 is the latest available year - the <a href="https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry">data’s here</a>). But it’s a faff to extract data from the excel sheets, especially for use in R or similar.</li>
 <li>This page <strong>provides easy-to-access copies from that dataset</strong>, with each useful dataset in its own CSV. It’ll be <strong>updated when the latest GVA data comes out.</strong></li>
 <li>This data also feeds into other tools/code on this website like sector and jobs analysis, and GVA gap analysis. (See left-hand bar.)</li>
 </ul>
-</section>
 <section id="also" class="level3">
 <h3 class="anchored" data-anchor-id="also">Also:</h3>
 <ul>
 <li><strong>UK regional/sectoral job count data</strong> is available via BRES (the Business Register and Employment Survey) <a href="https://www.nomisweb.co.uk/sources/bres">on NOMIS</a>, but again not in the most easily-useable form. (E.g. the website’s query form will separate out different fields into their own chunk in the file.)</li>
-<li>It’s also possible to extract more accurate job count numbers by <strong>aggregating up from the most granular sector counts</strong> (see the related <a href="">blog post</a> for more on this.) The BRES data below uses these more accurate counts.</li>
+<li>It’s also possible to extract more accurate job count numbers by <strong>aggregating up from the most granular sector counts</strong> The BRES data below uses these more accurate counts.</li>
 <li>So this page also has <strong>quick-access versions of all the most useful versions of the latest BRES data, including previously available years</strong>.</li>
 </ul>
 </section>
@@ -473,13 +478,12 @@ See below the data for ‘<a href="http://localhost:3241/regionalgva_n_bres.html
 <ul>
 <li>It’s useful to have <strong>both regional GVA and job count values combined</strong> (for e.g.&nbsp;GVA per job analysis, or to have gva and job analysis using the same SIC categories and places) - so this page also has <strong>linked GVA and job count data</strong>.</li>
 <li>There are several wrinkles with this data to get them to play nicely together that anyone using should be aware of - <strong>see details below.</strong></li>
-<li>Or for even more horrific detail, see <a href="">this blog post</a> on what the code’s doing and what data shaping choices have gone into the GVA / BRES join. Any thoughts on things I’ve stuffed up or that could be improved, let me know in the <a href="https://github.com/DanOlner/RegionalEconomicTools/issues">github issues</a>.</li>
-<li>The blog post also <strong>explains details you may need if new to this data</strong>, like the difference between Current Prices and Chained Volume prices (and why each has to be treated very differently in analysis e.g.&nbsp;don’t sum chained volume…)</li>
+<li>Any thoughts on things that could be improved or that I’ve stuffed up, please let me know - either in the <a href="https://github.com/DanOlner/RegionalEconomicTools/issues">github issues</a> or via email at danolner at gmail dot com (or any other contact methods listed top right on my <a href="https://danolner.github.io/">code blog</a>).</li>
 </ul>
 </section>
 <section id="automate" class="level3">
 <h3 class="anchored" data-anchor-id="automate">Automate!</h3>
-<p>Making data processing like this as <strong>automated and repeatable as possible</strong> makes it <strong>as open and useable as possible</strong>. As soon as new GVA or BRES data comes out, <a href="https://github.com/DanOlner/RegionalEconomicTools/tree/gh-pages/prepcode">code from the repo</a> can (hopefully!) be re-run painlessly<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</p>
+<p>Making data processing like this as <strong>automated and repeatable as possible</strong> makes it <strong>as open and useable as possible</strong>, which is a step towards <strong>quicker, more shareable analyses</strong>. As soon as new GVA or BRES data comes out, <a href="https://github.com/DanOlner/RegionalEconomicTools/tree/gh-pages/prepcode">code from the repo</a> can (hopefully!) be re-run painlessly<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p>
 
 
 </section>
@@ -492,7 +496,8 @@ See below the data for ‘<a href="http://localhost:3241/regionalgva_n_bres.html
 <li id="fn1"><p>The split between full and part-time is more/less than 30 hours a week. The “in employment” category “<a href="https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/employeesintheukbyregion/2023">includes</a> employees plus the number of working owners. BRES therefore includes self-employed workers as long as they are registered for VAT or Pay-As-You-Earn (PAYE) schemes. Self employed people not registered for these, along with HM Forces and Government Supported trainees are excluded.”<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Apart from one tiny difference - see the section describing the GVA/BRES joined datasets for more info - ITL and the most recent NUTS zones are the same, but the NUTS zones don’t have data past 2022, and the ITL zones have none prior to 2022 (they overlap one year).<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Or I think so anyway. How come? The <a href="https://www.nomisweb.co.uk/articles/1103.aspx">BRES rounding rules</a> are applied to every SIC hierarchy the same - so 5 digit SICs are rounded the same as sections. Summing from 5-digit upwards - smaller average values here means smaller roundings applied - thus gives more granular job values. I’ve tested by checking the spread of the newer job counts around the original values, so e.g.&nbsp;comparing 2 digit SIC sums from this version and the values for 2 digit jobs in BRES itself. The new values spread evenly either side of the old, suggesting no introduced bias. Code for that test is in <a href="https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/misc_checks.R">this script</a>, in this section: ‘CHECK HOW THE “SECTION AND 2 DIGIT JOBCOUNTS SUMMED FROM 5 DIGIT” compare to the BRES original versions of 2 DIG and Sections’.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>Well, that’s the theory. The underlying data structures <em>might</em> stay the same, you never know…<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>The ‘current price’ data could be summed, but the best that could be achieved there to keep a consistent time series would be a zone combining Dorset with Bournemouth, Christchurch and Poole. For chained volume values, it has to be the larger ITL2 zone, for the reasons given. Rather than do both, here I’ve just used the one approach so all data is comparable directly.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Well, that’s the theory. The underlying data structures <em>might</em> stay the same, you never know…<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
