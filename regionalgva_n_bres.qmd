@@ -504,10 +504,10 @@ Or to get individual files via github:
 
 ## Why?
 
-* Main reason: contribute to **reducing the effort / wrangling / wheel-reinventing needed to analyse UK regional economic data**.
+* Main reason: contribute to **reducing the effort / wrangling / wheel-reinventing needed to analyse UK regional economic data**, including making sure all national data is together in one place, because **any place needs comparing to others to understand it properly**).
 * The ONS publish **regional GVA data for the UK**, covering a range of SIC sectors (`r gva.latest` is the latest available year - the [data's here](https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry)). It's amazing data, presented in one handy place - but it needs some wrangling to get into an analyseable form, especially for use in R or similar.
 * This page **provides easy-to-access copies from that dataset**, with each useful dataset in its own CSV. It'll be **updated when the latest GVA data comes out.**
-* This data also feeds into other tools/code on this website like sector and jobs analysis, and GVA gap analysis. (See left-hand bar.)
+* Examples of analysing this data in R are **in the left-hand bar.** For instance, [UK Sectors: LQs and proportion plots](sector_locationquotients_and_proportions.html) walks through using the data here to **produce location quotients, maps and other plots**.
 
 ### Also:
 

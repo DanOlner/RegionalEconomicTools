@@ -22,7 +22,13 @@ Here, we'll explore some ways to analyse this data using R. The data has been pr
 
 We'll look at the **current prices** data, not the chained volume data. We'll be making **location quotients**, which require being able to sum different regions in different ways; chained volume measures can't be summed. Current price data (prices at the time point of the data) can't be used to measure nominal growth as it's not inflation adjusted, but as long as we're working with proportional change over time (which as we'll see, LQs are), they're fine.
 
-**The code is available in a single script in the [GVAcode.R file](GVAcode.R).**
+**The code is available in a single script in the [LQ_code.R file](LQ_code.R). The QML script for this output is [here](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/sector_locationquotients_and_proportions.qmd).**
+
+```{r savejustcode, eval=F, echo = F}
+knitr::purl(input = "sector_locationquotients_and_proportions.qmd", output = "LQ_code.R",documentation = 0)
+
+```
+
 
 ## Loading in data and finding location quotients
 
@@ -38,11 +44,13 @@ library(ggrepel)#For self-adjusting plot labels
 source('functions/misc_functions.R')
 options(scipen = 99)#Avoids scientific notation
 
-itl2.cp <- read_csv('data/ITL2currentprices_long.csv')
+itl2.cp <- read_csv('data/regionalGVA/regionalGVA_currentprices_ITL2_SIC_2DIGIT_LONG_2022.csv')
 
 ```
 
 In this dataframe, we have: ITL2 regions, SIC sectors and year - ranging from `r min(itl2.cp$year)` to `r max(itl2.cp$year)` in the current data - and finally the current price GVA value.
+
+**(Note: this and a tonne of other related data are available on this site, at the *[regional GVA and job-count data](regionalgva_n_bres.html)* page.)**
 
 Then we'll find the **location quotients** for the whole dataset. The [Excel sheet here](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/datasets/locationquotientdataandindustrialspecialisationforlocalauthorities) from the ONS has an excellent explanation of location quotients in its notes, I won't repeat all of that here. But a quick word on what the location quotient is showing for this data:
 
@@ -61,7 +69,7 @@ First, here's the function working on a single year in the data, to illustrate w
 ```{r lqoneyear}
 lq1998 <- add_location_quotient_and_proportions(
   df = itl2.cp %>% filter(year == 1998),
-  regionvar = ITL_region_name,
+  regionvar = Region_name,
   lq_var = SIC07_description,
   valuevar = value
 )
@@ -74,7 +82,7 @@ Let's repeat that for all years and replace the original dataframe with the resu
 itl2.cp <- itl2.cp %>% 
   split(.$year) %>% 
   map(add_location_quotient_and_proportions, 
-      regionvar = ITL_region_name,
+      regionvar = Region_name,
       lq_var = SIC07_description,
       valuevar = value) %>% 
   bind_rows()
@@ -89,8 +97,8 @@ Note we can see the point made above about *relative* LQ concentration not captu
 
 ```{r quickLQlook_SY}
 itl2.cp %>% filter(
-  ITL_region_name == 'South Yorkshire',
-  year == 2021
+  Region_name == 'South Yorkshire',
+  year == max(year)#get latest year in data
   ) %>% 
   mutate(regional_percent = sector_regional_proportion *100) %>% 
   select(SIC07_description,regional_percent, LQ) %>% 
@@ -103,8 +111,8 @@ Repeating that for Greater Manchester, where none of the LQ top ten are especial
 
 ```{r quickLQlook_GM}
 itl2.cp %>% filter(
-  ITL_region_name == 'Greater Manchester',
-  year == 2021
+  Region_name == 'Greater Manchester',
+  year == max(year)#get latest year in data
   ) %>% 
   mutate(regional_percent = sector_regional_proportion *100) %>% 
   select(SIC07_description,regional_percent, LQ) %>% 
@@ -118,7 +126,7 @@ Liverpool City Region has three public-sector-heavy SICs in its LQ top ten:
 
 ```{r quickLQlook_LCR}
 itl2.cp %>% filter(
-  ITL_region_name == 'Merseyside',
+  Region_name == 'Merseyside',
   year == 2021
   ) %>% 
   mutate(regional_percent = sector_regional_proportion *100) %>% 
@@ -136,7 +144,7 @@ Sectors with the highest difference across places in the UK will have a higher s
 ```{r geogconc}
 #Find the geographical variation of sectors using the LQ spread
 LQspread <- itl2.cp %>% 
-  filter(year == 2021) %>% 
+  filter(year == max(year)) %>% #get latest data
   group_by(SIC07_description) %>% 
   summarise(LQ_spread = diff(range(LQ))) %>% 
   arrange(-LQ_spread)
@@ -160,10 +168,10 @@ itl2.geo <- st_read('data/ITL_geographies/International_Territorial_Level_2_Janu
 sector_LQ_map <- itl2.geo %>% 
   right_join(
     itl2.cp %>% filter(
-      year==2021,
+      year==max(year),#get latest data
       SIC07_description == LQspread$SIC07_description[4]#picking out the fourth highest geographical spread sector
       ),
-    by = c('ITL221NM'='ITL_region_name')
+    by = c('ITL221CD'='ITL_code')
   )
 
 
@@ -187,7 +195,7 @@ Now onto plotting LQs themselves. To do this, we'll add in a measure of what the
 #To see which didn't get slopes (only 8 rows in the current data)
 LQ_slopes <- compute_slope_or_zero(
   data = itl2.cp, 
-  ITL_region_name, SIC07_description,#slopes will be found within whatever grouping vars are added here
+  Region_name, SIC07_description,#slopes will be found within whatever grouping vars are added here
   y = LQ_log, x = year)
 
 ```
@@ -203,18 +211,18 @@ The following code does three things:
 
 ```{r LQ_plot_prep1}
 #Filter down to a single year
-yeartoplot <- itl2.cp %>% filter(year == 2021)
+yeartoplot <- itl2.cp %>% filter(year == max(year))#use latest year
 
 #Add slopes into data to get LQ plots
 yeartoplot <- yeartoplot %>% 
   left_join(
     LQ_slopes,
-    by = c('ITL_region_name','SIC07_description')
+    by = c('Region_name','SIC07_description')
   )
 
 #Get min/max values for LQ over time as well, for each sector and place, to add as bars so range of sector is easy to see
 minmaxes <- itl2.cp %>% 
-  group_by(SIC07_description,ITL_region_name) %>% 
+  group_by(SIC07_description,Region_name) %>% 
   summarise(
     min_LQ_all_time = min(LQ),
     max_LQ_all_time = max(LQ)
@@ -224,7 +232,7 @@ minmaxes <- itl2.cp %>%
 yeartoplot <- yeartoplot %>% 
   left_join(
     minmaxes,
-    by = c('ITL_region_name','SIC07_description')
+    by = c('Region_name','SIC07_description')
   )
 ```
 
@@ -236,8 +244,8 @@ place = 'Merseyside'
 #Get a vector with sectors ordered by the place's LQs, descending order
 #Use this next to factor-order the SIC sectors
 sectorLQorder <- itl2.cp %>% filter(
-  ITL_region_name == place,
-  year == 2021
+  Region_name == place,
+  year == max(year)#use latest data
 ) %>% 
   arrange(-LQ) %>% 
   select(SIC07_description) %>% 
@@ -267,7 +275,7 @@ Note the commented out line - there are other useful things to filter by, e.g. i
 ```{r reduceLQ}
 # Reduce to SY LQ 1+
 lq.selection <- yeartoplot %>% filter(
-  ITL_region_name == place,
+  Region_name == place,
   # slope > 1,#LQ grew relatively over time
   LQ > 1
   )
@@ -293,7 +301,7 @@ p <- addplacename_to_LQplot(df = yeartoplot, placename = 'Merseyside',
                             plot_to_addto = p, shapenumber = 16,
                             min_LQ_all_time = min_LQ_all_time, max_LQ_all_time = max_LQ_all_time,#Range bars won't appear if either of these not included
                             value_column = value, sector_regional_proportion = sector_regional_proportion,#Sector size numbers won't appear if either of these not included
-                            region_name = ITL_region_name,#The next four, the function needs them all 
+                            region_name = Region_name,#The next four, the function needs them all 
                             sector_name = SIC07_description,
                             change_over_time = slope, 
                             LQ_column = LQ 
@@ -350,19 +358,19 @@ p <- LQ_baseplot(df = yeartoplot, alpha = 0, sector_name = SIC07_description,
 
 p <- addplacename_to_LQplot(df = yeartoplot, plot_to_addto = p, 
                             placename = 'Greater Manchester', shapenumber = 23,
-                            region_name = ITL_region_name,#The next four, the function needs them all 
+                            region_name = Region_name,#The next four, the function needs them all 
                             sector_name = SIC07_description, change_over_time = slope, LQ_column = LQ)
 
 p <- addplacename_to_LQplot(df = yeartoplot, plot_to_addto = p, 
                             placename = 'South Yorkshire', shapenumber = 22,
-                            region_name = ITL_region_name,
+                            region_name = Region_name,
                             sector_name = SIC07_description, change_over_time = slope, LQ_column = LQ)
 
 p <- addplacename_to_LQplot(df = yeartoplot, plot_to_addto = p, 
-                            placename = place1, shapenumber = 16,
+                            placename = place, shapenumber = 16,
                             min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                             value_column = value, sector_regional_proportion = sector_regional_proportion,#include numbers
-                            region_name = ITL_region_name,
+                            region_name = Region_name,
                             sector_name = SIC07_description, change_over_time = slope, LQ_column = LQ)
 p <- p + 
   annotate(
@@ -403,7 +411,7 @@ timeplot <- itl2.cp %>%
 
 #Use zoo's rollapply function to get a moving average
 timeplot <- timeplot %>% 
-  group_by(ITL_region_name) %>% 
+  group_by(Region_name) %>% 
   arrange(year) %>% 
   mutate(
     LQ_movingav = rollapply(LQ,3,mean,align='right',fill=NA),
@@ -413,22 +421,22 @@ timeplot <- timeplot %>%
 #Or pick top size values
 #Largest % in 2021
 largest_percents <- timeplot %>% 
-  filter(year == 2021) %>% 
+  filter(year == max(year)) %>% #latest data
   arrange(-percent_movingav)
 
 #Keep only the top ten places and order them
 timeplot <- timeplot %>% 
-  mutate(ITL_region_name = factor(ITL_region_name, ordered = T, levels = largest_percents$ITL_region_name)) %>% 
-  filter(ITL_region_name %in% largest_percents$ITL_region_name[1:10])
+  mutate(Region_name = factor(Region_name, ordered = T, levels = largest_percents$Region_name)) %>% 
+  filter(Region_name %in% largest_percents$Region_name[1:10])
 
 #Mark the ITL of interest so it can be clearer in the plot
 timeplot <- timeplot %>%
   mutate(
-    ITL2ofinterest = ifelse(ITL_region_name == place, 'ITL of interest','other'),
+    ITL2ofinterest = ifelse(Region_name == place, 'ITL of interest','other'),
   )
 
 ggplot(timeplot %>% 
-         rename(`ITL region` = ITL_region_name) %>% 
+         rename(`ITL region` = Region_name) %>% 
          filter(!is.na(percent_movingav)),#remove NAs from dates so the x axis doesn't show them
        aes(x = year, y = percent_movingav, colour = `ITL region`, size = ITL2ofinterest, linetype = ITL2ofinterest, group = `ITL region`)) +
   geom_point() +
@@ -458,7 +466,7 @@ timeplot <- itl2.cp %>%
   filter(SIC07_description == sector) 
 
 timeplot <- timeplot %>% 
-  group_by(ITL_region_name) %>% 
+  group_by(Region_name) %>% 
   arrange(year) %>% 
   mutate(
     LQ_movingav = rollapply(LQ,3,mean,align='right',fill=NA),
@@ -468,11 +476,11 @@ timeplot <- timeplot %>%
 
 timeplot <- timeplot %>%
   mutate(
-    ITL2ofinterest = ifelse(ITL_region_name == place, 'ITL of interest','other'),
+    ITL2ofinterest = ifelse(Region_name == place, 'ITL of interest','other'),
   )
 
 p <- ggplot(timeplot %>% 
-         rename(`ITL region` = ITL_region_name) %>% 
+         rename(`ITL region` = Region_name) %>% 
          filter(!is.na(percent_movingav)),#remove NAs from dates so the x axis doesn't show them, 
        aes(x = year, y = percent_movingav, colour = ITL2ofinterest, size = ITL2ofinterest, group = `ITL region`)) +
   geom_point() +
@@ -508,12 +516,12 @@ This highlights again a key weakness of using LQs. Though they're very useful fo
 #Look just at place of interest
 #And arrange by the 'growth' slope.
 place_slopes <- yeartoplot %>% 
-  filter(ITL_region_name == place) %>% 
+  filter(Region_name == place) %>% 
   arrange(-slope)
 
 #Use that to filter the main df and order sectors by which slope is largest
 timeplot.sectors <- itl2.cp %>% 
-  filter(ITL_region_name == place) %>% 
+  filter(Region_name == place) %>% 
   mutate(SIC07_description = factor(SIC07_description, ordered = T, levels = place_slopes$SIC07_description))
 
 #Moving averages
@@ -579,13 +587,13 @@ The plot included here is a gif that compares what difference logging the scales
 p <- twod_proportionplot(
   df = itl2.cp,
   x_regionnames = place, 
-  y_regionnames = unique(itl2.cp$ITL_region_name[itl2.cp$ITL_region_name != place]),
-  regionvar = ITL_region_name,
+  y_regionnames = unique(itl2.cp$Region_name[itl2.cp$Region_name != place]),
+  regionvar = Region_name,
   category_var = SIC07_description, 
   valuevar = value, 
   timevar = year, 
   start_time = 1998, 
-  end_time = 2021, 
+  end_time = max(itl2.cp$year), #latest timepoint
   compasspoints_to_display = c('SE','NE')
 )
 
@@ -621,19 +629,19 @@ These next two plots do the following:
 
 ```{r northsouth, eval=F}
 #Northern England
-north <- itl2.cp$ITL_region_name[grepl('Greater Manc|Merseyside|West Y|Cumbria|Cheshire|Lancashire|East Y|North Y|Tees|Northumb|South Y', itl2.cp$ITL_region_name, ignore.case = T)] %>% unique
+north <- itl2.cp$Region_name[grepl('Greater Manc|Merseyside|West Y|Cumbria|Cheshire|Lancashire|East Y|North Y|Tees|Northumb|South Y', itl2.cp$Region_name, ignore.case = T)] %>% unique
 
 #South England
-south <- itl2.cp$ITL_region_name[!grepl('Greater Manc|Merseyside|West Y|Cumbria|Cheshire|Lancashire|East Y|North Y|Tees|Northumb|South Y|Scot|Highl|Wales|Ireland', itl2.cp$ITL_region_name, ignore.case = T)] %>% unique
+south <- itl2.cp$Region_name[!grepl('Greater Manc|Merseyside|West Y|Cumbria|Cheshire|Lancashire|East Y|North Y|Tees|Northumb|South Y|Scot|Highl|Wales|Ireland', itl2.cp$Region_name, ignore.case = T)] %>% unique
   
 p <- twod_proportionplot(
   df = itl2.cp,
-  regionvar = ITL_region_name,
+  regionvar = Region_name,
   category_var = SIC07_description, 
   valuevar = value, 
   timevar = year, 
   start_time = 2008,
-  end_time = 2021,
+  end_time = max(itl2.cp$year), #latest timepoint
   # start_time = 1998,
   # end_time = 2007,
   compasspoints_to_display = c('SE','SW'),
@@ -664,7 +672,7 @@ ggsave(plot = p, filename = paste0('miscimages/2D_NS_plot2_t2.png'), width = 12,
 
 ![](miscimages/NS_98to07.gif)
 
-**2008 to 2021. Much more mixed, larger number of growing sectors on the Northern side of the plot.**
+**2008 to `r max(itl2.cp$year)`. Much more mixed, larger number of growing sectors on the Northern side of the plot.**
 
 
 ![](miscimages/NS_08to21.gif)
