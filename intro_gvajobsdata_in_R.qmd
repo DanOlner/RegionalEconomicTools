@@ -131,12 +131,14 @@ LQ_map <- itl3.geo %>%
 tmap_options(check.and.fix = TRUE)
 tmap_mode('view')#Use 'plot' to just plot an image
 
+
+
 #Plot map
 tm_shape(LQ_map) +
   tm_polygons('LQ_log', n = 9, id = 'Region_name') +
 tm_shape(LQ_map %>% filter(LQ < 1)) + #Highlight LQ < 1 places by overlaying thicker lines
-  tm_polygons(lwd = 2, alpha = 0, border.col = 'black') +
-  tm_layout(title = 'LQ spread of\nGoods sector\nAcross ITL3 regions', legend.outside = T)
+  tm_polygons(lwd = 2, alpha = 0, border.col = 'black', , id = 'Region_name') +
+  tm_layout(title = 'LQ spread of\nGoods sector\nAcross ITL3 regions', legend.outside = T) 
 
 
 ```
