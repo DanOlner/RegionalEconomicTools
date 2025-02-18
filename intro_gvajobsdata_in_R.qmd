@@ -9,7 +9,7 @@ execute:
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning = F, error = F, message = F, comment=NA)
+knitr::opts_chunk$set(fig.height = 8, fig.width = 8, echo = TRUE, warning = F, error = F, message = F, comment=NA)
 ```
 
 # Intro to using ONS GVA and jobs data in R
@@ -31,6 +31,7 @@ library(tidyverse)
 library(sf)#for geo stuff
 library(tmap)#for mapping 
 library(zoo)#for making smoothed moving averages
+library(patchwork)#combine ggplots easily
 
 source('functions/misc_functions.R')
 
@@ -103,10 +104,10 @@ lq.latestyear %>% filter(
   slice(1:15)
 ```
 
-Services is of course the mirror image of this, and we could list them - but taking a look at a **map of goods LQ** is also a good way of seeing what's going on. A couple of notes:
+Services is of course the mirror image of this, and we could list them - but taking a look at a **map of goods sector LQ** is also a good way of seeing what's going on. A couple of notes:
 
 * Log LQ is used as this keeps it symmetrical each side of zero, which makes the map a lot more legible (with the downside that log values aren't as interpretable).
-* Zones with LQ < 1 for goods are highlighted in thicker black lines - making clear that more service-heavy places tend to be towns and cities (and a swathe of London and the South East).
+* Zones with LQ < 1 for goods are highlighted in thicker black lines - making clear that **more service-heavy places tend to be towns and cities (and a swathe of London and the South East)**.
 * Plotting an interactive map here so it's easier to poke around / zoom in - change tmap_mode to 'plot' to just output as an image.
 
 
@@ -128,17 +129,169 @@ LQ_map <- itl3.geo %>%
   )
 
 #Some 'invalid polygons' issues that tmap can fix prior to live viewing
-tmap_options(check.and.fix = TRUE)
+# tmap_options(check.and.fix = TRUE)
 tmap_mode('view')#Use 'plot' to just plot an image
 
-
-
-#Plot map
+#Make map for interactive viewing
 tm_shape(LQ_map) +
-  tm_polygons('LQ_log', n = 9, id = 'Region_name') +
+  tm_polygons('LQ_log', n = 9, id = 'Region_name', fill.scale = tm_scale(values = "RdBu")) +
 tm_shape(LQ_map %>% filter(LQ < 1)) + #Highlight LQ < 1 places by overlaying thicker lines
   tm_polygons(lwd = 2, alpha = 0, border.col = 'black', , id = 'Region_name') +
   tm_layout(title = 'LQ spread of\nGoods sector\nAcross ITL3 regions', legend.outside = T) 
+
+
+```
+
+
+
+
+
+
+# How have the proportion of goods vs services changed over time?
+
+What's been happening to goods vs service sectors across the UK since this dataset's earliest date in 1998? We can examine the linear slopes to get a rough idea of what direction trends have been going in.
+
+First, let's re-run the LQ function for every year in the dataset:
+
+```{r lqall}
+itl3.ps <- itl3.ps %>% 
+  split(.$year) %>% 
+  map(add_location_quotient_and_proportions, 
+      regionvar = Region_name,
+      lq_var = SIC07_description,
+      valuevar = value) %>% 
+  bind_rows()
+
+```
+
+Then use another function that finds OLS slopes of change over time (not great time series statistics, useful for a quick look). We use the "sector regional proportion" value that came with the LQ function (this sums to one for all sectors in a place) and log values so places with different sector scales have comparable slopes (e.g. a 4-5% increase appears the same as 40-50%):
+
+
+```{r LQ_slopes}
+#Use
+#LQ_slopes %>% filter(slope==0)
+#To see which didn't get slopes (all got slopes here but sometimes there'll be missing values)
+LQ_slopes <- compute_slope_or_zero(
+  data = itl3.ps, 
+  Region_name, SIC07_description,#slopes will be found within whatever grouping vars are added here
+  y = log(sector_regional_proportion), x = year
+  # y = LQ_log, x = year
+  ) %>% left_join(
+    itl3.ps %>% select(Region_name,ITL_code) %>% distinct(), by = 'Region_name'#Add ITL code back in, so we can link to geodata below
+  ) %>% 
+  arrange(-slope) %>% 
+  mutate(approx_percentchange_peryear = slope * 100)
+
+
+```
+
+Using that, we can ask: where does it look like the proportion of services sectors has grown the most? Just sorting by slope size:
+
+```{r}
+LQ_slopes %>% filter(
+  SIC07_description == 'Services sector'
+  ) %>% 
+  select(Region_name,approx_percentchange_peryear) %>% 
+  arrange(-approx_percentchange_peryear) %>% 
+  slice(1:15)
+
+```
+
+
+We can make a map again, looking at what percentage change per year, on average, the slopes look like across the UK. There's no obvious pattern to places where services have shrunk as a proportion of their economies - but as with the list above, East Antrim is an outlier. We'll see in a second how much work "as a proportion" is doing...
+
+(Note, not an interactive map as it appears tmap/leaflet can only display one per page at the moment - it's changed back to 'plot' mode).
+
+```{r}
+slopes_map <- itl3.geo %>% 
+  right_join(
+    LQ_slopes %>% filter(
+      SIC07_description == 'Services sector'
+      ),
+    by = c('ITL321CD'='ITL_code')
+  )
+
+
+tmap_mode('plot')
+
+#Make map
+tm_shape(slopes_map) +
+  tm_polygons('approx_percentchange_peryear', id = 'Region_name', fill.scale = tm_scale(values = "RdBu")) +
+  tm_layout(title = 'Services sector approx. % GVA change per year, ITL3 regions', legend.outside = T) 
+
+
+
+```
+
+
+Let's take a look at the actual datapoints for 'percent of regional economy that's services', using the slopes data to extract the top (highest proportional growth) and bottom (highest prop shrinkage) slopes.
+
+* First, get the place names for top and bottom
+* Then in one ggplot for each of those, just look at the 1998 to latest datapoints
+* Using the excellent [patchwork library](https://patchwork.data-imaginist.com/) to easily combine and title these two plots.
+
+
+```{r}
+#Has already been ordered by slope, so can just filter and pull out
+#We just want the place names, to then plot their slopes
+topITL3names <- LQ_slopes %>%
+  filter(SIC07_description == "Services sector") %>%
+  slice_head(n = 12) %>% 
+  select(Region_name) %>% 
+  pull
+  
+bottomITL3names <- LQ_slopes %>%
+  filter(SIC07_description == "Services sector") %>%
+  slice_tail(n = 12) %>% 
+  select(Region_name) %>% 
+  pull
+  
+
+
+top.plot <- ggplot(itl3.ps %>%  
+         mutate(regional_percent = sector_regional_proportion *100) %>% 
+         filter(
+           Region_name %in% topITL3names,
+           SIC07_description == "Services sector"
+           ), 
+       aes(x = year, y = regional_percent, colour = fct_reorder(Region_name,-sector_regional_proportion) )) +
+  geom_point() +
+  geom_line() +
+  scale_color_brewer(palette = 'Paired', direction = 1) +
+  ylab('Regional GVA percent') +
+  theme(plot.title = element_text(face = 'bold')) +
+  labs(colour = 'ITL region')
+
+
+bottom.plot <- ggplot(itl3.ps %>%  
+         mutate(regional_percent = sector_regional_proportion *100) %>% 
+         filter(
+           Region_name %in% bottomITL3names,
+           SIC07_description == "Services sector"
+           ),
+       aes(x = year, y = regional_percent, colour = fct_reorder(Region_name,-sector_regional_proportion) )) +
+  geom_point() +
+  geom_line() +
+  scale_color_brewer(palette = 'Paired', direction = 1) +
+  ylab('Regional GVA percent') +
+  theme(plot.title = element_text(face = 'bold')) +
+  labs(colour = 'ITL region')
+
+
+top.plot / bottom.plot + plot_annotation(
+  title = 'Percent change in proportion of service sectors,1998-2022, top/bottom ITL3 zones'
+)
+  
+
+```
+
+
+Blimey - a couple of places really jump out from each plot, both inflecting around 2016. **Mid and East Antrim** in the 'top proportion growers' jumps hugely. **Southampton** equally has a massive drop - never far from a mid-80% service economy, it drops to below 70% before bouncing back a little.
+
+
+
+
+```{r}
 
 
 ```
@@ -152,7 +305,15 @@ tm_shape(LQ_map %>% filter(LQ < 1)) + #Highlight LQ < 1 places by overlaying thi
 
 
 
+```{r cuttinz}
+#| echo: false
+#| eval: false
 
+#Chained volume for services
+#Load 3 broad sector data for ITL2 and current prices
+itl3.ps <- read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/regionalGVA_chainedvolume_ITL3_SIC_3GROUPS_LONG_2022.csv')
+
+```
 
 
 

@@ -37,7 +37,8 @@ compute_slope_or_zero <- function(data, ..., y, x) {
     group_by(!!!groups) %>%
     nest() %>%
     mutate(slope = map_dbl(data, safe_get_slope)) %>%
-    select(-data)
+    select(-data) %>% 
+    ungroup()
   
 }
 
