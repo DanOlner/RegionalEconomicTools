@@ -460,7 +460,7 @@ If we want to look at all places at once, it's useful to do two things:
 1. Use a log scale on the y axis, so change scale is comparable and we can see places with smaller sectors.
 2. Use plotly to make an interactive plot, so hovering over lines will show what places are interactively. 
 
-This plot does so for LCR's largest LQ sector, manufacture of motor vehicles.
+This plot does this for LCR's largest LQ sector, manufacture of motor vehicles.
 
 ```{r plotother, fig.width=9}
 sector <- itl2.cp$SIC07_description[grepl('motor vehicles', itl2.cp$SIC07_description ,ignore.case = T)] %>% unique
@@ -497,13 +497,16 @@ p <- ggplot(timeplot %>%
       ) +
     theme(plot.title = element_text(face = 'bold'))
 
-p
+#Convert to interactive plot
+ggplotly(p, tooltip = c("ITL region"))
 
 ```
 
-It's easy to convert a ggplot to an interactive plotly. It can't be included on this page, but will run in RStudio, and there's an [online version here](https://danolner.github.io/regionalGVAbyindustry/GVA_percent_liverpool_city_region_motorvehicles.html).)
 
-```{r, eval = F}
+```{r, eval = F, echo = F}
+#It's easy to convert a ggplot to an interactive plotly. It can't be included on this page, but will run in RStudio, and there's an [online version here](https://danolner.github.io/regionalGVAbyindustry/GVA_percent_liverpool_city_region_motorvehicles.html).)
+
+
 ggplotly(p, tooltip = c("ITL region"))
 ```
 

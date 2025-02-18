@@ -1,0 +1,227 @@
+---
+title: "Intro to GVA and jobs data in R"
+code-overflow: wrap
+execute:
+  echo: true
+  warning: false
+  error: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, error = F, message = F, comment=NA)
+```
+
+# Intro to using ONS GVA and jobs data in R
+
+Here, we'll work with this pre-baked ONS data [from here](regionalgva_n_bres.html), which has been processed/linked to help smooth the path to getting GVA and jobs insights. As that page says, we've got the following to work with:
+
+* GVA data at ITL2 and 3 geographies, broken down by SIC industrial codes at 2-digit, Section (20 categories) and Production/Construction/Services, 1998 to most recent available year.
+* BRES job count data for the same (though with slightly more SIC codes), with a little bit better job count resolution than the originals (see above post for why/how).
+* A linked version that combines those two, so we can dig into GVA per job across Great Britain[^1].
+
+[^1]: NOMIS BRES data is not available for Northern Ireland.
+
+These are both deep, rich datasets (though it's worth exploring [how the reginal GVA data is made](https://www.ons.gov.uk/economy/regionalaccounts/grossdisposablehouseholdincome/methodologies/regionalaccountsmethodologyguidejune2019) to get a sense of its issues). Here, we'll just run through a range of examples to show how to get started with digging into them. See the left hand bar for other ways to use them (and do please let me know if you have any thoughts, other analyses etc, via the [github issues](https://github.com/DanOlner/RegionalEconomicTools/issues) or email danolner at gmail dot com).
+
+Here's some libraries and functions inside this repo we'll use.
+
+```{r}
+library(tidyverse)
+library(sf)#for geo stuff
+library(tmap)#for mapping 
+library(zoo)#for making smoothed moving averages
+
+source('functions/misc_functions.R')
+
+```
+
+
+
+# How do production vs services vary over the UK?
+
+Let's start with the broadest sector breakdown, and at ITL2 geography (mayoral authorities are at this level), nabbing the links from the [gva n bres page](https://danolner.github.io/RegionalEconomicTools/regionalgva_n_bres.html).
+
+This is **current prices** data - GVA values as they were when the data was collected, not adjusted for inflation. This is useful because (unlike inflation adjusted chained volume data), these can be legitimately summed in any way like - add up sectors, places etc. This means any change over time for current prices is only ever **relative**. (Examples below will illustrate this.)
+
+Also, sum the two 'production' and 'construction' sectors to give us just two 'goods v services' categories.
+
+```{r}
+#Load 3 broad sector data for ITL2 and current prices
+itl2.ps <- read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/regionalGVA_currentprices_ITL2_SIC_3GROUPS_LONG_2022.csv')
+
+#sum production and construction
+itl2.ps <- itl2.ps %>% 
+  mutate(SIC07_description = fct_collapse(SIC07_description, `Goods sector` = c("Production sector","Construction"))) %>% 
+  group_by(Region_name, year, SIC07_description) %>% 
+  summarise(
+    value = sum(value)
+  ) %>% 
+  ungroup()
+
+
+```
+
+
+Now let's use **location quotients** (LQs) to see where goods and services are most concentrated across the UK. (See [this post](sector_locationquotients_and_proportions.html) for a full explanation of LQs and a deeper dive into them), using a function loaded above.
+
+```{r}
+lq.latestyear <- add_location_quotient_and_proportions(
+  itl2.ps %>% filter(year == max(year)),#use the latest year in the data
+  regionvar = Region_name,
+  lq_var = SIC07_description,
+  valuevar = value
+)
+
+```
+
+
+```{r}
+lq.latestyear %>% filter(
+  SIC07_description == 'Goods sector'
+  ) %>% 
+  mutate(regional_percent = sector_regional_proportion *100) %>% 
+  select(Region_name,regional_percent, LQ) %>% 
+  arrange(-LQ) %>% 
+  slice(1:20)
+```
+
+
+Services is of course the mirror image of this, but here's the top 20 ITL2 zones:
+
+```{r}
+lq.latestyear %>% filter(
+  SIC07_description == 'Services sector'
+  ) %>% 
+  mutate(regional_percent = sector_regional_proportion *100) %>% 
+  select(Region_name,regional_percent, LQ) %>% 
+  arrange(-LQ) %>% 
+  slice(1:20)
+```
+
+
+
+
+
+
+
+
+```{r}
+#Load 3 broad sector data for ITL2 and current prices
+itl3.ps <- read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/regionalGVA_currentprices_ITL3_SIC_3GROUPS_LONG_2022.csv')
+
+#sum production and construction
+itl3.ps <- itl3.ps %>% 
+  mutate(SIC07_description = fct_collapse(SIC07_description, `Goods sector` = c("Production sector","Construction"))) %>% 
+  group_by(Region_name, year, SIC07_description) %>% 
+  summarise(
+    value = sum(value),
+    ITL_code = max(ITL_code)#This just keeps a single ITL code, they're all the same in this group. We need it to match on later as names don't perfectly match
+  ) %>% 
+  ungroup()
+
+
+```
+
+
+Now let's use **location quotients** (LQs) to see where goods and services are most concentrated across the UK. See [this post](sector_locationquotients_and_proportions.html) for a full explanation of LQs and a deeper dive into them - but briefly:
+
+* If the LQ > 1, that sector is relatively **more** concentrated in the region, compared to the UK
+* If the LQ < 1, it's relatively **less** concentrated in the region, compared to the UK
+* ... and the value says by how much e.g. an LQ of 2 would mean it's twice as concentrated.
+
+Using a function loaded above, this adds LQ details to the loaded CSV:
+
+```{r}
+lq.latestyear <- add_location_quotient_and_proportions(
+  itl3.ps %>% filter(year == max(year)),#use the latest year in the data
+  regionvar = Region_name,
+  lq_var = SIC07_description,
+  valuevar = value
+)
+
+```
+
+
+```{r}
+lq.latestyear %>% filter(
+  SIC07_description == 'Goods sector'
+  ) %>% 
+  mutate(regional_percent = sector_regional_proportion *100) %>% 
+  select(Region_name,regional_percent, LQ) %>% 
+  arrange(-LQ) %>% 
+  slice(1:20)
+```
+
+
+Services is of course the mirror image of this, but here's the top 20 ITL2 zones:
+
+```{r}
+lq.latestyear %>% filter(
+  SIC07_description == 'Services sector'
+  ) %>% 
+  mutate(regional_percent = sector_regional_proportion *100) %>% 
+  select(Region_name,regional_percent, LQ) %>% 
+  arrange(-LQ) %>% 
+  slice(1:20)
+```
+
+
+
+
+Map
+
+
+```{r}
+itl3.geo <- st_read('data/ITL_geographies/International_Territorial_Level_3_January_2021_UK_BUC_V3_2022_6920195468392554877', quiet = T) 
+
+#Check geo and data row matches... tick
+#Names don't quite match between the two, random commas etc
+table(itl3.geo$ITL321CD %in% itl3.ps$ITL_code)
+
+#Join map data to a subset of the GVA data
+LQ_map <- itl3.geo %>% 
+  right_join(
+    lq.latestyear %>% filter(
+      SIC07_description == 'Goods sector'
+      ),
+    by = c('ITL321CD'='ITL_code')
+  )
+
+#Highlight LQ > 1 places by overlaying thicker lines
+
+
+#Plot map
+tm_shape(LQ_map) +
+  tm_polygons('LQ_log', n = 9) +
+tm_shape(LQ_map %>% filter(LQ < 1)) +
+  tm_polygons(lwd = 2, alpha = 0, border.col = 'black') +
+  tm_layout(title = 'LQ spread of\nGoods sector\nAcross ITL3 regions', legend.outside = T)
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
