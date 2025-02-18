@@ -17,7 +17,10 @@ website:
       - section: "Resources"
         contents:
           - regionalgva_n_bres.qmd
-      - section: "GDP and GVA"
+      - section: "Intros"
+        contents:
+          - intro_gvajobsdata_in_R.qmd
+      - section: "Intro to using GVA and jobs data in R"
         contents:
           - gdp_gaps.qmd
           - beattyfothergill.qmd

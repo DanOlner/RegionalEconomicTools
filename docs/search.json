@@ -372,5 +372,29 @@
       "Resources",
       "Regional GVA and job count data: easy squeezy versions"
     ]
+  },
+  {
+    "objectID": "intro_gvajobsdata_in_R.html",
+    "href": "intro_gvajobsdata_in_R.html",
+    "title": "Intro to GVA and jobs data in R",
+    "section": "",
+    "text": "Here, we’ll work with this pre-baked ONS data from here, which has been processed/linked to help smooth the path to getting GVA and jobs insights. As that page says, we’ve got the following to work with:\n\nGVA data at ITL2 and 3 geographies, broken down by SIC industrial codes at 2-digit, Section (20 categories) and Production/Construction/Services, 1998 to most recent available year.\nBRES job count data for the same (though with slightly more SIC codes), with a little bit better job count resolution than the originals (see above post for why/how).\nA linked version that combines those two, so we can dig into GVA per job across Great Britain1.\n\nThese are both deep, rich datasets (though it’s worth exploring how the reginal GVA data is made to get a sense of its issues). Here, we’ll just run through a range of examples to show how to get started with digging into them. See the left hand bar for other ways to use them (and do please let me know if you have any thoughts, other analyses etc, via the github issues or email danolner at gmail dot com).\nHere’s some libraries and functions inside this repo we’ll use.\n\nlibrary(tidyverse)\nlibrary(sf)#for geo stuff\nlibrary(tmap)#for mapping \nlibrary(zoo)#for making smoothed moving averages\n\nsource('functions/misc_functions.R')",
+    "crumbs": [
+      "Home",
+      "Intros",
+      "Intro to GVA and jobs data in R"
+    ]
+  },
+  {
+    "objectID": "intro_gvajobsdata_in_R.html#footnotes",
+    "href": "intro_gvajobsdata_in_R.html#footnotes",
+    "title": "Intro to GVA and jobs data in R",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nNOMIS BRES data is not available for Northern Ireland.↩︎",
+    "crumbs": [
+      "Home",
+      "Intros",
+      "Intro to GVA and jobs data in R"
+    ]
   }
 ]
