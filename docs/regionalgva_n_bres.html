@@ -147,12 +147,29 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">GDP and GVA</span></a>
+ <span class="menu-text">Intros</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro_gvajobsdata_in_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intro to GVA and jobs data in R</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Intro to using GVA and jobs data in R</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gdp_gaps.html" class="sidebar-item-text sidebar-link">
@@ -169,13 +186,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">Sectors</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sector_locationquotients_and_proportions.html" class="sidebar-item-text sidebar-link">
@@ -239,7 +256,7 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Easy-access ONS regional <strong>gross value added (GVA)</strong> by SIC sector data, supplied as tidy CSVs: ITL2 &amp; 3 geographies, and SIC industrial codes at 2-digit, Section (20 categories) and Production/Construction/Services, 1998 to most recent available year, 2022. (<a href="https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry">Original ONS excel</a>, <a href="https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/regionalGVA_processing.R">code</a>, example use in R: <a href="https://danolner.github.io/RegionalEconomicTools/sector_locationquotients_and_proportions.html">location quotients / proportion plots</a>.)</li>
 <li>Same for BRES (the Business Register and Employment Survey) region-by-sector <strong>job count data</strong>, with extra-bonus higher accuracy values (see below). 2015 to latest year, 2023. (<a href="https://www.nomisweb.co.uk/datasets/newbres6pub">NOMIS page</a>, code for <a href="https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/BRES_API_download.R">API</a> &amp; <a href="https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/BRES_sum_SIC5digit_to_otherSICcategories.R">wrangling</a>.)</li>
-<li>Those two <strong>linked together into single GVA/jobcount datasets</strong> (2015 to 2022). (<a href="https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/combine_regGVA_and_BRES.R">Code</a>.)</li>
+<li>Those two <strong>linked together into single GVA/jobcount datasets</strong> (2015 to 2022), matching the GVA data’s bespoke 2-digit and section SIC categories for ITL3 (see below for more on that). (<a href="https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/combine_regGVA_and_BRES.R">Code</a>.)</li>
 </ul>
 <big>
 <center>
@@ -293,8 +310,8 @@ See below the data for ‘<a href="http://localhost:3241/regionalgva_n_bres.html
 <p>As well as ITL2 and ITL3 geographical zones, there’s:</p>
 <ul>
 <li>“3GROUPS”: SIC sectoral groupings for <strong>production, construction</strong> and <strong>services</strong> separately.</li>
-<li>“SIC_SECTION”: 20 SIC top-level sections (SIC codes with letters A to T) (see <a href="https://onsdigital.github.io/dp-classification-tools/standard-industrial-classification/ONS_SIC_hierarchy_view.html">SIC hierarchy</a>).</li>
-<li>“SIC_2DIGIT”: 2 digit codes, the most granular level available in the regional GVA data. <strong>NOTE HOWEVER:</strong> here, ONS combine a few of them, so these are are a <strong>smaller</strong> bespoke list in the GVA data. For ITL2 zones, there are <strong>72 SIC categories</strong>. For ITL3 zones, there are <strong>48 SIC categories.</strong></li>
+<li>“SIC_SECTION”: 20 SIC top-level sections (SIC codes with letters A to T) (see <a href="https://onsdigital.github.io/dp-classification-tools/standard-industrial-classification/ONS_SIC_hierarchy_view.html">SIC hierarchy</a>). <strong>NOTE: the ITL2 data has all single letter sections A to T; ITL3 data has A/B and D/E combined into their own categories, so there are two fewer.</strong></li>
+<li>“SIC_2DIGIT”: 2 digit codes, the most granular level available in the regional GVA data. <strong>NOTE AGAIN:</strong> here, ONS combine a few of them, so these are are a <strong>smaller</strong> bespoke list in the GVA data. For ITL2 zones, there are <strong>72 SIC categories</strong>. For ITL3 zones, there are <strong>48 SIC categories.</strong></li>
 </ul>
 <p>There a couple of other choices of CSV type:</p>
 <ul>
@@ -432,9 +449,9 @@ See below the data for ‘<a href="http://localhost:3241/regionalgva_n_bres.html
 <p>These datasets combine regional GVA and BRES job count data into single CSVs. They contain the same fields as the separate datasets above, but note these two points:</p>
 <ol type="1">
 <li>The newer post-Brexit ITL geographies for 2021 are the same as the previous EU-wide NUTS 2016 ones - <strong>apart from one small difference</strong>: ITL3 has “Bournemouth, Christchurch and Poole”, NUTS 3 has “Bournemouth and Poole”. Christchurch moved from “Dorset” in the data in 2021. Due to the “chained volume GVA can’t be summed” issue, the solution used here is this: <strong>The ITL3 zones for “Bournemouth, Christchurch and Poole” / “Dorset” / “Somerset” are replaced with the ITL2 zone that overlaps them all (“Dorset and Somerset”).</strong> Apologies to those zones affected, this is a less-than-ideal solution to keep the time series<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</li>
-<li>BRES job count data has been summed to match the bespoke SIC 2 digit lists in the GVA data. For ITL2 zones, there are <strong>72 SIC categories</strong>. For ITL3 zones, there are <strong>48 SIC categories.</strong></li>
+<li>BRES job count data has been summed to match the bespoke SIC categories in the GVA data. For ITL2 zones, there are <strong>72 2-digit SIC categories</strong> and the <strong>full SIC section list</strong>. For ITL3 zones, there are <strong>48 2-digit SIC categories</strong> and <strong>for SIC sections, A/B and D/E are combined, making two fewer categories</strong>.</li>
 </ol>
-<p>In the repo, there is a <strong>bespoke ITL3 geo-file reflecting point #1</strong> with the Dorset / Somerset / Bournemouth+Poole zones replaced with the ITL2 for Dorset/Somerset. The geojson file (~1.6mb) is <a href="https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/data/ITL_geographies/ITL3_bespokeforGVA_BRESjoin.geojson">here on github</a> (download button, top right) or raw <a href="https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/ITL_geographies/ITL3_bespokeforGVA_BRESjoin.geojson">here</a>. It will join on either zone ID or zone name to the BRES + GVA combo CSVs above.</p>
+<p>In the repo, there is a <strong>bespoke ITL3 geo-file, reflecting point #1</strong> with the Dorset / Somerset / Bournemouth+Poole zones replaced with the ITL2 for Dorset/Somerset. The geojson file (~1.6mb) is <a href="https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/data/ITL_geographies/ITL3_bespokeforGVA_BRESjoin.geojson">here on github</a> (download button, top right) or raw <a href="https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/ITL_geographies/ITL3_bespokeforGVA_BRESjoin.geojson">here</a>. It will join on either zone ID or zone name to the BRES + GVA combo CSVs above.</p>
 </section>
 </section>
 <section id="other-ways-to-get-the-data" class="level2">

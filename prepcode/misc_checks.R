@@ -927,6 +927,16 @@ table(is.na(gva.n.bres.2digit$JOBCOUNT_PT))
 
 
 
+## ALSO NEED TO CHECK FOR SIC SECTIONS, DIFF FOR ITL3 AND NUTS3----
+
+#And there's also a missing var that I didn't think there should be.
+
+
+
+
+
+
+
 
 ## NUTS3 INCLUDING GEOG FIDDLY BITS----
 
@@ -1119,6 +1129,28 @@ SIClookup <- read_csv('data/SIClookup.csv')
 
 #Is in fact full list... though SIC lookup doesn't have imputed rent, which it should
 length(unique(SIClookup$SIC_2DIGIT_NAME))
+
+
+
+
+# CHECK SECTION DIFFERENCES BETWEEN ITL2 AND 3 GVA DATA----
+
+#Then need to sum job count data appropriately in the combined section groups
+
+#itl2 - just need for names
+itl2 <- read_csv('data/regionalGVA/regionalGVA_chainedvolume_ITL2_SIC_SECTION_WIDE_2022.csv')
+
+itl3 <- read_csv('data/regionalGVA/regionalGVA_chainedvolume_ITL3_SIC_SECTION_WIDE_2022.csv')
+
+unique(itl2$SIC07_code)
+unique(itl3$SIC07_code)
+
+#Only two combos in ITL3...
+unique(itl3$SIC07_code)[!unique(itl3$SIC07_code) %in% unique(itl2$SIC07_code)]
+
+
+
+
 
 
 

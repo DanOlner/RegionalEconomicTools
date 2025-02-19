@@ -318,9 +318,51 @@ itl3.ps <- read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomic
 
 
 
+# Wiggly plot
+
+
+```{r}
+gva.jobs.ITL3 <- read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_chainedvolume_ITL3_SIC_SECTION_MINUSimputedrent_2022.csv')
+
+smoothband = 3
+
+gva.jobs.ITL3 <- gva.jobs.ITL3 %>% 
+  mutate(gvaperjobFT = gva/JOBCOUNT_FULLTIME) %>% 
+group_by(GEOGRAPHY_NAME,SIC07_description) %>%
+  mutate(
+  jobcountFT_movingav = rollapply(JOBCOUNT_FULLTIME,smoothband,mean,align='center',fill=NA),
+  gva_movingav = rollapply(gva,smoothband,mean,align='center',fill=NA),
+  `gva/job_movingav` = rollapply(gvaperjobFT * 1000,smoothband,mean,align='center',fill=NA)
+) %>% 
+  ungroup()
 
 
 
+```
+
+
+
+```{r}
+p <- twod_generictimeplot_multipletimepoints(
+  df = gva.jobs.ITL3 %>% filter(qg('southampton',GEOGRAPHY_NAME)),
+  category_var = SIC07_description,
+  # x_var = gva,
+  # y_var = JOBCOUNT_FULLTIME,
+  # label_var = gvaperjobFT,
+  x_var = gva_movingav,
+  y_var = jobcountFT_movingav,
+  label_var = `gva/job_movingav`,
+  timevar = DATE,
+  times = c(2016:2021) 
+)
+
+p + theme(aspect.ratio=1) +
+  scale_x_log10() +
+  scale_y_log10() +
+  xlab("GVA (3 year moving average)") +
+  ylab("Job count FT (3 year moving average)")
+
+```
 
 
 

@@ -87,6 +87,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLC1,Tees Valley and Durham,K (64-66),Financial and insurance activities,856,5420,1785,7210
 2021,TLC1,Tees Valley and Durham,K (64-66),Financial and insurance activities,885,4895,1430,6130
 2022,TLC1,Tees Valley and Durham,K (64-66),Financial and insurance activities,1012,7550,1490,9505
+2015,TLC1,Tees Valley and Durham,L (68),"Real estate activities, excluding imputed rental",922,4365,1535,8125
+2016,TLC1,Tees Valley and Durham,L (68),"Real estate activities, excluding imputed rental",961,5200,1165,7175
+2017,TLC1,Tees Valley and Durham,L (68),"Real estate activities, excluding imputed rental",1024,4685,1125,6500
+2018,TLC1,Tees Valley and Durham,L (68),"Real estate activities, excluding imputed rental",909,5165,1760,7850
+2019,TLC1,Tees Valley and Durham,L (68),"Real estate activities, excluding imputed rental",913,5390,1610,7000
+2020,TLC1,Tees Valley and Durham,L (68),"Real estate activities, excluding imputed rental",875,4460,1415,6860
+2021,TLC1,Tees Valley and Durham,L (68),"Real estate activities, excluding imputed rental",995,5330,2285,8065
+2022,TLC1,Tees Valley and Durham,L (68),"Real estate activities, excluding imputed rental",1067,4680,1755,8135
 2015,TLC1,Tees Valley and Durham,M (69-75),"Professional, scientific and technical activities",964,28310,3820,32705
 2016,TLC1,Tees Valley and Durham,M (69-75),"Professional, scientific and technical activities",966,20810,4870,27115
 2017,TLC1,Tees Valley and Durham,M (69-75),"Professional, scientific and technical activities",976,16155,7005,24645
@@ -239,6 +247,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLC2,Northumberland and Tyne and Wear,K (64-66),Financial and insurance activities,1713,13115,3480,16755
 2021,TLC2,Northumberland and Tyne and Wear,K (64-66),Financial and insurance activities,1846,11570,2665,15240
 2022,TLC2,Northumberland and Tyne and Wear,K (64-66),Financial and insurance activities,1967,11460,2485,14310
+2015,TLC2,Northumberland and Tyne and Wear,L (68),"Real estate activities, excluding imputed rental",1209,7705,2625,10875
+2016,TLC2,Northumberland and Tyne and Wear,L (68),"Real estate activities, excluding imputed rental",1241,7990,1870,11275
+2017,TLC2,Northumberland and Tyne and Wear,L (68),"Real estate activities, excluding imputed rental",1264,6380,1725,9225
+2018,TLC2,Northumberland and Tyne and Wear,L (68),"Real estate activities, excluding imputed rental",1208,8135,2655,11480
+2019,TLC2,Northumberland and Tyne and Wear,L (68),"Real estate activities, excluding imputed rental",1252,9660,2660,12270
+2020,TLC2,Northumberland and Tyne and Wear,L (68),"Real estate activities, excluding imputed rental",1295,7860,2730,11430
+2021,TLC2,Northumberland and Tyne and Wear,L (68),"Real estate activities, excluding imputed rental",1303,8085,3645,11780
+2022,TLC2,Northumberland and Tyne and Wear,L (68),"Real estate activities, excluding imputed rental",1410,7395,2405,12875
 2015,TLC2,Northumberland and Tyne and Wear,M (69-75),"Professional, scientific and technical activities",1309,33685,5320,39690
 2016,TLC2,Northumberland and Tyne and Wear,M (69-75),"Professional, scientific and technical activities",1316,28325,6275,36775
 2017,TLC2,Northumberland and Tyne and Wear,M (69-75),"Professional, scientific and technical activities",1381,24010,6705,33250
@@ -391,6 +407,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLD1,Cumbria,K (64-66),Financial and insurance activities,200,1450,595,2150
 2021,TLD1,Cumbria,K (64-66),Financial and insurance activities,241,2445,725,3060
 2022,TLD1,Cumbria,K (64-66),Financial and insurance activities,294,1860,570,2540
+2015,TLD1,Cumbria,L (68),"Real estate activities, excluding imputed rental",412,2310,775,3850
+2016,TLD1,Cumbria,L (68),"Real estate activities, excluding imputed rental",424,2095,1110,3390
+2017,TLD1,Cumbria,L (68),"Real estate activities, excluding imputed rental",449,2175,965,3495
+2018,TLD1,Cumbria,L (68),"Real estate activities, excluding imputed rental",427,1820,805,3675
+2019,TLD1,Cumbria,L (68),"Real estate activities, excluding imputed rental",435,1825,875,3525
+2020,TLD1,Cumbria,L (68),"Real estate activities, excluding imputed rental",399,1705,955,3475
+2021,TLD1,Cumbria,L (68),"Real estate activities, excluding imputed rental",350,2640,1045,3950
+2022,TLD1,Cumbria,L (68),"Real estate activities, excluding imputed rental",393,2880,1820,5175
 2015,TLD1,Cumbria,M (69-75),"Professional, scientific and technical activities",458,8795,2170,11845
 2016,TLD1,Cumbria,M (69-75),"Professional, scientific and technical activities",469,10550,2690,13660
 2017,TLD1,Cumbria,M (69-75),"Professional, scientific and technical activities",445,9040,2640,12455
@@ -543,6 +567,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLD3,Greater Manchester,K (64-66),Financial and insurance activities,5220,33255,5890,37980
 2021,TLD3,Greater Manchester,K (64-66),Financial and insurance activities,6351,45665,7305,53090
 2022,TLD3,Greater Manchester,K (64-66),Financial and insurance activities,6998,36485,4845,40405
+2015,TLD3,Greater Manchester,L (68),"Real estate activities, excluding imputed rental",3119,18950,4525,25700
+2016,TLD3,Greater Manchester,L (68),"Real estate activities, excluding imputed rental",3175,18425,6725,25700
+2017,TLD3,Greater Manchester,L (68),"Real estate activities, excluding imputed rental",3114,21900,6250,30700
+2018,TLD3,Greater Manchester,L (68),"Real estate activities, excluding imputed rental",2999,17375,6500,31800
+2019,TLD3,Greater Manchester,L (68),"Real estate activities, excluding imputed rental",3001,16975,6550,27350
+2020,TLD3,Greater Manchester,L (68),"Real estate activities, excluding imputed rental",2789,17000,7225,28500
+2021,TLD3,Greater Manchester,L (68),"Real estate activities, excluding imputed rental",3115,23900,7900,35300
+2022,TLD3,Greater Manchester,L (68),"Real estate activities, excluding imputed rental",3348,19675,6375,29300
 2015,TLD3,Greater Manchester,M (69-75),"Professional, scientific and technical activities",4723,88160,15760,109880
 2016,TLD3,Greater Manchester,M (69-75),"Professional, scientific and technical activities",4819,99385,21120,124775
 2017,TLD3,Greater Manchester,M (69-75),"Professional, scientific and technical activities",5326,100115,19450,121240
@@ -695,6 +727,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLD4,Lancashire,K (64-66),Financial and insurance activities,760,6250,1975,8240
 2021,TLD4,Lancashire,K (64-66),Financial and insurance activities,939,10535,2245,12610
 2022,TLD4,Lancashire,K (64-66),Financial and insurance activities,1013,7550,1395,9385
+2015,TLD4,Lancashire,L (68),"Real estate activities, excluding imputed rental",1032,5780,1680,8300
+2016,TLD4,Lancashire,L (68),"Real estate activities, excluding imputed rental",995,5810,2405,8920
+2017,TLD4,Lancashire,L (68),"Real estate activities, excluding imputed rental",1024,6860,2360,9945
+2018,TLD4,Lancashire,L (68),"Real estate activities, excluding imputed rental",970,5265,2065,9750
+2019,TLD4,Lancashire,L (68),"Real estate activities, excluding imputed rental",1024,5385,2070,8950
+2020,TLD4,Lancashire,L (68),"Real estate activities, excluding imputed rental",985,5735,2270,9000
+2021,TLD4,Lancashire,L (68),"Real estate activities, excluding imputed rental",1065,7960,2710,11080
+2022,TLD4,Lancashire,L (68),"Real estate activities, excluding imputed rental",1085,5910,2335,9385
 2015,TLD4,Lancashire,M (69-75),"Professional, scientific and technical activities",1175,27430,5575,34155
 2016,TLD4,Lancashire,M (69-75),"Professional, scientific and technical activities",1225,33785,6345,40445
 2017,TLD4,Lancashire,M (69-75),"Professional, scientific and technical activities",1365,28450,6645,36905
@@ -847,6 +887,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLD6,Cheshire,K (64-66),Financial and insurance activities,2566,18050,2910,21880
 2021,TLD6,Cheshire,K (64-66),Financial and insurance activities,3089,26020,3960,29570
 2022,TLD6,Cheshire,K (64-66),Financial and insurance activities,3242,15485,2565,18685
+2015,TLD6,Cheshire,L (68),"Real estate activities, excluding imputed rental",891,4925,1650,7250
+2016,TLD6,Cheshire,L (68),"Real estate activities, excluding imputed rental",894,4825,2500,8125
+2017,TLD6,Cheshire,L (68),"Real estate activities, excluding imputed rental",979,6325,2135,9120
+2018,TLD6,Cheshire,L (68),"Real estate activities, excluding imputed rental",909,5000,1625,8140
+2019,TLD6,Cheshire,L (68),"Real estate activities, excluding imputed rental",966,5410,1875,8330
+2020,TLD6,Cheshire,L (68),"Real estate activities, excluding imputed rental",927,5350,1925,8470
+2021,TLD6,Cheshire,L (68),"Real estate activities, excluding imputed rental",953,7185,2275,10020
+2022,TLD6,Cheshire,L (68),"Real estate activities, excluding imputed rental",956,5325,1675,7645
 2015,TLD6,Cheshire,M (69-75),"Professional, scientific and technical activities",2281,35665,8055,46035
 2016,TLD6,Cheshire,M (69-75),"Professional, scientific and technical activities",2285,50855,13435,63865
 2017,TLD6,Cheshire,M (69-75),"Professional, scientific and technical activities",2450,49440,14660,65220
@@ -999,6 +1047,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLD7,Merseyside,K (64-66),Financial and insurance activities,1659,13225,3310,17145
 2021,TLD7,Merseyside,K (64-66),Financial and insurance activities,2168,17185,3590,19905
 2022,TLD7,Merseyside,K (64-66),Financial and insurance activities,2272,11350,2430,13725
+2015,TLD7,Merseyside,L (68),"Real estate activities, excluding imputed rental",1157,6975,2095,10250
+2016,TLD7,Merseyside,L (68),"Real estate activities, excluding imputed rental",1149,6725,2940,10250
+2017,TLD7,Merseyside,L (68),"Real estate activities, excluding imputed rental",1189,7675,2790,10525
+2018,TLD7,Merseyside,L (68),"Real estate activities, excluding imputed rental",1129,7000,2410,11825
+2019,TLD7,Merseyside,L (68),"Real estate activities, excluding imputed rental",1167,7250,2375,11200
+2020,TLD7,Merseyside,L (68),"Real estate activities, excluding imputed rental",1207,6725,3725,13300
+2021,TLD7,Merseyside,L (68),"Real estate activities, excluding imputed rental",1260,10600,3600,16000
+2022,TLD7,Merseyside,L (68),"Real estate activities, excluding imputed rental",1288,7825,2400,12250
 2015,TLD7,Merseyside,M (69-75),"Professional, scientific and technical activities",1642,29310,6600,38840
 2016,TLD7,Merseyside,M (69-75),"Professional, scientific and technical activities",1573,39145,7205,48835
 2017,TLD7,Merseyside,M (69-75),"Professional, scientific and technical activities",1723,31825,7600,41285
@@ -1151,6 +1207,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLE1,East Yorkshire and Northern Lincolnshire,K (64-66),Financial and insurance activities,297,2160,940,2955
 2021,TLE1,East Yorkshire and Northern Lincolnshire,K (64-66),Financial and insurance activities,279,2025,970,3155
 2022,TLE1,East Yorkshire and Northern Lincolnshire,K (64-66),Financial and insurance activities,366,2630,985,3745
+2015,TLE1,East Yorkshire and Northern Lincolnshire,L (68),"Real estate activities, excluding imputed rental",636,2585,1090,4750
+2016,TLE1,East Yorkshire and Northern Lincolnshire,L (68),"Real estate activities, excluding imputed rental",643,2550,1600,4375
+2017,TLE1,East Yorkshire and Northern Lincolnshire,L (68),"Real estate activities, excluding imputed rental",675,2800,1300,4675
+2018,TLE1,East Yorkshire and Northern Lincolnshire,L (68),"Real estate activities, excluding imputed rental",665,3025,1225,5600
+2019,TLE1,East Yorkshire and Northern Lincolnshire,L (68),"Real estate activities, excluding imputed rental",684,2925,1250,7550
+2020,TLE1,East Yorkshire and Northern Lincolnshire,L (68),"Real estate activities, excluding imputed rental",689,3150,1500,6000
+2021,TLE1,East Yorkshire and Northern Lincolnshire,L (68),"Real estate activities, excluding imputed rental",729,3425,1250,5225
+2022,TLE1,East Yorkshire and Northern Lincolnshire,L (68),"Real estate activities, excluding imputed rental",741,2900,1525,5050
 2015,TLE1,East Yorkshire and Northern Lincolnshire,M (69-75),"Professional, scientific and technical activities",616,12645,3905,17710
 2016,TLE1,East Yorkshire and Northern Lincolnshire,M (69-75),"Professional, scientific and technical activities",621,13890,3675,18500
 2017,TLE1,East Yorkshire and Northern Lincolnshire,M (69-75),"Professional, scientific and technical activities",684,15125,4680,21075
@@ -1303,6 +1367,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLE2,North Yorkshire,K (64-66),Financial and insurance activities,1154,7070,1770,9285
 2021,TLE2,North Yorkshire,K (64-66),Financial and insurance activities,1396,6955,1765,9345
 2022,TLE2,North Yorkshire,K (64-66),Financial and insurance activities,1630,8870,1865,10940
+2015,TLE2,North Yorkshire,L (68),"Real estate activities, excluding imputed rental",905,3885,1765,7175
+2016,TLE2,North Yorkshire,L (68),"Real estate activities, excluding imputed rental",893,3425,2450,6600
+2017,TLE2,North Yorkshire,L (68),"Real estate activities, excluding imputed rental",935,3500,2025,7325
+2018,TLE2,North Yorkshire,L (68),"Real estate activities, excluding imputed rental",923,3675,2150,9050
+2019,TLE2,North Yorkshire,L (68),"Real estate activities, excluding imputed rental",997,3900,2125,13150
+2020,TLE2,North Yorkshire,L (68),"Real estate activities, excluding imputed rental",929,4275,2175,13250
+2021,TLE2,North Yorkshire,L (68),"Real estate activities, excluding imputed rental",966,4575,1865,7575
+2022,TLE2,North Yorkshire,L (68),"Real estate activities, excluding imputed rental",1000,3350,2550,7525
 2015,TLE2,North Yorkshire,M (69-75),"Professional, scientific and technical activities",1056,19530,6690,27090
 2016,TLE2,North Yorkshire,M (69-75),"Professional, scientific and technical activities",1155,21760,5670,28885
 2017,TLE2,North Yorkshire,M (69-75),"Professional, scientific and technical activities",1264,23985,6935,31690
@@ -1455,6 +1527,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLE3,South Yorkshire,K (64-66),Financial and insurance activities,1355,10720,2850,13805
 2021,TLE3,South Yorkshire,K (64-66),Financial and insurance activities,1635,10350,3025,14415
 2022,TLE3,South Yorkshire,K (64-66),Financial and insurance activities,1863,11410,2980,14395
+2015,TLE3,South Yorkshire,L (68),"Real estate activities, excluding imputed rental",823,4335,1430,6615
+2016,TLE3,South Yorkshire,L (68),"Real estate activities, excluding imputed rental",788,3885,2135,6185
+2017,TLE3,South Yorkshire,L (68),"Real estate activities, excluding imputed rental",794,4140,1695,6625
+2018,TLE3,South Yorkshire,L (68),"Real estate activities, excluding imputed rental",795,4140,1660,7000
+2019,TLE3,South Yorkshire,L (68),"Real estate activities, excluding imputed rental",824,4090,1535,8675
+2020,TLE3,South Yorkshire,L (68),"Real estate activities, excluding imputed rental",747,3845,1785,6850
+2021,TLE3,South Yorkshire,L (68),"Real estate activities, excluding imputed rental",832,4945,1785,7340
+2022,TLE3,South Yorkshire,L (68),"Real estate activities, excluding imputed rental",853,4265,2230,7190
 2015,TLE3,South Yorkshire,M (69-75),"Professional, scientific and technical activities",1111,23990,6190,31605
 2016,TLE3,South Yorkshire,M (69-75),"Professional, scientific and technical activities",1071,25175,6890,34645
 2017,TLE3,South Yorkshire,M (69-75),"Professional, scientific and technical activities",1147,29890,9615,39830
@@ -1607,6 +1687,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLE4,West Yorkshire,K (64-66),Financial and insurance activities,5149,34050,8030,41400
 2021,TLE4,West Yorkshire,K (64-66),Financial and insurance activities,5556,32595,7410,40615
 2022,TLE4,West Yorkshire,K (64-66),Financial and insurance activities,6262,36080,8110,45065
+2015,TLE4,West Yorkshire,L (68),"Real estate activities, excluding imputed rental",2216,11125,3455,16725
+2016,TLE4,West Yorkshire,L (68),"Real estate activities, excluding imputed rental",2162,10140,5340,15850
+2017,TLE4,West Yorkshire,L (68),"Real estate activities, excluding imputed rental",2252,11225,4105,17475
+2018,TLE4,West Yorkshire,L (68),"Real estate activities, excluding imputed rental",2173,11025,4125,18225
+2019,TLE4,West Yorkshire,L (68),"Real estate activities, excluding imputed rental",2228,11525,4210,24100
+2020,TLE4,West Yorkshire,L (68),"Real estate activities, excluding imputed rental",2228,12525,4875,24550
+2021,TLE4,West Yorkshire,L (68),"Real estate activities, excluding imputed rental",2404,13650,5380,19550
+2022,TLE4,West Yorkshire,L (68),"Real estate activities, excluding imputed rental",2544,10840,5720,18050
 2015,TLE4,West Yorkshire,M (69-75),"Professional, scientific and technical activities",3034,62725,16670,80975
 2016,TLE4,West Yorkshire,M (69-75),"Professional, scientific and technical activities",3192,63875,13095,80225
 2017,TLE4,West Yorkshire,M (69-75),"Professional, scientific and technical activities",3431,68970,16390,86500
@@ -1759,6 +1847,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLF1,Derbyshire and Nottinghamshire,K (64-66),Financial and insurance activities,1190,8715,2480,11820
 2021,TLF1,Derbyshire and Nottinghamshire,K (64-66),Financial and insurance activities,1485,10750,3390,13495
 2022,TLF1,Derbyshire and Nottinghamshire,K (64-66),Financial and insurance activities,1651,11190,2855,13710
+2015,TLF1,Derbyshire and Nottinghamshire,L (68),"Real estate activities, excluding imputed rental",1445,9075,2275,12275
+2016,TLF1,Derbyshire and Nottinghamshire,L (68),"Real estate activities, excluding imputed rental",1467,7400,2470,11350
+2017,TLF1,Derbyshire and Nottinghamshire,L (68),"Real estate activities, excluding imputed rental",1549,9425,2100,12600
+2018,TLF1,Derbyshire and Nottinghamshire,L (68),"Real estate activities, excluding imputed rental",1600,9275,3475,15050
+2019,TLF1,Derbyshire and Nottinghamshire,L (68),"Real estate activities, excluding imputed rental",1652,9925,3575,15850
+2020,TLF1,Derbyshire and Nottinghamshire,L (68),"Real estate activities, excluding imputed rental",1650,12225,4625,18125
+2021,TLF1,Derbyshire and Nottinghamshire,L (68),"Real estate activities, excluding imputed rental",1467,8650,4025,14000
+2022,TLF1,Derbyshire and Nottinghamshire,L (68),"Real estate activities, excluding imputed rental",1436,8625,4050,15550
 2015,TLF1,Derbyshire and Nottinghamshire,M (69-75),"Professional, scientific and technical activities",2208,40910,11325,56590
 2016,TLF1,Derbyshire and Nottinghamshire,M (69-75),"Professional, scientific and technical activities",2434,44570,11695,59005
 2017,TLF1,Derbyshire and Nottinghamshire,M (69-75),"Professional, scientific and technical activities",2505,42530,13335,57545
@@ -1911,6 +2007,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLF2,"Leicestershire, Rutland and Northamptonshire",K (64-66),Financial and insurance activities,2491,15675,4660,19810
 2021,TLF2,"Leicestershire, Rutland and Northamptonshire",K (64-66),Financial and insurance activities,2604,17950,5020,23800
 2022,TLF2,"Leicestershire, Rutland and Northamptonshire",K (64-66),Financial and insurance activities,2818,15320,3735,19505
+2015,TLF2,"Leicestershire, Rutland and Northamptonshire",L (68),"Real estate activities, excluding imputed rental",1209,7475,1775,10000
+2016,TLF2,"Leicestershire, Rutland and Northamptonshire",L (68),"Real estate activities, excluding imputed rental",1198,5275,1875,9850
+2017,TLF2,"Leicestershire, Rutland and Northamptonshire",L (68),"Real estate activities, excluding imputed rental",1298,7325,1745,9575
+2018,TLF2,"Leicestershire, Rutland and Northamptonshire",L (68),"Real estate activities, excluding imputed rental",1405,6975,2900,11500
+2019,TLF2,"Leicestershire, Rutland and Northamptonshire",L (68),"Real estate activities, excluding imputed rental",1463,7850,3020,13175
+2020,TLF2,"Leicestershire, Rutland and Northamptonshire",L (68),"Real estate activities, excluding imputed rental",1374,10175,3750,17450
+2021,TLF2,"Leicestershire, Rutland and Northamptonshire",L (68),"Real estate activities, excluding imputed rental",1471,8100,4300,13600
+2022,TLF2,"Leicestershire, Rutland and Northamptonshire",L (68),"Real estate activities, excluding imputed rental",1569,9015,3930,16575
 2015,TLF2,"Leicestershire, Rutland and Northamptonshire",M (69-75),"Professional, scientific and technical activities",2165,45840,11000,60570
 2016,TLF2,"Leicestershire, Rutland and Northamptonshire",M (69-75),"Professional, scientific and technical activities",2378,50920,12260,66460
 2017,TLF2,"Leicestershire, Rutland and Northamptonshire",M (69-75),"Professional, scientific and technical activities",2566,49155,13100,67190
@@ -2063,6 +2167,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLF3,Lincolnshire,K (64-66),Financial and insurance activities,214,1795,665,2420
 2021,TLF3,Lincolnshire,K (64-66),Financial and insurance activities,255,1955,865,2900
 2022,TLF3,Lincolnshire,K (64-66),Financial and insurance activities,307,2080,680,2665
+2015,TLF3,Lincolnshire,L (68),"Real estate activities, excluding imputed rental",474,2810,635,3990
+2016,TLF3,Lincolnshire,L (68),"Real estate activities, excluding imputed rental",458,1890,660,3730
+2017,TLF3,Lincolnshire,L (68),"Real estate activities, excluding imputed rental",482,2850,630,3760
+2018,TLF3,Lincolnshire,L (68),"Real estate activities, excluding imputed rental",477,2655,1120,4460
+2019,TLF3,Lincolnshire,L (68),"Real estate activities, excluding imputed rental",479,2760,1120,4995
+2020,TLF3,Lincolnshire,L (68),"Real estate activities, excluding imputed rental",480,3750,1505,5865
+2021,TLF3,Lincolnshire,L (68),"Real estate activities, excluding imputed rental",482,2385,1385,4270
+2022,TLF3,Lincolnshire,L (68),"Real estate activities, excluding imputed rental",483,2630,1420,4860
 2015,TLF3,Lincolnshire,M (69-75),"Professional, scientific and technical activities",492,9370,3185,13605
 2016,TLF3,Lincolnshire,M (69-75),"Professional, scientific and technical activities",478,10090,3220,14265
 2017,TLF3,Lincolnshire,M (69-75),"Professional, scientific and technical activities",477,9985,3585,14035
@@ -2215,6 +2327,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLG1,"Herefordshire, Worcestershire and Warwickshire",K (64-66),Financial and insurance activities,1452,8955,2085,10830
 2021,TLG1,"Herefordshire, Worcestershire and Warwickshire",K (64-66),Financial and insurance activities,1565,7455,1780,8900
 2022,TLG1,"Herefordshire, Worcestershire and Warwickshire",K (64-66),Financial and insurance activities,2040,14570,2065,16805
+2015,TLG1,"Herefordshire, Worcestershire and Warwickshire",L (68),"Real estate activities, excluding imputed rental",1402,7375,2210,11825
+2016,TLG1,"Herefordshire, Worcestershire and Warwickshire",L (68),"Real estate activities, excluding imputed rental",1436,5825,2085,10125
+2017,TLG1,"Herefordshire, Worcestershire and Warwickshire",L (68),"Real estate activities, excluding imputed rental",1465,8750,3340,13450
+2018,TLG1,"Herefordshire, Worcestershire and Warwickshire",L (68),"Real estate activities, excluding imputed rental",1436,7850,3835,13375
+2019,TLG1,"Herefordshire, Worcestershire and Warwickshire",L (68),"Real estate activities, excluding imputed rental",1455,7475,3875,13825
+2020,TLG1,"Herefordshire, Worcestershire and Warwickshire",L (68),"Real estate activities, excluding imputed rental",1276,7225,3485,12375
+2021,TLG1,"Herefordshire, Worcestershire and Warwickshire",L (68),"Real estate activities, excluding imputed rental",1411,7350,2315,11725
+2022,TLG1,"Herefordshire, Worcestershire and Warwickshire",L (68),"Real estate activities, excluding imputed rental",1399,11425,4875,19875
 2015,TLG1,"Herefordshire, Worcestershire and Warwickshire",M (69-75),"Professional, scientific and technical activities",1850,34815,6960,43715
 2016,TLG1,"Herefordshire, Worcestershire and Warwickshire",M (69-75),"Professional, scientific and technical activities",1976,33010,8405,43870
 2017,TLG1,"Herefordshire, Worcestershire and Warwickshire",M (69-75),"Professional, scientific and technical activities",2064,36580,10935,50725
@@ -2367,6 +2487,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLG2,Shropshire and Staffordshire,K (64-66),Financial and insurance activities,959,7925,2010,9985
 2021,TLG2,Shropshire and Staffordshire,K (64-66),Financial and insurance activities,1148,6040,1680,7640
 2022,TLG2,Shropshire and Staffordshire,K (64-66),Financial and insurance activities,1329,7220,1635,8495
+2015,TLG2,Shropshire and Staffordshire,L (68),"Real estate activities, excluding imputed rental",1063,6025,2120,9175
+2016,TLG2,Shropshire and Staffordshire,L (68),"Real estate activities, excluding imputed rental",1070,5100,2050,8625
+2017,TLG2,Shropshire and Staffordshire,L (68),"Real estate activities, excluding imputed rental",1082,7425,3050,10675
+2018,TLG2,Shropshire and Staffordshire,L (68),"Real estate activities, excluding imputed rental",1135,6500,3300,11800
+2019,TLG2,Shropshire and Staffordshire,L (68),"Real estate activities, excluding imputed rental",1222,6575,3175,11950
+2020,TLG2,Shropshire and Staffordshire,L (68),"Real estate activities, excluding imputed rental",1092,5875,2800,9350
+2021,TLG2,Shropshire and Staffordshire,L (68),"Real estate activities, excluding imputed rental",1180,6725,2375,11200
+2022,TLG2,Shropshire and Staffordshire,L (68),"Real estate activities, excluding imputed rental",1188,10550,4325,16800
 2015,TLG2,Shropshire and Staffordshire,M (69-75),"Professional, scientific and technical activities",1157,26235,7340,35070
 2016,TLG2,Shropshire and Staffordshire,M (69-75),"Professional, scientific and technical activities",1242,29280,8220,39445
 2017,TLG2,Shropshire and Staffordshire,M (69-75),"Professional, scientific and technical activities",1386,30525,10805,41830
@@ -2519,6 +2647,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLG3,West Midlands,K (64-66),Financial and insurance activities,5338,34510,7125,41985
 2021,TLG3,West Midlands,K (64-66),Financial and insurance activities,5543,31280,6140,36960
 2022,TLG3,West Midlands,K (64-66),Financial and insurance activities,6032,34185,5415,39235
+2015,TLG3,West Midlands,L (68),"Real estate activities, excluding imputed rental",2176,15225,3775,19850
+2016,TLG3,West Midlands,L (68),"Real estate activities, excluding imputed rental",2212,14650,3940,19825
+2017,TLG3,West Midlands,L (68),"Real estate activities, excluding imputed rental",2300,20725,6725,28375
+2018,TLG3,West Midlands,L (68),"Real estate activities, excluding imputed rental",2358,17350,7250,25675
+2019,TLG3,West Midlands,L (68),"Real estate activities, excluding imputed rental",2455,17275,6750,26650
+2020,TLG3,West Midlands,L (68),"Real estate activities, excluding imputed rental",2525,15850,5825,21700
+2021,TLG3,West Midlands,L (68),"Real estate activities, excluding imputed rental",2503,18975,5465,26600
+2022,TLG3,West Midlands,L (68),"Real estate activities, excluding imputed rental",2641,27050,8975,36550
 2015,TLG3,West Midlands,M (69-75),"Professional, scientific and technical activities",3259,71055,16940,90975
 2016,TLG3,West Midlands,M (69-75),"Professional, scientific and technical activities",3520,69715,18410,92420
 2017,TLG3,West Midlands,M (69-75),"Professional, scientific and technical activities",3937,72950,21145,98725
@@ -2671,6 +2807,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLH1,East Anglia,K (64-66),Financial and insurance activities,3630,24120,5825,30910
 2021,TLH1,East Anglia,K (64-66),Financial and insurance activities,3918,22545,5140,28880
 2022,TLH1,East Anglia,K (64-66),Financial and insurance activities,4105,22710,5245,26735
+2015,TLH1,East Anglia,L (68),"Real estate activities, excluding imputed rental",2059,10675,3635,16650
+2016,TLH1,East Anglia,L (68),"Real estate activities, excluding imputed rental",2010,10585,3535,14725
+2017,TLH1,East Anglia,L (68),"Real estate activities, excluding imputed rental",2134,8875,5575,18250
+2018,TLH1,East Anglia,L (68),"Real estate activities, excluding imputed rental",2151,10525,4725,18000
+2019,TLH1,East Anglia,L (68),"Real estate activities, excluding imputed rental",2175,10850,6050,20600
+2020,TLH1,East Anglia,L (68),"Real estate activities, excluding imputed rental",2183,10100,4750,17575
+2021,TLH1,East Anglia,L (68),"Real estate activities, excluding imputed rental",2257,11600,4975,18025
+2022,TLH1,East Anglia,L (68),"Real estate activities, excluding imputed rental",2332,12975,5775,21200
 2015,TLH1,East Anglia,M (69-75),"Professional, scientific and technical activities",3873,62430,16835,84560
 2016,TLH1,East Anglia,M (69-75),"Professional, scientific and technical activities",3844,66420,15820,86595
 2017,TLH1,East Anglia,M (69-75),"Professional, scientific and technical activities",4097,74165,20510,99710
@@ -2823,6 +2967,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLH2,Bedfordshire and Hertfordshire,K (64-66),Financial and insurance activities,2135,12290,3960,16560
 2021,TLH2,Bedfordshire and Hertfordshire,K (64-66),Financial and insurance activities,2412,10845,3155,14105
 2022,TLH2,Bedfordshire and Hertfordshire,K (64-66),Financial and insurance activities,2465,11205,3070,14235
+2015,TLH2,Bedfordshire and Hertfordshire,L (68),"Real estate activities, excluding imputed rental",2079,9350,2945,14600
+2016,TLH2,Bedfordshire and Hertfordshire,L (68),"Real estate activities, excluding imputed rental",2011,11000,2925,13825
+2017,TLH2,Bedfordshire and Hertfordshire,L (68),"Real estate activities, excluding imputed rental",2101,9425,5725,17575
+2018,TLH2,Bedfordshire and Hertfordshire,L (68),"Real estate activities, excluding imputed rental",2188,11800,4400,18650
+2019,TLH2,Bedfordshire and Hertfordshire,L (68),"Real estate activities, excluding imputed rental",2303,12020,5450,20200
+2020,TLH2,Bedfordshire and Hertfordshire,L (68),"Real estate activities, excluding imputed rental",2121,10100,4000,16250
+2021,TLH2,Bedfordshire and Hertfordshire,L (68),"Real estate activities, excluding imputed rental",1998,12800,5245,18500
+2022,TLH2,Bedfordshire and Hertfordshire,L (68),"Real estate activities, excluding imputed rental",2182,14350,5725,21675
 2015,TLH2,Bedfordshire and Hertfordshire,M (69-75),"Professional, scientific and technical activities",3615,69745,24415,99040
 2016,TLH2,Bedfordshire and Hertfordshire,M (69-75),"Professional, scientific and technical activities",3888,78090,19900,101325
 2017,TLH2,Bedfordshire and Hertfordshire,M (69-75),"Professional, scientific and technical activities",4342,86500,24985,113775
@@ -2975,6 +3127,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLH3,Essex,K (64-66),Financial and insurance activities,2444,13625,4835,19090
 2021,TLH3,Essex,K (64-66),Financial and insurance activities,2538,13155,3915,17850
 2022,TLH3,Essex,K (64-66),Financial and insurance activities,3120,22540,4765,26775
+2015,TLH3,Essex,L (68),"Real estate activities, excluding imputed rental",1589,7115,2570,11475
+2016,TLH3,Essex,L (68),"Real estate activities, excluding imputed rental",1620,7455,2465,10650
+2017,TLH3,Essex,L (68),"Real estate activities, excluding imputed rental",1716,6580,4175,12775
+2018,TLH3,Essex,L (68),"Real estate activities, excluding imputed rental",1788,8445,3435,12500
+2019,TLH3,Essex,L (68),"Real estate activities, excluding imputed rental",1813,7935,4350,14025
+2020,TLH3,Essex,L (68),"Real estate activities, excluding imputed rental",1699,7250,3240,11075
+2021,TLH3,Essex,L (68),"Real estate activities, excluding imputed rental",1737,8075,3650,12500
+2022,TLH3,Essex,L (68),"Real estate activities, excluding imputed rental",1874,9900,4100,14825
 2015,TLH3,Essex,M (69-75),"Professional, scientific and technical activities",2180,37655,12370,52525
 2016,TLH3,Essex,M (69-75),"Professional, scientific and technical activities",2340,41495,13250,57370
 2017,TLH3,Essex,M (69-75),"Professional, scientific and technical activities",2683,45555,15145,65190
@@ -3127,6 +3287,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLI3,Inner London - West,K (64-66),Financial and insurance activities,61371,235370,19490,267350
 2021,TLI3,Inner London - West,K (64-66),Financial and insurance activities,70226,265645,26480,299995
 2022,TLI3,Inner London - West,K (64-66),Financial and insurance activities,74434,237035,20690,265145
+2015,TLI3,Inner London - West,L (68),"Real estate activities, excluding imputed rental",9270,50500,10650,66750
+2016,TLI3,Inner London - West,L (68),"Real estate activities, excluding imputed rental",9244,45000,8425,59150
+2017,TLI3,Inner London - West,L (68),"Real estate activities, excluding imputed rental",9185,45000,9900,59050
+2018,TLI3,Inner London - West,L (68),"Real estate activities, excluding imputed rental",10258,48900,15150,69150
+2019,TLI3,Inner London - West,L (68),"Real estate activities, excluding imputed rental",10239,55950,11175,70150
+2020,TLI3,Inner London - West,L (68),"Real estate activities, excluding imputed rental",8627,48350,11625,63050
+2021,TLI3,Inner London - West,L (68),"Real estate activities, excluding imputed rental",8841,48950,14175,66600
+2022,TLI3,Inner London - West,L (68),"Real estate activities, excluding imputed rental",9276,51700,15850,70200
 2015,TLI3,Inner London - West,M (69-75),"Professional, scientific and technical activities",29001,305075,47665,380150
 2016,TLI3,Inner London - West,M (69-75),"Professional, scientific and technical activities",31166,326000,46295,396950
 2017,TLI3,Inner London - West,M (69-75),"Professional, scientific and technical activities",31661,301625,43720,373275
@@ -3279,6 +3447,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLI4,Inner London - East,K (64-66),Financial and insurance activities,19344,90585,4985,95750
 2021,TLI4,Inner London - East,K (64-66),Financial and insurance activities,19736,94135,6120,100925
 2022,TLI4,Inner London - East,K (64-66),Financial and insurance activities,22164,84845,4875,89835
+2015,TLI4,Inner London - East,L (68),"Real estate activities, excluding imputed rental",5211,25700,4975,31950
+2016,TLI4,Inner London - East,L (68),"Real estate activities, excluding imputed rental",5606,23150,4000,28800
+2017,TLI4,Inner London - East,L (68),"Real estate activities, excluding imputed rental",5402,23350,4425,29200
+2018,TLI4,Inner London - East,L (68),"Real estate activities, excluding imputed rental",5557,26200,7350,34400
+2019,TLI4,Inner London - East,L (68),"Real estate activities, excluding imputed rental",5804,28050,5850,34400
+2020,TLI4,Inner London - East,L (68),"Real estate activities, excluding imputed rental",5769,26050,5790,33300
+2021,TLI4,Inner London - East,L (68),"Real estate activities, excluding imputed rental",5892,24200,7900,34600
+2022,TLI4,Inner London - East,L (68),"Real estate activities, excluding imputed rental",5941,28650,9300,38700
 2015,TLI4,Inner London - East,M (69-75),"Professional, scientific and technical activities",11843,150320,19175,179575
 2016,TLI4,Inner London - East,M (69-75),"Professional, scientific and technical activities",12696,170825,26850,206050
 2017,TLI4,Inner London - East,M (69-75),"Professional, scientific and technical activities",13975,162925,25905,197250
@@ -3431,6 +3607,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLI5,Outer London - East and North East,K (64-66),Financial and insurance activities,642,5665,1350,6905
 2021,TLI5,Outer London - East and North East,K (64-66),Financial and insurance activities,645,5525,1445,7090
 2022,TLI5,Outer London - East and North East,K (64-66),Financial and insurance activities,675,4120,1000,5345
+2015,TLI5,Outer London - East and North East,L (68),"Real estate activities, excluding imputed rental",2561,8175,1735,10750
+2016,TLI5,Outer London - East and North East,L (68),"Real estate activities, excluding imputed rental",2826,6175,1645,8225
+2017,TLI5,Outer London - East and North East,L (68),"Real estate activities, excluding imputed rental",2731,6525,1715,8790
+2018,TLI5,Outer London - East and North East,L (68),"Real estate activities, excluding imputed rental",2947,6875,2545,10050
+2019,TLI5,Outer London - East and North East,L (68),"Real estate activities, excluding imputed rental",3073,8350,2005,10395
+2020,TLI5,Outer London - East and North East,L (68),"Real estate activities, excluding imputed rental",2895,6620,2080,9540
+2021,TLI5,Outer London - East and North East,L (68),"Real estate activities, excluding imputed rental",2835,6220,3235,10090
+2022,TLI5,Outer London - East and North East,L (68),"Real estate activities, excluding imputed rental",2882,7320,3760,11230
 2015,TLI5,Outer London - East and North East,M (69-75),"Professional, scientific and technical activities",1384,22310,4410,28155
 2016,TLI5,Outer London - East and North East,M (69-75),"Professional, scientific and technical activities",1480,27815,5350,34705
 2017,TLI5,Outer London - East and North East,M (69-75),"Professional, scientific and technical activities",1476,21865,6105,29015
@@ -3583,6 +3767,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLI6,Outer London - South,K (64-66),Financial and insurance activities,1876,11610,1590,13620
 2021,TLI6,Outer London - South,K (64-66),Financial and insurance activities,2153,11985,1795,14225
 2022,TLI6,Outer London - South,K (64-66),Financial and insurance activities,2086,11135,1745,12100
+2015,TLI6,Outer London - South,L (68),"Real estate activities, excluding imputed rental",2261,7290,1885,10200
+2016,TLI6,Outer London - South,L (68),"Real estate activities, excluding imputed rental",2420,5725,1415,7750
+2017,TLI6,Outer London - South,L (68),"Real estate activities, excluding imputed rental",2381,5550,1385,7700
+2018,TLI6,Outer London - South,L (68),"Real estate activities, excluding imputed rental",2608,6500,2050,9400
+2019,TLI6,Outer London - South,L (68),"Real estate activities, excluding imputed rental",2687,6800,1630,8600
+2020,TLI6,Outer London - South,L (68),"Real estate activities, excluding imputed rental",2569,6300,1720,8425
+2021,TLI6,Outer London - South,L (68),"Real estate activities, excluding imputed rental",2559,6310,1980,8170
+2022,TLI6,Outer London - South,L (68),"Real estate activities, excluding imputed rental",2520,6740,2055,9125
 2015,TLI6,Outer London - South,M (69-75),"Professional, scientific and technical activities",2078,31580,5740,39930
 2016,TLI6,Outer London - South,M (69-75),"Professional, scientific and technical activities",2224,37555,6840,47220
 2017,TLI6,Outer London - South,M (69-75),"Professional, scientific and technical activities",2223,29690,6845,39155
@@ -3735,6 +3927,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLI7,Outer London - West and North West,K (64-66),Financial and insurance activities,1735,10515,1695,12430
 2021,TLI7,Outer London - West and North West,K (64-66),Financial and insurance activities,1676,9970,2280,12400
 2022,TLI7,Outer London - West and North West,K (64-66),Financial and insurance activities,1749,8600,1580,10380
+2015,TLI7,Outer London - West and North West,L (68),"Real estate activities, excluding imputed rental",4334,16420,3710,21530
+2016,TLI7,Outer London - West and North West,L (68),"Real estate activities, excluding imputed rental",4502,13910,3200,19015
+2017,TLI7,Outer London - West and North West,L (68),"Real estate activities, excluding imputed rental",4473,14260,3580,19720
+2018,TLI7,Outer London - West and North West,L (68),"Real estate activities, excluding imputed rental",4737,15755,5955,22515
+2019,TLI7,Outer London - West and North West,L (68),"Real estate activities, excluding imputed rental",4916,18060,4255,23015
+2020,TLI7,Outer London - West and North West,L (68),"Real estate activities, excluding imputed rental",4811,14305,4755,20765
+2021,TLI7,Outer London - West and North West,L (68),"Real estate activities, excluding imputed rental",4723,15660,6005,22265
+2022,TLI7,Outer London - West and North West,L (68),"Real estate activities, excluding imputed rental",4703,15910,6605,22770
 2015,TLI7,Outer London - West and North West,M (69-75),"Professional, scientific and technical activities",4648,65370,14160,83300
 2016,TLI7,Outer London - West and North West,M (69-75),"Professional, scientific and technical activities",4889,75775,15445,94750
 2017,TLI7,Outer London - West and North West,M (69-75),"Professional, scientific and technical activities",4996,63575,14590,81950
@@ -3887,6 +4087,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",K (64-66),Financial and insurance activities,3767,25250,4955,30265
 2021,TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",K (64-66),Financial and insurance activities,4353,24255,4630,29395
 2022,TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",K (64-66),Financial and insurance activities,4539,22005,3605,26925
+2015,TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",L (68),"Real estate activities, excluding imputed rental",2820,15300,6400,24100
+2016,TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",L (68),"Real estate activities, excluding imputed rental",3005,16850,6500,25750
+2017,TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",L (68),"Real estate activities, excluding imputed rental",3142,15100,5350,24800
+2018,TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",L (68),"Real estate activities, excluding imputed rental",3031,11900,5500,21700
+2019,TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",L (68),"Real estate activities, excluding imputed rental",3103,12925,5625,20600
+2020,TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",L (68),"Real estate activities, excluding imputed rental",3450,17250,5925,25400
+2021,TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",L (68),"Real estate activities, excluding imputed rental",3205,15575,7075,25700
+2022,TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",L (68),"Real estate activities, excluding imputed rental",3303,15475,6125,24000
 2015,TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",M (69-75),"Professional, scientific and technical activities",7673,113545,25285,141775
 2016,TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",M (69-75),"Professional, scientific and technical activities",7547,111610,29725,147575
 2017,TLJ1,"Berkshire, Buckinghamshire and Oxfordshire",M (69-75),"Professional, scientific and technical activities",8087,97225,26550,128910
@@ -4039,6 +4247,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLJ2,"Surrey, East and West Sussex",K (64-66),Financial and insurance activities,5840,39210,7655,46035
 2021,TLJ2,"Surrey, East and West Sussex",K (64-66),Financial and insurance activities,6758,39000,7105,45780
 2022,TLJ2,"Surrey, East and West Sussex",K (64-66),Financial and insurance activities,7749,37580,6140,44555
+2015,TLJ2,"Surrey, East and West Sussex",L (68),"Real estate activities, excluding imputed rental",3267,16150,7850,26600
+2016,TLJ2,"Surrey, East and West Sussex",L (68),"Real estate activities, excluding imputed rental",3500,18350,8700,29100
+2017,TLJ2,"Surrey, East and West Sussex",L (68),"Real estate activities, excluding imputed rental",3491,16100,6300,26700
+2018,TLJ2,"Surrey, East and West Sussex",L (68),"Real estate activities, excluding imputed rental",3428,12450,7025,21600
+2019,TLJ2,"Surrey, East and West Sussex",L (68),"Real estate activities, excluding imputed rental",3475,12675,6575,21800
+2020,TLJ2,"Surrey, East and West Sussex",L (68),"Real estate activities, excluding imputed rental",3603,16625,7175,24600
+2021,TLJ2,"Surrey, East and West Sussex",L (68),"Real estate activities, excluding imputed rental",3563,13425,8050,24750
+2022,TLJ2,"Surrey, East and West Sussex",L (68),"Real estate activities, excluding imputed rental",3614,15100,6750,25250
 2015,TLJ2,"Surrey, East and West Sussex",M (69-75),"Professional, scientific and technical activities",6847,96125,20615,119575
 2016,TLJ2,"Surrey, East and West Sussex",M (69-75),"Professional, scientific and technical activities",6699,89475,25715,122575
 2017,TLJ2,"Surrey, East and West Sussex",M (69-75),"Professional, scientific and technical activities",6455,78065,24555,106225
@@ -4191,6 +4407,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLJ3,Hampshire and Isle of Wight,K (64-66),Financial and insurance activities,3269,21200,4950,25575
 2021,TLJ3,Hampshire and Isle of Wight,K (64-66),Financial and insurance activities,3531,17490,4035,22560
 2022,TLJ3,Hampshire and Isle of Wight,K (64-66),Financial and insurance activities,3656,16285,4190,21005
+2015,TLJ3,Hampshire and Isle of Wight,L (68),"Real estate activities, excluding imputed rental",1895,9525,4275,16100
+2016,TLJ3,Hampshire and Isle of Wight,L (68),"Real estate activities, excluding imputed rental",1954,10575,4225,16100
+2017,TLJ3,Hampshire and Isle of Wight,L (68),"Real estate activities, excluding imputed rental",1931,9185,3375,14900
+2018,TLJ3,Hampshire and Isle of Wight,L (68),"Real estate activities, excluding imputed rental",1906,7380,3700,13525
+2019,TLJ3,Hampshire and Isle of Wight,L (68),"Real estate activities, excluding imputed rental",1934,8430,3500,12650
+2020,TLJ3,Hampshire and Isle of Wight,L (68),"Real estate activities, excluding imputed rental",1978,10535,3590,14950
+2021,TLJ3,Hampshire and Isle of Wight,L (68),"Real estate activities, excluding imputed rental",2141,9745,4370,16045
+2022,TLJ3,Hampshire and Isle of Wight,L (68),"Real estate activities, excluding imputed rental",2147,11465,4485,17985
 2015,TLJ3,Hampshire and Isle of Wight,M (69-75),"Professional, scientific and technical activities",3660,51890,11040,64675
 2016,TLJ3,Hampshire and Isle of Wight,M (69-75),"Professional, scientific and technical activities",3657,50035,14230,67770
 2017,TLJ3,Hampshire and Isle of Wight,M (69-75),"Professional, scientific and technical activities",3596,45020,13655,61470
@@ -4343,6 +4567,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLJ4,Kent,K (64-66),Financial and insurance activities,2092,16390,4085,20880
 2021,TLJ4,Kent,K (64-66),Financial and insurance activities,2329,15925,3930,20520
 2022,TLJ4,Kent,K (64-66),Financial and insurance activities,2595,14215,3165,17600
+2015,TLJ4,Kent,L (68),"Real estate activities, excluding imputed rental",1559,8140,3800,12775
+2016,TLJ4,Kent,L (68),"Real estate activities, excluding imputed rental",1686,9225,3820,13675
+2017,TLJ4,Kent,L (68),"Real estate activities, excluding imputed rental",1740,8700,3255,12700
+2018,TLJ4,Kent,L (68),"Real estate activities, excluding imputed rental",1686,6150,3525,11150
+2019,TLJ4,Kent,L (68),"Real estate activities, excluding imputed rental",1737,6715,3285,10875
+2020,TLJ4,Kent,L (68),"Real estate activities, excluding imputed rental",1662,8325,3070,12025
+2021,TLJ4,Kent,L (68),"Real estate activities, excluding imputed rental",1736,7730,3665,11975
+2022,TLJ4,Kent,L (68),"Real estate activities, excluding imputed rental",1805,8710,3150,12900
 2015,TLJ4,Kent,M (69-75),"Professional, scientific and technical activities",2212,39555,8110,50530
 2016,TLJ4,Kent,M (69-75),"Professional, scientific and technical activities",2302,32365,11100,46155
 2017,TLJ4,Kent,M (69-75),"Professional, scientific and technical activities",2233,28180,11295,40910
@@ -4495,6 +4727,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLK1,"Gloucestershire, Wiltshire and Bath/Bristol area",K (64-66),Financial and insurance activities,6007,36340,7390,44970
 2021,TLK1,"Gloucestershire, Wiltshire and Bath/Bristol area",K (64-66),Financial and insurance activities,6202,37190,7210,45075
 2022,TLK1,"Gloucestershire, Wiltshire and Bath/Bristol area",K (64-66),Financial and insurance activities,7209,39655,8405,52235
+2015,TLK1,"Gloucestershire, Wiltshire and Bath/Bristol area",L (68),"Real estate activities, excluding imputed rental",2317,12980,4910,21950
+2016,TLK1,"Gloucestershire, Wiltshire and Bath/Bristol area",L (68),"Real estate activities, excluding imputed rental",2449,13390,5040,22200
+2017,TLK1,"Gloucestershire, Wiltshire and Bath/Bristol area",L (68),"Real estate activities, excluding imputed rental",2678,12780,4305,22400
+2018,TLK1,"Gloucestershire, Wiltshire and Bath/Bristol area",L (68),"Real estate activities, excluding imputed rental",2770,14790,5475,22625
+2019,TLK1,"Gloucestershire, Wiltshire and Bath/Bristol area",L (68),"Real estate activities, excluding imputed rental",2907,14275,5090,25050
+2020,TLK1,"Gloucestershire, Wiltshire and Bath/Bristol area",L (68),"Real estate activities, excluding imputed rental",2859,17110,6130,26420
+2021,TLK1,"Gloucestershire, Wiltshire and Bath/Bristol area",L (68),"Real estate activities, excluding imputed rental",2864,13460,4805,20415
+2022,TLK1,"Gloucestershire, Wiltshire and Bath/Bristol area",L (68),"Real estate activities, excluding imputed rental",3023,15005,6005,23010
 2015,TLK1,"Gloucestershire, Wiltshire and Bath/Bristol area",M (69-75),"Professional, scientific and technical activities",4953,86825,19420,109825
 2016,TLK1,"Gloucestershire, Wiltshire and Bath/Bristol area",M (69-75),"Professional, scientific and technical activities",5093,73770,18285,97175
 2017,TLK1,"Gloucestershire, Wiltshire and Bath/Bristol area",M (69-75),"Professional, scientific and technical activities",5038,79025,24185,110750
@@ -4647,6 +4887,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLK2,Dorset and Somerset,K (64-66),Financial and insurance activities,1982,14390,2425,17305
 2021,TLK2,Dorset and Somerset,K (64-66),Financial and insurance activities,2306,14175,2540,17255
 2022,TLK2,Dorset and Somerset,K (64-66),Financial and insurance activities,2355,13410,2480,16630
+2015,TLK2,Dorset and Somerset,L (68),"Real estate activities, excluding imputed rental",1246,6100,2890,10675
+2016,TLK2,Dorset and Somerset,L (68),"Real estate activities, excluding imputed rental",1329,6665,2830,11445
+2017,TLK2,Dorset and Somerset,L (68),"Real estate activities, excluding imputed rental",1396,6355,2525,11520
+2018,TLK2,Dorset and Somerset,L (68),"Real estate activities, excluding imputed rental",1400,7405,3725,12560
+2019,TLK2,Dorset and Somerset,L (68),"Real estate activities, excluding imputed rental",1473,7405,3450,15010
+2020,TLK2,Dorset and Somerset,L (68),"Real estate activities, excluding imputed rental",1492,9505,4480,15910
+2021,TLK2,Dorset and Somerset,L (68),"Real estate activities, excluding imputed rental",1433,6655,3275,12810
+2022,TLK2,Dorset and Somerset,L (68),"Real estate activities, excluding imputed rental",1511,7030,3480,12210
 2015,TLK2,Dorset and Somerset,M (69-75),"Professional, scientific and technical activities",1459,32475,7985,42360
 2016,TLK2,Dorset and Somerset,M (69-75),"Professional, scientific and technical activities",1483,26510,6510,34820
 2017,TLK2,Dorset and Somerset,M (69-75),"Professional, scientific and technical activities",1645,29215,8340,40230
@@ -4799,6 +5047,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLK3,Cornwall and Isles of Scilly,K (64-66),Financial and insurance activities,140,985,355,1280
 2021,TLK3,Cornwall and Isles of Scilly,K (64-66),Financial and insurance activities,143,995,365,1435
 2022,TLK3,Cornwall and Isles of Scilly,K (64-66),Financial and insurance activities,189,1300,530,2120
+2015,TLK3,Cornwall and Isles of Scilly,L (68),"Real estate activities, excluding imputed rental",435,2240,1140,4125
+2016,TLK3,Cornwall and Isles of Scilly,L (68),"Real estate activities, excluding imputed rental",443,2400,1110,4325
+2017,TLK3,Cornwall and Isles of Scilly,L (68),"Real estate activities, excluding imputed rental",509,2400,890,4425
+2018,TLK3,Cornwall and Isles of Scilly,L (68),"Real estate activities, excluding imputed rental",519,3140,1220,4650
+2019,TLK3,Cornwall and Isles of Scilly,L (68),"Real estate activities, excluding imputed rental",539,2885,1095,5350
+2020,TLK3,Cornwall and Isles of Scilly,L (68),"Real estate activities, excluding imputed rental",540,3525,1350,5100
+2021,TLK3,Cornwall and Isles of Scilly,L (68),"Real estate activities, excluding imputed rental",587,2575,980,3950
+2022,TLK3,Cornwall and Isles of Scilly,L (68),"Real estate activities, excluding imputed rental",598,2675,1125,4325
 2015,TLK3,Cornwall and Isles of Scilly,M (69-75),"Professional, scientific and technical activities",360,8850,2745,13185
 2016,TLK3,Cornwall and Isles of Scilly,M (69-75),"Professional, scientific and technical activities",383,6740,2290,10295
 2017,TLK3,Cornwall and Isles of Scilly,M (69-75),"Professional, scientific and technical activities",385,7345,2565,10720
@@ -4951,6 +5207,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLK4,Devon,K (64-66),Financial and insurance activities,454,3260,975,4345
 2021,TLK4,Devon,K (64-66),Financial and insurance activities,426,3340,1105,4480
 2022,TLK4,Devon,K (64-66),Financial and insurance activities,519,3740,1265,5490
+2015,TLK4,Devon,L (68),"Real estate activities, excluding imputed rental",1015,6185,2275,10180
+2016,TLK4,Devon,L (68),"Real estate activities, excluding imputed rental",1048,6460,2115,10690
+2017,TLK4,Devon,L (68),"Real estate activities, excluding imputed rental",1108,5250,1815,9925
+2018,TLK4,Devon,L (68),"Real estate activities, excluding imputed rental",1108,6475,2435,9650
+2019,TLK4,Devon,L (68),"Real estate activities, excluding imputed rental",1136,5875,2340,11510
+2020,TLK4,Devon,L (68),"Real estate activities, excluding imputed rental",1148,7670,2785,11260
+2021,TLK4,Devon,L (68),"Real estate activities, excluding imputed rental",1246,5950,2125,9610
+2022,TLK4,Devon,L (68),"Real estate activities, excluding imputed rental",1303,6225,2725,10110
 2015,TLK4,Devon,M (69-75),"Professional, scientific and technical activities",1179,22905,6105,30710
 2016,TLK4,Devon,M (69-75),"Professional, scientific and technical activities",1174,18615,5405,26125
 2017,TLK4,Devon,M (69-75),"Professional, scientific and technical activities",1172,20055,6600,29230
@@ -5103,6 +5367,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLL1,West Wales,K (64-66),Financial and insurance activities,1313,8075,2190,10525
 2021,TLL1,West Wales,K (64-66),Financial and insurance activities,1388,9620,2660,11885
 2022,TLL1,West Wales,K (64-66),Financial and insurance activities,1536,12015,2355,14235
+2015,TLL1,West Wales,L (68),"Real estate activities, excluding imputed rental",1059,6800,1960,11100
+2016,TLL1,West Wales,L (68),"Real estate activities, excluding imputed rental",1107,8995,2385,11680
+2017,TLL1,West Wales,L (68),"Real estate activities, excluding imputed rental",1129,5830,2435,9400
+2018,TLL1,West Wales,L (68),"Real estate activities, excluding imputed rental",1027,7285,3735,12965
+2019,TLL1,West Wales,L (68),"Real estate activities, excluding imputed rental",1006,6550,2385,9645
+2020,TLL1,West Wales,L (68),"Real estate activities, excluding imputed rental",1001,6285,3860,11730
+2021,TLL1,West Wales,L (68),"Real estate activities, excluding imputed rental",1000,7510,2475,11480
+2022,TLL1,West Wales,L (68),"Real estate activities, excluding imputed rental",1029,8475,1750,11260
 2015,TLL1,West Wales,M (69-75),"Professional, scientific and technical activities",960,23135,5985,32200
 2016,TLL1,West Wales,M (69-75),"Professional, scientific and technical activities",978,18380,5825,26000
 2017,TLL1,West Wales,M (69-75),"Professional, scientific and technical activities",1038,23160,6255,31375
@@ -5255,6 +5527,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLL2,East Wales,K (64-66),Financial and insurance activities,2477,14885,2995,18000
 2021,TLL2,East Wales,K (64-66),Financial and insurance activities,2902,17435,3790,20885
 2022,TLL2,East Wales,K (64-66),Financial and insurance activities,3016,20550,3725,24365
+2015,TLL2,East Wales,L (68),"Real estate activities, excluding imputed rental",794,5055,1735,8675
+2016,TLL2,East Wales,L (68),"Real estate activities, excluding imputed rental",792,6400,1890,8650
+2017,TLL2,East Wales,L (68),"Real estate activities, excluding imputed rental",788,3625,2275,7675
+2018,TLL2,East Wales,L (68),"Real estate activities, excluding imputed rental",759,5700,3115,9600
+2019,TLL2,East Wales,L (68),"Real estate activities, excluding imputed rental",778,5130,2220,8400
+2020,TLL2,East Wales,L (68),"Real estate activities, excluding imputed rental",780,5140,3090,8850
+2021,TLL2,East Wales,L (68),"Real estate activities, excluding imputed rental",780,5780,2140,8900
+2022,TLL2,East Wales,L (68),"Real estate activities, excluding imputed rental",846,6730,1480,8945
 2015,TLL2,East Wales,M (69-75),"Professional, scientific and technical activities",1177,26805,6295,35925
 2016,TLL2,East Wales,M (69-75),"Professional, scientific and technical activities",1204,23170,6595,30780
 2017,TLL2,East Wales,M (69-75),"Professional, scientific and technical activities",1241,29070,6925,37825
@@ -5407,6 +5687,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLM5,North Eastern Scotland,K (64-66),Financial and insurance activities,274,1555,385,2050
 2021,TLM5,North Eastern Scotland,K (64-66),Financial and insurance activities,230,1210,385,1645
 2022,TLM5,North Eastern Scotland,K (64-66),Financial and insurance activities,306,1345,460,1815
+2015,TLM5,North Eastern Scotland,L (68),"Real estate activities, excluding imputed rental",475,1930,985,3340
+2016,TLM5,North Eastern Scotland,L (68),"Real estate activities, excluding imputed rental",473,2215,1240,3800
+2017,TLM5,North Eastern Scotland,L (68),"Real estate activities, excluding imputed rental",466,1975,1225,3325
+2018,TLM5,North Eastern Scotland,L (68),"Real estate activities, excluding imputed rental",435,1665,930,3075
+2019,TLM5,North Eastern Scotland,L (68),"Real estate activities, excluding imputed rental",434,1800,1075,3100
+2020,TLM5,North Eastern Scotland,L (68),"Real estate activities, excluding imputed rental",391,1925,965,2950
+2021,TLM5,North Eastern Scotland,L (68),"Real estate activities, excluding imputed rental",345,1800,725,2900
+2022,TLM5,North Eastern Scotland,L (68),"Real estate activities, excluding imputed rental",383,1545,790,2585
 2015,TLM5,North Eastern Scotland,M (69-75),"Professional, scientific and technical activities",2168,32905,7255,40655
 2016,TLM5,North Eastern Scotland,M (69-75),"Professional, scientific and technical activities",1861,28085,6695,35790
 2017,TLM5,North Eastern Scotland,M (69-75),"Professional, scientific and technical activities",1849,27345,7975,36675
@@ -5559,6 +5847,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLM6,Highlands and Islands,K (64-66),Financial and insurance activities,150,1020,350,1345
 2021,TLM6,Highlands and Islands,K (64-66),Financial and insurance activities,150,900,395,1340
 2022,TLM6,Highlands and Islands,K (64-66),Financial and insurance activities,156,1120,375,1580
+2015,TLM6,Highlands and Islands,L (68),"Real estate activities, excluding imputed rental",365,1760,665,2805
+2016,TLM6,Highlands and Islands,L (68),"Real estate activities, excluding imputed rental",388,1980,750,3025
+2017,TLM6,Highlands and Islands,L (68),"Real estate activities, excluding imputed rental",389,1565,655,2650
+2018,TLM6,Highlands and Islands,L (68),"Real estate activities, excluding imputed rental",360,1635,650,2865
+2019,TLM6,Highlands and Islands,L (68),"Real estate activities, excluding imputed rental",377,1945,805,3100
+2020,TLM6,Highlands and Islands,L (68),"Real estate activities, excluding imputed rental",345,1735,695,2640
+2021,TLM6,Highlands and Islands,L (68),"Real estate activities, excluding imputed rental",318,1990,680,3125
+2022,TLM6,Highlands and Islands,L (68),"Real estate activities, excluding imputed rental",356,1675,770,2640
 2015,TLM6,Highlands and Islands,M (69-75),"Professional, scientific and technical activities",404,7720,2065,10520
 2016,TLM6,Highlands and Islands,M (69-75),"Professional, scientific and technical activities",414,7995,2185,11115
 2017,TLM6,Highlands and Islands,M (69-75),"Professional, scientific and technical activities",411,7100,2415,10280
@@ -5711,6 +6007,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLM7,Eastern Scotland,K (64-66),Financial and insurance activities,6950,36610,6000,42020
 2021,TLM7,Eastern Scotland,K (64-66),Financial and insurance activities,7830,36215,6445,43050
 2022,TLM7,Eastern Scotland,K (64-66),Financial and insurance activities,9038,43925,6110,50080
+2015,TLM7,Eastern Scotland,L (68),"Real estate activities, excluding imputed rental",1472,7775,3140,11975
+2016,TLM7,Eastern Scotland,L (68),"Real estate activities, excluding imputed rental",1537,8800,3050,13050
+2017,TLM7,Eastern Scotland,L (68),"Real estate activities, excluding imputed rental",1625,7550,3125,11475
+2018,TLM7,Eastern Scotland,L (68),"Real estate activities, excluding imputed rental",1610,8225,3250,14475
+2019,TLM7,Eastern Scotland,L (68),"Real estate activities, excluding imputed rental",1722,9825,4125,15050
+2020,TLM7,Eastern Scotland,L (68),"Real estate activities, excluding imputed rental",1636,9375,3600,13375
+2021,TLM7,Eastern Scotland,L (68),"Real estate activities, excluding imputed rental",1623,10350,3225,14050
+2022,TLM7,Eastern Scotland,L (68),"Real estate activities, excluding imputed rental",1733,8750,3375,12975
 2015,TLM7,Eastern Scotland,M (69-75),"Professional, scientific and technical activities",3140,45690,10155,59140
 2016,TLM7,Eastern Scotland,M (69-75),"Professional, scientific and technical activities",3354,48765,10205,62275
 2017,TLM7,Eastern Scotland,M (69-75),"Professional, scientific and technical activities",3543,46085,12620,62615
@@ -5863,6 +6167,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLM8,West Central Scotland,K (64-66),Financial and insurance activities,3630,23940,4680,29215
 2021,TLM8,West Central Scotland,K (64-66),Financial and insurance activities,3655,22440,5115,27655
 2022,TLM8,West Central Scotland,K (64-66),Financial and insurance activities,3945,20070,4525,24810
+2015,TLM8,West Central Scotland,L (68),"Real estate activities, excluding imputed rental",1365,8225,2370,11625
+2016,TLM8,West Central Scotland,L (68),"Real estate activities, excluding imputed rental",1483,9825,3025,13250
+2017,TLM8,West Central Scotland,L (68),"Real estate activities, excluding imputed rental",1470,8300,2675,11950
+2018,TLM8,West Central Scotland,L (68),"Real estate activities, excluding imputed rental",1387,8300,2570,14025
+2019,TLM8,West Central Scotland,L (68),"Real estate activities, excluding imputed rental",1471,10100,3325,13750
+2020,TLM8,West Central Scotland,L (68),"Real estate activities, excluding imputed rental",1420,10150,3100,13350
+2021,TLM8,West Central Scotland,L (68),"Real estate activities, excluding imputed rental",1333,10325,2635,14200
+2022,TLM8,West Central Scotland,L (68),"Real estate activities, excluding imputed rental",1461,8600,2900,12300
 2015,TLM8,West Central Scotland,M (69-75),"Professional, scientific and technical activities",1998,35685,6505,44165
 2016,TLM8,West Central Scotland,M (69-75),"Professional, scientific and technical activities",2057,41000,7075,51065
 2017,TLM8,West Central Scotland,M (69-75),"Professional, scientific and technical activities",2288,37490,9680,50175
@@ -6015,6 +6327,14 @@ DATE,ITL_code,GEOGRAPHY_NAME,SIC_CODE,SIC07_description,gva,JOBCOUNT_FULLTIME,JO
 2020,TLM9,Southern Scotland,K (64-66),Financial and insurance activities,623,3715,920,4565
 2021,TLM9,Southern Scotland,K (64-66),Financial and insurance activities,544,2715,955,3620
 2022,TLM9,Southern Scotland,K (64-66),Financial and insurance activities,577,3135,1000,4180
+2015,TLM9,Southern Scotland,L (68),"Real estate activities, excluding imputed rental",619,2840,1210,4415
+2016,TLM9,Southern Scotland,L (68),"Real estate activities, excluding imputed rental",634,3410,1255,4875
+2017,TLM9,Southern Scotland,L (68),"Real estate activities, excluding imputed rental",662,3260,1300,4640
+2018,TLM9,Southern Scotland,L (68),"Real estate activities, excluding imputed rental",646,3255,1265,5550
+2019,TLM9,Southern Scotland,L (68),"Real estate activities, excluding imputed rental",646,3425,1705,5550
+2020,TLM9,Southern Scotland,L (68),"Real estate activities, excluding imputed rental",617,3485,1490,5675
+2021,TLM9,Southern Scotland,L (68),"Real estate activities, excluding imputed rental",598,3735,1235,5350
+2022,TLM9,Southern Scotland,L (68),"Real estate activities, excluding imputed rental",668,3160,1415,4850
 2015,TLM9,Southern Scotland,M (69-75),"Professional, scientific and technical activities",651,11215,2550,14805
 2016,TLM9,Southern Scotland,M (69-75),"Professional, scientific and technical activities",671,12485,3075,16495
 2017,TLM9,Southern Scotland,M (69-75),"Professional, scientific and technical activities",767,12580,3690,16725

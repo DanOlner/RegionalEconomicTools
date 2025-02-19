@@ -28,7 +28,7 @@ nuts.latest <- read_csv('data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_A
 
 * Easy-access ONS regional **gross value added (GVA)** by SIC sector data, supplied as tidy CSVs: ITL2 & 3 geographies, and SIC industrial codes at 2-digit, Section (20 categories) and Production/Construction/Services, 1998 to most recent available year, `r gva.latest`. ([Original ONS excel](https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry), [code](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/regionalGVA_processing.R), example use in R: [location quotients / proportion plots](https://danolner.github.io/RegionalEconomicTools/sector_locationquotients_and_proportions.html).)
 * Same for BRES (the Business Register and Employment Survey) region-by-sector **job count data**, with extra-bonus higher accuracy values (see below). 2015 to latest year, `r itl.latest`. ([NOMIS page](https://www.nomisweb.co.uk/datasets/newbres6pub), code for [API](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/BRES_API_download.R) & [wrangling](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/BRES_sum_SIC5digit_to_otherSICcategories.R).)
-* Those two **linked together into single GVA/jobcount datasets** (2015 to `r gva.latest`). ([Code](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/combine_regGVA_and_BRES.R).)
+* Those two **linked together into single GVA/jobcount datasets** (2015 to `r gva.latest`), matching the GVA data's bespoke 2-digit and section SIC categories for ITL3 (see below for more on that). ([Code](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/combine_regGVA_and_BRES.R).)
 
 
 
@@ -137,8 +137,8 @@ GVA values are **all in millions of pounds**, same as the original.
 As well as ITL2 and ITL3 geographical zones, there's:
 
 * "3GROUPS": SIC sectoral groupings for **production, construction** and **services** separately.
-* "SIC_SECTION": 20 SIC top-level sections (SIC codes with letters A to T) (see [SIC hierarchy](https://onsdigital.github.io/dp-classification-tools/standard-industrial-classification/ONS_SIC_hierarchy_view.html)).
-* "SIC_2DIGIT": 2 digit codes, the most granular level available in the regional GVA data. **NOTE HOWEVER:** here, ONS combine a few of them, so these are are a **smaller** bespoke list in the GVA data. For ITL2 zones, there are **72 SIC categories**. For ITL3 zones, there are **48 SIC categories.**
+* "SIC_SECTION": 20 SIC top-level sections (SIC codes with letters A to T) (see [SIC hierarchy](https://onsdigital.github.io/dp-classification-tools/standard-industrial-classification/ONS_SIC_hierarchy_view.html)). **NOTE: the ITL2 data has all single letter sections A to T; ITL3 data has A/B and D/E combined into their own categories, so there are two fewer.**
+* "SIC_2DIGIT": 2 digit codes, the most granular level available in the regional GVA data. **NOTE AGAIN:** here, ONS combine a few of them, so these are are a **smaller** bespoke list in the GVA data. For ITL2 zones, there are **72 SIC categories**. For ITL3 zones, there are **48 SIC categories.**
 
 There a couple of other choices of CSV type:
 
@@ -475,9 +475,9 @@ These datasets combine regional GVA and BRES job count data into single CSVs. Th
 
 
 1. The newer post-Brexit ITL geographies for 2021 are the same as the previous EU-wide NUTS 2016 ones - **apart from one small difference**: ITL3 has "Bournemouth, Christchurch and Poole", NUTS 3 has "Bournemouth and Poole". Christchurch moved from "Dorset" in the data in 2021. Due to the "chained volume GVA can't be summed" issue, the solution used here is this: **The ITL3 zones for "Bournemouth, Christchurch and Poole" / "Dorset" / "Somerset" are replaced with the ITL2 zone that overlaps them all ("Dorset and Somerset").** Apologies to those zones affected, this is a less-than-ideal solution to keep the time series[^itl].
-2. BRES job count data has been summed to match the bespoke SIC 2 digit lists in the GVA data. For ITL2 zones, there are **72 SIC categories**. For ITL3 zones, there are **48 SIC categories.**
+2. BRES job count data has been summed to match the bespoke SIC categories in the GVA data. For ITL2 zones, there are **72 2-digit SIC categories** and the **full SIC section list**. For ITL3 zones, there are **48 2-digit SIC categories** and **for SIC sections, A/B and D/E are combined, making two fewer categories**.
 
-In the repo, there is a **bespoke ITL3 geo-file reflecting point #1** with the Dorset / Somerset / Bournemouth+Poole zones replaced with the ITL2 for Dorset/Somerset. The geojson file (~1.6mb) is [here on github](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/data/ITL_geographies/ITL3_bespokeforGVA_BRESjoin.geojson) (download button, top right) or raw [here](https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/ITL_geographies/ITL3_bespokeforGVA_BRESjoin.geojson). It will join on either zone ID or zone name to the BRES + GVA combo CSVs above.
+In the repo, there is a **bespoke ITL3 geo-file, reflecting point #1** with the Dorset / Somerset / Bournemouth+Poole zones replaced with the ITL2 for Dorset/Somerset. The geojson file (~1.6mb) is [here on github](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/data/ITL_geographies/ITL3_bespokeforGVA_BRESjoin.geojson) (download button, top right) or raw [here](https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/ITL_geographies/ITL3_bespokeforGVA_BRESjoin.geojson). It will join on either zone ID or zone name to the BRES + GVA combo CSVs above.
 
 [^itl]: The 'current price' data could be summed, but the best that could be achieved there to keep a consistent time series would be a zone combining Dorset with Bournemouth, Christchurch and Poole. For chained volume values, it has to be the larger ITL2 zone, for the reasons given. Rather than do both, here I've just used the one approach so all data is comparable directly.
 

@@ -152,7 +152,12 @@ for(SICgrouping in c('3GROUPS','SIC_SECTION','SIC_2DIGIT')){
       .init = gva_df %>% rename(GEOGRAPHY_NAME = Region_name, DATE = year,
                              SIC_CODE = SIC07_code ,gva = value)) %>% 
     relocate(DATE, .before = ITL_code) %>% 
-    rename(JOBCOUNT_FULLTIME = JOBCOUNT.x, JOBCOUNT_PARTTIME = JOBCOUNT.y, JOBCOUNT_ALLINEMPLOYMENT = JOBCOUNT)
+    rename(
+      # Region_name = GEOGRAPHY_NAME,
+      JOBCOUNT_FULLTIME = JOBCOUNT.x, 
+      JOBCOUNT_PARTTIME = JOBCOUNT.y, 
+      JOBCOUNT_ALLINEMPLOYMENT = JOBCOUNT
+      )
   })
   
   #Tweak filenames
@@ -301,6 +306,48 @@ for(SICgrouping in c('3GROUPS','SIC_SECTION','SIC_2DIGIT')){
     
   }
   
+  
+  
+  #Turns out, actually, there are two SIC section combos in ITL3 that *also* needed adding
+  #A bit less faff than 2 digit though.
+  #Only ITL3 differences:
+  #itl2 <- read_csv('data/regionalGVA/regionalGVA_chainedvolume_ITL2_SIC_SECTION_WIDE_2022.csv')
+  #itl3 <- read_csv('data/regionalGVA/regionalGVA_chainedvolume_ITL3_SIC_SECTION_WIDE_2022.csv')
+  #Only two combos in ITL3...
+  #unique(itl3$SIC07_code)[!unique(itl3$SIC07_code) %in% unique(itl2$SIC07_code)]
+  #"AB (1-9)"   "DE (35-39)"
+  
+  #And yes, need to come back and refactor - a loop followed by loads of if/thens???
+  if(SICgrouping == 'SIC_SECTION'){
+    
+    #Directly label the new combo codes in bres that need grouping and summing
+    all.bres <- all.bres %>%
+      map(~ .x %>%
+            mutate(
+              # SIC_CODE2 = case_when(#To check against orig, tick
+              SIC_CODE = case_when(
+                SIC_CODE %in% c("A (1-3)","B (5-9)") ~ "AB (1-9)",
+                SIC_CODE %in% c("D (35)","E (36-39)") ~ "DE (35-39)",
+                .default = SIC_CODE
+                )
+              )
+      )
+    
+    #Then sum by new section groupings that match ITL3 GVA data
+    all.bres <- all.bres %>% 
+      map(~ .x %>% 
+            group_by(DATE,GEOGRAPHY_NAME,SIC_CODE) %>% 
+            summarise(
+              JOBCOUNT = sum(JOBCOUNT)#Why we need this field to remain same for both for now
+            ) %>% 
+            ungroup() %>% 
+            filter(!is.na(SIC_CODE))
+      ) 
+    
+  }
+  
+  
+  
   #Then can carry on...
   
   #COMBINE!
@@ -421,7 +468,7 @@ for(SICgrouping in c('3GROUPS','SIC_SECTION','SIC_2DIGIT')){
   
   #saaaave
   gva.n.bres.tweakedITL3 %>% walk2(newnames, ~ {
-    .x %>% write_csv(file = .y)
+    .x %>%  write_csv(file = .y)
   })
     
   

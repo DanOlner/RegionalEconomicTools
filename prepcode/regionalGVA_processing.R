@@ -244,6 +244,7 @@ SIC_sections <- gva$SIC07_code[substr(gva$SIC07_code,2,2) == ' '] %>% unique
 #(Reminder - which we can only do using 'current prices' because only those can be re-summed, unlike chained volume measures)
 
 #REPLACE "L (68)" REAL ESTATE ACTIVITIES (WHICH INCLUDES IMPUTED RENT) WITH JUST 68 "Real estate activities, excluding imputed rental"  
+#NOTE: "68" WILL NEED REPLACING AGAIN WITH L (68) AFTER FOR LATER MATCHES, BUT PUT EXC IMPUTED RENT NOTE IN
 SIC_sections_minusImputedRent = SIC_sections
 SIC_sections_minusImputedRent[SIC_sections_minusImputedRent == 'L (68)'] <- '68'
 
@@ -261,6 +262,10 @@ gva.all <- gva %>%
 gva.minusimputedrent <- gva %>% 
   filter(SIC07_code %in% SIC_sections_minusImputedRent) 
 
+#Replace the 'minus imputed rent' version with a section letter so later matching works
+gva.minusimputedrent$SIC07_code[gva.minusimputedrent$SIC07_code == '68'] <- 'L (68)'
+
+
 #SAVE WIDE
 write_csv(gva.all, paste0('data/regionalGVA/regionalGVA_currentprices_ITL2_SIC_SECTION_WIDE_',names(gva)[length(names(gva))],'.csv'))
 write_csv(gva.minusimputedrent, paste0('data/regionalGVA/regionalGVA_currentprices_ITL2_SIC_SECTION_MINUSimputedrent_WIDE_',names(gva)[length(names(gva))],'.csv'))
@@ -273,6 +278,10 @@ gva.all <- gva.all %>%
 gva.minusimputedrent <- gva.minusimputedrent %>% 
   pivot_longer(`1998`:names(gva)[length(names(gva))], names_to = 'year', values_to = 'value') %>% #get most recent year
   mutate(year = as.numeric(year))
+
+
+#Replace the 'minus imputed rent' version with a section letter so later matching works
+gva.minusimputedrent$SIC07_code[gva.minusimputedrent$SIC07_code == '68'] <- 'L (68)'
 
 
 # unique(gva.minusimputedrent$Region_name)
@@ -332,6 +341,10 @@ gva.all <- gva %>%
 
 gva.minusimputedrent <- gva %>% 
   filter(SIC07_code %in% SIC_sections_minusImputedRent) 
+
+#Replace the 'minus imputed rent' version with a section letter so later matching works
+gva.minusimputedrent$SIC07_code[gva.minusimputedrent$SIC07_code == '68'] <- 'L (68)'
+
 
 #save wide
 write_csv(gva.all, paste0('data/regionalGVA/regionalGVA_chainedvolume_ITL2_SIC_SECTION_WIDE_',names(gva)[length(names(gva))],'.csv'))
@@ -704,6 +717,8 @@ gva.all <- gva %>%
 gva.minusimputedrent <- gva %>% 
   filter(SIC07_code %in% SIC_sections_ITL3_minusImputedRent) 
 
+#Replace the 'minus imputed rent' version with a section letter so later matching works
+gva.minusimputedrent$SIC07_code[gva.minusimputedrent$SIC07_code == '68'] <- 'L (68)'
 
 #Save as CSV, with latest year as name
 #SAVE WIDE
@@ -752,6 +767,9 @@ gva.all <- gva %>%
 
 gva.minusimputedrent <- gva %>% 
   filter(SIC07_code %in% SIC_sections_ITL3_minusImputedRent) 
+
+#Replace the 'minus imputed rent' version with a section letter so later matching works
+gva.minusimputedrent$SIC07_code[gva.minusimputedrent$SIC07_code == '68'] <- 'L (68)'
 
 #Save as CSV, with latest year as name
 write_csv(gva.all, paste0('data/regionalGVA/regionalGVA_chainedvolume_ITL3_SIC_SECTION_WIDE_',names(gva)[length(names(gva))],'.csv'))
@@ -852,7 +870,7 @@ write_csv(gva.all, paste0('data/regionalGVA/regionalGVA_currentprices_ITL3_SIC_2
 #Table 3b is chained volume prices with ITL3 zones
 gva <- readxl::read_excel(path = p1f,range = "Table 3b!A2:AC11458") 
 
-#More process-able names with no spaces
+#More process-able names with no spaces 
 names(gva) <- gsub(x = names(gva), pattern = ' ', replacement = '_')
 
 #Filter down to SIC rows and make long by year - remove ones from the list above, just leaving the ones we want
