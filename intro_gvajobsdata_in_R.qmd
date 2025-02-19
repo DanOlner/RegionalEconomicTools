@@ -309,6 +309,9 @@ Let's look at the **chained volume** data to find out; this will let us see actu
 ```{r}
 itl3.cv <- read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/regionalGVA_chainedvolume_ITL3_SIC_SECTION_LONG_2022.csv')
 
+lookup.itl3 <- read_csv('')
+
+
 
 ggplot(itl3.cv %>%  
          filter(Region_name == "Mid and East Antrim"), 

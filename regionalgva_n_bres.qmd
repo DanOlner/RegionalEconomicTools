@@ -40,6 +40,7 @@ nuts.latest <- read_csv('data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_A
 
 * **Use the links below** to access CSVs (click to get URL, right-click for download option).
 * These are all in the [github repo data folder](https://github.com/DanOlner/RegionalEconomicTools/tree/gh-pages/data) in separate subfolders - see '[other ways to get the data](http://localhost:3241/regionalgva_n_bres.html#other-ways-to-get-the-data)' for more on downloading direct from github.
+* There are also SIC lookup CSVs (three-group, sections, 2-digit) specific to the ONS regional GVA's bespoke categorisations [here for ITL2](https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/siclookup_forregionalGVAcategories_ITL2.csv) and [here for ITL3](https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/siclookup_forregionalGVAcategories_ITL3.csv) (as well as an SIC lookup for the standard list [here](https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/siclookup_forregionalGVAcategories_ITL3.csv)).
 
 ****
 

@@ -70,7 +70,7 @@ sections_expanded <- sections %>%
 ## --- 3. Expand the "twodigit" dataset ---
 # These codes come in several flavours – some are just numbers/ranges,
 # others include a letter part (e.g. "B (5-9)" or "CD-CF (19-21)").
-# Here we grab the numeric part. (You may need to adjust if some codes mix letter and digit differently.)
+# Here we grab the numeric part. (and adjust if some codes mix letter and digit differently.)
 twodigit_expanded <- twodigit %>%
   mutate(numeric_part = case_when(
     # If there's a parenthesis, extract what's inside.
@@ -175,6 +175,8 @@ map(list(lookup.itl2,lookup.itl3), nrow)
 
 write_csv(lookup.itl2,'data/siclookup_forregionalGVAcategories_ITL2.csv')
 write_csv(lookup.itl3,'data/siclookup_forregionalGVAcategories_ITL3.csv')
+
+
 
 
 
