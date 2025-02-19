@@ -563,13 +563,13 @@ twod_generictimeplot_multipletimepoints <- function(df, category_var, x_var, y_v
     if(mean(i == last)==1){
       
       p <- p + geom_segment(data = twoy.wide, aes(x = x_start, y = y_start , xend = x_end, yend = y_end),
-                            arrow = arrow(length = unit(0.5, "cm")),
+                            arrow = arrow(length = unit(0.4, "cm"), type = 'closed'),
                             size = 1)
       
     } else {
       
       p <- p + geom_segment(data = twoy.wide, aes(x = x_start, y = y_start , xend = x_end, yend = y_end),
-                            # arrow = arrow(length = unit(0.5, "cm")),
+                            arrow = arrow(length = unit(0.2, "cm")),
                             size = 1)
       
     }

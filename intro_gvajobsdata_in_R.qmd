@@ -39,7 +39,7 @@ source('functions/misc_functions.R')
 
 
 
-# How do production vs services vary over the UK?
+# How do production vs services vary across the UK?
 
 Let's start with the broadest sector breakdown, and at ITL3 geography, which includes most major cities and local authorities (though some are combined into one zone, like Barnsley, Doncaster & Rotherham). The link is nabbed from the [gva n bres page](https://danolner.github.io/RegionalEconomicTools/regionalgva_n_bres.html).
 
@@ -128,8 +128,6 @@ LQ_map <- itl3.geo %>%
     by = c('ITL321CD'='ITL_code')
   )
 
-#Some 'invalid polygons' issues that tmap can fix prior to live viewing
-# tmap_options(check.and.fix = TRUE)
 tmap_mode('view')#Use 'plot' to just plot an image
 
 #Make map for interactive viewing
@@ -138,7 +136,6 @@ tm_shape(LQ_map) +
 tm_shape(LQ_map %>% filter(LQ < 1)) + #Highlight LQ < 1 places by overlaying thicker lines
   tm_polygons(lwd = 2, alpha = 0, border.col = 'black', , id = 'Region_name') +
   tm_layout(title = 'LQ spread of\nGoods sector\nAcross ITL3 regions', legend.outside = T) 
-
 
 ```
 
@@ -291,29 +288,8 @@ Blimey - a couple of places really jump out from each plot, both inflecting arou
 
 
 
-```{r}
 
 
-```
-
-
-
-
-
-
-
-
-
-
-```{r cuttinz}
-#| echo: false
-#| eval: false
-
-#Chained volume for services
-#Load 3 broad sector data for ITL2 and current prices
-itl3.ps <- read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/regionalGVA_chainedvolume_ITL3_SIC_3GROUPS_LONG_2022.csv')
-
-```
 
 
 
@@ -332,7 +308,7 @@ group_by(GEOGRAPHY_NAME,SIC07_description) %>%
   mutate(
   jobcountFT_movingav = rollapply(JOBCOUNT_FULLTIME,smoothband,mean,align='center',fill=NA),
   gva_movingav = rollapply(gva,smoothband,mean,align='center',fill=NA),
-  `gva/job_movingav` = rollapply(gvaperjobFT * 1000,smoothband,mean,align='center',fill=NA)
+  `gva/FT moving av` = rollapply(gvaperjobFT * 1000,smoothband,mean,align='center',fill=NA)
 ) %>% 
   ungroup()
 
@@ -342,28 +318,82 @@ group_by(GEOGRAPHY_NAME,SIC07_description) %>%
 
 
 
+
+
 ```{r}
+
+
 p <- twod_generictimeplot_multipletimepoints(
-  df = gva.jobs.ITL3 %>% filter(qg('southampton',GEOGRAPHY_NAME)),
+  df = gva.jobs.ITL3 %>% filter(
+    qg('southampton',GEOGRAPHY_NAME), 
+    !qg('agri|constr',SIC07_description),
+    jobcountFT_movingav > 2500
+    ),
   category_var = SIC07_description,
   # x_var = gva,
   # y_var = JOBCOUNT_FULLTIME,
   # label_var = gvaperjobFT,
   x_var = gva_movingav,
   y_var = jobcountFT_movingav,
-  label_var = `gva/job_movingav`,
+  label_var = `gva/FT moving av`,
   timevar = DATE,
   times = c(2016:2021) 
 )
 
 p + theme(aspect.ratio=1) +
-  scale_x_log10() +
-  scale_y_log10() +
+  # scale_x_log10() +
+  # scale_y_log10() +
   xlab("GVA (3 year moving average)") +
   ylab("Job count FT (3 year moving average)")
 
 ```
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r cuttinz}
+#| echo: false
+#| eval: false
+
+#Chained volume for services
+#Load 3 broad sector data for ITL2 and current prices
+itl3.ps <- read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/regionalGVA_chainedvolume_ITL3_SIC_3GROUPS_LONG_2022.csv')
+
+
+#Hide smaller sectors in S'hampton
+#Use proportion sector size from the LQ data
+itl3.sections <- read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/regionalGVA_currentprices_ITL3_SIC_SECTION_LONG_2022.csv') %>% 
+   split(.$year) %>% 
+  map(add_location_quotient_and_proportions, 
+      regionvar = Region_name,
+      lq_var = SIC07_description,
+      valuevar = value) %>% 
+  bind_rows()
+
+sectorstokeep <- itl3.sections %>% 
+  filter(
+    Region_name == 'Southampton',
+    sector_regional_proportion > 0.05
+    ) %>% 
+  select(SIC07_description) %>% 
+  distinct() %>% pull
+
+```
 
 
 
