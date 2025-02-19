@@ -1,0 +1,49 @@
+SIC07_code,SIC07_description,SIC07_code_sections,SIC07_description_sections,SIC07_code_three,SIC07_description_three
+AB (1-9),"Agriculture, forestry and fishing; mining and quarrying",AB (1-9),"Agriculture, forestry and fishing; mining and quarrying",A-E,Production sector
+CA (10-12),"Manufacture of food, beverages and tobacco",C (10-33),Manufacturing,A-E,Production sector
+CB (13-15),"Manufacture of textiles, wearing apparel and leather",C (10-33),Manufacturing,A-E,Production sector
+CC (16-18),Manufacture of wood and paper products and printing,C (10-33),Manufacturing,A-E,Production sector
+CD-CG (19-23),"Manufacture of petroleum, chemicals and other minerals",C (10-33),Manufacturing,A-E,Production sector
+CH (24-25),Manufacture of basic and fabricated metal products,C (10-33),Manufacturing,A-E,Production sector
+CI-CJ (26-27),"Manufacture of electronic, optical and electrical products",C (10-33),Manufacturing,A-E,Production sector
+CK-CL (28-30),Manufacture of machinery and transport equipment,C (10-33),Manufacturing,A-E,Production sector
+CM (31-33),"Other manufacturing, repair and installation",C (10-33),Manufacturing,A-E,Production sector
+DE (35-39),"Electricity, gas, water; sewerage and waste management",DE (35-39),"Electricity, gas, water; sewerage and waste management",A-E,Production sector
+41,Construction of buildings,F (41-43),Construction,F (41-43),Construction
+42,Civil engineering,F (41-43),Construction,F (41-43),Construction
+43,Specialised construction activities,F (41-43),Construction,F (41-43),Construction
+45,Motor trades,G (45-47),Wholesale and retail trade; repair of motor vehicles,G-T,Services sector
+46,Wholesale trade,G (45-47),Wholesale and retail trade; repair of motor vehicles,G-T,Services sector
+47,Retail trade,G (45-47),Wholesale and retail trade; repair of motor vehicles,G-T,Services sector
+49-51,"Land, water and air transport",H (49-53),Transportation and storage,G-T,Services sector
+52,Warehousing and transport support activities,H (49-53),Transportation and storage,G-T,Services sector
+53,Postal and courier activities,H (49-53),Transportation and storage,G-T,Services sector
+55,Accommodation,I (55-56),Accommodation and food service activities,G-T,Services sector
+56,Food and beverage service activities,I (55-56),Accommodation and food service activities,G-T,Services sector
+58-60,Publishing; film and TV production and broadcasting,J (58-63),Information and communication,G-T,Services sector
+61-63,Telecommunications; information technology,J (58-63),Information and communication,G-T,Services sector
+64,Financial service activities,K (64-66),Financial and insurance activities,G-T,Services sector
+65-66,"Insurance, pension funding and auxiliary financial activities",K (64-66),Financial and insurance activities,G-T,Services sector
+68IMP,Owner-occupiers' imputed rental,L (68),Real estate activities,G-T,Services sector
+68,"Real estate activities, excluding imputed rental",L (68),Real estate activities,G-T,Services sector
+69,Legal and accounting activities,M (69-75),"Professional, scientific and technical activities",G-T,Services sector
+70,Head offices and management consultancy,M (69-75),"Professional, scientific and technical activities",G-T,Services sector
+71,Architectural and engineering activities,M (69-75),"Professional, scientific and technical activities",G-T,Services sector
+72-73,Research and development; advertising and market research,M (69-75),"Professional, scientific and technical activities",G-T,Services sector
+74,"Other professional, scientific and technical activities",M (69-75),"Professional, scientific and technical activities",G-T,Services sector
+75,Veterinary activities,M (69-75),"Professional, scientific and technical activities",G-T,Services sector
+77,Rental and leasing activities,N (77-82),Administrative and support service activities,G-T,Services sector
+78-80,Employment activities; tourism and security services,N (77-82),Administrative and support service activities,G-T,Services sector
+81,Services to buildings and landscape activities,N (77-82),Administrative and support service activities,G-T,Services sector
+82,Office administration and business support activities,N (77-82),Administrative and support service activities,G-T,Services sector
+O (84),Public administration and defence,O (84),Public administration and defence,G-T,Services sector
+P (85),Education,P (85),Education,G-T,Services sector
+86,Human health activities,Q (86-88),Human health and social work activities,G-T,Services sector
+87,Residential care activities,Q (86-88),Human health and social work activities,G-T,Services sector
+88,Social work activities,Q (86-88),Human health and social work activities,G-T,Services sector
+90-91,"Creative, arts, entertainment and cultural activities",R (90-93),"Arts, entertainment and recreation",G-T,Services sector
+92-93,Gambling and betting; sports and recreation activities,R (90-93),"Arts, entertainment and recreation",G-T,Services sector
+94,Activities of membership organisations,S (94-96),Other service activities,G-T,Services sector
+95,"Repair of computers, personal and household goods",S (94-96),Other service activities,G-T,Services sector
+96,Other personal service activities,S (94-96),Other service activities,G-T,Services sector
+T (97-98),Activities of households,T (97-98),Activities of households,G-T,Services sector

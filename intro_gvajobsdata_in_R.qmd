@@ -68,6 +68,7 @@ itl3.ps <- itl3.ps %>%
 
 ```
 
+## Looking at location quotients
 
 Now let's use **location quotients** (LQs) to see where goods and services are most concentrated across the UK. See [this post](sector_locationquotients_and_proportions.html) for a full explanation of LQs and a deeper dive into them - but briefly:
 
@@ -78,6 +79,8 @@ Now let's use **location quotients** (LQs) to see where goods and services are m
 LQs also have a handy feature:
 
 * As the [ONS Excel sheet on LQs](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/datasets/locationquotientdataandindustrialspecialisationforlocalauthorities) make really clear, because (A/B)/(C/D) is equivalent to (A/C)/(B/D), the LQ actually captures two related ways of seeing the same thing: how relatively concentrated sectors are *across a whole geography* like the UK, and how concentrated *within a subgeography* like South Yorkshire they are. (See the table in the ONS document - numbers which can be read either across geographies or across sectors.)
+
+(Note also: LQs **only make sense for current prices data**. Chained volume data can't be summed, as each row is inflation-adjusted invididually and e.g. ITL3 zones or sectors don't sum to larger geographies or SIC groupings because of that. LQs need to sum sectors and places to correctly work out proportions.)
 
 We'll use that in a moment. First, using a function loaded above, this adds LQ details to the loaded CSV:
 
@@ -110,6 +113,9 @@ Services is of course the mirror image of this, and we could list them - but tak
 * Zones with LQ < 1 for goods are highlighted in thicker black lines - making clear that **more service-heavy places tend to be towns and cities (and a swathe of London and the South East)**.
 * Plotting an interactive map here so it's easier to poke around / zoom in - change tmap_mode to 'plot' to just output as an image.
 
+
+
+## Making a map
 
 ```{r}
 #Load ITL3 map geodata
@@ -163,6 +169,8 @@ itl3.ps <- itl3.ps %>%
 
 Then use another function that finds OLS slopes of change over time (not great time series statistics, useful for a quick look). We use the "sector regional proportion" value that came with the LQ function (this sums to one for all sectors in a place) and log values so places with different sector scales have comparable slopes (e.g. a 4-5% increase appears the same as 40-50%):
 
+
+## Using linear slopes to examine biggest growers and shrinkers
 
 ```{r LQ_slopes}
 #Use
@@ -220,6 +228,8 @@ tm_shape(slopes_map) +
 
 ```
 
+
+## Plotting time series for places where services grew/shrunk the most
 
 Let's take a look at the actual datapoints for 'percent of regional economy that's services', using the slopes data to extract the top (highest proportional growth) and bottom (highest prop shrinkage) slopes.
 
@@ -283,7 +293,36 @@ top.plot / bottom.plot + plot_annotation(
 ```
 
 
-Blimey - a couple of places really jump out from each plot, both inflecting around 2016. **Mid and East Antrim** in the 'top proportion growers' jumps hugely. **Southampton** equally has a massive drop - never far from a mid-80% service economy, it drops to below 70% before bouncing back a little.
+Blimey - a couple of places really jump out from each plot, both inflecting around 2016. **Mid and East Antrim** in the 'top proportion growers' jumps hugely. **Southampton** equally has a massive drop - never far from a mid-80% service economy, it drops to below 70% before bouncing back a little. **North / northeast Lincolnshire** also sees a large drop - and appeared previously at the top of the "% goods sectors" list, with nearly 3 times higher proportion than the UK as a whole.
+
+Let's look at each of those, using different approaches and datasets.
+
+
+
+## Mid and East Antrim
+
+Mid/East Antrim's apparently huge services jump highlights why *proportional* changes need to be treated carefully. What's happening underneath that? Did services grow - or did goods and production drop, making services a bigger percent of Mid/East Antrim's economy?
+
+Let's look at the **chained volume** data to find out; this will let us see actual sector volume changes over time, adjusted for inflation.
+
+
+```{r}
+itl3.cv <- read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/regionalGVA_chainedvolume_ITL3_SIC_SECTION_LONG_2022.csv')
+
+
+ggplot(itl3.cv %>%  
+         filter(Region_name == "Mid and East Antrim"), 
+       aes(x = year, y = value, colour = fct_reorder(SIC07_description,-value) )) +
+  geom_point() +
+  geom_line() +
+  scale_color_brewer(palette = 'Paired', direction = 1) +
+  ylab('SIC section GVA (chained volume) ') +
+  theme(plot.title = element_text(face = 'bold')) +
+  labs(colour = 'SIC section')
+
+
+
+```
 
 
 
@@ -294,7 +333,8 @@ Blimey - a couple of places really jump out from each plot, both inflecting arou
 
 
 
-# Wiggly plot
+
+## Southampton's GVA vs job change over time
 
 
 ```{r}
@@ -320,7 +360,9 @@ group_by(GEOGRAPHY_NAME,SIC07_description) %>%
 
 
 
-```{r}
+```{r wiggleplot}
+#| fig-width: 11
+#| fig-height: 11
 
 
 p <- twod_generictimeplot_multipletimepoints(
