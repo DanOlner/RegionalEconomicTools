@@ -1,5 +1,5 @@
 ---
-title: "Intro to GVA and jobs data in R"
+title: "Intro to using ONS GVA and jobs data in R"
 code-overflow: wrap
 execute:
   echo: true
@@ -16,13 +16,11 @@ format:
 knitr::opts_chunk$set(fig.height = 8, fig.width = 10, echo = TRUE, warning = F, error = F, message = F, comment=NA)
 ```
 
-# Intro to using ONS GVA and jobs data in R
-
-This page runs through some R-code examples of ways to examine the pre-baked ONS GVA and jobs data [from here](regionalgva_n_bres.html), which has been processed/linked to help smooth the path to getting GVA and jobs insights. 
+This page runs through some R-code examples of ways to examine the **pre-baked ONS GVA and jobs data [from here](regionalgva_n_bres.html)**, which has been processed/linked to help smooth the path to getting GVA and jobs insights. 
 
 As well as base R and ggplot, it also uses a few bespoke functions written to analyse/visualise this data; these are all available in [the project repo](https://github.com/DanOlner/RegionalEconomicTools), in the [misc_functions.R](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/functions/misc_functions.R) script. 
 
-*A quick way to use all this is to [clone the repo](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) or download directly from github with the green 'code' button on the main repo page / 'download zip'. Though all data links below are URLs for the [pre-baked CSVs](regionalgva_n_bres.html), so don't require it to be downloaded locally.*
+*A quick way to use all this is to [clone the repo](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) or download directly from github with the green 'code' button on the main repo page / 'download zip'. Though all data used below loads directly from URLs, so don't require it to be downloaded locally.*
 
 As the pre-bake page says, we've got the following to work with:
 
@@ -33,11 +31,11 @@ As the pre-bake page says, we've got the following to work with:
 
 [^1]: NOMIS BRES data is not available for Northern Ireland.
 
-These are both deep, rich datasets (though it's worth exploring [how the reginal GVA data is made](https://www.ons.gov.uk/economy/regionalaccounts/grossdisposablehouseholdincome/methodologies/regionalaccountsmethodologyguidejune2019) to get a sense of its issues). Here, we'll just run through a range of examples to show how to get started with digging into them. 
+These are both rich datasets (though it's worth exploring [how the reginal GVA data is made](https://www.ons.gov.uk/economy/regionalaccounts/grossdisposablehouseholdincome/methodologies/regionalaccountsmethodologyguidejune2019) to get a sense of its issues). Here, we'll just run through a range of examples to show how to get started with digging into them. 
 
 See the left hand bar for other ways to use them, including a [deeper dive](https://danolner.github.io/RegionalEconomicTools/sector_locationquotients_and_proportions.html) into location quotients / proportion plots, and into [GVA gap](https://danolner.github.io/RegionalEconomicTools/gdp_gaps.html) analysis. 
 
-Please let me know if you have any thoughts, other analyses etc, via the [github issues](https://github.com/DanOlner/RegionalEconomicTools/issues) or email danolner at gmail dot com).
+**Please let me know if you have any thoughts, ideas or code on other analyses to add etc, via the [github issues](https://github.com/DanOlner/RegionalEconomicTools/issues) or email danolner at gmail dot com).**
 
 Here's some libraries, and the functions inside this repo we'll use.
 
@@ -146,9 +144,10 @@ ggplot(corecities %>%
   geom_point() +
   geom_line() +
   scale_color_brewer(palette = 'Paired', direction = 1) +
-  ylab('SIC GVA (chained volume) ') +
+  ylab('GVA per FT job (3 year moving av) ') +
   theme(plot.title = element_text(face = 'bold')) +
-  labs(colour = 'Core city') 
+  labs(colour = 'Core city') +
+  ggtitle(paste0('Core cities GVA per FT job over time (', smoothband,' year moving average)'))
 
 ```
 
@@ -158,7 +157,7 @@ ggplot(corecities %>%
 
 Next, we look at the broadest sector breakdown, and at ITL3 places, which (as above) includes most major cities and local authorities (though some are combined into one zone, like Barnsley, Doncaster & Rotherham). The data link is nabbed from the [pre-baked data page](https://danolner.github.io/RegionalEconomicTools/regionalgva_n_bres.html).
 
-**The code will also work for ITL2 zones using this data (mayoral authorities are at this level) - just [use this CSV](https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/regionalGVA_currentprices_ITL2_SIC_3GROUPS_LONG_2022.csv) for ITL3 instead.**
+**The code will also work for ITL2 zones using this data (mayoral authorities are at this level) - just [use this CSV](https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/regionalGVA_currentprices_ITL2_SIC_3GROUPS_LONG_2022.csv) in place of ITL3 below.**
 
 
 We use **current prices** data - GVA values *as they were when the data was collected*, not adjusted for inflation. This is useful because (unlike inflation adjusted chained volume data), these can be legitimately summed in any way like - add up sectors, places etc. This means any change over time for current prices is only ever **relative**. (Examples below will illustrate this.)
@@ -404,7 +403,7 @@ bottom.plot <- ggplot(itl3.ps %>%
 
 
 top.plot / bottom.plot + plot_annotation(
-  title = 'Percent change in proportion of service sectors,1998-2022, top/bottom ITL3 zones'
+  title = 'Change in proportion of service sectors, 1998-2022, top/bottom ITL3 zones'
 )
   
 
@@ -597,7 +596,8 @@ p + theme(aspect.ratio=1) +
 
 What can we see here?
 
-* The likely explanation for Southampton's proportional drop in service sectors: manufacturing GVA has **pretty much exactly tripled** over the time series (remember, this is chained volume, so adjusted for inflation - this is a real tripling of value, if the data's right).
+* The likely explanation for Southampton's proportional drop in service sectors: look at **manufacturing** (bottom of plot). It starts in 2016 (red dot, 2015-17 average) and ends in 2021 (2020-22 average, black dot), with each datapoint marked by a tiny arrow pointing along its change path.
+* Manufacturing GVA has **pretty much exactly tripled** over the time series (remember, this is chained volume, so adjusted for inflation - this is a real tripling of value, if the data's right).
 * But jobs have **increased much less** (around 400 extra, starting at about 3400 in 2015-17). As a result, **GVA per job has gone from 200K to 542K** (see labels). Manufacturing has a much smaller job count than other SIC sections here, but it's far ahead in GVA/job.
 * Going exactly the opposite way, **Transportation/storage** has a good chunk more jobs but - while it's again slightly increased those numbers - GVA has been consistently dropping.
 * Compass quadrants (NE, NW etc) show which sectors had joint GVA *and* jobs growth (green / NE). Manufacturing is - just - in that category.
@@ -655,15 +655,13 @@ twod_percentplot(
 
 # Productivity comparison over time and to other places
 
-The last plot uses chained volume data for ITL2 zones again, and picks out one place (Leicestershire, Rutland and Northamptonshire) to show how (1) SIC section GVA per full-time worker has changed over time (here, moving average again) and (2) how its productivity compares to other places (blue dots). A sub-selection of SIC sections of interest are picked out.
+This last plot is another way to see how a place is changing over time relative to others in the UK. It uses chained volume data for ITL2 zones again, and picks out one place (Leicestershire, Rutland and Northamptonshire) to show how (1) SIC section GVA per full-time worker has changed over time (here, moving average again) and (2) how its productivity compares to other places (blue dots). A sub-selection of SIC sections of interest are picked out.
 
 A few things jump out:
 
 * ICT productivity has increased everywhere; Leicester/Rutland follows that trend
 * As it does for health and social care, which has seen declining productivity by this metric in recent years (though note with more public-service sectors, ONS estimate GVA by multiplying up from the number of workers, so the numbers are a little circular if dividing by them again.)
-* 
-
-
+* There's an [interactive version here](https://danolner.github.io/RegionalEconomicTools/outputs/GVA_per_FT_chainedvolume_LeicsRutlandOverlaid.html) where it's possible to see that the manufacturing productivity outlier is Cheshire, for example (hover over points). ggplotly code in the comment below creates this kind of plot.
 
 
 
@@ -730,6 +728,8 @@ ggplot(
   xlab('year') +
   ylab('GVA per FT (3 year moving average)')
   
+#ggplotly for interactive
+#ggplotly(p, tooltip = 'GEOGRAPHY_NAME', width = 1100, height = 700)
 
 ```
 
@@ -747,6 +747,8 @@ ggplot(
 ```{r cuttinz}
 #| echo: false
 #| eval: false
+
+
 
 #Chained volume for services
 #Load 3 broad sector data for ITL2 and current prices
