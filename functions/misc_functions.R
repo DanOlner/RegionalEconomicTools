@@ -528,7 +528,9 @@ twod_generictimeplot_multipletimepoints <- function(df, category_var, x_var, y_v
   
   p <- ggplot()
   
-  #Check if last entry
+  #Check if first entry (for getting label start)
+  first = year_pairs[[1]]
+  #Check if last entry (for changing arrow)
   last = year_pairs[[length(year_pairs)]]
   
   for(i in year_pairs){
@@ -554,9 +556,11 @@ twod_generictimeplot_multipletimepoints <- function(df, category_var, x_var, y_v
       select(!!category_var,!!timevar,!!x_var,!!y_var,!!label_var) %>%
       pivot_wider(names_from = !!timevar, values_from = c(!!x_var,!!y_var,!!label_var))
     
-    
     #Rename wide two year for change vector back to generic names
     names(twoy.wide) <- c(names(twoy.wide)[1],'x_start','x_end','y_start','y_end','label_start','label_end')
+    
+    #Keep first point labels to add below
+    if(mean(i == first)==1) keeplabels <<- twoy.wide
     
     #Change arrow for last
     #Easiest with list just to test if both years correct
@@ -588,8 +592,15 @@ twod_generictimeplot_multipletimepoints <- function(df, category_var, x_var, y_v
     guides(colour=guide_legend(title=" ")) +
     xlab(quo_name(x_var)) +
     ylab(quo_name(y_var))
-  # 
-  # #Reduce to latest year and merge in values for labels
+   
+  #Reduce to latest year and merge in values for labels
+  #Nab first point labels from saved copy
+  twoy.wide <- twoy.wide %>% 
+    select(-label_start) %>% 
+    bind_cols(
+      keeplabels %>% select(label_start)
+    )
+  
   label_df <- twoy %>% filter(!!timevar==max(!!timevar), compass %in% compasspoints_to_display) %>%
     left_join(
       twoy.wide %>% select(!!category_var,label_start,label_end)
