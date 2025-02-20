@@ -38,7 +38,7 @@ That's a big difference - the top ranked place being 3 times more productive, vs
 ```{r}
 #| fig-width: 10
 #Load in scraped data from table 1
-pip <- read_csv('data/Beatty_Fothergill_productivity-industries-places_table1.csv') %>% filter(Place!='United Kingdom')
+pip <- read_csv('data/misc/Beatty_Fothergill_productivity-industries-places_table1.csv') %>% filter(Place!='United Kingdom')
 
 #Get factor order from column order before converting to long
 measure_factororder = names(pip)[2:9]
