@@ -160,7 +160,36 @@ tm_shape(chk2 %>% filter(DATE == 2022)) +
 
 
 
+#Get text list of core cities from ITL3 data----
 
+#Random itl3 list
+itl3 <- read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/regionalGVA_currentprices_ITL3_SIC_3GROUPS_WIDE_2022.csv')
+
+corecities <- itl3$Region_name[qg('sheffield|Belfast|Birmingham|Bristol|Cardiff|Glasgow|Leeds|Liverpool|Manchester|Tyne|Nottingham', itl3$Region_name)] %>% unique
+
+#Yes, all in there, need to remove a few...
+corecities <- corecities[!grepl(x = corecities, pattern = 'Greater|shire', ignore.case = T)]
+corecities <- corecities[order(corecities)]
+
+
+# Extract per hour worked data from ONS productivity xls----
+
+url1 <- 'https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions/current/labourproductivityitls.xls'
+p1f <- tempfile(fileext=".xls")
+download.file(url1, p1f, mode="wb")
+
+perhourworked <- readxl::read_excel(path = p1f,range = "Productivity Hours!A5:V239") 
+
+perfilledjob <- readxl::read_excel(path = p1f,range = "Productivity Jobs!A5:X239") 
+
+#HOURS WORKED PER WEEK - needs multiplying up to match yearly GVA values
+perhourworked.itl3 <- perhourworked %>% 
+  filter(ITL_level == 'ITL3') %>% 
+  select(-ITL_level) %>% 
+  pivot_longer(contains('Hours'), names_to = 'year', values_to = 'hoursworked') %>% 
+  mutate(year = str_sub(year, start = 7, end = 10) %>% as.numeric)
+
+write_csv(perhourworked.itl3,'data/perhourworked_ITL3.csv')
 
 
 

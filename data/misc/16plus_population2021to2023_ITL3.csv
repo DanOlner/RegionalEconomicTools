@@ -1,0 +1,493 @@
+DATE,Region_name,GEOGRAPHY_CODE,Value,Confidence
+2012,Tees Valley and Durham,UKC1,492800,14700
+2012,Northumberland and Tyne and Wear,UKC2,627400,18500
+2012,Cumbria,UKD1,238900,16600
+2012,Greater Manchester,UKD3,1195700,27300
+2012,Lancashire,UKD4,659600,24100
+2012,Cheshire,UKD6,434300,22100
+2012,Merseyside,UKD7,650500,19500
+2012,East Yorkshire and Northern Lincolnshire,UKE1,405000,14500
+2012,North Yorkshire,UKE2,392600,19400
+2012,South Yorkshire,UKE3,587600,21200
+2012,West Yorkshire,UKE4,997000,31500
+2012,Derbyshire and Nottinghamshire,UKF1,977000,32300
+2012,"Leicestershire, Rutland and Northamptonshire",UKF2,825100,31000
+2012,Lincolnshire,UKF3,323500,21500
+2012,"Herefordshire, Worcestershire and Warwickshire",UKG1,629800,25600
+2012,Shropshire and Staffordshire,UKG2,732200,25700
+2012,West Midlands,UKG3,1122600,29700
+2012,East Anglia,UKH1,1154100,38200
+2012,Bedfordshire and Hertfordshire,UKH2,861200,32100
+2012,Essex,UKH3,829600,29800
+2012,Inner London - West,UKI3,563800,23100
+2012,Inner London - East,UKI4,1048800,36500
+2012,Outer London - East and North East,UKI5,799400,30000
+2012,Outer London - South,UKI6,606900,26000
+2012,Outer London - West and North West,UKI7,950400,34900
+2012,"Berkshire, Buckinghamshire and Oxfordshire",UKJ1,1155500,26300
+2012,"Surrey, East and West Sussex",UKJ2,1342400,41900
+2012,Hampshire and Isle of Wight,UKJ3,930200,27800
+2012,Kent,UKJ4,796400,31800
+2012,"Gloucestershire, Wiltshire and Bath/Bristol area",UKK1,1152900,31600
+2012,Dorset and Somerset,UKK2,596900,20700
+2012,Cornwall and Isles of Scilly,UKK3,237100,16400
+2012,Devon,UKK4,531000,20400
+2012,West Wales,UKL1,822400,15700
+2012,East Wales,UKL2,515000,13800
+2012,North Eastern Scotland,UKM5,259200,13500
+2012,Highlands and Islands,UKM6,220400,8400
+2012,Eastern Scotland,UKM7,911200,21400
+2012,West Central Scotland,UKM8,660000,18800
+2012,Southern Scotland,UKM9,431000,13000
+2013,Tees Valley and Durham,UKC1,504700,14900
+2013,Northumberland and Tyne and Wear,UKC2,621300,18400
+2013,Cumbria,UKD1,237600,16500
+2013,Greater Manchester,UKD3,1206900,27100
+2013,Lancashire,UKD4,644600,24400
+2013,Cheshire,UKD6,430700,21400
+2013,Merseyside,UKD7,661800,19600
+2013,East Yorkshire and Northern Lincolnshire,UKE1,413300,14900
+2013,North Yorkshire,UKE2,388800,18700
+2013,South Yorkshire,UKE3,605700,21800
+2013,West Yorkshire,UKE4,1006800,32100
+2013,Derbyshire and Nottinghamshire,UKF1,977400,32500
+2013,"Leicestershire, Rutland and Northamptonshire",UKF2,823800,30900
+2013,Lincolnshire,UKF3,332800,22000
+2013,"Herefordshire, Worcestershire and Warwickshire",UKG1,643700,25500
+2013,Shropshire and Staffordshire,UKG2,753700,26400
+2013,West Midlands,UKG3,1137600,30900
+2013,East Anglia,UKH1,1160800,37900
+2013,Bedfordshire and Hertfordshire,UKH2,883500,31900
+2013,Essex,UKH3,846300,30100
+2013,Inner London - West,UKI3,568500,23300
+2013,Inner London - East,UKI4,1097000,36900
+2013,Outer London - East and North East,UKI5,818200,31100
+2013,Outer London - South,UKI6,633900,27400
+2013,Outer London - West and North West,UKI7,963400,34000
+2013,"Berkshire, Buckinghamshire and Oxfordshire",UKJ1,1169100,26300
+2013,"Surrey, East and West Sussex",UKJ2,1368300,42900
+2013,Hampshire and Isle of Wight,UKJ3,936700,28200
+2013,Kent,UKJ4,819200,33000
+2013,"Gloucestershire, Wiltshire and Bath/Bristol area",UKK1,1164700,31500
+2013,Dorset and Somerset,UKK2,616900,21500
+2013,Cornwall and Isles of Scilly,UKK3,245600,17300
+2013,Devon,UKK4,529000,20400
+2013,West Wales,UKL1,838600,15800
+2013,East Wales,UKL2,532400,14000
+2013,North Eastern Scotland,UKM5,259100,13700
+2013,Highlands and Islands,UKM6,222800,8500
+2013,Eastern Scotland,UKM7,906600,21500
+2013,West Central Scotland,UKM8,678900,19200
+2013,Southern Scotland,UKM9,427800,12900
+2014,Tees Valley and Durham,UKC1,514000,14800
+2014,Northumberland and Tyne and Wear,UKC2,644100,18800
+2014,Cumbria,UKD1,233900,16200
+2014,Greater Manchester,UKD3,1236100,27400
+2014,Lancashire,UKD4,645000,24400
+2014,Cheshire,UKD6,442600,21700
+2014,Merseyside,UKD7,647500,19900
+2014,East Yorkshire and Northern Lincolnshire,UKE1,420200,15300
+2014,North Yorkshire,UKE2,379800,18700
+2014,South Yorkshire,UKE3,620300,22500
+2014,West Yorkshire,UKE4,1023700,32200
+2014,Derbyshire and Nottinghamshire,UKF1,1002700,33900
+2014,"Leicestershire, Rutland and Northamptonshire",UKF2,858400,31200
+2014,Lincolnshire,UKF3,348100,22100
+2014,"Herefordshire, Worcestershire and Warwickshire",UKG1,655400,25000
+2014,Shropshire and Staffordshire,UKG2,743100,26800
+2014,West Midlands,UKG3,1172500,31700
+2014,East Anglia,UKH1,1179100,38600
+2014,Bedfordshire and Hertfordshire,UKH2,902700,32400
+2014,Essex,UKH3,840300,30600
+2014,Inner London - West,UKI3,601100,23700
+2014,Inner London - East,UKI4,1167900,38700
+2014,Outer London - East and North East,UKI5,850900,32400
+2014,Outer London - South,UKI6,634300,27800
+2014,Outer London - West and North West,UKI7,988900,34800
+2014,"Berkshire, Buckinghamshire and Oxfordshire",UKJ1,1179200,26300
+2014,"Surrey, East and West Sussex",UKJ2,1377500,42800
+2014,Hampshire and Isle of Wight,UKJ3,963700,28600
+2014,Kent,UKJ4,838700,33300
+2014,"Gloucestershire, Wiltshire and Bath/Bristol area",UKK1,1203900,31500
+2014,Dorset and Somerset,UKK2,612100,21700
+2014,Cornwall and Isles of Scilly,UKK3,258000,17500
+2014,Devon,UKK4,542900,20700
+2014,West Wales,UKL1,848200,16100
+2014,East Wales,UKL2,532300,14200
+2014,North Eastern Scotland,UKM5,260900,13900
+2014,Highlands and Islands,UKM6,230900,8700
+2014,Eastern Scotland,UKM7,934300,22300
+2014,West Central Scotland,UKM8,688400,19900
+2014,Southern Scotland,UKM9,444200,13100
+2015,Tees Valley and Durham,UKC1,518100,15200
+2015,Northumberland and Tyne and Wear,UKC2,655900,19500
+2015,Cumbria,UKD1,246800,16700
+2015,Greater Manchester,UKD3,1264100,28300
+2015,Lancashire,UKD4,675100,25400
+2015,Cheshire,UKD6,440400,22200
+2015,Merseyside,UKD7,673500,20200
+2015,East Yorkshire and Northern Lincolnshire,UKE1,423400,15400
+2015,North Yorkshire,UKE2,412500,19200
+2015,South Yorkshire,UKE3,632700,23300
+2015,West Yorkshire,UKE4,1062200,33000
+2015,Derbyshire and Nottinghamshire,UKF1,1031700,35700
+2015,"Leicestershire, Rutland and Northamptonshire",UKF2,857700,31900
+2015,Lincolnshire,UKF3,344400,23300
+2015,"Herefordshire, Worcestershire and Warwickshire",UKG1,648500,25000
+2015,Shropshire and Staffordshire,UKG2,773000,27500
+2015,West Midlands,UKG3,1177600,32200
+2015,East Anglia,UKH1,1198800,39000
+2015,Bedfordshire and Hertfordshire,UKH2,929700,33100
+2015,Essex,UKH3,878200,32200
+2015,Inner London - West,UKI3,612400,25600
+2015,Inner London - East,UKI4,1230300,41400
+2015,Outer London - East and North East,UKI5,889900,33900
+2015,Outer London - South,UKI6,654700,28200
+2015,Outer London - West and North West,UKI7,1013300,35700
+2015,"Berkshire, Buckinghamshire and Oxfordshire",UKJ1,1220700,27300
+2015,"Surrey, East and West Sussex",UKJ2,1378900,43800
+2015,Hampshire and Isle of Wight,UKJ3,992000,29700
+2015,Kent,UKJ4,836200,33800
+2015,"Gloucestershire, Wiltshire and Bath/Bristol area",UKK1,1240800,32000
+2015,Dorset and Somerset,UKK2,622300,22700
+2015,Cornwall and Isles of Scilly,UKK3,253700,17700
+2015,Devon,UKK4,569100,21300
+2015,West Wales,UKL1,859000,16200
+2015,East Wales,UKL2,539700,14600
+2015,North Eastern Scotland,UKM5,263600,14700
+2015,Highlands and Islands,UKM6,230300,9000
+2015,Eastern Scotland,UKM7,935100,22900
+2015,West Central Scotland,UKM8,709000,20600
+2015,Southern Scotland,UKM9,444900,13400
+2016,Tees Valley and Durham,UKC1,531500,16600
+2016,Northumberland and Tyne and Wear,UKC2,665400,20400
+2016,Cumbria,UKD1,233900,16300
+2016,Greater Manchester,UKD3,1279600,29400
+2016,Lancashire,UKD4,694500,25800
+2016,Cheshire,UKD6,439600,23000
+2016,Merseyside,UKD7,685800,21200
+2016,East Yorkshire and Northern Lincolnshire,UKE1,428600,16100
+2016,North Yorkshire,UKE2,419100,20300
+2016,South Yorkshire,UKE3,621000,23600
+2016,West Yorkshire,UKE4,1072400,34800
+2016,Derbyshire and Nottinghamshire,UKF1,1058600,36900
+2016,"Leicestershire, Rutland and Northamptonshire",UKF2,870700,33100
+2016,Lincolnshire,UKF3,336300,23200
+2016,"Herefordshire, Worcestershire and Warwickshire",UKG1,647000,25500
+2016,Shropshire and Staffordshire,UKG2,791100,28000
+2016,West Midlands,UKG3,1211600,33000
+2016,East Anglia,UKH1,1207000,40400
+2016,Bedfordshire and Hertfordshire,UKH2,922200,33800
+2016,Essex,UKH3,872700,32300
+2016,Inner London - West,UKI3,618700,27000
+2016,Inner London - East,UKI4,1264900,44400
+2016,Outer London - East and North East,UKI5,922700,35600
+2016,Outer London - South,UKI6,660800,29200
+2016,Outer London - West and North West,UKI7,1024500,38800
+2016,"Berkshire, Buckinghamshire and Oxfordshire",UKJ1,1223000,28700
+2016,"Surrey, East and West Sussex",UKJ2,1427000,46300
+2016,Hampshire and Isle of Wight,UKJ3,976700,30100
+2016,Kent,UKJ4,859200,36600
+2016,"Gloucestershire, Wiltshire and Bath/Bristol area",UKK1,1261100,33600
+2016,Dorset and Somerset,UKK2,611800,23500
+2016,Cornwall and Isles of Scilly,UKK3,265300,18500
+2016,Devon,UKK4,544700,21600
+2016,West Wales,UKL1,878800,17300
+2016,East Wales,UKL2,541600,15600
+2016,North Eastern Scotland,UKM5,248900,15100
+2016,Highlands and Islands,UKM6,227800,9200
+2016,Eastern Scotland,UKM7,952200,24400
+2016,West Central Scotland,UKM8,734400,21500
+2016,Southern Scotland,UKM9,432800,14000
+2017,Tees Valley and Durham,UKC1,528100,16100
+2017,Northumberland and Tyne and Wear,UKC2,665900,20100
+2017,Cumbria,UKD1,241000,16700
+2017,Greater Manchester,UKD3,1316600,30500
+2017,Lancashire,UKD4,706000,26000
+2017,Cheshire,UKD6,439600,22800
+2017,Merseyside,UKD7,696900,21500
+2017,East Yorkshire and Northern Lincolnshire,UKE1,427800,15800
+2017,North Yorkshire,UKE2,397200,19900
+2017,South Yorkshire,UKE3,644100,24100
+2017,West Yorkshire,UKE4,1090800,35100
+2017,Derbyshire and Nottinghamshire,UKF1,1033000,36200
+2017,"Leicestershire, Rutland and Northamptonshire",UKF2,882600,35100
+2017,Lincolnshire,UKF3,352100,24000
+2017,"Herefordshire, Worcestershire and Warwickshire",UKG1,663500,26900
+2017,Shropshire and Staffordshire,UKG2,788700,28200
+2017,West Midlands,UKG3,1251500,34300
+2017,East Anglia,UKH1,1197700,41500
+2017,Bedfordshire and Hertfordshire,UKH2,938700,33800
+2017,Essex,UKH3,896500,32600
+2017,Inner London - West,UKI3,615800,28400
+2017,Inner London - East,UKI4,1290700,45900
+2017,Outer London - East and North East,UKI5,919400,34400
+2017,Outer London - South,UKI6,663000,29500
+2017,Outer London - West and North West,UKI7,1043300,39500
+2017,"Berkshire, Buckinghamshire and Oxfordshire",UKJ1,1239100,28900
+2017,"Surrey, East and West Sussex",UKJ2,1424600,47500
+2017,Hampshire and Isle of Wight,UKJ3,1007000,30300
+2017,Kent,UKJ4,894000,38300
+2017,"Gloucestershire, Wiltshire and Bath/Bristol area",UKK1,1280900,33100
+2017,Dorset and Somerset,UKK2,629000,23600
+2017,Cornwall and Isles of Scilly,UKK3,269900,18600
+2017,Devon,UKK4,591400,22600
+2017,West Wales,UKL1,879500,17100
+2017,East Wales,UKL2,560200,15700
+2017,North Eastern Scotland,UKM5,259000,15000
+2017,Highlands and Islands,UKM6,233000,8900
+2017,Eastern Scotland,UKM7,976000,24500
+2017,West Central Scotland,UKM8,728300,21400
+2017,Southern Scotland,UKM9,442500,14200
+2018,Tees Valley and Durham,UKC1,539700,16000
+2018,Northumberland and Tyne and Wear,UKC2,663200,20400
+2018,Cumbria,UKD1,241500,16400
+2018,Greater Manchester,UKD3,1329600,30700
+2018,Lancashire,UKD4,695000,25200
+2018,Cheshire,UKD6,449900,23300
+2018,Merseyside,UKD7,716900,22300
+2018,East Yorkshire and Northern Lincolnshire,UKE1,429500,16200
+2018,North Yorkshire,UKE2,406700,20700
+2018,South Yorkshire,UKE3,656100,24800
+2018,West Yorkshire,UKE4,1076900,35200
+2018,Derbyshire and Nottinghamshire,UKF1,1046700,36000
+2018,"Leicestershire, Rutland and Northamptonshire",UKF2,890700,35700
+2018,Lincolnshire,UKF3,351900,24300
+2018,"Herefordshire, Worcestershire and Warwickshire",UKG1,678600,27400
+2018,Shropshire and Staffordshire,UKG2,790400,27400
+2018,West Midlands,UKG3,1278800,34900
+2018,East Anglia,UKH1,1216400,42400
+2018,Bedfordshire and Hertfordshire,UKH2,946200,35300
+2018,Essex,UKH3,899400,32100
+2018,Inner London - West,UKI3,629600,29700
+2018,Inner London - East,UKI4,1319700,48400
+2018,Outer London - East and North East,UKI5,941800,36300
+2018,Outer London - South,UKI6,677800,30800
+2018,Outer London - West and North West,UKI7,1050900,42100
+2018,"Berkshire, Buckinghamshire and Oxfordshire",UKJ1,1233000,29800
+2018,"Surrey, East and West Sussex",UKJ2,1413700,49400
+2018,Hampshire and Isle of Wight,UKJ3,997600,31800
+2018,Kent,UKJ4,886100,39100
+2018,"Gloucestershire, Wiltshire and Bath/Bristol area",UKK1,1288300,33700
+2018,Dorset and Somerset,UKK2,637300,23600
+2018,Cornwall and Isles of Scilly,UKK3,266000,19500
+2018,Devon,UKK4,577800,22600
+2018,West Wales,UKL1,882600,17500
+2018,East Wales,UKL2,576000,16100
+2018,North Eastern Scotland,UKM5,256400,15300
+2018,Highlands and Islands,UKM6,230400,9300
+2018,Eastern Scotland,UKM7,987500,23800
+2018,West Central Scotland,UKM8,727300,21700
+2018,Southern Scotland,UKM9,436800,14800
+2019,Tees Valley and Durham,UKC1,531100,16000
+2019,Northumberland and Tyne and Wear,UKC2,664400,21000
+2019,Cumbria,UKD1,238300,16900
+2019,Greater Manchester,UKD3,1334400,31800
+2019,Lancashire,UKD4,700400,25500
+2019,Cheshire,UKD6,458400,24200
+2019,Merseyside,UKD7,730800,23000
+2019,East Yorkshire and Northern Lincolnshire,UKE1,430100,16600
+2019,North Yorkshire,UKE2,405600,21000
+2019,South Yorkshire,UKE3,661900,25600
+2019,West Yorkshire,UKE4,1082100,35100
+2019,Derbyshire and Nottinghamshire,UKF1,1077500,37200
+2019,"Leicestershire, Rutland and Northamptonshire",UKF2,931100,37700
+2019,Lincolnshire,UKF3,353100,25900
+2019,"Herefordshire, Worcestershire and Warwickshire",UKG1,676600,27100
+2019,Shropshire and Staffordshire,UKG2,795300,28200
+2019,West Midlands,UKG3,1303900,35900
+2019,East Anglia,UKH1,1230200,43500
+2019,Bedfordshire and Hertfordshire,UKH2,952700,35300
+2019,Essex,UKH3,906300,32400
+2019,Inner London - West,UKI3,641600,32000
+2019,Inner London - East,UKI4,1354200,50300
+2019,Outer London - East and North East,UKI5,945700,38100
+2019,Outer London - South,UKI6,687400,30300
+2019,Outer London - West and North West,UKI7,1040400,47100
+2019,"Berkshire, Buckinghamshire and Oxfordshire",UKJ1,1256500,30100
+2019,"Surrey, East and West Sussex",UKJ2,1486500,51600
+2019,Hampshire and Isle of Wight,UKJ3,987700,31700
+2019,Kent,UKJ4,907100,41600
+2019,"Gloucestershire, Wiltshire and Bath/Bristol area",UKK1,1290100,34300
+2019,Dorset and Somerset,UKK2,648100,25000
+2019,Cornwall and Isles of Scilly,UKK3,263800,20000
+2019,Devon,UKK4,581700,23700
+2019,West Wales,UKL1,883800,17800
+2019,East Wales,UKL2,578200,16600
+2019,North Eastern Scotland,UKM5,266600,15500
+2019,Highlands and Islands,UKM6,229700,9700
+2019,Eastern Scotland,UKM7,986000,24300
+2019,West Central Scotland,UKM8,738000,21200
+2019,Southern Scotland,UKM9,443600,15400
+2020,Tees Valley and Durham,UKC1,531300,17800
+2020,Northumberland and Tyne and Wear,UKC2,670400,23300
+2020,Cumbria,UKD1,230300,17900
+2020,Greater Manchester,UKD3,1327000,36700
+2020,Lancashire,UKD4,694100,29500
+2020,Cheshire,UKD6,458400,25100
+2020,Merseyside,UKD7,725200,25100
+2020,East Yorkshire and Northern Lincolnshire,UKE1,427000,18400
+2020,North Yorkshire,UKE2,397600,22500
+2020,South Yorkshire,UKE3,653000,28700
+2020,West Yorkshire,UKE4,1120300,40000
+2020,Derbyshire and Nottinghamshire,UKF1,1057300,40600
+2020,"Leicestershire, Rutland and Northamptonshire",UKF2,925300,39900
+2020,Lincolnshire,UKF3,329400,24900
+2020,"Herefordshire, Worcestershire and Warwickshire",UKG1,663900,28100
+2020,Shropshire and Staffordshire,UKG2,779100,30800
+2020,West Midlands,UKG3,1314100,42000
+2020,East Anglia,UKH1,1210700,45700
+2020,Bedfordshire and Hertfordshire,UKH2,965600,38100
+2020,Essex,UKH3,886500,35300
+2020,Inner London - West,UKI3,651300,37200
+2020,Inner London - East,UKI4,1382700,61500
+2020,Outer London - East and North East,UKI5,960200,43400
+2020,Outer London - South,UKI6,683500,34100
+2020,Outer London - West and North West,UKI7,1070300,51500
+2020,"Berkshire, Buckinghamshire and Oxfordshire",UKJ1,1230300,33000
+2020,"Surrey, East and West Sussex",UKJ2,1460000,52800
+2020,Hampshire and Isle of Wight,UKJ3,980800,34100
+2020,Kent,UKJ4,913200,43200
+2020,"Gloucestershire, Wiltshire and Bath/Bristol area",UKK1,1287900,37300
+2020,Dorset and Somerset,UKK2,626900,26500
+2020,Cornwall and Isles of Scilly,UKK3,263400,20600
+2020,Devon,UKK4,568600,25000
+2020,West Wales,UKL1,881100,19800
+2020,East Wales,UKL2,570600,18100
+2020,North Eastern Scotland,UKM5,255200,17000
+2020,Highlands and Islands,UKM6,228100,11000
+2020,Eastern Scotland,UKM7,962400,27400
+2020,West Central Scotland,UKM8,737500,24700
+2020,Southern Scotland,UKM9,430100,17100
+2021,Tees Valley and Durham,UKC1,529000,17900
+2021,Northumberland and Tyne and Wear,UKC2,651400,23200
+2021,Cumbria,UKD1,227500,16400
+2021,Greater Manchester,UKD3,1321100,37900
+2021,Lancashire,UKD4,668300,28500
+2021,Cheshire,UKD6,434500,24100
+2021,Merseyside,UKD7,734400,27600
+2021,East Yorkshire and Northern Lincolnshire,UKE1,423400,18400
+2021,North Yorkshire,UKE2,402800,21700
+2021,South Yorkshire,UKE3,660300,27900
+2021,West Yorkshire,UKE4,1090100,39800
+2021,Derbyshire and Nottinghamshire,UKF1,1045600,38900
+2021,"Leicestershire, Rutland and Northamptonshire",UKF2,883600,37300
+2021,Lincolnshire,UKF3,344200,24200
+2021,"Herefordshire, Worcestershire and Warwickshire",UKG1,668300,27500
+2021,Shropshire and Staffordshire,UKG2,771500,31000
+2021,West Midlands,UKG3,1326300,44300
+2021,East Anglia,UKH1,1212100,44500
+2021,Bedfordshire and Hertfordshire,UKH2,954700,38400
+2021,Essex,UKH3,914600,34600
+2021,Inner London - West,UKI3,648900,39500
+2021,Inner London - East,UKI4,1403300,62400
+2021,Outer London - East and North East,UKI5,958800,43200
+2021,Outer London - South,UKI6,693000,34000
+2021,Outer London - West and North West,UKI7,1050300,48900
+2021,"Berkshire, Buckinghamshire and Oxfordshire",UKJ1,1219700,32900
+2021,"Surrey, East and West Sussex",UKJ2,1455000,50100
+2021,Hampshire and Isle of Wight,UKJ3,987200,33800
+2021,Kent,UKJ4,874700,40400
+2021,"Gloucestershire, Wiltshire and Bath/Bristol area",UKK1,1288400,36000
+2021,Dorset and Somerset,UKK2,618300,25600
+2021,Cornwall and Isles of Scilly,UKK3,254900,19800
+2021,Devon,UKK4,556200,23500
+2021,West Wales,UKL1,879800,20000
+2021,East Wales,UKL2,570300,18700
+2021,North Eastern Scotland,UKM5,252200,16900
+2021,Highlands and Islands,UKM6,215300,12600
+2021,Eastern Scotland,UKM7,974700,29700
+2021,West Central Scotland,UKM8,733700,26100
+2021,Southern Scotland,UKM9,426000,17600
+2022,Tees Valley and Durham,UKC1,539900,19100
+2022,Northumberland and Tyne and Wear,UKC2,650100,24300
+2022,Cumbria,UKD1,232400,16700
+2022,Greater Manchester,UKD3,1337600,41100
+2022,Lancashire,UKD4,680500,31100
+2022,Cheshire,UKD6,443000,27100
+2022,Merseyside,UKD7,731500,30900
+2022,East Yorkshire and Northern Lincolnshire,UKE1,432900,19400
+2022,North Yorkshire,UKE2,413900,23000
+2022,South Yorkshire,UKE3,669700,30200
+2022,West Yorkshire,UKE4,1095700,41600
+2022,Derbyshire and Nottinghamshire,UKF1,1056800,41200
+2022,"Leicestershire, Rutland and Northamptonshire",UKF2,920600,38600
+2022,Lincolnshire,UKF3,357400,26800
+2022,"Herefordshire, Worcestershire and Warwickshire",UKG1,667800,29300
+2022,Shropshire and Staffordshire,UKG2,801300,35600
+2022,West Midlands,UKG3,1326500,46000
+2022,East Anglia,UKH1,1248200,47100
+2022,Bedfordshire and Hertfordshire,UKH2,958900,40900
+2022,Essex,UKH3,918200,37900
+2022,Inner London - West,UKI3,662000,39900
+2022,Inner London - East,UKI4,1429300,69700
+2022,Outer London - East and North East,UKI5,995000,47500
+2022,Outer London - South,UKI6,724200,37500
+2022,Outer London - West and North West,UKI7,1027400,52600
+2022,"Berkshire, Buckinghamshire and Oxfordshire",UKJ1,1260800,36400
+2022,"Surrey, East and West Sussex",UKJ2,1457800,55200
+2022,Hampshire and Isle of Wight,UKJ3,972300,35400
+2022,Kent,UKJ4,916300,44500
+2022,"Gloucestershire, Wiltshire and Bath/Bristol area",UKK1,1305100,38800
+2022,Dorset and Somerset,UKK2,632000,27500
+2022,Cornwall and Isles of Scilly,UKK3,268200,21900
+2022,Devon,UKK4,568000,25100
+2022,West Wales,UKL1,898000,21300
+2022,East Wales,UKL2,558200,19800
+2022,North Eastern Scotland,UKM5,252800,18200
+2022,Highlands and Islands,UKM6,217800,13400
+2022,Eastern Scotland,UKM7,991000,30100
+2022,West Central Scotland,UKM8,745700,27700
+2022,Southern Scotland,UKM9,436600,17800
+2023,Tees Valley and Durham,UKC1,554600,22900
+2023,Northumberland and Tyne and Wear,UKC2,667600,26800
+2023,Cumbria,UKD1,246500,19300
+2023,Greater Manchester,UKD3,1331200,49300
+2023,Lancashire,UKD4,685500,36700
+2023,Cheshire,UKD6,467400,37400
+2023,Merseyside,UKD7,717400,34300
+2023,East Yorkshire and Northern Lincolnshire,UKE1,437000,23000
+2023,North Yorkshire,UKE2,410300,24900
+2023,South Yorkshire,UKE3,660400,34200
+2023,West Yorkshire,UKE4,1106500,52200
+2023,Derbyshire and Nottinghamshire,UKF1,1075500,47400
+2023,"Leicestershire, Rutland and Northamptonshire",UKF2,925100,43400
+2023,Lincolnshire,UKF3,348900,31500
+2023,"Herefordshire, Worcestershire and Warwickshire",UKG1,687800,33300
+2023,Shropshire and Staffordshire,UKG2,818000,40900
+2023,West Midlands,UKG3,1355500,54500
+2023,East Anglia,UKH1,1240200,54200
+2023,Bedfordshire and Hertfordshire,UKH2,970800,46600
+2023,Essex,UKH3,910000,43600
+2023,Inner London - West,UKI3,648100,46300
+2023,Inner London - East,UKI4,1380000,77000
+2023,Outer London - East and North East,UKI5,992800,53700
+2023,Outer London - South,UKI6,705400,45300
+2023,Outer London - West and North West,UKI7,1055300,73800
+2023,"Berkshire, Buckinghamshire and Oxfordshire",UKJ1,1292500,42200
+2023,"Surrey, East and West Sussex",UKJ2,1482900,63600
+2023,Hampshire and Isle of Wight,UKJ3,1029400,41600
+2023,Kent,UKJ4,905100,52200
+2023,"Gloucestershire, Wiltshire and Bath/Bristol area",UKK1,1320200,44600
+2023,Dorset and Somerset,UKK2,643700,30100
+2023,Cornwall and Isles of Scilly,UKK3,269200,25500
+2023,Devon,UKK4,574900,27600
+2023,West Wales,UKL1,899600,23800
+2023,East Wales,UKL2,576300,23000
+2023,North Eastern Scotland,UKM5,269700,22100
+2023,Highlands and Islands,UKM6,229900,15900
+2023,Eastern Scotland,UKM7,1002900,34100
+2023,West Central Scotland,UKM8,742200,32000
+2023,Southern Scotland,UKM9,427800,21500
+2012,Northern Ireland,N92000002,795200,29100
+2013,Northern Ireland,N92000002,800800,29300
+2014,Northern Ireland,N92000002,807900,30300
+2015,Northern Ireland,N92000002,822800,31400
+2016,Northern Ireland,N92000002,834600,31000
+2017,Northern Ireland,N92000002,833000,30600
+2018,Northern Ireland,N92000002,848000,27900
+2019,Northern Ireland,N92000002,870900,24200
+2020,Northern Ireland,N92000002,844800,27600
+2021,Northern Ireland,N92000002,848600,25900
+2022,Northern Ireland,N92000002,879400,23800
+2023,Northern Ireland,N92000002,901000,25400

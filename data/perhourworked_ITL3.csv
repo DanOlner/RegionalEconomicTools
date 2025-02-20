@@ -1,0 +1,3402 @@
+ITL_code,Region_name,year,hoursworked
+TLC11,Hartlepool and Stockton-on-Tees,2004,3568693
+TLC11,Hartlepool and Stockton-on-Tees,2005,3549987
+TLC11,Hartlepool and Stockton-on-Tees,2006,3582223
+TLC11,Hartlepool and Stockton-on-Tees,2007,3474521
+TLC11,Hartlepool and Stockton-on-Tees,2008,3663759
+TLC11,Hartlepool and Stockton-on-Tees,2009,3519571
+TLC11,Hartlepool and Stockton-on-Tees,2010,3502080
+TLC11,Hartlepool and Stockton-on-Tees,2011,3535974
+TLC11,Hartlepool and Stockton-on-Tees,2012,3275222
+TLC11,Hartlepool and Stockton-on-Tees,2013,3463096
+TLC11,Hartlepool and Stockton-on-Tees,2014,3529891
+TLC11,Hartlepool and Stockton-on-Tees,2015,3622597
+TLC11,Hartlepool and Stockton-on-Tees,2016,3615339
+TLC11,Hartlepool and Stockton-on-Tees,2017,3777376
+TLC11,Hartlepool and Stockton-on-Tees,2018,3681637
+TLC11,Hartlepool and Stockton-on-Tees,2019,3702823
+TLC11,Hartlepool and Stockton-on-Tees,2020,3169154
+TLC11,Hartlepool and Stockton-on-Tees,2021,3598033
+TLC11,Hartlepool and Stockton-on-Tees,2022,3612188
+TLC12,South Teesside,2004,3374493
+TLC12,South Teesside,2005,3278271
+TLC12,South Teesside,2006,3340380
+TLC12,South Teesside,2007,3388159
+TLC12,South Teesside,2008,3212606
+TLC12,South Teesside,2009,3235821
+TLC12,South Teesside,2010,3133470
+TLC12,South Teesside,2011,3103801
+TLC12,South Teesside,2012,3289399
+TLC12,South Teesside,2013,3286288
+TLC12,South Teesside,2014,3149308
+TLC12,South Teesside,2015,3134147
+TLC12,South Teesside,2016,3121012
+TLC12,South Teesside,2017,3082333
+TLC12,South Teesside,2018,3208465
+TLC12,South Teesside,2019,3296796
+TLC12,South Teesside,2020,2827734
+TLC12,South Teesside,2021,3383990
+TLC12,South Teesside,2022,3330047
+TLC13,Darlington,2004,1560947
+TLC13,Darlington,2005,1534492
+TLC13,Darlington,2006,1635509
+TLC13,Darlington,2007,1690321
+TLC13,Darlington,2008,1725340
+TLC13,Darlington,2009,1594375
+TLC13,Darlington,2010,1778098
+TLC13,Darlington,2011,1586514
+TLC13,Darlington,2012,1694607
+TLC13,Darlington,2013,1572926
+TLC13,Darlington,2014,1699487
+TLC13,Darlington,2015,1643203
+TLC13,Darlington,2016,1555016
+TLC13,Darlington,2017,1511957
+TLC13,Darlington,2018,1552909
+TLC13,Darlington,2019,1492073
+TLC13,Darlington,2020,1679766
+TLC13,Darlington,2021,1666424
+TLC13,Darlington,2022,1689617
+TLC14,Durham CC,2004,5618824
+TLC14,Durham CC,2005,5365010
+TLC14,Durham CC,2006,5605047
+TLC14,Durham CC,2007,5596543
+TLC14,Durham CC,2008,5386806
+TLC14,Durham CC,2009,5589976
+TLC14,Durham CC,2010,5460036
+TLC14,Durham CC,2011,5266911
+TLC14,Durham CC,2012,5304936
+TLC14,Durham CC,2013,5660107
+TLC14,Durham CC,2014,5702581
+TLC14,Durham CC,2015,5671464
+TLC14,Durham CC,2016,5523075
+TLC14,Durham CC,2017,5666992
+TLC14,Durham CC,2018,5755046
+TLC14,Durham CC,2019,5901952
+TLC14,Durham CC,2020,5282631
+TLC14,Durham CC,2021,5934106
+TLC14,Durham CC,2022,5799513
+TLC21,Northumberland,2004,3702343
+TLC21,Northumberland,2005,3563851
+TLC21,Northumberland,2006,3660640
+TLC21,Northumberland,2007,3726920
+TLC21,Northumberland,2008,3870296
+TLC21,Northumberland,2009,3916949
+TLC21,Northumberland,2010,3831456
+TLC21,Northumberland,2011,3567956
+TLC21,Northumberland,2012,3385307
+TLC21,Northumberland,2013,3558091
+TLC21,Northumberland,2014,3466918
+TLC21,Northumberland,2015,3470297
+TLC21,Northumberland,2016,3581544
+TLC21,Northumberland,2017,3524684
+TLC21,Northumberland,2018,3551360
+TLC21,Northumberland,2019,3702075
+TLC21,Northumberland,2020,3205505
+TLC21,Northumberland,2021,3424017
+TLC21,Northumberland,2022,3380298
+TLC22,Tyneside,2004,12011819
+TLC22,Tyneside,2005,12551010
+TLC22,Tyneside,2006,12749660
+TLC22,Tyneside,2007,12536757
+TLC22,Tyneside,2008,12491988
+TLC22,Tyneside,2009,12231162
+TLC22,Tyneside,2010,12151781
+TLC22,Tyneside,2011,12088972
+TLC22,Tyneside,2012,12149068
+TLC22,Tyneside,2013,12069982
+TLC22,Tyneside,2014,12593454
+TLC22,Tyneside,2015,12703746
+TLC22,Tyneside,2016,12517624
+TLC22,Tyneside,2017,12800682
+TLC22,Tyneside,2018,13160952
+TLC22,Tyneside,2019,12619135
+TLC22,Tyneside,2020,10869933
+TLC22,Tyneside,2021,12138592
+TLC22,Tyneside,2022,12575141
+TLC23,Sunderland,2004,3555122
+TLC23,Sunderland,2005,3818466
+TLC23,Sunderland,2006,3967576
+TLC23,Sunderland,2007,3954520
+TLC23,Sunderland,2008,3974360
+TLC23,Sunderland,2009,3788872
+TLC23,Sunderland,2010,3496840
+TLC23,Sunderland,2011,3652273
+TLC23,Sunderland,2012,3737890
+TLC23,Sunderland,2013,3718238
+TLC23,Sunderland,2014,3676796
+TLC23,Sunderland,2015,3764530
+TLC23,Sunderland,2016,3797477
+TLC23,Sunderland,2017,3762995
+TLC23,Sunderland,2018,3779116
+TLC23,Sunderland,2019,3610474
+TLC23,Sunderland,2020,3444442
+TLC23,Sunderland,2021,3774085
+TLC23,Sunderland,2022,3478498
+TLD11,West Cumbria,2004,2878757
+TLD11,West Cumbria,2005,2781883
+TLD11,West Cumbria,2006,2904101
+TLD11,West Cumbria,2007,3033303
+TLD11,West Cumbria,2008,3067037
+TLD11,West Cumbria,2009,3158233
+TLD11,West Cumbria,2010,3374220
+TLD11,West Cumbria,2011,3169187
+TLD11,West Cumbria,2012,3140552
+TLD11,West Cumbria,2013,3075775
+TLD11,West Cumbria,2014,3200718
+TLD11,West Cumbria,2015,3346633
+TLD11,West Cumbria,2016,3211595
+TLD11,West Cumbria,2017,3230282
+TLD11,West Cumbria,2018,3275925
+TLD11,West Cumbria,2019,3368673
+TLD11,West Cumbria,2020,2850012
+TLD11,West Cumbria,2021,2846155
+TLD11,West Cumbria,2022,3222754
+TLD12,East Cumbria,2004,4362113
+TLD12,East Cumbria,2005,3915847
+TLD12,East Cumbria,2006,4061597
+TLD12,East Cumbria,2007,4715982
+TLD12,East Cumbria,2008,4542823
+TLD12,East Cumbria,2009,4310739
+TLD12,East Cumbria,2010,4625351
+TLD12,East Cumbria,2011,4002663
+TLD12,East Cumbria,2012,4398692
+TLD12,East Cumbria,2013,4457598
+TLD12,East Cumbria,2014,4720934
+TLD12,East Cumbria,2015,4465948
+TLD12,East Cumbria,2016,4452504
+TLD12,East Cumbria,2017,4533947
+TLD12,East Cumbria,2018,4444296
+TLD12,East Cumbria,2019,4535359
+TLD12,East Cumbria,2020,4279798
+TLD12,East Cumbria,2021,4658511
+TLD12,East Cumbria,2022,4277461
+TLD33,Manchester,2004,10359468
+TLD33,Manchester,2005,10198183
+TLD33,Manchester,2006,10553970
+TLD33,Manchester,2007,10455684
+TLD33,Manchester,2008,10544004
+TLD33,Manchester,2009,9849738
+TLD33,Manchester,2010,10481439
+TLD33,Manchester,2011,10262013
+TLD33,Manchester,2012,10504366
+TLD33,Manchester,2013,11206543
+TLD33,Manchester,2014,11590483
+TLD33,Manchester,2015,11552307
+TLD33,Manchester,2016,12751161
+TLD33,Manchester,2017,13122081
+TLD33,Manchester,2018,13236379
+TLD33,Manchester,2019,14065054
+TLD33,Manchester,2020,12557324
+TLD33,Manchester,2021,13611589
+TLD33,Manchester,2022,13869321
+TLD34,Greater Manchester South West,2004,7915613
+TLD34,Greater Manchester South West,2005,7899977
+TLD34,Greater Manchester South West,2006,7783801
+TLD34,Greater Manchester South West,2007,7599490
+TLD34,Greater Manchester South West,2008,7640279
+TLD34,Greater Manchester South West,2009,7933906
+TLD34,Greater Manchester South West,2010,7854412
+TLD34,Greater Manchester South West,2011,7860920
+TLD34,Greater Manchester South West,2012,7975271
+TLD34,Greater Manchester South West,2013,8287833
+TLD34,Greater Manchester South West,2014,8477008
+TLD34,Greater Manchester South West,2015,8532309
+TLD34,Greater Manchester South West,2016,8576516
+TLD34,Greater Manchester South West,2017,8772516
+TLD34,Greater Manchester South West,2018,9175959
+TLD34,Greater Manchester South West,2019,9105552
+TLD34,Greater Manchester South West,2020,8206129
+TLD34,Greater Manchester South West,2021,9607571
+TLD34,Greater Manchester South West,2022,10056314
+TLD35,Greater Manchester South East,2004,6530850
+TLD35,Greater Manchester South East,2005,6650983
+TLD35,Greater Manchester South East,2006,6342006
+TLD35,Greater Manchester South East,2007,6551349
+TLD35,Greater Manchester South East,2008,6338522
+TLD35,Greater Manchester South East,2009,6482004
+TLD35,Greater Manchester South East,2010,6079899
+TLD35,Greater Manchester South East,2011,6323076
+TLD35,Greater Manchester South East,2012,6215852
+TLD35,Greater Manchester South East,2013,6084753
+TLD35,Greater Manchester South East,2014,6325749
+TLD35,Greater Manchester South East,2015,6217241
+TLD35,Greater Manchester South East,2016,6163391
+TLD35,Greater Manchester South East,2017,6112332
+TLD35,Greater Manchester South East,2018,6561239
+TLD35,Greater Manchester South East,2019,6849865
+TLD35,Greater Manchester South East,2020,5877121
+TLD35,Greater Manchester South East,2021,6722638
+TLD35,Greater Manchester South East,2022,6499065
+TLD36,Greater Manchester North West,2004,6498788
+TLD36,Greater Manchester North West,2005,7220567
+TLD36,Greater Manchester North West,2006,7088261
+TLD36,Greater Manchester North West,2007,6809522
+TLD36,Greater Manchester North West,2008,6717460
+TLD36,Greater Manchester North West,2009,6531616
+TLD36,Greater Manchester North West,2010,6659538
+TLD36,Greater Manchester North West,2011,6492249
+TLD36,Greater Manchester North West,2012,6566051
+TLD36,Greater Manchester North West,2013,6555830
+TLD36,Greater Manchester North West,2014,7066233
+TLD36,Greater Manchester North West,2015,6854318
+TLD36,Greater Manchester North West,2016,6978436
+TLD36,Greater Manchester North West,2017,7308752
+TLD36,Greater Manchester North West,2018,7461471
+TLD36,Greater Manchester North West,2019,7681330
+TLD36,Greater Manchester North West,2020,6295325
+TLD36,Greater Manchester North West,2021,7288913
+TLD36,Greater Manchester North West,2022,7144912
+TLD37,Greater Manchester North East,2004,6962458
+TLD37,Greater Manchester North East,2005,7125674
+TLD37,Greater Manchester North East,2006,7130128
+TLD37,Greater Manchester North East,2007,7132930
+TLD37,Greater Manchester North East,2008,7017680
+TLD37,Greater Manchester North East,2009,7085021
+TLD37,Greater Manchester North East,2010,6854462
+TLD37,Greater Manchester North East,2011,6736550
+TLD37,Greater Manchester North East,2012,7080294
+TLD37,Greater Manchester North East,2013,7072323
+TLD37,Greater Manchester North East,2014,7267645
+TLD37,Greater Manchester North East,2015,7172346
+TLD37,Greater Manchester North East,2016,7318806
+TLD37,Greater Manchester North East,2017,7513488
+TLD37,Greater Manchester North East,2018,7809844
+TLD37,Greater Manchester North East,2019,7644871
+TLD37,Greater Manchester North East,2020,6506547
+TLD37,Greater Manchester North East,2021,7282951
+TLD37,Greater Manchester North East,2022,7398787
+TLD41,Blackburn with Darwen,2004,2082248
+TLD41,Blackburn with Darwen,2005,1994450
+TLD41,Blackburn with Darwen,2006,1921785
+TLD41,Blackburn with Darwen,2007,2194234
+TLD41,Blackburn with Darwen,2008,2078810
+TLD41,Blackburn with Darwen,2009,1897334
+TLD41,Blackburn with Darwen,2010,1943175
+TLD41,Blackburn with Darwen,2011,1934979
+TLD41,Blackburn with Darwen,2012,2061131
+TLD41,Blackburn with Darwen,2013,2091678
+TLD41,Blackburn with Darwen,2014,2272294
+TLD41,Blackburn with Darwen,2015,2154849
+TLD41,Blackburn with Darwen,2016,2200322
+TLD41,Blackburn with Darwen,2017,2106964
+TLD41,Blackburn with Darwen,2018,2261508
+TLD41,Blackburn with Darwen,2019,2174977
+TLD41,Blackburn with Darwen,2020,2037575
+TLD41,Blackburn with Darwen,2021,2307759
+TLD41,Blackburn with Darwen,2022,2231124
+TLD42,Blackpool,2004,1834658
+TLD42,Blackpool,2005,1836444
+TLD42,Blackpool,2006,1940765
+TLD42,Blackpool,2007,1946392
+TLD42,Blackpool,2008,1806224
+TLD42,Blackpool,2009,1934316
+TLD42,Blackpool,2010,1689343
+TLD42,Blackpool,2011,1748178
+TLD42,Blackpool,2012,1833692
+TLD42,Blackpool,2013,1700451
+TLD42,Blackpool,2014,1961509
+TLD42,Blackpool,2015,1851130
+TLD42,Blackpool,2016,1766020
+TLD42,Blackpool,2017,1901649
+TLD42,Blackpool,2018,1929000
+TLD42,Blackpool,2019,1988968
+TLD42,Blackpool,2020,1795527
+TLD42,Blackpool,2021,1821031
+TLD42,Blackpool,2022,2022204
+TLD44,Lancaster and Wyre,2004,2621320
+TLD44,Lancaster and Wyre,2005,2846940
+TLD44,Lancaster and Wyre,2006,2939321
+TLD44,Lancaster and Wyre,2007,2679359
+TLD44,Lancaster and Wyre,2008,3019516
+TLD44,Lancaster and Wyre,2009,3007663
+TLD44,Lancaster and Wyre,2010,2785800
+TLD44,Lancaster and Wyre,2011,3063189
+TLD44,Lancaster and Wyre,2012,2764895
+TLD44,Lancaster and Wyre,2013,2915905
+TLD44,Lancaster and Wyre,2014,3081924
+TLD44,Lancaster and Wyre,2015,2937907
+TLD44,Lancaster and Wyre,2016,2683347
+TLD44,Lancaster and Wyre,2017,3028811
+TLD44,Lancaster and Wyre,2018,2825897
+TLD44,Lancaster and Wyre,2019,2811466
+TLD44,Lancaster and Wyre,2020,2235669
+TLD44,Lancaster and Wyre,2021,2595359
+TLD44,Lancaster and Wyre,2022,2931448
+TLD45,Mid Lancashire,2004,6663530
+TLD45,Mid Lancashire,2005,6899370
+TLD45,Mid Lancashire,2006,6692962
+TLD45,Mid Lancashire,2007,7065841
+TLD45,Mid Lancashire,2008,6763080
+TLD45,Mid Lancashire,2009,6621010
+TLD45,Mid Lancashire,2010,6863092
+TLD45,Mid Lancashire,2011,6932895
+TLD45,Mid Lancashire,2012,6698462
+TLD45,Mid Lancashire,2013,6891138
+TLD45,Mid Lancashire,2014,7257165
+TLD45,Mid Lancashire,2015,6982495
+TLD45,Mid Lancashire,2016,6869832
+TLD45,Mid Lancashire,2017,6517641
+TLD45,Mid Lancashire,2018,6888239
+TLD45,Mid Lancashire,2019,7119934
+TLD45,Mid Lancashire,2020,6247648
+TLD45,Mid Lancashire,2021,6419075
+TLD45,Mid Lancashire,2022,6841997
+TLD46,East Lancashire,2004,4105820
+TLD46,East Lancashire,2005,3995886
+TLD46,East Lancashire,2006,3795872
+TLD46,East Lancashire,2007,3852591
+TLD46,East Lancashire,2008,3848724
+TLD46,East Lancashire,2009,3634692
+TLD46,East Lancashire,2010,3686315
+TLD46,East Lancashire,2011,3853425
+TLD46,East Lancashire,2012,3735705
+TLD46,East Lancashire,2013,3785560
+TLD46,East Lancashire,2014,3838103
+TLD46,East Lancashire,2015,4088218
+TLD46,East Lancashire,2016,4064778
+TLD46,East Lancashire,2017,3852815
+TLD46,East Lancashire,2018,4150177
+TLD46,East Lancashire,2019,4264694
+TLD46,East Lancashire,2020,3764312
+TLD46,East Lancashire,2021,3734283
+TLD46,East Lancashire,2022,3772765
+TLD47,Chorley and West Lancashire,2004,2771349
+TLD47,Chorley and West Lancashire,2005,2859051
+TLD47,Chorley and West Lancashire,2006,2825293
+TLD47,Chorley and West Lancashire,2007,2883356
+TLD47,Chorley and West Lancashire,2008,2541799
+TLD47,Chorley and West Lancashire,2009,2818456
+TLD47,Chorley and West Lancashire,2010,2896591
+TLD47,Chorley and West Lancashire,2011,2829569
+TLD47,Chorley and West Lancashire,2012,2948224
+TLD47,Chorley and West Lancashire,2013,2911492
+TLD47,Chorley and West Lancashire,2014,3062768
+TLD47,Chorley and West Lancashire,2015,2948474
+TLD47,Chorley and West Lancashire,2016,3072115
+TLD47,Chorley and West Lancashire,2017,2796117
+TLD47,Chorley and West Lancashire,2018,3093050
+TLD47,Chorley and West Lancashire,2019,3134761
+TLD47,Chorley and West Lancashire,2020,2780774
+TLD47,Chorley and West Lancashire,2021,2806105
+TLD47,Chorley and West Lancashire,2022,2870823
+TLD61,Warrington,2004,3524010
+TLD61,Warrington,2005,3834365
+TLD61,Warrington,2006,3832606
+TLD61,Warrington,2007,3691536
+TLD61,Warrington,2008,3708869
+TLD61,Warrington,2009,3596760
+TLD61,Warrington,2010,3751293
+TLD61,Warrington,2011,3891279
+TLD61,Warrington,2012,3794691
+TLD61,Warrington,2013,4189380
+TLD61,Warrington,2014,4129023
+TLD61,Warrington,2015,4272997
+TLD61,Warrington,2016,4680300
+TLD61,Warrington,2017,4398766
+TLD61,Warrington,2018,4362064
+TLD61,Warrington,2019,4615090
+TLD61,Warrington,2020,4285612
+TLD61,Warrington,2021,4512415
+TLD61,Warrington,2022,4477599
+TLD62,Cheshire East,2004,5420720
+TLD62,Cheshire East,2005,5284649
+TLD62,Cheshire East,2006,5409596
+TLD62,Cheshire East,2007,5536352
+TLD62,Cheshire East,2008,5531266
+TLD62,Cheshire East,2009,5588653
+TLD62,Cheshire East,2010,5679257
+TLD62,Cheshire East,2011,5523689
+TLD62,Cheshire East,2012,5772500
+TLD62,Cheshire East,2013,6012551
+TLD62,Cheshire East,2014,6094526
+TLD62,Cheshire East,2015,6492643
+TLD62,Cheshire East,2016,6575955
+TLD62,Cheshire East,2017,6573829
+TLD62,Cheshire East,2018,6574839
+TLD62,Cheshire East,2019,6893386
+TLD62,Cheshire East,2020,5988202
+TLD62,Cheshire East,2021,5990098
+TLD62,Cheshire East,2022,6151931
+TLD63,Cheshire West and Chester,2004,5019665
+TLD63,Cheshire West and Chester,2005,4709679
+TLD63,Cheshire West and Chester,2006,4905347
+TLD63,Cheshire West and Chester,2007,4969399
+TLD63,Cheshire West and Chester,2008,4817258
+TLD63,Cheshire West and Chester,2009,4883904
+TLD63,Cheshire West and Chester,2010,4903884
+TLD63,Cheshire West and Chester,2011,4719153
+TLD63,Cheshire West and Chester,2012,4953596
+TLD63,Cheshire West and Chester,2013,4856999
+TLD63,Cheshire West and Chester,2014,5279563
+TLD63,Cheshire West and Chester,2015,5748919
+TLD63,Cheshire West and Chester,2016,5318044
+TLD63,Cheshire West and Chester,2017,5542139
+TLD63,Cheshire West and Chester,2018,5669350
+TLD63,Cheshire West and Chester,2019,5930944
+TLD63,Cheshire West and Chester,2020,4963214
+TLD63,Cheshire West and Chester,2021,5052915
+TLD63,Cheshire West and Chester,2022,5609357
+TLD71,East Merseyside,2004,5505329
+TLD71,East Merseyside,2005,5244997
+TLD71,East Merseyside,2006,5710781
+TLD71,East Merseyside,2007,5678743
+TLD71,East Merseyside,2008,5539997
+TLD71,East Merseyside,2009,5419069
+TLD71,East Merseyside,2010,5472657
+TLD71,East Merseyside,2011,5578208
+TLD71,East Merseyside,2012,6029037
+TLD71,East Merseyside,2013,5525269
+TLD71,East Merseyside,2014,5996809
+TLD71,East Merseyside,2015,5895049
+TLD71,East Merseyside,2016,6321219
+TLD71,East Merseyside,2017,6202609
+TLD71,East Merseyside,2018,6132765
+TLD71,East Merseyside,2019,6652817
+TLD71,East Merseyside,2020,5761748
+TLD71,East Merseyside,2021,6139946
+TLD71,East Merseyside,2022,6187129
+TLD72,Liverpool,2004,6957519
+TLD72,Liverpool,2005,7384686
+TLD72,Liverpool,2006,7510758
+TLD72,Liverpool,2007,7284846
+TLD72,Liverpool,2008,7637942
+TLD72,Liverpool,2009,7442451
+TLD72,Liverpool,2010,7203206
+TLD72,Liverpool,2011,7139843
+TLD72,Liverpool,2012,7188113
+TLD72,Liverpool,2013,7297228
+TLD72,Liverpool,2014,7649836
+TLD72,Liverpool,2015,7773052
+TLD72,Liverpool,2016,7734513
+TLD72,Liverpool,2017,8081881
+TLD72,Liverpool,2018,8138060
+TLD72,Liverpool,2019,8856213
+TLD72,Liverpool,2020,7393916
+TLD72,Liverpool,2021,8106759
+TLD72,Liverpool,2022,9028977
+TLD73,Sefton,2004,3226780
+TLD73,Sefton,2005,3201460
+TLD73,Sefton,2006,3019457
+TLD73,Sefton,2007,3002310
+TLD73,Sefton,2008,2945728
+TLD73,Sefton,2009,2584400
+TLD73,Sefton,2010,2718681
+TLD73,Sefton,2011,2766645
+TLD73,Sefton,2012,2798401
+TLD73,Sefton,2013,2739806
+TLD73,Sefton,2014,2826744
+TLD73,Sefton,2015,2606699
+TLD73,Sefton,2016,2770114
+TLD73,Sefton,2017,2769364
+TLD73,Sefton,2018,2602786
+TLD73,Sefton,2019,2849561
+TLD73,Sefton,2020,2337919
+TLD73,Sefton,2021,2797098
+TLD73,Sefton,2022,2469141
+TLD74,Wirral,2004,3073582
+TLD74,Wirral,2005,3284461
+TLD74,Wirral,2006,3075136
+TLD74,Wirral,2007,2921664
+TLD74,Wirral,2008,3158499
+TLD74,Wirral,2009,3108590
+TLD74,Wirral,2010,3120262
+TLD74,Wirral,2011,3009779
+TLD74,Wirral,2012,3021414
+TLD74,Wirral,2013,3098033
+TLD74,Wirral,2014,3271588
+TLD74,Wirral,2015,3361205
+TLD74,Wirral,2016,3060572
+TLD74,Wirral,2017,3491275
+TLD74,Wirral,2018,3267781
+TLD74,Wirral,2019,3370767
+TLD74,Wirral,2020,3024151
+TLD74,Wirral,2021,2925409
+TLD74,Wirral,2022,3456212
+TLE11,"Kingston upon Hull, City of",2004,4222488
+TLE11,"Kingston upon Hull, City of",2005,4038590
+TLE11,"Kingston upon Hull, City of",2006,3978009
+TLE11,"Kingston upon Hull, City of",2007,3794718
+TLE11,"Kingston upon Hull, City of",2008,3623659
+TLE11,"Kingston upon Hull, City of",2009,3686212
+TLE11,"Kingston upon Hull, City of",2010,3649229
+TLE11,"Kingston upon Hull, City of",2011,3922422
+TLE11,"Kingston upon Hull, City of",2012,3944871
+TLE11,"Kingston upon Hull, City of",2013,3872763
+TLE11,"Kingston upon Hull, City of",2014,3762487
+TLE11,"Kingston upon Hull, City of",2015,3589849
+TLE11,"Kingston upon Hull, City of",2016,3830571
+TLE11,"Kingston upon Hull, City of",2017,3904933
+TLE11,"Kingston upon Hull, City of",2018,4065796
+TLE11,"Kingston upon Hull, City of",2019,4008920
+TLE11,"Kingston upon Hull, City of",2020,3719069
+TLE11,"Kingston upon Hull, City of",2021,3801746
+TLE11,"Kingston upon Hull, City of",2022,3994246
+TLE12,East Riding of Yorkshire,2004,3735285
+TLE12,East Riding of Yorkshire,2005,3661589
+TLE12,East Riding of Yorkshire,2006,3716524
+TLE12,East Riding of Yorkshire,2007,3807052
+TLE12,East Riding of Yorkshire,2008,3661703
+TLE12,East Riding of Yorkshire,2009,3822285
+TLE12,East Riding of Yorkshire,2010,3835926
+TLE12,East Riding of Yorkshire,2011,3999936
+TLE12,East Riding of Yorkshire,2012,3710442
+TLE12,East Riding of Yorkshire,2013,3802509
+TLE12,East Riding of Yorkshire,2014,4162246
+TLE12,East Riding of Yorkshire,2015,3865884
+TLE12,East Riding of Yorkshire,2016,3919345
+TLE12,East Riding of Yorkshire,2017,4069176
+TLE12,East Riding of Yorkshire,2018,4315095
+TLE12,East Riding of Yorkshire,2019,4317911
+TLE12,East Riding of Yorkshire,2020,3709851
+TLE12,East Riding of Yorkshire,2021,3899677
+TLE12,East Riding of Yorkshire,2022,3973597
+TLE13,North and North East Lincolnshire,2004,4473893
+TLE13,North and North East Lincolnshire,2005,4582616
+TLE13,North and North East Lincolnshire,2006,4313883
+TLE13,North and North East Lincolnshire,2007,4618945
+TLE13,North and North East Lincolnshire,2008,4501348
+TLE13,North and North East Lincolnshire,2009,4367430
+TLE13,North and North East Lincolnshire,2010,4453851
+TLE13,North and North East Lincolnshire,2011,4724472
+TLE13,North and North East Lincolnshire,2012,4374047
+TLE13,North and North East Lincolnshire,2013,4232285
+TLE13,North and North East Lincolnshire,2014,4427509
+TLE13,North and North East Lincolnshire,2015,4536634
+TLE13,North and North East Lincolnshire,2016,4586148
+TLE13,North and North East Lincolnshire,2017,4639646
+TLE13,North and North East Lincolnshire,2018,4813511
+TLE13,North and North East Lincolnshire,2019,4819758
+TLE13,North and North East Lincolnshire,2020,4330015
+TLE13,North and North East Lincolnshire,2021,4999203
+TLE13,North and North East Lincolnshire,2022,4560138
+TLE21,York,2004,3141256
+TLE21,York,2005,3113286
+TLE21,York,2006,3105930
+TLE21,York,2007,3158730
+TLE21,York,2008,3103348
+TLE21,York,2009,3140740
+TLE21,York,2010,3293677
+TLE21,York,2011,3444808
+TLE21,York,2012,3354200
+TLE21,York,2013,3278258
+TLE21,York,2014,3344143
+TLE21,York,2015,3220776
+TLE21,York,2016,3178207
+TLE21,York,2017,3303429
+TLE21,York,2018,3484188
+TLE21,York,2019,3425992
+TLE21,York,2020,3302099
+TLE21,York,2021,3562032
+TLE21,York,2022,3332876
+TLE22,North Yorkshire CC,2004,7971163
+TLE22,North Yorkshire CC,2005,8679803
+TLE22,North Yorkshire CC,2006,8843243
+TLE22,North Yorkshire CC,2007,8960160
+TLE22,North Yorkshire CC,2008,8770657
+TLE22,North Yorkshire CC,2009,9149715
+TLE22,North Yorkshire CC,2010,8991177
+TLE22,North Yorkshire CC,2011,8741100
+TLE22,North Yorkshire CC,2012,9258918
+TLE22,North Yorkshire CC,2013,9489933
+TLE22,North Yorkshire CC,2014,9668088
+TLE22,North Yorkshire CC,2015,9883394
+TLE22,North Yorkshire CC,2016,9761768
+TLE22,North Yorkshire CC,2017,9516865
+TLE22,North Yorkshire CC,2018,10170881
+TLE22,North Yorkshire CC,2019,9406287
+TLE22,North Yorkshire CC,2020,7664938
+TLE22,North Yorkshire CC,2021,8578545
+TLE22,North Yorkshire CC,2022,9575311
+TLE31,"Barnsley, Doncaster and Rotherham",2004,9423107
+TLE31,"Barnsley, Doncaster and Rotherham",2005,9572322
+TLE31,"Barnsley, Doncaster and Rotherham",2006,9545591
+TLE31,"Barnsley, Doncaster and Rotherham",2007,9493385
+TLE31,"Barnsley, Doncaster and Rotherham",2008,9067760
+TLE31,"Barnsley, Doncaster and Rotherham",2009,8980609
+TLE31,"Barnsley, Doncaster and Rotherham",2010,9063063
+TLE31,"Barnsley, Doncaster and Rotherham",2011,9175208
+TLE31,"Barnsley, Doncaster and Rotherham",2012,9283749
+TLE31,"Barnsley, Doncaster and Rotherham",2013,9092568
+TLE31,"Barnsley, Doncaster and Rotherham",2014,9565194
+TLE31,"Barnsley, Doncaster and Rotherham",2015,9710760
+TLE31,"Barnsley, Doncaster and Rotherham",2016,10050816
+TLE31,"Barnsley, Doncaster and Rotherham",2017,9814239
+TLE31,"Barnsley, Doncaster and Rotherham",2018,10428426
+TLE31,"Barnsley, Doncaster and Rotherham",2019,10285242
+TLE31,"Barnsley, Doncaster and Rotherham",2020,9553376
+TLE31,"Barnsley, Doncaster and Rotherham",2021,10361590
+TLE31,"Barnsley, Doncaster and Rotherham",2022,10449818
+TLE32,Sheffield,2004,7946812
+TLE32,Sheffield,2005,8175852
+TLE32,Sheffield,2006,7988709
+TLE32,Sheffield,2007,8009365
+TLE32,Sheffield,2008,7981083
+TLE32,Sheffield,2009,7691510
+TLE32,Sheffield,2010,7477522
+TLE32,Sheffield,2011,7954680
+TLE32,Sheffield,2012,7767639
+TLE32,Sheffield,2013,7571922
+TLE32,Sheffield,2014,8248002
+TLE32,Sheffield,2015,8199820
+TLE32,Sheffield,2016,8044778
+TLE32,Sheffield,2017,8353496
+TLE32,Sheffield,2018,8144280
+TLE32,Sheffield,2019,8137814
+TLE32,Sheffield,2020,7687820
+TLE32,Sheffield,2021,7973836
+TLE32,Sheffield,2022,8535013
+TLE41,Bradford,2004,6426570
+TLE41,Bradford,2005,6557505
+TLE41,Bradford,2006,6441243
+TLE41,Bradford,2007,6440776
+TLE41,Bradford,2008,6558700
+TLE41,Bradford,2009,6808604
+TLE41,Bradford,2010,6206625
+TLE41,Bradford,2011,6260281
+TLE41,Bradford,2012,6126338
+TLE41,Bradford,2013,6480951
+TLE41,Bradford,2014,6433865
+TLE41,Bradford,2015,6347612
+TLE41,Bradford,2016,6260898
+TLE41,Bradford,2017,6771580
+TLE41,Bradford,2018,6993620
+TLE41,Bradford,2019,6697641
+TLE41,Bradford,2020,5834892
+TLE41,Bradford,2021,6522677
+TLE41,Bradford,2022,6355043
+TLE42,Leeds,2004,13433099
+TLE42,Leeds,2005,13565622
+TLE42,Leeds,2006,13785190
+TLE42,Leeds,2007,13440750
+TLE42,Leeds,2008,13356202
+TLE42,Leeds,2009,13088922
+TLE42,Leeds,2010,13154454
+TLE42,Leeds,2011,12962226
+TLE42,Leeds,2012,13595845
+TLE42,Leeds,2013,13984604
+TLE42,Leeds,2014,13657734
+TLE42,Leeds,2015,14201106
+TLE42,Leeds,2016,14974326
+TLE42,Leeds,2017,14668655
+TLE42,Leeds,2018,15073137
+TLE42,Leeds,2019,15544668
+TLE42,Leeds,2020,14472043
+TLE42,Leeds,2021,15357377
+TLE42,Leeds,2022,16027492
+TLE44,Calderdale and Kirklees,2004,8133737
+TLE44,Calderdale and Kirklees,2005,8035968
+TLE44,Calderdale and Kirklees,2006,8147011
+TLE44,Calderdale and Kirklees,2007,7938520
+TLE44,Calderdale and Kirklees,2008,7627874
+TLE44,Calderdale and Kirklees,2009,7681746
+TLE44,Calderdale and Kirklees,2010,7979367
+TLE44,Calderdale and Kirklees,2011,7953053
+TLE44,Calderdale and Kirklees,2012,8072574
+TLE44,Calderdale and Kirklees,2013,8020399
+TLE44,Calderdale and Kirklees,2014,8415994
+TLE44,Calderdale and Kirklees,2015,8588370
+TLE44,Calderdale and Kirklees,2016,8446385
+TLE44,Calderdale and Kirklees,2017,8363799
+TLE44,Calderdale and Kirklees,2018,8470326
+TLE44,Calderdale and Kirklees,2019,8684260
+TLE44,Calderdale and Kirklees,2020,6837980
+TLE44,Calderdale and Kirklees,2021,8190750
+TLE44,Calderdale and Kirklees,2022,8271094
+TLE45,Wakefield,2004,4379016
+TLE45,Wakefield,2005,4533162
+TLE45,Wakefield,2006,4409831
+TLE45,Wakefield,2007,4795197
+TLE45,Wakefield,2008,4627546
+TLE45,Wakefield,2009,4525320
+TLE45,Wakefield,2010,4505393
+TLE45,Wakefield,2011,4633102
+TLE45,Wakefield,2012,4700893
+TLE45,Wakefield,2013,4825903
+TLE45,Wakefield,2014,4785043
+TLE45,Wakefield,2015,4708958
+TLE45,Wakefield,2016,5097057
+TLE45,Wakefield,2017,4939111
+TLE45,Wakefield,2018,5141601
+TLE45,Wakefield,2019,4970923
+TLE45,Wakefield,2020,4512231
+TLE45,Wakefield,2021,4828282
+TLE45,Wakefield,2022,4932443
+TLF11,Derby,2004,3734280
+TLF11,Derby,2005,3902823
+TLF11,Derby,2006,3876928
+TLF11,Derby,2007,3936662
+TLF11,Derby,2008,3726487
+TLF11,Derby,2009,3591768
+TLF11,Derby,2010,3528802
+TLF11,Derby,2011,3821816
+TLF11,Derby,2012,3772510
+TLF11,Derby,2013,3869204
+TLF11,Derby,2014,4001900
+TLF11,Derby,2015,3992969
+TLF11,Derby,2016,3900965
+TLF11,Derby,2017,4129943
+TLF11,Derby,2018,4224091
+TLF11,Derby,2019,4599937
+TLF11,Derby,2020,3917848
+TLF11,Derby,2021,4157337
+TLF11,Derby,2022,4620457
+TLF12,East Derbyshire,2004,3174743
+TLF12,East Derbyshire,2005,3029547
+TLF12,East Derbyshire,2006,2961328
+TLF12,East Derbyshire,2007,3409160
+TLF12,East Derbyshire,2008,3097177
+TLF12,East Derbyshire,2009,2969230
+TLF12,East Derbyshire,2010,3330224
+TLF12,East Derbyshire,2011,3396888
+TLF12,East Derbyshire,2012,3764527
+TLF12,East Derbyshire,2013,3334667
+TLF12,East Derbyshire,2014,3174853
+TLF12,East Derbyshire,2015,3710811
+TLF12,East Derbyshire,2016,3333887
+TLF12,East Derbyshire,2017,3503418
+TLF12,East Derbyshire,2018,3567071
+TLF12,East Derbyshire,2019,3530664
+TLF12,East Derbyshire,2020,3203682
+TLF12,East Derbyshire,2021,3262431
+TLF12,East Derbyshire,2022,3661307
+TLF13,South and West Derbyshire,2004,5955842
+TLF13,South and West Derbyshire,2005,6444198
+TLF13,South and West Derbyshire,2006,6133796
+TLF13,South and West Derbyshire,2007,6259846
+TLF13,South and West Derbyshire,2008,6075773
+TLF13,South and West Derbyshire,2009,5733447
+TLF13,South and West Derbyshire,2010,5844370
+TLF13,South and West Derbyshire,2011,6065353
+TLF13,South and West Derbyshire,2012,6412196
+TLF13,South and West Derbyshire,2013,5986928
+TLF13,South and West Derbyshire,2014,5930002
+TLF13,South and West Derbyshire,2015,6205108
+TLF13,South and West Derbyshire,2016,5659981
+TLF13,South and West Derbyshire,2017,6368937
+TLF13,South and West Derbyshire,2018,6569039
+TLF13,South and West Derbyshire,2019,6577146
+TLF13,South and West Derbyshire,2020,5695526
+TLF13,South and West Derbyshire,2021,5465783
+TLF13,South and West Derbyshire,2022,6348646
+TLF14,Nottingham,2004,6081585
+TLF14,Nottingham,2005,6197411
+TLF14,Nottingham,2006,6081117
+TLF14,Nottingham,2007,6014295
+TLF14,Nottingham,2008,5775999
+TLF14,Nottingham,2009,5700411
+TLF14,Nottingham,2010,6317636
+TLF14,Nottingham,2011,6052582
+TLF14,Nottingham,2012,6208341
+TLF14,Nottingham,2013,6881308
+TLF14,Nottingham,2014,6606313
+TLF14,Nottingham,2015,7043242
+TLF14,Nottingham,2016,7257457
+TLF14,Nottingham,2017,6484371
+TLF14,Nottingham,2018,6481221
+TLF14,Nottingham,2019,6319554
+TLF14,Nottingham,2020,5859912
+TLF14,Nottingham,2021,6607884
+TLF14,Nottingham,2022,6968949
+TLF15,North Nottinghamshire,2004,5344383
+TLF15,North Nottinghamshire,2005,5741105
+TLF15,North Nottinghamshire,2006,5710121
+TLF15,North Nottinghamshire,2007,6077508
+TLF15,North Nottinghamshire,2008,5721698
+TLF15,North Nottinghamshire,2009,5850838
+TLF15,North Nottinghamshire,2010,5690042
+TLF15,North Nottinghamshire,2011,5662566
+TLF15,North Nottinghamshire,2012,5461886
+TLF15,North Nottinghamshire,2013,5795909
+TLF15,North Nottinghamshire,2014,6182279
+TLF15,North Nottinghamshire,2015,6208798
+TLF15,North Nottinghamshire,2016,6177017
+TLF15,North Nottinghamshire,2017,6407901
+TLF15,North Nottinghamshire,2018,6278757
+TLF15,North Nottinghamshire,2019,6794448
+TLF15,North Nottinghamshire,2020,5747324
+TLF15,North Nottinghamshire,2021,6267165
+TLF15,North Nottinghamshire,2022,6919953
+TLF16,South Nottinghamshire,2004,3303996
+TLF16,South Nottinghamshire,2005,3537627
+TLF16,South Nottinghamshire,2006,3648964
+TLF16,South Nottinghamshire,2007,3631202
+TLF16,South Nottinghamshire,2008,3478151
+TLF16,South Nottinghamshire,2009,3616523
+TLF16,South Nottinghamshire,2010,3472218
+TLF16,South Nottinghamshire,2011,3392860
+TLF16,South Nottinghamshire,2012,3242168
+TLF16,South Nottinghamshire,2013,3361286
+TLF16,South Nottinghamshire,2014,3564120
+TLF16,South Nottinghamshire,2015,3582140
+TLF16,South Nottinghamshire,2016,3689699
+TLF16,South Nottinghamshire,2017,4010568
+TLF16,South Nottinghamshire,2018,3725143
+TLF16,South Nottinghamshire,2019,3414876
+TLF16,South Nottinghamshire,2020,3099807
+TLF16,South Nottinghamshire,2021,3541636
+TLF16,South Nottinghamshire,2022,4105194
+TLF21,Leicester,2004,5114074
+TLF21,Leicester,2005,5369898
+TLF21,Leicester,2006,5299814
+TLF21,Leicester,2007,5229963
+TLF21,Leicester,2008,5182607
+TLF21,Leicester,2009,5122017
+TLF21,Leicester,2010,4966511
+TLF21,Leicester,2011,5087209
+TLF21,Leicester,2012,5058661
+TLF21,Leicester,2013,5155574
+TLF21,Leicester,2014,5256721
+TLF21,Leicester,2015,5676945
+TLF21,Leicester,2016,6015129
+TLF21,Leicester,2017,5780286
+TLF21,Leicester,2018,5234172
+TLF21,Leicester,2019,5423746
+TLF21,Leicester,2020,4900713
+TLF21,Leicester,2021,4981459
+TLF21,Leicester,2022,5285550
+TLF22,Leicestershire CC and Rutland,2004,9076405
+TLF22,Leicestershire CC and Rutland,2005,9605472
+TLF22,Leicestershire CC and Rutland,2006,10018358
+TLF22,Leicestershire CC and Rutland,2007,9786253
+TLF22,Leicestershire CC and Rutland,2008,10104369
+TLF22,Leicestershire CC and Rutland,2009,9640851
+TLF22,Leicestershire CC and Rutland,2010,9401203
+TLF22,Leicestershire CC and Rutland,2011,9621026
+TLF22,Leicestershire CC and Rutland,2012,9765110
+TLF22,Leicestershire CC and Rutland,2013,9939376
+TLF22,Leicestershire CC and Rutland,2014,9958221
+TLF22,Leicestershire CC and Rutland,2015,10371946
+TLF22,Leicestershire CC and Rutland,2016,10528856
+TLF22,Leicestershire CC and Rutland,2017,10401085
+TLF22,Leicestershire CC and Rutland,2018,10876593
+TLF22,Leicestershire CC and Rutland,2019,10627359
+TLF22,Leicestershire CC and Rutland,2020,9840859
+TLF22,Leicestershire CC and Rutland,2021,11161627
+TLF22,Leicestershire CC and Rutland,2022,11710950
+TLF24,West Northamptonshire,2004,6112721
+TLF24,West Northamptonshire,2005,6623790
+TLF24,West Northamptonshire,2006,6452005
+TLF24,West Northamptonshire,2007,6712286
+TLF24,West Northamptonshire,2008,6700761
+TLF24,West Northamptonshire,2009,6501277
+TLF24,West Northamptonshire,2010,6977793
+TLF24,West Northamptonshire,2011,6380079
+TLF24,West Northamptonshire,2012,6811925
+TLF24,West Northamptonshire,2013,6575306
+TLF24,West Northamptonshire,2014,6934905
+TLF24,West Northamptonshire,2015,6933516
+TLF24,West Northamptonshire,2016,7185888
+TLF24,West Northamptonshire,2017,7601757
+TLF24,West Northamptonshire,2018,7154503
+TLF24,West Northamptonshire,2019,7568398
+TLF24,West Northamptonshire,2020,6634353
+TLF24,West Northamptonshire,2021,7697206
+TLF24,West Northamptonshire,2022,7316313
+TLF25,North Northamptonshire,2004,4241916
+TLF25,North Northamptonshire,2005,4247913
+TLF25,North Northamptonshire,2006,4102772
+TLF25,North Northamptonshire,2007,4522134
+TLF25,North Northamptonshire,2008,4088969
+TLF25,North Northamptonshire,2009,4037288
+TLF25,North Northamptonshire,2010,4253741
+TLF25,North Northamptonshire,2011,4534311
+TLF25,North Northamptonshire,2012,4483133
+TLF25,North Northamptonshire,2013,4682269
+TLF25,North Northamptonshire,2014,4538710
+TLF25,North Northamptonshire,2015,4565123
+TLF25,North Northamptonshire,2016,5330710
+TLF25,North Northamptonshire,2017,4907419
+TLF25,North Northamptonshire,2018,5102973
+TLF25,North Northamptonshire,2019,5446927
+TLF25,North Northamptonshire,2020,4558232
+TLF25,North Northamptonshire,2021,4712092
+TLF25,North Northamptonshire,2022,5064579
+TLF30,Lincolnshire CC,2004,8562488
+TLF30,Lincolnshire CC,2005,9174293
+TLF30,Lincolnshire CC,2006,9336515
+TLF30,Lincolnshire CC,2007,9785140
+TLF30,Lincolnshire CC,2008,9756879
+TLF30,Lincolnshire CC,2009,9482048
+TLF30,Lincolnshire CC,2010,9496962
+TLF30,Lincolnshire CC,2011,9921123
+TLF30,Lincolnshire CC,2012,9544486
+TLF30,Lincolnshire CC,2013,9421004
+TLF30,Lincolnshire CC,2014,9578233
+TLF30,Lincolnshire CC,2015,9908011
+TLF30,Lincolnshire CC,2016,10018636
+TLF30,Lincolnshire CC,2017,10281530
+TLF30,Lincolnshire CC,2018,9962572
+TLF30,Lincolnshire CC,2019,10010366
+TLF30,Lincolnshire CC,2020,9000487
+TLF30,Lincolnshire CC,2021,9543000
+TLF30,Lincolnshire CC,2022,9774503
+TLG11,"Herefordshire, County of",2004,2591586
+TLG11,"Herefordshire, County of",2005,2677431
+TLG11,"Herefordshire, County of",2006,2574890
+TLG11,"Herefordshire, County of",2007,2680508
+TLG11,"Herefordshire, County of",2008,2831166
+TLG11,"Herefordshire, County of",2009,2861792
+TLG11,"Herefordshire, County of",2010,2772870
+TLG11,"Herefordshire, County of",2011,2663526
+TLG11,"Herefordshire, County of",2012,2944498
+TLG11,"Herefordshire, County of",2013,3027890
+TLG11,"Herefordshire, County of",2014,2900541
+TLG11,"Herefordshire, County of",2015,2988648
+TLG11,"Herefordshire, County of",2016,3023903
+TLG11,"Herefordshire, County of",2017,3098333
+TLG11,"Herefordshire, County of",2018,3196283
+TLG11,"Herefordshire, County of",2019,3069420
+TLG11,"Herefordshire, County of",2020,2721421
+TLG11,"Herefordshire, County of",2021,2798898
+TLG11,"Herefordshire, County of",2022,2716982
+TLG12,Worcestershire CC,2004,7929734
+TLG12,Worcestershire CC,2005,8384253
+TLG12,Worcestershire CC,2006,8229112
+TLG12,Worcestershire CC,2007,7880917
+TLG12,Worcestershire CC,2008,8112642
+TLG12,Worcestershire CC,2009,7538918
+TLG12,Worcestershire CC,2010,7789149
+TLG12,Worcestershire CC,2011,7948705
+TLG12,Worcestershire CC,2012,8270872
+TLG12,Worcestershire CC,2013,7655745
+TLG12,Worcestershire CC,2014,8088596
+TLG12,Worcestershire CC,2015,8079123
+TLG12,Worcestershire CC,2016,8530370
+TLG12,Worcestershire CC,2017,8946163
+TLG12,Worcestershire CC,2018,8913485
+TLG12,Worcestershire CC,2019,8878506
+TLG12,Worcestershire CC,2020,7714551
+TLG12,Worcestershire CC,2021,8097043
+TLG12,Worcestershire CC,2022,8657064
+TLG13,Warwickshire CC,2004,8110298
+TLG13,Warwickshire CC,2005,7945523
+TLG13,Warwickshire CC,2006,8348443
+TLG13,Warwickshire CC,2007,8466828
+TLG13,Warwickshire CC,2008,8496812
+TLG13,Warwickshire CC,2009,8823117
+TLG13,Warwickshire CC,2010,8557673
+TLG13,Warwickshire CC,2011,8763131
+TLG13,Warwickshire CC,2012,8529147
+TLG13,Warwickshire CC,2013,8859581
+TLG13,Warwickshire CC,2014,9711991
+TLG13,Warwickshire CC,2015,10192537
+TLG13,Warwickshire CC,2016,10241462
+TLG13,Warwickshire CC,2017,10145170
+TLG13,Warwickshire CC,2018,9996162
+TLG13,Warwickshire CC,2019,10080943
+TLG13,Warwickshire CC,2020,9080561
+TLG13,Warwickshire CC,2021,10117338
+TLG13,Warwickshire CC,2022,10110567
+TLG21,Telford and Wrekin,2004,2537455
+TLG21,Telford and Wrekin,2005,2499428
+TLG21,Telford and Wrekin,2006,2715394
+TLG21,Telford and Wrekin,2007,2610256
+TLG21,Telford and Wrekin,2008,2591948
+TLG21,Telford and Wrekin,2009,2405443
+TLG21,Telford and Wrekin,2010,2486305
+TLG21,Telford and Wrekin,2011,2331150
+TLG21,Telford and Wrekin,2012,2511533
+TLG21,Telford and Wrekin,2013,2443604
+TLG21,Telford and Wrekin,2014,2701976
+TLG21,Telford and Wrekin,2015,2555115
+TLG21,Telford and Wrekin,2016,2718108
+TLG21,Telford and Wrekin,2017,2708301
+TLG21,Telford and Wrekin,2018,2785602
+TLG21,Telford and Wrekin,2019,2891995
+TLG21,Telford and Wrekin,2020,2658061
+TLG21,Telford and Wrekin,2021,2961503
+TLG21,Telford and Wrekin,2022,2865935
+TLG22,Shropshire CC,2004,3919979
+TLG22,Shropshire CC,2005,3847091
+TLG22,Shropshire CC,2006,4237963
+TLG22,Shropshire CC,2007,3917324
+TLG22,Shropshire CC,2008,3854200
+TLG22,Shropshire CC,2009,4129121
+TLG22,Shropshire CC,2010,4003608
+TLG22,Shropshire CC,2011,3822642
+TLG22,Shropshire CC,2012,4381268
+TLG22,Shropshire CC,2013,4024237
+TLG22,Shropshire CC,2014,4256800
+TLG22,Shropshire CC,2015,4334624
+TLG22,Shropshire CC,2016,4482945
+TLG22,Shropshire CC,2017,4447967
+TLG22,Shropshire CC,2018,4414779
+TLG22,Shropshire CC,2019,4488157
+TLG22,Shropshire CC,2020,3813211
+TLG22,Shropshire CC,2021,4024229
+TLG22,Shropshire CC,2022,4384166
+TLG23,Stoke-on-Trent,2004,3490501
+TLG23,Stoke-on-Trent,2005,3392785
+TLG23,Stoke-on-Trent,2006,3453183
+TLG23,Stoke-on-Trent,2007,3295879
+TLG23,Stoke-on-Trent,2008,3204515
+TLG23,Stoke-on-Trent,2009,3513200
+TLG23,Stoke-on-Trent,2010,3507293
+TLG23,Stoke-on-Trent,2011,3375228
+TLG23,Stoke-on-Trent,2012,3567783
+TLG23,Stoke-on-Trent,2013,3693422
+TLG23,Stoke-on-Trent,2014,3743607
+TLG23,Stoke-on-Trent,2015,3811404
+TLG23,Stoke-on-Trent,2016,3968664
+TLG23,Stoke-on-Trent,2017,4032055
+TLG23,Stoke-on-Trent,2018,3950763
+TLG23,Stoke-on-Trent,2019,3867125
+TLG23,Stoke-on-Trent,2020,3647789
+TLG23,Stoke-on-Trent,2021,3971817
+TLG23,Stoke-on-Trent,2022,3846388
+TLG24,Staffordshire CC,2004,10963505
+TLG24,Staffordshire CC,2005,10794919
+TLG24,Staffordshire CC,2006,10950143
+TLG24,Staffordshire CC,2007,10974782
+TLG24,Staffordshire CC,2008,11293431
+TLG24,Staffordshire CC,2009,10848109
+TLG24,Staffordshire CC,2010,10621661
+TLG24,Staffordshire CC,2011,10427475
+TLG24,Staffordshire CC,2012,11207876
+TLG24,Staffordshire CC,2013,11566924
+TLG24,Staffordshire CC,2014,11316050
+TLG24,Staffordshire CC,2015,11785699
+TLG24,Staffordshire CC,2016,11679915
+TLG24,Staffordshire CC,2017,11955352
+TLG24,Staffordshire CC,2018,11992420
+TLG24,Staffordshire CC,2019,11960998
+TLG24,Staffordshire CC,2020,10670405
+TLG24,Staffordshire CC,2021,12135635
+TLG24,Staffordshire CC,2022,12317142
+TLG31,Birmingham,2004,16269811
+TLG31,Birmingham,2005,16236665
+TLG31,Birmingham,2006,16121719
+TLG31,Birmingham,2007,16547333
+TLG31,Birmingham,2008,15644745
+TLG31,Birmingham,2009,14469403
+TLG31,Birmingham,2010,14699650
+TLG31,Birmingham,2011,15465333
+TLG31,Birmingham,2012,15699497
+TLG31,Birmingham,2013,16710342
+TLG31,Birmingham,2014,16764015
+TLG31,Birmingham,2015,17646704
+TLG31,Birmingham,2016,17020772
+TLG31,Birmingham,2017,17002532
+TLG31,Birmingham,2018,16933336
+TLG31,Birmingham,2019,17213912
+TLG31,Birmingham,2020,16379569
+TLG31,Birmingham,2021,16271777
+TLG31,Birmingham,2022,17503866
+TLG32,Solihull,2004,3364351
+TLG32,Solihull,2005,3421553
+TLG32,Solihull,2006,3387021
+TLG32,Solihull,2007,3440405
+TLG32,Solihull,2008,3077876
+TLG32,Solihull,2009,2947780
+TLG32,Solihull,2010,3038148
+TLG32,Solihull,2011,3020850
+TLG32,Solihull,2012,3199337
+TLG32,Solihull,2013,3273079
+TLG32,Solihull,2014,3359332
+TLG32,Solihull,2015,3522573
+TLG32,Solihull,2016,3688242
+TLG32,Solihull,2017,3703801
+TLG32,Solihull,2018,4383214
+TLG32,Solihull,2019,4367691
+TLG32,Solihull,2020,3679291
+TLG32,Solihull,2021,4645465
+TLG32,Solihull,2022,4591558
+TLG33,Coventry,2004,4493903
+TLG33,Coventry,2005,4680391
+TLG33,Coventry,2006,4592233
+TLG33,Coventry,2007,4833528
+TLG33,Coventry,2008,4651568
+TLG33,Coventry,2009,4537686
+TLG33,Coventry,2010,4574020
+TLG33,Coventry,2011,4685610
+TLG33,Coventry,2012,4797187
+TLG33,Coventry,2013,5149684
+TLG33,Coventry,2014,5336020
+TLG33,Coventry,2015,5366209
+TLG33,Coventry,2016,5120127
+TLG33,Coventry,2017,5124567
+TLG33,Coventry,2018,5224886
+TLG33,Coventry,2019,5343868
+TLG33,Coventry,2020,4919847
+TLG33,Coventry,2021,4870338
+TLG33,Coventry,2022,5337816
+TLG36,Dudley,2004,3863593
+TLG36,Dudley,2005,4112476
+TLG36,Dudley,2006,3921767
+TLG36,Dudley,2007,3932771
+TLG36,Dudley,2008,3664633
+TLG36,Dudley,2009,3895110
+TLG36,Dudley,2010,3788170
+TLG36,Dudley,2011,3460365
+TLG36,Dudley,2012,3328084
+TLG36,Dudley,2013,3461149
+TLG36,Dudley,2014,3552629
+TLG36,Dudley,2015,3315237
+TLG36,Dudley,2016,3790836
+TLG36,Dudley,2017,3844353
+TLG36,Dudley,2018,3917283
+TLG36,Dudley,2019,3949336
+TLG36,Dudley,2020,2890613
+TLG36,Dudley,2021,3561466
+TLG36,Dudley,2022,3643429
+TLG37,Sandwell,2004,3676644
+TLG37,Sandwell,2005,4165683
+TLG37,Sandwell,2006,4243810
+TLG37,Sandwell,2007,4200839
+TLG37,Sandwell,2008,4152774
+TLG37,Sandwell,2009,3993952
+TLG37,Sandwell,2010,3772165
+TLG37,Sandwell,2011,3587777
+TLG37,Sandwell,2012,3999610
+TLG37,Sandwell,2013,3911662
+TLG37,Sandwell,2014,4261487
+TLG37,Sandwell,2015,4587194
+TLG37,Sandwell,2016,4581884
+TLG37,Sandwell,2017,4307668
+TLG37,Sandwell,2018,4183368
+TLG37,Sandwell,2019,4208677
+TLG37,Sandwell,2020,3571610
+TLG37,Sandwell,2021,4056720
+TLG37,Sandwell,2022,3969157
+TLG38,Walsall,2004,3523642
+TLG38,Walsall,2005,3556983
+TLG38,Walsall,2006,3531540
+TLG38,Walsall,2007,3547896
+TLG38,Walsall,2008,3288411
+TLG38,Walsall,2009,3042012
+TLG38,Walsall,2010,3133430
+TLG38,Walsall,2011,2927331
+TLG38,Walsall,2012,2980767
+TLG38,Walsall,2013,3170554
+TLG38,Walsall,2014,2851856
+TLG38,Walsall,2015,3326309
+TLG38,Walsall,2016,3424492
+TLG38,Walsall,2017,3632312
+TLG38,Walsall,2018,3574133
+TLG38,Walsall,2019,3533898
+TLG38,Walsall,2020,2717584
+TLG38,Walsall,2021,2951329
+TLG38,Walsall,2022,3196409
+TLG39,Wolverhampton,2004,3283286
+TLG39,Wolverhampton,2005,3362332
+TLG39,Wolverhampton,2006,3697536
+TLG39,Wolverhampton,2007,3696578
+TLG39,Wolverhampton,2008,3760820
+TLG39,Wolverhampton,2009,3822317
+TLG39,Wolverhampton,2010,3930791
+TLG39,Wolverhampton,2011,3992788
+TLG39,Wolverhampton,2012,3667850
+TLG39,Wolverhampton,2013,3725343
+TLG39,Wolverhampton,2014,3397842
+TLG39,Wolverhampton,2015,3325232
+TLG39,Wolverhampton,2016,3355076
+TLG39,Wolverhampton,2017,3293050
+TLG39,Wolverhampton,2018,3576129
+TLG39,Wolverhampton,2019,3566470
+TLG39,Wolverhampton,2020,3018955
+TLG39,Wolverhampton,2021,3102918
+TLG39,Wolverhampton,2022,3295370
+TLH11,Peterborough,2004,2947373
+TLH11,Peterborough,2005,3181202
+TLH11,Peterborough,2006,3159949
+TLH11,Peterborough,2007,3538425
+TLH11,Peterborough,2008,3490212
+TLH11,Peterborough,2009,3000414
+TLH11,Peterborough,2010,3072173
+TLH11,Peterborough,2011,2827944
+TLH11,Peterborough,2012,3317836
+TLH11,Peterborough,2013,3269665
+TLH11,Peterborough,2014,3443908
+TLH11,Peterborough,2015,3342573
+TLH11,Peterborough,2016,3588587
+TLH11,Peterborough,2017,3798996
+TLH11,Peterborough,2018,3709383
+TLH11,Peterborough,2019,3730180
+TLH11,Peterborough,2020,3335385
+TLH11,Peterborough,2021,3827172
+TLH11,Peterborough,2022,3775862
+TLH12,Cambridgeshire CC,2004,8671048
+TLH12,Cambridgeshire CC,2005,9235602
+TLH12,Cambridgeshire CC,2006,10151868
+TLH12,Cambridgeshire CC,2007,9677527
+TLH12,Cambridgeshire CC,2008,9591149
+TLH12,Cambridgeshire CC,2009,9973769
+TLH12,Cambridgeshire CC,2010,9877998
+TLH12,Cambridgeshire CC,2011,9709833
+TLH12,Cambridgeshire CC,2012,9437510
+TLH12,Cambridgeshire CC,2013,10248692
+TLH12,Cambridgeshire CC,2014,10247246
+TLH12,Cambridgeshire CC,2015,10836094
+TLH12,Cambridgeshire CC,2016,10909128
+TLH12,Cambridgeshire CC,2017,11064375
+TLH12,Cambridgeshire CC,2018,11374705
+TLH12,Cambridgeshire CC,2019,11668829
+TLH12,Cambridgeshire CC,2020,10391080
+TLH12,Cambridgeshire CC,2021,10560340
+TLH12,Cambridgeshire CC,2022,11058174
+TLH14,Suffolk CC,2004,10183833
+TLH14,Suffolk CC,2005,9963175
+TLH14,Suffolk CC,2006,10216879
+TLH14,Suffolk CC,2007,10183847
+TLH14,Suffolk CC,2008,10033326
+TLH14,Suffolk CC,2009,9697104
+TLH14,Suffolk CC,2010,9867683
+TLH14,Suffolk CC,2011,10211214
+TLH14,Suffolk CC,2012,10346706
+TLH14,Suffolk CC,2013,10522052
+TLH14,Suffolk CC,2014,10419175
+TLH14,Suffolk CC,2015,10467785
+TLH14,Suffolk CC,2016,10164226
+TLH14,Suffolk CC,2017,10906087
+TLH14,Suffolk CC,2018,11028101
+TLH14,Suffolk CC,2019,10828809
+TLH14,Suffolk CC,2020,10017633
+TLH14,Suffolk CC,2021,10784709
+TLH14,Suffolk CC,2022,10295927
+TLH15,Norwich and East Norfolk,2004,5444882
+TLH15,Norwich and East Norfolk,2005,5769321
+TLH15,Norwich and East Norfolk,2006,5966619
+TLH15,Norwich and East Norfolk,2007,5882052
+TLH15,Norwich and East Norfolk,2008,5554125
+TLH15,Norwich and East Norfolk,2009,5278812
+TLH15,Norwich and East Norfolk,2010,5493420
+TLH15,Norwich and East Norfolk,2011,5312257
+TLH15,Norwich and East Norfolk,2012,5760120
+TLH15,Norwich and East Norfolk,2013,5813844
+TLH15,Norwich and East Norfolk,2014,5634294
+TLH15,Norwich and East Norfolk,2015,5261899
+TLH15,Norwich and East Norfolk,2016,5959092
+TLH15,Norwich and East Norfolk,2017,5644429
+TLH15,Norwich and East Norfolk,2018,5714029
+TLH15,Norwich and East Norfolk,2019,5643542
+TLH15,Norwich and East Norfolk,2020,4670172
+TLH15,Norwich and East Norfolk,2021,5177000
+TLH15,Norwich and East Norfolk,2022,5968246
+TLH16,North and West Norfolk,2004,2832763
+TLH16,North and West Norfolk,2005,2806056
+TLH16,North and West Norfolk,2006,2848163
+TLH16,North and West Norfolk,2007,2715542
+TLH16,North and West Norfolk,2008,2962613
+TLH16,North and West Norfolk,2009,2992552
+TLH16,North and West Norfolk,2010,2982754
+TLH16,North and West Norfolk,2011,2909252
+TLH16,North and West Norfolk,2012,2892209
+TLH16,North and West Norfolk,2013,2970288
+TLH16,North and West Norfolk,2014,3361014
+TLH16,North and West Norfolk,2015,3219965
+TLH16,North and West Norfolk,2016,3325019
+TLH16,North and West Norfolk,2017,3031704
+TLH16,North and West Norfolk,2018,2949576
+TLH16,North and West Norfolk,2019,3200975
+TLH16,North and West Norfolk,2020,2809670
+TLH16,North and West Norfolk,2021,2935958
+TLH16,North and West Norfolk,2022,2930095
+TLH17,Breckland and South Norfolk,2004,2828306
+TLH17,Breckland and South Norfolk,2005,2809186
+TLH17,Breckland and South Norfolk,2006,2946849
+TLH17,Breckland and South Norfolk,2007,2793284
+TLH17,Breckland and South Norfolk,2008,2915681
+TLH17,Breckland and South Norfolk,2009,2886872
+TLH17,Breckland and South Norfolk,2010,2936419
+TLH17,Breckland and South Norfolk,2011,3073144
+TLH17,Breckland and South Norfolk,2012,3145416
+TLH17,Breckland and South Norfolk,2013,3007876
+TLH17,Breckland and South Norfolk,2014,3321271
+TLH17,Breckland and South Norfolk,2015,3422981
+TLH17,Breckland and South Norfolk,2016,3144565
+TLH17,Breckland and South Norfolk,2017,3601264
+TLH17,Breckland and South Norfolk,2018,3340273
+TLH17,Breckland and South Norfolk,2019,3355552
+TLH17,Breckland and South Norfolk,2020,3074288
+TLH17,Breckland and South Norfolk,2021,3157940
+TLH17,Breckland and South Norfolk,2022,3105942
+TLH21,Luton,2004,2915833
+TLH21,Luton,2005,3142599
+TLH21,Luton,2006,3015719
+TLH21,Luton,2007,3037932
+TLH21,Luton,2008,2970740
+TLH21,Luton,2009,2810065
+TLH21,Luton,2010,2767587
+TLH21,Luton,2011,2752847
+TLH21,Luton,2012,2497329
+TLH21,Luton,2013,2912634
+TLH21,Luton,2014,3109550
+TLH21,Luton,2015,3027329
+TLH21,Luton,2016,3219241
+TLH21,Luton,2017,3210516
+TLH21,Luton,2018,3199492
+TLH21,Luton,2019,3357056
+TLH21,Luton,2020,2860879
+TLH21,Luton,2021,3013702
+TLH21,Luton,2022,3558470
+TLH23,Hertfordshire CC,2004,16858827
+TLH23,Hertfordshire CC,2005,17238845
+TLH23,Hertfordshire CC,2006,16956526
+TLH23,Hertfordshire CC,2007,17405440
+TLH23,Hertfordshire CC,2008,18240820
+TLH23,Hertfordshire CC,2009,17669266
+TLH23,Hertfordshire CC,2010,17635269
+TLH23,Hertfordshire CC,2011,17637584
+TLH23,Hertfordshire CC,2012,18422028
+TLH23,Hertfordshire CC,2013,18794121
+TLH23,Hertfordshire CC,2014,19432548
+TLH23,Hertfordshire CC,2015,19958036
+TLH23,Hertfordshire CC,2016,21285719
+TLH23,Hertfordshire CC,2017,22226680
+TLH23,Hertfordshire CC,2018,22089903
+TLH23,Hertfordshire CC,2019,22586133
+TLH23,Hertfordshire CC,2020,19552448
+TLH23,Hertfordshire CC,2021,21248996
+TLH23,Hertfordshire CC,2022,20477908
+TLH24,Bedford,2004,2426521
+TLH24,Bedford,2005,2522356
+TLH24,Bedford,2006,2530336
+TLH24,Bedford,2007,2426696
+TLH24,Bedford,2008,2408008
+TLH24,Bedford,2009,2098681
+TLH24,Bedford,2010,2174020
+TLH24,Bedford,2011,2311968
+TLH24,Bedford,2012,2203040
+TLH24,Bedford,2013,2412855
+TLH24,Bedford,2014,2482389
+TLH24,Bedford,2015,2482861
+TLH24,Bedford,2016,2542820
+TLH24,Bedford,2017,2538062
+TLH24,Bedford,2018,2614110
+TLH24,Bedford,2019,2583951
+TLH24,Bedford,2020,2570446
+TLH24,Bedford,2021,2592574
+TLH24,Bedford,2022,2884452
+TLH25,Central Bedfordshire,2004,3027584
+TLH25,Central Bedfordshire,2005,3160538
+TLH25,Central Bedfordshire,2006,3217991
+TLH25,Central Bedfordshire,2007,3096692
+TLH25,Central Bedfordshire,2008,3163673
+TLH25,Central Bedfordshire,2009,3001905
+TLH25,Central Bedfordshire,2010,2743360
+TLH25,Central Bedfordshire,2011,3372594
+TLH25,Central Bedfordshire,2012,3024245
+TLH25,Central Bedfordshire,2013,3193356
+TLH25,Central Bedfordshire,2014,3280914
+TLH25,Central Bedfordshire,2015,3263739
+TLH25,Central Bedfordshire,2016,3596386
+TLH25,Central Bedfordshire,2017,3504746
+TLH25,Central Bedfordshire,2018,3579312
+TLH25,Central Bedfordshire,2019,3641074
+TLH25,Central Bedfordshire,2020,3018773
+TLH25,Central Bedfordshire,2021,3481505
+TLH25,Central Bedfordshire,2022,3134381
+TLH31,Southend-on-Sea,2004,2078450
+TLH31,Southend-on-Sea,2005,2294234
+TLH31,Southend-on-Sea,2006,2114664
+TLH31,Southend-on-Sea,2007,2246898
+TLH31,Southend-on-Sea,2008,2116495
+TLH31,Southend-on-Sea,2009,2117054
+TLH31,Southend-on-Sea,2010,2031508
+TLH31,Southend-on-Sea,2011,2030941
+TLH31,Southend-on-Sea,2012,2149852
+TLH31,Southend-on-Sea,2013,2221496
+TLH31,Southend-on-Sea,2014,2248074
+TLH31,Southend-on-Sea,2015,2115782
+TLH31,Southend-on-Sea,2016,1939215
+TLH31,Southend-on-Sea,2017,2208104
+TLH31,Southend-on-Sea,2018,2314412
+TLH31,Southend-on-Sea,2019,2357746
+TLH31,Southend-on-Sea,2020,2107356
+TLH31,Southend-on-Sea,2021,2091726
+TLH31,Southend-on-Sea,2022,2086532
+TLH32,Thurrock,2004,2000529
+TLH32,Thurrock,2005,1986725
+TLH32,Thurrock,2006,1959399
+TLH32,Thurrock,2007,2001325
+TLH32,Thurrock,2008,1971969
+TLH32,Thurrock,2009,2060985
+TLH32,Thurrock,2010,1984025
+TLH32,Thurrock,2011,1939142
+TLH32,Thurrock,2012,1943553
+TLH32,Thurrock,2013,1999396
+TLH32,Thurrock,2014,2049561
+TLH32,Thurrock,2015,2194637
+TLH32,Thurrock,2016,2151848
+TLH32,Thurrock,2017,2183325
+TLH32,Thurrock,2018,2454709
+TLH32,Thurrock,2019,2192872
+TLH32,Thurrock,2020,2169958
+TLH32,Thurrock,2021,2507469
+TLH32,Thurrock,2022,2891700
+TLH34,Essex Haven Gateway,2004,5625663
+TLH34,Essex Haven Gateway,2005,5277235
+TLH34,Essex Haven Gateway,2006,5444522
+TLH34,Essex Haven Gateway,2007,5375573
+TLH34,Essex Haven Gateway,2008,5264434
+TLH34,Essex Haven Gateway,2009,5168034
+TLH34,Essex Haven Gateway,2010,5118087
+TLH34,Essex Haven Gateway,2011,5281184
+TLH34,Essex Haven Gateway,2012,5588819
+TLH34,Essex Haven Gateway,2013,5623638
+TLH34,Essex Haven Gateway,2014,6025426
+TLH34,Essex Haven Gateway,2015,6050401
+TLH34,Essex Haven Gateway,2016,5991820
+TLH34,Essex Haven Gateway,2017,5973401
+TLH34,Essex Haven Gateway,2018,6152965
+TLH34,Essex Haven Gateway,2019,5936469
+TLH34,Essex Haven Gateway,2020,4816240
+TLH34,Essex Haven Gateway,2021,5386588
+TLH34,Essex Haven Gateway,2022,6095891
+TLH35,West Essex,2004,3960258
+TLH35,West Essex,2005,3774314
+TLH35,West Essex,2006,4063144
+TLH35,West Essex,2007,3862958
+TLH35,West Essex,2008,3937703
+TLH35,West Essex,2009,3941195
+TLH35,West Essex,2010,3677126
+TLH35,West Essex,2011,3899477
+TLH35,West Essex,2012,4545832
+TLH35,West Essex,2013,4133182
+TLH35,West Essex,2014,3908156
+TLH35,West Essex,2015,4121277
+TLH35,West Essex,2016,4483996
+TLH35,West Essex,2017,4613275
+TLH35,West Essex,2018,4688946
+TLH35,West Essex,2019,4978964
+TLH35,West Essex,2020,4272910
+TLH35,West Essex,2021,4442215
+TLH35,West Essex,2022,5159175
+TLH36,Heart of Essex,2004,4592125
+TLH36,Heart of Essex,2005,4427330
+TLH36,Heart of Essex,2006,4265346
+TLH36,Heart of Essex,2007,4524133
+TLH36,Heart of Essex,2008,4432045
+TLH36,Heart of Essex,2009,4470337
+TLH36,Heart of Essex,2010,4604505
+TLH36,Heart of Essex,2011,4400115
+TLH36,Heart of Essex,2012,4611104
+TLH36,Heart of Essex,2013,4543588
+TLH36,Heart of Essex,2014,4454547
+TLH36,Heart of Essex,2015,4604294
+TLH36,Heart of Essex,2016,4975126
+TLH36,Heart of Essex,2017,4636199
+TLH36,Heart of Essex,2018,4961192
+TLH36,Heart of Essex,2019,4823141
+TLH36,Heart of Essex,2020,4638668
+TLH36,Heart of Essex,2021,4897428
+TLH36,Heart of Essex,2022,5077829
+TLH37,Essex Thames Gateway,2004,3958368
+TLH37,Essex Thames Gateway,2005,4006912
+TLH37,Essex Thames Gateway,2006,3971482
+TLH37,Essex Thames Gateway,2007,4068396
+TLH37,Essex Thames Gateway,2008,4107763
+TLH37,Essex Thames Gateway,2009,3971960
+TLH37,Essex Thames Gateway,2010,3925359
+TLH37,Essex Thames Gateway,2011,4115093
+TLH37,Essex Thames Gateway,2012,4137896
+TLH37,Essex Thames Gateway,2013,4009749
+TLH37,Essex Thames Gateway,2014,4127958
+TLH37,Essex Thames Gateway,2015,4365236
+TLH37,Essex Thames Gateway,2016,4368073
+TLH37,Essex Thames Gateway,2017,4452166
+TLH37,Essex Thames Gateway,2018,4477849
+TLH37,Essex Thames Gateway,2019,4580529
+TLH37,Essex Thames Gateway,2020,4318046
+TLH37,Essex Thames Gateway,2021,4354513
+TLH37,Essex Thames Gateway,2022,4584079
+TLI31,Camden and City of London,2004,21212582
+TLI31,Camden and City of London,2005,22083429
+TLI31,Camden and City of London,2006,21569044
+TLI31,Camden and City of London,2007,22819552
+TLI31,Camden and City of London,2008,23331379
+TLI31,Camden and City of London,2009,23166269
+TLI31,Camden and City of London,2010,23973310
+TLI31,Camden and City of London,2011,26134115
+TLI31,Camden and City of London,2012,27202550
+TLI31,Camden and City of London,2013,28130356
+TLI31,Camden and City of London,2014,29966298
+TLI31,Camden and City of London,2015,30718128
+TLI31,Camden and City of London,2016,32610151
+TLI31,Camden and City of London,2017,34269408
+TLI31,Camden and City of London,2018,35457920
+TLI31,Camden and City of London,2019,36347141
+TLI31,Camden and City of London,2020,32851700
+TLI31,Camden and City of London,2021,35624680
+TLI31,Camden and City of London,2022,37132280
+TLI32,Westminster,2004,19666236
+TLI32,Westminster,2005,20848252
+TLI32,Westminster,2006,20601984
+TLI32,Westminster,2007,21107068
+TLI32,Westminster,2008,21366386
+TLI32,Westminster,2009,21468070
+TLI32,Westminster,2010,21880716
+TLI32,Westminster,2011,21470892
+TLI32,Westminster,2012,23146544
+TLI32,Westminster,2013,24168906
+TLI32,Westminster,2014,24487126
+TLI32,Westminster,2015,24009396
+TLI32,Westminster,2016,25009736
+TLI32,Westminster,2017,24503816
+TLI32,Westminster,2018,25396838
+TLI32,Westminster,2019,25965998
+TLI32,Westminster,2020,22584878
+TLI32,Westminster,2021,25481294
+TLI32,Westminster,2022,26661416
+TLI33,Kensington & Chelsea and Hammersmith & Fulham,2004,7864713
+TLI33,Kensington & Chelsea and Hammersmith & Fulham,2005,8759221
+TLI33,Kensington & Chelsea and Hammersmith & Fulham,2006,8509290
+TLI33,Kensington & Chelsea and Hammersmith & Fulham,2007,8357528
+TLI33,Kensington & Chelsea and Hammersmith & Fulham,2008,8467925
+TLI33,Kensington & Chelsea and Hammersmith & Fulham,2009,8791321
+TLI33,Kensington & Chelsea and Hammersmith & Fulham,2010,8597386
+TLI33,Kensington & Chelsea and Hammersmith & Fulham,2011,8691459
+TLI33,Kensington & Chelsea and Hammersmith & Fulham,2012,9039017
+TLI33,Kensington & Chelsea and Hammersmith & Fulham,2013,8755455
+TLI33,Kensington & Chelsea and Hammersmith & Fulham,2014,8318607
+TLI33,Kensington & Chelsea and Hammersmith & Fulham,2015,8874461
+TLI33,Kensington & Chelsea and Hammersmith & Fulham,2016,8973083
+TLI33,Kensington & Chelsea and Hammersmith & Fulham,2017,9616511
+TLI33,Kensington & Chelsea and Hammersmith & Fulham,2018,9473195
+TLI33,Kensington & Chelsea and Hammersmith & Fulham,2019,9759884
+TLI33,Kensington & Chelsea and Hammersmith & Fulham,2020,8799817
+TLI33,Kensington & Chelsea and Hammersmith & Fulham,2021,9066223
+TLI33,Kensington & Chelsea and Hammersmith & Fulham,2022,9316364
+TLI34,Wandsworth,2004,3873592
+TLI34,Wandsworth,2005,3789859
+TLI34,Wandsworth,2006,3975725
+TLI34,Wandsworth,2007,3750965
+TLI34,Wandsworth,2008,4017179
+TLI34,Wandsworth,2009,3934248
+TLI34,Wandsworth,2010,3681781
+TLI34,Wandsworth,2011,3475290
+TLI34,Wandsworth,2012,4100198
+TLI34,Wandsworth,2013,4001330
+TLI34,Wandsworth,2014,3692067
+TLI34,Wandsworth,2015,4075661
+TLI34,Wandsworth,2016,4440177
+TLI34,Wandsworth,2017,4113975
+TLI34,Wandsworth,2018,4236886
+TLI34,Wandsworth,2019,4364829
+TLI34,Wandsworth,2020,3873814
+TLI34,Wandsworth,2021,4358642
+TLI34,Wandsworth,2022,4256524
+TLI41,Hackney and Newham,2004,5427682
+TLI41,Hackney and Newham,2005,5485861
+TLI41,Hackney and Newham,2006,5496725
+TLI41,Hackney and Newham,2007,5463170
+TLI41,Hackney and Newham,2008,5376318
+TLI41,Hackney and Newham,2009,5762004
+TLI41,Hackney and Newham,2010,5557067
+TLI41,Hackney and Newham,2011,6560602
+TLI41,Hackney and Newham,2012,6232591
+TLI41,Hackney and Newham,2013,6575019
+TLI41,Hackney and Newham,2014,7390848
+TLI41,Hackney and Newham,2015,7442883
+TLI41,Hackney and Newham,2016,7972597
+TLI41,Hackney and Newham,2017,7624097
+TLI41,Hackney and Newham,2018,8491660
+TLI41,Hackney and Newham,2019,8067928
+TLI41,Hackney and Newham,2020,7931649
+TLI41,Hackney and Newham,2021,9341891
+TLI41,Hackney and Newham,2022,10186021
+TLI42,Tower Hamlets,2004,6097687
+TLI42,Tower Hamlets,2005,6681200
+TLI42,Tower Hamlets,2006,6897037
+TLI42,Tower Hamlets,2007,7359277
+TLI42,Tower Hamlets,2008,7444444
+TLI42,Tower Hamlets,2009,7683523
+TLI42,Tower Hamlets,2010,7775414
+TLI42,Tower Hamlets,2011,8754876
+TLI42,Tower Hamlets,2012,8698808
+TLI42,Tower Hamlets,2013,8931492
+TLI42,Tower Hamlets,2014,9437616
+TLI42,Tower Hamlets,2015,9463182
+TLI42,Tower Hamlets,2016,9610867
+TLI42,Tower Hamlets,2017,9949001
+TLI42,Tower Hamlets,2018,10879841
+TLI42,Tower Hamlets,2019,11159560
+TLI42,Tower Hamlets,2020,10038371
+TLI42,Tower Hamlets,2021,9441619
+TLI42,Tower Hamlets,2022,10272054
+TLI43,Haringey and Islington,2004,7748717
+TLI43,Haringey and Islington,2005,8243769
+TLI43,Haringey and Islington,2006,8205519
+TLI43,Haringey and Islington,2007,8580247
+TLI43,Haringey and Islington,2008,8896459
+TLI43,Haringey and Islington,2009,8694116
+TLI43,Haringey and Islington,2010,8156775
+TLI43,Haringey and Islington,2011,8261464
+TLI43,Haringey and Islington,2012,8450824
+TLI43,Haringey and Islington,2013,9166387
+TLI43,Haringey and Islington,2014,9442666
+TLI43,Haringey and Islington,2015,9975371
+TLI43,Haringey and Islington,2016,9978318
+TLI43,Haringey and Islington,2017,10566436
+TLI43,Haringey and Islington,2018,10597640
+TLI43,Haringey and Islington,2019,10350083
+TLI43,Haringey and Islington,2020,9463786
+TLI43,Haringey and Islington,2021,10541285
+TLI43,Haringey and Islington,2022,11469309
+TLI44,Lewisham and Southwark,2004,8751094
+TLI44,Lewisham and Southwark,2005,8685155
+TLI44,Lewisham and Southwark,2006,9028586
+TLI44,Lewisham and Southwark,2007,9888454
+TLI44,Lewisham and Southwark,2008,10829281
+TLI44,Lewisham and Southwark,2009,10122648
+TLI44,Lewisham and Southwark,2010,9258556
+TLI44,Lewisham and Southwark,2011,9964210
+TLI44,Lewisham and Southwark,2012,11010367
+TLI44,Lewisham and Southwark,2013,10761320
+TLI44,Lewisham and Southwark,2014,11514026
+TLI44,Lewisham and Southwark,2015,11410913
+TLI44,Lewisham and Southwark,2016,12560659
+TLI44,Lewisham and Southwark,2017,12440963
+TLI44,Lewisham and Southwark,2018,13326902
+TLI44,Lewisham and Southwark,2019,12681742
+TLI44,Lewisham and Southwark,2020,10783543
+TLI44,Lewisham and Southwark,2021,11779681
+TLI44,Lewisham and Southwark,2022,12810150
+TLI45,Lambeth,2004,4653118
+TLI45,Lambeth,2005,4685731
+TLI45,Lambeth,2006,4315027
+TLI45,Lambeth,2007,4198790
+TLI45,Lambeth,2008,4454863
+TLI45,Lambeth,2009,4670938
+TLI45,Lambeth,2010,4597640
+TLI45,Lambeth,2011,4554812
+TLI45,Lambeth,2012,5077534
+TLI45,Lambeth,2013,5456213
+TLI45,Lambeth,2014,5391000
+TLI45,Lambeth,2015,5111880
+TLI45,Lambeth,2016,5183904
+TLI45,Lambeth,2017,5612650
+TLI45,Lambeth,2018,5132336
+TLI45,Lambeth,2019,5434062
+TLI45,Lambeth,2020,4683964
+TLI45,Lambeth,2021,5040274
+TLI45,Lambeth,2022,5230521
+TLI51,Bexley and Greenwich,2004,4229532
+TLI51,Bexley and Greenwich,2005,4196183
+TLI51,Bexley and Greenwich,2006,4364534
+TLI51,Bexley and Greenwich,2007,4549211
+TLI51,Bexley and Greenwich,2008,4296110
+TLI51,Bexley and Greenwich,2009,4322301
+TLI51,Bexley and Greenwich,2010,4251502
+TLI51,Bexley and Greenwich,2011,4377867
+TLI51,Bexley and Greenwich,2012,4323787
+TLI51,Bexley and Greenwich,2013,4441472
+TLI51,Bexley and Greenwich,2014,4962460
+TLI51,Bexley and Greenwich,2015,5038954
+TLI51,Bexley and Greenwich,2016,5004041
+TLI51,Bexley and Greenwich,2017,5417045
+TLI51,Bexley and Greenwich,2018,5120025
+TLI51,Bexley and Greenwich,2019,5428452
+TLI51,Bexley and Greenwich,2020,4945800
+TLI51,Bexley and Greenwich,2021,5136324
+TLI51,Bexley and Greenwich,2022,5547218
+TLI52,Barking & Dagenham and Havering,2004,4255900
+TLI52,Barking & Dagenham and Havering,2005,4006593
+TLI52,Barking & Dagenham and Havering,2006,4171176
+TLI52,Barking & Dagenham and Havering,2007,4082737
+TLI52,Barking & Dagenham and Havering,2008,3954424
+TLI52,Barking & Dagenham and Havering,2009,3865033
+TLI52,Barking & Dagenham and Havering,2010,3828442
+TLI52,Barking & Dagenham and Havering,2011,3984910
+TLI52,Barking & Dagenham and Havering,2012,4077685
+TLI52,Barking & Dagenham and Havering,2013,4157053
+TLI52,Barking & Dagenham and Havering,2014,4258254
+TLI52,Barking & Dagenham and Havering,2015,4492999
+TLI52,Barking & Dagenham and Havering,2016,4592109
+TLI52,Barking & Dagenham and Havering,2017,4799101
+TLI52,Barking & Dagenham and Havering,2018,4854651
+TLI52,Barking & Dagenham and Havering,2019,4372339
+TLI52,Barking & Dagenham and Havering,2020,4659507
+TLI52,Barking & Dagenham and Havering,2021,5059890
+TLI52,Barking & Dagenham and Havering,2022,5177396
+TLI53,Redbridge and Waltham Forest,2004,4453256
+TLI53,Redbridge and Waltham Forest,2005,4676430
+TLI53,Redbridge and Waltham Forest,2006,4312185
+TLI53,Redbridge and Waltham Forest,2007,4261139
+TLI53,Redbridge and Waltham Forest,2008,4166454
+TLI53,Redbridge and Waltham Forest,2009,4269800
+TLI53,Redbridge and Waltham Forest,2010,3928563
+TLI53,Redbridge and Waltham Forest,2011,4101746
+TLI53,Redbridge and Waltham Forest,2012,4413365
+TLI53,Redbridge and Waltham Forest,2013,4658201
+TLI53,Redbridge and Waltham Forest,2014,4951976
+TLI53,Redbridge and Waltham Forest,2015,4699049
+TLI53,Redbridge and Waltham Forest,2016,4896634
+TLI53,Redbridge and Waltham Forest,2017,4632708
+TLI53,Redbridge and Waltham Forest,2018,4884071
+TLI53,Redbridge and Waltham Forest,2019,5277874
+TLI53,Redbridge and Waltham Forest,2020,4347851
+TLI53,Redbridge and Waltham Forest,2021,4453503
+TLI53,Redbridge and Waltham Forest,2022,5289623
+TLI54,Enfield,2004,3053788
+TLI54,Enfield,2005,3320000
+TLI54,Enfield,2006,3117140
+TLI54,Enfield,2007,3009369
+TLI54,Enfield,2008,3368552
+TLI54,Enfield,2009,3268478
+TLI54,Enfield,2010,3254616
+TLI54,Enfield,2011,3200788
+TLI54,Enfield,2012,3303712
+TLI54,Enfield,2013,3271590
+TLI54,Enfield,2014,3936280
+TLI54,Enfield,2015,3741023
+TLI54,Enfield,2016,3684064
+TLI54,Enfield,2017,3175445
+TLI54,Enfield,2018,3482303
+TLI54,Enfield,2019,3750584
+TLI54,Enfield,2020,3247876
+TLI54,Enfield,2021,3243345
+TLI54,Enfield,2022,3370187
+TLI61,Bromley,2004,3729026
+TLI61,Bromley,2005,3355098
+TLI61,Bromley,2006,3603646
+TLI61,Bromley,2007,3950675
+TLI61,Bromley,2008,3657772
+TLI61,Bromley,2009,3169225
+TLI61,Bromley,2010,3452273
+TLI61,Bromley,2011,3340400
+TLI61,Bromley,2012,3238609
+TLI61,Bromley,2013,3747800
+TLI61,Bromley,2014,3509869
+TLI61,Bromley,2015,3596535
+TLI61,Bromley,2016,3524872
+TLI61,Bromley,2017,3493292
+TLI61,Bromley,2018,3593695
+TLI61,Bromley,2019,3710117
+TLI61,Bromley,2020,3448819
+TLI61,Bromley,2021,3319109
+TLI61,Bromley,2022,3803854
+TLI62,Croydon,2004,4593701
+TLI62,Croydon,2005,4630890
+TLI62,Croydon,2006,4608346
+TLI62,Croydon,2007,4607679
+TLI62,Croydon,2008,4565929
+TLI62,Croydon,2009,4095914
+TLI62,Croydon,2010,3971613
+TLI62,Croydon,2011,3799309
+TLI62,Croydon,2012,3721105
+TLI62,Croydon,2013,3529536
+TLI62,Croydon,2014,3958478
+TLI62,Croydon,2015,3921653
+TLI62,Croydon,2016,4288342
+TLI62,Croydon,2017,4538090
+TLI62,Croydon,2018,4119485
+TLI62,Croydon,2019,3876552
+TLI62,Croydon,2020,3619179
+TLI62,Croydon,2021,3781848
+TLI62,Croydon,2022,4001396
+TLI63,"Merton, Kingston upon Thames and Sutton",2004,7011350
+TLI63,"Merton, Kingston upon Thames and Sutton",2005,6944902
+TLI63,"Merton, Kingston upon Thames and Sutton",2006,7132827
+TLI63,"Merton, Kingston upon Thames and Sutton",2007,6865218
+TLI63,"Merton, Kingston upon Thames and Sutton",2008,7139734
+TLI63,"Merton, Kingston upon Thames and Sutton",2009,6508039
+TLI63,"Merton, Kingston upon Thames and Sutton",2010,7127319
+TLI63,"Merton, Kingston upon Thames and Sutton",2011,6524423
+TLI63,"Merton, Kingston upon Thames and Sutton",2012,6989623
+TLI63,"Merton, Kingston upon Thames and Sutton",2013,7177162
+TLI63,"Merton, Kingston upon Thames and Sutton",2014,7718440
+TLI63,"Merton, Kingston upon Thames and Sutton",2015,7815889
+TLI63,"Merton, Kingston upon Thames and Sutton",2016,7756065
+TLI63,"Merton, Kingston upon Thames and Sutton",2017,8312347
+TLI63,"Merton, Kingston upon Thames and Sutton",2018,7839405
+TLI63,"Merton, Kingston upon Thames and Sutton",2019,8058687
+TLI63,"Merton, Kingston upon Thames and Sutton",2020,6619767
+TLI63,"Merton, Kingston upon Thames and Sutton",2021,7438164
+TLI63,"Merton, Kingston upon Thames and Sutton",2022,7847540
+TLI71,Barnet,2004,3668710
+TLI71,Barnet,2005,3799612
+TLI71,Barnet,2006,4012014
+TLI71,Barnet,2007,4001420
+TLI71,Barnet,2008,4199240
+TLI71,Barnet,2009,4235914
+TLI71,Barnet,2010,4103104
+TLI71,Barnet,2011,4182205
+TLI71,Barnet,2012,3945612
+TLI71,Barnet,2013,4298630
+TLI71,Barnet,2014,4631779
+TLI71,Barnet,2015,4502239
+TLI71,Barnet,2016,4374134
+TLI71,Barnet,2017,5076892
+TLI71,Barnet,2018,4565178
+TLI71,Barnet,2019,4598208
+TLI71,Barnet,2020,3915202
+TLI71,Barnet,2021,4878628
+TLI71,Barnet,2022,4585589
+TLI72,Brent,2004,3738792
+TLI72,Brent,2005,3640789
+TLI72,Brent,2006,3777621
+TLI72,Brent,2007,3643253
+TLI72,Brent,2008,3485211
+TLI72,Brent,2009,3537202
+TLI72,Brent,2010,3655813
+TLI72,Brent,2011,3423966
+TLI72,Brent,2012,3642691
+TLI72,Brent,2013,3683132
+TLI72,Brent,2014,3889502
+TLI72,Brent,2015,3866746
+TLI72,Brent,2016,4433545
+TLI72,Brent,2017,4537942
+TLI72,Brent,2018,4698748
+TLI72,Brent,2019,4522793
+TLI72,Brent,2020,3740235
+TLI72,Brent,2021,3680062
+TLI72,Brent,2022,4338254
+TLI73,Ealing,2004,4159327
+TLI73,Ealing,2005,4265112
+TLI73,Ealing,2006,4561091
+TLI73,Ealing,2007,4396059
+TLI73,Ealing,2008,4162469
+TLI73,Ealing,2009,4181880
+TLI73,Ealing,2010,3844279
+TLI73,Ealing,2011,4447902
+TLI73,Ealing,2012,4571519
+TLI73,Ealing,2013,4662024
+TLI73,Ealing,2014,4709915
+TLI73,Ealing,2015,4556187
+TLI73,Ealing,2016,4433246
+TLI73,Ealing,2017,4755048
+TLI73,Ealing,2018,4216299
+TLI73,Ealing,2019,4400220
+TLI73,Ealing,2020,4144209
+TLI73,Ealing,2021,4580803
+TLI73,Ealing,2022,4197426
+TLI74,Harrow and Hillingdon,2004,8226948
+TLI74,Harrow and Hillingdon,2005,8789260
+TLI74,Harrow and Hillingdon,2006,8524897
+TLI74,Harrow and Hillingdon,2007,8872767
+TLI74,Harrow and Hillingdon,2008,8807606
+TLI74,Harrow and Hillingdon,2009,8270646
+TLI74,Harrow and Hillingdon,2010,8072815
+TLI74,Harrow and Hillingdon,2011,8261799
+TLI74,Harrow and Hillingdon,2012,8686566
+TLI74,Harrow and Hillingdon,2013,8638445
+TLI74,Harrow and Hillingdon,2014,9218874
+TLI74,Harrow and Hillingdon,2015,8026549
+TLI74,Harrow and Hillingdon,2016,8585559
+TLI74,Harrow and Hillingdon,2017,8672656
+TLI74,Harrow and Hillingdon,2018,8794438
+TLI74,Harrow and Hillingdon,2019,8689495
+TLI74,Harrow and Hillingdon,2020,7523807
+TLI74,Harrow and Hillingdon,2021,8230342
+TLI74,Harrow and Hillingdon,2022,9285488
+TLI75,Hounslow and Richmond upon Thames,2004,6574773
+TLI75,Hounslow and Richmond upon Thames,2005,6656406
+TLI75,Hounslow and Richmond upon Thames,2006,6495017
+TLI75,Hounslow and Richmond upon Thames,2007,7127101
+TLI75,Hounslow and Richmond upon Thames,2008,6875840
+TLI75,Hounslow and Richmond upon Thames,2009,6708985
+TLI75,Hounslow and Richmond upon Thames,2010,6807220
+TLI75,Hounslow and Richmond upon Thames,2011,7027680
+TLI75,Hounslow and Richmond upon Thames,2012,7476286
+TLI75,Hounslow and Richmond upon Thames,2013,8161537
+TLI75,Hounslow and Richmond upon Thames,2014,7563898
+TLI75,Hounslow and Richmond upon Thames,2015,8419850
+TLI75,Hounslow and Richmond upon Thames,2016,9267760
+TLI75,Hounslow and Richmond upon Thames,2017,8646428
+TLI75,Hounslow and Richmond upon Thames,2018,8318655
+TLI75,Hounslow and Richmond upon Thames,2019,8666812
+TLI75,Hounslow and Richmond upon Thames,2020,7276513
+TLI75,Hounslow and Richmond upon Thames,2021,7463373
+TLI75,Hounslow and Richmond upon Thames,2022,8171991
+TLJ11,Berkshire,2004,15643282
+TLJ11,Berkshire,2005,15716361
+TLJ11,Berkshire,2006,15984816
+TLJ11,Berkshire,2007,16325396
+TLJ11,Berkshire,2008,16167906
+TLJ11,Berkshire,2009,15385208
+TLJ11,Berkshire,2010,15610327
+TLJ11,Berkshire,2011,16359836
+TLJ11,Berkshire,2012,16491920
+TLJ11,Berkshire,2013,16442529
+TLJ11,Berkshire,2014,16944436
+TLJ11,Berkshire,2015,16891132
+TLJ11,Berkshire,2016,17685135
+TLJ11,Berkshire,2017,18064389
+TLJ11,Berkshire,2018,17668491
+TLJ11,Berkshire,2019,18154488
+TLJ11,Berkshire,2020,16137448
+TLJ11,Berkshire,2021,16812452
+TLJ11,Berkshire,2022,17994540
+TLJ12,Milton Keynes,2004,4434829
+TLJ12,Milton Keynes,2005,4492389
+TLJ12,Milton Keynes,2006,4569785
+TLJ12,Milton Keynes,2007,4952263
+TLJ12,Milton Keynes,2008,5091484
+TLJ12,Milton Keynes,2009,4625363
+TLJ12,Milton Keynes,2010,4915323
+TLJ12,Milton Keynes,2011,4751173
+TLJ12,Milton Keynes,2012,5230953
+TLJ12,Milton Keynes,2013,5553518
+TLJ12,Milton Keynes,2014,5368474
+TLJ12,Milton Keynes,2015,6170553
+TLJ12,Milton Keynes,2016,6740273
+TLJ12,Milton Keynes,2017,6176108
+TLJ12,Milton Keynes,2018,6177833
+TLJ12,Milton Keynes,2019,6188352
+TLJ12,Milton Keynes,2020,5704549
+TLJ12,Milton Keynes,2021,6042854
+TLJ12,Milton Keynes,2022,5823683
+TLJ13,Buckinghamshire CC,2004,7519552
+TLJ13,Buckinghamshire CC,2005,7013377
+TLJ13,Buckinghamshire CC,2006,7217597
+TLJ13,Buckinghamshire CC,2007,7357398
+TLJ13,Buckinghamshire CC,2008,7486557
+TLJ13,Buckinghamshire CC,2009,7524055
+TLJ13,Buckinghamshire CC,2010,6820957
+TLJ13,Buckinghamshire CC,2011,6996980
+TLJ13,Buckinghamshire CC,2012,7550278
+TLJ13,Buckinghamshire CC,2013,7649747
+TLJ13,Buckinghamshire CC,2014,7908905
+TLJ13,Buckinghamshire CC,2015,8065748
+TLJ13,Buckinghamshire CC,2016,8487084
+TLJ13,Buckinghamshire CC,2017,8491704
+TLJ13,Buckinghamshire CC,2018,8164789
+TLJ13,Buckinghamshire CC,2019,8449103
+TLJ13,Buckinghamshire CC,2020,7482115
+TLJ13,Buckinghamshire CC,2021,8172629
+TLJ13,Buckinghamshire CC,2022,8592516
+TLJ14,Oxfordshire CC,2004,10625677
+TLJ14,Oxfordshire CC,2005,10639766
+TLJ14,Oxfordshire CC,2006,10775470
+TLJ14,Oxfordshire CC,2007,10842911
+TLJ14,Oxfordshire CC,2008,10698506
+TLJ14,Oxfordshire CC,2009,10743630
+TLJ14,Oxfordshire CC,2010,10279160
+TLJ14,Oxfordshire CC,2011,10915350
+TLJ14,Oxfordshire CC,2012,11380037
+TLJ14,Oxfordshire CC,2013,11548632
+TLJ14,Oxfordshire CC,2014,12222163
+TLJ14,Oxfordshire CC,2015,11809584
+TLJ14,Oxfordshire CC,2016,12291786
+TLJ14,Oxfordshire CC,2017,12521196
+TLJ14,Oxfordshire CC,2018,12185275
+TLJ14,Oxfordshire CC,2019,12856519
+TLJ14,Oxfordshire CC,2020,11356640
+TLJ14,Oxfordshire CC,2021,11948313
+TLJ14,Oxfordshire CC,2022,13115166
+TLJ21,Brighton and Hove,2004,4125534
+TLJ21,Brighton and Hove,2005,4299696
+TLJ21,Brighton and Hove,2006,3984735
+TLJ21,Brighton and Hove,2007,4064298
+TLJ21,Brighton and Hove,2008,4177586
+TLJ21,Brighton and Hove,2009,3981084
+TLJ21,Brighton and Hove,2010,4037262
+TLJ21,Brighton and Hove,2011,3979256
+TLJ21,Brighton and Hove,2012,4159806
+TLJ21,Brighton and Hove,2013,4447549
+TLJ21,Brighton and Hove,2014,4480907
+TLJ21,Brighton and Hove,2015,4410578
+TLJ21,Brighton and Hove,2016,4780480
+TLJ21,Brighton and Hove,2017,4745969
+TLJ21,Brighton and Hove,2018,4894127
+TLJ21,Brighton and Hove,2019,4724924
+TLJ21,Brighton and Hove,2020,4036419
+TLJ21,Brighton and Hove,2021,4584803
+TLJ21,Brighton and Hove,2022,4795010
+TLJ22,East Sussex CC,2004,5721799
+TLJ22,East Sussex CC,2005,5909441
+TLJ22,East Sussex CC,2006,6091415
+TLJ22,East Sussex CC,2007,6060377
+TLJ22,East Sussex CC,2008,6235744
+TLJ22,East Sussex CC,2009,6007500
+TLJ22,East Sussex CC,2010,6127532
+TLJ22,East Sussex CC,2011,5857552
+TLJ22,East Sussex CC,2012,6349020
+TLJ22,East Sussex CC,2013,6488296
+TLJ22,East Sussex CC,2014,6109037
+TLJ22,East Sussex CC,2015,6717163
+TLJ22,East Sussex CC,2016,6408570
+TLJ22,East Sussex CC,2017,6586968
+TLJ22,East Sussex CC,2018,6692368
+TLJ22,East Sussex CC,2019,6831346
+TLJ22,East Sussex CC,2020,5383516
+TLJ22,East Sussex CC,2021,6109697
+TLJ22,East Sussex CC,2022,6524756
+TLJ25,West Surrey,2004,11403899
+TLJ25,West Surrey,2005,12172436
+TLJ25,West Surrey,2006,12242092
+TLJ25,West Surrey,2007,12186511
+TLJ25,West Surrey,2008,12157723
+TLJ25,West Surrey,2009,12268673
+TLJ25,West Surrey,2010,12121321
+TLJ25,West Surrey,2011,12480249
+TLJ25,West Surrey,2012,12937048
+TLJ25,West Surrey,2013,12497593
+TLJ25,West Surrey,2014,13512291
+TLJ25,West Surrey,2015,13224649
+TLJ25,West Surrey,2016,13621396
+TLJ25,West Surrey,2017,12798666
+TLJ25,West Surrey,2018,13039097
+TLJ25,West Surrey,2019,13555810
+TLJ25,West Surrey,2020,11681918
+TLJ25,West Surrey,2021,12436684
+TLJ25,West Surrey,2022,12360399
+TLJ26,East Surrey,2004,5282001
+TLJ26,East Surrey,2005,5448932
+TLJ26,East Surrey,2006,5621670
+TLJ26,East Surrey,2007,5691742
+TLJ26,East Surrey,2008,5628252
+TLJ26,East Surrey,2009,5765079
+TLJ26,East Surrey,2010,6037398
+TLJ26,East Surrey,2011,6078913
+TLJ26,East Surrey,2012,5701771
+TLJ26,East Surrey,2013,5676670
+TLJ26,East Surrey,2014,5976929
+TLJ26,East Surrey,2015,5824062
+TLJ26,East Surrey,2016,6404516
+TLJ26,East Surrey,2017,6254088
+TLJ26,East Surrey,2018,5712146
+TLJ26,East Surrey,2019,6397217
+TLJ26,East Surrey,2020,5575711
+TLJ26,East Surrey,2021,6059693
+TLJ26,East Surrey,2022,5989234
+TLJ27,West Sussex (South West),2004,5219879
+TLJ27,West Sussex (South West),2005,5323073
+TLJ27,West Sussex (South West),2006,5453881
+TLJ27,West Sussex (South West),2007,5543523
+TLJ27,West Sussex (South West),2008,5385897
+TLJ27,West Sussex (South West),2009,5277423
+TLJ27,West Sussex (South West),2010,5335952
+TLJ27,West Sussex (South West),2011,5400329
+TLJ27,West Sussex (South West),2012,5952550
+TLJ27,West Sussex (South West),2013,5489013
+TLJ27,West Sussex (South West),2014,6216380
+TLJ27,West Sussex (South West),2015,5721122
+TLJ27,West Sussex (South West),2016,5791729
+TLJ27,West Sussex (South West),2017,5466105
+TLJ27,West Sussex (South West),2018,6019446
+TLJ27,West Sussex (South West),2019,6154740
+TLJ27,West Sussex (South West),2020,5379143
+TLJ27,West Sussex (South West),2021,6036549
+TLJ27,West Sussex (South West),2022,5508590
+TLJ28,West Sussex (North East),2004,6317556
+TLJ28,West Sussex (North East),2005,6167840
+TLJ28,West Sussex (North East),2006,6360254
+TLJ28,West Sussex (North East),2007,6134603
+TLJ28,West Sussex (North East),2008,6491138
+TLJ28,West Sussex (North East),2009,5827159
+TLJ28,West Sussex (North East),2010,6323657
+TLJ28,West Sussex (North East),2011,6161374
+TLJ28,West Sussex (North East),2012,6291042
+TLJ28,West Sussex (North East),2013,6727630
+TLJ28,West Sussex (North East),2014,6310182
+TLJ28,West Sussex (North East),2015,6194158
+TLJ28,West Sussex (North East),2016,7431097
+TLJ28,West Sussex (North East),2017,6718180
+TLJ28,West Sussex (North East),2018,7011122
+TLJ28,West Sussex (North East),2019,7323927
+TLJ28,West Sussex (North East),2020,6128404
+TLJ28,West Sussex (North East),2021,5999091
+TLJ28,West Sussex (North East),2022,6831760
+TLJ31,Portsmouth,2004,3271469
+TLJ31,Portsmouth,2005,3308778
+TLJ31,Portsmouth,2006,3206635
+TLJ31,Portsmouth,2007,3106260
+TLJ31,Portsmouth,2008,3105804
+TLJ31,Portsmouth,2009,3237181
+TLJ31,Portsmouth,2010,3383277
+TLJ31,Portsmouth,2011,3225114
+TLJ31,Portsmouth,2012,3571789
+TLJ31,Portsmouth,2013,3335127
+TLJ31,Portsmouth,2014,3288511
+TLJ31,Portsmouth,2015,3314289
+TLJ31,Portsmouth,2016,3314761
+TLJ31,Portsmouth,2017,3403580
+TLJ31,Portsmouth,2018,3183221
+TLJ31,Portsmouth,2019,3317725
+TLJ31,Portsmouth,2020,2995747
+TLJ31,Portsmouth,2021,3375449
+TLJ31,Portsmouth,2022,3228209
+TLJ32,Southampton,2004,3883815
+TLJ32,Southampton,2005,4024033
+TLJ32,Southampton,2006,3843139
+TLJ32,Southampton,2007,3743309
+TLJ32,Southampton,2008,3520417
+TLJ32,Southampton,2009,3567679
+TLJ32,Southampton,2010,3308532
+TLJ32,Southampton,2011,3249886
+TLJ32,Southampton,2012,3440403
+TLJ32,Southampton,2013,3754976
+TLJ32,Southampton,2014,3811300
+TLJ32,Southampton,2015,3856360
+TLJ32,Southampton,2016,3858425
+TLJ32,Southampton,2017,3914054
+TLJ32,Southampton,2018,3643406
+TLJ32,Southampton,2019,3695255
+TLJ32,Southampton,2020,3462241
+TLJ32,Southampton,2021,3785435
+TLJ32,Southampton,2022,3873547
+TLJ34,Isle of Wight,2004,1498875
+TLJ34,Isle of Wight,2005,1536383
+TLJ34,Isle of Wight,2006,1660397
+TLJ34,Isle of Wight,2007,1626267
+TLJ34,Isle of Wight,2008,1612857
+TLJ34,Isle of Wight,2009,1570170
+TLJ34,Isle of Wight,2010,1465373
+TLJ34,Isle of Wight,2011,1521609
+TLJ34,Isle of Wight,2012,1518741
+TLJ34,Isle of Wight,2013,1596062
+TLJ34,Isle of Wight,2014,1568249
+TLJ34,Isle of Wight,2015,1640407
+TLJ34,Isle of Wight,2016,1617828
+TLJ34,Isle of Wight,2017,1664750
+TLJ34,Isle of Wight,2018,1708833
+TLJ34,Isle of Wight,2019,1674129
+TLJ34,Isle of Wight,2020,1470075
+TLJ34,Isle of Wight,2021,1626166
+TLJ34,Isle of Wight,2022,1605170
+TLJ35,South Hampshire,2004,5293708
+TLJ35,South Hampshire,2005,5459138
+TLJ35,South Hampshire,2006,5359684
+TLJ35,South Hampshire,2007,5505977
+TLJ35,South Hampshire,2008,5852694
+TLJ35,South Hampshire,2009,5427497
+TLJ35,South Hampshire,2010,5421931
+TLJ35,South Hampshire,2011,5702797
+TLJ35,South Hampshire,2012,5700142
+TLJ35,South Hampshire,2013,5549956
+TLJ35,South Hampshire,2014,6125043
+TLJ35,South Hampshire,2015,5867587
+TLJ35,South Hampshire,2016,5869279
+TLJ35,South Hampshire,2017,5635905
+TLJ35,South Hampshire,2018,5371340
+TLJ35,South Hampshire,2019,5765843
+TLJ35,South Hampshire,2020,5245548
+TLJ35,South Hampshire,2021,5311328
+TLJ35,South Hampshire,2022,5475728
+TLJ36,Central Hampshire,2004,7433530
+TLJ36,Central Hampshire,2005,7483744
+TLJ36,Central Hampshire,2006,7756258
+TLJ36,Central Hampshire,2007,7970056
+TLJ36,Central Hampshire,2008,7934655
+TLJ36,Central Hampshire,2009,7635995
+TLJ36,Central Hampshire,2010,7568148
+TLJ36,Central Hampshire,2011,7960789
+TLJ36,Central Hampshire,2012,8127880
+TLJ36,Central Hampshire,2013,8002821
+TLJ36,Central Hampshire,2014,8325207
+TLJ36,Central Hampshire,2015,8564767
+TLJ36,Central Hampshire,2016,8798088
+TLJ36,Central Hampshire,2017,8226904
+TLJ36,Central Hampshire,2018,8435806
+TLJ36,Central Hampshire,2019,8728844
+TLJ36,Central Hampshire,2020,7488512
+TLJ36,Central Hampshire,2021,7912146
+TLJ36,Central Hampshire,2022,8419175
+TLJ37,North Hampshire,2004,5560235
+TLJ37,North Hampshire,2005,5389791
+TLJ37,North Hampshire,2006,5459370
+TLJ37,North Hampshire,2007,5570172
+TLJ37,North Hampshire,2008,5485937
+TLJ37,North Hampshire,2009,5036122
+TLJ37,North Hampshire,2010,5094957
+TLJ37,North Hampshire,2011,5592035
+TLJ37,North Hampshire,2012,5936114
+TLJ37,North Hampshire,2013,5910598
+TLJ37,North Hampshire,2014,5861091
+TLJ37,North Hampshire,2015,5831422
+TLJ37,North Hampshire,2016,5837036
+TLJ37,North Hampshire,2017,5895997
+TLJ37,North Hampshire,2018,5614285
+TLJ37,North Hampshire,2019,5526796
+TLJ37,North Hampshire,2020,4920555
+TLJ37,North Hampshire,2021,5311877
+TLJ37,North Hampshire,2022,5746162
+TLJ41,Medway,2004,2807743
+TLJ41,Medway,2005,2991389
+TLJ41,Medway,2006,2848298
+TLJ41,Medway,2007,2858874
+TLJ41,Medway,2008,2848911
+TLJ41,Medway,2009,2523727
+TLJ41,Medway,2010,2821011
+TLJ41,Medway,2011,2746876
+TLJ41,Medway,2012,3102219
+TLJ41,Medway,2013,2845118
+TLJ41,Medway,2014,2935537
+TLJ41,Medway,2015,2897840
+TLJ41,Medway,2016,3055059
+TLJ41,Medway,2017,3066904
+TLJ41,Medway,2018,2937935
+TLJ41,Medway,2019,2954497
+TLJ41,Medway,2020,2883794
+TLJ41,Medway,2021,3151627
+TLJ41,Medway,2022,3457482
+TLJ43,Kent Thames Gateway,2004,4138571
+TLJ43,Kent Thames Gateway,2005,4185933
+TLJ43,Kent Thames Gateway,2006,3862742
+TLJ43,Kent Thames Gateway,2007,4102259
+TLJ43,Kent Thames Gateway,2008,4077311
+TLJ43,Kent Thames Gateway,2009,4309396
+TLJ43,Kent Thames Gateway,2010,4218990
+TLJ43,Kent Thames Gateway,2011,4426214
+TLJ43,Kent Thames Gateway,2012,4238778
+TLJ43,Kent Thames Gateway,2013,4654891
+TLJ43,Kent Thames Gateway,2014,4512811
+TLJ43,Kent Thames Gateway,2015,4552119
+TLJ43,Kent Thames Gateway,2016,4997291
+TLJ43,Kent Thames Gateway,2017,4949912
+TLJ43,Kent Thames Gateway,2018,4923309
+TLJ43,Kent Thames Gateway,2019,4925342
+TLJ43,Kent Thames Gateway,2020,4177420
+TLJ43,Kent Thames Gateway,2021,4806131
+TLJ43,Kent Thames Gateway,2022,5199422
+TLJ44,East Kent,2004,5733108
+TLJ44,East Kent,2005,5727894
+TLJ44,East Kent,2006,5851300
+TLJ44,East Kent,2007,6234402
+TLJ44,East Kent,2008,6220917
+TLJ44,East Kent,2009,5798523
+TLJ44,East Kent,2010,5711248
+TLJ44,East Kent,2011,5707952
+TLJ44,East Kent,2012,5763831
+TLJ44,East Kent,2013,5801101
+TLJ44,East Kent,2014,5985705
+TLJ44,East Kent,2015,6016693
+TLJ44,East Kent,2016,6550767
+TLJ44,East Kent,2017,6365099
+TLJ44,East Kent,2018,6305853
+TLJ44,East Kent,2019,6722385
+TLJ44,East Kent,2020,5678452
+TLJ44,East Kent,2021,6072225
+TLJ44,East Kent,2022,7166562
+TLJ45,Mid Kent,2004,4169777
+TLJ45,Mid Kent,2005,4254560
+TLJ45,Mid Kent,2006,4050514
+TLJ45,Mid Kent,2007,4417778
+TLJ45,Mid Kent,2008,4230573
+TLJ45,Mid Kent,2009,4044261
+TLJ45,Mid Kent,2010,4103544
+TLJ45,Mid Kent,2011,4382715
+TLJ45,Mid Kent,2012,4261321
+TLJ45,Mid Kent,2013,4485067
+TLJ45,Mid Kent,2014,4685937
+TLJ45,Mid Kent,2015,4564620
+TLJ45,Mid Kent,2016,4876022
+TLJ45,Mid Kent,2017,4563964
+TLJ45,Mid Kent,2018,4481553
+TLJ45,Mid Kent,2019,5007708
+TLJ45,Mid Kent,2020,4291084
+TLJ45,Mid Kent,2021,4731530
+TLJ45,Mid Kent,2022,4682381
+TLJ46,West Kent,2004,4921229
+TLJ46,West Kent,2005,5304574
+TLJ46,West Kent,2006,4669251
+TLJ46,West Kent,2007,4659846
+TLJ46,West Kent,2008,4993412
+TLJ46,West Kent,2009,5069229
+TLJ46,West Kent,2010,4639134
+TLJ46,West Kent,2011,5176864
+TLJ46,West Kent,2012,5245548
+TLJ46,West Kent,2013,5259006
+TLJ46,West Kent,2014,5543391
+TLJ46,West Kent,2015,5727471
+TLJ46,West Kent,2016,5508666
+TLJ46,West Kent,2017,5675536
+TLJ46,West Kent,2018,5333113
+TLJ46,West Kent,2019,5965673
+TLJ46,West Kent,2020,5091137
+TLJ46,West Kent,2021,6325410
+TLJ46,West Kent,2022,5894180
+TLK11,"Bristol, City of",2004,7581344
+TLK11,"Bristol, City of",2005,7957794
+TLK11,"Bristol, City of",2006,8035094
+TLK11,"Bristol, City of",2007,8137946
+TLK11,"Bristol, City of",2008,7882682
+TLK11,"Bristol, City of",2009,7783899
+TLK11,"Bristol, City of",2010,7644898
+TLK11,"Bristol, City of",2011,8060172
+TLK11,"Bristol, City of",2012,8248924
+TLK11,"Bristol, City of",2013,8628485
+TLK11,"Bristol, City of",2014,8767164
+TLK11,"Bristol, City of",2015,8740929
+TLK11,"Bristol, City of",2016,8667603
+TLK11,"Bristol, City of",2017,9335676
+TLK11,"Bristol, City of",2018,9133598
+TLK11,"Bristol, City of",2019,9459406
+TLK11,"Bristol, City of",2020,8625914
+TLK11,"Bristol, City of",2021,9467337
+TLK11,"Bristol, City of",2022,10216249
+TLK12,"Bath and North East Somerset, North Somerset and South Gloucestershire",2004,9586716
+TLK12,"Bath and North East Somerset, North Somerset and South Gloucestershire",2005,9565777
+TLK12,"Bath and North East Somerset, North Somerset and South Gloucestershire",2006,9875276
+TLK12,"Bath and North East Somerset, North Somerset and South Gloucestershire",2007,9580822
+TLK12,"Bath and North East Somerset, North Somerset and South Gloucestershire",2008,9524088
+TLK12,"Bath and North East Somerset, North Somerset and South Gloucestershire",2009,9663583
+TLK12,"Bath and North East Somerset, North Somerset and South Gloucestershire",2010,9709036
+TLK12,"Bath and North East Somerset, North Somerset and South Gloucestershire",2011,9844770
+TLK12,"Bath and North East Somerset, North Somerset and South Gloucestershire",2012,9697256
+TLK12,"Bath and North East Somerset, North Somerset and South Gloucestershire",2013,9815617
+TLK12,"Bath and North East Somerset, North Somerset and South Gloucestershire",2014,9968016
+TLK12,"Bath and North East Somerset, North Somerset and South Gloucestershire",2015,9793741
+TLK12,"Bath and North East Somerset, North Somerset and South Gloucestershire",2016,10373571
+TLK12,"Bath and North East Somerset, North Somerset and South Gloucestershire",2017,10113736
+TLK12,"Bath and North East Somerset, North Somerset and South Gloucestershire",2018,10569307
+TLK12,"Bath and North East Somerset, North Somerset and South Gloucestershire",2019,10508035
+TLK12,"Bath and North East Somerset, North Somerset and South Gloucestershire",2020,10212005
+TLK12,"Bath and North East Somerset, North Somerset and South Gloucestershire",2021,10752832
+TLK12,"Bath and North East Somerset, North Somerset and South Gloucestershire",2022,11161512
+TLK13,Gloucestershire CC,2004,9221801
+TLK13,Gloucestershire CC,2005,8531804
+TLK13,Gloucestershire CC,2006,8674287
+TLK13,Gloucestershire CC,2007,8637957
+TLK13,Gloucestershire CC,2008,9015777
+TLK13,Gloucestershire CC,2009,8930509
+TLK13,Gloucestershire CC,2010,9007734
+TLK13,Gloucestershire CC,2011,9184682
+TLK13,Gloucestershire CC,2012,9455389
+TLK13,Gloucestershire CC,2013,9668640
+TLK13,Gloucestershire CC,2014,9940728
+TLK13,Gloucestershire CC,2015,10168877
+TLK13,Gloucestershire CC,2016,9921176
+TLK13,Gloucestershire CC,2017,9597421
+TLK13,Gloucestershire CC,2018,10383012
+TLK13,Gloucestershire CC,2019,10388844
+TLK13,Gloucestershire CC,2020,9341362
+TLK13,Gloucestershire CC,2021,9454869
+TLK13,Gloucestershire CC,2022,9985816
+TLK14,Swindon,2004,3513116
+TLK14,Swindon,2005,3951046
+TLK14,Swindon,2006,3765867
+TLK14,Swindon,2007,3850581
+TLK14,Swindon,2008,3575386
+TLK14,Swindon,2009,3439860
+TLK14,Swindon,2010,3477854
+TLK14,Swindon,2011,3677160
+TLK14,Swindon,2012,3620541
+TLK14,Swindon,2013,3699826
+TLK14,Swindon,2014,3758507
+TLK14,Swindon,2015,3683666
+TLK14,Swindon,2016,3924447
+TLK14,Swindon,2017,3680988
+TLK14,Swindon,2018,3778589
+TLK14,Swindon,2019,3786026
+TLK14,Swindon,2020,3476042
+TLK14,Swindon,2021,3655119
+TLK14,Swindon,2022,3615976
+TLK15,Wiltshire,2004,6120444
+TLK15,Wiltshire,2005,6201957
+TLK15,Wiltshire,2006,6129778
+TLK15,Wiltshire,2007,6332187
+TLK15,Wiltshire,2008,6172104
+TLK15,Wiltshire,2009,6357342
+TLK15,Wiltshire,2010,6141626
+TLK15,Wiltshire,2011,6054809
+TLK15,Wiltshire,2012,6133752
+TLK15,Wiltshire,2013,6255337
+TLK15,Wiltshire,2014,6877944
+TLK15,Wiltshire,2015,6756178
+TLK15,Wiltshire,2016,7161562
+TLK15,Wiltshire,2017,6884439
+TLK15,Wiltshire,2018,6926129
+TLK15,Wiltshire,2019,7406123
+TLK15,Wiltshire,2020,6622662
+TLK15,Wiltshire,2021,6656981
+TLK15,Wiltshire,2022,6631700
+TLK23,Somerset CC,2004,7158788
+TLK23,Somerset CC,2005,7197824
+TLK23,Somerset CC,2006,7369643
+TLK23,Somerset CC,2007,7746429
+TLK23,Somerset CC,2008,7429000
+TLK23,Somerset CC,2009,7238235
+TLK23,Somerset CC,2010,7249910
+TLK23,Somerset CC,2011,7868454
+TLK23,Somerset CC,2012,7445705
+TLK23,Somerset CC,2013,7505450
+TLK23,Somerset CC,2014,7835846
+TLK23,Somerset CC,2015,7993451
+TLK23,Somerset CC,2016,7543430
+TLK23,Somerset CC,2017,7795112
+TLK23,Somerset CC,2018,8109696
+TLK23,Somerset CC,2019,8311128
+TLK23,Somerset CC,2020,6952959
+TLK23,Somerset CC,2021,7576749
+TLK23,Somerset CC,2022,7994273
+TLK24,"Bournemouth, Christchurch and Poole",2004,5321807
+TLK24,"Bournemouth, Christchurch and Poole",2005,5393914
+TLK24,"Bournemouth, Christchurch and Poole",2006,5569379
+TLK24,"Bournemouth, Christchurch and Poole",2007,5719500
+TLK24,"Bournemouth, Christchurch and Poole",2008,5614880
+TLK24,"Bournemouth, Christchurch and Poole",2009,5489133
+TLK24,"Bournemouth, Christchurch and Poole",2010,5512699
+TLK24,"Bournemouth, Christchurch and Poole",2011,5499607
+TLK24,"Bournemouth, Christchurch and Poole",2012,5675792
+TLK24,"Bournemouth, Christchurch and Poole",2013,5983090
+TLK24,"Bournemouth, Christchurch and Poole",2014,5993681
+TLK24,"Bournemouth, Christchurch and Poole",2015,5917309
+TLK24,"Bournemouth, Christchurch and Poole",2016,6005687
+TLK24,"Bournemouth, Christchurch and Poole",2017,6031301
+TLK24,"Bournemouth, Christchurch and Poole",2018,6318646
+TLK24,"Bournemouth, Christchurch and Poole",2019,6536118
+TLK24,"Bournemouth, Christchurch and Poole",2020,5482109
+TLK24,"Bournemouth, Christchurch and Poole",2021,5877478
+TLK24,"Bournemouth, Christchurch and Poole",2022,6076167
+TLK25,Dorset,2004,4248955
+TLK25,Dorset,2005,4697662
+TLK25,Dorset,2006,4643462
+TLK25,Dorset,2007,4734092
+TLK25,Dorset,2008,4614554
+TLK25,Dorset,2009,5067677
+TLK25,Dorset,2010,4849296
+TLK25,Dorset,2011,5004406
+TLK25,Dorset,2012,4795369
+TLK25,Dorset,2013,4936368
+TLK25,Dorset,2014,5040698
+TLK25,Dorset,2015,4799649
+TLK25,Dorset,2016,4887018
+TLK25,Dorset,2017,5129602
+TLK25,Dorset,2018,5291141
+TLK25,Dorset,2019,5140247
+TLK25,Dorset,2020,4144331
+TLK25,Dorset,2021,5239501
+TLK25,Dorset,2022,5033159
+TLK30,Cornwall and Isles of Scilly,2004,6628122
+TLK30,Cornwall and Isles of Scilly,2005,6711612
+TLK30,Cornwall and Isles of Scilly,2006,7281544
+TLK30,Cornwall and Isles of Scilly,2007,7089811
+TLK30,Cornwall and Isles of Scilly,2008,7859276
+TLK30,Cornwall and Isles of Scilly,2009,7099604
+TLK30,Cornwall and Isles of Scilly,2010,7443854
+TLK30,Cornwall and Isles of Scilly,2011,7256667
+TLK30,Cornwall and Isles of Scilly,2012,7314090
+TLK30,Cornwall and Isles of Scilly,2013,7412497
+TLK30,Cornwall and Isles of Scilly,2014,7491206
+TLK30,Cornwall and Isles of Scilly,2015,7406137
+TLK30,Cornwall and Isles of Scilly,2016,7904234
+TLK30,Cornwall and Isles of Scilly,2017,8378461
+TLK30,Cornwall and Isles of Scilly,2018,7951671
+TLK30,Cornwall and Isles of Scilly,2019,7703803
+TLK30,Cornwall and Isles of Scilly,2020,6769793
+TLK30,Cornwall and Isles of Scilly,2021,7873837
+TLK30,Cornwall and Isles of Scilly,2022,8108763
+TLK41,Plymouth,2004,3398848
+TLK41,Plymouth,2005,3368272
+TLK41,Plymouth,2006,3392134
+TLK41,Plymouth,2007,3405971
+TLK41,Plymouth,2008,3368855
+TLK41,Plymouth,2009,3264787
+TLK41,Plymouth,2010,3326218
+TLK41,Plymouth,2011,3301153
+TLK41,Plymouth,2012,3282460
+TLK41,Plymouth,2013,3388007
+TLK41,Plymouth,2014,3589746
+TLK41,Plymouth,2015,3611825
+TLK41,Plymouth,2016,3498071
+TLK41,Plymouth,2017,3589100
+TLK41,Plymouth,2018,3421048
+TLK41,Plymouth,2019,3656827
+TLK41,Plymouth,2020,3291544
+TLK41,Plymouth,2021,3674516
+TLK41,Plymouth,2022,3969765
+TLK42,Torbay,2004,1642305
+TLK42,Torbay,2005,1688662
+TLK42,Torbay,2006,1744630
+TLK42,Torbay,2007,1619701
+TLK42,Torbay,2008,1604913
+TLK42,Torbay,2009,1539265
+TLK42,Torbay,2010,1452734
+TLK42,Torbay,2011,1526989
+TLK42,Torbay,2012,1625373
+TLK42,Torbay,2013,1548712
+TLK42,Torbay,2014,1498378
+TLK42,Torbay,2015,1493457
+TLK42,Torbay,2016,1630826
+TLK42,Torbay,2017,1610356
+TLK42,Torbay,2018,1467759
+TLK42,Torbay,2019,1562202
+TLK42,Torbay,2020,1307525
+TLK42,Torbay,2021,1602480
+TLK42,Torbay,2022,1671355
+TLK43,Devon CC,2004,10326494
+TLK43,Devon CC,2005,10763634
+TLK43,Devon CC,2006,10767731
+TLK43,Devon CC,2007,10519835
+TLK43,Devon CC,2008,10445422
+TLK43,Devon CC,2009,10704270
+TLK43,Devon CC,2010,10728041
+TLK43,Devon CC,2011,10662690
+TLK43,Devon CC,2012,10588015
+TLK43,Devon CC,2013,11007688
+TLK43,Devon CC,2014,11163043
+TLK43,Devon CC,2015,11536305
+TLK43,Devon CC,2016,11375179
+TLK43,Devon CC,2017,11473904
+TLK43,Devon CC,2018,11575641
+TLK43,Devon CC,2019,11374766
+TLK43,Devon CC,2020,10512964
+TLK43,Devon CC,2021,11089215
+TLK43,Devon CC,2022,12204874
+TLL11,Isle of Anglesey,2004,701794
+TLL11,Isle of Anglesey,2005,690553
+TLL11,Isle of Anglesey,2006,828925
+TLL11,Isle of Anglesey,2007,808943
+TLL11,Isle of Anglesey,2008,730129
+TLL11,Isle of Anglesey,2009,727603
+TLL11,Isle of Anglesey,2010,688023
+TLL11,Isle of Anglesey,2011,682789
+TLL11,Isle of Anglesey,2012,747907
+TLL11,Isle of Anglesey,2013,726244
+TLL11,Isle of Anglesey,2014,787074
+TLL11,Isle of Anglesey,2015,785814
+TLL11,Isle of Anglesey,2016,778977
+TLL11,Isle of Anglesey,2017,730742
+TLL11,Isle of Anglesey,2018,800294
+TLL11,Isle of Anglesey,2019,780979
+TLL11,Isle of Anglesey,2020,639729
+TLL11,Isle of Anglesey,2021,710307
+TLL11,Isle of Anglesey,2022,783057
+TLL12,Gwynedd,2004,1668526
+TLL12,Gwynedd,2005,1707395
+TLL12,Gwynedd,2006,1784108
+TLL12,Gwynedd,2007,1703436
+TLL12,Gwynedd,2008,1688123
+TLL12,Gwynedd,2009,1804276
+TLL12,Gwynedd,2010,1741283
+TLL12,Gwynedd,2011,1816537
+TLL12,Gwynedd,2012,1798832
+TLL12,Gwynedd,2013,1974713
+TLL12,Gwynedd,2014,1927594
+TLL12,Gwynedd,2015,2025046
+TLL12,Gwynedd,2016,1884249
+TLL12,Gwynedd,2017,1940738
+TLL12,Gwynedd,2018,1867247
+TLL12,Gwynedd,2019,1749406
+TLL12,Gwynedd,2020,1723884
+TLL12,Gwynedd,2021,1627512
+TLL12,Gwynedd,2022,1808095
+TLL13,Conwy and Denbighshire,2004,2545140
+TLL13,Conwy and Denbighshire,2005,2612195
+TLL13,Conwy and Denbighshire,2006,2520012
+TLL13,Conwy and Denbighshire,2007,2585140
+TLL13,Conwy and Denbighshire,2008,2661208
+TLL13,Conwy and Denbighshire,2009,2516344
+TLL13,Conwy and Denbighshire,2010,2499454
+TLL13,Conwy and Denbighshire,2011,2548969
+TLL13,Conwy and Denbighshire,2012,2666332
+TLL13,Conwy and Denbighshire,2013,2647149
+TLL13,Conwy and Denbighshire,2014,2647889
+TLL13,Conwy and Denbighshire,2015,2836671
+TLL13,Conwy and Denbighshire,2016,2894239
+TLL13,Conwy and Denbighshire,2017,2797519
+TLL13,Conwy and Denbighshire,2018,2932481
+TLL13,Conwy and Denbighshire,2019,2815233
+TLL13,Conwy and Denbighshire,2020,2549218
+TLL13,Conwy and Denbighshire,2021,2619350
+TLL13,Conwy and Denbighshire,2022,2730150
+TLL14,South West Wales,2004,4421534
+TLL14,South West Wales,2005,4694234
+TLL14,South West Wales,2006,4786161
+TLL14,South West Wales,2007,4771964
+TLL14,South West Wales,2008,4763925
+TLL14,South West Wales,2009,4910242
+TLL14,South West Wales,2010,4717995
+TLL14,South West Wales,2011,4806106
+TLL14,South West Wales,2012,4778292
+TLL14,South West Wales,2013,4962578
+TLL14,South West Wales,2014,5088063
+TLL14,South West Wales,2015,5131825
+TLL14,South West Wales,2016,5326560
+TLL14,South West Wales,2017,4997870
+TLL14,South West Wales,2018,5134670
+TLL14,South West Wales,2019,5088692
+TLL14,South West Wales,2020,4367803
+TLL14,South West Wales,2021,4931007
+TLL14,South West Wales,2022,5012594
+TLL15,Central Valleys,2004,3105043
+TLL15,Central Valleys,2005,3282017
+TLL15,Central Valleys,2006,3284565
+TLL15,Central Valleys,2007,3327488
+TLL15,Central Valleys,2008,3086018
+TLL15,Central Valleys,2009,3045388
+TLL15,Central Valleys,2010,2999474
+TLL15,Central Valleys,2011,3061223
+TLL15,Central Valleys,2012,3151476
+TLL15,Central Valleys,2013,3026625
+TLL15,Central Valleys,2014,3131921
+TLL15,Central Valleys,2015,3057809
+TLL15,Central Valleys,2016,2947257
+TLL15,Central Valleys,2017,3150160
+TLL15,Central Valleys,2018,3217431
+TLL15,Central Valleys,2019,3021912
+TLL15,Central Valleys,2020,2874577
+TLL15,Central Valleys,2021,3141711
+TLL15,Central Valleys,2022,3322825
+TLL16,Gwent Valleys,2004,3332447
+TLL16,Gwent Valleys,2005,3346365
+TLL16,Gwent Valleys,2006,3520099
+TLL16,Gwent Valleys,2007,3549131
+TLL16,Gwent Valleys,2008,3301437
+TLL16,Gwent Valleys,2009,3430879
+TLL16,Gwent Valleys,2010,3426697
+TLL16,Gwent Valleys,2011,3314919
+TLL16,Gwent Valleys,2012,3281851
+TLL16,Gwent Valleys,2013,3426632
+TLL16,Gwent Valleys,2014,3428254
+TLL16,Gwent Valleys,2015,3410774
+TLL16,Gwent Valleys,2016,3503347
+TLL16,Gwent Valleys,2017,3455138
+TLL16,Gwent Valleys,2018,3445130
+TLL16,Gwent Valleys,2019,3517765
+TLL16,Gwent Valleys,2020,3210008
+TLL16,Gwent Valleys,2021,3498002
+TLL16,Gwent Valleys,2022,3716736
+TLL17,Bridgend and Neath Port Talbot,2004,3049104
+TLL17,Bridgend and Neath Port Talbot,2005,3211990
+TLL17,Bridgend and Neath Port Talbot,2006,3146454
+TLL17,Bridgend and Neath Port Talbot,2007,3225200
+TLL17,Bridgend and Neath Port Talbot,2008,3216368
+TLL17,Bridgend and Neath Port Talbot,2009,3176885
+TLL17,Bridgend and Neath Port Talbot,2010,3195224
+TLL17,Bridgend and Neath Port Talbot,2011,3143010
+TLL17,Bridgend and Neath Port Talbot,2012,3273452
+TLL17,Bridgend and Neath Port Talbot,2013,3278590
+TLL17,Bridgend and Neath Port Talbot,2014,3358983
+TLL17,Bridgend and Neath Port Talbot,2015,3412012
+TLL17,Bridgend and Neath Port Talbot,2016,3495417
+TLL17,Bridgend and Neath Port Talbot,2017,3452907
+TLL17,Bridgend and Neath Port Talbot,2018,3482277
+TLL17,Bridgend and Neath Port Talbot,2019,3354638
+TLL17,Bridgend and Neath Port Talbot,2020,3209049
+TLL17,Bridgend and Neath Port Talbot,2021,3477712
+TLL17,Bridgend and Neath Port Talbot,2022,3425502
+TLL18,Swansea,2004,3175665
+TLL18,Swansea,2005,3406883
+TLL18,Swansea,2006,3521885
+TLL18,Swansea,2007,3395110
+TLL18,Swansea,2008,3067499
+TLL18,Swansea,2009,3137883
+TLL18,Swansea,2010,3198796
+TLL18,Swansea,2011,3167292
+TLL18,Swansea,2012,3037638
+TLL18,Swansea,2013,3238444
+TLL18,Swansea,2014,3330932
+TLL18,Swansea,2015,3557778
+TLL18,Swansea,2016,3530296
+TLL18,Swansea,2017,3401706
+TLL18,Swansea,2018,3493646
+TLL18,Swansea,2019,3413037
+TLL18,Swansea,2020,3276189
+TLL18,Swansea,2021,3200895
+TLL18,Swansea,2022,3396680
+TLL21,Monmouthshire and Newport,2004,3704097
+TLL21,Monmouthshire and Newport,2005,3635806
+TLL21,Monmouthshire and Newport,2006,3778846
+TLL21,Monmouthshire and Newport,2007,3619489
+TLL21,Monmouthshire and Newport,2008,3610444
+TLL21,Monmouthshire and Newport,2009,3477702
+TLL21,Monmouthshire and Newport,2010,3515700
+TLL21,Monmouthshire and Newport,2011,3519993
+TLL21,Monmouthshire and Newport,2012,3470900
+TLL21,Monmouthshire and Newport,2013,3273474
+TLL21,Monmouthshire and Newport,2014,3357866
+TLL21,Monmouthshire and Newport,2015,3408139
+TLL21,Monmouthshire and Newport,2016,3637277
+TLL21,Monmouthshire and Newport,2017,3725828
+TLL21,Monmouthshire and Newport,2018,3986675
+TLL21,Monmouthshire and Newport,2019,3826024
+TLL21,Monmouthshire and Newport,2020,3310494
+TLL21,Monmouthshire and Newport,2021,3628081
+TLL21,Monmouthshire and Newport,2022,3487505
+TLL22,Cardiff and Vale of Glamorgan,2004,7427624
+TLL22,Cardiff and Vale of Glamorgan,2005,7878615
+TLL22,Cardiff and Vale of Glamorgan,2006,7649520
+TLL22,Cardiff and Vale of Glamorgan,2007,7623583
+TLL22,Cardiff and Vale of Glamorgan,2008,7507333
+TLL22,Cardiff and Vale of Glamorgan,2009,7387436
+TLL22,Cardiff and Vale of Glamorgan,2010,7086259
+TLL22,Cardiff and Vale of Glamorgan,2011,7474133
+TLL22,Cardiff and Vale of Glamorgan,2012,7236387
+TLL22,Cardiff and Vale of Glamorgan,2013,7455262
+TLL22,Cardiff and Vale of Glamorgan,2014,7639932
+TLL22,Cardiff and Vale of Glamorgan,2015,7603481
+TLL22,Cardiff and Vale of Glamorgan,2016,8055270
+TLL22,Cardiff and Vale of Glamorgan,2017,8164163
+TLL22,Cardiff and Vale of Glamorgan,2018,8158799
+TLL22,Cardiff and Vale of Glamorgan,2019,8267043
+TLL22,Cardiff and Vale of Glamorgan,2020,7393586
+TLL22,Cardiff and Vale of Glamorgan,2021,8109979
+TLL22,Cardiff and Vale of Glamorgan,2022,8598005
+TLL23,Flintshire and Wrexham,2004,3997941
+TLL23,Flintshire and Wrexham,2005,4125975
+TLL23,Flintshire and Wrexham,2006,4113678
+TLL23,Flintshire and Wrexham,2007,4189826
+TLL23,Flintshire and Wrexham,2008,4200769
+TLL23,Flintshire and Wrexham,2009,3856817
+TLL23,Flintshire and Wrexham,2010,3947446
+TLL23,Flintshire and Wrexham,2011,4113204
+TLL23,Flintshire and Wrexham,2012,4089458
+TLL23,Flintshire and Wrexham,2013,4090595
+TLL23,Flintshire and Wrexham,2014,4396225
+TLL23,Flintshire and Wrexham,2015,4370512
+TLL23,Flintshire and Wrexham,2016,4178104
+TLL23,Flintshire and Wrexham,2017,4340780
+TLL23,Flintshire and Wrexham,2018,4562741
+TLL23,Flintshire and Wrexham,2019,4504213
+TLL23,Flintshire and Wrexham,2020,4007025
+TLL23,Flintshire and Wrexham,2021,4323901
+TLL23,Flintshire and Wrexham,2022,4098793
+TLL24,Powys,2004,2046935
+TLL24,Powys,2005,1831205
+TLL24,Powys,2006,1905796
+TLL24,Powys,2007,1956093
+TLL24,Powys,2008,1899569
+TLL24,Powys,2009,1839880
+TLL24,Powys,2010,1956612
+TLL24,Powys,2011,1965300
+TLL24,Powys,2012,1944013
+TLL24,Powys,2013,2095373
+TLL24,Powys,2014,2134292
+TLL24,Powys,2015,2213696
+TLL24,Powys,2016,2086858
+TLL24,Powys,2017,2045741
+TLL24,Powys,2018,2165984
+TLL24,Powys,2019,2125854
+TLL24,Powys,2020,1654180
+TLL24,Powys,2021,1867458
+TLL24,Powys,2022,1879011
+TLM50,Aberdeen City and Aberdeenshire,2004,8146325
+TLM50,Aberdeen City and Aberdeenshire,2005,8552981
+TLM50,Aberdeen City and Aberdeenshire,2006,8608111
+TLM50,Aberdeen City and Aberdeenshire,2007,8904542
+TLM50,Aberdeen City and Aberdeenshire,2008,9225432
+TLM50,Aberdeen City and Aberdeenshire,2009,8728865
+TLM50,Aberdeen City and Aberdeenshire,2010,8684816
+TLM50,Aberdeen City and Aberdeenshire,2011,8942535
+TLM50,Aberdeen City and Aberdeenshire,2012,9218508
+TLM50,Aberdeen City and Aberdeenshire,2013,9565488
+TLM50,Aberdeen City and Aberdeenshire,2014,9852561
+TLM50,Aberdeen City and Aberdeenshire,2015,9665626
+TLM50,Aberdeen City and Aberdeenshire,2016,9411083
+TLM50,Aberdeen City and Aberdeenshire,2017,9680121
+TLM50,Aberdeen City and Aberdeenshire,2018,9184132
+TLM50,Aberdeen City and Aberdeenshire,2019,9062668
+TLM50,Aberdeen City and Aberdeenshire,2020,7865275
+TLM50,Aberdeen City and Aberdeenshire,2021,8238553
+TLM50,Aberdeen City and Aberdeenshire,2022,8741168
+TLM61,"Caithness and Sutherland, and Ross and Cromarty",2004,1157991
+TLM61,"Caithness and Sutherland, and Ross and Cromarty",2005,1243589
+TLM61,"Caithness and Sutherland, and Ross and Cromarty",2006,1324235
+TLM61,"Caithness and Sutherland, and Ross and Cromarty",2007,1384582
+TLM61,"Caithness and Sutherland, and Ross and Cromarty",2008,1359440
+TLM61,"Caithness and Sutherland, and Ross and Cromarty",2009,1315288
+TLM61,"Caithness and Sutherland, and Ross and Cromarty",2010,1160431
+TLM61,"Caithness and Sutherland, and Ross and Cromarty",2011,1215866
+TLM61,"Caithness and Sutherland, and Ross and Cromarty",2012,1152388
+TLM61,"Caithness and Sutherland, and Ross and Cromarty",2013,1213241
+TLM61,"Caithness and Sutherland, and Ross and Cromarty",2014,1365165
+TLM61,"Caithness and Sutherland, and Ross and Cromarty",2015,1027392
+TLM61,"Caithness and Sutherland, and Ross and Cromarty",2016,1154549
+TLM61,"Caithness and Sutherland, and Ross and Cromarty",2017,1191391
+TLM61,"Caithness and Sutherland, and Ross and Cromarty",2018,1210661
+TLM61,"Caithness and Sutherland, and Ross and Cromarty",2019,1205456
+TLM61,"Caithness and Sutherland, and Ross and Cromarty",2020,1010917
+TLM61,"Caithness and Sutherland, and Ross and Cromarty",2021,1126284
+TLM61,"Caithness and Sutherland, and Ross and Cromarty",2022,1231367
+TLM62,"Inverness and Nairn, Moray, Badenoch and Strathspey",2004,2578766
+TLM62,"Inverness and Nairn, Moray, Badenoch and Strathspey",2005,2561890
+TLM62,"Inverness and Nairn, Moray, Badenoch and Strathspey",2006,3024905
+TLM62,"Inverness and Nairn, Moray, Badenoch and Strathspey",2007,3045855
+TLM62,"Inverness and Nairn, Moray, Badenoch and Strathspey",2008,3096887
+TLM62,"Inverness and Nairn, Moray, Badenoch and Strathspey",2009,2902060
+TLM62,"Inverness and Nairn, Moray, Badenoch and Strathspey",2010,2853135
+TLM62,"Inverness and Nairn, Moray, Badenoch and Strathspey",2011,2949654
+TLM62,"Inverness and Nairn, Moray, Badenoch and Strathspey",2012,2784350
+TLM62,"Inverness and Nairn, Moray, Badenoch and Strathspey",2013,3111179
+TLM62,"Inverness and Nairn, Moray, Badenoch and Strathspey",2014,3137240
+TLM62,"Inverness and Nairn, Moray, Badenoch and Strathspey",2015,2995031
+TLM62,"Inverness and Nairn, Moray, Badenoch and Strathspey",2016,3148070
+TLM62,"Inverness and Nairn, Moray, Badenoch and Strathspey",2017,3231164
+TLM62,"Inverness and Nairn, Moray, Badenoch and Strathspey",2018,3194249
+TLM62,"Inverness and Nairn, Moray, Badenoch and Strathspey",2019,2991729
+TLM62,"Inverness and Nairn, Moray, Badenoch and Strathspey",2020,2564742
+TLM62,"Inverness and Nairn, Moray, Badenoch and Strathspey",2021,2772900
+TLM62,"Inverness and Nairn, Moray, Badenoch and Strathspey",2022,3135109
+TLM63,"Lochaber, Skye and Lochalsh, Arran and Cumbrae, and Argyll and Bute",2004,1406441
+TLM63,"Lochaber, Skye and Lochalsh, Arran and Cumbrae, and Argyll and Bute",2005,1318126
+TLM63,"Lochaber, Skye and Lochalsh, Arran and Cumbrae, and Argyll and Bute",2006,1587474
+TLM63,"Lochaber, Skye and Lochalsh, Arran and Cumbrae, and Argyll and Bute",2007,1480143
+TLM63,"Lochaber, Skye and Lochalsh, Arran and Cumbrae, and Argyll and Bute",2008,1465537
+TLM63,"Lochaber, Skye and Lochalsh, Arran and Cumbrae, and Argyll and Bute",2009,1482142
+TLM63,"Lochaber, Skye and Lochalsh, Arran and Cumbrae, and Argyll and Bute",2010,1346408
+TLM63,"Lochaber, Skye and Lochalsh, Arran and Cumbrae, and Argyll and Bute",2011,1278467
+TLM63,"Lochaber, Skye and Lochalsh, Arran and Cumbrae, and Argyll and Bute",2012,1336585
+TLM63,"Lochaber, Skye and Lochalsh, Arran and Cumbrae, and Argyll and Bute",2013,1390072
+TLM63,"Lochaber, Skye and Lochalsh, Arran and Cumbrae, and Argyll and Bute",2014,1314469
+TLM63,"Lochaber, Skye and Lochalsh, Arran and Cumbrae, and Argyll and Bute",2015,1318240
+TLM63,"Lochaber, Skye and Lochalsh, Arran and Cumbrae, and Argyll and Bute",2016,1350395
+TLM63,"Lochaber, Skye and Lochalsh, Arran and Cumbrae, and Argyll and Bute",2017,1434661
+TLM63,"Lochaber, Skye and Lochalsh, Arran and Cumbrae, and Argyll and Bute",2018,1404207
+TLM63,"Lochaber, Skye and Lochalsh, Arran and Cumbrae, and Argyll and Bute",2019,1500374
+TLM63,"Lochaber, Skye and Lochalsh, Arran and Cumbrae, and Argyll and Bute",2020,1144136
+TLM63,"Lochaber, Skye and Lochalsh, Arran and Cumbrae, and Argyll and Bute",2021,1267352
+TLM63,"Lochaber, Skye and Lochalsh, Arran and Cumbrae, and Argyll and Bute",2022,1364174
+TLM64,Na h-Eileanan Siar,2004,394826
+TLM64,Na h-Eileanan Siar,2005,400553
+TLM64,Na h-Eileanan Siar,2006,338334
+TLM64,Na h-Eileanan Siar,2007,364141
+TLM64,Na h-Eileanan Siar,2008,335788
+TLM64,Na h-Eileanan Siar,2009,336816
+TLM64,Na h-Eileanan Siar,2010,292310
+TLM64,Na h-Eileanan Siar,2011,341663
+TLM64,Na h-Eileanan Siar,2012,324603
+TLM64,Na h-Eileanan Siar,2013,332763
+TLM64,Na h-Eileanan Siar,2014,329659
+TLM64,Na h-Eileanan Siar,2015,345929
+TLM64,Na h-Eileanan Siar,2016,334821
+TLM64,Na h-Eileanan Siar,2017,368064
+TLM64,Na h-Eileanan Siar,2018,366885
+TLM64,Na h-Eileanan Siar,2019,368282
+TLM64,Na h-Eileanan Siar,2020,358603
+TLM64,Na h-Eileanan Siar,2021,399662
+TLM64,Na h-Eileanan Siar,2022,387843
+TLM65,Orkney Islands,2004,301878
+TLM65,Orkney Islands,2005,331291
+TLM65,Orkney Islands,2006,303515
+TLM65,Orkney Islands,2007,352498
+TLM65,Orkney Islands,2008,284187
+TLM65,Orkney Islands,2009,327369
+TLM65,Orkney Islands,2010,339959
+TLM65,Orkney Islands,2011,318100
+TLM65,Orkney Islands,2012,315887
+TLM65,Orkney Islands,2013,324681
+TLM65,Orkney Islands,2014,326706
+TLM65,Orkney Islands,2015,371550
+TLM65,Orkney Islands,2016,327495
+TLM65,Orkney Islands,2017,409127
+TLM65,Orkney Islands,2018,319376
+TLM65,Orkney Islands,2019,315637
+TLM65,Orkney Islands,2020,276275
+TLM65,Orkney Islands,2021,207420
+TLM65,Orkney Islands,2022,250859
+TLM66,Shetland Islands,2004,401141
+TLM66,Shetland Islands,2005,450953
+TLM66,Shetland Islands,2006,382198
+TLM66,Shetland Islands,2007,415517
+TLM66,Shetland Islands,2008,387398
+TLM66,Shetland Islands,2009,448519
+TLM66,Shetland Islands,2010,470713
+TLM66,Shetland Islands,2011,418770
+TLM66,Shetland Islands,2012,416341
+TLM66,Shetland Islands,2013,462540
+TLM66,Shetland Islands,2014,475877
+TLM66,Shetland Islands,2015,506479
+TLM66,Shetland Islands,2016,395958
+TLM66,Shetland Islands,2017,477165
+TLM66,Shetland Islands,2018,403459
+TLM66,Shetland Islands,2019,402044
+TLM66,Shetland Islands,2020,468059
+TLM66,Shetland Islands,2021,415390
+TLM66,Shetland Islands,2022,302999
+TLM71,Angus and Dundee City,2004,3411349
+TLM71,Angus and Dundee City,2005,3524660
+TLM71,Angus and Dundee City,2006,3506351
+TLM71,Angus and Dundee City,2007,3468388
+TLM71,Angus and Dundee City,2008,3488205
+TLM71,Angus and Dundee City,2009,3647606
+TLM71,Angus and Dundee City,2010,3378310
+TLM71,Angus and Dundee City,2011,3317507
+TLM71,Angus and Dundee City,2012,3181162
+TLM71,Angus and Dundee City,2013,3286383
+TLM71,Angus and Dundee City,2014,3477239
+TLM71,Angus and Dundee City,2015,3488087
+TLM71,Angus and Dundee City,2016,3533290
+TLM71,Angus and Dundee City,2017,3634305
+TLM71,Angus and Dundee City,2018,3355492
+TLM71,Angus and Dundee City,2019,3310380
+TLM71,Angus and Dundee City,2020,3035574
+TLM71,Angus and Dundee City,2021,3309280
+TLM71,Angus and Dundee City,2022,3438444
+TLM72,Clackmannanshire and Fife,2004,4625874
+TLM72,Clackmannanshire and Fife,2005,4796674
+TLM72,Clackmannanshire and Fife,2006,4882757
+TLM72,Clackmannanshire and Fife,2007,4717095
+TLM72,Clackmannanshire and Fife,2008,4519628
+TLM72,Clackmannanshire and Fife,2009,4607997
+TLM72,Clackmannanshire and Fife,2010,4318870
+TLM72,Clackmannanshire and Fife,2011,4503139
+TLM72,Clackmannanshire and Fife,2012,4319180
+TLM72,Clackmannanshire and Fife,2013,4717772
+TLM72,Clackmannanshire and Fife,2014,4762343
+TLM72,Clackmannanshire and Fife,2015,4567595
+TLM72,Clackmannanshire and Fife,2016,4861869
+TLM72,Clackmannanshire and Fife,2017,4653511
+TLM72,Clackmannanshire and Fife,2018,4409820
+TLM72,Clackmannanshire and Fife,2019,4480269
+TLM72,Clackmannanshire and Fife,2020,3973604
+TLM72,Clackmannanshire and Fife,2021,4677273
+TLM72,Clackmannanshire and Fife,2022,4943701
+TLM73,East Lothian and Midlothian,2004,1740710
+TLM73,East Lothian and Midlothian,2005,1721604
+TLM73,East Lothian and Midlothian,2006,1871002
+TLM73,East Lothian and Midlothian,2007,1795701
+TLM73,East Lothian and Midlothian,2008,1828632
+TLM73,East Lothian and Midlothian,2009,1734039
+TLM73,East Lothian and Midlothian,2010,1656407
+TLM73,East Lothian and Midlothian,2011,1752629
+TLM73,East Lothian and Midlothian,2012,1726692
+TLM73,East Lothian and Midlothian,2013,1916763
+TLM73,East Lothian and Midlothian,2014,1868481
+TLM73,East Lothian and Midlothian,2015,1969618
+TLM73,East Lothian and Midlothian,2016,1858783
+TLM73,East Lothian and Midlothian,2017,1919737
+TLM73,East Lothian and Midlothian,2018,2059270
+TLM73,East Lothian and Midlothian,2019,1890265
+TLM73,East Lothian and Midlothian,2020,1881987
+TLM73,East Lothian and Midlothian,2021,2161519
+TLM73,East Lothian and Midlothian,2022,2034528
+TLM75,City of Edinburgh,2004,9984741
+TLM75,City of Edinburgh,2005,10397083
+TLM75,City of Edinburgh,2006,10217781
+TLM75,City of Edinburgh,2007,10585511
+TLM75,City of Edinburgh,2008,10411093
+TLM75,City of Edinburgh,2009,9888518
+TLM75,City of Edinburgh,2010,9849837
+TLM75,City of Edinburgh,2011,10008567
+TLM75,City of Edinburgh,2012,10670629
+TLM75,City of Edinburgh,2013,10142654
+TLM75,City of Edinburgh,2014,9844272
+TLM75,City of Edinburgh,2015,10060041
+TLM75,City of Edinburgh,2016,10330524
+TLM75,City of Edinburgh,2017,10339127
+TLM75,City of Edinburgh,2018,10766516
+TLM75,City of Edinburgh,2019,11014392
+TLM75,City of Edinburgh,2020,10221256
+TLM75,City of Edinburgh,2021,11179910
+TLM75,City of Edinburgh,2022,10602628
+TLM76,Falkirk,2004,1950065
+TLM76,Falkirk,2005,1897813
+TLM76,Falkirk,2006,1944188
+TLM76,Falkirk,2007,2073218
+TLM76,Falkirk,2008,2039792
+TLM76,Falkirk,2009,1922250
+TLM76,Falkirk,2010,1756696
+TLM76,Falkirk,2011,1929834
+TLM76,Falkirk,2012,1942962
+TLM76,Falkirk,2013,2117131
+TLM76,Falkirk,2014,2091103
+TLM76,Falkirk,2015,2016402
+TLM76,Falkirk,2016,2081213
+TLM76,Falkirk,2017,2100986
+TLM76,Falkirk,2018,2031637
+TLM76,Falkirk,2019,2066214
+TLM76,Falkirk,2020,1980399
+TLM76,Falkirk,2021,2224995
+TLM76,Falkirk,2022,2107652
+TLM77,"Perth and Kinross, and Stirling",2004,3172321
+TLM77,"Perth and Kinross, and Stirling",2005,3353880
+TLM77,"Perth and Kinross, and Stirling",2006,3353626
+TLM77,"Perth and Kinross, and Stirling",2007,3618792
+TLM77,"Perth and Kinross, and Stirling",2008,3465525
+TLM77,"Perth and Kinross, and Stirling",2009,3599898
+TLM77,"Perth and Kinross, and Stirling",2010,3564117
+TLM77,"Perth and Kinross, and Stirling",2011,3299830
+TLM77,"Perth and Kinross, and Stirling",2012,3367316
+TLM77,"Perth and Kinross, and Stirling",2013,3516032
+TLM77,"Perth and Kinross, and Stirling",2014,3583503
+TLM77,"Perth and Kinross, and Stirling",2015,3441215
+TLM77,"Perth and Kinross, and Stirling",2016,3697239
+TLM77,"Perth and Kinross, and Stirling",2017,3676176
+TLM77,"Perth and Kinross, and Stirling",2018,3566767
+TLM77,"Perth and Kinross, and Stirling",2019,3813402
+TLM77,"Perth and Kinross, and Stirling",2020,3134270
+TLM77,"Perth and Kinross, and Stirling",2021,3583051
+TLM77,"Perth and Kinross, and Stirling",2022,3601646
+TLM78,West Lothian,2004,2322886
+TLM78,West Lothian,2005,2425615
+TLM78,West Lothian,2006,2521329
+TLM78,West Lothian,2007,2474407
+TLM78,West Lothian,2008,2619855
+TLM78,West Lothian,2009,2502540
+TLM78,West Lothian,2010,2438721
+TLM78,West Lothian,2011,2361073
+TLM78,West Lothian,2012,2459179
+TLM78,West Lothian,2013,2377818
+TLM78,West Lothian,2014,2665340
+TLM78,West Lothian,2015,2422437
+TLM78,West Lothian,2016,2527571
+TLM78,West Lothian,2017,2551975
+TLM78,West Lothian,2018,2534523
+TLM78,West Lothian,2019,2602159
+TLM78,West Lothian,2020,2396769
+TLM78,West Lothian,2021,2499502
+TLM78,West Lothian,2022,2472209
+TLM81,"East Dunbartonshire, West Dunbartonshire, and Helensburgh and Lomond",2004,2151305
+TLM81,"East Dunbartonshire, West Dunbartonshire, and Helensburgh and Lomond",2005,2228364
+TLM81,"East Dunbartonshire, West Dunbartonshire, and Helensburgh and Lomond",2006,2235097
+TLM81,"East Dunbartonshire, West Dunbartonshire, and Helensburgh and Lomond",2007,2372304
+TLM81,"East Dunbartonshire, West Dunbartonshire, and Helensburgh and Lomond",2008,2322546
+TLM81,"East Dunbartonshire, West Dunbartonshire, and Helensburgh and Lomond",2009,2154564
+TLM81,"East Dunbartonshire, West Dunbartonshire, and Helensburgh and Lomond",2010,2092464
+TLM81,"East Dunbartonshire, West Dunbartonshire, and Helensburgh and Lomond",2011,2041712
+TLM81,"East Dunbartonshire, West Dunbartonshire, and Helensburgh and Lomond",2012,2120138
+TLM81,"East Dunbartonshire, West Dunbartonshire, and Helensburgh and Lomond",2013,2127246
+TLM81,"East Dunbartonshire, West Dunbartonshire, and Helensburgh and Lomond",2014,2133899
+TLM81,"East Dunbartonshire, West Dunbartonshire, and Helensburgh and Lomond",2015,2092278
+TLM81,"East Dunbartonshire, West Dunbartonshire, and Helensburgh and Lomond",2016,2178199
+TLM81,"East Dunbartonshire, West Dunbartonshire, and Helensburgh and Lomond",2017,2224434
+TLM81,"East Dunbartonshire, West Dunbartonshire, and Helensburgh and Lomond",2018,2192911
+TLM81,"East Dunbartonshire, West Dunbartonshire, and Helensburgh and Lomond",2019,2212771
+TLM81,"East Dunbartonshire, West Dunbartonshire, and Helensburgh and Lomond",2020,1954202
+TLM81,"East Dunbartonshire, West Dunbartonshire, and Helensburgh and Lomond",2021,2252769
+TLM81,"East Dunbartonshire, West Dunbartonshire, and Helensburgh and Lomond",2022,2263447
+TLM82,Glasgow City,2004,13034264
+TLM82,Glasgow City,2005,13623728
+TLM82,Glasgow City,2006,13528632
+TLM82,Glasgow City,2007,13263183
+TLM82,Glasgow City,2008,13786336
+TLM82,Glasgow City,2009,12952053
+TLM82,Glasgow City,2010,12035824
+TLM82,Glasgow City,2011,12299137
+TLM82,Glasgow City,2012,12303270
+TLM82,Glasgow City,2013,12307073
+TLM82,Glasgow City,2014,12971456
+TLM82,Glasgow City,2015,12464345
+TLM82,Glasgow City,2016,12654701
+TLM82,Glasgow City,2017,12921846
+TLM82,Glasgow City,2018,13095960
+TLM82,Glasgow City,2019,13594701
+TLM82,Glasgow City,2020,11604241
+TLM82,Glasgow City,2021,12903994
+TLM82,Glasgow City,2022,13388413
+TLM83,"Inverclyde, East Renfrewshire, and Renfrewshire",2004,3971803
+TLM83,"Inverclyde, East Renfrewshire, and Renfrewshire",2005,4135155
+TLM83,"Inverclyde, East Renfrewshire, and Renfrewshire",2006,4086881
+TLM83,"Inverclyde, East Renfrewshire, and Renfrewshire",2007,4210779
+TLM83,"Inverclyde, East Renfrewshire, and Renfrewshire",2008,4115202
+TLM83,"Inverclyde, East Renfrewshire, and Renfrewshire",2009,3865525
+TLM83,"Inverclyde, East Renfrewshire, and Renfrewshire",2010,3788715
+TLM83,"Inverclyde, East Renfrewshire, and Renfrewshire",2011,3867423
+TLM83,"Inverclyde, East Renfrewshire, and Renfrewshire",2012,3666351
+TLM83,"Inverclyde, East Renfrewshire, and Renfrewshire",2013,3681992
+TLM83,"Inverclyde, East Renfrewshire, and Renfrewshire",2014,3774102
+TLM83,"Inverclyde, East Renfrewshire, and Renfrewshire",2015,3997343
+TLM83,"Inverclyde, East Renfrewshire, and Renfrewshire",2016,4061201
+TLM83,"Inverclyde, East Renfrewshire, and Renfrewshire",2017,4063427
+TLM83,"Inverclyde, East Renfrewshire, and Renfrewshire",2018,4172992
+TLM83,"Inverclyde, East Renfrewshire, and Renfrewshire",2019,3710575
+TLM83,"Inverclyde, East Renfrewshire, and Renfrewshire",2020,3766738
+TLM83,"Inverclyde, East Renfrewshire, and Renfrewshire",2021,3954645
+TLM83,"Inverclyde, East Renfrewshire, and Renfrewshire",2022,3874227
+TLM84,North Lanarkshire,2004,3873334
+TLM84,North Lanarkshire,2005,3994693
+TLM84,North Lanarkshire,2006,4295164
+TLM84,North Lanarkshire,2007,4351814
+TLM84,North Lanarkshire,2008,4330775
+TLM84,North Lanarkshire,2009,3838095
+TLM84,North Lanarkshire,2010,3985331
+TLM84,North Lanarkshire,2011,3801704
+TLM84,North Lanarkshire,2012,4008465
+TLM84,North Lanarkshire,2013,3877746
+TLM84,North Lanarkshire,2014,4320486
+TLM84,North Lanarkshire,2015,4095107
+TLM84,North Lanarkshire,2016,4035039
+TLM84,North Lanarkshire,2017,4370946
+TLM84,North Lanarkshire,2018,4425201
+TLM84,North Lanarkshire,2019,3989864
+TLM84,North Lanarkshire,2020,4087263
+TLM84,North Lanarkshire,2021,4124623
+TLM84,North Lanarkshire,2022,4096125
+TLM91,Scottish Borders,2004,1443303
+TLM91,Scottish Borders,2005,1500941
+TLM91,Scottish Borders,2006,1467419
+TLM91,Scottish Borders,2007,1584986
+TLM91,Scottish Borders,2008,1522863
+TLM91,Scottish Borders,2009,1408771
+TLM91,Scottish Borders,2010,1374854
+TLM91,Scottish Borders,2011,1488840
+TLM91,Scottish Borders,2012,1418614
+TLM91,Scottish Borders,2013,1517273
+TLM91,Scottish Borders,2014,1431255
+TLM91,Scottish Borders,2015,1417903
+TLM91,Scottish Borders,2016,1500539
+TLM91,Scottish Borders,2017,1497652
+TLM91,Scottish Borders,2018,1495346
+TLM91,Scottish Borders,2019,1571883
+TLM91,Scottish Borders,2020,1338157
+TLM91,Scottish Borders,2021,1476134
+TLM91,Scottish Borders,2022,1459627
+TLM92,Dumfries and Galloway,2004,1968769
+TLM92,Dumfries and Galloway,2005,1942849
+TLM92,Dumfries and Galloway,2006,2052471
+TLM92,Dumfries and Galloway,2007,2188479
+TLM92,Dumfries and Galloway,2008,2099634
+TLM92,Dumfries and Galloway,2009,2044708
+TLM92,Dumfries and Galloway,2010,1969286
+TLM92,Dumfries and Galloway,2011,2052095
+TLM92,Dumfries and Galloway,2012,2024704
+TLM92,Dumfries and Galloway,2013,2037153
+TLM92,Dumfries and Galloway,2014,2031788
+TLM92,Dumfries and Galloway,2015,2094429
+TLM92,Dumfries and Galloway,2016,2141429
+TLM92,Dumfries and Galloway,2017,2238374
+TLM92,Dumfries and Galloway,2018,2056784
+TLM92,Dumfries and Galloway,2019,2055438
+TLM92,Dumfries and Galloway,2020,1706129
+TLM92,Dumfries and Galloway,2021,2010566
+TLM92,Dumfries and Galloway,2022,1981784
+TLM93,East Ayrshire and North Ayrshire mainland,2004,2456118
+TLM93,East Ayrshire and North Ayrshire mainland,2005,2551030
+TLM93,East Ayrshire and North Ayrshire mainland,2006,2687413
+TLM93,East Ayrshire and North Ayrshire mainland,2007,2540857
+TLM93,East Ayrshire and North Ayrshire mainland,2008,2491558
+TLM93,East Ayrshire and North Ayrshire mainland,2009,2371773
+TLM93,East Ayrshire and North Ayrshire mainland,2010,2447474
+TLM93,East Ayrshire and North Ayrshire mainland,2011,2519665
+TLM93,East Ayrshire and North Ayrshire mainland,2012,2401980
+TLM93,East Ayrshire and North Ayrshire mainland,2013,2481448
+TLM93,East Ayrshire and North Ayrshire mainland,2014,2466929
+TLM93,East Ayrshire and North Ayrshire mainland,2015,2556569
+TLM93,East Ayrshire and North Ayrshire mainland,2016,2635130
+TLM93,East Ayrshire and North Ayrshire mainland,2017,2747953
+TLM93,East Ayrshire and North Ayrshire mainland,2018,2482601
+TLM93,East Ayrshire and North Ayrshire mainland,2019,2608037
+TLM93,East Ayrshire and North Ayrshire mainland,2020,2110352
+TLM93,East Ayrshire and North Ayrshire mainland,2021,2497298
+TLM93,East Ayrshire and North Ayrshire mainland,2022,2384936
+TLM94,South Ayrshire,2004,1522358
+TLM94,South Ayrshire,2005,1382770
+TLM94,South Ayrshire,2006,1587461
+TLM94,South Ayrshire,2007,1619167
+TLM94,South Ayrshire,2008,1628905
+TLM94,South Ayrshire,2009,1487436
+TLM94,South Ayrshire,2010,1438695
+TLM94,South Ayrshire,2011,1501244
+TLM94,South Ayrshire,2012,1362716
+TLM94,South Ayrshire,2013,1476940
+TLM94,South Ayrshire,2014,1364776
+TLM94,South Ayrshire,2015,1484874
+TLM94,South Ayrshire,2016,1455612
+TLM94,South Ayrshire,2017,1490599
+TLM94,South Ayrshire,2018,1420963
+TLM94,South Ayrshire,2019,1455675
+TLM94,South Ayrshire,2020,1251254
+TLM94,South Ayrshire,2021,1382212
+TLM94,South Ayrshire,2022,1408468
+TLM95,South Lanarkshire,2004,3899841
+TLM95,South Lanarkshire,2005,4061474
+TLM95,South Lanarkshire,2006,4331415
+TLM95,South Lanarkshire,2007,4104465
+TLM95,South Lanarkshire,2008,4005395
+TLM95,South Lanarkshire,2009,3776334
+TLM95,South Lanarkshire,2010,3555916
+TLM95,South Lanarkshire,2011,3881472
+TLM95,South Lanarkshire,2012,3700385
+TLM95,South Lanarkshire,2013,3763708
+TLM95,South Lanarkshire,2014,3702130
+TLM95,South Lanarkshire,2015,3866830
+TLM95,South Lanarkshire,2016,3982654
+TLM95,South Lanarkshire,2017,3891844
+TLM95,South Lanarkshire,2018,3823242
+TLM95,South Lanarkshire,2019,3963857
+TLM95,South Lanarkshire,2020,3442089
+TLM95,South Lanarkshire,2021,3698324
+TLM95,South Lanarkshire,2022,3806790
+TLN06,Belfast,2004,7601204
+TLN06,Belfast,2005,8634680
+TLN06,Belfast,2006,7954658
+TLN06,Belfast,2007,8072645
+TLN06,Belfast,2008,7810991
+TLN06,Belfast,2009,8364692
+TLN06,Belfast,2010,7737691
+TLN06,Belfast,2011,7894409
+TLN06,Belfast,2012,7829411
+TLN06,Belfast,2013,8190923
+TLN06,Belfast,2014,7359172
+TLN06,Belfast,2015,7573541
+TLN06,Belfast,2016,7973022
+TLN06,Belfast,2017,8131492
+TLN06,Belfast,2018,7868451
+TLN06,Belfast,2019,8211230
+TLN06,Belfast,2020,7361725
+TLN06,Belfast,2021,7630463
+TLN06,Belfast,2022,8327053
+TLN07,"Armagh City, Banbridge and Craigavon",2004,2527269
+TLN07,"Armagh City, Banbridge and Craigavon",2005,2464083
+TLN07,"Armagh City, Banbridge and Craigavon",2006,2620785
+TLN07,"Armagh City, Banbridge and Craigavon",2007,2641660
+TLN07,"Armagh City, Banbridge and Craigavon",2008,2612102
+TLN07,"Armagh City, Banbridge and Craigavon",2009,2541754
+TLN07,"Armagh City, Banbridge and Craigavon",2010,2484677
+TLN07,"Armagh City, Banbridge and Craigavon",2011,2584593
+TLN07,"Armagh City, Banbridge and Craigavon",2012,2499503
+TLN07,"Armagh City, Banbridge and Craigavon",2013,2449511
+TLN07,"Armagh City, Banbridge and Craigavon",2014,2753768
+TLN07,"Armagh City, Banbridge and Craigavon",2015,2788136
+TLN07,"Armagh City, Banbridge and Craigavon",2016,2696298
+TLN07,"Armagh City, Banbridge and Craigavon",2017,2755144
+TLN07,"Armagh City, Banbridge and Craigavon",2018,2705787
+TLN07,"Armagh City, Banbridge and Craigavon",2019,2981994
+TLN07,"Armagh City, Banbridge and Craigavon",2020,2703797
+TLN07,"Armagh City, Banbridge and Craigavon",2021,2687034
+TLN07,"Armagh City, Banbridge and Craigavon",2022,2780906
+TLN08,"Newry, Mourne and Down",2004,1479946
+TLN08,"Newry, Mourne and Down",2005,1591371
+TLN08,"Newry, Mourne and Down",2006,1586508
+TLN08,"Newry, Mourne and Down",2007,1694970
+TLN08,"Newry, Mourne and Down",2008,1682787
+TLN08,"Newry, Mourne and Down",2009,1526859
+TLN08,"Newry, Mourne and Down",2010,1696497
+TLN08,"Newry, Mourne and Down",2011,1556850
+TLN08,"Newry, Mourne and Down",2012,1571631
+TLN08,"Newry, Mourne and Down",2013,1624674
+TLN08,"Newry, Mourne and Down",2014,1805728
+TLN08,"Newry, Mourne and Down",2015,1753410
+TLN08,"Newry, Mourne and Down",2016,1994846
+TLN08,"Newry, Mourne and Down",2017,2065368
+TLN08,"Newry, Mourne and Down",2018,2097487
+TLN08,"Newry, Mourne and Down",2019,2115143
+TLN08,"Newry, Mourne and Down",2020,1989963
+TLN08,"Newry, Mourne and Down",2021,1921997
+TLN08,"Newry, Mourne and Down",2022,1984327
+TLN09,Ards and North Down,2004,1383168
+TLN09,Ards and North Down,2005,1336686
+TLN09,Ards and North Down,2006,1379671
+TLN09,Ards and North Down,2007,1289909
+TLN09,Ards and North Down,2008,1472055
+TLN09,Ards and North Down,2009,1251501
+TLN09,Ards and North Down,2010,1297558
+TLN09,Ards and North Down,2011,1194192
+TLN09,Ards and North Down,2012,1217973
+TLN09,Ards and North Down,2013,1568454
+TLN09,Ards and North Down,2014,1004059
+TLN09,Ards and North Down,2015,1060299
+TLN09,Ards and North Down,2016,1106766
+TLN09,Ards and North Down,2017,1222484
+TLN09,Ards and North Down,2018,1239290
+TLN09,Ards and North Down,2019,1391585
+TLN09,Ards and North Down,2020,1220573
+TLN09,Ards and North Down,2021,1200158
+TLN09,Ards and North Down,2022,1184447
+TLN0A,Derry City and Strabane,2004,1865046
+TLN0A,Derry City and Strabane,2005,1830265
+TLN0A,Derry City and Strabane,2006,1685023
+TLN0A,Derry City and Strabane,2007,2013900
+TLN0A,Derry City and Strabane,2008,1727553
+TLN0A,Derry City and Strabane,2009,2170217
+TLN0A,Derry City and Strabane,2010,2076450
+TLN0A,Derry City and Strabane,2011,2195928
+TLN0A,Derry City and Strabane,2012,1968307
+TLN0A,Derry City and Strabane,2013,2162345
+TLN0A,Derry City and Strabane,2014,2077361
+TLN0A,Derry City and Strabane,2015,1784222
+TLN0A,Derry City and Strabane,2016,1854500
+TLN0A,Derry City and Strabane,2017,1858083
+TLN0A,Derry City and Strabane,2018,1774268
+TLN0A,Derry City and Strabane,2019,1863142
+TLN0A,Derry City and Strabane,2020,1714403
+TLN0A,Derry City and Strabane,2021,1678208
+TLN0A,Derry City and Strabane,2022,1794967
+TLN0B,Mid Ulster,2004,1599434
+TLN0B,Mid Ulster,2005,1484560
+TLN0B,Mid Ulster,2006,1579293
+TLN0B,Mid Ulster,2007,1544277
+TLN0B,Mid Ulster,2008,1672850
+TLN0B,Mid Ulster,2009,1419726
+TLN0B,Mid Ulster,2010,1546633
+TLN0B,Mid Ulster,2011,1527452
+TLN0B,Mid Ulster,2012,1537442
+TLN0B,Mid Ulster,2013,1670862
+TLN0B,Mid Ulster,2014,1814773
+TLN0B,Mid Ulster,2015,1778803
+TLN0B,Mid Ulster,2016,1903104
+TLN0B,Mid Ulster,2017,2031289
+TLN0B,Mid Ulster,2018,2098929
+TLN0B,Mid Ulster,2019,2256668
+TLN0B,Mid Ulster,2020,1766036
+TLN0B,Mid Ulster,2021,1926080
+TLN0B,Mid Ulster,2022,2028853
+TLN0C,Causeway Coast and Glens,2004,1407309
+TLN0C,Causeway Coast and Glens,2005,1396490
+TLN0C,Causeway Coast and Glens,2006,1554725
+TLN0C,Causeway Coast and Glens,2007,1453317
+TLN0C,Causeway Coast and Glens,2008,1397917
+TLN0C,Causeway Coast and Glens,2009,1166502
+TLN0C,Causeway Coast and Glens,2010,1195976
+TLN0C,Causeway Coast and Glens,2011,1185154
+TLN0C,Causeway Coast and Glens,2012,1264064
+TLN0C,Causeway Coast and Glens,2013,1216288
+TLN0C,Causeway Coast and Glens,2014,1260493
+TLN0C,Causeway Coast and Glens,2015,1265956
+TLN0C,Causeway Coast and Glens,2016,1251565
+TLN0C,Causeway Coast and Glens,2017,1301776
+TLN0C,Causeway Coast and Glens,2018,1294008
+TLN0C,Causeway Coast and Glens,2019,1426347
+TLN0C,Causeway Coast and Glens,2020,1385675
+TLN0C,Causeway Coast and Glens,2021,1320687
+TLN0C,Causeway Coast and Glens,2022,1398477
+TLN0D,Antrim and Newtownabbey,2004,1848698
+TLN0D,Antrim and Newtownabbey,2005,1807537
+TLN0D,Antrim and Newtownabbey,2006,1895824
+TLN0D,Antrim and Newtownabbey,2007,1950642
+TLN0D,Antrim and Newtownabbey,2008,1548920
+TLN0D,Antrim and Newtownabbey,2009,1821459
+TLN0D,Antrim and Newtownabbey,2010,1810319
+TLN0D,Antrim and Newtownabbey,2011,1635416
+TLN0D,Antrim and Newtownabbey,2012,1604925
+TLN0D,Antrim and Newtownabbey,2013,1567308
+TLN0D,Antrim and Newtownabbey,2014,1766523
+TLN0D,Antrim and Newtownabbey,2015,1813667
+TLN0D,Antrim and Newtownabbey,2016,1987858
+TLN0D,Antrim and Newtownabbey,2017,1948936
+TLN0D,Antrim and Newtownabbey,2018,1975669
+TLN0D,Antrim and Newtownabbey,2019,1994321
+TLN0D,Antrim and Newtownabbey,2020,1744335
+TLN0D,Antrim and Newtownabbey,2021,1802588
+TLN0D,Antrim and Newtownabbey,2022,1795160
+TLN0E,Lisburn and Castlereagh,2004,1831044
+TLN0E,Lisburn and Castlereagh,2005,1665653
+TLN0E,Lisburn and Castlereagh,2006,1932900
+TLN0E,Lisburn and Castlereagh,2007,1939230
+TLN0E,Lisburn and Castlereagh,2008,2020859
+TLN0E,Lisburn and Castlereagh,2009,1739053
+TLN0E,Lisburn and Castlereagh,2010,1639271
+TLN0E,Lisburn and Castlereagh,2011,1679490
+TLN0E,Lisburn and Castlereagh,2012,1610040
+TLN0E,Lisburn and Castlereagh,2013,1655023
+TLN0E,Lisburn and Castlereagh,2014,1714342
+TLN0E,Lisburn and Castlereagh,2015,1763455
+TLN0E,Lisburn and Castlereagh,2016,1794631
+TLN0E,Lisburn and Castlereagh,2017,2022041
+TLN0E,Lisburn and Castlereagh,2018,2102733
+TLN0E,Lisburn and Castlereagh,2019,2183201
+TLN0E,Lisburn and Castlereagh,2020,1852303
+TLN0E,Lisburn and Castlereagh,2021,1999319
+TLN0E,Lisburn and Castlereagh,2022,1973046
+TLN0F,Mid and East Antrim,2004,1528379
+TLN0F,Mid and East Antrim,2005,1692194
+TLN0F,Mid and East Antrim,2006,1433138
+TLN0F,Mid and East Antrim,2007,1567468
+TLN0F,Mid and East Antrim,2008,1830719
+TLN0F,Mid and East Antrim,2009,1770016
+TLN0F,Mid and East Antrim,2010,1857191
+TLN0F,Mid and East Antrim,2011,1676894
+TLN0F,Mid and East Antrim,2012,1839084
+TLN0F,Mid and East Antrim,2013,2126797
+TLN0F,Mid and East Antrim,2014,1884916
+TLN0F,Mid and East Antrim,2015,1757548
+TLN0F,Mid and East Antrim,2016,1660616
+TLN0F,Mid and East Antrim,2017,1577149
+TLN0F,Mid and East Antrim,2018,1773656
+TLN0F,Mid and East Antrim,2019,1639212
+TLN0F,Mid and East Antrim,2020,1353042
+TLN0F,Mid and East Antrim,2021,1321103
+TLN0F,Mid and East Antrim,2022,1386829
+TLN0G,Fermanagh and Omagh,2004,1231165
+TLN0G,Fermanagh and Omagh,2005,1415238
+TLN0G,Fermanagh and Omagh,2006,1555939
+TLN0G,Fermanagh and Omagh,2007,1348902
+TLN0G,Fermanagh and Omagh,2008,1429123
+TLN0G,Fermanagh and Omagh,2009,1099985
+TLN0G,Fermanagh and Omagh,2010,1191609
+TLN0G,Fermanagh and Omagh,2011,1072317
+TLN0G,Fermanagh and Omagh,2012,1016521
+TLN0G,Fermanagh and Omagh,2013,1123046
+TLN0G,Fermanagh and Omagh,2014,1123011
+TLN0G,Fermanagh and Omagh,2015,1202647
+TLN0G,Fermanagh and Omagh,2016,1286878
+TLN0G,Fermanagh and Omagh,2017,1397786
+TLN0G,Fermanagh and Omagh,2018,1408475
+TLN0G,Fermanagh and Omagh,2019,1428949
+TLN0G,Fermanagh and Omagh,2020,1287123
+TLN0G,Fermanagh and Omagh,2021,1295919
+TLN0G,Fermanagh and Omagh,2022,1344388

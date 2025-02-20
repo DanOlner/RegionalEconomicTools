@@ -841,7 +841,7 @@ twod_generictimeplot_normalisetozero <- function(df, category_var, x_var, y_var,
   #Vectors all centred on zero, percent change for all shown
   #Annotate with a triangle indicating the half of the plot where GVA per worker will have dropped between time points
   p <- ggplot() +
-    annotate(geom = "polygon", x = c(-1000, 1000, -1000), y = c(1000, 1000, -1000), fill = "white", alpha = 0.5)
+    annotate(geom = "polygon", x = c(-1000, 1000, -1000), y = c(1000, 1000, -1000), fill = "grey", alpha = 0.3)
   
   
   p <- p +
@@ -899,6 +899,29 @@ twod_generictimeplot_normalisetozero <- function(df, category_var, x_var, y_var,
   
   return(list(plot = p, twoyeardata = twoy.wide))
   
+  
+}
+
+
+
+
+#Wrapper for 2D generic timeplot above that hides some common post-processing
+twod_percentplot <- function(...){
+  
+  p <- twod_generictimeplot_normalisetozero(...)
+  
+  xrange_adjust = diff(range(p[[2]]$x_pct_change)) * 0.1
+  yrange_adjust = diff(range(p[[2]]$y_pct_change)) * 0.1
+  
+  p[[1]] + coord_fixed(
+    xlim = c(
+      min(p[[2]]$x_pct_change) - xrange_adjust,
+      ifelse(max(p[[2]]$x_pct_change) > 0,max(p[[2]]$x_pct_change) + xrange_adjust,0)
+    ),
+    ylim = c(
+      min(p[[2]]$y_pct_change) - yrange_adjust,max(p[[2]]$y_pct_change) + yrange_adjust 
+    )
+  ) 
   
 }
 

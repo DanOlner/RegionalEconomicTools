@@ -18,17 +18,28 @@ knitr::opts_chunk$set(fig.height = 8, fig.width = 10, echo = TRUE, warning = F, 
 
 # Intro to using ONS GVA and jobs data in R
 
-Here, we'll work with this pre-baked ONS data [from here](regionalgva_n_bres.html), which has been processed/linked to help smooth the path to getting GVA and jobs insights. As that page says, we've got the following to work with:
+This page runs through some R-code examples of ways to examine the pre-baked ONS GVA and jobs data [from here](regionalgva_n_bres.html), which has been processed/linked to help smooth the path to getting GVA and jobs insights. 
+
+As well as base R and ggplot, it also uses a few bespoke functions written to analyse/visualise this data; these are all available in [the project repo](https://github.com/DanOlner/RegionalEconomicTools), in the [misc_functions.R](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/functions/misc_functions.R) script. 
+
+*A quick way to use all this is to [clone the repo](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) or download directly from github with the green 'code' button on the main repo page / 'download zip'. Though all data links below are URLs for the [pre-baked CSVs](regionalgva_n_bres.html), so don't require it to be downloaded locally.*
+
+As the pre-bake page says, we've got the following to work with:
 
 * GVA data at ITL2 and 3 geographies, broken down by SIC industrial codes at 2-digit, Section (20 categories) and Production/Construction/Services, 1998 to most recent available year.
 * BRES job count data for the same (though with slightly more SIC codes), with a little bit better job count resolution than the originals (see above post for why/how).
 * A linked version that combines those two, so we can dig into GVA per job across Great Britain[^1].
+* A couple of lookup tables for the ONS' bespoke SIC codes for their regional GVA data.
 
 [^1]: NOMIS BRES data is not available for Northern Ireland.
 
-These are both deep, rich datasets (though it's worth exploring [how the reginal GVA data is made](https://www.ons.gov.uk/economy/regionalaccounts/grossdisposablehouseholdincome/methodologies/regionalaccountsmethodologyguidejune2019) to get a sense of its issues). Here, we'll just run through a range of examples to show how to get started with digging into them. See the left hand bar for other ways to use them (and do please let me know if you have any thoughts, other analyses etc, via the [github issues](https://github.com/DanOlner/RegionalEconomicTools/issues) or email danolner at gmail dot com).
+These are both deep, rich datasets (though it's worth exploring [how the reginal GVA data is made](https://www.ons.gov.uk/economy/regionalaccounts/grossdisposablehouseholdincome/methodologies/regionalaccountsmethodologyguidejune2019) to get a sense of its issues). Here, we'll just run through a range of examples to show how to get started with digging into them. 
 
-Here's some libraries and functions inside this repo we'll use.
+See the left hand bar for other ways to use them, including a [deeper dive](https://danolner.github.io/RegionalEconomicTools/sector_locationquotients_and_proportions.html) into location quotients / proportion plots, and into [GVA gap](https://danolner.github.io/RegionalEconomicTools/gdp_gaps.html) analysis. 
+
+Please let me know if you have any thoughts, other analyses etc, via the [github issues](https://github.com/DanOlner/RegionalEconomicTools/issues) or email danolner at gmail dot com).
+
+Here's some libraries, and the functions inside this repo we'll use.
 
 ```{r libs}
 library(tidyverse)
@@ -40,15 +51,115 @@ library(plotly)#For interactive plots
 
 source('functions/misc_functions.R')
 
+#Set ggplot theme
+theme_set(theme_light())
+
+```
+
+
+# Two quick examples to get started 
+
+Just using ggplot, let's first look at how a single ITL2 zone's broad sectors have changed over time. We'll **use a 3 year moving average** using the [zoo](https://cran.r-project.org/web/packages/zoo/index.html) library to make the trends easier to discern, and pick out the **top 12 SIC sections by GVA** in the most recent 3 years.
+
+This uses **chained volume data** showing real-terms value change in these sectors.
+
+```{r}
+#| fig-height: 6 
+
+itl2.sections.cv <- read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/regionalGVA_chainedvolume_ITL2_SIC_SECTION_LONG_2022.csv') 
+
+#Add moving average
+#Set range of average - 3 years
+smoothband = 3
+
+#Find the average within each place and each sector in each place
+#Year is already in order, so this will find 3 year moving av between consecutive years
+itl2.sections.cv <- itl2.sections.cv %>% 
+  group_by(Region_name,SIC07_description) %>% 
+  mutate(
+    gva_movingav = rollapply(value,smoothband,mean,align='center',fill=NA)
+  ) %>% 
+  ungroup()
+  
+place = "Leicestershire, Rutland and Northamptonshire"
+
+#top 12 sectors in latest year
+top12sectors <- itl2.sections.cv %>% 
+  filter(
+    Region_name == place,
+    year == max(year) - 1#to get 3 year moving average value
+    ) %>% 
+  arrange(-gva_movingav) %>% 
+  slice_head(n= 12) %>% 
+  select(SIC07_description) %>% 
+  pull()
+  
+#Plot! 
+ggplot(itl2.sections.cv %>% 
+         filter(
+           Region_name == place, 
+           SIC07_description %in% top12sectors,
+           !is.na(gva_movingav)#Remove NAs created by 3 year moving average
+           ), 
+       aes(x = year, y = gva_movingav, colour = fct_reorder(SIC07_description,-gva_movingav) )) +
+  geom_point() +
+  geom_line() +
+  scale_color_brewer(palette = 'Paired', direction = 1) +
+  ylab('SIC GVA (chained volume) ') +
+  theme(plot.title = element_text(face = 'bold')) +
+  labs(colour = 'SIC section') +
+  ggtitle(paste0(place, ' GVA over time\nTop 12 sectors by GVA in latest year\n(', smoothband,' year moving average)'))
+
+```
+
+
+Second, using one of the **joined GVA and BRES job count datasets**, let's see how **GVA per full time job has changed over time for the UK's core cities** (minus Belfast, as BRES data is Great Britain only) within the **manufacturing sectors**.
+
+Smoothed values are necessary here to discern a trend at all - the underlying BRES data samples are volatile. (Try this with *gvaperFT* to see...)
+
+By this measure, there appears to be a slight **convergence of manufacturing productivity in the core cities** (though note [how choice of productivity measure](https://danolner.github.io/RegionalEconomicTools/beattyfothergill.html) can affect gap analysis).
+
+```{r}
+#| fig-height: 6 
+
+itl3.sections.cv <- read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_chainedvolume_ITL3_SIC_SECTION_MINUSimputedrent_2022.csv')
+
+#Get core cities and find moving average
+corecities <- itl3.sections.cv %>% 
+  filter(
+    GEOGRAPHY_NAME %in% c('Belfast','Birmingham','Bristol, City of','Cardiff and Vale of Glamorgan','Glasgow City','Leeds','Liverpool','Manchester','Nottingham','Sheffield','Tyneside')
+  ) %>% 
+  group_by(ITL_code,SIC_CODE) %>% 
+  mutate(
+    gvaperFT = gva / JOBCOUNT_FULLTIME,
+    `gva/FT moving av` = rollapply(gvaperFT * 1000,smoothband,mean,align='center',fill=NA)
+    ) %>% 
+  ungroup()
+  
+
+ggplot(corecities %>%  
+         filter(
+           SIC07_description=="Manufacturing",
+           !is.na(`gva/FT moving av`)
+           ), 
+       aes(x = DATE, y = `gva/FT moving av`, colour = fct_reorder(GEOGRAPHY_NAME,-`gva/FT moving av`) )) +
+  geom_point() +
+  geom_line() +
+  scale_color_brewer(palette = 'Paired', direction = 1) +
+  ylab('SIC GVA (chained volume) ') +
+  theme(plot.title = element_text(face = 'bold')) +
+  labs(colour = 'Core city') 
+
 ```
 
 
 
 # How do production vs services vary across the UK?
 
-Let's start with the broadest sector breakdown, and at ITL3 geography, which includes most major cities and local authorities (though some are combined into one zone, like Barnsley, Doncaster & Rotherham). The link is nabbed from the [gva n bres page](https://danolner.github.io/RegionalEconomicTools/regionalgva_n_bres.html).
+Next, we look at the broadest sector breakdown, and at ITL3 places, which (as above) includes most major cities and local authorities (though some are combined into one zone, like Barnsley, Doncaster & Rotherham). The data link is nabbed from the [pre-baked data page](https://danolner.github.io/RegionalEconomicTools/regionalgva_n_bres.html).
 
 **The code will also work for ITL2 zones using this data (mayoral authorities are at this level) - just [use this CSV](https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/regionalGVA_currentprices_ITL2_SIC_3GROUPS_LONG_2022.csv) for ITL3 instead.**
+
 
 We use **current prices** data - GVA values *as they were when the data was collected*, not adjusted for inflation. This is useful because (unlike inflation adjusted chained volume data), these can be legitimately summed in any way like - add up sectors, places etc. This means any change over time for current prices is only ever **relative**. (Examples below will illustrate this.)
 
@@ -89,7 +200,7 @@ LQs also have a handy feature:
 
 (Note also: LQs **only make sense for current prices data**. Chained volume data can't be summed, as each row is inflation-adjusted invididually and e.g. ITL3 zones or sectors don't sum to larger geographies or SIC groupings because of that. LQs need to sum sectors and places to correctly work out proportions.)
 
-We'll use that in a moment. First, using a function loaded above, this adds LQ details to the loaded CSV:
+First, using a function loaded above, this adds LQ details to the loaded CSV:
 
 ```{r}
 lq.latestyear <- add_location_quotient_and_proportions(
@@ -460,14 +571,7 @@ It takes a bit of staring but it's worth it to get a single-view idea of all maj
 
 p <- twod_generictimeplot_multipletimepoints(
   df = gva.jobs.ITL3 %>% filter(
-    # qg('rotherham',GEOGRAPHY_NAME),
-    # qg('barnsley',GEOGRAPHY_NAME),
-    # qg('doncaster',GEOGRAPHY_NAME),
-    qg('sheffield',GEOGRAPHY_NAME),
-    # qg('cheshire west',GEOGRAPHY_NAME),
-    # qg('cheshire east',GEOGRAPHY_NAME),
-    # qg('southampton',GEOGRAPHY_NAME),
-    # qg('North East Lincolnshire',GEOGRAPHY_NAME)
+    qg('southampton',GEOGRAPHY_NAME),
     !qg('agri|constr',SIC07_description),
     jobcount_movingav > 2500
     ),
@@ -500,62 +604,18 @@ What can we see here?
 
 
 
+# Percent change in services for all ITL2 zones
 
-# Percent plot
+The next plot takes advantage of having both GVA and jobs data to see how the proportion of service sectors has changed, along with jobs, percent-wise. This is mostly the same data as the previous plot, with some changes:
 
+* Percent change, all places normalised to start at zero (we'd usually filter out smaller size sectors in this plot, but service sectors together are a large chunk of all local economies).
+* The **grey diagonal** shaded area is the "productivity dropped here" region of the plot. Combined with the compass point directions, it's thus possible to see: did a place increase productivity through GVA **and** job increases, or just one or the other? In North-Eastern Scotland, for example, *services productivity increased, combined with ~7% job losses ins services.* Outer London E/NE productivity *dropped* despite both GVA and jobs going up, as the GVA increased proportionally less.
 
-```{r itl3percentplot}
-gva.jobs.ITL3.3groups <- read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_currentprices_ITL3_SIC_3GROUPS_MINUSimputedrent_2022.csv') %>% 
-  split(.$DATE) %>% 
-  map(add_location_quotient_and_proportions, 
-      regionvar = GEOGRAPHY_NAME,
-      lq_var = SIC07_description,
-      valuevar = gva) %>% 
-  bind_rows()
-
-
-gva.jobs.ITL3.3groups <- gva.jobs.ITL3.3groups %>% 
-  mutate(gvaperjob = gva/JOBCOUNT_FULLTIME) %>%
-group_by(GEOGRAPHY_NAME,SIC07_description) %>%
-  mutate(
-  jobcount_movingav = rollapply(JOBCOUNT_FULLTIME,smoothband,mean,align='center',fill=NA),
-  gva_movingav = rollapply(gva,smoothband,mean,align='center',fill=NA),
-  `gva/job moving av` = rollapply(gvaperjob * 1000,smoothband,mean,align='center',fill=NA)
-) %>% 
-  ungroup()
-
-
-
-p <- twod_generictimeplot_normalisetozero(
-  df = gva.jobs.ITL3.3groups %>% filter(SIC07_description=='Services sector'),
-  category_var = GEOGRAPHY_NAME,
-  x_var = gva_movingav,
-  y_var = jobcount_movingav,
-  timevar = DATE,
-  label_var = `gva/job moving av`,
-  category_var_value_to_highlight = 'Southampton',
-  start_time = 2016,
-  end_time = 2021
-)
-
-
-xrange_adjust = diff(range(p[[2]]$x_pct_change)) * 0.1
-yrange_adjust = diff(range(p[[2]]$y_pct_change)) * 0.1
-
-p[[1]] + coord_fixed(
-  xlim = c(
-    min(p[[2]]$x_pct_change) - xrange_adjust,
-    ifelse(max(p[[2]]$x_pct_change) > 0,max(p[[2]]$x_pct_change) + xrange_adjust,0)#hack for health, need to make generic
-  ),
-  ylim = c(
-    min(p[[2]]$y_pct_change) - yrange_adjust,max(p[[2]]$y_pct_change) + yrange_adjust 
-  )
-) 
-
-
-```
 
 ```{r itl2percentplot}
+#| fig-width: 12
+#| fig-height: 8
+
 gva.jobs.ITL2.3groups <- read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_currentprices_ITL2_SIC_3GROUPS_MINUSimputedrent_2022.csv') %>% 
   split(.$DATE) %>% 
   map(add_location_quotient_and_proportions, 
@@ -575,57 +635,41 @@ group_by(GEOGRAPHY_NAME,SIC07_description) %>%
 ) %>% 
   ungroup()
 
-
-
-p <- twod_generictimeplot_normalisetozero(
+#Add into 2D percent plot
+twod_percentplot(
   df = gva.jobs.ITL2.3groups %>% filter(SIC07_description=='Services sector'),
   category_var = GEOGRAPHY_NAME,
   x_var = gva_movingav,
   y_var = jobcount_movingav,
   timevar = DATE,
   label_var = `gva/job moving av`,
-  # category_var_value_to_highlight = 'Southampton',
+  category_var_value_to_highlight = 'South Yorkshire',
   start_time = 2016,
   end_time = 2021
 )
 
 
-xrange_adjust = diff(range(p[[2]]$x_pct_change)) * 0.1
-yrange_adjust = diff(range(p[[2]]$y_pct_change)) * 0.1
-
-p[[1]] + coord_fixed(
-  xlim = c(
-    min(p[[2]]$x_pct_change) - xrange_adjust,
-    ifelse(max(p[[2]]$x_pct_change) > 0,max(p[[2]]$x_pct_change) + xrange_adjust,0)#hack for health, need to make generic
-  ),
-  ylim = c(
-    min(p[[2]]$y_pct_change) - yrange_adjust,max(p[[2]]$y_pct_change) + yrange_adjust 
-  )
-) 
-
 
 ```
 
 
+# Productivity comparison over time and to other places
 
+The last plot uses chained volume data for ITL2 zones again, and picks out one place (Leicestershire, Rutland and Northamptonshire) to show how (1) SIC section GVA per full-time worker has changed over time (here, moving average again) and (2) how its productivity compares to other places (blue dots). A sub-selection of SIC sections of interest are picked out.
 
+A few things jump out:
 
-
-
-# Productivity comparison
-
+* ICT productivity has increased everywhere; Leicester/Rutland follows that trend
+* As it does for health and social care, which has seen declining productivity by this metric in recent years (though note with more public-service sectors, ONS estimate GVA by multiplying up from the number of workers, so the numbers are a little circular if dividing by them again.)
+* 
 
 
 
 
 
 ```{r}
-#| fig-width: 13
-#| fig-height: 8
-#| fig-dpi: 500
-#| label: fig-relativeprod
-#| fig-cap: "Productivity per job, as % of GB total output. Broken down by SIC section, each point is an ITL2 zone. 3 yr moving average shows change over time. SY overlaid in larger dots."
-
+#| fig-width: 11
+#| fig-height: 7
 
 gva.jobs.ITL2.sections.cv <- read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_chainedvolume_ITL2_SIC_SECTION_MINUSimputedrent_2022.csv') %>% 
   mutate(
@@ -667,39 +711,25 @@ gva.jobs.ITL2.sections.cv <- gva.jobs.ITL2.sections.cv %>%
     )
   )
 
-#PLOT: GVA PER FT JOB FOR SIC SECTIONS OVER TIME, SY OVERLAID
-p <- ggplot(
+#PLOT: GVA PER FT JOB FOR SIC SECTIONS OVER TIME
+ggplot(
   gva.jobs.ITL2.sections.cv %>% 
     filter(qg('constr|manuf|scientific|information|transport|health|food|entertainment',SIC07_description)) %>%
-    # filter(!qg('steam|estate|waste|mining|agri|households|other',SIC07_description)) %>%
     mutate(
-    # SY = GEOGRAPHY_NAME == 'West Yorkshire',
-    DATE = DATE - 2000,
-    # SY = GEOGRAPHY_NAME == 'South Yorkshire',
-    # SY = GEOGRAPHY_NAME == 'South Yorkshire',
-    # SY = qg('greater manc',GEOGRAPHY_NAME),
-    SY = qg('leic',GEOGRAPHY_NAME),
+    DATE = DATE - 2000,#Make dates 2 digit, more readable on axis
+    placetoshow = qg('leic',GEOGRAPHY_NAME),#get leicester ITL2
     SIC_SECTION_REDUCED = fct_reorder(SIC_SECTION_REDUCED, gvaperjob, .desc = T)
     ),
-  # itl2 %>% mutate(SY = GEOGRAPHY_NAME == 'South Yorkshire', SIC_SECTION = fct_reorder(SIC_SECTION, GVAperFT_asPERCENTofGB_times_ten_to_seven_movingav, .desc = T)),
-  aes(x = DATE, y = `gva/job moving av`, group = GEOGRAPHY_NAME, size = SY, colour = SY)) +
-  # ggforce::geom_sina()
-  # coord_cartesian(xlim = c(2017,2022)) +
+  aes(x = DATE, y = `gva/job moving av`, group = GEOGRAPHY_NAME, size = placetoshow, colour = placetoshow)) +
   coord_cartesian(xlim = c(16,21)) +
   geom_jitter(width = 0.1) +
   scale_size_manual(values = c(1,5)) +
   scale_colour_brewer(palette = 'Set1', direction = -1, name = "Sector") +
-  # facet_wrap(~SIC_SECTION, scales = 'free_y') +
   facet_wrap(~SIC_SECTION_REDUCED, nrow = 1, labeller = labeller(groupwrap = label_wrap_gen(10))) +
   guides(colour = F, size = F) +
-  # ggtitle('GVA per FT job (as proportion of whole GB economy), smoothed 3 yr average. South Yorkshire in large red spots.') +
   xlab('year') +
   ylab('GVA per FT (3 year moving average)')
   
-
-p
-
-ggplotly(p, tooltip = 'GEOGRAPHY_NAME')
 
 ```
 
@@ -741,7 +771,111 @@ sectorstokeep <- itl3.sections %>%
   select(SIC07_description) %>% 
   distinct() %>% pull
 
+
+
+
+itl3.sections.cv <- read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_chainedvolume_ITL3_SIC_SECTION_MINUSimputedrent_2022.csv')
+
+smoothband = 3
+
+corecities <- itl3.sections.cv %>% 
+  filter(
+    GEOGRAPHY_NAME %in% c('Belfast','Birmingham','Bristol, City of','Cardiff and Vale of Glamorgan','Glasgow City','Leeds','Liverpool','Manchester','Nottingham','Sheffield','Tyneside')
+  ) %>% 
+  group_by(ITL_code,SIC_CODE) %>% 
+  mutate(
+    gvaperFT = gva / JOBCOUNT_FULLTIME,
+    `gva/FT moving av` = rollapply(gvaperFT * 1000,smoothband,mean,align='center',fill=NA)
+    ) %>% 
+  ungroup()
+  
+
+ggplot(corecities %>%  
+         filter(SIC07_description=="Manufacturing"), 
+       aes(x = DATE, y = `gva/FT moving av`, colour = fct_reorder(GEOGRAPHY_NAME,-`gva/FT moving av`) )) +
+  geom_point() +
+  geom_line() +
+  scale_color_brewer(palette = 'Paired', direction = 1) +
+  ylab('SIC GVA (chained volume) ') +
+  theme(plot.title = element_text(face = 'bold')) +
+  labs(colour = 'Core city') 
+
+
+
+
+itl3.services.cv <- read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/regionalGVA_chainedvolume_ITL3_SIC_3GROUPS_LONG_2022.csv')
+
+#Year is already in the right order...
+itl3.services.cv <- itl3.services.cv %>% 
+  group_by(Region_name,SIC07_description) %>% 
+  mutate(
+    percentdiff_frompreviousyear = ((value - lag(value))/lag(value)) * 100,
+    percentdiff_frompreviousyear_movingav = rollapply(percentdiff_frompreviousyear,smoothband,mean,align='center',fill=NA)
+  )
+
+
+
+corecities <- c('Belfast','Birmingham','Bristol, City of','Cardiff and Vale of Glamorgan','Glasgow City','Leeds','Liverpool','Manchester','Nottingham','Sheffield','Tyneside')
+
+
+
+
+
+ggplot(itl3.services.cv %>%  
+         filter(
+           Region_name %in% corecities, 
+           SIC07_description=="Services sector"), 
+       aes(x = year, y = percentdiff_frompreviousyear_movingav, colour = fct_reorder(Region_name,-percentdiff_frompreviousyear_movingav) )) +
+  geom_point() +
+  geom_line() +
+  scale_color_brewer(palette = 'Paired', direction = 1) +
+  ylab('SIC GVA (chained volume) ') +
+  theme(plot.title = element_text(face = 'bold')) +
+  labs(colour = 'Core city') 
+
+
+#```{r itl3percentplot}
+gva.jobs.ITL3.3groups <- read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_currentprices_ITL3_SIC_3GROUPS_MINUSimputedrent_2022.csv') %>% 
+  split(.$DATE) %>% 
+  map(add_location_quotient_and_proportions, 
+      regionvar = GEOGRAPHY_NAME,
+      lq_var = SIC07_description,
+      valuevar = gva) %>% 
+  bind_rows()
+
+
+gva.jobs.ITL3.3groups <- gva.jobs.ITL3.3groups %>% 
+  mutate(gvaperjob = gva/JOBCOUNT_FULLTIME) %>%
+group_by(GEOGRAPHY_NAME,SIC07_description) %>%
+  mutate(
+  jobcount_movingav = rollapply(JOBCOUNT_FULLTIME,smoothband,mean,align='center',fill=NA),
+  gva_movingav = rollapply(gva,smoothband,mean,align='center',fill=NA),
+  `gva/job moving av` = rollapply(gvaperjob * 1000,smoothband,mean,align='center',fill=NA)
+) %>% 
+  ungroup()
+
+
+twod_percentplot(
+  df = gva.jobs.ITL3.3groups %>% filter(SIC07_description=='Services sector'),
+  category_var = GEOGRAPHY_NAME,
+  x_var = gva_movingav,
+  y_var = jobcount_movingav,
+  timevar = DATE,
+  label_var = `gva/job moving av`,
+  category_var_value_to_highlight = 'Southampton',
+  start_time = 2016,
+  end_time = 2021
+)
+
+
+#```
+
+
+
 ```
+
+
+
 
 
 
