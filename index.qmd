@@ -4,21 +4,23 @@ title: "UK regional economics tools, analysis and ideas"
 
 ## What is this website?
 
-* A repository of tools, methods and ideas for analysing UK regional economic data, mainly from official ONS sources.
+* A live repository of tools, methods and ideas for analysing UK regional economic data, mainly from official ONS sources.
 * With the aim of:
 * Supporting policymakers to more clearly see what's happening in their regional economies, what their history is, how they compare to other places in the UK, and what the main method issues are when interpreting the data.
 * Helping to build capacity 'in-house' so regional policymakers can become more self-reliant (see [Centre for Cities' report LA Evidential](https://www.centreforcities.org/publication/la-evidential/) for excellent analysis of how to overcome barriers to regional capacity building.)
-* This is a live document and will continue to grow in dialogue with its users.
 
 Current website content (see table of content links on the left):
 
-* GDP and GVA:
-    - **GDP / GVA regional gaps in the UK**: analysis and R code for comparing different types of economic gap between places, showing what difference choice of data makes.
-    - **Beatty & Fothergill analysis of productivity**: visualisations based on the [CRESR report](https://www.shu.ac.uk/centre-regional-economic-social-research/publications/the-productivity-of-industries-and-places) 'Productivity of Industry and Places', showing how much the economic gap between places changes depending on a range of data choices.
+* **Resource: [GVA and jobs CSVs](regionalgva_n_bres.html)**: nicely "[here's some I made earlier](miscdocs/heresoneimadeearlier.png)" pre-wrangled regional GVA and BRES jobs data, to remove obstacles / smooth the way / lessen wheel-reinvention. Includes linked GVA / BRES data and lookups.
+* **[Intro to using that data](intro_gvajobsdata_in_R.html)** that runs through some examples, visualisations, maps, location quotients etc.
+* Other things:
+    - **[LQ and proportion plots](sector_locationquotients_and_proportions.html)**: code and method showing how to analysis sectoral composition in regions and how they compare to other places, using location quotients, mapping and 'proportion plots' that get under the skin of what LQs are showing.
+    - **[GDP / GVA regional gaps](gdp_gaps.html) in the UK**: analysis and R code for comparing different types of economic gap between places, showing what difference choice of data makes.
+    - **Beatty & Fothergill on how measure choice affects productivity gaps - [some viz](beattyfothergill.html)**: visualisations based on the [CRESR report](https://www.shu.ac.uk/centre-regional-economic-social-research/publications/the-productivity-of-industries-and-places) 'Productivity of Industry and Places', showing how much the economic gap between places changes depending on a range of data choices.
 * Sectors:
-    - **LQ and proportion plots**: code and method showing how to analysis sectoral composition in regions and how they compare to other places, using location quotients, mapping and 'proportion plots' that get under the skin of what LQs are showing.
+   
 
 
-This project was funded by [Y-PERN](https://y-pern.org.uk/) and supported SYMCA's [Plan for Good Growth](https://www.southyorkshire-ca.gov.uk/business/plan-for-good-growth) and [Skills Strategy](https://www.southyorkshire-ca.gov.uk/business/skills-strategy) 2024.
+This project was funded by [Y-PERN](https://y-pern.org.uk/) and supported SYMCA's [Plan for Good Growth](https://www.southyorkshire-ca.gov.uk/business/plan-for-good-growth) and [Skills Strategy](https://www.southyorkshire-ca.gov.uk/business/skills-strategy) 2024, and ongoing work in 2025.
 
 Any questions, please do get in touch via the issues tab on the [github repo of this website](https://github.com/DanOlner/RegionalEconomicTools) or email: danolner at gmail dot com or d dot olner at sheffield.ac.uk.
