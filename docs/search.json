@@ -514,5 +514,17 @@
       "Intros",
       "Intro to using ONS GVA and jobs data in R"
     ]
+  },
+  {
+    "objectID": "intro_gvajobsdata_in_R.html#so-whats-going-on-with-those-places",
+    "href": "intro_gvajobsdata_in_R.html#so-whats-going-on-with-those-places",
+    "title": "Intro to using ONS GVA and jobs data in R",
+    "section": "So what’s going on with those places?",
+    "text": "So what’s going on with those places?\nIt appears to be a combination of genuine economic changes and ONS method alteration after publication of the Blue Book 2022. Southampton Data Observatory say:\n\n“The ONS identified a change in the UK National Accounts that resulted in a long-term revision to the manufacturing of food, beverages and tobacco industry. This change happened to be concentrated in the Southampton area.”\n\nGVA for overseas operations of firms based in Southampton previously hadn’t been included; now it is (see also here for Blue Book 2023).\nWhile these changes don’t cause huge national shifts in GVA (although some) the regional impact varies - hence what we see in Southampton and Mid/East Antrim.\nThe ONS explain another key source of change here - a move towards using direct VAT data in addition to survey data, which has in some cases quite radically altered measured output:\n\n“These upward revisions to manufacturing are driven by the incorporation of Value Added Tax (VAT) data for Quarter 3 2022 and updated data in other quarters. This is the case in particular in the manufacture of computer, electronic and optical products and manufacture of food products, beverages and tobacco.”",
+    "crumbs": [
+      "Home",
+      "Intros",
+      "Intro to using ONS GVA and jobs data in R"
+    ]
   }
 ]
