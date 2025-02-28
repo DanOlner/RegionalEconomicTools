@@ -1151,7 +1151,9 @@ unique(itl3$SIC07_code)[!unique(itl3$SIC07_code) %in% unique(itl2$SIC07_code)]
 
 
 
+# Look for advanced sectors in 5 digits----
 
+SIClookup <- read_csv('data/SIClookup.csv')
 
 
 
