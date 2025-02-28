@@ -34,7 +34,11 @@ itl2.cp <- read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomic
   ) %>% 
   ungroup()
   
-sectorname = itl2.cp$SIC07_description[qg('manuf',itl2.cp$SIC07_description)] %>% unique
+
+
+
+# sectorname = itl2.cp$SIC07_description[qg('manuf',itl2.cp$SIC07_description)] %>% unique
+sectorname = itl2.cp$SIC07_description[qg('information',itl2.cp$SIC07_description)] %>% unique
 
 mostrecentvals <- itl2.cp %>% filter(
   SIC07_description == sectorname,
@@ -69,7 +73,7 @@ gva.jobs.ITL2 <- gva.jobs.ITL2 %>%
 
 itl2.viz <- gva.jobs.ITL2 %>% 
   filter(
-    GEOGRAPHY_NAME %in%  mostrecentvals$Region_name[mostrecentvals$regional_percent > 5],
+    GEOGRAPHY_NAME %in%  mostrecentvals$Region_name[mostrecentvals$regional_percent > 4.9],
     # Region_name %in%  mostrecentvals$Region_name[mostrecentvals$LQ > 1],
     SIC07_description == sectorname
   )
@@ -92,10 +96,11 @@ p <- twod_percentplot(
 p <- p + xlab("GVA percent change 2015-17 to 2020-22 average") +
 ylab("FT JOBS percent change 2015-17 to 2020-22 average")
 
-ggsave(plot = p, filename = 'local/outputs/sy_percentplot.png', width = 14, height = 10)
+ggsave(plot = p, filename = 'local/outputs/sy_percentplot.png', width = 17, height = 8)
+# ggsave(plot = p, filename = 'local/outputs/sy_percentplot.png', width = 14, height = 10)
 
 
-#Wiggle plot
+#Wiggle plot----
 
 #Reduce to smaller list
 
@@ -127,6 +132,79 @@ p + theme(aspect.ratio=1) +
   # scale_y_log10() +
   xlab(paste0("GVA (",smoothband," year moving average)")) +
   ylab(paste0("Job count FT (",smoothband," year moving average)"))
+
+
+
+
+
+# PRODUCTIVTY / SECTOR PLOT----
+
+gva.jobs.ITL2.sections.cv <- read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_chainedvolume_ITL2_SIC_SECTION_MINUSimputedrent_2022.csv') %>% 
+  mutate(
+    gvaperjob = (gva/JOBCOUNT_FULLTIME) * 1000
+  )
+
+
+gva.jobs.ITL2.sections.cv <- gva.jobs.ITL2.sections.cv %>% 
+  mutate(gvaperjob = gva/JOBCOUNT_FULLTIME) %>%
+  group_by(GEOGRAPHY_NAME,SIC07_description) %>%
+  mutate(
+    jobcount_movingav = rollapply(JOBCOUNT_FULLTIME,smoothband,mean,align='center',fill=NA),
+    gva_movingav = rollapply(gva,smoothband,mean,align='center',fill=NA),
+    `gva/job moving av` = rollapply(gvaperjob * 1000,smoothband,mean,align='center',fill=NA)
+  ) %>% 
+  ungroup()
+
+
+
+gva.jobs.ITL2.sections.cv <- gva.jobs.ITL2.sections.cv %>% 
+  mutate(
+    SIC_SECTION_REDUCED = case_when(
+      # grepl('admin',SIC07_description,ignore.case = T) ~ 'Admin',
+      grepl('agri',SIC07_description,ignore.case = T) ~ 'Agri',
+      grepl('electr',SIC07_description,ignore.case = T) ~ 'power',
+      grepl('information',SIC07_description,ignore.case = T) ~ 'ICT',
+      grepl('manuf',SIC07_description,ignore.case = T) ~ 'Manuf',
+      grepl('mining',SIC07_description,ignore.case = T) ~ 'Mining',
+      grepl('other',SIC07_description,ignore.case = T) ~ 'other',
+      grepl('scientific',SIC07_description,ignore.case = T) ~ 'Sci/techn',
+      grepl('real estate',SIC07_description,ignore.case = T) ~ 'Real est',
+      grepl('transport',SIC07_description,ignore.case = T) ~ 'Transport',
+      grepl('water',SIC07_description,ignore.case = T) ~ 'Water',
+      grepl('entertainment',SIC07_description,ignore.case = T) ~ 'Entertainment',
+      grepl('human health',SIC07_description,ignore.case = T) ~ 'Health/soc',
+      grepl('food service activities',SIC07_description,ignore.case = T) ~ 'Food/service',
+      grepl('wholesale',SIC07_description,ignore.case = T) ~ 'Retail',
+      .default = SIC07_description
+    )
+  )
+
+#PLOT: GVA PER FT JOB FOR SIC SECTIONS OVER TIME
+ggplot(
+  gva.jobs.ITL2.sections.cv %>% 
+    # filter(qg('constr|manuf|scientific|information|transport|health|food|entertainment|educ',SIC07_description)) %>%
+    filter(qg('constr|manuf|scientific|information|health|entertainment|educ|real|electr',SIC07_description)) %>%
+    mutate(
+      DATE = DATE - 2000,#Make dates 2 digit, more readable on axis
+      placetoshow = qg('south y',GEOGRAPHY_NAME),#get leicester ITL2
+      SIC_SECTION_REDUCED = fct_reorder(SIC_SECTION_REDUCED, gvaperjob, .desc = T)
+    ),
+  aes(x = DATE, y = `gva/job moving av`, group = GEOGRAPHY_NAME, size = placetoshow, colour = placetoshow)) +
+  coord_cartesian(xlim = c(16,21)) +
+  geom_jitter(width = 0.1) +
+  scale_size_manual(values = c(1,5)) +
+  scale_colour_brewer(palette = 'Set1', direction = -1, name = "Sector") +
+  facet_wrap(~SIC_SECTION_REDUCED, nrow = 1, labeller = labeller(groupwrap = label_wrap_gen(10))) +
+  guides(colour = F, size = F) +
+  xlab('year') +
+  ylab('GVA per FT (3 year moving average)')
+
+#ggplotly for interactive
+#ggplotly(p, tooltip = 'GEOGRAPHY_NAME', width = 1100, height = 700)
+
+ggsave('local/outputs/sy_prodsector2.png', width = 11, height = 5)
+
+
 
 
 
