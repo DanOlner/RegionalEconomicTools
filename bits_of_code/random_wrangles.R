@@ -69,7 +69,7 @@ gva.jobs.ITL2 <- gva.jobs.ITL2 %>%
 
 itl2.viz <- gva.jobs.ITL2 %>% 
   filter(
-    GEOGRAPHY_NAME %in%  mostrecentvals$Region_name[mostrecentvals$regional_percent > 10],
+    GEOGRAPHY_NAME %in%  mostrecentvals$Region_name[mostrecentvals$regional_percent > 5],
     # Region_name %in%  mostrecentvals$Region_name[mostrecentvals$LQ > 1],
     SIC07_description == sectorname
   )
@@ -78,7 +78,7 @@ itl2.viz <- gva.jobs.ITL2 %>%
 
 #Add into 2D percent plot
 p <- twod_percentplot(
-  df = itl2.viz %>% filter(qg('manuf', SIC07_description)),
+  df = itl2.viz, 
   category_var = GEOGRAPHY_NAME,
   x_var = gva_movingav,
   y_var = jobcount_movingav,
