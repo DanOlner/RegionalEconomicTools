@@ -13,7 +13,7 @@ library(tidyverse)
 #Via https://stackoverflow.com/a/79311678/5023561
 url1 <- 'https://www.ons.gov.uk/file?uri=/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry/current/regionalgrossvalueaddedbalancedbyindustryandallitlregions.xlsx'
 p1f <- tempfile(fileext=".xlsx")
-download.file(url1, p1f, mode="wb")
+download.file(url1, p1f, mode="wb") 
 
 
 
