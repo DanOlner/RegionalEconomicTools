@@ -44,6 +44,82 @@ compute_slope_or_zero <- function(data, ..., y, x) {
 
 
 
+#Function to compute slope / SE
+# get_slope_and_se <- function(data) {
+#   
+#   model <- lm(data = data, formula = as.formula(paste0(quo_name(y), " ~ ", quo_name(x))))
+#   
+#   slope <- coef(model)[2]
+#   se <- summary(model)$coefficients[2, 2]
+#   return(list(slope = slope, se = se))
+#   
+# }
+# 
+# 
+# #Get two-variable regression slope and SE safely (don't break if no result returned)
+# get_slope_and_se_safely <- function(data, ..., y, x) {
+#   
+#   groups <- quos(...)   
+#   y <- enquo(y)
+#   x <- enquo(x) 
+#   
+#   #Make it a safe function using purrr::possibly
+#   safe_get_slope <- possibly(get_slope_and_se, otherwise = list(slope = NA, se = NA))
+#   
+#   #Group and summarize
+#   data %>%
+#     group_by(!!!groups) %>%
+#     nest() %>%
+#     mutate(result = map(data, safe_get_slope)) %>% 
+#     mutate(slope = map_dbl(result, "slope"),
+#            se = map_dbl(result, "se")) %>%
+#     select(-data, -result)
+#   
+# }
+
+
+
+
+#Version that returns slope and SE (for 2D LM only...)
+get_slope_and_se_safely <- function(data, ..., y, x) {
+  
+  groups <- quos(...)  
+  y <- enquo(y)
+  x <- enquo(x) 
+  
+  #Function to compute slope
+  get_slope_and_se <- function(data) {
+    # model <- lm(data = data, formula = as.formula(paste0(!!y, " ~ ", !!x)))
+    model <- lm(data = data, formula = as.formula(paste0(quo_name(y), " ~ ", quo_name(x))))
+    
+    slope <- coef(model)[2]
+    se <- summary(model)$coefficients[2, 2]
+    return(list(slope = slope, se = se))
+    
+    
+    # return(c(coef(model)[2],summary(model)[[4]]['x','Std. Error']))
+  }
+  
+  #Make it a safe function using purrr::possibly
+  safe_get_slope <- possibly(get_slope_and_se, otherwise = list(slope = NA, se = NA))
+  
+  #Group and summarize
+  data %>%
+    group_by(!!!groups) %>%
+    nest() %>%
+    mutate(result = map(data, safe_get_slope)) %>% 
+    mutate(slope = map_dbl(result, "slope"),
+           se = map_dbl(result, "se")) %>%
+    select(-data, -result)
+  
+}
+
+
+
+
+
+
+
 #Create location quotients (and the regional and larger scale proportions needed to calculate it) and return attached to original dataframe
 add_location_quotient_and_proportions <- function(df, regionvar, lq_var, valuevar){
   
@@ -584,11 +660,6 @@ twod_generictimeplot_multipletimepoints <- function(df, category_var, x_var, y_v
   p <- p +
     geom_point(data = twoy %>% filter(compass%in%compasspoints_to_display), size = 5, alpha = 0.75,
                aes(x = !!x_var, y = !!y_var,colour = factor(!!timevar), group = !!category_var)) +
-    # geom_line(data = twoy %>% filter(compass %in% compasspoints_to_display), size = 1, aes(x = !!x_var, y = !!y_var, group = !!category_var), colour = 'red') +
-    # geom_abline(slope = 1, size = 1, colour='blue', alpha = 0.5) +
-    # coord_cartesian(xlim = c(0.1,11), ylim = c(0.1,11)) + # good for log scale
-    # scale_y_log10() +
-    # scale_x_log10() +
     guides(colour=guide_legend(title=" ")) +
     xlab(quo_name(x_var)) +
     ylab(quo_name(y_var))
@@ -606,14 +677,15 @@ twod_generictimeplot_multipletimepoints <- function(df, category_var, x_var, y_v
       twoy.wide %>% select(!!category_var,label_start,label_end)
     )
   
+  #Change label if numeric or not
+  # labeltext = ifelse(
+  #   is.numeric()
+  # )
+  
   p <- p + geom_text_repel(
     data = label_df,
-    # data = twoy %>% filter(!!timevar==max(!!timevar), compass %in% compasspoints_to_display),
     aes(x = !!x_var, y = !!y_var,
         label = paste0(!!category_var, "\n(",quo_name(label_var),": ",round(label_start,2),ifelse(label_start < label_end," >> "," << "),round(label_end,2),")"),
-        # label = paste0(!!category_var, "\n(",quo_name(x_var),": ",round(!!x_var,2),", ",quo_name(y_var),": ",round(!!y_var,2),")"),
-        # label = paste0(!!category_var, "\n(",quo_name(x_var),": ",round(!!x_var,2),", ",quo_name(y_var),": ",round(!!y_var,2),")"),
-        # label = paste0(!!category_var, "\n(x:",round(x_var,2),"%,y:",round(y_var,2),"%)"),
         colour = compass),
     alpha=1,
     nudge_x = .05,
@@ -924,4 +996,294 @@ twod_percentplot <- function(...){
   ) 
   
 }
+
+
+
+
+
+#Pass in a desired confidence interval in percent
+#Returns the correct +/- z score for applying to a standard error
+getZScore <- function(confidence_percent) {
+  # Convert the percentage to a proportion
+  confidence_proportion <- confidence_percent / 100
+  
+  # Calculate the two-tailed probability
+  alpha <- 1 - confidence_proportion
+  
+  # Calculate the one-tailed probability
+  alpha_half <- alpha / 2
+  
+  # Get the Z-score for the one-tailed probability
+  z_score <- qnorm(1 - alpha_half)
+  
+  return(z_score)
+}
+
+
+
+#Produce a ggplot visualisation of differences between OLS slopes (for time series here)
+#Between pairs of slopes e.g. all sectors in SY (or another particular place) compared to each other
+#Or all places paired for a particular sector
+#filterval2 for comparing a different pair of slopes for two grid-columns e.g. two different places
+#Will need naming if using two separate ones
+slopeDiffGrid <- function(slope_df, confidence_interval, column_to_grid, column_to_filter, filterval, filterval2 = NULL, returndata = F){
+  
+  column_to_grid <- enquo(column_to_grid) 
+  column_to_filter <- enquo(column_to_filter) 
+  
+  #Filter down to single thing (sector, place etc)
+  #If looking at two filtervals on different axes...
+  #Do first before overwriting slope_df
+  if(!is.null(filterval2)) slope_df2 <- slope_df %>% filter(!!column_to_filter == filterval2)
+  
+  slope_df <- slope_df %>% 
+    filter(!!column_to_filter == filterval)
+  
+  #Apply CIs
+  ci <- getZScore(confidence_interval)
+  
+  # cat('CI = ',confidence_interval,', z score = ', ci, '\n')
+  
+  
+  if(!is.null(filterval2)){
+    
+    slope_df2 <- slope_df2 %>% 
+      mutate(
+        min.ci = slope - (se * ci),
+        max.ci = slope + (se * ci),
+        crosses.zero = min.ci * max.ci < 0
+      )
+    
+  }
+  
+  slope_df <- slope_df %>% 
+    mutate(
+      min.ci = slope - (se * ci),
+      max.ci = slope + (se * ci),
+      crosses.zero = min.ci * max.ci < 0
+    )
+  
+  
+  #Apply CI overlap test to all pairs
+  #https://stackoverflow.com/a/3269471
+  #If (StartA <= EndB) and (EndA >= StartB) 
+  
+  #Get all pair combos
+  combos <- expand.grid(gridcol1 = slope_df[quo_name(column_to_grid)] %>% pull, gridcol2 = slope_df[quo_name(column_to_grid)] %>% pull)
+  
+  #Merge in two repeated sets of the values and CIs to check for CI overlap for each pair
+  combos <- combos %>%
+    left_join(
+      slope_df %>% ungroup() %>% select(
+        !!column_to_grid,
+        slopeone = slope,
+        min.cione = min.ci,
+        max.cione = max.ci,
+        crosses.zero.one = crosses.zero
+      ),
+      by = c('gridcol1' = quo_name(column_to_grid))
+    )
+  
+  #Merge in two repeated sets of the values and CIs to check for CI overlap for each pair
+  #If using a different place/sector etc for one of the matrix axes, do that here
+  if(!is.null(filterval2)){
+    
+    combos <- combos %>%
+      left_join(
+        slope_df2 %>% ungroup() %>% select(
+          !!column_to_grid,
+          slopetwo = slope,
+          min.citwo = min.ci,
+          max.citwo = max.ci,
+          crosses.zero.two = crosses.zero
+        ),
+        by = c('gridcol2' = quo_name(column_to_grid))
+      )
+    
+  } else {
+    
+    combos <- combos %>%
+      left_join(
+        slope_df %>% ungroup() %>% select(
+          !!column_to_grid,
+          slopetwo = slope,
+          min.citwo = min.ci,
+          max.citwo = max.ci,
+          crosses.zero.two = crosses.zero
+        ),
+        by = c('gridcol2' = quo_name(column_to_grid))
+      )
+    
+  }
+  
+  # 
+  # #Apply CI overlap test to all pairs
+  # #https://stackoverflow.com/a/3269471
+  # #If (StartA <= EndB) and (EndA >= StartB)
+  combos <- combos %>% 
+    mutate(CIs_overlap = ifelse(
+      (.[,'min.cione'] <= .[,'max.citwo'] & .[,'max.cione'] <= .[,'min.citwo']) |
+        (.[,'min.citwo'] <= .[,'max.cione'] & .[,'max.citwo'] <= .[,'min.cione'])  , 
+      F,T)
+      # CIs_overlap = factor(CIs_overlap, ordered = T, levels = c(F,T))
+    ) %>% 
+    mutate(
+      slopediff = slopetwo - slopeone#Add in slope differences
+    )
+  
+  #Zero point of scale
+  #Though shouldn't be necessary here as symmetric differences across the matrix diagonal mean the scale is always an exact mirror
+  valz <- c(range(combos$slopediff, na.rm = T), 0)
+  scale_values <- function(x){(x-min(x))/(max(x)-min(x))}
+  scaled <- scale_values(valz)
+  zerocutoff <- scaled[3]
+  
+  
+  #Use x and y axis names to mark the polarity of those individual slopes
+  #And whether they cross zero
+  combos <- combos %>% 
+    mutate(
+      slopecolour_x = case_when(
+        !crosses.zero.one & slopeone > 0 ~ "#28da28",
+        crosses.zero.one & slopeone > 0 ~ "#96c493",
+        !crosses.zero.one & slopeone < 0 ~ "red",
+        crosses.zero.one & slopeone < 0 ~ "#ffcccc"
+      ),
+      slopecolour_y = case_when(
+        !crosses.zero.two & slopetwo > 0 ~ "#28da28",
+        crosses.zero.two & slopetwo > 0 ~ "#96c493",
+        !crosses.zero.two & slopetwo < 0 ~ "red",
+        crosses.zero.two & slopetwo < 0 ~ "#ffcccc"
+      )
+    )
+  
+  
+  #Get unique values from that for the column_to_grid column
+  #And order so matches x y axis order
+  #(Probably a neater way of doing this)
+  slopecolours_x <- combos %>% 
+    distinct(gridcol1, .keep_all = T) %>% 
+    arrange(gridcol1) %>% 
+    select(slopecolour_x) %>% 
+    pull
+  
+  slopecolours_y <- combos %>% 
+    distinct(gridcol2, .keep_all = T) %>% 
+    arrange(gridcol2) %>% 
+    select(slopecolour_y) %>% 
+    pull
+  
+  
+  #Add in yearly % change of slope and CIs from log on the left axis
+  combos <- combos %>% 
+    mutate(
+      slopeone_percent = round((exp(slopeone) -1) * 100,1),
+      min.cione_percent = round((exp(min.cione) -1) * 100,1),
+      max.cione_percent = round((exp(max.cione) -1) * 100,1),
+      slopetwo_percent = round((exp(slopetwo) -1) * 100,1),
+      min.citwo_percent = round((exp(min.citwo) -1) * 100,1),
+      max.citwo_percent = round((exp(max.citwo) -1) * 100,1),
+    )
+  
+  #Using colour for grid outline for sig values doesn't quite work, it draws messily
+  #Add as extra layer over the top instead
+  p <- ggplot(combos, aes(
+    # x = substr(gridcol1,0,30),
+    x = paste0(substr(gridcol1,0,24),' (',slopeone_percent,'% CI: ',min.cione_percent,'%,',max.cione_percent,'%)'),
+    y = paste0(substr(gridcol2,0,24),' (',slopetwo_percent,'% CI: ',min.citwo_percent,'%,',max.citwo_percent,'%)'), 
+    fill= slopediff, colour = CIs_overlap)
+  ) + 
+    geom_tile() +
+    # geom_tile(width = 0.8, height = 0.8, size = 1) +
+    scale_fill_gradientn(
+      colours = c("red", "white", "darkgreen"),
+      values = c(0, zerocutoff, 1)#https://stackoverflow.com/a/58725778/5023561
+    ) +
+    theme(
+      axis.text.x = element_text(angle = 270, vjust = 0.5, hjust=0, colour = slopecolours_x),
+      axis.text.y = element_text(colour = slopecolours_y)
+      # axis.title.x=element_blank(),
+      # axis.title.y=element_blank()
+    ) +
+    scale_color_manual(values = setNames(c('black','white'),c(F,T)), guide = 'none')
+  
+  #Add in axis labels if we're comparing two different things, else remove entirely
+  if(!is.null(filterval2)) p <- p + xlab(filterval) + ylab(filterval2) else p <- p + theme(axis.title.x=element_blank(),axis.title.y=element_blank())
+  
+  if(returndata) combos else p
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Assumes itl3.2digit.cv exists in global env
+#See LeedsBradfordExplore.R 795
+#Pairwise spearman correlations over time for ranked GVA
+#Adding in average for whole time series
+#standard dev
+#slope and CI
+#Assumes the data already exists
+pair_spearman_summarystats <- function(pairofplacenames){
+  
+  # print(pairofplacenames)  
+   
+  place1 <- toString(pairofplacenames[1])
+  place2 <- toString(pairofplacenames[2])
+
+  lb <- itl3.2digit.cv %>% 
+    filter(Region_name %in% c(place1,place2)) %>% 
+    select(Region_name,SIC07_description,year,value) %>% 
+    pivot_wider(names_from = Region_name, values_from = value)
+  
+  #Check rank correlation change over time there...
+  corz <- lb %>% 
+    group_by(year) %>% 
+    summarise(correlation = cor(!!sym(place1),!!sym(place2), method = 'spearman')) #3 and 4 are place name cols
+  
+  #Get mean rank correlation
+  corz.mean <- mean(corz$correlation)
+  
+  #sd
+  corz.sd <- sd(corz$correlation)
+  
+  #get slope / CI
+  
+  dolinear = function(){
+    
+    model <- lm(data = corz, formula = correlation ~ year)
+    slope <- coef(model)[2]
+    se <- summary(model)$coefficients[2, 2]
+    
+    return(list(
+      slope = slope,
+      se = se
+    ))
+    
+  }
+  
+  safe_get_slope <- possibly(dolinear, otherwise = list(slope = NA, se = NA))
+  
+  modelresult <- safe_get_slope()
+  
+  return(list(
+    mean = corz.mean,
+    sd = corz.sd,
+    slope = modelresult$slope,
+    se = modelresult$se
+  ))
+  
+}
+
+
+
 

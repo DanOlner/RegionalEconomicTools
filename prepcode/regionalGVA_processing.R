@@ -1,3 +1,6 @@
+#CURRENT DATA RELEASE DATE: 2025
+#See here for final 2024 commit: https://github.com/DanOlner/RegionalEconomicTools/releases/tag/Final2024data_commit
+
 #ONS regional GVA process from URL
 #Through to separate sheets for different geographical scales and SIC levels
 #For both current prices and chained volume
@@ -11,7 +14,9 @@ library(tidyverse)
 
 #Workaround for lack of URL download native in readxl package
 #Via https://stackoverflow.com/a/79311678/5023561
-url1 <- 'https://www.ons.gov.uk/file?uri=/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry/current/regionalgrossvalueaddedbalancedbyindustryandallitlregions.xlsx'
+#2024: url1 <- 'https://www.ons.gov.uk/file?uri=/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry/current/regionalgrossvalueaddedbalancedbyindustryandallitlregions.xlsx'
+#2025:
+url1 <- 'https://www.ons.gov.uk/file?uri=/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry/current/regionalgrossvalueaddedbalancedbyindustryandallinternationalterritoriallevelsitlregions.xlsx'
 p1f <- tempfile(fileext=".xlsx")
 download.file(url1, p1f, mode="wb") 
 
@@ -28,12 +33,13 @@ download.file(url1, p1f, mode="wb")
 ### 1. CURRENT PRICES AT ITL2 LEVEL, PRODUCTION VS CONSTRUCTION VS SERVICES, WITH/WITHOUT IMPUTED RENT----
 
 #Table 2c is current prices with ITL2 zones
-gva <- readxl::read_excel(path = p1f,range = "Table 2c!A2:AC3938") 
+gva <- readxl::read_excel(path = p1f,range = "Table 2c!A2:AD4556") 
 
 #More process-able names with no spaces
 names(gva) <- gsub(x = names(gva), pattern = ' ', replacement = '_')
 
 #Keep goods and services only
+#Unchanged for 2025
 goods_n_services <- c(
   'A-E',
   'F (41-43)',
@@ -48,6 +54,7 @@ gva.all <- gva %>%
 #Save wide version
 write_csv(gva.all, paste0('data/regionalGVA/regionalGVA_currentprices_ITL2_SIC_3GROUPS_WIDE_',names(gva)[length(names(gva))],'.csv'))
 
+#Make long version
 gva.all <- gva.all %>% 
   pivot_longer(`1998`:names(gva)[length(names(gva))], names_to = 'year', values_to = 'value') %>% #get most recent year
   mutate(year = as.numeric(year))
@@ -89,58 +96,66 @@ write_csv(gva.all, paste0('data/regionalGVA/regionalGVA_currentprices_ITL2_SIC_3
 #chk <- unique(gva$SIC07_code)[!grepl("[A-Za-z]", unique(gva$SIC07_code))]
 # pattern <- "\\b(4[5-9]|5[0-9]|6[0-6]|68|69|7[0-9]|)\\b"
 
+services.excludingimputedrent <- c(
+  '45',
+  '46',
+  '47',
+  '49',
+  '50-51',
+  '52',
+  '53',
+  '55',
+  '56',
+  '58',
+  # '59-60',2024
+  '59',#2025 change
+  '60',#2025 change
+  '61',
+  '62',
+  '63',
+  '64',
+  '65',
+  '66',
+  '68',#real estate EXC imputed rent ONLY
+  '69',
+  '70',
+  '71',
+  '72',
+  '73',
+  '74',
+  '75',
+  '77',
+  '78',
+  '79',
+  '80',
+  '81',
+  '82',
+  'O (84)',
+  'P (85)',
+  '86',
+  '87',
+  '88',
+  '90',
+  '91',
+  '92',
+  '93',
+  '94',
+  '95',
+  '96',
+  'T (97-98)'
+)
+
 gva.services.eximputedrent <-  gva %>% 
   filter(
-    SIC07_code %in% c(
-      '45',
-      '46',
-      '47',
-      '49',
-      '50-51',
-      '52',
-      '53',
-      '55',
-      '56',
-      '58',
-      '59-60',
-      '61',
-      '62',
-      '63',
-      '64',
-      '65',
-      '66',
-      '68',#real estate EXC imputed rent ONLY
-      '69',
-      '70',
-      '71',
-      '72',
-      '73',
-      '74',
-      '75',
-      '77',
-      '78',
-      '79',
-      '80',
-      '81',
-      '82',
-      'O (84)',
-      'P (85)',
-      '86',
-      '87',
-      '88',
-      '90',
-      '91',
-      '92',
-      '93',
-      '94',
-      '95',
-      '96',
-      'T (97-98)'
-    )
+    SIC07_code %in% services.excludingimputedrent
   )
   
 #Check... tick
 unique(gva.services.eximputedrent$SIC07_code)
+length(unique(gva.services.eximputedrent$SIC07_code))
+length(services.excludingimputedrent)
+
+
 
 #Make long, sum everything year by year, place
 gva.services.eximputedrent <- gva.services.eximputedrent %>% 
@@ -177,7 +192,7 @@ write_csv(gva.all.eximputedrent, paste0('data/regionalGVA/regionalGVA_currentpri
 #And there's no direct non-imputed rent row to use
 
 #Table 2b is chained volume prices with ITL2 zones
-gva <- readxl::read_excel(path = p1f,range = "Table 2b!A2:AC3938") 
+gva <- readxl::read_excel(path = p1f,range = "Table 2b!A2:AD4556") 
 
 #More process-able names with no spaces
 names(gva) <- gsub(x = names(gva), pattern = ' ', replacement = '_')
@@ -193,7 +208,7 @@ gva.all <- gva %>%
 #Save as CSV, with latest year as name
 write_csv(gva.all, paste0('data/regionalGVA/regionalGVA_chainedvolume_ITL2_SIC_3GROUPS_WIDE_',names(gva)[length(names(gva))],'.csv'))
 
-
+#Make long
 gva.all <- gva.all %>% 
   pivot_longer(`1998`:names(gva)[length(names(gva))], names_to = 'year', values_to = 'value') %>% #get most recent year
   mutate(year = as.numeric(year))
@@ -228,7 +243,7 @@ write_csv(gva.all, paste0('data/regionalGVA/regionalGVA_chainedvolume_ITL2_SIC_3
 ### 1. CURRENT PRICES AT ITL2 LEVEL, SIC SECTIONS, WITH/WITHOUT IMPUTED RENT----
 
 #Table 2c is current prices with ITL2 zones
-gva <- readxl::read_excel(path = p1f,range = "Table 2c!A2:AC3938") 
+gva <- readxl::read_excel(path = p1f,range = "Table 2c!A2:AD4556") 
 
 #More process-able names with no spaces
 names(gva) <- gsub(x = names(gva), pattern = ' ', replacement = '_')
@@ -327,7 +342,7 @@ write_csv(gva.minusimputedrent, paste0('data/regionalGVA/regionalGVA_currentpric
 #No summing involved
 
 #Table 2b is chained volume prices with ITL2 zones
-gva <- readxl::read_excel(path = p1f,range = "Table 2b!A2:AC3938") 
+gva <- readxl::read_excel(path = p1f,range = "Table 2b!A2:AD4556") 
 
 #More process-able names with no spaces
 names(gva) <- gsub(x = names(gva), pattern = ' ', replacement = '_')
@@ -388,13 +403,14 @@ write_csv(gva.minusimputedrent, paste0('data/regionalGVA/regionalGVA_chainedvolu
 #Don't need to recalculate removing imputed rent - it's in here as a separate category, can be removed later
 
 #Table 2c is current prices with ITL2 zones
-gva <- readxl::read_excel(path = p1f,range = "Table 2c!A2:AC3938") 
+gva <- readxl::read_excel(path = p1f,range = "Table 2c!A2:AD4556") 
 
 #More process-able names with no spaces
 names(gva) <- gsub(x = names(gva), pattern = ' ', replacement = '_')
 
 #WARNING: ONLY CORRECT LIST TO REMOVE FOR ITL2 - ITL3 has a different list of SICs
 #SICs to remove to leave just unique SIC values
+#Still works for 2025 as well as 2024 to leave correct highest res SICs
 SICremoves = c(
   'Total',
   'A-E',
@@ -457,7 +473,7 @@ write_csv(gva.all, paste0('data/regionalGVA/regionalGVA_currentprices_ITL2_SIC_2
 #Have to keep each as is
 
 #Table 2b is chained volume prices with ITL2 zones
-gva <- readxl::read_excel(path = p1f,range = "Table 2b!A2:AC3938") 
+gva <- readxl::read_excel(path = p1f,range = "Table 2b!A2:AD4556") 
 
 #More process-able names with no spaces
 names(gva) <- gsub(x = names(gva), pattern = ' ', replacement = '_')
@@ -501,7 +517,7 @@ write_csv(gva.all, paste0('data/regionalGVA/regionalGVA_chainedvolume_ITL2_SIC_2
 ### 1. CURRENT PRICES AT ITL3 LEVEL, GOODS VS SERVICES, WITH/WITHOUT IMPUTED RENT----
 
 #Table 3c is current prices with ITL3 zones
-gva <- readxl::read_excel(path = p1f,range = "Table 3c!A2:AC11458") 
+gva <- readxl::read_excel(path = p1f,range = "Table 3c!A2:AD11468") 
 
 #More process-able names with no spaces
 names(gva) <- gsub(x = names(gva), pattern = ' ', replacement = '_')
@@ -545,48 +561,55 @@ write_csv(gva.all, paste0('data/regionalGVA/regionalGVA_currentprices_ITL3_SIC_3
 # pattern <- "\\b(4[5-9]|5[0-9]|6[0-6]|68|69|7[0-9]|)\\b"
 
 #Again, different from ITL2...
+services.eximputedrent.itl3 <- c(
+  '45',
+  '46',
+  '47',
+  '49-51',
+  '52',
+  '53',
+  '55',
+  '56',
+  '58-60',
+  '61-63',
+  #'64',2024
+  #'65-66',2024
+  'K (64-66)',#2025 update
+  '68',#real estate EXC imputed rent ONLY
+  '69',
+  '70',
+  '71',
+  '72-73',
+  #'74',2024
+  #'75',2024
+  '74-75',#2025 update
+  '77',
+  '78-80',
+  '81',
+  '82',
+  'O (84)',
+  'P (85)',
+  '86',
+  '87',
+  '88',
+  '90-91',
+  '92-93',
+  '94',
+  '95',
+  '96',
+  'T (97-98)'
+)
+
+
 gva.services.eximputedrent <-  gva %>% 
   filter(
-    SIC07_code %in% c(
-      '45',
-      '46',
-      '47',
-      '49-51',
-      '52',
-      '53',
-      '55',
-      '56',
-      '58-60',
-      '61-63',
-      '64',
-      '65-66',
-      '68',#real estate EXC imputed rent ONLY
-      '69',
-      '70',
-      '71',
-      '72-73',
-      '74',
-      '75',
-      '77',
-      '78-80',
-      '81',
-      '82',
-      'O (84)',
-      'P (85)',
-      '86',
-      '87',
-      '88',
-      '90-91',
-      '92-93',
-      '94',
-      '95',
-      '96',
-      'T (97-98)'
-    )
+    SIC07_code %in% services.eximputedrent.itl3
   )
 
 #Check... tick
 unique(gva.services.eximputedrent$SIC07_code)
+length(unique(gva.services.eximputedrent$SIC07_code))
+length(services.eximputedrent.itl3)
 
 #Make long, sum everything year by year, place
 gva.services.eximputedrent <- gva.services.eximputedrent %>% 
@@ -629,7 +652,10 @@ write_csv(gva.all.eximputedrent, paste0('data/regionalGVA/regionalGVA_currentpri
 #Have to keep each as is
 
 #Table 3b is chained volume prices with ITL3 zones
-gva <- readxl::read_excel(path = p1f,range = "Table 3b!A2:AC11458") 
+gva <- readxl::read_excel(path = p1f,range = "Table 3b!A2:AD11468") 
+
+#warnings here - but it's OK for 3-group and sections...
+# lapply(gva,class)
 
 #More process-able names with no spaces
 names(gva) <- gsub(x = names(gva), pattern = ' ', replacement = '_')
@@ -682,7 +708,7 @@ write_csv(gva.all, paste0('data/regionalGVA/regionalGVA_chainedvolume_ITL3_SIC_3
 ### 1. CURRENT PRICES AT ITL3 LEVEL, SIC SECTIONS, WITH/WITHOUT IMPUTED RENT----
 
 #Table 3c is current prices with ITL3 zones
-gva <- readxl::read_excel(path = p1f,range = "Table 3c!A2:AC11458") 
+gva <- readxl::read_excel(path = p1f,range = "Table 3c!A2:AD11468") 
 
 #More process-able names with no spaces
 names(gva) <- gsub(x = names(gva), pattern = ' ', replacement = '_')
@@ -701,6 +727,9 @@ SIC_sections_ITL3 <- c(
   'DE (35-39)',#Unique to ITL3
   SIC_sections[6:length(SIC_sections)]#rest the same
 )
+
+#Check... tick, all present in data
+table(SIC_sections_ITL3 %in% unique(gva$SIC07_code))
 
 #And minus imputed rent... (adding in "real estate excluding imputed rent" in place of including)
 SIC_sections_ITL3_minusImputedRent <- SIC_sections_ITL3
@@ -753,7 +782,7 @@ write_csv(gva.minusimputedrent, paste0('data/regionalGVA/regionalGVA_currentpric
 #Have to keep each as is
 
 #Table 3b is chained volume prices with ITL3 zones
-gva <- readxl::read_excel(path = p1f,range = "Table 3b!A2:AC11458") 
+gva <- readxl::read_excel(path = p1f,range = "Table 3b!A2:AD11468") 
 
 #More process-able names with no spaces
 names(gva) <- gsub(x = names(gva), pattern = ' ', replacement = '_')
@@ -812,24 +841,25 @@ write_csv(gva.minusimputedrent, paste0('data/regionalGVA/regionalGVA_chainedvolu
 #Don't need to recalculate removing imputed rent - it's in here as a separate category, can be removed later
 
 #Table 3c is current prices with ITL3 zones
-gva <- readxl::read_excel(path = p1f,range = "Table 3c!A2:AC11458") 
+gva <- readxl::read_excel(path = p1f,range = "Table 3c!A2:AD11468") 
 
 #More process-able names with no spaces
 names(gva) <- gsub(x = names(gva), pattern = ' ', replacement = '_')
 
-#WARNING: ONLY CORRECT LIST TO REMOVE FOR ITL3 - ITL3 has a different list of SICs
+#CORRECT LIST TO REMOVE FOR ITL3
 #SICs to remove to leave just unique SIC values
 ITL3_SICremoves = c(
   'Total',
   'A-E',
   'C (10-33)',
+  'CM (31-33)',
   'F (41-43)',
   'G-T',
   'G (45-47)',
   'H (49-53)',
   'I (55-56)',
   'J (58-63)',
-  'K (64-66)',
+  #'K (64-66)',#keep in for 2025 data
   'L (68)',#real estate activities - leaves in "Real estate activities, excluding imputed rental" & "Owner-occupiers' imputed rental" as separate categories
   'M (69-75)',
   'N (77-82)',
@@ -837,6 +867,9 @@ ITL3_SICremoves = c(
   'R (90-93)',
   'S (94-96)'
 )
+
+#check presence in data... tick
+table(ITL3_SICremoves %in% gva$SIC07_code)
 
 #Filter down to SIC rows and make long by year - remove ones from the list above, just leaving the ones we want
 #Also convert year to numeric
@@ -868,7 +901,7 @@ write_csv(gva.all, paste0('data/regionalGVA/regionalGVA_currentprices_ITL3_SIC_2
 #Have to keep each as is
 
 #Table 3b is chained volume prices with ITL3 zones
-gva <- readxl::read_excel(path = p1f,range = "Table 3b!A2:AC11458") 
+gva <- readxl::read_excel(path = p1f,range = "Table 3b!A2:AD11468") 
 
 #More process-able names with no spaces 
 names(gva) <- gsub(x = names(gva), pattern = ' ', replacement = '_')
