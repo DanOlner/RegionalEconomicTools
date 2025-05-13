@@ -1,0 +1,297 @@
+---
+title: "Leeds/Bradford linkages -- all results"
+author: "Dan Olner"
+format: 
+  html:
+    output-file: "LeedsBradford_overview_May2025"
+    fig-width: 9.5
+    fig-height: 8
+execute:
+  echo: false
+  message: false
+  warning: false
+fig-responsive: false
+---
+
+```{r setup}
+library(tidyverse)
+library(spdep)
+library(sf)#for geo stuff
+# library(tmap)#for mapping 
+library(zoo)#for making smoothed moving averages
+library(patchwork)#combine ggplots easily
+library(plotly)#For interactive plots
+library(ggdist)
+library(tidyr)
+library(distributional)
+library(RColorBrewer)
+
+source('../functions/misc_functions.R')
+options(scipen = 999)
+
+#Set ggplot theme
+theme_set(theme_light())
+
+
+```
+
+
+## Leeds / Bradford sectors over time from latest ONS data (1998 to 2023)
+
+
+
+
+```{r, fig-sectorplot-LB}
+#| label: fig-sectorplot-LB
+#| fig-cap: "Fig cap."
+#| fig-height: 10
+
+itl3.sections.cv <- read_csv('../data/regionalGVA/regionalGVA_chainedvolume_ITL3_SIC_SECTION_LONG_2023.csv') 
+#itl3.sections.cv <- read_csv('data/regionalGVA/regionalGVA_chainedvolume_ITL3_SIC_SECTION_LONG_2023.csv') 
+
+itl3.sections.cv <- itl3.sections.cv %>% 
+  filter(SIC07_description!="Activities of households") %>% 
+ mutate(
+    SIC07_description = case_when(
+      grepl('defence',SIC07_description,ignore.case = T) ~ 'public/defence',
+      grepl('support',SIC07_description,ignore.case = T) ~ 'admin/support',
+      grepl('financ',SIC07_description,ignore.case = T) ~ 'finance/insu',
+      grepl('agri',SIC07_description,ignore.case = T) ~ 'Agri/mining',
+      grepl('electr',SIC07_description,ignore.case = T) ~ 'power/water',
+      grepl('information',SIC07_description,ignore.case = T) ~ 'ICT',
+      grepl('manuf',SIC07_description,ignore.case = T) ~ 'Manuf',
+      grepl('other',SIC07_description,ignore.case = T) ~ 'other',
+      grepl('scientific',SIC07_description,ignore.case = T) ~ 'Scientific',
+      grepl('real estate',SIC07_description,ignore.case = T) ~ 'Real est',
+      grepl('transport',SIC07_description,ignore.case = T) ~ 'Transport',
+      grepl('entertainment',SIC07_description,ignore.case = T) ~ 'Entertainment',
+      grepl('human health',SIC07_description,ignore.case = T) ~ 'Health/soc',
+      grepl('food service activities',SIC07_description,ignore.case = T) ~ 'Food/service',
+      grepl('wholesale',SIC07_description,ignore.case = T) ~ 'Retail',
+      .default = SIC07_description
+    )
+  )
+
+# unique(itl3.sections.cv$SIC07_description)
+
+
+
+#Add moving average
+#Set range of average - 3 years
+smoothband = 3
+
+#Find the average within each place and each sector in each place
+#Year is already in order, so this will find 3 year moving av between consecutive years
+itl3.sections.cv <- itl3.sections.cv %>% 
+  group_by(Region_name,SIC07_description) %>% 
+  mutate(
+    gva_movingav = rollapply(value,smoothband,mean,align='center',fill=NA)
+  ) %>% 
+  ungroup()
+
+place = itl3.sections.cv$Region_name[qg('Leeds',itl3.sections.cv$Region_name)] %>% unique
+
+#top 12 sectors in latest year
+top12sectors <- itl3.sections.cv %>% 
+  filter(
+    Region_name == place,
+    year == max(year) - 1#to get 3 year moving average value
+  ) %>% 
+  arrange(-gva_movingav) %>% 
+  slice_head(n= 12) %>% 
+  select(SIC07_description) %>% 
+  pull()
+
+
+
+#Get colours same for same SIC codes
+#https://stackoverflow.com/a/33144808/5023561
+#Make different pastel-ish colours
+n <- length(unique(itl3.sections.cv$SIC07_description))
+set.seed(12)
+qual_col_pals = brewer.pal.info[brewer.pal.info$category == 'qual',]
+col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
+# pie(rep(1,n), col=sample(col_vector, n))
+
+# randomcols <- sample(col_vector, n)
+# n <- length(unique(itl3.sections.cv$SIC07_description))
+randomcols <- col_vector[10:(10+(n-1))]
+
+
+#Plot! 
+leedsplot <- ggplot(itl3.sections.cv %>% 
+                      filter(
+                        Region_name == place, 
+                        SIC07_description %in% top12sectors,
+                        !is.na(gva_movingav)#Remove NAs created by 3 year moving average
+                      ), 
+                    aes(x = year, y = gva_movingav, colour = fct_reorder(SIC07_description,-gva_movingav) )) +
+  geom_point() +
+  geom_line() +
+  # scale_color_brewer(palette = 'Paired', direction = 1) +
+  scale_color_manual(values = setNames(randomcols,unique(itl3.sections.cv$SIC07_description))) +#set manual pastel colours matching sector name
+  ylab('SIC GVA (chained volume) ') +
+  theme(plot.title = element_text(face = 'bold')) +
+  labs(colour = 'SIC section') +
+  ggtitle(paste0(place, ' GVA over time\nTop 12 sectors by GVA in latest year\n(', smoothband,' year moving average)'))
+
+# leedsplot
+
+
+place = itl3.sections.cv$Region_name[qg('Bradford',itl3.sections.cv$Region_name)] %>% unique
+
+#top 12 sectors in latest year
+top12sectors <- itl3.sections.cv %>% 
+  filter(
+    Region_name == place,
+    year == max(year) - 1#to get 3 year moving average value
+  ) %>% 
+  arrange(-gva_movingav) %>% 
+  slice_head(n= 12) %>% 
+  select(SIC07_description) %>% 
+  pull()
+
+#Plot! 
+bradfordplot <- ggplot(itl3.sections.cv %>% 
+                         filter(
+                           Region_name == place, 
+                           SIC07_description %in% top12sectors,
+                           !is.na(gva_movingav)#Remove NAs created by 3 year moving average
+                         ), 
+                       aes(x = year, y = gva_movingav, colour = fct_reorder(SIC07_description,-gva_movingav) )) +
+  geom_point() +
+  geom_line() +
+  # scale_color_brewer(palette = 'Paired', direction = 1) +
+  scale_color_manual(values = setNames(randomcols,unique(itl3.sections.cv$SIC07_description))) +#set manual pastel colours matching sector name
+  ylab('SIC GVA (chained volume) ') +
+  theme(plot.title = element_text(face = 'bold')) +
+  labs(colour = 'SIC section') +
+  ggtitle(paste0(place, ' GVA over time\nTop 12 sectors by GVA in latest year\n(', smoothband,' year moving average)'))
+
+leedsplot / bradfordplot
+
+```
+
+
+
+
+
+## GVA over jobs for Leeds and Bradford compared to rest of UK
+
+```{r, fig-itl3-gvaperjob}
+#| label: fig-itl3-gvaperjob
+#| fig-cap: "Fig cap."
+#| fig-width: 9.5
+#| fig-height: 8
+
+
+gva.jobs.ITL3.sections.cv <- read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_chainedvolume_ITL3_SIC_SECTION_MINUSimputedrent_2022.csv') %>% 
+  mutate(
+    gvaperjob = (gva/JOBCOUNT_FULLTIME) * 1000
+  )
+
+smoothband = 3
+
+gva.jobs.ITL3.sections.cv <- gva.jobs.ITL3.sections.cv %>% 
+  mutate(gvaperjob = gva/JOBCOUNT_FULLTIME) %>%
+  group_by(GEOGRAPHY_NAME,SIC07_description) %>%
+  mutate(
+    jobcount_movingav = rollapply(JOBCOUNT_FULLTIME,smoothband,mean,align='center',fill=NA),
+    gva_movingav = rollapply(gva,smoothband,mean,align='center',fill=NA),
+    `gva/job moving av` = rollapply(gvaperjob * 1000,smoothband,mean,align='center',fill=NA)
+  ) %>% 
+  ungroup()
+
+
+
+gva.jobs.ITL3.sections.cv <- gva.jobs.ITL3.sections.cv %>% 
+  # filter(!SIC07_description %in% c("Mining and quarrying","Agriculture, forestry and fishing")) %>% #this is a dup - it shouldn't be here, it's rolled into agri/mining (added as github issue)
+  filter(GEOGRAPHY_NAME!="Dorset and Somerset") %>% #easiest thing - just drop dorset/somerset for now, will lose dup sectors
+  mutate(
+    SIC_SECTION_REDUCED = case_when(
+      grepl('defence',SIC07_description,ignore.case = T) ~ 'public/defence',
+      grepl('support',SIC07_description,ignore.case = T) ~ 'admin/support',
+      grepl('financ',SIC07_description,ignore.case = T) ~ 'finance/insu',
+      grepl('agri',SIC07_description,ignore.case = T) ~ 'Agri/mining',
+      grepl('electr',SIC07_description,ignore.case = T) ~ 'power/water',
+      grepl('information',SIC07_description,ignore.case = T) ~ 'ICT',
+      grepl('manuf',SIC07_description,ignore.case = T) ~ 'Manuf',
+      grepl('other',SIC07_description,ignore.case = T) ~ 'other',
+      grepl('scientific',SIC07_description,ignore.case = T) ~ 'Scientific',
+      grepl('real estate',SIC07_description,ignore.case = T) ~ 'Real est',
+      grepl('transport',SIC07_description,ignore.case = T) ~ 'Transport',
+      grepl('entertainment',SIC07_description,ignore.case = T) ~ 'Entertainment',
+      grepl('human health',SIC07_description,ignore.case = T) ~ 'Health/soc',
+      grepl('food service activities',SIC07_description,ignore.case = T) ~ 'Food/service',
+      grepl('wholesale',SIC07_description,ignore.case = T) ~ 'Retail',
+      .default = SIC07_description
+    )
+  )
+
+
+#ggplot won't give control over order very well... let's add on top manually, more control
+prod.data <- gva.jobs.ITL3.sections.cv %>% 
+  mutate(
+    DATE = DATE - 2000,#Make dates 2 digit, more readable on axis
+    SIC_SECTION_REDUCED = fct_reorder(SIC_SECTION_REDUCED, gvaperjob, .desc = T),
+    highlow = ifelse(SIC_SECTION_REDUCED %in% levels(SIC_SECTION_REDUCED)[1:9],'high','low')#Break into two plots to stack, split by total av productivity
+  ) %>% 
+  filter(!qg('hous',SIC07_description), `gva/job moving av` > 0)
+  
+
+
+p1 <- ggplot() +
+  geom_jitter(#Rest of UK first
+    data =  prod.data %>% filter(highlow == 'high'),
+    aes(x = DATE, y = `gva/job moving av`, group = GEOGRAPHY_NAME),
+    alpha = 0.3, size = 1, 
+    width = 0.1) +
+  coord_cartesian(xlim = c(16,21), ylim = c(0,600)) +
+  geom_point(#Then Leeds and Bradford
+    data =  prod.data %>% filter(GEOGRAPHY_NAME %in% c('Leeds','Bradford'), highlow == 'high'),
+    aes(x = DATE, y = `gva/job moving av`, group = GEOGRAPHY_NAME, colour = GEOGRAPHY_NAME, shape = GEOGRAPHY_NAME),
+    alpha = 1, size = 5) +
+    scale_colour_brewer(palette = 'Set1', direction = 1, name="") +
+  geom_line(#Then Leeds and Bradford
+    data =  prod.data %>% filter(GEOGRAPHY_NAME %in% c('Leeds','Bradford'), highlow == 'high'),
+    aes(x = DATE, y = `gva/job moving av`, group = GEOGRAPHY_NAME, colour = GEOGRAPHY_NAME),
+    alpha = 0.5, size = 1) +
+    scale_colour_brewer(palette = 'Set1', direction = 1, name="") +
+  scale_shape_manual(values = c(16,18), name="") +
+  xlab('year') +
+  facet_wrap(~SIC_SECTION_REDUCED, nrow = 1, labeller = labeller(groupwrap = label_wrap_gen(10)))
+
+p2 <- ggplot() +
+  geom_jitter(#Rest of UK first
+    data =  prod.data %>% filter(highlow == 'low'),
+    aes(x = DATE, y = `gva/job moving av`, group = GEOGRAPHY_NAME),
+    alpha = 0.3, size = 1, 
+    width = 0.1) +
+  coord_cartesian(xlim = c(16,21), ylim = c(0,200)) +
+  geom_point(#Then Leeds and Bradford
+    data =  prod.data %>% filter(GEOGRAPHY_NAME %in% c('Leeds','Bradford'), highlow == 'low'),
+    aes(x = DATE, y = `gva/job moving av`, group = GEOGRAPHY_NAME, colour = GEOGRAPHY_NAME, shape = GEOGRAPHY_NAME),
+    alpha = 1, size = 5) +
+    scale_colour_brewer(palette = 'Set1', direction = 1, name="") +
+  geom_line(#Then Leeds and Bradford
+    data =  prod.data %>% filter(GEOGRAPHY_NAME %in% c('Leeds','Bradford'), highlow == 'low'),
+    aes(x = DATE, y = `gva/job moving av`, group = GEOGRAPHY_NAME, colour = GEOGRAPHY_NAME),
+    alpha = 0.5, size = 1) +
+    scale_colour_brewer(palette = 'Set1', direction = 1, name="") +
+  scale_shape_manual(values = c(16,18), name="") +
+  xlab('year') +
+  facet_wrap(~SIC_SECTION_REDUCED, nrow = 1, labeller = labeller(groupwrap = label_wrap_gen(10)))
+  
+
+p1 / p2
+
+
+```
+
+
+
+
+## GVA by sector over time: line charts
+
+
+

@@ -19,7 +19,7 @@ theme_set(theme_light())
 
 # OLDER 2024 GVA BRES DATA----
 
-## Productivity over time
+## ITL2 Productivity over time----
 
 #Where final data year is 2022 so now quite out of date
 #But doing BRES / ONS link could take a while to get same output...
@@ -82,6 +82,107 @@ ggplot(
   guides(colour = F, size = F) +
   xlab('year') +
   ylab('GVA per FT (3 year moving average)')
+
+
+#Same for ITL3 / sections----
+
+gva.jobs.ITL3.sections.cv <- read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_chainedvolume_ITL3_SIC_SECTION_MINUSimputedrent_2022.csv') %>% 
+  mutate(
+    gvaperjob = (gva/JOBCOUNT_FULLTIME) * 1000
+  )
+
+smoothband = 3
+
+gva.jobs.ITL3.sections.cv <- gva.jobs.ITL3.sections.cv %>% 
+  mutate(gvaperjob = gva/JOBCOUNT_FULLTIME) %>%
+  group_by(GEOGRAPHY_NAME,SIC07_description) %>%
+  mutate(
+    jobcount_movingav = rollapply(JOBCOUNT_FULLTIME,smoothband,mean,align='center',fill=NA),
+    gva_movingav = rollapply(gva,smoothband,mean,align='center',fill=NA),
+    `gva/job moving av` = rollapply(gvaperjob * 1000,smoothband,mean,align='center',fill=NA)
+  ) %>% 
+  ungroup()
+
+
+
+gva.jobs.ITL3.sections.cv <- gva.jobs.ITL3.sections.cv %>% 
+  # filter(!SIC07_description %in% c("Mining and quarrying","Agriculture, forestry and fishing")) %>% #this is a dup - it shouldn't be here, it's rolled into agri/mining (added as github issue)
+  filter(GEOGRAPHY_NAME!="Dorset and Somerset") %>% #easiest thing - just drop dorset/somerset for now, will lose dup sectors
+  mutate(
+    SIC_SECTION_REDUCED = case_when(
+      # grepl('admin',SIC07_description,ignore.case = T) ~ 'Admin',
+      grepl('agri',SIC07_description,ignore.case = T) ~ 'Agri/mining',
+      grepl('electr',SIC07_description,ignore.case = T) ~ 'power/water',
+      grepl('information',SIC07_description,ignore.case = T) ~ 'ICT',
+      grepl('manuf',SIC07_description,ignore.case = T) ~ 'Manuf',
+      grepl('other',SIC07_description,ignore.case = T) ~ 'other',
+      grepl('scientific',SIC07_description,ignore.case = T) ~ 'Scientific',
+      grepl('real estate',SIC07_description,ignore.case = T) ~ 'Real est',
+      grepl('transport',SIC07_description,ignore.case = T) ~ 'Transport',
+      grepl('entertainment',SIC07_description,ignore.case = T) ~ 'Entertainment',
+      grepl('human health',SIC07_description,ignore.case = T) ~ 'Health/soc',
+      grepl('food service activities',SIC07_description,ignore.case = T) ~ 'Food/service',
+      grepl('wholesale',SIC07_description,ignore.case = T) ~ 'Retail',
+      .default = SIC07_description
+    )
+  )
+
+#PLOT: GVA PER FT JOB FOR SIC SECTIONS OVER TIME
+# ggplot(
+#   gva.jobs.ITL3.sections.cv %>% 
+#     # filter(qg('constr|manuf|scientific|information|transport|health|food|entertainment',SIC07_description)) %>%
+#     mutate(
+#       DATE = DATE - 2000,#Make dates 2 digit, more readable on axis
+#       # placetoshow = qg('leeds',GEOGRAPHY_NAME),
+#       placetoshow = case_when(
+#         qg('leeds',GEOGRAPHY_NAME) ~ 'Leeds',
+#         qg('bradford',GEOGRAPHY_NAME) ~ 'Bradford',
+#         .default = 'other ITL3'
+#       ),
+#       placetoshow = factor(placetoshow, levels = c('other ITL3','Leeds','Bradford')),
+#       SIC_SECTION_REDUCED = fct_reorder(SIC_SECTION_REDUCED, gvaperjob, .desc = T)
+#     ),
+#   aes(x = DATE, y = `gva/job moving av`, group = GEOGRAPHY_NAME, size = placetoshow, colour = placetoshow, alpha = placetoshow)) +
+#   coord_cartesian(xlim = c(16,21)) +
+#   geom_jitter(width = 0.1) +
+#   scale_size_manual(values = c(1,5,5)) +
+#   scale_alpha_manual(values = c(0.25,1,1)) +
+#   scale_colour_brewer(palette = 'Set1', direction = 1) +
+#   # scale_colour_brewer(palette = 'Set1', direction = 1, name = "Sector") +
+#   facet_wrap(~SIC_SECTION_REDUCED, nrow = 1, labeller = labeller(groupwrap = label_wrap_gen(10))) +
+#   guides(size = F) +
+#   # guides(colour = F, size = F) +
+#   xlab('year') +
+#   ylab('GVA per FT (3 year moving average)')
+# 
+
+
+#ggplot won't give control over order very well... let's add on top manually, more control
+prod.data <- gva.jobs.ITL3.sections.cv %>% 
+  mutate(
+    DATE = DATE - 2000,#Make dates 2 digit, more readable on axis
+    SIC_SECTION_REDUCED = fct_reorder(SIC_SECTION_REDUCED, gvaperjob, .desc = T)
+  ) %>% 
+  filter(!qg('hous',SIC07_description))
+  
+  
+ggplot() +
+  geom_jitter(
+    data =  prod.data,
+    aes(x = DATE, y = `gva/job moving av`, group = GEOGRAPHY_NAME),
+    alpha = 0.3, size = 1, 
+    width = 0.1) +
+  coord_cartesian(xlim = c(16,21)) +
+  geom_point(
+    data =  prod.data %>% filter(GEOGRAPHY_NAME %in% c('Leeds','Bradford')),
+    aes(x = DATE, y = `gva/job moving av`, group = GEOGRAPHY_NAME, colour = GEOGRAPHY_NAME, shape = GEOGRAPHY_NAME),
+    alpha = 1, size = 3, 
+    width = 0.1) +
+    scale_colour_brewer(palette = 'Set1', direction = 1) +
+  scale_shape_manual(values = c(16,18)) +
+  facet_wrap(~SIC_SECTION_REDUCED, nrow = 1, labeller = labeller(groupwrap = label_wrap_gen(10)))
+  
+
 
 
 
@@ -477,7 +578,7 @@ yeartoplot <- yeartoplot %>%
     by = c('Region_name','SIC07_description')
   )
 
-place = 'Leeds'
+place = 'Rotherham'
 
 #Get a vector with sectors ordered by the place's LQs, descending order
 #Use this next to factor-order the SIC sectors
@@ -507,6 +608,39 @@ p <- addplacename_to_LQplot(df = yeartoplot, placename = place,
 )
 
 p
+
+
+
+
+p <- LQ_baseplot(df = yeartoplot, alpha = 0, sector_name = SIC07_description, 
+                 LQ_column = LQ, change_over_time = slope)
+
+p <- addplacename_to_LQplot(df = yeartoplot, plot_to_addto = p, 
+                            placename = 'Bradford', shapenumber = 23,
+                            region_name = Region_name,#The next four, the function needs them all 
+                            sector_name = SIC07_description, change_over_time = slope, LQ_column = LQ)
+
+# p <- addplacename_to_LQplot(df = yeartoplot, plot_to_addto = p, 
+#                             placename = 'South Yorkshire', shapenumber = 22,
+#                             region_name = Region_name,
+#                             sector_name = SIC07_description, change_over_time = slope, LQ_column = LQ)
+
+p <- addplacename_to_LQplot(df = yeartoplot, plot_to_addto = p, 
+                            placename = place, shapenumber = 16,
+                            min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
+                            value_column = value, sector_regional_proportion = sector_regional_proportion,#include numbers
+                            region_name = Region_name,
+                            sector_name = SIC07_description, change_over_time = slope, LQ_column = LQ)
+p <- p + 
+  annotate(
+    "text",
+    label = "Bradford: diamonds",
+    x = 0.05, y = 'Education',
+    
+  )
+
+p  
+
 
 
 
@@ -1041,12 +1175,13 @@ spatial.lag <- contiguity.matrix %*% city.wards$percentEmployed
 
 ## Proportion plots from that data----
 
+smoothband = 5
 
 itl3.2digit.cp <- itl3.2digit.cp %>% 
   group_by(Region_name,SIC07_description) %>%
   mutate(
-    gva_movingav = rollapply(value,smoothband,mean,align='center',fill=NA),
-    sector_regional_proportion_movingav = rollapply(sector_regional_proportion,smoothband,mean,align='center',fill=NA),
+    gva_movingav = rollapply(value,smoothband,mean,align='center',fill=NA, na.rm = T),
+    sector_regional_proportion_movingav = rollapply(sector_regional_proportion,smoothband,mean,align='center',fill=NA, na.rm = T),
     sector_regional_percent_movingav = sector_regional_proportion_movingav * 100
   ) %>% 
   ungroup()
@@ -1055,8 +1190,9 @@ itl3.2digit.cp <- itl3.2digit.cp %>%
 leedsbradford <- itl3.2digit.cp %>% 
   filter(
     qg('leeds|bradford',Region_name),
-    !is.na(sector_regional_proportion_movingav),
-    sector_regional_percent_movingav > 1
+    !is.na(sector_regional_proportion_movingav)
+    # sector_regional_percent_movingav > 1
+    # sector_regional_percent_movingav < 1
   ) %>% 
   select(Region_name,SIC07_description,year,gva_movingav,sector_regional_percent_movingav) %>% 
   pivot_wider(names_from = Region_name, values_from = c(gva_movingav,sector_regional_percent_movingav)) %>% 
@@ -1072,7 +1208,9 @@ p <- twod_generictimeplot_multipletimepoints(
   y_var = sector_regional_percent_movingav_Bradford,
   label_var = gva_movingav_Leeds,
   timevar = year,
-  times = c(1999:2022) 
+  # times = c(1999:2022) #3 yr moving av endpoints
+  times = c(2000:2021) #5 yr moving av endpoints
+  
 )
 
 # p + theme(aspect.ratio=1) +
@@ -1082,6 +1220,211 @@ p + coord_fixed() +
   scale_y_log10() +
   xlab(paste0('Leeds')) +
   ylab(paste0('Bradford'))
+
+
+
+
+
+
+#Just two time points! Rather less horrific to look at
+p <- twod_generictimeplot(
+  df = leedsbradford,
+  category_var = SIC07_description,
+  x_var = sector_regional_percent_movingav_Leeds,
+  y_var = sector_regional_percent_movingav_Bradford,
+  label_var = gva_movingav_Leeds,
+  timevar = year,
+  # start_time = 2016,
+  start_time = 2000,
+  end_time = 2021
+)
+
+p + coord_fixed() +
+  geom_abline(slope = 1, intercept = 0, alpha = 0.5, size = 3) + 
+  scale_x_log10() +
+  scale_y_log10() +
+  xlab(paste0('Leeds')) +
+  ylab(paste0('Bradford'))
+
+
+
+
+#SEPARATING OUT DIRECTIONS
+p <- twod_generictimeplot(
+  df = leedsbradford,
+  category_var = SIC07_description,
+  x_var = sector_regional_percent_movingav_Leeds,
+  y_var = sector_regional_percent_movingav_Bradford,
+  label_var = gva_movingav_Leeds,
+  timevar = year,
+  # start_time = 2016,
+  start_time = 2000,
+  end_time = 2021,
+  compasspoints_to_display = c('NE')
+)
+
+# p + theme(aspect.ratio=1) +
+p <- p + coord_fixed() +
+  geom_abline(slope = 1, intercept = 0, alpha = 0.5, size = 3) + 
+  # scale_x_log10() +
+  # scale_y_log10() +
+  xlab(paste0('Leeds')) +
+  ylab(paste0('Bradford'))
+
+
+
+#Aaand shrunk together
+p2 <- twod_generictimeplot(
+  df = leedsbradford,
+  category_var = SIC07_description,
+  x_var = sector_regional_percent_movingav_Leeds,
+  y_var = sector_regional_percent_movingav_Bradford,
+  label_var = gva_movingav_Leeds,
+  timevar = year,
+  # start_time = 2016,
+  start_time = 2000,
+  end_time = 2021,
+  compasspoints_to_display = c('SW')
+)
+
+# p + theme(aspect.ratio=1) +
+p2 <- p2 + coord_fixed() +
+  geom_abline(slope = 1, intercept = 0, alpha = 0.5, size = 3) + 
+  # scale_x_log10() +
+  # scale_y_log10() +
+  xlab(paste0('Leeds')) +
+  ylab(paste0('Bradford'))
+
+
+#NO SOUTH EAST! Which waaaas...
+p3 <- twod_generictimeplot(
+  df = leedsbradford,
+  category_var = SIC07_description,
+  x_var = sector_regional_percent_movingav_Leeds,
+  y_var = sector_regional_percent_movingav_Bradford,
+  label_var = gva_movingav_Leeds,
+  timevar = year,
+  # start_time = 2016,
+  start_time = 2000,
+  end_time = 2021,
+  compasspoints_to_display = c('SE')
+)
+
+# p + theme(aspect.ratio=1) +
+p3 <- p3 + coord_fixed() +
+  geom_abline(slope = 1, intercept = 0, alpha = 0.5, size = 3) +
+  # scale_x_log10() +
+  # scale_y_log10() +
+  xlab(paste0('Leeds')) +
+  ylab(paste0('Bradford'))
+
+
+p4 <- twod_generictimeplot(
+  df = leedsbradford,
+  category_var = SIC07_description,
+  x_var = sector_regional_percent_movingav_Leeds,
+  y_var = sector_regional_percent_movingav_Bradford,
+  label_var = gva_movingav_Leeds,
+  timevar = year,
+  # start_time = 2016,
+  start_time = 2000,
+  end_time = 2021,
+  compasspoints_to_display = c('NW')
+)
+
+# p + theme(aspect.ratio=1) +
+p4 <- p4 + coord_fixed() +
+  geom_abline(slope = 1, intercept = 0, alpha = 0.5, size = 3) + 
+  # scale_x_log10() +
+  # scale_y_log10() +
+  xlab(paste0('Leeds')) +
+  ylab(paste0('Bradford'))
+
+#Hardly any movement in NW (grew Bradford shrunk Leeds)
+(p+p2) / (p3 + p4)
+
+
+
+
+
+## PROPORTION PLOT FOR LEEDS+BRADFORD VS REST OF UK----
+
+#Group by those two and sum GVA
+lb.v.uk <- itl3.2digit.cp %>% 
+  select(Region_name:value) %>% 
+  mutate(
+    # leedsbradford_flag = ifelse(qg('leeds|bradford',Region_name), 'Leeds_Bradford','Rest_of_UK')
+    leedsbradford_flag = ifelse(qg('sheffield',Region_name), 'Leeds_Bradford','Rest_of_UK')
+  ) %>% 
+  group_by(leedsbradford_flag,year,SIC07_description) %>% 
+  summarise(value = sum(value)) %>% 
+  rename(Region_name = leedsbradford_flag) %>% 
+  ungroup()
+
+  
+#Re-find LQ values for those and get sector percentages
+lb.v.uk <- lb.v.uk %>% 
+  split(.$year) %>% 
+    map(add_location_quotient_and_proportions, 
+        regionvar = Region_name,
+        lq_var = SIC07_description,
+        valuevar = value) %>% 
+    bind_rows()
+
+
+#Then find moving averages to get start/end points for proportion plot(s)
+smoothband = 5
+
+lb.v.uk <- lb.v.uk %>% 
+  group_by(Region_name,SIC07_description) %>%
+  mutate(
+    gva_movingav = rollapply(value,smoothband,mean,align='center',fill=NA, na.rm = T),
+    sector_regional_proportion_movingav = rollapply(sector_regional_proportion,smoothband,mean,align='center',fill=NA, na.rm = T),
+    sector_regional_percent_movingav = sector_regional_proportion_movingav * 100
+  ) %>% 
+  ungroup()
+
+#Check against orig
+# itl3.2digit.cp %>% filter(qg('leeds|bradford', Region_name)) %>% View
+
+
+#Put Leeds/Bradford and 'Rest of UK' on different axes
+lb.v.uk.wide <- lb.v.uk %>% 
+  filter(
+    !is.na(sector_regional_proportion_movingav)
+  ) %>% 
+  select(Region_name,SIC07_description,year,gva_movingav,sector_regional_percent_movingav) %>% 
+  pivot_wider(names_from = Region_name, values_from = c(gva_movingav,sector_regional_percent_movingav))
+  # mutate(
+  #   gva_both = paste0('GVA Leeds/Bradford: £',gva_movingav_Leeds_Bradford %>% round(2),'M')
+  # )
+
+
+#PLOT!
+p <- twod_generictimeplot(
+  df = lb.v.uk.wide,
+  category_var = SIC07_description,
+  x_var = sector_regional_percent_movingav_Leeds_Bradford,
+  y_var = sector_regional_percent_movingav_Rest_of_UK,
+  label_var = gva_movingav_Leeds_Bradford,
+  timevar = year,
+  # start_time = 2016,
+  start_time = 2000,
+  end_time = 2021
+  # compasspoints_to_display = c('SW')
+  # compasspoints_to_display = c('NW')
+  # compasspoints_to_display = c('SW')
+  # compasspoints_to_display = c('NE')
+)
+
+p + coord_fixed(xlim = c(1,12), ylim = c(1,12)) +
+  geom_abline(slope = 1, intercept = 0, alpha = 0.5, size = 3) + 
+  # scale_x_log10() +
+  # scale_y_log10() +
+  xlab(paste0('Leeds/Bradford')) +
+  ylab(paste0('Rest of UK'))
+
+
 
 
 
@@ -1369,13 +1712,9 @@ both <- both %>%
 
 #Then - we want the two places on their own axes, thus...
 both.wide.pos <- both %>%
-  filter(slopetype == 'sig pos',internal_external == 'external') %>%
-  select(sector,place,percent) %>%
+  filter(slopetype %in% c('sig pos','sig neg'),internal_external == 'external') %>%
+  select(sector,place,percent,slopetype) %>%
   pivot_wider(names_from = place, values_from = percent)
-
-firstplace <- both %>%
-  filter(slopetype == 'sig pos', place == unique(both$place)[1]) %>%
-  select(place,sector,percent,internal_external)
 
 
 
@@ -1384,7 +1723,12 @@ firstplace <- both %>%
 
 
 #Plot
-ggplot(both, aes(x = ))
+p <- ggplot(both.wide.pos, aes(x = Leeds, y = Bradford, group = sector)) +
+  geom_point() +
+  geom_abline(intercept = 0, slope = 1) +
+  facet_wrap(~slopetype)
+
+ggplotly(p, tooltip = 'sector')
 
 
 

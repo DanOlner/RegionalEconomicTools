@@ -1,0 +1,17 @@
+{
+  "hash": "2f6d7cf31a4ad8f9671bc52583e6978e",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Leeds/Bradford linkages -- all results\"\nauthor: \"Dan Olner\"\nformat: \n  html:\n    output-file: \"LeedsBradford_overview_May2025\"\n    fig-width: 9.5\n    fig-height: 8\nexecute:\n  echo: false\n  message: false\n  warning: false\nfig-responsive: false\n---\n\n::: {.cell}\n\n:::\n\n\n\n\n## Leeds / Bradford sectors over time from latest ONS data (1998 to 2023)\n\n\n\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![Fig cap.](LeedsBradford_allresults_files/figure-html/fig-sectorplot-LB-1.png){#fig-sectorplot-LB width=912}\n:::\n:::\n\n\n\n\n\n\n\n## GVA over jobs for Leeds and Bradford compared to rest of UK\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![Fig cap.](LeedsBradford_allresults_files/figure-html/fig-itl3-gvaperjob-1.png){#fig-itl3-gvaperjob width=912}\n:::\n:::\n\n\n\n\n\n\n## GVA by sector over time: line charts\n\n\n\n",
+    "supporting": [
+      "LeedsBradford_allresults_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
