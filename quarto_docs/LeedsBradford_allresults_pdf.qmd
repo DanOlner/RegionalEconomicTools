@@ -2,7 +2,7 @@
 title: "Economic collaboration across Bradford and Leeds: what does the latest sector data show?"
 author: "Dan Olner"
 format: 
-  html:
+  pdf:
     output-file: "LeedsBradford_overview_May2025"
     fig-width: 9.5
     fig-height: 8

@@ -2,7 +2,7 @@
 title: "Economic collaboration across Bradford and Leeds: what does the latest sector data show?"
 author: "Dan Olner"
 format: 
-  html:
+  pdf:
     output-file: "LeedsBradford_overview_May2025"
     fig-width: 9.5
     fig-height: 8
@@ -35,6 +35,8 @@ theme_set(theme_light())
 
 
 ```
+
+
 
 ## OVERVIEW
 
@@ -91,6 +93,8 @@ Here's a summary of what the data analysis below shows.
 
 
 ## 1. How has the structure of Leeds and Bradford's economies changed over time?
+
+
 
 
 
@@ -243,7 +247,11 @@ leedsplot / bradsplot
 
 
 
+
+
 ## 2. GVA per job for Leeds and Bradford's sectors compared to the rest of the UK
+
+
 
 
 
@@ -360,7 +368,11 @@ p1 / p2
 
 
 
+
+
 ## 3. From Companies House firm level data: in the last year (March 2024-March 2025), percent change in employment in firms with 10+ employees, five West Yorkshire local authorities compared to 'core cities' (hover for place names)
+
+
 
 
 ```{r, fig-percentempfourplaces}
@@ -483,7 +495,11 @@ ggplotly(p, height = 900, tooltip = 'Place: ')
 
 ```
 
+
+
 ## 4: Same as above from Companies House data, but all firms with fewer than 10 employees
+
+
 
 ```{r, fig-percentempfourplaces_lessthan10}
 #| label: fig-percentempfourplaces_lessthan10
@@ -577,6 +593,8 @@ ggplotly(p, height = 900, tooltip = 'Place: ')
 
 
 
+
+
 ## 5: Location quotient change for Leeds and Bradford's broad sectors
 
 
@@ -588,6 +606,8 @@ ggplotly(p, height = 900, tooltip = 'Place: ')
 * Red circles have been decreasing in concentration over time (larger circles decreasing the most)
 * Black horizontal lines show the min and max of concentration in the data’s history (from 2015 to 2023) (so, often, large green circles will be at the right of this line because sector concentration has been steadily increasing)
 * Per sector GVA money amounts and percent of that region’s entire economy are shown on the right.
+
+
 
 
 
@@ -705,7 +725,11 @@ p
 
 
 
+
+
 ## 6. Which sectors grew as a proportion of *both* Leeds and Bradford, and by how much? Change between 1998 and 2023 (5 yr moving av) in Leeds and Bradford sectors (2 digit SIC)
+
+
 
 
 ```{r, fig-props}
@@ -887,6 +911,8 @@ p +
 
 
 
+
+
 ## 7. In the last decade (2014 to 2023) which sectors in Leeds and Bradford have increased their output significantly more than other places?
 
 @fig-plotslopecounts aims to show which sectors (at 2 digit SIC level) have **relatively increased** more than other places - and that the change is significant (slopes don't overlap, with 95% CIs). It uses the most recently available GVA data, up to 2023, looking at trends over the last decade.
@@ -898,6 +924,8 @@ To get to the points in the plot, the data goes through the following steps:
 * Plot what percent of places Leeds/Bradford has these higher slopes.
 
 Note, growth could be positive (or negative) everywhere; the comparison shows whether Leeds/Bradford's rate over time is higher in comparison to those. So, for example - ICT volume output has been growing everywhere in the UK over time, but Leeds and Bradford have grown significantly more (on this measure) than 59% and 45% of other places, respectively.
+
+
 
 ```{r, fig-plotslopecounts}
 #| label: fig-plotslopecounts
@@ -1161,11 +1189,6 @@ p
 
 ```
 
-
-
-
-
-
 ```{r eval=FALSE}
 ## Economic similarity
 
@@ -1335,21 +1358,4 @@ leedsplot / bradfordplot
 
 
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
