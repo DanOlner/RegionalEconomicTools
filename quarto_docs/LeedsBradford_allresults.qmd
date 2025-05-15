@@ -477,7 +477,7 @@ ggplotly(p, height = 900, tooltip = 'Place: ')
 
 ```
 
-## 3A: Same as above from Companies House data, but all firms with fewer than 10 employees
+## 4: Same as above from Companies House data, but all firms with fewer than 10 employees
 
 ```{r, fig-percentempfourplaces_lessthan10}
 #| label: fig-percentempfourplaces_lessthan10
@@ -571,7 +571,7 @@ ggplotly(p, height = 900, tooltip = 'Place: ')
 
 
 
-## 4: Location quotient change for Leeds and Bradford's broad sectors
+## 5: Location quotient change for Leeds and Bradford's broad sectors
 
 
 **Key for location quotient plot (see [this post](sector_locationquotients_and_proportions.html) for more):**
@@ -699,7 +699,7 @@ p
 
 
 
-## 5. Which sectors grew as a proportion of *both* Leeds and Bradford, and by how much? Change between 1998 and 2023 (5 yr moving av) in Leeds and Bradford sectors (2 digit SIC)
+## 6. Which sectors grew as a proportion of *both* Leeds and Bradford, and by how much? Change between 1998 and 2023 (5 yr moving av) in Leeds and Bradford sectors (2 digit SIC)
 
 
 ```{r, fig-props}
@@ -881,7 +881,7 @@ p +
 
 
 
-## 6. In the last decade (2014 to 2023) which sectors in Leeds and Bradford have increased their output significantly more than other places?
+## 7. In the last decade (2014 to 2023) which sectors in Leeds and Bradford have increased their output significantly more than other places?
 
 @fig-plotslopecounts aims to show which sectors (at 2 digit SIC level) have **relatively increased** more than other places - and that the change is significant (slopes don't overlap, with 95% CIs). It uses the most recently available GVA data, up to 2023, looking at trends over the last decade.
 
