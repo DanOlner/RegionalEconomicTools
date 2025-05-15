@@ -297,6 +297,7 @@ leedsplot <- ggplot(itl3.sections.cv %>%
   ylab('SIC GVA (chained volume) ') +
   theme(plot.title = element_text(face = 'bold')) +
   labs(colour = 'SIC section') +
+  scale_y_log10() +
   ggtitle(paste0(place, ' GVA over time\nTop 12 sectors by GVA in latest year\n(', smoothband,' year moving average)'))
 
 # leedsplot
@@ -330,9 +331,23 @@ bradfordplot <- ggplot(itl3.sections.cv %>%
   ylab('SIC GVA (chained volume) ') +
   theme(plot.title = element_text(face = 'bold')) +
   labs(colour = 'SIC section') +
+  scale_y_log10() +
   ggtitle(paste0(place, ' GVA over time\nTop 12 sectors by GVA in latest year\n(', smoothband,' year moving average)'))
 
 leedsplot + bradfordplot
+
+
+#Quick checks: if using log scale, does that accurately convey the % change in sector range change?
+#Comparing two at different scales - ICT and finance in Leeds
+chk <- itl3.sections.cv %>% 
+  filter(
+    Region_name == 'Leeds', 
+    qg('information|financ', SIC07_description),
+    !is.na(gva_movingav)
+  )
+
+
+
 
 
 ## REPEAT LEEDS/BRADFORD BUT DO SECTION PROPORTIONS OVER TIME (FOR BETTER COMPARISON)----
@@ -391,7 +406,7 @@ leedsplot <- ggplot(itl3.sections.cp %>%
   geom_point() +
   geom_line() +
   # scale_color_brewer(palette = 'Paired', direction = 1) +
-  scale_color_manual(values = setNames(randomcols,unique(itl3.sections.cv$SIC07_description))) +#set manual pastel colours matching sector name
+  scale_color_manual(values = setNames(randomcols,unique(itl3.sections.cp$SIC07_description))) +#set manual pastel colours matching sector name
   ylab('Sector: percent of regional economy') +
   theme(plot.title = element_text(face = 'bold')) +
   labs(colour = 'SIC section') +
@@ -422,7 +437,7 @@ bradsplot <- ggplot(itl3.sections.cp %>%
   geom_point() +
   geom_line() +
   # scale_color_brewer(palette = 'Paired', direction = 1) +
-  scale_color_manual(values = setNames(randomcols,unique(itl3.sections.cv$SIC07_description))) +#set manual pastel colours matching sector name
+  scale_color_manual(values = setNames(randomcols,unique(itl3.sections.cp$SIC07_description))) +#set manual pastel colours matching sector name
   ylab('Sector: percent of regional economy') +
   theme(plot.title = element_text(face = 'bold')) +
   labs(colour = 'SIC section') +
@@ -432,6 +447,15 @@ bradsplot <- ggplot(itl3.sections.cp %>%
 bradsplot + leedsplot
 
 
+#Same eyeballing for current price proportions... ICT looks odd given its CV growth in Leeds, doesn't it?
+chk.cp <- itl3.sections.cp %>% 
+  filter(
+    Region_name == 'Leeds', 
+    qg('information|financ', SIC07_description),
+    !is.na(gva_movingav)
+  ) %>% 
+  mutate(sector_regional_percent_movingav = sector_regional_prop_movingav * 100) %>% 
+  select(Region_name,SIC07_description,year,value:sector_total_proportion,gva_movingav:sector_regional_percent_movingav)
 
 
 
@@ -642,6 +666,38 @@ p <- p +
 p  
 
 
+
+#If I could plot both and space them out, that would be good (could get Bradford change showing too)
+p <- LQ_baseplot(df = yeartoplot, alpha = 0, sector_name = SIC07_description, 
+                 LQ_column = LQ, change_over_time = slope)
+
+p <- addplacename_to_LQplot(df = yeartoplot, plot_to_addto = p, 
+                            placename = 'Bradford', shapenumber = 23,
+                            min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
+                            value_column = value, sector_regional_proportion = sector_regional_proportion,#include numbers
+                            region_name = Region_name,
+                            sector_name = SIC07_description, change_over_time = slope, LQ_column = LQ,
+                            nudgepos = -0.1, text = 7)
+
+
+
+p <- addplacename_to_LQplot(df = yeartoplot, plot_to_addto = p, 
+                            placename = place, shapenumber = 16,
+                            min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
+                            value_column = value, sector_regional_proportion = sector_regional_proportion,#include numbers
+                            region_name = Region_name,
+                            sector_name = SIC07_description, change_over_time = slope, LQ_column = LQ,
+                            nudgepos = 0.1, text = 7)
+p <- p + 
+  annotate(
+    "text",
+    label = "Bradford: diamonds",
+    x = 0.05, y = 'Education'
+    ) +
+  coord_cartesian(xlim = c(0.03,7))
+  
+
+p 
 
 
 
@@ -878,7 +934,10 @@ lb <- lb %>%
 
 
 
-## Spatial dependency / similarity of neighbouring economies over time----
+# Spatial dependency / similarity of neighbouring economies over time----
+
+#NOTE: DON'T RANK CV DATA, CAN'T COMPARE DIFFERENT SECTORS' POSITIONS!
+#cp is set in the function for doing the spearman's...
 
 #Noting that there's a tidy wrapper...
 #https://sfdep.josiahparry.com/
@@ -1041,7 +1100,10 @@ results.df <- results.df %>%
 
 #We lost two pairs somewhere?  
 table(results.df$neighbourflag)
-  
+
+
+#SAVE!
+saveRDS(results.df, 'data/misc/spearman_econsimilarity_neighbours_v_all.rds')
 
 
 #THAT'S THE FINAL PAIRS THING WITH FLAGGED NEIGHBOURS...
@@ -1199,6 +1261,11 @@ leedsbradford <- itl3.2digit.cp %>%
   mutate(
     gva_both = paste0('GVA Leeds: ',gva_movingav_Leeds %>% round(2) , '\nGVA Bradford: ', gva_movingav_Bradford %>% round(2))
   )
+
+
+#save for output doc
+saveRDS(leedsbradford,'data/misc/leedsbradford_regprops.rds')
+
 
 
 p <- twod_generictimeplot_multipletimepoints(

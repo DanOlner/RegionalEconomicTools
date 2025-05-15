@@ -231,7 +231,7 @@ LQ_baseplot <- function(df, alpha = 0.1, sector_name, LQ_column, change_over_tim
 #a column with min and max values to overlay as bars to indicate full range of the data
 addplacename_to_LQplot <- function(df, plot_to_addto, placename, shapenumber=16, backgroundcolour='black', add_gva = F, setalpha = 1,
                                    region_name, sector_name,change_over_time, value_column, LQ_column, sector_regional_proportion,
-                                   min_LQ_all_time,max_LQ_all_time, value_col_ismoney = T){
+                                   min_LQ_all_time,max_LQ_all_time, value_col_ismoney = T, nudgepos = 0, textx = 20){
   
   region_name <- enquo(region_name)  
   sector_name <- enquo(sector_name)
@@ -244,28 +244,32 @@ addplacename_to_LQplot <- function(df, plot_to_addto, placename, shapenumber=16,
       aes(y = !!sector_name, x = !!LQ_column, size = !!change_over_time *1.75),
       shape = shapenumber,
       colour = backgroundcolour,
-      alpha = setalpha
+      alpha = setalpha,
+      position = position_nudge(y = nudgepos)
     ) +
     geom_point(
       data = df %>% filter(!!region_name == placename, !!change_over_time < 0), 
       aes(y = !!sector_name, x = !!LQ_column, size = !!change_over_time *-1.75),
       shape = shapenumber,
       colour = backgroundcolour,
-      alpha = setalpha
+      alpha = setalpha,
+      position = position_nudge(y = nudgepos)
     ) +
     geom_point(
       data = df %>% filter(!!region_name == placename, !!change_over_time > 0), 
       aes(y = !!sector_name, x = !!LQ_column, size = !!change_over_time),
       shape = shapenumber,
       colour = 'green',
-      alpha = setalpha
+      alpha = setalpha,
+      position = position_nudge(y = nudgepos)
     ) +
     geom_point(
       data = df %>% filter(!!region_name == placename, !!change_over_time < 0), 
       aes(y = !!sector_name, x = !!LQ_column, size = !!change_over_time * -1),
       shape = shapenumber,
       colour = 'red',
-      alpha = setalpha
+      alpha = setalpha,
+      position = position_nudge(y = nudgepos)
     ) 
   
   #Test for one of these missing, don't display if so
@@ -278,8 +282,10 @@ addplacename_to_LQplot <- function(df, plot_to_addto, placename, shapenumber=16,
     plot_to_addto <- plot_to_addto +  
       geom_text(
         data = df %>% filter(!!region_name == placename), 
-        aes(y = !!sector_name, x = 20, label = paste0('£',!!value_column,'M, ',round(!!sector_regional_proportion * 100, 2),'%')),
-        nudge_x = 0.3, hjust = 1, alpha = 0.7, size = 3
+        aes(y = !!sector_name, x = textx, label = paste0('£',!!value_column,'M, ',round(!!sector_regional_proportion * 100, 2),'%')),
+        # nudge_x = 0.3, 
+        hjust = 1, alpha = 0.7, size = 3,
+        position = position_nudge(y = nudgepos)
       )
     
     } else {
@@ -287,8 +293,10 @@ addplacename_to_LQplot <- function(df, plot_to_addto, placename, shapenumber=16,
     plot_to_addto <- plot_to_addto +  
       geom_text(
         data = df %>% filter(!!region_name == placename), 
-        aes(y = !!sector_name, x = 20, label = paste0(!!value_column,', ',round(!!sector_regional_proportion * 100, 2),'%')),
-        nudge_x = 0.3, hjust = 1, alpha = 0.7, size = 3
+        aes(y = !!sector_name, x = textx, label = paste0(!!value_column,', ',round(!!sector_regional_proportion * 100, 2),'%')),
+        # nudge_x = 0.3, 
+        hjust = 1, alpha = 0.7, size = 3,
+        position = position_nudge(y = nudgepos)
       )
     
     }
@@ -303,7 +311,8 @@ addplacename_to_LQplot <- function(df, plot_to_addto, placename, shapenumber=16,
         geom_errorbar(
           data = df %>% filter(!!region_name == placename),
           aes(y = !!sector_name, xmin = !!min_LQ_all_time, xmax = !!max_LQ_all_time),
-          width = 0.1
+          width = 0.1,
+          position = position_nudge(y = nudgepos)
         )
       
     }
@@ -451,7 +460,7 @@ twod_proportionplot <- function(df, regionvar, category_var, valuevar, timevar, 
 # Y_var, values e.g. job count
 # Category_Var = either e.g. places or sectors
 #Label var, from the two time points, to display
-twod_generictimeplot <- function(df, category_var, x_var, y_var, timevar, label_var, start_time, end_time, compasspoints_to_display = c('NE','NW','SE','SW')){
+twod_generictimeplot <- function(df, category_var, x_var, y_var, timevar, label_var, start_time, end_time, compasspoints_to_display = c('NE','NW','SE','SW'), labeltextsize = 3){
   
   category_var <- enquo(category_var)  
   x_var <- enquo(x_var)
@@ -539,7 +548,8 @@ twod_generictimeplot <- function(df, category_var, x_var, y_var, timevar, label_
     segment.curvature = -0.1,
     segment.ncp = 0.3,
     segment.angle = 20,
-    max.overlaps = 20
+    max.overlaps = 10,
+    size = labeltextsize
   ) +
     scale_color_manual(values = setNames(c("red", "black",'#7fc97f','#beaed4','#fdc086','#1f78b4'),
                                          c(start_time, end_time,'NE','SE','NW','SW')))
@@ -1226,7 +1236,7 @@ slopeDiffGrid <- function(slope_df, confidence_interval, column_to_grid, column_
 
 
 
-#Assumes itl3.2digit.cv exists in global env
+#Assumes itl3.2digit.cp exists in global env
 #See LeedsBradfordExplore.R 795
 #Pairwise spearman correlations over time for ranked GVA
 #Adding in average for whole time series
@@ -1240,7 +1250,7 @@ pair_spearman_summarystats <- function(pairofplacenames){
   place1 <- toString(pairofplacenames[1])
   place2 <- toString(pairofplacenames[2])
 
-  lb <- itl3.2digit.cv %>% 
+  lb <- itl3.2digit.cp %>% 
     filter(Region_name %in% c(place1,place2)) %>% 
     select(Region_name,SIC07_description,year,value) %>% 
     pivot_wider(names_from = Region_name, values_from = value)
