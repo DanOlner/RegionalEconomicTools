@@ -2,7 +2,7 @@
 title: "Economic collaboration across Bradford and Leeds: what does the latest sector data show?"
 author: "Dan Olner"
 format: 
-  pdf:
+  docx:
     output-file: "LeedsBradford_overview_May2025"
     fig-width: 9.5
     fig-height: 8
@@ -45,12 +45,16 @@ This report digs into the **economic connection between Bradford and Leeds from 
 * **Leeds’ business services continue to grow in strength and specialisation, but Bradford’s finance, legal and technical sector growth suggests both places are benefiting from agglomeration**. Sectors connected to the region’s learning and innovation have also drawn closer together economically, in both education and scientific/technical output.
 * Information and communication technology (ICT) has been growing everywhere in the UK for the past two decades, but **Leeds’ and Bradford’s ICT output has grown significantly more than 59% and 45% of other places**, respectively, suggesting ICT is growing together across both and deeply connected.
 * **Both cities’ health sectors have grown in tandem (to become 10% and 15% of Leeds’ and Bradford’s economies)**, and that growth continues in the last year in the private sector, with Bradford’s companies house jobs count now not far behind Leeds.
-* **Commuter flows between the two cities affirms Bradford’s “strong functional relationship with Leeds”** with “high flows of young qualified Bradford residents working in Leeds, many in the large global and UK consulting, accounting, insurance and financial services sector companies with presence there” (Metro Dynamics 2017). 
+* **Commuter flows between the two cities affirms Bradford’s “strong functional relationship with Leeds”** with “high flows of young qualified Bradford residents working in Leeds, many in the large global and UK consulting, accounting, insurance and financial services sector companies with presence there” (Metro Dynamics 2017[^1]). 
 * This picture **challenges any simple core/periphery take.** Productivity analysis does show Leeds has higher per worker output in several sectors, but both are very close across many of them, and have historically moved in lockstep – with Bradford’s productivity higher in some key sectors like scientific /technical, and ICT productivity some way ahead of the UK average. 
-* **This level of economic integration has developed despite transport connectivity, not because of it.** It has shaped which parts of the two cities have been able to connect the most and thus benefit from linkages. Several recent analyses (see e.g. Stansbury et al 2023) have reinforced the case that UK transport constrains core cities and their linked job markets. 
-* The Northern Powerhouse Rail assessment’s analysis suggested that better “connection between Leeds, Bradford and Manchester can alone potentially increase productivity by 6%, raise the employment rate by 1.5% and increase gross value added (GVA) in the north by about 8% over 10 years” (Mott McDonald p.4). This report points to the deep connections between Bradford and Leeds’ innovation and research systems, as well as their complementary service infrastructure, and the co-benefits that can underpin. **A step change in transport connectivity could lead to a qualitatively different level of agglomeration built on that**, taking both cities beyond the kind of numbers NPR cite. Recent jobs growth evident in the Companies House data indicates what direction the region could go in, especially if building on wider ‘corridors of opportunity’ across West Yorkshire’s economy (see Companies House analysis below of growth across the region’s five local authorities).
+* **This level of economic integration has developed despite transport connectivity, not because of it.** It has shaped which parts of the two cities have been able to connect the most and thus benefit from linkages. Several recent analyses (see e.g. Stansbury et al 2023[^2]) have reinforced the case that UK transport constrains core cities and their linked job markets. 
+* The Northern Powerhouse Rail assessment’s analysis suggested that better “connection between Leeds, Bradford and Manchester can alone potentially increase productivity by 6%, raise the employment rate by 1.5% and increase gross value added (GVA) in the north by about 8% over 10 years” (Mott McDonald p.4[^3]). This report points to the deep connections between Bradford and Leeds’ innovation and research systems, as well as their complementary service infrastructure, and the co-benefits that can underpin. **A step change in transport connectivity could lead to a qualitatively different level of agglomeration built on that**, taking both cities beyond the kind of numbers NPR cite. Recent jobs growth evident in the Companies House data indicates what direction the region could go in, especially if building on wider ‘corridors of opportunity’ across West Yorkshire’s economy (see Companies House analysis below of growth across the region’s five local authorities).
 
+[^1]: "Bradford Economic Intelligence" report, Metro dynamics. July 2017
 
+[^2]: Stansbury, A., Turner ,Dan, and Balls, E., 2023. Tackling the UK’s regional economic inequality: binding constraints and avenues for policy intervention. Contemporary Social Science 18, 318–356.
+
+[^3]: "How to kickstart a northern renaissance: A vision-led case for investing n Northern Powerhouse Rail" report, Mott McDonald. 2021.
 
 ## HEADLINES FROM THE DATA ANALYSIS
 
@@ -475,10 +479,9 @@ p <- p +
   ylab("") 
 
 
-#p
-
+p
 # ggplotly(p, width = 800, height = 900, tooltip = 'localauthority_name')
-ggplotly(p, height = 900, tooltip = 'Place: ')
+# ggplotly(p, height = 900, tooltip = 'Place: ')
 
 
 ```
@@ -562,10 +565,9 @@ p <- p +
   ylab("") 
 
 
-#p
-
+p
 # ggplotly(p, width = 800, height = 900, tooltip = 'localauthority_name')
-ggplotly(p, height = 900, tooltip = 'Place: ')
+# ggplotly(p, height = 900, tooltip = 'Place: ')
 
 
 ```
