@@ -39,7 +39,9 @@ theme_set(theme_light())
 ## OVERVIEW
 
 
-This report digs into the **economic connection between Bradford and Leeds from 1998 to the present day**, putting it in a national context. It uses the latest ONS and Companies House data. The next section explores that data in detail. There are links to each chunk of analysis on the right, or scroll through them below. (Also, hover over figure citations for previews.) Open data and code for this report can be found [here](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/quarto_docs/LeedsBradford_allresults.qmd).
+This report digs into the **economic connection between Bradford and Leeds from 1998 to the present day**, putting it in a national context. It uses the latest ONS and Companies House data. The next section explores that data in detail. 
+
+An interactive online version of this document is viewable at **bit.ly/lbcx2025.** Open data and code for this report can be found [here](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/quarto_docs/LeedsBradford_allresults.qmd).
 
 * Over the last twenty five years, **Bradford and Leeds have converged more deeply** across sectors like finance. In this year’s Companies House data, **finance job growth continues** in a good mix of micro and larger firms, with “sophisticated supply chains” identified by Metro Dynamics (2017) still developing, and Bradford’s job growth ahead of UK core cities.
 * **Leeds’ business services continue to grow in strength and specialisation, but Bradford’s finance, legal and technical sector growth suggests both places are benefiting from agglomeration**. Sectors connected to the region’s learning and innovation have also drawn closer together economically, in both education and scientific/technical output.
