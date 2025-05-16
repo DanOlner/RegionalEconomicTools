@@ -14,6 +14,10 @@ library(RColorBrewer)
 source('functions/misc_functions.R')
 options(scipen = 999)
 
+#URL source load
+# source('https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/functions/misc_functions.R')
+# source('https://bit.ly/45f88Vv')
+
 #Set ggplot theme
 theme_set(theme_light())
 
