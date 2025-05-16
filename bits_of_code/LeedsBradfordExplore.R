@@ -9,6 +9,7 @@ library(plotly)#For interactive plots
 library(ggdist)
 library(tidyr)
 library(distributional)
+library(RColorBrewer)
 
 source('functions/misc_functions.R')
 options(scipen = 999)
