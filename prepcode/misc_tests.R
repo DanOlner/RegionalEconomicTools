@@ -43,3 +43,13 @@ df_best_matches <- df_matches %>%
   group_by(cleaned_itl3) %>% #arbitrary, could group by other
   slice_max(similarity_jw, n = 1) %>%
   ungroup()
+
+
+
+
+# Test alternative rolling average methods----
+
+#Been using zoo's rollapply but is there a native tidyverse option?
+#E.g. https://stackoverflow.com/a/75687758/5023561
+#Oh that's another library anyway... 
+#https://cran.r-project.org/web/packages/slider/vignettes/slider.html
