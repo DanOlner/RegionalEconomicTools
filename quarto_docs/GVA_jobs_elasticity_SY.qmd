@@ -1,0 +1,421 @@
+---
+title: "GVA jobs elasticity"
+code-overflow: wrap
+execute:
+  echo: false
+  warning: false
+  error: false
+format:
+  html:
+    toc: true
+    collapse: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.height = 8, fig.width = 10, echo = F, warning = F, error = F, message = F, comment=NA)
+```
+
+```{r librariesdata}
+library(flextable)
+library(tidyverse)
+library(zoo)
+# library(plotly)
+# library(sf)
+# library(tmap)
+library(patchwork)
+# library(jtools)
+source('../functions/misc_functions.R')
+
+itl2 <- read_csv('../data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_chainedvolume_ITL2_SIC_SECTION_MINUSimputedrent_2022.csv')
+
+deltas <- itl2 %>% 
+  filter(!qg('agri|health|educ|households|public admin', SIC07_description)) %>% 
+  group_by(SIC07_description,GEOGRAPHY_NAME) %>% 
+  mutate(
+    delta_gva = log(lag(gva)) - log(gva),
+    delta_jobs = log(lag(JOBCOUNT_FULLTIME)) - log(JOBCOUNT_FULLTIME)
+  ) %>% 
+  ungroup() %>% 
+  filter(,
+         !is.na(delta_gva),
+         !is.infinite(delta_jobs)
+         ) %>% 
+  mutate(
+    pandemic = ifelse(DATE < 2020, "pre","post"),
+    goods_services = ifelse(
+    qg('mining|manuf|constru|elec|water', SIC07_description), 'goods','services')
+    )
+  
+#A few of these, breaks regressions
+deltas$delta_jobs[is.infinite(deltas$delta_jobs)] <- NA
+
+
+
+```
+
+
+# Headlines, plus all the caveats
+
+* These results estimate the **elasticity between jobs and GVA for South Yorkshire** e.g. "For every job added to the economy, GVA could change by..." (with 95% confidence intervals). (Log of difference in jobs is regressed on log of GVA differnce across pairs of years.)
+* Data comes from the difference between pairs of years for GVA and jobs. There isn't enough data to get ITL2 vs SIC sections, but there's enough for each separately (and ITL2 broken down by goods v services). Here, just pre-pandemic data is used too - most likely a more reliable take on the real jobs/GVA relationship (though COVID will have changed that).
+* To get South Yorkshire sector estimates, national sector elasticities are applied to South Yorkshire sectors ("If South Yorkshire sectors had national elasticities, then one extra SY job equals x GVA change"), and that is adjusted by the difference to the national mean for South Yorkshire as a whole, by goods v services, to reflect SY's national position.
+* **Public sectors have been removed** from the analysis, because ONS deduces their GVA by multiplying jobs x regional wages. So trying to find GVA elasticities would be circular.
+* **Finance** is a highly modelled sector, GVA-wise, so **treat with caution**.
+* **Mining is a tiny proportion of SY economy (~200 jobs)** so elasticities likely to be volatile
+
+## Thoughts:
+
+* Productive sectors (GVA per worker / per hour terms) may be inelastic to employment change - so adding new workers may not affect output as much as one might hope. This is most likely due to the ratio of workers to capital investment in those sector's GVA. For example, this **appears to be the case for ICT** as a whole, as well as in South Yorkshire: it's a highly productive sector but changes in employment lead to only weak GVA changes. Sheffield's ICT sector is largely telecoms - a very capital intensive sector.
+* Some of these results are puzzling e.g. a low jobs/GVA elasticity for power sectors is to be expected given its huge capital intensity, but arts/entertainment is also low. Service sectors like that should have a more direct relationship between employment and output; why doesn't it do so here? (See below on why post-COVID job/GVA losses appear to strengthen the elasticity in food/ents sectors).
+* Confidence intervals **overlap a great deal**. A lot of sectors'/places' jobs <> GVA relationship are not very statistically separable from each other. This is a finding in itself - job investment may have quite even results regardless of focus.
+* **Manufacturing does stand out** in South Yorkshire however, with higher possible values for the job > GVA multiplier.
+
+
+
+## Caveats!
+
+* It doesn't identify causation. Salaries are a large part of the GVA number, but GVA can also change due to non-worker/capital investment, or external economic factors. So a GVA increase can lead to job increases.
+* Capital investment can correlate to an increase or decrease in jobcount; the numbers here just try to pick up on the average direction of the relationship between jobcount and GVA change.
+
+
+# What's below
+
+The three plot types and table below build on each other:
+
+1. Job to GVA elasticities for SIC sections nationally ("A 1% increase in jobs is associated with an x% increase in GVA in these sectors...")
+2. The same, but looking at places (broken down by goods and service categories - more granular sectors don't give enough data points)
+3. Combine those two data sources to give an estimate of actual job-increase to GVA ratios for South Yorkshire sectors, by (1) applying national sector elasticities to South Yorkshire ("If SY sectors had national elasticities..."); (2) adjusting by SY's difference to the mean for its economy as a whole (given how much higher elasticities are on average in plot 2).
+
+
+## Jobs / GVA elasticities for broad sectors across the UK, pre and post pandemic
+
+
+
+```{r gva_elast_prepostpandemic_sicsections}
+rez.sectors <- get_slope_and_se_safely(deltas, y = delta_gva, x = delta_jobs, SIC07_description, pandemic) %>% 
+  mutate(
+    ci95min = slope - (se * 1.96),
+    ci95max = slope + (se * 1.96)
+  ) %>% 
+  filter(!is.na(slope))
+
+# ggplot(rez.sectors, aes(x = slope, y = fct_reorder(SIC07_description,slope))) +
+#   geom_point() +
+#   geom_errorbar(aes(xmin = ci95min, xmax = ci95max), width = 0.1) +
+#   # scale_size_manual(values = c(0.5,1)) +
+#   # scale_colour_manual(values = c('grey','black')) +
+#   geom_vline(xintercept = 0, colour = 'black', alpha = 0.5) +
+#   xlab('1% ^ in full time workers is associated with x% ^ in GVA on average')
+
+ggplot(rez.sectors, 
+       aes(x = slope, y = fct_reorder(SIC07_description,slope), colour = pandemic)) +
+  geom_point(position = position_dodge(width = 0.5)) +
+  geom_errorbar(aes(xmin = ci95min, xmax = ci95max), width = 0.1, position = position_dodge(width = 0.5)) +
+  scale_size_manual(values = c(0.5,1)) +
+  # scale_colour_manual(values = c('grey','black')) +
+  scale_color_brewer(palette = 'Paired') +
+  geom_vline(xintercept = 0, colour = 'black', alpha = 0.5) +
+  xlab('1% ^ in full time workers is associated with x% ^ in GVA on average') +
+  ylab("")
+
+
+```
+
+
+## Same data, pre-COVID only
+
+... to make it easier to see without huge apparent service sector elasticities post-COVID (those are caused by large **negative** values - post COVID, food and entertainment jobs and output both dropped hugely, producing a stronger positive slope line, counterintuitively).
+
+That doesn't necessarily invalidate the data  - correlated losses shine a light on the jobs/GVA relationship too - but the pandemic had such a severe impact on these sectors, it's likely unrepresentative of 'normal' eonomic movements.
+
+```{r gva_elast_prepandemic_sicsections}
+ggplot(rez.sectors %>% filter(pandemic == 'pre'), 
+       aes(x = slope, y = fct_reorder(SIC07_description,slope))) +
+  geom_point() +
+  geom_errorbar(aes(xmin = ci95min, xmax = ci95max), width = 0.1) +
+  scale_size_manual(values = c(0.5,1)) +
+  # scale_colour_manual(values = c('grey','black')) +
+  scale_color_brewer(palette = 'Paired') +
+  geom_vline(xintercept = 0, colour = 'black', alpha = 0.5) +
+  xlab('1% ^ in full time workers is associated with x% ^ in GVA on average')
+
+
+
+```
+
+
+
+## Jobs/GVA elasticities at ITL2 level with South Yorkshire marked (goods v services)
+
+```{r goodsvservices}
+#| fig-height: 13
+
+pandemicflag = "pre"
+
+rez <- get_slope_and_se_safely(deltas, y = delta_gva, x = delta_jobs, GEOGRAPHY_NAME, goods_services, pandemic) %>% 
+  mutate(
+    ci95min = slope - (se * 1.96),
+    ci95max = slope + (se * 1.96)
+  ) %>% 
+  filter(!is.na(slope))
+
+
+#Pull out points for CI lines
+cilines <- rez %>%
+  ungroup() %>% 
+  filter(GEOGRAPHY_NAME == 'South Yorkshire', pandemic %in% pandemicflag, goods_services == 'goods') %>% 
+  select(ci95min,ci95max) 
+
+goods <- ggplot(rez %>% mutate(SY = qg('south y',GEOGRAPHY_NAME)) %>% filter(pandemic %in% pandemicflag, goods_services == 'goods'), 
+       aes(x = slope, y = fct_reorder(GEOGRAPHY_NAME,slope), size = SY)) +
+  geom_point(position = position_dodge(width = 0.5)) +
+  geom_errorbar(aes(xmin = ci95min, xmax = ci95max), width = 0.1, position = position_dodge(width = 0.5)) +
+  scale_size_manual(values = c(0.5,1)) +
+  # scale_colour_manual(values = c('grey','black')) +
+  scale_color_brewer(palette = 'Paired') +
+  geom_vline(xintercept = 0, colour = 'black', alpha = 0.3, size = 2) +
+  geom_vline(xintercept = cilines$ci95min[1], colour = 'darkgreen', alpha = 0.1, size = 1) +
+  geom_vline(xintercept = cilines$ci95max[1], colour = 'darkgreen', alpha = 0.1, size = 1) +
+  xlab('1% ^ in full time workers is associated with x% ^ in GVA on average') +
+  ylab('') +
+  ggtitle("GOODS")
+
+
+cilines <- rez %>%
+  ungroup() %>% 
+  filter(GEOGRAPHY_NAME == 'South Yorkshire', pandemic %in% pandemicflag, goods_services == 'services') %>% 
+  select(ci95min,ci95max) 
+
+services <- ggplot(rez %>% mutate(SY = qg('south y',GEOGRAPHY_NAME)) %>% filter(pandemic %in% pandemicflag, goods_services == 'services'), 
+       aes(x = slope, y = fct_reorder(GEOGRAPHY_NAME,slope), size = SY)) +
+  geom_point(position = position_dodge(width = 0.5)) +
+  geom_errorbar(aes(xmin = ci95min, xmax = ci95max), width = 0.1, position = position_dodge(width = 0.5)) +
+  scale_size_manual(values = c(0.5,1)) +
+  # scale_colour_manual(values = c('grey','black')) +
+  scale_color_brewer(palette = 'Paired') +
+  geom_vline(xintercept = 0, colour = 'black', alpha = 0.5) +
+  geom_vline(xintercept = cilines$ci95min[1], colour = 'darkgreen', alpha = 0.1, size = 1) +
+  geom_vline(xintercept = cilines$ci95max[1], colour = 'darkgreen', alpha = 0.1, size = 1) +
+  xlab('1% ^ in full time workers is associated with x% ^ in GVA on average') +
+  ylab('') +
+  ggtitle("SERVICES")
+
+
+goods / services
+
+```
+
+
+
+## Combining those two to estimate sector elasticities for South Yorkshire. "If one more job in sector x, then GVA £ change by..."
+
+
+```{r table}
+#Get SY job counts and percentages...
+itl2.lq <- itl2 %>% 
+  split(.$DATE) %>% 
+  map(add_location_quotient_and_proportions, 
+      regionvar = GEOGRAPHY_NAME,
+      lq_var = SIC07_description,
+      valuevar = JOBCOUNT_FULLTIME) %>% 
+  bind_rows() %>% 
+  mutate(
+    jobcountFT_regionalpercent = sector_regional_proportion * 100
+    ) %>% 
+  group_by(GEOGRAPHY_NAME,SIC07_description) %>% 
+  mutate(
+    movingav_jobcountFT_regionalpercent = rollapply(jobcountFT_regionalpercent,3,mean,align='center',fill=NA),
+    movingav_jobcountFT = rollapply(JOBCOUNT_FULLTIME,3,mean,align='center',fill=NA),
+    movingav_gva = rollapply(gva,3,mean,align='center',fill=NA)
+  ) %>% 
+  ungroup()
+
+#Confirm sums correctly to 100% of jobs per region/year... tick
+# itl2.lq %>%
+#   group_by(DATE,GEOGRAPHY_NAME) %>%
+#   summarise(sum(jobcountFT_regionalpercent))
+sy <- itl2.lq %>% 
+  filter(GEOGRAPHY_NAME == 'South Yorkshire')
+
+#Just latest year 3 year moving av
+sy.latest <- sy %>% filter(DATE == 2021) %>% select(SIC07_description,gva,movingav_jobcountFT_regionalpercent,movingav_jobcountFT,movingav_gva)
+
+
+#Add in elasticities for pre-COVID sectors for UK as a whole, to prep if...then
+#Keeping only sectors we have elasticities for
+sy.latest <- sy.latest %>% right_join(rez.sectors %>% filter(pandemic == 'pre'), by = 'SIC07_description')
+
+#Then some very basic sums to get from "1% inc in jobs means x% inc in GVA" and apply to these numbers
+
+#1. What one job as a percent of total jobs here?
+sy.latest <- sy.latest %>% 
+  # mutate(onejob_iswhatfraction = (1/movingav_jobcountFT)*100 )
+  mutate(onejob_iswhatfraction = 1/movingav_jobcountFT )
+
+#2. Elasticity is just a multiplier of job % change, so can multiply up by that to get GVA change if one extra job
+sy.latest <- sy.latest %>% 
+  mutate(
+    onejob_assocdwithhowmuchextraGVA_pointestimate =  onejob_iswhatfraction * movingav_gva * slope,
+    onejob_assocdwithhowmuchextraGVA_min95 =  onejob_iswhatfraction * movingav_gva * ci95min,
+    onejob_assocdwithhowmuchextraGVA_max95 =  onejob_iswhatfraction * movingav_gva * ci95max
+  )
+
+
+
+#Let's plot that...
+# ggplot(sy.latest, 
+#        aes(x = onejob_assocdwithhowmuchextraGVA_pointestimate * 1000, 
+#            y = fct_reorder(SIC07_description,onejob_assocdwithhowmuchextraGVA_pointestimate))) +
+#   geom_point() +
+#   geom_errorbar(aes(xmin = onejob_assocdwithhowmuchextraGVA_min95* 1000, 
+#                     xmax = onejob_assocdwithhowmuchextraGVA_max95* 1000), width = 0.1) +
+#   scale_size_manual(values = c(0.5,1)) +
+#   # scale_colour_manual(values = c('grey','black')) +
+#   scale_color_brewer(palette = 'Paired') +
+#   geom_vline(xintercept = 0, colour = 'black', alpha = 0.5) +
+#   xlab('One extra full time workers is associated with ^ in GVA on average')
+
+
+
+
+
+# set_flextable_defaults(
+#   font.size = 10, theme_fun = theme_vanilla,
+#   padding = 6,
+#   background.color = "#EFEFEF")
+# 
+# #https://stackoverflow.com/a/63928956
+# flextable(jobnumbers.table) %>% autofit() %>% fit_to_width(7.5)
+
+# GET PRE PANDEMIC SLOPES FOR ITL2S, FOR GOODS AND SERVICES, AND FIND SY DISTANCE TO MEAN
+
+#For then applying to elasticity values
+#That is - use info on difference of SY ITL2 elasticity, difference to mean
+#To adjust application of national level sector elasticities
+#To better match SY's probable values
+
+rez.pre <- get_slope_and_se_safely(deltas, y = delta_gva, x = delta_jobs, GEOGRAPHY_NAME, goods_services, pandemic) %>% 
+  mutate(
+    ci95min = slope - (se * 1.96),
+    ci95max = slope + (se * 1.96)
+  ) %>% 
+  filter(
+    !is.na(slope),
+    pandemic == 'pre'
+    )
+
+#Get mean, and then we just need SY point estimate and CI distance to that mean
+means <- rez.pre %>% 
+  group_by(goods_services) %>% 
+  summarise(meanslope = mean(slope)) %>% 
+  ungroup() %>% 
+  left_join(
+    rez.pre %>% ungroup() %>% filter(qg('south y',GEOGRAPHY_NAME)) %>% select(goods_services,slope,ci95min,ci95max)
+  ) %>% 
+  mutate(
+    sy_slopemultiple = slope/meanslope,
+    sy_ci95min_multiple = ci95min/meanslope,
+    sy_ci95max_multiple = ci95max/meanslope
+  )
+
+
+
+#Add goods/services flag back into the SY job/GVA values from last section
+sy.latest <- sy.latest %>%
+  mutate(goods_services = ifelse(
+    qg('mining|manuf|constru|elec|water', SIC07_description), 'goods','services'
+    ))
+
+
+#Add the multipliers in
+sy.latest <- sy.latest %>%
+  left_join(
+    means %>% select(goods_services,sy_slopemultiple:sy_ci95max_multiple),
+    by = 'goods_services'
+  )
+
+
+#Then multiply up...
+sy.latest <- sy.latest %>%
+  mutate(
+    ADJ_onejob_assocdwithhowmuchextraGVA_pointestimate = onejob_assocdwithhowmuchextraGVA_pointestimate * sy_slopemultiple * 1000000,
+    ADJ_onejob_assocdwithhowmuchextraGVA_min95 = onejob_assocdwithhowmuchextraGVA_min95 * sy_ci95min_multiple * 1000000,
+    ADJ_onejob_assocdwithhowmuchextraGVA_max95 = onejob_assocdwithhowmuchextraGVA_max95 * sy_ci95max_multiple* 1000000
+  )
+
+
+#And what does that look like??
+ggplot(sy.latest, 
+       aes(x = ADJ_onejob_assocdwithhowmuchextraGVA_pointestimate, 
+           y = fct_reorder(SIC07_description,ADJ_onejob_assocdwithhowmuchextraGVA_pointestimate))) +
+  geom_point() +
+  geom_errorbar(aes(xmin = ADJ_onejob_assocdwithhowmuchextraGVA_min95, 
+                    xmax = ADJ_onejob_assocdwithhowmuchextraGVA_max95), width = 0.1) +
+  scale_size_manual(values = c(0.5,1)) +
+  # scale_colour_manual(values = c('grey','black')) +
+  scale_color_brewer(palette = 'Paired') +
+  geom_vline(xintercept = 0, colour = 'black', alpha = 0.5) +
+  xlab('One extra full time worker is associated with ^ in GVA on average') +
+  ylab("")
+
+
+
+
+```
+
+
+## Table of data in the last plot
+
+```{r tablething}
+
+set_flextable_defaults(
+  font.size = 10, theme_fun = theme_vanilla,
+  padding = 6,
+  background.color = "#EFEFEF")
+
+sy.latest <- sy.latest %>% 
+  mutate(
+    `^1 job =` = paste0('£',round(ADJ_onejob_assocdwithhowmuchextraGVA_pointestimate,0)),
+    `min CI (95%)` = paste0('£',round(ADJ_onejob_assocdwithhowmuchextraGVA_min95,0)),
+    `max CI (95%)` = paste0('£',round(ADJ_onejob_assocdwithhowmuchextraGVA_max95,0)),
+    sector = case_when(
+      grepl('mining',SIC07_description,ignore.case = T) ~ 'Mining',
+      grepl('defence',SIC07_description,ignore.case = T) ~ 'public/defence',
+      grepl('support',SIC07_description,ignore.case = T) ~ 'admin/support',
+      grepl('financ',SIC07_description,ignore.case = T) ~ 'finance/insu',
+      grepl('agri',SIC07_description,ignore.case = T) ~ 'Agri/mining',
+      grepl('electr',SIC07_description,ignore.case = T) ~ 'power',
+      grepl('water',SIC07_description,ignore.case = T) ~ 'water',
+      grepl('information',SIC07_description,ignore.case = T) ~ 'ICT',
+      grepl('manuf',SIC07_description,ignore.case = T) ~ 'Manuf',
+      grepl('other',SIC07_description,ignore.case = T) ~ 'other',
+      grepl('scientific',SIC07_description,ignore.case = T) ~ 'Scientific',
+      grepl('real estate',SIC07_description,ignore.case = T) ~ 'Real est',
+      grepl('transport',SIC07_description,ignore.case = T) ~ 'Transport',
+      grepl('entertainment',SIC07_description,ignore.case = T) ~ 'Entertainment',
+      grepl('human health',SIC07_description,ignore.case = T) ~ 'Health/soc',
+      grepl('food service activities',SIC07_description,ignore.case = T) ~ 'Food/service',
+      grepl('wholesale',SIC07_description,ignore.case = T) ~ 'Retail',
+      .default = SIC07_description
+  ),
+  sector = factor(sector),
+  sector = fct_reorder(sector,ADJ_onejob_assocdwithhowmuchextraGVA_pointestimate)
+  ) %>% 
+  select(
+    sector,`^1 job =`,`min CI (95%)`,`max CI (95%)`
+  )
+
+
+#https://stackoverflow.com/a/63928956
+flextable(
+  sy.latest %>% arrange(desc(sector))
+  # sy.latest %>% arrange(`^1 job =`)
+  ) %>% autofit() %>% fit_to_width(7.5)
+
+```
+
+
+
+
+

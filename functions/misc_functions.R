@@ -84,7 +84,7 @@ compute_slope_or_zero <- function(data, ..., y, x) {
 get_slope_and_se_safely <- function(data, ..., y, x) {
   
   groups <- quos(...)  
-  y <- enquo(y)
+  y <- enquo(y) 
   x <- enquo(x) 
   
   #Function to compute slope
