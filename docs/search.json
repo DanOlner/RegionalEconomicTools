@@ -796,9 +796,9 @@
   {
     "objectID": "quarto_docs/GVA_jobs_elasticity_SY.html",
     "href": "quarto_docs/GVA_jobs_elasticity_SY.html",
-    "title": "GVA jobs elasticity",
+    "title": "Jobs/GVA elasticities for sectors in South Yorkshire",
     "section": "",
-    "text": "These results estimate the elasticity between jobs and GVA for South Yorkshire e.g. “For every job added to the economy, GVA could change by…” (with 95% confidence intervals). (Log of difference in jobs is regressed on log of GVA differnce across pairs of years.)\nData comes from the difference between pairs of years for GVA and jobs. There isn’t enough data to get ITL2 vs SIC sections, but there’s enough for each separately (and ITL2 broken down by goods v services). Here, just pre-pandemic data is used too - most likely a more reliable take on the real jobs/GVA relationship (though COVID will have changed that).\nTo get South Yorkshire sector estimates, national sector elasticities are applied to South Yorkshire sectors (“If South Yorkshire sectors had national elasticities, then one extra SY job equals x GVA change”), and that is adjusted by the difference to the national mean for South Yorkshire as a whole, by goods v services, to reflect SY’s national position.\nPublic sectors have been removed from the analysis, because ONS deduces their GVA by multiplying jobs x regional wages. So trying to find GVA elasticities would be circular.\nFinance is a highly modelled sector, GVA-wise, so treat with caution.\nMining is a tiny proportion of SY economy (~200 jobs) so elasticities likely to be volatile\n\n\n\n\nProductive sectors (GVA per worker / per hour terms) may be inelastic to employment change - so adding new workers may not affect output as much as one might hope. This is most likely due to the ratio of workers to capital investment in those sector’s GVA. For example, this appears to be the case for ICT as a whole, as well as in South Yorkshire: it’s a highly productive sector but changes in employment lead to only weak GVA changes. Sheffield’s ICT sector is largely telecoms - a very capital intensive sector.\nSome of these results are puzzling e.g. a low jobs/GVA elasticity for power sectors is to be expected given its huge capital intensity, but arts/entertainment is also low. Service sectors like that should have a more direct relationship between employment and output; why doesn’t it do so here? (See below on why post-COVID job/GVA losses appear to strengthen the elasticity in food/ents sectors).\nConfidence intervals overlap a great deal. A lot of sectors’/places’ jobs &lt;&gt; GVA relationship are not very statistically separable from each other. This is a finding in itself - job investment may have quite even results regardless of focus.\nManufacturing does stand out in South Yorkshire however, with higher possible values for the job &gt; GVA multiplier.\n\n\n\n\n\nIt doesn’t identify causation. Salaries are a large part of the GVA number, but GVA can also change due to non-worker/capital investment, or external economic factors. So a GVA increase can lead to job increases.\nCapital investment can correlate to an increase or decrease in jobcount; the numbers here just try to pick up on the average direction of the relationship between jobcount and GVA change."
+    "text": "These results estimate the elasticity between jobs and GVA for South Yorkshire e.g. “For every job added to the economy, GVA could change by…” (with 95% confidence intervals). (Log of difference in jobs is regressed on log of GVA differnce across pairs of years.)\nData comes from the difference between pairs of years for GVA and jobs. There isn’t enough data to get ITL2 vs SIC sections, but there’s enough for each separately (and ITL2 broken down by goods v services). Here, just pre-pandemic data is used too - most likely a more reliable take on the real jobs/GVA relationship (though COVID will have changed that).\nTo get South Yorkshire sector estimates, national sector elasticities are applied to South Yorkshire sectors (“If South Yorkshire sectors had national elasticities, then one extra SY job equals x GVA change”), and that is adjusted by the difference to the national mean for South Yorkshire as a whole, by goods v services, to reflect SY’s national position.\nPublic sectors have been removed from the analysis, because ONS deduces their GVA by multiplying jobs x regional wages. So trying to find GVA elasticities would be circular.\nFinance is a highly modelled sector, GVA-wise, so treat with caution.\nMining is a tiny proportion of SY economy (~200 jobs) so elasticities likely to be volatile\n\n\n\n\nProductive sectors (GVA per worker / per hour terms) may be inelastic to employment change - so adding new workers may not affect output as much as one might hope. This is most likely due to the ratio of workers to capital investment in those sector’s GVA. For example, this appears to be the case for ICT as a whole, as well as in South Yorkshire: it’s a highly productive sector but changes in employment lead to only weak GVA changes. Sheffield’s ICT sector is largely telecoms - a very capital intensive sector.\nSome of these results are puzzling e.g. a low jobs/GVA elasticity for power sectors is to be expected given its huge capital intensity, but arts/entertainment is also low. Service sectors like that should have a more direct relationship between employment and output; why doesn’t it do so here? (See below on why post-COVID job/GVA losses appear to strengthen the elasticity in food/ents sectors).\nConfidence intervals overlap a great deal. A lot of sectors’/places’ jobs &lt;&gt; GVA relationship are not very statistically separable from each other. This is a finding in itself - job investment may have quite even results regardless of focus.\nManufacturing does stand out in South Yorkshire however, with higher possible values for the job &gt; GVA multiplier.\n\nQuestion I don’t have a full answer for: what kinds of investment tend to be more capital/labour complementary (capital more likely to create jobs) that substituting (capital tends to destroy jobs)?\n\n\n\n\nIt doesn’t identify causation. Salaries are a large part of the GVA number, but GVA can also change due to non-worker/capital investment, or external economic factors. So a GVA increase can lead to job increases.\nCapital investment can correlate to an increase or decrease in jobcount; the numbers here just try to pick up on the average direction of the relationship between jobcount and GVA change."
   },
   {
     "objectID": "quarto_docs/GVA_jobs_elasticity_SY.html#same-at-itl2-level-with-south-yorkshire-marked-goods-v-services",
@@ -838,7 +838,7 @@
   {
     "objectID": "quarto_docs/GVA_jobs_elasticity_SY.html#table-of-data-in-the-last-plot",
     "href": "quarto_docs/GVA_jobs_elasticity_SY.html#table-of-data-in-the-last-plot",
-    "title": "GVA jobs elasticity",
+    "title": "Jobs/GVA elasticities for sectors in South Yorkshire",
     "section": "Table of data in the last plot",
     "text": "Table of data in the last plot\n\n\nsector^1 job =min CI (95%)max CI (95%)Mining£85342£10604£231071finance/insu£63456£12561£152904Manuf£34743£1781£107394Real est£29163£3433£79541water£24188£1642£72656Retail£22449£-3117£84045Transport£19752£5309£42051Construction£18609£210£61430Scientific£16342£3237£39369admin/support£15984£2814£39902other£15171£1841£41158Food/service£13827£1781£37105ICT£10426£-3949£48941Entertainment£3766£-1778£19069power£-17942£-26995£81522"
   },
@@ -852,42 +852,42 @@
   {
     "objectID": "quarto_docs/GVA_jobs_elasticity_SY.html#same-data-pre-covid-only",
     "href": "quarto_docs/GVA_jobs_elasticity_SY.html#same-data-pre-covid-only",
-    "title": "GVA jobs elasticity",
+    "title": "Jobs/GVA elasticities for sectors in South Yorkshire",
     "section": "Same data, pre-COVID only",
     "text": "Same data, pre-COVID only\n… to make it easier to see without huge apparent service sector elasticities post-COVID (those are caused by large negative values - post COVID, food and entertainment jobs and output both dropped hugely, producing a stronger positive slope line, counterintuitively).\nThat doesn’t necessarily invalidate the data - correlated losses shine a light on the jobs/GVA relationship too - but the pandemic had such a severe impact on these sectors, it’s likely unrepresentative of ‘normal’ eonomic movements."
   },
   {
     "objectID": "quarto_docs/GVA_jobs_elasticity_SY.html#jobs-gva-elasticities-for-broad-sectors-across-the-uk-pre-and-post-pandemic",
     "href": "quarto_docs/GVA_jobs_elasticity_SY.html#jobs-gva-elasticities-for-broad-sectors-across-the-uk-pre-and-post-pandemic",
-    "title": "GVA jobs elasticity",
+    "title": "Jobs/GVA elasticities for sectors in South Yorkshire",
     "section": "Jobs / GVA elasticities for broad sectors across the UK, pre and post pandemic",
     "text": "Jobs / GVA elasticities for broad sectors across the UK, pre and post pandemic"
   },
   {
     "objectID": "quarto_docs/GVA_jobs_elasticity_SY.html#jobsgva-elasticities-at-itl2-level-with-south-yorkshire-marked-goods-v-services",
     "href": "quarto_docs/GVA_jobs_elasticity_SY.html#jobsgva-elasticities-at-itl2-level-with-south-yorkshire-marked-goods-v-services",
-    "title": "GVA jobs elasticity",
+    "title": "Jobs/GVA elasticities for sectors in South Yorkshire",
     "section": "Jobs/GVA elasticities at ITL2 level with South Yorkshire marked (goods v services)",
     "text": "Jobs/GVA elasticities at ITL2 level with South Yorkshire marked (goods v services)"
   },
   {
     "objectID": "quarto_docs/GVA_jobs_elasticity_SY.html#combining-those-two-to-estimate-sector-elasticities-for-south-yorkshire.-if-one-more-job-in-sector-x-then-gva-change-by",
     "href": "quarto_docs/GVA_jobs_elasticity_SY.html#combining-those-two-to-estimate-sector-elasticities-for-south-yorkshire.-if-one-more-job-in-sector-x-then-gva-change-by",
-    "title": "GVA jobs elasticity",
+    "title": "Jobs/GVA elasticities for sectors in South Yorkshire",
     "section": "Combining those two to estimate sector elasticities for South Yorkshire. “If one more job in sector x, then GVA £ change by…”",
     "text": "Combining those two to estimate sector elasticities for South Yorkshire. “If one more job in sector x, then GVA £ change by…”"
   },
   {
     "objectID": "quarto_docs/GVA_jobs_elasticity_SY.html#thoughts",
     "href": "quarto_docs/GVA_jobs_elasticity_SY.html#thoughts",
-    "title": "GVA jobs elasticity",
+    "title": "Jobs/GVA elasticities for sectors in South Yorkshire",
     "section": "",
-    "text": "Productive sectors (GVA per worker / per hour terms) may be inelastic to employment change - so adding new workers may not affect output as much as one might hope. This is most likely due to the ratio of workers to capital investment in those sector’s GVA. For example, this appears to be the case for ICT as a whole, as well as in South Yorkshire: it’s a highly productive sector but changes in employment lead to only weak GVA changes. Sheffield’s ICT sector is largely telecoms - a very capital intensive sector.\nSome of these results are puzzling e.g. a low jobs/GVA elasticity for power sectors is to be expected given its huge capital intensity, but arts/entertainment is also low. Service sectors like that should have a more direct relationship between employment and output; why doesn’t it do so here? (See below on why post-COVID job/GVA losses appear to strengthen the elasticity in food/ents sectors).\nConfidence intervals overlap a great deal. A lot of sectors’/places’ jobs &lt;&gt; GVA relationship are not very statistically separable from each other. This is a finding in itself - job investment may have quite even results regardless of focus.\nManufacturing does stand out in South Yorkshire however, with higher possible values for the job &gt; GVA multiplier."
+    "text": "Productive sectors (GVA per worker / per hour terms) may be inelastic to employment change - so adding new workers may not affect output as much as one might hope. This is most likely due to the ratio of workers to capital investment in those sector’s GVA. For example, this appears to be the case for ICT as a whole, as well as in South Yorkshire: it’s a highly productive sector but changes in employment lead to only weak GVA changes. Sheffield’s ICT sector is largely telecoms - a very capital intensive sector.\nSome of these results are puzzling e.g. a low jobs/GVA elasticity for power sectors is to be expected given its huge capital intensity, but arts/entertainment is also low. Service sectors like that should have a more direct relationship between employment and output; why doesn’t it do so here? (See below on why post-COVID job/GVA losses appear to strengthen the elasticity in food/ents sectors).\nConfidence intervals overlap a great deal. A lot of sectors’/places’ jobs &lt;&gt; GVA relationship are not very statistically separable from each other. This is a finding in itself - job investment may have quite even results regardless of focus.\nManufacturing does stand out in South Yorkshire however, with higher possible values for the job &gt; GVA multiplier.\n\nQuestion I don’t have a full answer for: what kinds of investment tend to be more capital/labour complementary (capital more likely to create jobs) that substituting (capital tends to destroy jobs)?"
   },
   {
     "objectID": "quarto_docs/GVA_jobs_elasticity_SY.html#caveats",
     "href": "quarto_docs/GVA_jobs_elasticity_SY.html#caveats",
-    "title": "GVA jobs elasticity",
+    "title": "Jobs/GVA elasticities for sectors in South Yorkshire",
     "section": "",
     "text": "It doesn’t identify causation. Salaries are a large part of the GVA number, but GVA can also change due to non-worker/capital investment, or external economic factors. So a GVA increase can lead to job increases.\nCapital investment can correlate to an increase or decrease in jobcount; the numbers here just try to pick up on the average direction of the relationship between jobcount and GVA change."
   }

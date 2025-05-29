@@ -1,5 +1,5 @@
 ---
-title: "GVA jobs elasticity"
+title: "Jobs/GVA elasticities for sectors in South Yorkshire"
 code-overflow: wrap
 execute:
   echo: false
@@ -71,7 +71,7 @@ deltas$delta_jobs[is.infinite(deltas$delta_jobs)] <- NA
 * Confidence intervals **overlap a great deal**. A lot of sectors'/places' jobs <> GVA relationship are not very statistically separable from each other. This is a finding in itself - job investment may have quite even results regardless of focus.
 * **Manufacturing does stand out** in South Yorkshire however, with higher possible values for the job > GVA multiplier.
 
-
+Question I don't have a full answer for: what kinds of investment tend to be more capital/labour complementary (capital more likely to create jobs) that substituting (capital tends to destroy jobs)?
 
 ## Caveats!
 
