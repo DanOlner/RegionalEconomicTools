@@ -1,0 +1,122 @@
+---
+title: "Using R for regional economic analysis, taster session (17th June 2025)"
+sidebar: false
+code-overflow: wrap
+execute:
+  echo: true
+  warning: false
+  error: false
+format:
+  html:
+    toc: true
+    collapse: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.height = 8, fig.width = 10, echo = TRUE, warning = F, error = F, message = F, comment=NA)
+
+```
+
+## Introduction
+
+This page is a **whistlestop tour** of using R for regional economic analysis of UK data. It's the source we'll run through in the June '25 [ONS Presents taster session](https://www.eventbrite.co.uk/e/ons-local-workshop-using-r-for-regional-economic-analysis-taster-session-tickets-1372930745819).
+
+Let me start with some things to bear in mind as we work through everything:
+
+----
+
+* **If anyone hasn't already got set up with R, I'll talk for a couple of minutes now and give you a chance to create an account on posit.cloud.** 
+
+* **Just follow the three steps below and you'll be ready to go**
+
+
+
+::: {.callout-note icon=false}
+
+## Get up and running with RStudio in the cloud
+
+* [Create an account at posit.cloud](https://login.posit.cloud/login) using the 'sign up' box, and then log in. That'll take you to your online workspace.
+* Click the **new project** button, top right
+* Select '**new project from template**' (as in the pic below) and then "Data Analysis in R with the tidyverse" (if not already selected). This template comes pre-installed with the tidyverse package, which we'll be using. Select then click OK down at the bottom. **This will open your RStudio project where we'll do the coding.** 
+
+![](https://danolner.github.io/posts/setting_up_w_r_online/newproject.png){width="200px"}
+
+:::
+
+----
+
+## Pre-amble
+
+Things!
+
+
+## Making a new R script in RStudio
+
+**RStudio is where you'll be doing all the R loveliness** (though see also the spangly new [positron](https://positron.posit.co/), I haven't tried yet).
+
+Before looking at RStudio, let's **make a new R script, where we'll do the coding**.
+
+
+::: {.callout-note icon=false}
+
+## Task 1: open a new R script in RStudio
+
+* In the **file** menu in RStudio
+* Use **new file** and **R script** (note: it tells you the keyboard shortcut for this)
+
+![](miscimages/Screenshot from 2025-06-12 11-48-14.png){width="200px"}
+
+:::
+
+
+After that new file's been made, RStudio should look something like the pic below.
+
+![](https://danolner.github.io/posts/setting_up_w_r_online/rstudio_online.png)
+
+
+
+
+
+
+
+## R Script
+
+```{r}
+library(tidyverse)
+
+```
+
+## Piping!
+
+```{r eval=F, echo=F}
+#Piping image from
+#https://s3.amazonaws.com/conference-handouts/2015-nctm-boston/pdfs/Fun%20Functions%20Handout%202013.pdf
+```
+
+```{r}
+
+#standard functions look like e.g.
+sqrt(100)
+
+#But we can also PIPE the number INTO the function...
+100 %>% sqrt
+
+#Which seems pointless, except we can now CHAIN FUNCTIONS
+
+```
+
+![](miscimages/function_machines.png){width="250px"}
+
+
+
+
+
+
+```{r cuttinz, eval=F, echo=F}
+
+#* **Follow [this little guide here](https://danolner.github.io/posts/setting_up_w_r_online/#if-using-rstudio-online-set-up-a-posit.cloud-account-and-create-your-rstudio-project){target="_blank"} to do that (opens in new tab).**
+
+
+
+```
+

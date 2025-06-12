@@ -12,7 +12,6 @@ v <- function(x) View(x)
 qg <- function(...) grepl(..., ignore.case = T)
 
 
-
 #The rest...
 
 #Compute series of slopes within groups safely, returning 0 if can't calculate

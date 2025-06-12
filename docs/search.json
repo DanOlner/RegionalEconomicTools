@@ -890,5 +890,75 @@
     "title": "Jobs/GVA elasticities for sectors in South Yorkshire",
     "section": "",
     "text": "It doesn’t identify causation. Salaries are a large part of the GVA number, but GVA can also change due to non-worker/capital investment, or external economic factors. So a GVA increase can lead to job increases.\nCapital investment can correlate to an increase or decrease in jobcount; the numbers here just try to pick up on the average direction of the relationship between jobcount and GVA change."
+  },
+  {
+    "objectID": "R_regecon_taster_2025.html",
+    "href": "R_regecon_taster_2025.html",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "",
+    "text": "This page is a whistlestop tour of using R for regional economic analysis of UK data. It’s the source we’ll run through in the June ’25 ONS Presents taster session.\nLet me start with some things to bear in mind as we work through everything:\n\n\nIf anyone hasn’t already got set up with R, I’ll talk for a couple of minutes now and give you a chance to create an account on posit.cloud.\nJust follow the three steps below and you’ll be ready to go\n\n\n\n\n\n\n\nGet up and running with RStudio in the cloud\n\n\n\n\nCreate an account at posit.cloud using the ‘sign up’ box, and then log in. That’ll take you to your online workspace.\nClick the new project button, top right\nSelect ‘new project from template’ (as in the pic below) and then “Data Analysis in R with the tidyverse” (if not already selected). This template comes pre-installed with the tidyverse package, which we’ll be using. Select then click OK down at the bottom. This will open your RStudio project where we’ll do the coding."
+  },
+  {
+    "objectID": "R_regecon_taster_2025.html#piping",
+    "href": "R_regecon_taster_2025.html#piping",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Piping!",
+    "text": "Piping!\n\n#standard functions look like e.g.\nsqrt(100)\n\n[1] 10\n\n#But we can also PIPE the number INTO the function...\n100 %&gt;% sqrt\n\n[1] 10\n\n#Which seems pointless, except we can now CHAIN FUNCTIONS"
+  },
+  {
+    "objectID": "R_regecon_taster_2025.html#does-this-actually-work-to-spread-text-out-across-the-whole-thing-quarto-uses-the-concept-of-columns-to-describe-page-layout-e.g.-the-body-column-the-margin-column-etc..-below-well-describe-how-to-arrange-content-into-these-columns.-if-you-need-to-adjust-the-widths-of-the-columns-see-page-layout---grid-customization.",
+    "href": "R_regecon_taster_2025.html#does-this-actually-work-to-spread-text-out-across-the-whole-thing-quarto-uses-the-concept-of-columns-to-describe-page-layout-e.g.-the-body-column-the-margin-column-etc..-below-well-describe-how-to-arrange-content-into-these-columns.-if-you-need-to-adjust-the-widths-of-the-columns-see-page-layout---grid-customization.",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Does this actually work to spread text out across the whole thing? Quarto uses the concept of columns to describe page layout (e.g. the “body” column, the “margin” column, etc.). Below we’ll describe how to arrange content into these columns. If you need to adjust the widths of the columns, see Page Layout - Grid Customization.",
+    "text": "Does this actually work to spread text out across the whole thing? Quarto uses the concept of columns to describe page layout (e.g. the “body” column, the “margin” column, etc.). Below we’ll describe how to arrange content into these columns. If you need to adjust the widths of the columns, see Page Layout - Grid Customization.\nAll of the layout capabilities described in this document work for HTML output and many work for PDF and LaTeX output. For details about the PDF / LaTeX output, see PDF/LaTeX Layout."
+  },
+  {
+    "objectID": "R_regecon_taster_2025.html#this-is-also-big-text",
+    "href": "R_regecon_taster_2025.html#this-is-also-big-text",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "",
+    "text": "library(tidyverse)"
+  },
+  {
+    "objectID": "R_regecon_taster_2025.html#looking-at-rstudio",
+    "href": "R_regecon_taster_2025.html#looking-at-rstudio",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Looking at RStudio",
+    "text": "Looking at RStudio\n\nlibrary(tidyverse)"
+  },
+  {
+    "objectID": "R_regecon_taster_2025.html#pre-amble",
+    "href": "R_regecon_taster_2025.html#pre-amble",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Pre-amble",
+    "text": "Pre-amble\nThings!"
+  },
+  {
+    "objectID": "R_regecon_taster_2025.html#rstudio-quick-look",
+    "href": "R_regecon_taster_2025.html#rstudio-quick-look",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "RStudio quick look",
+    "text": "RStudio quick look\nRStudio is where you’ll be working in R (though see also the spangly new positron, I haven’t tried yet).\nBefore looking at RStudio, let’s make a new R script, where we’ll do the coding.\n\n\n\n\n\n\nTask 1: open a new R script in RStudio\n\n\n\n\nIn the file menu in RStudio\nUse new file and R script (note: it tells you the keyboard shortcut for this)\n\n\n\n\nAfter that script’s been made, RStudio should look something like the pic below."
+  },
+  {
+    "objectID": "R_regecon_taster_2025.html#r-script",
+    "href": "R_regecon_taster_2025.html#r-script",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "R Script",
+    "text": "R Script\n\nlibrary(tidyverse)"
+  },
+  {
+    "objectID": "R_regecon_taster_2025.html#introduction",
+    "href": "R_regecon_taster_2025.html#introduction",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "",
+    "text": "This page is a whistlestop tour of using R for regional economic analysis of UK data. It’s the source we’ll run through in the June ’25 ONS Presents taster session.\nLet me start with some things to bear in mind as we work through everything:\n\n\nIf anyone hasn’t already got set up with R, I’ll talk for a couple of minutes now and give you a chance to create an account on posit.cloud.\nJust follow the three steps below and you’ll be ready to go\n\n\n\n\n\n\n\nGet up and running with RStudio in the cloud\n\n\n\n\nCreate an account at posit.cloud using the ‘sign up’ box, and then log in. That’ll take you to your online workspace.\nClick the new project button, top right\nSelect ‘new project from template’ (as in the pic below) and then “Data Analysis in R with the tidyverse” (if not already selected). This template comes pre-installed with the tidyverse package, which we’ll be using. Select then click OK down at the bottom. This will open your RStudio project where we’ll do the coding."
+  },
+  {
+    "objectID": "R_regecon_taster_2025.html#making-a-new-r-script-in-rstudio",
+    "href": "R_regecon_taster_2025.html#making-a-new-r-script-in-rstudio",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Making a new R script in RStudio",
+    "text": "Making a new R script in RStudio\nRStudio is where you’ll be doing all the R loveliness (though see also the spangly new positron, I haven’t tried yet).\nBefore looking at RStudio, let’s make a new R script, where we’ll do the coding.\n\n\n\n\n\n\nTask 1: open a new R script in RStudio\n\n\n\n\nIn the file menu in RStudio\nUse new file and R script (note: it tells you the keyboard shortcut for this)\n\n\n\n\nAfter that script’s been made, RStudio should look something like the pic below."
   }
 ]
