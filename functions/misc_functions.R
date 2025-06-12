@@ -1,6 +1,15 @@
 #Misc functions
 library(tidyverse)
-library(ggrepel)
+
+if(!require(ggrepel)){
+  install.packages("ggrepel")
+  library(ggrepel)
+}
+
+if(!require(zoo)){
+  install.packages("zoo")
+  library(zoo)
+}
 
 #HELPER FUNCTIONS
 #reduce need to type glimpse every time...

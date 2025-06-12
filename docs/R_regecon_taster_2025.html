@@ -142,15 +142,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#pre-amble" id="toc-pre-amble" class="nav-link" data-scroll-target="#pre-amble">Pre-amble</a></li>
   <li><a href="#making-a-new-r-script-in-rstudio" id="toc-making-a-new-r-script-in-rstudio" class="nav-link" data-scroll-target="#making-a-new-r-script-in-rstudio">Making a new R script in RStudio</a></li>
-  <li><a href="#r-script" id="toc-r-script" class="nav-link" data-scroll-target="#r-script">R Script</a></li>
-  <li><a href="#piping" id="toc-piping" class="nav-link" data-scroll-target="#piping">Piping!</a></li>
+  <li><a href="#tour-of-rstudio-getting-set-up" id="toc-tour-of-rstudio-getting-set-up" class="nav-link" data-scroll-target="#tour-of-rstudio-getting-set-up">Tour of RStudio / getting set up</a>
+  <ul class="collapse">
+  <li><a href="#the-console" id="toc-the-console" class="nav-link" data-scroll-target="#the-console">1. The console</a></li>
+  <li><a href="#giving-things-names" id="toc-giving-things-names" class="nav-link" data-scroll-target="#giving-things-names">2. Giving things names</a></li>
+  <li><a href="#using-an-r-script" id="toc-using-an-r-script" class="nav-link" data-scroll-target="#using-an-r-script">3. Using an R script</a></li>
+  </ul></li>
+  <li><a href="#some-economic-data-finally-phew" id="toc-some-economic-data-finally-phew" class="nav-link" data-scroll-target="#some-economic-data-finally-phew">Some economic data finally, phew</a></li>
+  <li><a href="#piping-interlude" id="toc-piping-interlude" class="nav-link" data-scroll-target="#piping-interlude">Piping interlude!</a></li>
   </ul>
 </nav>
     </div>
@@ -185,7 +191,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>If anyone hasn’t already got set up with R, I’ll talk for a couple of minutes now and give you a chance to create an account on posit.cloud.</strong></p></li>
 <li><p><strong>Just follow the three steps below and you’ll be ready to go</strong></p></li>
 </ul>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -200,14 +206,25 @@ Get up and running with RStudio in the cloud
 <li>Click the <strong>new project</strong> button, top right</li>
 <li>Select ‘<strong>new project from template</strong>’ (as in the pic below) and then “Data Analysis in R with the tidyverse” (if not already selected). This template comes pre-installed with the tidyverse package, which we’ll be using. Select then click OK down at the bottom. <strong>This will open your RStudio project where we’ll do the coding.</strong></li>
 </ul>
+<div class="center">
 <p><img src="https://danolner.github.io/posts/setting_up_w_r_online/newproject.png" class="img-fluid" width="200"></p>
+</div>
 </div>
 </div>
 <hr>
 </section>
 <section id="pre-amble" class="level2">
 <h2 class="anchored" data-anchor-id="pre-amble">Pre-amble</h2>
-<p>Things!</p>
+<ul>
+<li><p>First, apologies - because this is just a taster, we won’t be able to check in on everyone’s progress to make sure it’s working or making sense! I’ve designed the guide so it can be followed step by step - but if we lose you along the way, we’ve also got a poll and ways to stay in touch, if I can help to support outside of this session.</p></li>
+<li><p>That could include smaller groups where making sure it’s working will be possible!</p></li>
+<li><p>May veer from insultingly simplistic to horribly complex</p></li>
+<li><p>This is a whistlestop tour - if you’re new to any of this, don’t worry about it making sense on first go! I’ll just try to highlight what R can do, and provide pointers to learning more.</p></li>
+<li><p>Sometimes things won’t work… [explain]</p></li>
+<li><p>Bugs and errors, explain.</p></li>
+<li><p>I will pick out one or two basic R things to highlight, but missing a load… [e.g.&nbsp;piping / functions]</p></li>
+<li><p>Other things…</p></li>
+</ul>
 </section>
 <section id="making-a-new-r-script-in-rstudio" class="level2">
 <h2 class="anchored" data-anchor-id="making-a-new-r-script-in-rstudio">Making a new R script in RStudio</h2>
@@ -219,7 +236,7 @@ Get up and running with RStudio in the cloud
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Task 1: open a new R script in RStudio
+Task: Open a new R script in RStudio
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -227,32 +244,154 @@ Task 1: open a new R script in RStudio
 <li>In the <strong>file</strong> menu in RStudio</li>
 <li>Use <strong>new file</strong> and <strong>R script</strong> (note: it tells you the keyboard shortcut for this)</li>
 </ul>
+<div class="center">
 <p><img src="miscimages/Screenshot from 2025-06-12 11-48-14.png" class="img-fluid" width="200"></p>
 </div>
 </div>
-<p>After that script’s been made, RStudio should look something like the pic below.</p>
+</div>
+<p>After that new file’s been made, RStudio should look something like the pic below.</p>
 <p><img src="https://danolner.github.io/posts/setting_up_w_r_online/rstudio_online.png" class="img-fluid"></p>
 </section>
-<section id="r-script" class="level2">
-<h2 class="anchored" data-anchor-id="r-script">R Script</h2>
+<section id="tour-of-rstudio-getting-set-up" class="level2">
+<h2 class="anchored" data-anchor-id="tour-of-rstudio-getting-set-up">Tour of RStudio / getting set up</h2>
+<section id="the-console" class="level3">
+<h3 class="anchored" data-anchor-id="the-console">1. The console</h3>
+<p>The <strong>console</strong> is <strong>bottom left</strong>: all R commands end up being run here. You either <strong>run code directly in the console</strong> or <strong>send code from your R script.</strong></p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Task: enter some commands directly into the console
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Click in the console area</strong> so the cursor is on the command line. When we enter commands here, they will <strong>run as soon as you press enter</strong>.</p>
+<p>For example, type (or copy) these - <strong>press enter and you’ll see the results directly in the console.</strong></p>
+<p>Note that second one: <code>sqrt</code> is a <strong>function</strong> and arguments go into the brackets. More on that in a mo.</p>
+<p><strong>Note two! All code blocks on the webpage have a little clipboard symbol if you hover over them, to quickly copy so you can paste it all into RStudio. This will come in especially handy with larger code blocks later…</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">64</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+</div>
+</div>
 </div>
 </section>
-<section id="piping" class="level2">
-<h2 class="anchored" data-anchor-id="piping">Piping!</h2>
+<section id="giving-things-names" class="level3">
+<h3 class="anchored" data-anchor-id="giving-things-names">2. Giving things names</h3>
+<p>We can assign all manner of things a <strong>name</strong> to then use them elsewhere: values, strings, lists - <strong>and, crucially, data objects like all the UK’s regional GVA.</strong> But these <strong>all use the same method.</strong></p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Task: Still in the console, assign a value to a name
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#standard functions look like e.g.</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">64</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You’ll see that assignment appear <strong>top right in RStudio</strong>. It can be retrieved just with:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 64</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-an-r-script" class="level3">
+<h3 class="anchored" data-anchor-id="using-an-r-script">3. Using an R script</h3>
+<p><strong>We’ll now stick some code into that newly created R script we made earlier in the top left of RStudio.</strong></p>
+<p>All code will run in the console - what we do with scripts is just send our written/saved code <em>to</em> the console.</p>
+<p>Let’s test this by <strong>adding code to load the tidyverse library</strong>.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Task: Type or paste the following text at the top of the newly opened R script in the top left panel.
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>When you’ve put that in, <strong>the script title will go red</strong>, showing it can now be saved (it should look something like the image below).</p>
+<div class="center">
+<p><img src="https://danolner.github.io/posts/setting_up_w_r_online/script1.png" class="img-fluid"></p>
+</div>
+<ul>
+<li><strong>Save the script</strong> either with the CTRL + S shortcut, or file &gt; save. Give it whatever name you like, but note that it <strong>saves into your self-contained project folder.</strong></li>
+</ul>
+</div>
+</div>
+<p><strong>Now we need to actually run that line of code…</strong></p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Task: Run the <code>library(tidyverse)</code> line
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>We can run code in a script in a couple of ways:</strong></p>
+<ol type="1">
+<li>In your R script, if <strong>no code text is highlighted/selected</strong> RStudio will <strong>Run the code line by line</strong> (or chunk by chunk - we’ll cover that in the taster session).</li>
+<li><strong>If a block of text is highlighted</strong>, the whole block will run. So e.g.&nbsp;if you select-all in a script and then run it, <strong>the entire script will run.</strong></li>
+</ol>
+<p>Let’s do #1: <strong>Run the code line by line</strong>.</p>
+<ul>
+<li><strong>To test this, we’ll load the tidyverse library with the code we just pasted in</strong> (which is just one line of code at the moment!) Put the cursor at the end of the <code>libary(tidyverse)</code> line in the script (if it’s not there already), either with the mouse or keyboard. (Keyboard navigation is mostly the same as any other text editor like Word, but <a href="https://support.posit.co/hc/en-us/articles/200711853-Keyboard-Shortcuts-in-the-RStudio-IDE">here’s a full shortcut list</a> if useful.)</li>
+<li>Once there, either use the ‘run’ button, top right of the script window, or (much easier if you’re doing this repeatedly) <strong>press CTRL+ENTER to run it.</strong></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p><strong>If all is well, you should see the text below (or similar) - the tidyverse library is now loaded. Huzzah!</strong></p>
+<div class="center">
+<p><img src="miscimages/tidyverseloaded.png" class="img-fluid"></p>
+</div>
+</section>
+</section>
+<section id="some-economic-data-finally-phew" class="level2">
+<h2 class="anchored" data-anchor-id="some-economic-data-finally-phew">Some economic data finally, phew</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># LOAD ITL3 GVA DATA----</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#ITL3 zones, SIC sections, current prices, 2023 latest data</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'https://bit.ly/rtasteritl3'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="piping-interlude" class="level2">
+<h2 class="anchored" data-anchor-id="piping-interlude">Piping interlude!</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#standard functions look like e.g.</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#But we can also PIPE the number INTO the function...</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dv">100</span> <span class="sc">%&gt;%</span> sqrt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#But we can also PIPE the number INTO the function...</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="dv">100</span> <span class="sc">%&gt;%</span> sqrt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Which seems pointless, except we can now CHAIN FUNCTIONS</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Which seems pointless, except we can now CHAIN FUNCTIONS</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><img src="miscimages/function_machines.png" class="img-fluid" width="250"></p>
 

@@ -931,7 +931,7 @@
     "href": "R_regecon_taster_2025.html#pre-amble",
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "Pre-amble",
-    "text": "Pre-amble\nThings!"
+    "text": "Pre-amble\n\nFirst, apologies - because this is just a taster, we won’t be able to check in on everyone’s progress to make sure it’s working or making sense! I’ve designed the guide so it can be followed step by step - but if we lose you along the way, we’ve also got a poll and ways to stay in touch, if I can help to support outside of this session.\nThat could include smaller groups where making sure it’s working will be possible!\nMay veer from insultingly simplistic to horribly complex\nThis is a whistlestop tour - if you’re new to any of this, don’t worry about it making sense on first go! I’ll just try to highlight what R can do, and provide pointers to learning more.\nSometimes things won’t work… [explain]\nBugs and errors, explain.\nI will pick out one or two basic R things to highlight, but missing a load… [e.g. piping / functions]\nOther things…"
   },
   {
     "objectID": "R_regecon_taster_2025.html#rstudio-quick-look",
@@ -959,6 +959,41 @@
     "href": "R_regecon_taster_2025.html#making-a-new-r-script-in-rstudio",
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "Making a new R script in RStudio",
-    "text": "Making a new R script in RStudio\nRStudio is where you’ll be doing all the R loveliness (though see also the spangly new positron, I haven’t tried yet).\nBefore looking at RStudio, let’s make a new R script, where we’ll do the coding.\n\n\n\n\n\n\nTask 1: open a new R script in RStudio\n\n\n\n\nIn the file menu in RStudio\nUse new file and R script (note: it tells you the keyboard shortcut for this)\n\n\n\n\nAfter that script’s been made, RStudio should look something like the pic below."
+    "text": "Making a new R script in RStudio\nRStudio is where you’ll be doing all the R loveliness (though see also the spangly new positron, I haven’t tried yet).\nBefore looking at RStudio, let’s make a new R script, where we’ll do the coding.\n\n\n\n\n\n\nTask: Open a new R script in RStudio\n\n\n\n\nIn the file menu in RStudio\nUse new file and R script (note: it tells you the keyboard shortcut for this)\n\n\n\n\n\n\nAfter that new file’s been made, RStudio should look something like the pic below."
+  },
+  {
+    "objectID": "R_regecon_taster_2025.html#the-console",
+    "href": "R_regecon_taster_2025.html#the-console",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "1. The console",
+    "text": "1. The console\nThe console is bottom left: all R commands end up being run here. You either run code directly in the console or send code from your R script.\n\n\n\n\n\n\nTask: enter some commands directly into the console\n\n\n\nClick in the console area so the cursor is on the command line. When we enter commands here, they will run as soon as you press enter.\nFor example, type (or copy) these - press enter and you’ll see the results directly in the console.\nNote that second one: sqrt is a function and arguments go into the brackets. More on that in a mo.\n\n2+2\n\n[1] 4\n\nsqrt(64)\n\n[1] 8"
+  },
+  {
+    "objectID": "R_regecon_taster_2025.html#giving-things-names",
+    "href": "R_regecon_taster_2025.html#giving-things-names",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "2. Giving things names",
+    "text": "2. Giving things names\nWe can assign all manner of things a name to then use them elsewhere: values, strings, lists - and, crucially, data objects. But these all use the same method.\n\n\n\n\n\n\nTask: Still in the console, assign a value to a name\n\n\n\n\nx = sqrt(64)\n\nYou’ll see that assignment appear top right in RStudio. It can be retreived just with:\n\nx\n\n[1] 8"
+  },
+  {
+    "objectID": "R_regecon_taster_2025.html#tour-of-rstudio-getting-set-up",
+    "href": "R_regecon_taster_2025.html#tour-of-rstudio-getting-set-up",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Tour of RStudio / getting set up",
+    "text": "Tour of RStudio / getting set up\n\n1. The console\nThe console is bottom left: all R commands end up being run here. You either run code directly in the console or send code from your R script.\n\n\n\n\n\n\nTask: enter some commands directly into the console\n\n\n\nClick in the console area so the cursor is on the command line. When we enter commands here, they will run as soon as you press enter.\nFor example, type (or copy) these - press enter and you’ll see the results directly in the console.\nNote that second one: sqrt is a function and arguments go into the brackets. More on that in a mo.\nNote two! All code blocks on the webpage have a little clipboard symbol if you hover over them, to quickly copy so you can paste it all into RStudio. This will come in especially handy with larger code blocks later…\n\n2+2\n\n[1] 4\n\nsqrt(64)\n\n[1] 8\n\n\n\n\n\n\n2. Giving things names\nWe can assign all manner of things a name to then use them elsewhere: values, strings, lists - and, crucially, data objects like all the UK’s regional GVA. But these all use the same method.\n\n\n\n\n\n\nTask: Still in the console, assign a value to a name\n\n\n\n\nx = 64\n\nYou’ll see that assignment appear top right in RStudio. It can be retrieved just with:\n\nx\n\n[1] 64\n\n\n\n\n\n\n3. Using an R script\nWe’ll now stick some code into that newly created R script we made earlier in the top left of RStudio.\nAll code will run in the console - what we do with scripts is just send our written/saved code to the console.\nLet’s test this by adding code to load the tidyverse library.\n\n\n\n\n\n\nTask: Type or paste the following text at the top of the newly opened R script in the top left panel.\n\n\n\n\nlibrary(tidyverse)\n\nWhen you’ve put that in, the script title will go red, showing it can now be saved (it should look something like the image below).\n\n\n\n\nSave the script either with the CTRL + S shortcut, or file &gt; save. Give it whatever name you like, but note that it saves into your self-contained project folder.\n\n\n\nNow we need to actually run that line of code…\n\n\n\n\n\n\nTask: Run the library(tidyverse) line\n\n\n\nWe can run code in a script in a couple of ways:\n\nIn your R script, if no code text is highlighted/selected RStudio will Run the code line by line (or chunk by chunk - we’ll cover that in the taster session).\nIf a block of text is highlighted, the whole block will run. So e.g. if you select-all in a script and then run it, the entire script will run.\n\nLet’s do #1: Run the code line by line.\n\nTo test this, we’ll load the tidyverse library with the code we just pasted in (which is just one line of code at the moment!) Put the cursor at the end of the libary(tidyverse) line in the script (if it’s not there already), either with the mouse or keyboard. (Keyboard navigation is mostly the same as any other text editor like Word, but here’s a full shortcut list if useful.)\nOnce there, either use the ‘run’ button, top right of the script window, or (much easier if you’re doing this repeatedly) press CTRL+ENTER to run it.\n\n\nlibrary(tidyverse)\n\n\n\nIf all is well, you should see the text below (or similar) - the tidyverse library is now loaded. Huzzah!"
+  },
+  {
+    "objectID": "R_regecon_taster_2025.html#piping-interlude",
+    "href": "R_regecon_taster_2025.html#piping-interlude",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Piping interlude!",
+    "text": "Piping interlude!\n\n#standard functions look like e.g.\nsqrt(100)\n\n[1] 10\n\n#But we can also PIPE the number INTO the function...\n100 %&gt;% sqrt\n\n[1] 10\n\n#Which seems pointless, except we can now CHAIN FUNCTIONS"
+  },
+  {
+    "objectID": "R_regecon_taster_2025.html#some-economic-data-finally-phew",
+    "href": "R_regecon_taster_2025.html#some-economic-data-finally-phew",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Some economic data finally, phew",
+    "text": "Some economic data finally, phew\n\n# LOAD ITL3 GVA DATA----\n\n#ITL3 zones, SIC sections, current prices, 2023 latest data\ndf &lt;- read_csv('https://bit.ly/rtasteritl3')"
   }
 ]
