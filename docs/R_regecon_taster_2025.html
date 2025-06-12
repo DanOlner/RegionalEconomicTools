@@ -155,7 +155,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#giving-things-names" id="toc-giving-things-names" class="nav-link" data-scroll-target="#giving-things-names">2. Giving things names</a></li>
   <li><a href="#using-an-r-script" id="toc-using-an-r-script" class="nav-link" data-scroll-target="#using-an-r-script">3. Using an R script</a></li>
   </ul></li>
-  <li><a href="#some-economic-data-finally-phew" id="toc-some-economic-data-finally-phew" class="nav-link" data-scroll-target="#some-economic-data-finally-phew">Some economic data finally, phew</a></li>
+  <li><a href="#finally---some-economic-data-phew" id="toc-finally---some-economic-data-phew" class="nav-link" data-scroll-target="#finally---some-economic-data-phew">Finally - some economic data! Phew!</a></li>
   <li><a href="#piping-interlude" id="toc-piping-interlude" class="nav-link" data-scroll-target="#piping-interlude">Piping interlude!</a></li>
   </ul>
 </nav>
@@ -369,29 +369,60 @@ Task: Run the <code>library(tidyverse)</code> line
 </div>
 </section>
 </section>
-<section id="some-economic-data-finally-phew" class="level2">
-<h2 class="anchored" data-anchor-id="some-economic-data-finally-phew">Some economic data finally, phew</h2>
+<section id="finally---some-economic-data-phew" class="level2">
+<h2 class="anchored" data-anchor-id="finally---some-economic-data-phew">Finally - some economic data! Phew!</h2>
+<p><strong>Well nearly.</strong> Just one more thing first before actual economic data, sorry. We’re just going to <strong>load some functions (and install a couple of libraries)</strong> that we’ll need (i.e.&nbsp;Blue Peter style “here’s some I made earlier” chunks of code…) If of interest (or you want to check the code isn’t stealing your bank details!) code for these functions are <a href="https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/functions/misc_functions.R">on the github site here</a>.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Task: In the R script, stick this code below the <code>library(tidyverse)</code> line and run it with CTRL+ENTER or the run command
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As this will <strong>install a couple of libraries for the first time</strong> it’ll take about <strong>25-30 seconds</strong> to run.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># LOAD ITL3 GVA DATA----</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#ITL3 zones, SIC sections, current prices, 2023 latest data</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'https://bit.ly/rtasteritl3'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Load some functions and load two libraries (and install them if they're not already present)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'https://bit.ly/rtasterfunctions'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>Right - <strong>now we can load some economic data</strong>. Let’s load it first, then we’ll talk through what it is.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Task: In the R script, stick this code below the <code>library(tidyverse)</code> line and run it with CTRL+ENTER or the run command
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># LOAD ITL3 GVA DATA----</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#ITL3 zones, SIC sections, current prices, 2023 latest data</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">'https://bit.ly/rtasteritl3'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="piping-interlude" class="level2">
 <h2 class="anchored" data-anchor-id="piping-interlude">Piping interlude!</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#standard functions look like e.g.</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#standard functions look like e.g.</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#But we can also PIPE the number INTO the function...</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="dv">100</span> <span class="sc">%&gt;%</span> sqrt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#But we can also PIPE the number INTO the function...</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="dv">100</span> <span class="sc">%&gt;%</span> sqrt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Which seems pointless, except we can now CHAIN FUNCTIONS</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Which seems pointless, except we can now CHAIN FUNCTIONS</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><img src="miscimages/function_machines.png" class="img-fluid" width="250"></p>
 

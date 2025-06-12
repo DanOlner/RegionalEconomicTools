@@ -198,23 +198,41 @@ library(tidyverse)
 
 
 
-## Some economic data finally, phew
+## Finally - some economic data! Phew!
 
 
-Just one more thing first before actual economic data, sorry. We're just going to load some functions that we'll need in a moment (i.e. Blue Peter style "here's some I made earlier" chunks of code...) If of interest, code for these functions are [on the github site here](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/functions/misc_functions.R).
+**Well nearly.** Just one more thing first before actual economic data, sorry. We're just going to **load some functions (and install a couple of libraries)** that we'll need (i.e. Blue Peter style "here's some I made earlier" chunks of code...) If of interest (or you want to check the code isn't stealing your bank details!) code for these functions are [on the github site here](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/functions/misc_functions.R).
+
+::: {.callout-note icon=false}
+
+## Task: In the R script, stick this code below the `library(tidyverse)` line and run it with CTRL+ENTER or the run command
+
+As this will **install a couple of libraries for the first time** it'll take about **25-30 seconds** to run.
+
+```{r}
+#Load some functions and load two libraries (and install them if they're not already present)
+source('https://bit.ly/rtasterfunctions')
+
+```
+
+::: 
+
+Right - **now we can load some economic data**. Let's load it first, then we'll talk through what it is.
 
 
 
+::: {.callout-note icon=false}
 
+## Task: In the R script, stick this code below the `library(tidyverse)` line and run it with CTRL+ENTER or the run command
 
 ```{r}
 # LOAD ITL3 GVA DATA----
 
 #ITL3 zones, SIC sections, current prices, 2023 latest data
-df <- read_csv('https://bit.ly/rtasteritl3')
+df = read_csv('https://bit.ly/rtasteritl3')
 ```
 
-
+:::
 
 
 

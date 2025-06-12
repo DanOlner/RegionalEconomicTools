@@ -995,5 +995,12 @@
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "Some economic data finally, phew",
     "text": "Some economic data finally, phew\n\n# LOAD ITL3 GVA DATA----\n\n#ITL3 zones, SIC sections, current prices, 2023 latest data\ndf &lt;- read_csv('https://bit.ly/rtasteritl3')"
+  },
+  {
+    "objectID": "R_regecon_taster_2025.html#finally---some-economic-data-phew",
+    "href": "R_regecon_taster_2025.html#finally---some-economic-data-phew",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Finally - some economic data! Phew!",
+    "text": "Finally - some economic data! Phew!\nWell nearly. Just one more thing first before actual economic data, sorry. We’re just going to load some functions (and install a couple of libraries) that we’ll need (i.e. Blue Peter style “here’s some I made earlier” chunks of code…) If of interest (or you want to check the code isn’t stealing your bank details!) code for these functions are on the github site here.\n\n\n\n\n\n\nTask: In the R script, stick this code below the library(tidyverse) line and run it with CTRL+ENTER or the run command\n\n\n\nAs this will install a couple of libraries for the first time it’ll take about 25-30 seconds to run.\n\n#Load some functions and load two libraries (and install them if they're not already present)\nsource('https://bit.ly/rtasterfunctions')\n\n\n\nRight - now we can load some economic data. Let’s load it first, then we’ll talk through what it is.\n\n\n\n\n\n\nTask: In the R script, stick this code below the library(tidyverse) line and run it with CTRL+ENTER or the run command\n\n\n\n\n# LOAD ITL3 GVA DATA----\n\n#ITL3 zones, SIC sections, current prices, 2023 latest data\ndf = read_csv('https://bit.ly/rtasteritl3')"
   }
 ]
