@@ -95,6 +95,7 @@
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="styles.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -447,6 +448,30 @@
 <li>Other things…</li>
 </ul>
 </section>
+<section id="the-plan" class="slide level2">
+<h2>The plan</h2>
+<ul>
+<li>We’ll <strong>work through these slides together</strong>, sometimes typing or copying code from the slides into RStudio.</li>
+<li>So I’ll be <strong>flitting between the slides and RStudio myself</strong> to do the same steps you’ll be trying.</li>
+<li>That could be vexing if you’re trying to look at slides! So <strong>make sure you have your own version of the slides open the a browser.</strong> I’ll post a link to it in the chat.</li>
+<li>Each slide is numbered - I’ll say where we’re at as we go on</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>If you <strong>don’t fancy constantly flitting between slides and RStudio</strong> I’ve also made a single copy of the whole script we’ll work through, which you can get here (click on the little clipboard symbol top-right to copy, and then when we make a script below, paste the whole thing in).</li>
+<li>I’ll provide that link again below after we’ve made a script.</li>
+<li>Numbers in the comments on the script will (should!) match the slides so you can just follow along in RStudio.</li>
+</ul>
+</section>
+<section id="the-slides" class="slide level2">
+<h2>The slides</h2>
+<ul>
+<li>Once you have your own copy of the slides open, note the <strong>three-bar button, bottom left</strong>.</li>
+<li>That lets you see the full contents</li>
+</ul>
+</section>
 <section>
 <section id="coding-time" class="title-slide slide level1 center">
 <h1>CODING TIME!</h1>
@@ -492,31 +517,40 @@
 <p><strong>Task: enter some commands directly into the console</strong></p>
 </div>
 <div class="callout-content">
-<p><strong>Click in the console area</strong> so the cursor is on the command line. When we enter commands here, they will <strong>run as soon as you press enter</strong>.</p>
-<p>For example, type (or copy) these - <strong>press enter and you’ll see the results directly in the console.</strong></p>
+<p><strong>Click in the console area</strong> so the cursor is on the command line. Type some random sums (or copy, see next slide) - <strong>press enter and you’ll see the results directly in the console.</strong></p>
 <p>Note that second one: <code>sqrt</code> is a <strong>function</strong> and arguments go into the brackets. More on that in a mo.</p>
-</div>
-</div>
-</div>
-</section>
-<section class="slide level2">
-
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Getting code into RStudio from here</strong></p>
-</div>
-<div class="callout-content">
-<p>All code blocks here <strong>have a little clipboard symbol if you hover over them</strong> to quickly copy so you can paste it all into RStudio. This will come in especially handy with larger code blocks later…</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">64</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Copying code from these slides into RStudio</strong></p>
+</div>
+<div class="callout-content">
+<p>All code blocks here <strong>have a little clipboard symbol if you hover over them</strong> to quickly copy so you can paste it all into RStudio. This will come in especially handy with larger code blocks later…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">64</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8</code></pre>
 </div>
@@ -535,11 +569,11 @@
 </div>
 <div class="callout-content">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">64</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">64</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You’ll see that assignment appear <strong>top right in RStudio</strong>. It can be retrieved just with:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 64</code></pre>
 </div>
@@ -553,6 +587,20 @@
 <p><strong>We’ll now stick some code into that newly created R script we made earlier in the top left of RStudio.</strong></p>
 <p>All code will run in the console - what we do with scripts is just send our written/saved code <em>to</em> the console.</p>
 <p>Let’s test this by <strong>adding code to load the tidyverse library</strong>.</p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>What’s the tidyverse?</strong></p>
+</div>
+<div class="callout-content">
+<p>It’s a basket of tools that have become part of the R language - they all fit together to make consistent workflows <strong>much</strong> easier.</p>
+<p>The online book <a href="https://r4ds.hadley.nz/">R for Data Science</a> is a great source to learn it, by the person who started it.</p>
+</div>
+</div>
+</div>
 </section>
 <section class="slide level2">
 
@@ -564,7 +612,7 @@
 <div class="callout-content">
 <p>Type or paste the following text at the top of the newly opened R script in the top left panel.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>When you’ve put that in, <strong>the script title will go red</strong>, showing it can now be saved (it should look something like the image below).</p>
 <div class="center">
@@ -598,6 +646,9 @@
 </div>
 </div>
 </div>
+</section>
+<section class="slide level2">
+
 <p><strong>If all is well, you should see the text below (or similar) - the tidyverse library is now loaded. Huzzah!</strong></p>
 <div class="center">
 <p><img data-src="miscimages/tidyverseloaded.png"></p>
@@ -610,7 +661,7 @@
 </section>
 <section id="well-nearly" class="slide level2">
 <h2>Well nearly…</h2>
-<p><strong>Just one more thing first before actual economic data, sorry. We’re just going to </strong>load some functions (and install a couple of libraries)** that we’ll need (i.e.&nbsp;Blue Peter style “here’s some I made earlier” chunks of code…) If of interest (or you want to check the code isn’t stealing your bank details!) code for these functions are <a href="https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/functions/misc_functions.R">on the github site here</a>.</p>
+<p><strong>Just one more thing first before actual economic data, sorry. We’re just going to </strong>load some functions (and install a couple of libraries) that we’ll need (i.e.&nbsp;Blue Peter style “here’s some I made earlier” chunks of code…) If of interest (or you want to check the code isn’t stealing your bank details!) code for these functions are <a href="https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/functions/misc_functions.R">on the github site here</a>.</p>
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -618,9 +669,10 @@
 </div>
 <div class="callout-content">
 <p>As this will <strong>install a couple of libraries for the first time</strong> it’ll take about <strong>25-30 seconds</strong> to run.</p>
+<p><strong>Note: comments in R begin with a #hash.</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Load some functions and load two libraries (and install them if they're not already present)</span></span>
-<span id="cb9-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'https://bit.ly/rtasterfunctions'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Load some functions and load two libraries (and install them if they're not already present)</span></span>
+<span id="cb13-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'https://bit.ly/rtasterfunctions'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -632,37 +684,235 @@
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Task: get some regional economic data!</strong></p>
+<p><strong>Tasks: get some regional economic data! Then look at it in RStudio.</strong></p>
 </div>
 <div class="callout-content">
+<p>This line takes a <strong>comma-separated variable file from the web</strong> and names it / assigns it to <code>df</code>.</p>
+<p>Paste it into your script (below the other code we’ve added) and run it.</p>
+<p>If you <strong>look at the environment pane, top right</strong>. <code>df</code> should now be there (as in the pic below).</p>
+<p>Then try this: <strong>click anywhere on that line in the environment pane</strong> - it’ll open a <strong>new tab in RStudio</strong> with a view of the data attached to <code>df</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># LOAD ITL3 GVA DATA----</span></span>
-<span id="cb10-2"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#ITL3 zones, SIC sections, current prices, 2023 latest data</span></span>
-<span id="cb10-4"><a aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">'https://bit.ly/rtasteritl3'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># LOAD ITL3 GVA DATA----</span></span>
+<span id="cb14-2"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#ITL3 zones, SIC sections, current prices, 2023 latest data</span></span>
+<span id="cb14-4"><a aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">'https://bit.ly/rtasteritl3'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="center">
+<p><img data-src="miscimages/env.png"></p>
+</div>
+</section>
+<section id="what-data-have-we-got-here" class="slide level2">
+<h2>What data have we got here?</h2>
+<p>This is from the latest ONS <strong>“Regional gross value added (balanced) by industry: all International Territorial Level (ITL) regions”</strong> (The Excel file is <a href="https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry">available here</a>). Released April 2025, it’s got data up to 2023. It’s got:</p>
+<ul>
+<li>ITL3 zones i.e.&nbsp;local authorities rather than MCAs</li>
+<li>SIC sections: 18 broad sector categories</li>
+<li>1998 to 2023</li>
+</ul>
+<p>Let’s look at those in R…</p>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Task: look at what SIC sector categories are in the data</strong></p>
+</div>
+<div class="callout-content">
+<p>We can do this by pulling out the unique values from a column.</p>
+<p>In R, there are <strong>different ways to refer to columns.</strong> Here’s a key one: use the name, then a dollar sign. R will then let you autocomplete the column name.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(df<span class="sc">$</span>SIC07_description)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Agriculture, forestry and fishing; mining and quarrying"
+ [2] "Manufacturing"                                          
+ [3] "Electricity, gas, water; sewerage and waste management" 
+ [4] "Construction"                                           
+ [5] "Wholesale and retail trade; repair of motor vehicles"   
+ [6] "Transportation and storage"                             
+ [7] "Accommodation and food service activities"              
+ [8] "Information and communication"                          
+ [9] "Financial and insurance activities"                     
+[10] "Real estate activities"                                 
+[11] "Professional, scientific and technical activities"      
+[12] "Administrative and support service activities"          
+[13] "Public administration and defence"                      
+[14] "Education"                                              
+[15] "Human health and social work activities"                
+[16] "Arts, entertainment and recreation"                     
+[17] "Other service activities"                               
+[18] "Activities of households"                               </code></pre>
+</div>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="piping-interlude" class="slide level2">
-<h2>Piping interlude!</h2>
+<section class="slide level2">
+
+<p><strong>“R is brilliant” exhibit A: we can use it to automate tedious things.</strong></p>
+<p>Here’s a sample of what the data looks like in the original Excel file. Different SIC sector levels are nested, there’s one column per year.</p>
+<div class="center">
+<p><img data-src="miscimages/regionalxlexample.png"></p>
+</div>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>The data in <code>df</code> comes from that ONS Excel sheet</li>
+<li>I’ve used R to get it directly from the web and then extract each CSV separately that might be needed</li>
+<li>Including separating sectors by type: goods/services, sections, the full SIC list (45 sectors in this data)</li>
+<li>So that’s the <strong>first part of the pipeline</strong>: extracting the data from source and getting into a nice useable form.</li>
+</ul>
+</section>
+<section id="location-quotients" class="slide level2">
+<h2>Location quotients</h2>
+<p>Earwig go!</p>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Task:</strong></p>
+</div>
+<div class="callout-content">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#standard functions look like e.g.</span></span>
-<span id="cb11-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># LOCATION QUOTIENTS/PROPORTIONS----</span></span>
+<span id="cb17-2"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">add_location_quotient_and_proportions</span>(</span>
+<span id="cb17-4"><a aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">1998</span>),</span>
+<span id="cb17-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">regionvar =</span> Region_name,</span>
+<span id="cb17-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">lq_var =</span> SIC07_description,</span>
+<span id="cb17-7"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">valuevar =</span> value</span>
+<span id="cb17-8"><a aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> glimpse</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 3,276
+Columns: 13
+$ ITL_code                   &lt;chr&gt; "TLC31", "TLC31", "TLC31", "TLC31", "TLC31"…
+$ Region_name                &lt;chr&gt; "Hartlepool and Stockton-on-Tees", "Hartlep…
+$ SIC07_code                 &lt;chr&gt; "AB (1-9)", "C (10-33)", "DE (35-39)", "F (…
+$ SIC07_description          &lt;chr&gt; "Agriculture, forestry and fishing; mining …
+$ year                       &lt;dbl&gt; 1998, 1998, 1998, 1998, 1998, 1998, 1998, 1…
+$ value                      &lt;dbl&gt; 17, 775, 222, 233, 334, 195, 71, 35, 112, 4…
+$ region_totalsize           &lt;dbl&gt; 3318, 3318, 3318, 3318, 3318, 3318, 3318, 3…
+$ sector_regional_proportion &lt;dbl&gt; 0.005123568, 0.233574442, 0.066907776, 0.07…
+$ total_sectorsize           &lt;dbl&gt; 12743, 143696, 25694, 46669, 109388, 39867,…
+$ totalsize                  &lt;dbl&gt; 887910, 887910, 887910, 887910, 887910, 887…
+$ sector_total_proportion    &lt;dbl&gt; 0.014351680, 0.161836222, 0.028937618, 0.05…
+$ LQ                         &lt;dbl&gt; 0.3570013, 1.4432767, 2.3121384, 1.3360416,…
+$ LQ_log                     &lt;dbl&gt; -1.03001584, 0.36691599, 0.83817280, 0.2897…</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="piping-interlude" class="title-slide slide level1 center">
+<h1>Piping interlude!</h1>
+
+</section>
+<section class="slide level2">
+
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Task: compare standard R function to ‘piping in’ the argument</strong></p>
+</div>
+<div class="callout-content">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#standard functions look like e.g.</span></span>
+<span id="cb19-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#But we can also PIPE the number INTO the function...</span></span>
-<span id="cb13-2"><a aria-hidden="true" tabindex="-1"></a><span class="dv">100</span> <span class="sc">%&gt;%</span> sqrt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#But we can also PIPE the number INTO the function...</span></span>
+<span id="cb21-2"><a aria-hidden="true" tabindex="-1"></a><span class="dv">100</span> <span class="sc">%&gt;%</span> sqrt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Which seems pointless, except we can now CHAIN FUNCTIONS</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Which seems pointless, except we can now CHAIN FUNCTIONS</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </div>
 
+<img data-src="miscimages/function_machines.png" width="250" class="r-stretch"></section>
+<section class="slide level2">
 
-<img data-src="miscimages/function_machines.png" width="250" class="r-stretch"><div class="quarto-auto-generated-content">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Task:</strong></p>
+</div>
+<div class="callout-content">
+<p>While we’re here: <strong>highlight just this bit of code: <code>df %&gt;% group_split(year)</code> and then run</strong>. We can see what just that chunk is doing exactly what the function name suggests.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Finding location quotients for each year in the data </span></span>
+<span id="cb24-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#And then overwriting the df variable with the result</span></span>
+<span id="cb24-3"><a aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb24-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_split</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb24-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(add_location_quotient_and_proportions, </span>
+<span id="cb24-6"><a aria-hidden="true" tabindex="-1"></a>      <span class="at">regionvar =</span> Region_name,</span>
+<span id="cb24-7"><a aria-hidden="true" tabindex="-1"></a>      <span class="at">lq_var =</span> SIC07_description,</span>
+<span id="cb24-8"><a aria-hidden="true" tabindex="-1"></a>      <span class="at">valuevar =</span> value) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Task:</strong></p>
+</div>
+<div class="callout-content">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#View a single place...</span></span>
+<span id="cb25-2"><a aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(</span>
+<span id="cb25-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">qg</span>(<span class="st">'rotherham'</span>,Region_name),</span>
+<span id="cb25-4"><a aria-hidden="true" tabindex="-1"></a>  year <span class="sc">==</span> <span class="fu">max</span>(year)<span class="co">#get latest year in data</span></span>
+<span id="cb25-5"><a aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">regional_percent =</span> sector_regional_proportion <span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-7"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(SIC07_description,regional_percent, LQ) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-8"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>LQ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 18 × 3
+   SIC07_description                                      regional_percent    LQ
+   &lt;chr&gt;                                                             &lt;dbl&gt; &lt;dbl&gt;
+ 1 Manufacturing                                                    16.9   1.83 
+ 2 Construction                                                     11.4   1.80 
+ 3 Activities of households                                          0.125 1.39 
+ 4 Transportation and storage                                        4.74  1.38 
+ 5 Human health and social work activities                          11.5   1.37 
+ 6 Electricity, gas, water; sewerage and waste management            3.50  1.34 
+ 7 Public administration and defence                                 6.06  1.20 
+ 8 Wholesale and retail trade; repair of motor vehicles             11.9   1.19 
+ 9 Administrative and support service activities                     5.82  1.09 
+10 Education                                                         6.51  1.04 
+11 Accommodation and food service activities                         2.93  1.02 
+12 Real estate activities                                           10.2   0.771
+13 Agriculture, forestry and fishing; mining and quarryi…            0.624 0.754
+14 Other service activities                                          1.20  0.730
+15 Arts, entertainment and recreation                                0.696 0.500
+16 Professional, scientific and technical activities                 2.78  0.331
+17 Information and communication                                     1.98  0.331
+18 Financial and insurance activities                                1.09  0.122</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Cheatsheets!</p>
+
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>

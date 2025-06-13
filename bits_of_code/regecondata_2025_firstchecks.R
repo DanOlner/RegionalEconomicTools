@@ -272,6 +272,8 @@ bradsplot + leedsplot
 itl3.2digit.cp <- read_csv('data/regionalGVA/regionalGVA_currentprices_ITL3_SIC_2DIGIT_LONG_2023.csv') %>% 
   filter(!qg('imputed',SIC07_description))
 
+unique(itl3.2digit.cp$SIC07_description)
+
 #There's a single minus one value, set to zero
 itl3.2digit.cp[itl3.2digit.cp == -1] <- 0
 

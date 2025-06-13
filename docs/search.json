@@ -1043,14 +1043,14 @@
     "href": "R_regecon_taster_2025_revealjs.html#piping-interlude",
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "Piping interlude!",
-    "text": "Piping interlude!\n\n#standard functions look like e.g.\nsqrt(100)\n\n[1] 10\n\n#But we can also PIPE the number INTO the function...\n100 %&gt;% sqrt\n\n[1] 10\n\n#Which seems pointless, except we can now CHAIN FUNCTIONS"
+    "text": "Piping interlude!\n\n\n\nTask: compare standard R function to ‘piping in’ the argument\n\n\n\n#standard functions look like e.g.\nsqrt(100)\n\n[1] 10\n\n#But we can also PIPE the number INTO the function...\n100 %&gt;% sqrt\n\n[1] 10\n\n#Which seems pointless, except we can now CHAIN FUNCTIONS"
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#the-console",
     "href": "R_regecon_taster_2025_revealjs.html#the-console",
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "1. The console",
-    "text": "1. The console\nThe console is bottom left: all R commands end up being run here. You either run code directly in the console or send code from your R script.\n\n\n\nTask: enter some commands directly into the console\n\n\nClick in the console area so the cursor is on the command line. When we enter commands here, they will run as soon as you press enter.\nFor example, type (or copy) these - press enter and you’ll see the results directly in the console.\nNote that second one: sqrt is a function and arguments go into the brackets. More on that in a mo."
+    "text": "1. The console\nThe console is bottom left: all R commands end up being run here. You either run code directly in the console or send code from your R script.\n\n\n\nTask: enter some commands directly into the console\n\n\nClick in the console area so the cursor is on the command line. Type some random sums (or copy, see next slide) - press enter and you’ll see the results directly in the console.\nNote that second one: sqrt is a function and arguments go into the brackets. More on that in a mo.\n\n2+2\n\n[1] 4\n\nsqrt(64)\n\n[1] 8"
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#giving-things-names",
@@ -1064,13 +1064,62 @@
     "href": "R_regecon_taster_2025_revealjs.html#using-an-r-script",
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "3. Using an R script",
-    "text": "3. Using an R script\nWe’ll now stick some code into that newly created R script we made earlier in the top left of RStudio.\nAll code will run in the console - what we do with scripts is just send our written/saved code to the console.\nLet’s test this by adding code to load the tidyverse library."
+    "text": "3. Using an R script\nWe’ll now stick some code into that newly created R script we made earlier in the top left of RStudio.\nAll code will run in the console - what we do with scripts is just send our written/saved code to the console.\nLet’s test this by adding code to load the tidyverse library.\n\n\n\n\n\n\nWhat’s the tidyverse?\n\n\nIt’s a basket of tools that have become part of the R language - they all fit together to make consistent workflows much easier.\nThe online book R for Data Science is a great source to learn it, by the person who started it."
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#well-nearly",
     "href": "R_regecon_taster_2025_revealjs.html#well-nearly",
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "Well nearly…",
-    "text": "Well nearly…\nJust one more thing first before actual economic data, sorry. We’re just going to load some functions (and install a couple of libraries)** that we’ll need (i.e. Blue Peter style “here’s some I made earlier” chunks of code…) If of interest (or you want to check the code isn’t stealing your bank details!) code for these functions are on the github site here.\n\n\n\nTask: In the R script, stick this code below the library(tidyverse) line and run it with CTRL+ENTER or the run command\n\n\nAs this will install a couple of libraries for the first time it’ll take about 25-30 seconds to run.\n\n#Load some functions and load two libraries (and install them if they're not already present)\nsource('https://bit.ly/rtasterfunctions')"
+    "text": "Well nearly…\nJust one more thing first before actual economic data, sorry. We’re just going to load some functions (and install a couple of libraries) that we’ll need (i.e. Blue Peter style “here’s some I made earlier” chunks of code…) If of interest (or you want to check the code isn’t stealing your bank details!) code for these functions are on the github site here.\n\n\n\nTask: In the R script, stick this code below the library(tidyverse) line and run it with CTRL+ENTER or the run command\n\n\nAs this will install a couple of libraries for the first time it’ll take about 25-30 seconds to run.\nNote: comments in R begin with a #hash.\n\n#Load some functions and load two libraries (and install them if they're not already present)\nsource('https://bit.ly/rtasterfunctions')"
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#the-plan",
+    "href": "R_regecon_taster_2025_revealjs.html#the-plan",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "The plan",
+    "text": "The plan\n\nWe’ll work through these slides together, sometimes typing or copying code from the slides into RStudio.\nSo I’ll be flitting between the slides and RStudio myself to do the same steps you’ll be trying.\nThat could be vexing if you’re trying to look at slides! So make sure you have your own version of the slides open the a browser. I’ll post a link to it in the chat.\nEach slide is numbered - I’ll say where we’re at as we go on"
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#the-slides",
+    "href": "R_regecon_taster_2025_revealjs.html#the-slides",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "The slides",
+    "text": "The slides\n\nOnce you have your own copy of the slides open, note the three-bar button, bottom left.\nThat lets you see the full contents"
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#what-data-have-we-got-here",
+    "href": "R_regecon_taster_2025_revealjs.html#what-data-have-we-got-here",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "What data have we got here?",
+    "text": "What data have we got here?\nThis is from the latest ONS “Regional gross value added (balanced) by industry: all International Territorial Level (ITL) regions” (The Excel file is available here). Released April 2025, it’s got data up to 2023. It’s got:\n\nITL3 zones i.e. local authorities rather than MCAs\nSIC sections: 18 broad sector categories\n1998 to 2023\n\nLet’s look at those in R…"
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#r-is-ace-exhibit-a-using-it-to-extract-data-like-this-easily",
+    "href": "R_regecon_taster_2025_revealjs.html#r-is-ace-exhibit-a-using-it-to-extract-data-like-this-easily",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "“R is ace” exhibit A: using it to extract data like this easily",
+    "text": "“R is ace” exhibit A: using it to extract data like this easily\nStuff"
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#r-is-brilliant-exhibit-a-using-it-to-extract-data-like-this-easily",
+    "href": "R_regecon_taster_2025_revealjs.html#r-is-brilliant-exhibit-a-using-it-to-extract-data-like-this-easily",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "“R is brilliant” exhibit A: using it to extract data like this easily",
+    "text": "“R is brilliant” exhibit A: using it to extract data like this easily\nStuff"
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#r-is-brilliant-exhibit-a-we-can-use-it-to-automate-tedious-things",
+    "href": "R_regecon_taster_2025_revealjs.html#r-is-brilliant-exhibit-a-we-can-use-it-to-automate-tedious-things",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "“R is brilliant” exhibit A: we can use it to automate tedious things",
+    "text": "“R is brilliant” exhibit A: we can use it to automate tedious things\nHere’s a sample of what the data looks like in the original Excel file. Different SIC sector levels are nested, there’s one column per year."
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#location-quotients",
+    "href": "R_regecon_taster_2025_revealjs.html#location-quotients",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Location quotients",
+    "text": "Location quotients\nEarwig go!\n\n\n\nTask:\n\n\n\n# LOCATION QUOTIENTS/PROPORTIONS----\n\nadd_location_quotient_and_proportions(\n  df %&gt;% filter(year == 1998),\n  regionvar = Region_name,\n  lq_var = SIC07_description,\n  valuevar = value\n) %&gt;% glimpse\n\nRows: 3,276\nColumns: 13\n$ ITL_code                   &lt;chr&gt; \"TLC31\", \"TLC31\", \"TLC31\", \"TLC31\", \"TLC31\"…\n$ Region_name                &lt;chr&gt; \"Hartlepool and Stockton-on-Tees\", \"Hartlep…\n$ SIC07_code                 &lt;chr&gt; \"AB (1-9)\", \"C (10-33)\", \"DE (35-39)\", \"F (…\n$ SIC07_description          &lt;chr&gt; \"Agriculture, forestry and fishing; mining …\n$ year                       &lt;dbl&gt; 1998, 1998, 1998, 1998, 1998, 1998, 1998, 1…\n$ value                      &lt;dbl&gt; 17, 775, 222, 233, 334, 195, 71, 35, 112, 4…\n$ region_totalsize           &lt;dbl&gt; 3318, 3318, 3318, 3318, 3318, 3318, 3318, 3…\n$ sector_regional_proportion &lt;dbl&gt; 0.005123568, 0.233574442, 0.066907776, 0.07…\n$ total_sectorsize           &lt;dbl&gt; 12743, 143696, 25694, 46669, 109388, 39867,…\n$ totalsize                  &lt;dbl&gt; 887910, 887910, 887910, 887910, 887910, 887…\n$ sector_total_proportion    &lt;dbl&gt; 0.014351680, 0.161836222, 0.028937618, 0.05…\n$ LQ                         &lt;dbl&gt; 0.3570013, 1.4432767, 2.3121384, 1.3360416,…\n$ LQ_log                     &lt;dbl&gt; -1.03001584, 0.36691599, 0.83817280, 0.2897…"
   }
 ]

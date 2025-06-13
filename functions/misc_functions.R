@@ -20,6 +20,12 @@ v <- function(x) View(x)
 #gq = "grepl quick!"
 qg <- function(...) grepl(..., ignore.case = T)
 
+#Same as above but returning distinct values
+getdistinct <- function(...) grep(..., ignore.case = T, value = T) %>% unique
+
+
+
+
 
 #The rest...
 
