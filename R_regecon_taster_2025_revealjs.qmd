@@ -7,9 +7,9 @@ execute:
   warning: false
   error: false
 format:
-  html:
-    toc: true
-    toc-expand: true
+  revealjs:
+    slide-number: true
+    code-line-numbers: false
 ---
 
 ```{r setup, include=FALSE}
@@ -19,16 +19,12 @@ knitr::opts_chunk$set(fig.height = 8, fig.width = 10, echo = TRUE, warning = F, 
 
 ## Introduction
 
-This page is a **whistlestop tour** of using R for regional economic analysis of UK data. It's the source we'll run through in the June '25 [ONS Presents taster session](https://www.eventbrite.co.uk/e/ons-local-workshop-using-r-for-regional-economic-analysis-taster-session-tickets-1372930745819).
+We'll be doing a **whistlestop tour** of using R for regional economic analysis of UK data. It's the source we'll run through in the June '25 [ONS Presents taster session](https://www.eventbrite.co.uk/e/ons-local-workshop-using-r-for-regional-economic-analysis-taster-session-tickets-1372930745819).
 
-Let me start with some things to bear in mind as we work through everything:
 
 ----
 
-* **If anyone hasn't already got set up with R, I'll talk for a couple of minutes now and give you a chance to create an account on posit.cloud.** 
-
-* **Just follow the three steps below and you'll be ready to go**
-
+* **If anyone hasn't already got set up with R, I'll talk for a couple of minutes now and give you a chance to create an account on posit.cloud. Just follow the three steps below and you'll be ready to go**
 
 
 ::: {.callout-tip icon=false}
@@ -51,12 +47,13 @@ Let me start with some things to bear in mind as we work through everything:
 
 * First, apologies - because this is just a taster, we won't be able to check in on everyone's progress to make sure it's working or making sense! I've designed the guide so it can be followed step by step - but if we lose you along the way, we've also got a poll and ways to stay in touch, if I can help to support outside of this session.
 
+---
 
-If this happens, we'll still run through some of things R can do, and we can set up support later...
-
-
+* If this happens, we'll still run through some of things R can do, and we can set up support later...
 * That could include smaller groups where making sure it's working will be possible!
-* May veer from insultingly simplistic to horribly complex
+* The aim: this should work for anyone completely new to RStudio. May veer from insultingly simplistic to horribly complex
+
+---
 
 * This is a whistlestop tour - if you're new to any of this, don't worry about it making sense on first go! I'll just try to highlight what R can do, and provide pointers to learning more.
 * Sometimes things won't work... [explain]
@@ -64,6 +61,7 @@ If this happens, we'll still run through some of things R can do, and we can set
 * I will pick out one or two basic R things to highlight, but missing a load... [e.g. piping / functions]
 * Other things...
 
+# CODING TIME!
 
 ## Making a new R script in RStudio
 
@@ -85,15 +83,16 @@ Before looking at RStudio, let's **make a new R script, where we'll do the codin
 
 :::
 
+---
 
 After that new file's been made, RStudio should look something like the pic below.
 
 ![](https://danolner.github.io/posts/setting_up_w_r_online/rstudio_online.png)
 
 
-## Tour of RStudio / getting set up
+# Tour of RStudio / getting set up
 
-### 1. The console
+## 1. The console
 
 The **console** is **bottom left**: all R commands end up being run here. You either **run code directly in the console** or **send code from your R script.**
 
@@ -107,7 +106,20 @@ For example, type (or copy) these - **press enter and you'll see the results dir
 
 Note that second one: `sqrt` is a **function** and arguments go into the brackets. More on that in a mo.
 
-**Note two! All code blocks on the webpage have a little clipboard symbol if you hover over them, to quickly copy so you can paste it all into RStudio. This will come in especially handy with larger code blocks later...**
+:::
+
+
+
+
+---
+
+::: {.callout-note}
+
+## Getting code into RStudio from here
+
+All code blocks here **have a little clipboard symbol if you hover over them** to quickly copy so you can paste it all into RStudio. This will come in especially handy with larger code blocks later...
+
+
 
 ```{r}
 
@@ -120,7 +132,7 @@ sqrt(64)
 :::
 
 
-### 2. Giving things names
+## 2. Giving things names
 
 We can assign all manner of things a **name** to then use them elsewhere: values, strings, lists - **and, crucially, data objects like all the UK's regional GVA.** But these **all use the same method.**
 
@@ -141,7 +153,7 @@ x
 :::
 
 
-### 3. Using an R script
+## 3. Using an R script
 
 **We'll now stick some code into that newly created R script we made earlier in the top left of RStudio.** 
 
@@ -149,10 +161,13 @@ All code will run in the console - what we do with scripts is just send our writ
 
 Let's test this by **adding code to load the tidyverse library**.
 
+---
 
 ::: {.callout-note icon=false}
 
-## Task: Type or paste the following text at the top of the newly opened R script in the top left panel. 
+## Task: add a line of code to the R script
+
+Type or paste the following text at the top of the newly opened R script in the top left panel. 
 
 ```{r eval = F}
 library(tidyverse)
@@ -169,15 +184,13 @@ When you've put that in, **the script title will go red**, showing it can now be
 :::
 
 
-**Now we need to actually run that line of code...**
-
-
+---
 
 ::: {.callout-note icon=false}
 
 ## Task: Run the `library(tidyverse)` line
 
-**We can run code in a script in a couple of ways:**
+**Now we need to actually run that line of code... we can do this in a couple of ways:**
 
 1. In your R script, if **no code text is highlighted/selected** RStudio will **Run the code line by line** (or chunk by chunk - we'll cover that in the taster session).
 2. **If a block of text is highlighted**, the whole block will run. So e.g. if you select-all in a script and then run it, **the entire script will run.**
@@ -186,10 +199,6 @@ Let's do #1: **Run the code line by line**.
 
 * **To test this, we'll load the tidyverse library with the code we just pasted in** (which is just one line of code at the moment!) Put the cursor at the end of the `libary(tidyverse)` line in the script (if it's not there already), either with the mouse or keyboard. (Keyboard navigation is mostly the same as any other text editor like Word, but [here's a full shortcut list](https://support.posit.co/hc/en-us/articles/200711853-Keyboard-Shortcuts-in-the-RStudio-IDE) if useful.)
 * Once there, either use the 'run' button, top right of the script window, or (much easier if you're doing this repeatedly) **press CTRL+ENTER to run it.**
-
-```{r}
-library(tidyverse)
-```
 
 :::
 
@@ -203,10 +212,11 @@ library(tidyverse)
 
 
 
-## Finally - some economic data! Phew!
+# Finally - some economic data! Phew!
 
+## Well nearly...
 
-**Well nearly.** Just one more thing first before actual economic data, sorry. We're just going to **load some functions (and install a couple of libraries)** that we'll need (i.e. Blue Peter style "here's some I made earlier" chunks of code...) If of interest (or you want to check the code isn't stealing your bank details!) code for these functions are [on the github site here](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/functions/misc_functions.R).
+**Just one more thing first before actual economic data, sorry. We're just going to **load some functions (and install a couple of libraries)** that we'll need (i.e. Blue Peter style "here's some I made earlier" chunks of code...) If of interest (or you want to check the code isn't stealing your bank details!) code for these functions are [on the github site here](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/functions/misc_functions.R).
 
 ::: {.callout-note icon=false}
 
@@ -222,9 +232,11 @@ source('https://bit.ly/rtasterfunctions')
 
 ::: 
 
+
+
+---
+
 Right - **now we can load some economic data**. Let's load it first, then we'll talk through what it is.
-
-
 
 ::: {.callout-note icon=false}
 
