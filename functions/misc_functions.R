@@ -95,7 +95,7 @@ compute_slope_or_zero <- function(data, ..., y, x) {
 
 
 #Version that returns slope and SE (for 2D LM only...)
-get_slope_and_se_safely <- function(data, ..., y, x) {
+get_slope_and_se_safely <- function(data, ..., y, x, neweywest = F) {
   
   groups <- quos(...)  
   y <- enquo(y) 
@@ -103,13 +103,25 @@ get_slope_and_se_safely <- function(data, ..., y, x) {
   
   #Function to compute slope
   get_slope_and_se <- function(data) {
-    # model <- lm(data = data, formula = as.formula(paste0(!!y, " ~ ", !!x)))
+    
     model <- lm(data = data, formula = as.formula(paste0(quo_name(y), " ~ ", quo_name(x))))
     
-    slope <- coef(model)[2]
-    se <- summary(model)$coefficients[2, 2]
-    return(list(slope = slope, se = se))
+    if(neweywest){
+      
+      nw_se <- sandwich::NeweyWest(model, lag = 1, prewhite = TRUE)
+      rez <- lmtest::coeftest(model, vcov. = nw_se)
+      
+      slope <- coef(rez)[2]
+      se <- rez[2,2]
+      
+    } else {
     
+      slope <- coef(model)[2]
+      se <- summary(model)$coefficients[2, 2]
+      
+    }
+    
+      return(list(slope = slope, se = se))
     
     # return(c(coef(model)[2],summary(model)[[4]]['x','Std. Error']))
   }

@@ -10,6 +10,7 @@ format:
   revealjs:
     slide-number: true
     code-line-numbers: false
+    code-overflow: wrap
     css: styles.css
 ---
 
@@ -44,7 +45,12 @@ We'll be doing a **whistlestop tour** of using R for regional economic analysis 
 
 ----
 
-## Pre-amble
+## Goals for the session
+
+* To actually **get you started using R and RStudio** if you haven't before.
+* 
+
+---
 
 * First, apologies - because this is just a taster, we won't be able to check in on everyone's progress to make sure it's working or making sense! I've designed the guide so it can be followed step by step - but if we lose you along the way, we've also got a poll and ways to stay in touch, if I can help to support outside of this session.
 
@@ -235,7 +241,7 @@ Let's do #1: **Run the code line by line**.
 
 ---
 
-**If all is well, you should see the text below (or similar) - the tidyverse library is now loaded. Huzzah!** 
+**If all is well, you should see the text below in the console - the tidyverse library is now loaded. Huzzah!** 
 
 
 ::: {.center}
@@ -244,11 +250,13 @@ Let's do #1: **Run the code line by line**.
 
 
 
-# Finally - some economic data! Phew!
+# Finally - some economic data! Phew.
 
 ## Well nearly...
 
-**Just one more thing first before actual economic data, sorry. We're just going to **load some functions (and install a couple of libraries) that we'll need (i.e. Blue Peter style "here's some I made earlier" chunks of code...) If of interest (or you want to check the code isn't stealing your bank details!) code for these functions are [on the github site here](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/functions/misc_functions.R).
+**Just one more thing first before actual economic data, sorry. We're just going to **load some functions (and install a couple of libraries) that we'll need.
+
+If of interest (or you want to check the code isn't stealing your bank details!) code for these functions are [on the github site here](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/functions/misc_functions.R).
 
 ::: {.callout-note icon=false}
 
@@ -259,7 +267,7 @@ As this will **install a couple of libraries for the first time** it'll take abo
 **Note: comments in R begin with a #hash.**
 
 ```{r}
-#Load some functions and load two libraries (and install them if they're not already present)
+#Load some functions and two libraries (and install those libraries if they're not already present)
 source('https://bit.ly/rtasterfunctions')
 
 ```
@@ -270,24 +278,25 @@ source('https://bit.ly/rtasterfunctions')
 
 ---
 
-Right - **now we can load some economic data**. Let's load it first, then we'll talk through what it is.
+**Now we can load some regional GVA data**.
 
 ::: {.callout-note icon=false}
-## Tasks: get some regional economic data! Then look at it in RStudio.
+## Tasks: Load in regional economic data, then look at it in RStudio.
 
-This line takes a **comma-separated variable file from the web** and names it / assigns it to `df`.
+This line takes a **comma-separated variable file from the web** and names it / assigns it to `df`. **Paste it into your script (below the other code we've added) and run it.**
 
-Paste it into your script (below the other code we've added) and run it. 
-
-If you **look at the environment pane, top right**. `df` should now be there (as in the pic below).
-
-Then try this: **click anywhere on that line in the environment pane** - it'll open a **new tab in RStudio** with a view of the data attached to `df`.
+If you **look at the environment pane, top right**. `df` should now be there (as in the pic below). **Click anywhere on that line in the environment pane** - it'll open a **new tab in RStudio** with a view of the data attached to `df`.
 
 ```{r}
 # LOAD ITL3 GVA DATA----
 
-#ITL3 zones, SIC sections, current prices, 2023 latest data
-df = read_csv('https://bit.ly/rtasteritl3')
+#ITL3 zones, SIC sections, current prices, 2023 latest data (minus imputed rent)
+df = read_csv('https://bit.ly/rtasteritl3noir')
+
+#This one has imputed rent included if you want it
+# df = read_csv('https://bit.ly/rtasteritl3')
+
+
 ```
 
 :::
@@ -302,11 +311,19 @@ df = read_csv('https://bit.ly/rtasteritl3')
 
 This is from the latest ONS **"Regional gross value added (balanced) by industry: all International Territorial Level (ITL) regions"** (The Excel file is [available here](https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry)). Released April 2025, it's got data up to 2023. It's got:
 
+* GVA values from 1998 to 2023, broken down by:
 * ITL3 zones i.e. local authorities rather than MCAs
-* SIC sections: 18 broad sector categories
-* 1998 to 2023
+* SIC sections: 18 broad sector categories (max in this data is 45 categories)
 
-Let's look at those in R...
+Plus...
+
+---
+
+* This is **current price** data: what the pound value of GVA was **in each separate year**, unadjusted for inflation
+* This data **can be summed**, unlike the inflation-adjusted (chained volume) data (where each sector in each place is inflation-adjusted separately, so can't be summed)
+* Because it can be summed, this current price data is **great for digging into structural change** (e.g. "How have sector proportions changed over time?") But not so good for real growth analysis.
+
+Let's start looking at the data in R...
 
 ---
 
@@ -315,7 +332,7 @@ Let's look at those in R...
 
 We can do this by pulling out the unique values from a column.
 
-In R, there are **different ways to refer to columns.** Here's a key one: use the name, then a dollar sign. R will then let you autocomplete the column name.
+In R, there are **different ways to refer to columns.** Here's a key one: use the object's name, then a dollar sign. R will then let you autocomplete the column name.
 
 ```{r}
 unique(df$SIC07_description)
@@ -325,9 +342,22 @@ unique(df$SIC07_description)
 
 ---
 
-**"R is brilliant" exhibit A: we can use it to automate tedious things.**
+::: {.callout-note icon=false}
+## Task: do the same for place names
 
-Here's a sample of what the data looks like in the original Excel file. Different SIC sector levels are nested, there's one column per year.
+We can use the same method to get the full list of ITL3 place names too (though we'll use an easier method to pick them out later). Here, we also stick them into alphabetical order.
+
+```{r eval=F}
+unique(df$Region_name)[order(unique(df$Region_name))]
+```
+
+:::
+
+---
+
+**"R is brilliant" exhibit A: we can use it to automate/repeat tedious things.**
+
+Here's a sample of what the data looks like in the original Excel file. Different SIC sector levels are nested, there's one column per year (in R, we've made year a single 'tidy' column)
 
 ::: {.center}
 ![](miscimages/regionalxlexample.png)
@@ -336,27 +366,117 @@ Here's a sample of what the data looks like in the original Excel file. Differen
 
 ---
 
-* The data in `df` comes from that ONS Excel sheet
+* The data we've attached to the `df` object comes from that ONS Excel sheet
 * I've used R to get it directly from the web and then extract each CSV separately that might be needed
-* Including separating sectors by type: goods/services, sections, the full SIC list (45 sectors in this data)
-* So that's the **first part of the pipeline**: extracting the data from source and getting into a nice useable form.
+* Each of those nested sector groups gets separated out: goods/services, sections, the full SIC list (45 sectors in this data)
+* The code for that [is here](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/regionalGVA_processing.R){target="_blank"}.
+* (Is this an example of R code that could be useful to run in powerBI to wrangle data for use?)
+
+
+## Wrangling the data
+
+* We have our sector/region GVA data in R now - but **how to wrangle it by place and sector, to start getting useful info out of it?** 
+* Here's an example of using the `tidyverse` to do this - we'll group by sector for the latest year to see its median and range
+
+---
+
+::: {.callout-note icon=false}
+## Task: Wrangle the data to get some summary numbers
+
+We'll talk about what's going on here a bit more in the next slide. For now - copy and run the code.
+
+**Note: RStudio will run the whole block if press CTRL + ENTER with cursor anywhere in it.**
+
+```{r}
+df %>% 
+  filter(year == max(year)) %>% 
+  group_by(SIC07_description) %>% 
+  summarise(
+    median_gva = median(value),
+    min_gva = min(value),
+    max_gva = max(value)
+    ) %>% 
+  arrange(-median_gva)
+```
+
+
+:::
+
+
+
+
+## Piping interlude!
+
+```{r eval=F, echo=F}
+#Piping image from
+#https://s3.amazonaws.com/conference-handouts/2015-nctm-boston/pdfs/Fun%20Functions%20Handout%202013.pdf
+```
+
+* That last block of code was **piping output of one function into the input of the next**, chaining them together. This is super-powerful and useful.
+
+![](miscimages/function_machines.png)
+
+---
+
+Here's the principle with a silly toy example using two functions. Dead simple here, but with larger processing chains it quickly becomes indispensible. It'll crop up a lot as we go.^[R geek footnote: magrittr pipe not native pipe because only one shortcut in RStudio + magrittr pipe more versatile.]
+
+::: {.callout-note icon=false}
+## Task: compare standard R function to 'piping in' the argument
+
+If typing these out, the keyboard shortcut in RStudio for the pipe operator is **CTRL + SHIFT + M**.
+
+```{r}
+
+#Boooo, nested brackets...
+sqrt(log10(10000))
+
+#Wooo! Lovely piped functions!
+10000 %>% sqrt %>% log10
+
+```
+
+:::
+
+ 
+
+## Getting sector proportions and location quotients
+
+* Now we'll **wrangle the data using a function we loaded earlier** Blue Peter style (may be showing age there!) 
+* This function adds in columns for **what proportion of each place's economy each sector makes up** and, using that, what the **location quotient (LQ)** is for each sector in each place.
+
+![](miscimages/heresoneImadeearlier.png)
 
 
 ---
 
-## Location quotients
+##  {.center}
 
-Earwig go!
+::: {.callout-note}
+## Location quotient (LQ)
+
+* In case the LQ is new to anyone: it's just **the proportion of a sector in a place, over its proportion nationally.**
+* So it's **less than one** if a sector is less concentrated in a place than the UK average / more than 1 if higher (and 0.5 and 2 if it's half or double the UK concentration).
+* [This ONS LQ excel sheet](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/datasets/locationquotientdataandindustrialspecialisationforlocalauthorities){target="_blank"} has a really clear explanation in the notes.
+* I've made a page on other ways to use the LQ in R [here](https://danolner.github.io/RegionalEconomicTools/sector_locationquotients_and_proportions.html), if of interest.
+
+:::
+
+
+----
 
 ::: {.callout-note icon=false}
-## Task: 
+## Task: run this function and `glimpse` the result in the console.
+
+We stick **four arguments** into the function - including the data itself, which here we filter to the latest year.
+
+It's then piped to `glimpse`, which lets us look at all columns at once by **sticking them on their side** (a nice way to check our results look sane).
 
 
 ```{r}
 # LOCATION QUOTIENTS/PROPORTIONS----
 
 add_location_quotient_and_proportions(
-  df %>% filter(year == 1998),
+  df %>% filter(year == max(year)),
   regionvar = Region_name,
   lq_var = SIC07_description,
   valuevar = value
@@ -367,56 +487,48 @@ add_location_quotient_and_proportions(
 
 
 
-# Piping interlude!
+----
 
----
+##  {.center}
 
-```{r eval=F, echo=F}
-#Piping image from
-#https://s3.amazonaws.com/conference-handouts/2015-nctm-boston/pdfs/Fun%20Functions%20Handout%202013.pdf
-```
+::: {.callout-tip}
 
+Once the code from the next slide is in RStudio, if you **`CTRL + mouse click` on the function name**, it'll take you to the code (if you loaded them above). You'll see it's a not-too-elaborate piping operation of the type we were just looking at.
 
-::: {.callout-note icon=false}
-## Task: compare standard R function to 'piping in' the argument
-
-
-```{r}
-
-#standard functions look like e.g.
-sqrt(100)
-
-#But we can also PIPE the number INTO the function...
-100 %>% sqrt
-
-#Which seems pointless, except we can now CHAIN FUNCTIONS
-
-```
+The power of functions is in packaging this kind of 'need often' task into flexible, reusable form.
 
 :::
 
-
-![](miscimages/function_machines.png){width="250px"}
-
 ---
 
 
 
+In the **next code block** we're running the same code but doing **four extra things** that we chain together:
+
+1. We `group_split` the data into years (one separate dataframe per year)
+2. `map` each year bundle into the `add_location_quotient_and_proportions` function
+3. `bind_rows` it all back together
+4. We also **overwrite `df`** with the result (first line) so we've kept it (rather than, in the last example, just outputting to the console).
 
 
-
+---
 
 ::: {.callout-note icon=false}
-## Task: 
+## Task: find LQs and proportions for each year and keep the result
+
+Once run, we can also **look at the result again via the environment panel**.
+
+(Note: you'll probably **get a warning** - this is due to a single negative GVA value, it won't affect anything here.)
 
 While we're here: **highlight just this bit of code: `df %>% group_split(year)` and then run**. We can see what just that chunk is doing exactly what the function name suggests.
+
 
 ```{r}
 #Finding location quotients for each year in the data 
 #And then overwriting the df variable with the result
-df = df %>% 
+df = df %>%
   group_split(year) %>%
-  map(add_location_quotient_and_proportions, 
+  map(add_location_quotient_and_proportions,
       regionvar = Region_name,
       lq_var = SIC07_description,
       valuevar = value) %>% 
@@ -427,13 +539,19 @@ df = df %>%
 
 ---
 
+**Now let's do something with result: **
+
+* **Pick out one place or local authority**: you'll only need some of the place name you want - here I'm using `rotherh` to find Rotherham, but do change it to other places.
+* For the latest year in the data, **pull out the location quotient and sector proportion for that place**
+* And then order, highest to lowest.
+
 ::: {.callout-note icon=false}
 ## Task: 
 
-```{r}
+```{r eval=F}
 #View a single place...
 df %>% filter(
-  qg('rotherham',Region_name),
+  qg('rotherh',Region_name),
   year == max(year)#get latest year in data
 ) %>% 
   mutate(regional_percent = sector_regional_proportion *100) %>% 
@@ -446,68 +564,354 @@ df %>% filter(
 
 ---
 
-Cheatsheets!
+**Output from that code... **
+
+* Rotherham's largest sector specialism (highest LQ) is **manufacturing** for the latest year (and nearly 19% of its economy). 
+
+```{r echo=F}
+#View a single place...
+df %>% filter(
+  qg('rotherham',Region_name),
+  year == max(year)#get latest year in data
+) %>% 
+  mutate(regional_percent = sector_regional_proportion *100) %>% 
+  select(SIC07_description,regional_percent, LQ) %>% 
+  arrange(-LQ) 
+
+```
+
+
+---
+
+::: {.callout-tip}
+## Cheatsheets!
+
+There are a bunch of excellent **cheat sheet documents** available for many of R's features. You can easily access them via RStudio's `help` menu. 
+
+The **[data tranformation with dplyr](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf)** sheet covers a lot of the functions we're using in piping operations.
+
+There's also an excellent **[ggplot cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf)**, among many others.
+
+:::
+
 
 ---
 
 
 
-## How has the structure of [x and y] economies changed over time?
+## Visualising: how has the structure of places' economies changed over time?
 
+Let's plot some of the data. We'll look at how an ITL3 zone's broad sectors have **changed their proportion over time**, to see how those economies have changed structurally.
+
+We'll do this in **3 stages**:
+
+1. Add in a **moving average** to smooth the data a little
+2. Pick out the top 12 broad sectors in the latest year
+3. Plot!
+
+
+---
 
 ::: {.callout-note icon=false}
-## Task: 
+## Task: apply the moving average to our `df` data object and pick out the placename we want
+
+You can look at the available ITL3 zones at [geoportal.statistics.gov.uk here](https://geoportal.statistics.gov.uk/datasets/1121eb5cb03245d787e97426f9ebe699_2/explore?location=52.100456%2C-0.493217%2C6.92){target="_blank"}, if useful for checking names. (Opens in new tab.)
 
 ```{r}
+# PLOT STRUCTURAL CHANGE OVER TIME IN ITL3 ZONE----
+
+#Processing before plot
+
+#1. Set window for rolling average: 3 years
 smoothband = 3
 
-df <- df %>% 
+#2. Make new column with rolling average in (applying to all places and sectors)
+#Years are already in the right order, so will roll apply across those correctly
+df = df %>% 
   group_by(Region_name,SIC07_description) %>% 
   mutate(
-    gva_movingav = rollapply(value,smoothband,mean,align='center',fill=NA),
-    sector_regional_prop_movingav = rollapply(sector_regional_proportion,smoothband,mean,align='center',fill=NA)
+    sector_regional_prop_movingav = rollapply(
+      sector_regional_proportion,smoothband,mean,align='center',fill=NA
+      )
   ) %>% 
   ungroup()
 
-place = qgp('rotherh',df$Region_name)
+#3. Pick out the name of the place / ITl3 zone to look at
+#We only need a bit of the name...
+place = getdistinct('doncas',df$Region_name)
+
+#Check we found the single place we wanted (some search terms will pick up none or more than one)
+place
+
+
+```
   
+:::
+
+---
+
+
+
+::: {.callout-note icon=false}
+## Task: for our chosen place, pick out the largest proportion sectors in the most recent year
+
+Here, we `filter` to get our place and year, `arrange` in reverse order of moving average, `slice` off the top 12 and `pull` out the sector names.
   
-#top 12 sectors in latest year
-top12sectors <- itl3.sections.cp %>% 
+```{r}
+# top 12 sectors in latest year
+top12sectors = df %>%
   filter(
     Region_name == place,
     year == max(year) - 1#to get 3 year moving average value
-  ) %>% 
-  arrange(-sector_regional_prop_movingav) %>% 
-  slice_head(n= 12) %>% 
-  select(SIC07_description) %>% 
+  ) %>%
+  arrange(-sector_regional_prop_movingav) %>%
+  slice_head(n= 12) %>%
+  select(SIC07_description) %>%
   pull()
+```
+
+:::
+
+---
+
+
+
+::: {.callout-note icon=false}
+## Task: plot smoothed sector proportion over time using `ggplot`
+
+
+```{r plot1code}
+#| eval: false
 
 #Plot! 
-leedsplot <- ggplot(itl3.sections.cp %>% 
-                      filter(
-                        Region_name == place, 
-                        # SIC07_description %in% top12sectors,
-                        !is.na(sector_regional_prop_movingav)#Remove NAs created by 3 year moving average
-                      ), 
-                    aes(x = year, y = sector_regional_prop_movingav * 100, colour = fct_reorder(SIC07_description,-sector_regional_prop_movingav) )) +
+ggplot(df %>%
+         filter(
+           Region_name == place,
+           SIC07_description %in% top12sectors,
+           !is.na(sector_regional_prop_movingav)#Remove NAs created by 3 year moving average
+           ),
+       aes(x = year, y = sector_regional_prop_movingav * 100, colour =
+             fct_reorder(SIC07_description,-sector_regional_prop_movingav) )) +
   geom_point() +
   geom_line() +
-  # scale_color_brewer(palette = 'Paired', direction = 1) +
-  scale_color_manual(values = setNames(randomcols,unique(itl3.sections.cp$SIC07_description))) +#set manual pastel colours matching sector name
+  scale_color_brewer(palette = 'Paired', direction = 1) +
   ylab('Sector: percent of regional economy') +
-  theme(plot.title = element_text(face = 'bold')) +
-  labs(colour = 'SIC section') +
-  # scale_y_log10() +
+  labs(colour = paste0('Largest 12 sectors in ',max(df$year))) +
   ggtitle(paste0(place, ' GVA % of economy over time (', smoothband,' year moving average)'))
 
 ```
+
+:::
+
+Resulting plot is on on next slide -->
+
+
+---
+
+```{r plot1output}
+#| echo: false
+
+#Plot! 
+ggplot(df %>%
+         filter(
+           Region_name == place,
+           SIC07_description %in% top12sectors,
+           !is.na(sector_regional_prop_movingav)#Remove NAs created by 3 year moving average
+           ),
+       aes(x = year, y = sector_regional_prop_movingav * 100, colour =
+             fct_reorder(SIC07_description,-sector_regional_prop_movingav) )) +
+  geom_point() +
+  geom_line() +
+  scale_color_brewer(palette = 'Paired', direction = 1) +
+  ylab('Sector: percent of regional economy') +
+  labs(colour = paste0('Largest 12 sectors in ',max(df$year))) +
+  ggtitle(paste0(place, ' GVA % of economy over time (', smoothband,' year moving average)'))
+
+```
+
+
+
+
+
+
+## Jobs v sectors
+
+::: {.callout-note icon=false}
+## Task: plot smoothed sector proportion over time using `ggplot`
+
 
 
 :::
 
 
 
+
+# BONUS MATERIAL
+
+## Multiple proportion plots with consistent sector colours
+
+::: {.callout-note icon=false}
+## Task: 
+
+```{r}
+#| eval: false
+
+n <- length(unique(df$SIC07_description))
+set.seed(12)
+qual_col_pals = RColorBrewer::brewer.pal.info[RColorBrewer::brewer.pal.info$category == 'qual',]
+col_vector = unlist(mapply(RColorBrewer::brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
+
+randomcols <- col_vector[10:(10+(n-1))]
+
+#Do once!
+getplot <- function(place){
+  
+  df = df %>% 
+    filter(!qg("Activities of households|agri",SIC07_description)) %>% 
+    mutate(
+      SIC07_description = case_when(
+        grepl('defence',SIC07_description,ignore.case = T) ~ 'public/defence',
+        grepl('support',SIC07_description,ignore.case = T) ~ 'admin/support',
+        grepl('financ',SIC07_description,ignore.case = T) ~ 'finance/insu',
+        grepl('agri',SIC07_description,ignore.case = T) ~ 'Agri/mining',
+        grepl('electr',SIC07_description,ignore.case = T) ~ 'power/water',
+        grepl('information',SIC07_description,ignore.case = T) ~ 'ICT',
+        grepl('manuf',SIC07_description,ignore.case = T) ~ 'Manuf',
+        grepl('other',SIC07_description,ignore.case = T) ~ 'other',
+        grepl('scientific',SIC07_description,ignore.case = T) ~ 'Scientific',
+        grepl('real estate',SIC07_description,ignore.case = T) ~ 'Real est',
+        grepl('transport',SIC07_description,ignore.case = T) ~ 'Transport',
+        grepl('entertainment',SIC07_description,ignore.case = T) ~ 'Entertainment',
+        grepl('human health',SIC07_description,ignore.case = T) ~ 'Health/soc',
+        grepl('food service activities',SIC07_description,ignore.case = T) ~ 'Food/service',
+        grepl('wholesale',SIC07_description,ignore.case = T) ~ 'Retail',
+        .default = SIC07_description
+      )
+    )
+  
+  top12sectors = df %>%
+    filter(
+      Region_name == place,
+      year == max(year) - 1#to get 3 year moving average value
+    ) %>%
+    arrange(-sector_regional_prop_movingav) %>%
+    slice_head(n= 12) %>%
+    select(SIC07_description) %>%
+    pull()
+  
+  
+  ggplot(df %>% 
+           filter(
+             Region_name == place, 
+             SIC07_description %in% top12sectors,
+             !is.na(sector_regional_prop_movingav)#Remove NAs created by 3 year moving average
+           ), 
+         aes(x = year, y = sector_regional_prop_movingav * 100, colour = fct_reorder(SIC07_description,-sector_regional_prop_movingav) )) +
+    geom_point() +
+    geom_line() +
+    scale_color_manual(values = setNames(randomcols,unique(df$SIC07_description))) +#set manual pastel colours matching sector name
+    ylab('Sector: percent of regional economy') +
+    theme(plot.title = element_text(face = 'bold')) +
+    labs(colour = 'SIC section') +
+    # scale_y_log10() +
+    ggtitle(paste0(place, ' GVA % of economy over time\nTop 12 sectors in ',max(df$year),'\n (', smoothband,' year moving average)'))
+  
+  
+}
+
+places = getdistinct('doncas|roth|barns|sheff',df$Region_name)
+
+plots <- map(places, getplot)
+
+patchwork::wrap_plots(plots)
+
+```
+
+
+:::
+
+---
+
+```{r}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 8
+
+n <- length(unique(df$SIC07_description))
+set.seed(12)
+qual_col_pals = RColorBrewer::brewer.pal.info[RColorBrewer::brewer.pal.info$category == 'qual',]
+col_vector = unlist(mapply(RColorBrewer::brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
+
+randomcols <- col_vector[10:(10+(n-1))]
+
+#Do once!
+getplot <- function(place){
+  
+  df = df %>% 
+    filter(!qg("Activities of households|agri",SIC07_description)) %>% 
+    mutate(
+      SIC07_description = case_when(
+        grepl('defence',SIC07_description,ignore.case = T) ~ 'public/defence',
+        grepl('support',SIC07_description,ignore.case = T) ~ 'admin/support',
+        grepl('financ',SIC07_description,ignore.case = T) ~ 'finance/insu',
+        grepl('agri',SIC07_description,ignore.case = T) ~ 'Agri/mining',
+        grepl('electr',SIC07_description,ignore.case = T) ~ 'power/water',
+        grepl('information',SIC07_description,ignore.case = T) ~ 'ICT',
+        grepl('manuf',SIC07_description,ignore.case = T) ~ 'Manuf',
+        grepl('other',SIC07_description,ignore.case = T) ~ 'other',
+        grepl('scientific',SIC07_description,ignore.case = T) ~ 'Scientific',
+        grepl('real estate',SIC07_description,ignore.case = T) ~ 'Real est',
+        grepl('transport',SIC07_description,ignore.case = T) ~ 'Transport',
+        grepl('entertainment',SIC07_description,ignore.case = T) ~ 'Entertainment',
+        grepl('human health',SIC07_description,ignore.case = T) ~ 'Health/soc',
+        grepl('food service activities',SIC07_description,ignore.case = T) ~ 'Food/service',
+        grepl('wholesale',SIC07_description,ignore.case = T) ~ 'Retail',
+        .default = SIC07_description
+      )
+    )
+  
+  top12sectors = df %>%
+    filter(
+      Region_name == place,
+      year == max(year) - 1#to get 3 year moving average value
+    ) %>%
+    arrange(-sector_regional_prop_movingav) %>%
+    slice_head(n= 12) %>%
+    select(SIC07_description) %>%
+    pull()
+  
+  
+  ggplot(df %>% 
+           filter(
+             Region_name == place, 
+             SIC07_description %in% top12sectors,
+             !is.na(sector_regional_prop_movingav)#Remove NAs created by 3 year moving average
+           ), 
+         aes(x = year, y = sector_regional_prop_movingav * 100, colour = fct_reorder(SIC07_description,-sector_regional_prop_movingav) )) +
+    geom_point() +
+    geom_line() +
+    scale_color_manual(values = setNames(randomcols,unique(df$SIC07_description))) +#set manual pastel colours matching sector name
+    ylab('Sector: percent of regional economy') +
+    theme(plot.title = element_text(face = 'bold')) +
+    labs(colour = 'SIC section') +
+    # scale_y_log10() +
+    ggtitle(paste0(place, ' GVA % of economy over time\nTop 12 sectors in ',max(df$year),'\n (', smoothband,' year moving average)'))
+  
+  
+}
+
+places = getdistinct('doncas|roth|barns|sheff',df$Region_name)
+
+plots <- map(places, getplot)
+
+patchwork::wrap_plots(plots)
+
+```
+
+
+
+
+---
 
 
 

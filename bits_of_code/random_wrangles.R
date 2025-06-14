@@ -207,6 +207,42 @@ ggsave('local/outputs/sy_prodsector2.png', width = 11, height = 5)
 
 
 
+# Newey West SE tests for time series sector data----
 
+#https://chatgpt.com/c/684d7594-3aa8-8013-88a4-1aa8c5671ea5?model=gpt-4o
+# install.packages("sandwich")
+# install.packages("lmtest")
+
+library(sandwich)
+library(lmtest)
+
+#Get chained volume data...
+df.cv <- read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/regionalGVA_chainedvolume_ITL3_SIC_SECTION_MINUSimputedrent_LONG_2023.csv')
+
+df.cv[df.cv < 0] = 0
+
+# Example: linear model on log-transformed values
+model <- lm(log(value) ~ year, data = df.cv %>% filter(qg('sheffield',Region_name),qg('manuf',SIC07_description)))
+
+# Compute Newey-West (HAC) standard errors
+# The lag argument sets the maximum autocorrelation lag to account for
+nw_se <- NeweyWest(model, lag = 1, prewhite = TRUE)
+
+# Run a robust coefficient test
+coeftest(model, vcov. = nw_se)
+
+summary(model)
+
+
+#Test added as option to function
+slopes.log1523 <- get_slope_and_se_safely(data = df.cv %>% filter(year %in% 2015:2023), Region_name,SIC07_description, y = log(value), x = year, neweywest = F)
+
+slopes.log1523.nw <- get_slope_and_se_safely(data = df.cv %>% filter(year %in% 2015:2023), Region_name,SIC07_description, y = log(value), x = year, neweywest = T)
+
+plot(slopes.log1523$slope,slopes.log1523.nw$slope)
+plot(slopes.log1523$se,slopes.log1523.nw$se)
+
+table(is.na(slopes.log1523$se))
+table(is.na(slopes.log1523.nw$se))
 
 

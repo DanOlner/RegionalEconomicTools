@@ -1043,7 +1043,7 @@
     "href": "R_regecon_taster_2025_revealjs.html#piping-interlude",
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "Piping interlude!",
-    "text": "Piping interlude!\n\n\n\nTask: compare standard R function to ‘piping in’ the argument\n\n\n\n#standard functions look like e.g.\nsqrt(100)\n\n[1] 10\n\n#But we can also PIPE the number INTO the function...\n100 %&gt;% sqrt\n\n[1] 10\n\n#Which seems pointless, except we can now CHAIN FUNCTIONS"
+    "text": "Piping interlude!\n\nThat last block of code was piping output of one function into the input of the next, chaining them together. This is super-powerful and useful."
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#the-console",
@@ -1071,7 +1071,7 @@
     "href": "R_regecon_taster_2025_revealjs.html#well-nearly",
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "Well nearly…",
-    "text": "Well nearly…\nJust one more thing first before actual economic data, sorry. We’re just going to load some functions (and install a couple of libraries) that we’ll need (i.e. Blue Peter style “here’s some I made earlier” chunks of code…) If of interest (or you want to check the code isn’t stealing your bank details!) code for these functions are on the github site here.\n\n\n\nTask: In the R script, stick this code below the library(tidyverse) line and run it with CTRL+ENTER or the run command\n\n\nAs this will install a couple of libraries for the first time it’ll take about 25-30 seconds to run.\nNote: comments in R begin with a #hash.\n\n#Load some functions and load two libraries (and install them if they're not already present)\nsource('https://bit.ly/rtasterfunctions')"
+    "text": "Well nearly…\nJust one more thing first before actual economic data, sorry. We’re just going to load some functions (and install a couple of libraries) that we’ll need.\nIf of interest (or you want to check the code isn’t stealing your bank details!) code for these functions are on the github site here.\n\n\n\nTask: In the R script, stick this code below the library(tidyverse) line and run it with CTRL+ENTER or the run command\n\n\nAs this will install a couple of libraries for the first time it’ll take about 25-30 seconds to run.\nNote: comments in R begin with a #hash.\n\n#Load some functions and two libraries (and install those libraries if they're not already present)\nsource('https://bit.ly/rtasterfunctions')"
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#the-plan",
@@ -1092,7 +1092,7 @@
     "href": "R_regecon_taster_2025_revealjs.html#what-data-have-we-got-here",
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "What data have we got here?",
-    "text": "What data have we got here?\nThis is from the latest ONS “Regional gross value added (balanced) by industry: all International Territorial Level (ITL) regions” (The Excel file is available here). Released April 2025, it’s got data up to 2023. It’s got:\n\nITL3 zones i.e. local authorities rather than MCAs\nSIC sections: 18 broad sector categories\n1998 to 2023\n\nLet’s look at those in R…"
+    "text": "What data have we got here?\nThis is from the latest ONS “Regional gross value added (balanced) by industry: all International Territorial Level (ITL) regions” (The Excel file is available here). Released April 2025, it’s got data up to 2023. It’s got:\n\nGVA values from 1998 to 2023, broken down by:\nITL3 zones i.e. local authorities rather than MCAs\nSIC sections: 18 broad sector categories (max in this data is 45 categories)\n\nPlus…"
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#r-is-ace-exhibit-a-using-it-to-extract-data-like-this-easily",
@@ -1120,6 +1120,69 @@
     "href": "R_regecon_taster_2025_revealjs.html#location-quotients",
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "Location quotients",
-    "text": "Location quotients\nEarwig go!\n\n\n\nTask:\n\n\n\n# LOCATION QUOTIENTS/PROPORTIONS----\n\nadd_location_quotient_and_proportions(\n  df %&gt;% filter(year == 1998),\n  regionvar = Region_name,\n  lq_var = SIC07_description,\n  valuevar = value\n) %&gt;% glimpse\n\nRows: 3,276\nColumns: 13\n$ ITL_code                   &lt;chr&gt; \"TLC31\", \"TLC31\", \"TLC31\", \"TLC31\", \"TLC31\"…\n$ Region_name                &lt;chr&gt; \"Hartlepool and Stockton-on-Tees\", \"Hartlep…\n$ SIC07_code                 &lt;chr&gt; \"AB (1-9)\", \"C (10-33)\", \"DE (35-39)\", \"F (…\n$ SIC07_description          &lt;chr&gt; \"Agriculture, forestry and fishing; mining …\n$ year                       &lt;dbl&gt; 1998, 1998, 1998, 1998, 1998, 1998, 1998, 1…\n$ value                      &lt;dbl&gt; 17, 775, 222, 233, 334, 195, 71, 35, 112, 4…\n$ region_totalsize           &lt;dbl&gt; 3318, 3318, 3318, 3318, 3318, 3318, 3318, 3…\n$ sector_regional_proportion &lt;dbl&gt; 0.005123568, 0.233574442, 0.066907776, 0.07…\n$ total_sectorsize           &lt;dbl&gt; 12743, 143696, 25694, 46669, 109388, 39867,…\n$ totalsize                  &lt;dbl&gt; 887910, 887910, 887910, 887910, 887910, 887…\n$ sector_total_proportion    &lt;dbl&gt; 0.014351680, 0.161836222, 0.028937618, 0.05…\n$ LQ                         &lt;dbl&gt; 0.3570013, 1.4432767, 2.3121384, 1.3360416,…\n$ LQ_log                     &lt;dbl&gt; -1.03001584, 0.36691599, 0.83817280, 0.2897…"
+    "text": "Location quotients\nEarwig go!\n\n\n\nTask:\n\n\n\n# LOCATION QUOTIENTS/PROPORTIONS----\n\nadd_location_quotient_and_proportions(\n  df %&gt;% filter(year == 1998),\n  regionvar = Region_name,\n  lq_var = SIC07_description,\n  valuevar = value\n) %&gt;% glimpse\n\nRows: 3,276\nColumns: 13\n$ ITL_code                   &lt;chr&gt; \"TLC31\", \"TLC31\", \"TLC31\", \"TLC31\", \"TLC31\"…\n$ Region_name                &lt;chr&gt; \"Hartlepool and Stockton-on-Tees\", \"Hartlep…\n$ SIC07_code                 &lt;chr&gt; \"AB (1-9)\", \"C (10-33)\", \"DE (35-39)\", \"F (…\n$ SIC07_description          &lt;chr&gt; \"Agriculture, forestry and fishing; mining …\n$ year                       &lt;dbl&gt; 1998, 1998, 1998, 1998, 1998, 1998, 1998, 1…\n$ value                      &lt;dbl&gt; 17, 775, 222, 233, 334, 195, 71, 35, 112, 7…\n$ region_totalsize           &lt;dbl&gt; 2940, 2940, 2940, 2940, 2940, 2940, 2940, 2…\n$ sector_regional_proportion &lt;dbl&gt; 0.005782313, 0.263605442, 0.075510204, 0.07…\n$ total_sectorsize           &lt;dbl&gt; 12743, 143696, 25694, 46669, 109388, 39867,…\n$ totalsize                  &lt;dbl&gt; 783813, 783813, 783813, 783813, 783813, 783…\n$ sector_total_proportion    &lt;dbl&gt; 0.016257704, 0.183329442, 0.032780778, 0.05…\n$ LQ                         &lt;dbl&gt; 0.3556660, 1.4378784, 2.3034903, 1.3310444,…\n$ LQ_log                     &lt;dbl&gt; -1.033763146, 0.363168684, 0.834425491, 0.2…"
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#how-has-the-structure-of-x-and-y-economies-changed-over-time",
+    "href": "R_regecon_taster_2025_revealjs.html#how-has-the-structure-of-x-and-y-economies-changed-over-time",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "How has the structure of [x and y] economies changed over time?",
+    "text": "How has the structure of [x and y] economies changed over time?\n\n\n\nTask:\n\n\nYou can look at the available ITL3 zones at geoportal.statistics.gov.uk here, if useful for checking names. (Opens in new tab.)\n\n# PLOT STRUCTURAL CHANGE OVER TIME IN ITL3 ZONE----\n\n#Processing before plot\nsmoothband = 3\n\ndf &lt;- df %&gt;% \n  group_by(Region_name,SIC07_description) %&gt;% \n  mutate(\n    gva_movingav = rollapply(value,smoothband,mean,align='center',fill=NA),\n    sector_regional_prop_movingav = \n      rollapply(sector_regional_proportion,smoothband,mean,align='center',fill=NA)\n  ) %&gt;% \n  ungroup()\n\nplace = getdistinct('doncas',df$Region_name)"
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#goals-for-the-session",
+    "href": "R_regecon_taster_2025_revealjs.html#goals-for-the-session",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Goals for the session",
+    "text": "Goals for the session\n\nTo actually get you started using R and RStudio if you haven’t before."
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#getting-sector-proportions-and-location-quotients",
+    "href": "R_regecon_taster_2025_revealjs.html#getting-sector-proportions-and-location-quotients",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Getting sector proportions and location quotients",
+    "text": "Getting sector proportions and location quotients\n\nNow we’ll wrangle the data using a function we loaded earlier Blue Peter style (may be showing age there!)\nThis function adds in columns for what proportion of each place’s economy each sector makes up and, using that, what the location quotient (LQ) is for each sector in each place."
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#wrangling-the-data",
+    "href": "R_regecon_taster_2025_revealjs.html#wrangling-the-data",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Wrangling the data",
+    "text": "Wrangling the data\n\nWe have our sector/region GVA data in R now - but how to wrangle it by place and sector, to start getting useful info out of it?\nHere’s an example of using the tidyverse to do this - we’ll group by sector for the latest year to see its median and range"
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#section",
+    "href": "R_regecon_taster_2025_revealjs.html#section",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "",
+    "text": "Location quotient (LQ)\n\n\n\nIn case the LQ is new to anyone: it’s just the proportion of a sector in a place, over its proportion nationally.\nSo it’s less than one if a sector is less concentrated in a place than the UK average / more than 1 if higher (and 0.5 and 2 if it’s half or double the UK concentration).\nThis ONS LQ excel sheet has a really clear explanation in the notes.\nI’ve made a page on other ways to use the LQ in R here, if of interest."
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#getting-them-for-every-year-and-keeping-the-result",
+    "href": "R_regecon_taster_2025_revealjs.html#getting-them-for-every-year-and-keeping-the-result",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Getting them for every year and keeping the result",
+    "text": "Getting them for every year and keeping the result\nIn the next code block, we’re running the same code but doing four extra things that we chain together:\n\nWe group_split the data into years (one separate dataframe per year)\nmap each year bundle into the add_location_quotient_and_proportions function\nbind_rows it all back together\nWe also overwrite df with the result (first line) so we’ve kept it (rather than, in the last example, just outputting to the console)."
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#section-1",
+    "href": "R_regecon_taster_2025_revealjs.html#section-1",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "",
+    "text": "Tip\n\n\nOnce the code from the next slide is in RStudio, if you CTRL + mouse click on the function name, it’ll take you to the code (if you loaded them above). You’ll see it’s a not-too-elaborate piping operation of the type we were just looking at.\nThe power of functions is in packaging this kind of ‘need often’ task into flexible, reusable form."
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#visualising-how-has-the-structure-of-places-economies-changed-over-time",
+    "href": "R_regecon_taster_2025_revealjs.html#visualising-how-has-the-structure-of-places-economies-changed-over-time",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Visualising: how has the structure of places’ economies changed over time?",
+    "text": "Visualising: how has the structure of places’ economies changed over time?\nLet’s plot some of the data. We’ll look at how an ITL3 zone’s broad sectors have changed their proportion over time, to see how those economies have changed structurally.\nWe’ll do this in 3 stages:\n\nAdd in a moving average to smooth the data a little\nPick out the top 12 broad sectors in the latest year\nPlot!"
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#multiple-proportion-plots-with-consistent-sector-colours",
+    "href": "R_regecon_taster_2025_revealjs.html#multiple-proportion-plots-with-consistent-sector-colours",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Multiple proportion plots with consistent sector colours",
+    "text": "Multiple proportion plots with consistent sector colours\n\n\n\nTask:\n\n\n\nn &lt;- length(unique(df$SIC07_description))\nset.seed(12)\nqual_col_pals = RColorBrewer::brewer.pal.info[RColorBrewer::brewer.pal.info$category == 'qual',]\ncol_vector = unlist(mapply(RColorBrewer::brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))\n\nrandomcols &lt;- col_vector[10:(10+(n-1))]\n\n#Do once!\ngetplot &lt;- function(place){\n  \n  df = df %&gt;% \n    filter(!qg(\"Activities of households|agri\",SIC07_description)) %&gt;% \n    mutate(\n      SIC07_description = case_when(\n        grepl('defence',SIC07_description,ignore.case = T) ~ 'public/defence',\n        grepl('support',SIC07_description,ignore.case = T) ~ 'admin/support',\n        grepl('financ',SIC07_description,ignore.case = T) ~ 'finance/insu',\n        grepl('agri',SIC07_description,ignore.case = T) ~ 'Agri/mining',\n        grepl('electr',SIC07_description,ignore.case = T) ~ 'power/water',\n        grepl('information',SIC07_description,ignore.case = T) ~ 'ICT',\n        grepl('manuf',SIC07_description,ignore.case = T) ~ 'Manuf',\n        grepl('other',SIC07_description,ignore.case = T) ~ 'other',\n        grepl('scientific',SIC07_description,ignore.case = T) ~ 'Scientific',\n        grepl('real estate',SIC07_description,ignore.case = T) ~ 'Real est',\n        grepl('transport',SIC07_description,ignore.case = T) ~ 'Transport',\n        grepl('entertainment',SIC07_description,ignore.case = T) ~ 'Entertainment',\n        grepl('human health',SIC07_description,ignore.case = T) ~ 'Health/soc',\n        grepl('food service activities',SIC07_description,ignore.case = T) ~ 'Food/service',\n        grepl('wholesale',SIC07_description,ignore.case = T) ~ 'Retail',\n        .default = SIC07_description\n      )\n    )\n  \n  top12sectors = df %&gt;%\n    filter(\n      Region_name == place,\n      year == max(year) - 1#to get 3 year moving average value\n    ) %&gt;%\n    arrange(-sector_regional_prop_movingav) %&gt;%\n    slice_head(n= 12) %&gt;%\n    select(SIC07_description) %&gt;%\n    pull()\n  \n  \n  ggplot(df %&gt;% \n           filter(\n             Region_name == place, \n             SIC07_description %in% top12sectors,\n             !is.na(sector_regional_prop_movingav)#Remove NAs created by 3 year moving average\n           ), \n         aes(x = year, y = sector_regional_prop_movingav * 100, colour = fct_reorder(SIC07_description,-sector_regional_prop_movingav) )) +\n    geom_point() +\n    geom_line() +\n    scale_color_manual(values = setNames(randomcols,unique(df$SIC07_description))) +#set manual pastel colours matching sector name\n    ylab('Sector: percent of regional economy') +\n    theme(plot.title = element_text(face = 'bold')) +\n    labs(colour = 'SIC section') +\n    # scale_y_log10() +\n    ggtitle(paste0(place, ' GVA % of economy over time\\nTop 12 sectors in ',max(df$year),'\\n (', smoothband,' year moving average)'))\n  \n  \n}\n\nplaces = getdistinct('doncas|roth|barns|sheff',df$Region_name)\n\nplots &lt;- map(places, getplot)\n\npatchwork::wrap_plots(plots)"
   }
 ]
