@@ -246,3 +246,16 @@ table(is.na(slopes.log1523$se))
 table(is.na(slopes.log1523.nw$se))
 
 
+
+# Sunburst test using BRES data for specific places----
+
+#Using pre-made BRES data
+bres <- readRDS('data/BRES/BRES_ALLYEARSWITHDATA_TYPE428_internationalterritoriallevelslevel3asofJan2021_2_Fulltimeemployees_2022_2023.rds')
+
+#Just save latest year to use with the R taster session June 2025
+
+
+
+
+
+

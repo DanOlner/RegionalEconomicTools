@@ -21,7 +21,7 @@ knitr::opts_chunk$set(fig.height = 8, fig.width = 10, echo = TRUE, warning = F, 
 
 ## Introduction
 
-We'll be doing a **whistlestop tour** of using R for regional economic analysis of UK data. It's the source we'll run through in the June '25 [ONS Presents taster session](https://www.eventbrite.co.uk/e/ons-local-workshop-using-r-for-regional-economic-analysis-taster-session-tickets-1372930745819).
+We'll be doing a **whistlestop tour** of using R for regional economic analysis of UK data. It's the source we'll run through in the June '25 [ONS Presents taster session](https://www.eventbrite.co.uk/e/ons-local-workshop-using-r-for-regional-economic-analysis-taster-session-tickets-1372930745819){target="_blank"}.
 
 
 ----
@@ -33,7 +33,7 @@ We'll be doing a **whistlestop tour** of using R for regional economic analysis 
 
 ## Get up and running with RStudio in the cloud
 
-* [Create an account at posit.cloud](https://login.posit.cloud/login) using the 'sign up' box, and then log in. That'll take you to your online workspace.
+* [Create an account at posit.cloud](https://login.posit.cloud/login){target="_blank"} using the 'sign up' box, and then log in. That'll take you to your online workspace.
 * Click the **new project** button, top right
 * Select '**new project from template**' (as in the pic below) and then "Data Analysis in R with the tidyverse" (if not already selected). This template comes pre-installed with the tidyverse package, which we'll be using. Select then click OK down at the bottom. **This will open your RStudio project where we'll do the coding.** 
 
@@ -91,7 +91,7 @@ We'll be doing a **whistlestop tour** of using R for regional economic analysis 
 
 ## Making a new R script in RStudio
 
-**RStudio is where you'll be doing all the R loveliness** (though see also the spangly new [positron](https://positron.posit.co/), I haven't tried yet).
+**RStudio is where you'll be doing all the R loveliness** (though see also the spangly new [positron](https://positron.posit.co/){target="_blank"}, I haven't tried yet).
 
 Before looking at RStudio, let's **make a new R script, where we'll do the coding**.
 
@@ -256,7 +256,7 @@ Let's do #1: **Run the code line by line**.
 
 **Just one more thing first before actual economic data, sorry. We're just going to **load some functions (and install a couple of libraries) that we'll need.
 
-If of interest (or you want to check the code isn't stealing your bank details!) code for these functions are [on the github site here](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/functions/misc_functions.R).
+If of interest (or you want to check the code isn't stealing your bank details!) code for these functions are [on the github site here](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/functions/misc_functions.R){target="_blank"}.
 
 ::: {.callout-note icon=false}
 
@@ -309,7 +309,7 @@ df = read_csv('https://bit.ly/rtasteritl3noir')
 
 ## What data have we got here?
 
-This is from the latest ONS **"Regional gross value added (balanced) by industry: all International Territorial Level (ITL) regions"** (The Excel file is [available here](https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry)). Released April 2025, it's got data up to 2023. It's got:
+This is from the latest ONS **"Regional gross value added (balanced) by industry: all International Territorial Level (ITL) regions"** (The Excel file is [available here](https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry){target="_blank"}). Released April 2025, it's got data up to 2023. It's got:
 
 * GVA values from 1998 to 2023, broken down by:
 * ITL3 zones i.e. local authorities rather than MCAs
@@ -588,9 +588,9 @@ df %>% filter(
 
 There are a bunch of excellent **cheat sheet documents** available for many of R's features. You can easily access them via RStudio's `help` menu. 
 
-The **[data tranformation with dplyr](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf)** sheet covers a lot of the functions we're using in piping operations.
+The **[data tranformation with dplyr](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf){target="_blank"}** sheet covers a lot of the functions we're using in piping operations.
 
-There's also an excellent **[ggplot cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf)**, among many others.
+There's also an excellent **[ggplot cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf){target="_blank"}**, among many others. We'll come back to this one...
 
 :::
 
@@ -674,7 +674,20 @@ top12sectors = df %>%
 
 ---
 
+## GGPLOT interlude!
 
+* In the next slide, we finally make an actual chart. Phew. 
+* There's a lot going on in `ggplot`, the package we'll be using to visualise data - but it's worth mentioning that its **principles are actually clear and consistent.**
+* You'll see it has an `aes` argument - that's short for **aesthetics**. An aesthetic is any single distinct plot element - like the x or y axis, colour, shape, size etc. 
+
+---
+
+* The rule is simple: **you map one column to one aesthetic.** This is another **tidy data** principle, and its the reason - for example - why we have years all their own column, so year can be mapped to one axis.
+* We'll see later with geographical zones - categorical variables also get mapped to single aesthetics.
+* The [ggplot cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf){target="_blank"} shows, for **all plot types**, what aesthetics are available.
+
+
+---
 
 ::: {.callout-note icon=false}
 ## Task: plot smoothed sector proportion over time using `ggplot`
@@ -731,17 +744,337 @@ ggplot(df %>%
 
 
 
+## Real GVA growth over time
 
+Current prices are great and everything - loads of value being able to examine relative change, and things actually adding up. **But they're not real prices**^[Though Diane Coyle quotes Schelling 1958: "What we call 'real' magnitudes are not completely real; only the money magnitudes are real. The 'real' ones are hypothetical." Coyle 2025 p.178], so can't be used to understand **real growth over time**.
 
+For this, we have to use **chained volume** data that adjusts for inflation...
 
-## Jobs v sectors
+---
+
+So next we **load data for the same sectors and ITL3 zones, but it's chained volume GVA figures**, inflation-adjusted to 2022 money value.
+
+We'll then **pick out a single place to examine**. I've chosen Barnsley - but note: **you can use a small part of a local authority / place name to return the full name that we'll use to filter the data**. 
+
+Check it's returned what you want though. For example, `glouc` will return a couple of different places with 'Gloucester' in. 
+---
 
 ::: {.callout-note icon=false}
-## Task: plot smoothed sector proportion over time using `ggplot`
+## Tasks: Load in the chained volume data for ITL3 zones and SIC sections, then pick a place name to examine
 
+
+```{r}
+# CHAINED VOLUME ITL3 DATA----
+
+df.cv = read_csv('https://bit.ly/rtasteritl3cvnoir')
+
+#Get the text for an ITL3 zone by searching for a bit of the name
+place = getdistinct('barns',df$Region_name)
+
+#Check we got just one place!
+place
+
+```
 
 
 :::
+
+
+---
+
+Now we'll **examine sector growth trends**, looking at average growth over time. To start with, let's pick out a couple of sectors for our chosen place.
+
+::: {.callout-note icon=false}
+## Task: Plot trends over time for a couple of sectors using ggplot.
+
+Set a start/end year (here, the most recent decade). **Note: two sector names are searched for here**, separating with a `|` vertical bar meaning `or`. Reminder: you can look at the full list of available sectors with **unique(df.cv$SIC07_description)**
+
+```{r eval = F}
+startyear = 2014
+endyear = 2023
+
+#Pick out single slopes to illustrate
+ggplot(
+  df.cv %>% filter(
+    year %in% startyear:endyear,
+    Region_name == place,
+    qg('information|professional', SIC07_description)
+  ),
+  aes(x = year, y = value, colour = SIC07_description)
+) +
+  geom_point() +
+  geom_line() +
+  geom_smooth(method = 'lm') +
+  ggtitle(paste0(place, ' selected sectors\nGVA change over time (chained volume)'))
+
+```
+
+:::
+
+
+---
+
+```{r echo = F}
+#| fig-width: 12
+
+startyear = 2014
+endyear = 2023
+
+#Pick out single slopes to illustrate
+ggplot(
+  df.cv %>% filter(
+    year %in% startyear:endyear,
+    Region_name == place,
+    qg('information|professional', SIC07_description)
+  ),
+  aes(x = year, y = value, colour = SIC07_description)
+) +
+  geom_line() +
+  geom_point() +
+  geom_smooth(method = 'lm') +
+  ggtitle(paste0(place, ' selected sectors\nGVA change over time (chained volume)'))
+
+```
+
+
+
+---
+
+
+Next, we're going to **find linear trends for every sector in our chosen place and compare them, including some confidence intervals**. To do this we'll:
+
+* Use another pre-made function loaded earlier that **finds linear slopes and standard errors for each group** (each sector in this case), using log values so change is comparable.
+* Do a bit of wrangling and then **plot average % change per year for each sector.**
+
+---
+
+
+::: {.callout-note icon=false}
+## Task: Get slopes and confidence intervals for each sector in our chosen place
+
+The function has a 'use [Newey West estimators](https://en.wikipedia.org/wiki/Newey%E2%80%93West_estimator){target="_blank"}' option - better standard errors for sticking lines through time series data (**open contibutions to improve trend analysis here would be very welcome!**)
+
+```{r}
+#Get all slopes for sectors in that place
+slopes = get_slope_and_se_safely(
+  df.cv %>% filter(
+    year %in% startyear:endyear,
+    Region_name == place,
+    !qg('households', SIC07_description)
+    ), 
+  SIC07_description, 
+  y = log(value), 
+  x = year, 
+  neweywest = T)
+
+
+#Add 95% confidence intervals around the slope
+slopes = slopes %>% 
+  mutate(
+    ci95min = slope - (se * 1.96),
+    ci95max = slope + (se * 1.96)
+  )
+```
+
+
+:::
+
+---
+
+::: {.callout-note icon=false}
+## Task:
+
+
+```{r eval = F}
+#Adjust to get percentage change per year
+slopes = slopes %>% 
+  mutate(across(c(slope,ci95min,ci95max), ~(exp(.) - 1) * 100, .names = '{.col}_percentperyear'))
+
+#Plot the slope with those confidence intervals
+ggplot(slopes, aes(x = slope_percentperyear, y = fct_reorder(SIC07_description,slope))) +
+  geom_point() +
+  geom_errorbar(aes(xmin = ci95min_percentperyear, xmax = ci95max_percentperyear), width = 0.1) +
+  geom_vline(xintercept = 0, colour = 'black', alpha = 0.5) +
+  coord_cartesian(xlim = c(-25,25)) +
+  xlab('Av. % change per year') +
+  ylab("") +
+  ggtitle(paste0(place, ' broad sectors av. chained volume GVA % change per year\n',startyear,'-',endyear,', 95% conf intervals'))
+  
+```
+
+
+:::
+
+Plot in next slide -->
+
+
+---
+
+```{r echo = F}
+
+#Adjust to get percentage change per year from log slopes
+slopes = slopes %>% 
+  mutate(across(c(slope,ci95min,ci95max), ~(exp(.) - 1) * 100, .names = '{.col}_percentperyear'))
+
+#Plot the slope with those confidence intervals
+ggplot(slopes, aes(x = slope_percentperyear, y = fct_reorder(SIC07_description,slope))) +
+  geom_point() +
+  geom_errorbar(aes(xmin = ci95min_percentperyear, xmax = ci95max_percentperyear), width = 0.1) +
+  geom_vline(xintercept = 0, colour = 'black', alpha = 0.5) +
+  coord_cartesian(xlim = c(-25,25)) +
+  xlab('Av. % change per year') +
+  ylab("") +
+  ggtitle(paste0(place, ' broad sectors av. chained volume GVA % change per year\n',startyear,'-',endyear,', 95% conf intervals'))
+  
+
+```
+
+
+
+## More growth analysis: ITL2 zones
+
+Let's actually run through extracting data from an online Excel sheet. It's not too much work. We'll use it to look at **growth rates for the entire economies of mayoral authorities and other ITL2 zones.**
+
+**We use the `readxl` package - this is already installed in posit.cloud RStudio. If you're working in RStudio on your own machine, here's some code to check if you have it installed and install it if not.** 
+
+
+::: {.callout-note icon=false}
+## Task: Check if readxl is installed and install if not
+
+
+```{r}
+# EXAMPLE OF GETTING DATA DIRECTLY (GET NATIONAL SIC SECTION DATA)----
+
+#Check readxl is already installed, install if not.
+if(!require(readxl)){
+  install.packages("readxl")
+  library(readxl)
+}
+
+```
+
+:::
+
+
+
+
+---
+
+Then onto getting the data directly and processing it...
+
+
+::: {.callout-note icon=false}
+## Task: Copy and run this code to get data directly from the ONS regional/industry GVA Excel file
+
+We download a temporary local copy and then extract from a sheet and cell range we define using the `readxl` package.
+
+```{r}
+#2025:
+url1 <- 'https://www.ons.gov.uk/file?uri=/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry/current/regionalgrossvalueaddedbalancedbyindustryandallinternationalterritoriallevelsitlregions.xlsx'
+p1f <- tempfile(fileext=".xlsx")
+download.file(url1, p1f, mode="wb") 
+
+itl2.all <- read_excel(path = p1f,range = "Table 2a!A2:AD4556")
+
+names(itl2.all) <- gsub(x = names(itl2.all), pattern = ' ', replacement = '_')
+
+itl2.all = itl2.all %>% 
+  filter(SIC07_description == 'All industries') %>% 
+  pivot_longer(`1998`:names(itl2.all)[length(names(itl2.all))], names_to = 'year', values_to = 'value') %>% #get most recent year
+  mutate(year = as.numeric(year))
+
+```
+
+:::
+
+
+
+---
+
+Now we have the data in the `itl.all` object in the form we want, we'll do as we did above for sectors in one place - **find linear slopes for each ITL2 zone and some confidence intervals**.
+
+::: {.callout-note icon=false}
+## Task: choose a time window and find OLS slopes for each ITL2 zone
+
+```{r}
+startyear = 2011
+endyear = 2023
+
+#Get all slopes for sectors in that place
+slopes = get_slope_and_se_safely(
+  itl2.all %>% filter(year %in% c(startyear:endyear)), 
+  Region_name,
+  y = log(value), 
+  x = year, 
+  neweywest = T)
+
+
+#Add 95% confidence intervals around the slope
+slopes = slopes %>% 
+  mutate(
+    ci95min = slope - (se * 1.96),
+    ci95max = slope + (se * 1.96)
+  )
+
+```
+
+:::
+
+
+
+---
+
+Finally, we plot the slopes to show average percent change over time...
+
+::: {.callout-note icon=false}
+## Task: plot each ITL2's linear slopes with confidence intervals 
+
+
+```{r eval=F}
+#Adjust to get percentage change per year from log slopes
+slopes = slopes %>% 
+  mutate(across(c(slope,ci95min,ci95max), ~(exp(.) - 1) * 100, .names = '{.col}_percentperyear'))
+
+#Plot the slope with those confidence intervals
+ggplot(slopes, aes(x = slope_percentperyear, y = fct_reorder(Region_name,slope))) +
+  geom_point() +
+  geom_errorbar(aes(xmin = ci95min_percentperyear, xmax = ci95max_percentperyear), width = 0.1) +
+  geom_vline(xintercept = 0, colour = 'black', alpha = 0.5) +
+  xlab('Av. % change per year') +
+  ylab("") +
+  ggtitle('All industries in ITL2 zones, chained volume GVA\nAv. % change per year\n2014-2023, 95% conf intervals')
+
+
+```
+
+:::
+
+
+---
+
+
+```{r echo=F}
+#Adjust to get percentage change per year from log slopes
+slopes = slopes %>% 
+  mutate(across(c(slope,ci95min,ci95max), ~(exp(.) - 1) * 100, .names = '{.col}_percentperyear'))
+
+#Plot the slope with those confidence intervals
+ggplot(slopes, aes(x = slope_percentperyear, y = fct_reorder(Region_name,slope))) +
+  geom_point() +
+  geom_errorbar(aes(xmin = ci95min_percentperyear, xmax = ci95max_percentperyear), width = 0.1) +
+  geom_vline(xintercept = 0, colour = 'black', alpha = 0.5) +
+  xlab('Av. % change per year') +
+  ylab("") +
+  ggtitle('All industries in ITL2 zones, chained volume GVA\nAv. % change per year\n2014-2023, 95% conf intervals')
+
+
+```
+
+---
+
+
+
+
 
 
 
@@ -920,6 +1253,26 @@ patchwork::wrap_plots(plots)
 
 #* **Follow [this little guide here](https://danolner.github.io/posts/setting_up_w_r_online/#if-using-rstudio-online-set-up-a-posit.cloud-account-and-create-your-rstudio-project){target="_blank"} to do that (opens in new tab).**
 
+#Extract just code
+knitr::purl(input = "R_regecon_taster_2025_revealjs.qmd", output = "R_regecon_taster_2025_codeextract.R",documentation = 0)
+
+#Mark time periods in the data to group by
+itl2.all = itl2.all %>% 
+  mutate(
+    timeperiod = case_when(
+      year %in% c(1998:2010) ~ '1998 to 2010',
+      year %in% c(2011:2023) ~ '2011 to 2023'
+    )
+  )
+
+ggplot(slopes, aes(x = slope_percentperyear, y = fct_reorder(Region_name,slope), colour = timeperiod)) +
+  geom_point(position = position_dodge(width = 0.5)) +
+  geom_errorbar(aes(xmin = ci95min_percentperyear, xmax = ci95max_percentperyear), position = position_dodge(width = 0.5), width = 0.1) +
+  geom_vline(xintercept = 0, colour = 'black', alpha = 0.5) +
+  coord_cartesian(xlim = c(-5,5)) +
+  xlab('Av. % change per year') +
+  ylab("") +
+  ggtitle(paste0(place, ' broad sectors av. chained volume GVA % change per year\n',startyear,'-',endyear,', 95% conf intervals'))
 
 
 ```

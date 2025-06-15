@@ -1184,5 +1184,33 @@
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "Multiple proportion plots with consistent sector colours",
     "text": "Multiple proportion plots with consistent sector colours\n\n\n\nTask:\n\n\n\nn &lt;- length(unique(df$SIC07_description))\nset.seed(12)\nqual_col_pals = RColorBrewer::brewer.pal.info[RColorBrewer::brewer.pal.info$category == 'qual',]\ncol_vector = unlist(mapply(RColorBrewer::brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))\n\nrandomcols &lt;- col_vector[10:(10+(n-1))]\n\n#Do once!\ngetplot &lt;- function(place){\n  \n  df = df %&gt;% \n    filter(!qg(\"Activities of households|agri\",SIC07_description)) %&gt;% \n    mutate(\n      SIC07_description = case_when(\n        grepl('defence',SIC07_description,ignore.case = T) ~ 'public/defence',\n        grepl('support',SIC07_description,ignore.case = T) ~ 'admin/support',\n        grepl('financ',SIC07_description,ignore.case = T) ~ 'finance/insu',\n        grepl('agri',SIC07_description,ignore.case = T) ~ 'Agri/mining',\n        grepl('electr',SIC07_description,ignore.case = T) ~ 'power/water',\n        grepl('information',SIC07_description,ignore.case = T) ~ 'ICT',\n        grepl('manuf',SIC07_description,ignore.case = T) ~ 'Manuf',\n        grepl('other',SIC07_description,ignore.case = T) ~ 'other',\n        grepl('scientific',SIC07_description,ignore.case = T) ~ 'Scientific',\n        grepl('real estate',SIC07_description,ignore.case = T) ~ 'Real est',\n        grepl('transport',SIC07_description,ignore.case = T) ~ 'Transport',\n        grepl('entertainment',SIC07_description,ignore.case = T) ~ 'Entertainment',\n        grepl('human health',SIC07_description,ignore.case = T) ~ 'Health/soc',\n        grepl('food service activities',SIC07_description,ignore.case = T) ~ 'Food/service',\n        grepl('wholesale',SIC07_description,ignore.case = T) ~ 'Retail',\n        .default = SIC07_description\n      )\n    )\n  \n  top12sectors = df %&gt;%\n    filter(\n      Region_name == place,\n      year == max(year) - 1#to get 3 year moving average value\n    ) %&gt;%\n    arrange(-sector_regional_prop_movingav) %&gt;%\n    slice_head(n= 12) %&gt;%\n    select(SIC07_description) %&gt;%\n    pull()\n  \n  \n  ggplot(df %&gt;% \n           filter(\n             Region_name == place, \n             SIC07_description %in% top12sectors,\n             !is.na(sector_regional_prop_movingav)#Remove NAs created by 3 year moving average\n           ), \n         aes(x = year, y = sector_regional_prop_movingav * 100, colour = fct_reorder(SIC07_description,-sector_regional_prop_movingav) )) +\n    geom_point() +\n    geom_line() +\n    scale_color_manual(values = setNames(randomcols,unique(df$SIC07_description))) +#set manual pastel colours matching sector name\n    ylab('Sector: percent of regional economy') +\n    theme(plot.title = element_text(face = 'bold')) +\n    labs(colour = 'SIC section') +\n    # scale_y_log10() +\n    ggtitle(paste0(place, ' GVA % of economy over time\\nTop 12 sectors in ',max(df$year),'\\n (', smoothband,' year moving average)'))\n  \n  \n}\n\nplaces = getdistinct('doncas|roth|barns|sheff',df$Region_name)\n\nplots &lt;- map(places, getplot)\n\npatchwork::wrap_plots(plots)"
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#real-gva-growth-over-time",
+    "href": "R_regecon_taster_2025_revealjs.html#real-gva-growth-over-time",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Real GVA growth over time",
+    "text": "Real GVA growth over time\nCurrent prices are great and everything - loads of value being able to examine relative change, and things actually adding up. But they’re not real prices1, so can’t be used to understand real growth over time.\nFor this, we have to use chained volume data that adjusts for inflation…\nThough Diane Coyle quotes Schelling 1958: “What we call ‘real’ magnitudes are not completely real; only the money magnitudes are real. The ‘real’ ones are hypothetical.” Coyle 2025 p.178"
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#jobs-v-sectors",
+    "href": "R_regecon_taster_2025_revealjs.html#jobs-v-sectors",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Jobs v sectors",
+    "text": "Jobs v sectors\n\n\n\nTask:"
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#more-growth-analysis-itl2-zones",
+    "href": "R_regecon_taster_2025_revealjs.html#more-growth-analysis-itl2-zones",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "More growth analysis: ITL2 zones",
+    "text": "More growth analysis: ITL2 zones\nLet’s actually run through extracting data from an online Excel sheet. It’s not too much work. We’ll use it to look at growth rates for the entire economies of mayoral authorities and other ITL2 zones.\nWe use the readxl package - this is already installed in posit.cloud RStudio. If you’re working in RStudio on your own machine, here’s some code to check if you have it installed and install it if not.\n\n\n\nTask: Check if readxl is installed and install if not\n\n\n\n# EXAMPLE OF GETTING DATA DIRECTLY (GET NATIONAL SIC SECTION DATA)----\n\n#Check readxl is already installed, install if not.\nif(!require(readxl)){\n  install.packages(\"readxl\")\n  library(readxl)\n}"
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#ggplot-interlude",
+    "href": "R_regecon_taster_2025_revealjs.html#ggplot-interlude",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "GGPLOT interlude!",
+    "text": "GGPLOT interlude!\n\nIn the next slide, we finally make an actual chart. Phew.\nThere’s a lot going on in ggplot, the package we’ll be using to visualise data - but it’s worth mentioning that its principles are actually clear and consistent.\nYou’ll see it has an aes argument - that’s short for aesthetics. An aesthetic is any single distinct plot element - like the x or y axis, colour, shape, size etc."
   }
 ]
