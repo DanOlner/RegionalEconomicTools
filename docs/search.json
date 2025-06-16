@@ -1006,7 +1006,7 @@
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#introduction",
     "href": "R_regecon_taster_2025_revealjs.html#introduction",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "Introduction",
     "text": "Introduction\n\nWe’ll be doing a whistlestop tour of using R for digging into UK regional economies.\nFor this session, we’re using just one ONS source - regional GVA broken down by industry. At the end I’ll list a bunch of other sources and ideas, and code for using them.\nWe’ll also be asking which of these would be most useful to you for future sessions, and what other data or tools might interest you."
   },
@@ -1020,7 +1020,7 @@
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#making-a-new-r-script-in-rstudio",
     "href": "R_regecon_taster_2025_revealjs.html#making-a-new-r-script-in-rstudio",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "Making a new R script in RStudio",
     "text": "Making a new R script in RStudio\nRStudio is where you’ll be doing all the R loveliness.\nBefore looking at RStudio, let’s make a new R script, where we’ll do the coding.\n\n\n\nTask: Open a new R script in RStudio\n\n\n\nIn the file menu in RStudio\nUse new file and R script (note: it tells you the keyboard shortcut for this)"
   },
@@ -1041,42 +1041,42 @@
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#piping-interlude",
     "href": "R_regecon_taster_2025_revealjs.html#piping-interlude",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "Piping interlude!",
     "text": "Piping interlude!\n\nThat last block of code was piping output of one function into the input of the next, chaining them together. This is super-powerful and useful."
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#the-console",
     "href": "R_regecon_taster_2025_revealjs.html#the-console",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "1. The console",
     "text": "1. The console\nThe console is bottom left: all R commands end up being run here. You either run code directly in the console or send code from your R script.\n\n\n\nTask: enter some commands directly into the console\n\n\nClick in the console area so the cursor is on the command line. Type some random sums (or copy, see next slide) - press enter and you’ll see the results directly in the console.\nNote that second one: sqrt is a function and arguments go into the brackets. More on that in a mo.\n\n2+2\n\n[1] 4\n\nsqrt(64)\n\n[1] 8"
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#giving-things-names",
     "href": "R_regecon_taster_2025_revealjs.html#giving-things-names",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "2. Giving things names",
     "text": "2. Giving things names\nWe can assign all manner of things a name to then use them elsewhere: values, strings, lists - and, crucially, data objects like all the UK’s regional GVA. But these all use the same method.\n\n\n\nTask: Still in the console, assign a value to a name\n\n\n\nx = 64\n\nYou’ll see that assignment appear top right in RStudio. It can be retrieved just with:\n\nx\n\n[1] 64"
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#using-an-r-script",
     "href": "R_regecon_taster_2025_revealjs.html#using-an-r-script",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "3. Using an R script",
     "text": "3. Using an R script\nWe’ll now stick some code into that newly created R script we made earlier in the top left of RStudio.\nAll code will run in the console - what we do with scripts is just send our written/saved code to the console.\nLet’s test this by adding code to load the tidyverse library.\n\n\n\n\n\n\nWhat’s the tidyverse?\n\n\nIt’s a basket of tools that have become part of the R language - they all fit together to make consistent workflows much easier.\nThe online book R for Data Science is a great source to learn it, by the person who started it."
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#well-nearly",
     "href": "R_regecon_taster_2025_revealjs.html#well-nearly",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "Well nearly…",
     "text": "Well nearly…\nJust one more thing first before actual economic data, sorry. We’re just going to load some functions (and install a couple of libraries) that we’ll need.\nIf of interest, code for these functions are on the github site here.\n\n\n\nTask: In the R script, stick this code below the library(tidyverse) line and run it with CTRL+ENTER or the run command\n\n\nAs this will install a couple of libraries for the first time it’ll take about a minute to run.\nNote: comments in R begin with a #hash.\n\n#Load some functions and two libraries (and install those libraries if they're not already present)\nsource('https://bit.ly/rtasterfunctions')"
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#the-plan",
     "href": "R_regecon_taster_2025_revealjs.html#the-plan",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "The plan",
     "text": "The plan\n\nI’ve got two tabs open I’ll move between. 1: These slides with the code and links in. 2: RStudio, open in posit.cloud.\nWe’ll work through these slides together, sometimes typing or copying code from the slides into RStudio.\nNavigate the slides with the up/down or left/right keyboard arrows.\nYou can move between those two tabs, and also come back to Teams to see how I’m doing stuff.\nEach slide is numbered - I’ll say where we’re at as we progress."
   },
@@ -1090,7 +1090,7 @@
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#what-data-have-we-got-here",
     "href": "R_regecon_taster_2025_revealjs.html#what-data-have-we-got-here",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "What data have we got here?",
     "text": "What data have we got here?\nThis is from the latest ONS “Regional gross value added (balanced) by industry: all International Territorial Level (ITL) regions” (The Excel file is available here). Released April 2025, it’s got data up to 2023. It has:\n\nGVA values from 1998 to 2023, broken down by:\nITL3 zones i.e. local authorities rather than MCAs\nSIC sections: 18 broad sector categories (max in this data is 45 categories)\n\nPlus…"
   },
@@ -1132,28 +1132,28 @@
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#goals-for-the-session",
     "href": "R_regecon_taster_2025_revealjs.html#goals-for-the-session",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "Goals for the session",
     "text": "Goals for the session\n\nActually get you started using R and RStudio if you haven’t used them before.\nGive you a sense of how R can be used for UK regional data analysis and output.\nSignpost to next steps if you want to do more. For anyone who does want to continue, I’m keen to grow our networks to collaborate on our capacity building."
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#getting-sector-proportions-and-location-quotients",
     "href": "R_regecon_taster_2025_revealjs.html#getting-sector-proportions-and-location-quotients",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "Getting sector proportions and location quotients",
     "text": "Getting sector proportions and location quotients\n\nNow we’ll wrangle the data using a function we loaded earlier Blue Peter style (may be showing age there!)\nThis function adds in columns for what proportion of each place’s economy each sector makes up and, using that, what the location quotient (LQ) is for each sector in each place."
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#wrangling-the-data",
     "href": "R_regecon_taster_2025_revealjs.html#wrangling-the-data",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "Wrangling the data",
     "text": "Wrangling the data\n\nSo - we have our sector/region GVA data in R now - but how to wrangle it by place and sector, to start getting useful info out of it?\nHere’s an example of using the tidyverse to do this - we’ll group by sector for the latest year to see its median and range"
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#section",
     "href": "R_regecon_taster_2025_revealjs.html#section",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "",
     "text": "Location quotient (LQ)\n\n\n\nIn case the LQ is new to anyone: it’s just the proportion of a sector in a place, over its proportion nationally.\nSo it’s less than one if a sector is less concentrated in a place than the UK average / more than 1 if higher (and 0.5 and 2 if it’s half or double the UK concentration).\nThis ONS LQ excel sheet has a really clear explanation in the notes.\nI’ve made a page on other ways to use the LQ in R here, if of interest."
   },
@@ -1167,28 +1167,28 @@
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#section-1",
     "href": "R_regecon_taster_2025_revealjs.html#section-1",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "",
     "text": "Tip\n\n\nOnce the code from the next slide is in RStudio, if you CTRL + mouse click on the function name, it’ll take you to the code (if you loaded them above). You’ll see it’s a not-too-elaborate piping operation of the type we were just looking at.\nThe power of functions is in packaging this kind of ‘need often’ task into flexible, reusable form."
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#visualising-how-has-the-structure-of-places-economies-changed-over-time",
     "href": "R_regecon_taster_2025_revealjs.html#visualising-how-has-the-structure-of-places-economies-changed-over-time",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "Visualising: how has the structure of places’ economies changed over time?",
     "text": "Visualising: how has the structure of places’ economies changed over time?\nLet’s plot some of the data. We’ll look at how an ITL3 zone’s broad sectors have changed their proportion over time, to see how those economies have changed structurally.\nWe’ll do this in 3 stages:\n\nAdd in a moving average to smooth the data a little\nPick out the top 12 broad sectors in the latest year\nPlot!"
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#multiple-proportion-plots-with-consistent-sector-colours",
     "href": "R_regecon_taster_2025_revealjs.html#multiple-proportion-plots-with-consistent-sector-colours",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "Multiple proportion plots with consistent sector colours",
     "text": "Multiple proportion plots with consistent sector colours\n\n\n\nTask:\n\n\n\nn &lt;- length(unique(df$SIC07_description))\nset.seed(12)\nqual_col_pals = RColorBrewer::brewer.pal.info[RColorBrewer::brewer.pal.info$category == 'qual',]\ncol_vector = unlist(mapply(RColorBrewer::brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))\n\nrandomcols &lt;- col_vector[10:(10+(n-1))]\n\n#Do once!\ngetplot &lt;- function(place){\n  \n  df = df %&gt;% \n    filter(!qg(\"Activities of households|agri\",SIC07_description)) %&gt;% \n    mutate(\n      SIC07_description = case_when(\n        grepl('defence',SIC07_description,ignore.case = T) ~ 'public/defence',\n        grepl('support',SIC07_description,ignore.case = T) ~ 'admin/support',\n        grepl('financ',SIC07_description,ignore.case = T) ~ 'finance/insu',\n        grepl('agri',SIC07_description,ignore.case = T) ~ 'Agri/mining',\n        grepl('electr',SIC07_description,ignore.case = T) ~ 'power/water',\n        grepl('information',SIC07_description,ignore.case = T) ~ 'ICT',\n        grepl('manuf',SIC07_description,ignore.case = T) ~ 'Manuf',\n        grepl('other',SIC07_description,ignore.case = T) ~ 'other',\n        grepl('scientific',SIC07_description,ignore.case = T) ~ 'Scientific',\n        grepl('real estate',SIC07_description,ignore.case = T) ~ 'Real est',\n        grepl('transport',SIC07_description,ignore.case = T) ~ 'Transport',\n        grepl('entertainment',SIC07_description,ignore.case = T) ~ 'Entertainment',\n        grepl('human health',SIC07_description,ignore.case = T) ~ 'Health/soc',\n        grepl('food service activities',SIC07_description,ignore.case = T) ~ 'Food/service',\n        grepl('wholesale',SIC07_description,ignore.case = T) ~ 'Retail',\n        .default = SIC07_description\n      )\n    )\n  \n  top12sectors = df %&gt;%\n    filter(\n      Region_name == place,\n      year == max(year) - 1#to get 3 year moving average value\n    ) %&gt;%\n    arrange(-sector_regional_prop_movingav) %&gt;%\n    slice_head(n= 12) %&gt;%\n    select(SIC07_description) %&gt;%\n    pull()\n  \n  \n  ggplot(df %&gt;% \n           filter(\n             Region_name == place, \n             SIC07_description %in% top12sectors,\n             !is.na(sector_regional_prop_movingav)#Remove NAs created by 3 year moving average\n           ), \n         aes(x = year, y = sector_regional_prop_movingav * 100, colour = fct_reorder(SIC07_description,-sector_regional_prop_movingav) )) +\n    geom_point() +\n    geom_line() +\n    scale_color_manual(values = setNames(randomcols,unique(df$SIC07_description))) +#set manual pastel colours matching sector name\n    ylab('Sector: percent of regional economy') +\n    theme(plot.title = element_text(face = 'bold')) +\n    labs(colour = 'SIC section') +\n    # scale_y_log10() +\n    ggtitle(paste0(place, ' GVA % of economy over time\\nTop 12 sectors in ',max(df$year),'\\n (', smoothband,' year moving average)'))\n  \n  \n}\n\nplaces = getdistinct('doncas|roth|barns|sheff',df$Region_name)\n\nplots &lt;- map(places, getplot)\n\npatchwork::wrap_plots(plots)"
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#real-gva-growth-over-time",
     "href": "R_regecon_taster_2025_revealjs.html#real-gva-growth-over-time",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "Real GVA growth over time",
     "text": "Real GVA growth over time\nCurrent prices are great and everything - loads of value being able to examine relative change, and things actually adding up. But they’re not real prices1, so can’t be used to understand real growth over time.\nFor this, we have to use chained volume data that adjusts for inflation…\nThough Diane Coyle quotes Schelling 1958: “What we call ‘real’ magnitudes are not completely real; only the money magnitudes are real. The ‘real’ ones are hypothetical.” Coyle 2025 p.178"
   },
@@ -1202,42 +1202,42 @@
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#more-growth-analysis-itl2-zones",
     "href": "R_regecon_taster_2025_revealjs.html#more-growth-analysis-itl2-zones",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "More growth analysis: ITL2 zones",
     "text": "More growth analysis: ITL2 zones\nLet’s actually run through extracting data from an online Excel sheet. It’s not too much work. We’ll use it to look at growth rates for the entire economies of mayoral authorities and other ITL2 zones.\nWe use the readxl package - this is already installed in posit.cloud RStudio. If you’re working in RStudio on your own machine, here’s some code to check if you have it installed and install it if not.\n\n\n\nTask: Check if readxl is installed and install if not\n\n\n\n# EXAMPLE OF GETTING DATA DIRECTLY (GET NATIONAL SIC SECTION DATA)----\n\n#Check readxl is already installed, install if not.\nif(!require(readxl)){\n  install.packages(\"readxl\")\n  library(readxl)\n}"
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#ggplot-interlude",
     "href": "R_regecon_taster_2025_revealjs.html#ggplot-interlude",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "GGPLOT interlude!",
     "text": "GGPLOT interlude!\n\nIn the next slide, we finally make an actual chart. Phew.\nThere’s a lot going on in ggplot, the package we’ll be using to visualise data - but it’s worth mentioning that its principles are actually clear and consistent.\nYou’ll see it has an aes argument - that’s short for aesthetics. An aesthetic is any single distinct plot element - like the x or y axis, colour, shape, size etc."
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#before-we-start",
     "href": "R_regecon_taster_2025_revealjs.html#before-we-start",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "Before we start…",
     "text": "Before we start…\n\nYou’ve got two ways to engage with this session:\n\n\nJust watch the screencast, let it wash over you and then come back to the materials in your own time. (These slides as well as ONS recording.)\nRun the R code yourself as we go. If you’re trying #2 - you’ll need a copy of these slides open. You’ll have got the link via email - it’s also in the chat, or just type bit.ly/rtasterslides into your browser address bar.\n\n\nIf the slide link isn’t working for any reason, you’ll also have been sent a Word doc with the same material in"
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#because-this-is-just-a-taster-session",
     "href": "R_regecon_taster_2025_revealjs.html#because-this-is-just-a-taster-session",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "Because this is just a taster session…",
     "text": "Because this is just a taster session…\n\nThis is not a full training workshop. Whenever we’re learning new coding methods, things always go wrong, guaranteed. It’s all part of the fun.\nIf in a workshop, we can take time to fix those problems. Sorry, we won’t have capacity for that today."
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#one-last-thing",
     "href": "R_regecon_taster_2025_revealjs.html#one-last-thing",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "One last thing…",
     "text": "One last thing…\n\nOnce you have your own copy of the slides open, note the three-bar button, bottom left.\nThat lets you see the table of contents\n\nAlso last chance to open own slide copy! Get them at bit.ly/rtasterslides."
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#not-got-r-yet",
     "href": "R_regecon_taster_2025_revealjs.html#not-got-r-yet",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "Not got R yet?",
     "text": "Not got R yet?\n\nIf you want to do some coding but didn’t have a chance to run through the little R setup guide, you’ve got some time now while I do all the pre-amble!\nThe slide below takes you through how to get RStudio working in the browser using (free) posit.cloud.\nWe’ll use the free version of posit.cloud - it’s only got 1GB RAM, so we can’t do some of the heavier stuff, but is perfect for an intro.\n(The paid tier isn’t too expensive and is powerful enough for most work.)"
   },
@@ -1272,7 +1272,7 @@
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#before-moving-on",
     "href": "R_regecon_taster_2025_revealjs.html#before-moving-on",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "Before moving on…",
     "text": "Before moving on…\n\nThere are a load more examples of using this data for comparing places, doing location quotients etc at my regional econ tools website (of course produced using R!)\nThis intro has basic examples, this digs more into using LQs to put places in national context, this looks at ways to see how GVA ‘gaps’ between places change over time."
   },
@@ -1286,14 +1286,14 @@
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#other-things-we-could-cover-another-time-links-to-examples",
     "href": "R_regecon_taster_2025_revealjs.html#other-things-we-could-cover-another-time-links-to-examples",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "Other things we could cover another time (links to examples)",
     "text": "Other things we could cover another time (links to examples)\n\nDirectly accessing NOMIS data in R and harmonising with other sources. Examples: BRES jobs. Good GVA demoninators like 16-64s or 16+, per filled job, pop count, per hour worked (example of plotting GVA over each of these). SICSOC industry vs occupation (dashboard example in SICSOC tab here).\nHarmonised regional GVA and jobs data. I’ve done that here but the GVA/jobs link needs a 2023 update."
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#next",
     "href": "R_regecon_taster_2025_revealjs.html#next",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "Next?",
     "text": "Next?\n\nWould any of the above be of interest for future R sessions?\nIs there anything I’ve not mentioned that would be good?\nHappy to chat - d dot olner at sheffield dot ac dot uk or message me on LinkedIn."
   },
@@ -1307,9 +1307,9 @@
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#things-we-havent-covered",
     "href": "R_regecon_taster_2025_revealjs.html#things-we-havent-covered",
-    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "title": "Using R for regional economic analysis, ONS Local taster session (17th June 2025)",
     "section": "Things we haven’t covered",
-    "text": "Things we haven’t covered\n\nBuilding full pipelines from the data wrangling above can include:\n\nPreparing reports in R. Here’s an example looking at business dynamism using ONS data.\nUsing github to complete the pipeline by presenting online (e.g. these slides!)\nInteractive plots and maps in R e.g. Companies House ‘most common sector’ hexmap.\nMaking dashboards using R Shiny e.g. South Yorkshire Companies House employee change dashboard."
+    "text": "Things we haven’t covered\n\nBuilding full pipelines from the data wrangling above can include:\n\nPreparing reports in R. Here’s an example looking at business dynamism using ONS data.\nUsing github to complete the pipeline by presenting online (e.g. these slides!)\nInteractives in R e.g. Companies House ‘most common sector’ hexmap; interactive employment report.\nMaking dashboards using R Shiny e.g. South Yorkshire Companies House employee change dashboard."
   },
   {
     "objectID": "regionalgva_n_bres.html#update-2025-temporary-holding-pen-for-latest-april-2025-gva-data-while-i-re-harmonise",

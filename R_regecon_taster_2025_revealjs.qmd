@@ -1,5 +1,5 @@
 ---
-title: "Using R for regional economic analysis, taster session (17th June 2025)"
+title: "Using R for regional economic analysis, ONS Local taster session (17th June 2025)"
 sidebar: false
 code-overflow: wrap
 execute:
@@ -1491,7 +1491,7 @@ ggplot(slopes, aes(x = slope_percentperyear, y = fct_reorder(Region_name,slope))
 * Building full pipelines from the data wrangling above can include:
     - Preparing reports in R. [Here's an example](https://danolner.github.io/FirmAnalysis/ONS_business_demography.html){target="_blank"} looking at business dynamism using ONS data.
     - [Using github](https://github.com/DanOlner){target="_blank"} to complete the pipeline by presenting online (e.g. these slides!)
-    - Interactive plots and maps in R e.g. Companies House '[most common sector](https://danolner.github.io/companieshouseopen/maps/companieshouse_modal_SICsection_byemployeecount_minfiftyplus_hex5000.html){target="_blank"}' hexmap.
+    - Interactives in R e.g. Companies House '[most common sector](https://danolner.github.io/companieshouseopen/maps/companieshouse_modal_SICsection_byemployeecount_minfiftyplus_hex5000.html){target="_blank"}' hexmap; [interactive employment report](https://danolner.github.io/companieshouseopen/reports/companies_house_SY_initialreport_march2025.html){target="_blank"}.
     - Making dashboards using R Shiny e.g. South Yorkshire Companies House employee change [dashboard](https://danolner.shinyapps.io/SY_companieshouse/){target="_blank"}.
 
 
