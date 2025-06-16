@@ -1,10 +1,9 @@
-
-
 library(tidyverse)
 
 #Load some functions and two libraries (and install those libraries if they're not already present)
+x = Sys.time()
 source('https://bit.ly/rtasterfunctions')
-
+Sys.time() - x
 
 # LOAD ITL3 GVA DATA----
 

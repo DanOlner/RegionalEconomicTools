@@ -424,7 +424,7 @@
 <ul>
 <li>I’ve also stuck an <strong>image of the ‘set up posit.cloud’ slide in the chat</strong>, if useful.</li>
 <li>Sorry - if posit.cloud doesn’t work for any reason, <strong>we won’t have time during this session to troubleshoot via chat</strong> - but we’ll work out ways to offer support after, if that’s useful.</li>
-<li>And here’s the link to your own slide copy in the browser again, just in case: <code>bit.ly/rtasterslides</code></li>
+<li>( Link to your own slide copy in the browser again, just in case: <code>bit.ly/rtasterslides</code> )</li>
 </ul>
 </section>
 <section class="slide level2">
@@ -476,7 +476,7 @@
 <ul>
 <li>I’ll also be banging on about <strong>how great R is for open, collaborative working.</strong> It’s build for openness and reproducibility, and this makes them <strong>great for collaborative learning.</strong></li>
 <li>I’ll talk about <strong>how to make reproducible pipelines all the way from data source to outputs</strong>.</li>
-<li><strong>These slides are an example:</strong> code available <a href="https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/R_regecon_taster_2025_revealjs.qmd">here</a>.</li>
+<li><strong>The slides you’re looking at are an example:</strong> code available <a href="https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/R_regecon_taster_2025_revealjs.qmd">here</a>.</li>
 </ul>
 </section>
 <section id="because-this-is-just-a-taster-session" class="slide level2">
@@ -661,6 +661,357 @@
 </section>
 <section class="slide level2">
 
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>We’ll be copy/pasted separate code chunks as we go to talk through what they do. But <strong>if you’d rather bulk-copy the session’s code</strong> and run through it as you see fit, <strong>copy here with the clipboard symbol then paste into the new R script.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#WHOLE SCRIPT FOR THE SESSION</span></span>
+<span id="cb12-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb12-3"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Load some functions and two libraries (and install those libraries if they're not already present)</span></span>
+<span id="cb12-5"><a aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb12-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'https://bit.ly/rtasterfunctions'</span>)</span>
+<span id="cb12-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> x</span>
+<span id="cb12-8"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a aria-hidden="true" tabindex="-1"></a><span class="co"># LOAD ITL3 GVA DATA----</span></span>
+<span id="cb12-10"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a aria-hidden="true" tabindex="-1"></a><span class="co">#ITL3 zones, SIC sections, current prices, 2023 latest data (minus imputed rent)</span></span>
+<span id="cb12-12"><a aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">'https://bit.ly/rtasteritl3noir'</span>)</span>
+<span id="cb12-13"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a aria-hidden="true" tabindex="-1"></a><span class="co">#This one has imputed rent included if you want it</span></span>
+<span id="cb12-15"><a aria-hidden="true" tabindex="-1"></a><span class="co"># df = read_csv('https://bit.ly/rtasteritl3')</span></span>
+<span id="cb12-16"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(df<span class="sc">$</span>SIC07_description)</span>
+<span id="cb12-20"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-21"><a aria-hidden="true" tabindex="-1"></a><span class="co"># unique(df$Region_name)[order(unique(df$Region_name))]</span></span>
+<span id="cb12-22"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb12-24"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="fu">max</span>(year)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-25"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(SIC07_description) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-26"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb12-27"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">median_gva =</span> <span class="fu">median</span>(value),</span>
+<span id="cb12-28"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">min_gva =</span> <span class="fu">min</span>(value),</span>
+<span id="cb12-29"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">max_gva =</span> <span class="fu">max</span>(value)</span>
+<span id="cb12-30"><a aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-31"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>median_gva)</span>
+<span id="cb12-32"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-33"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-34"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-35"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Boooo, nested brackets...</span></span>
+<span id="cb12-36"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">log10</span>(<span class="dv">10000</span>))</span>
+<span id="cb12-37"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-38"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Wooo! Lovely piped functions!</span></span>
+<span id="cb12-39"><a aria-hidden="true" tabindex="-1"></a><span class="dv">10000</span> <span class="sc">%&gt;%</span> sqrt <span class="sc">%&gt;%</span> log10</span>
+<span id="cb12-40"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-41"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-42"><a aria-hidden="true" tabindex="-1"></a><span class="co"># LOCATION QUOTIENTS/PROPORTIONS----</span></span>
+<span id="cb12-43"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-44"><a aria-hidden="true" tabindex="-1"></a><span class="fu">add_location_quotient_and_proportions</span>(</span>
+<span id="cb12-45"><a aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="fu">max</span>(year)),</span>
+<span id="cb12-46"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">regionvar =</span> Region_name,</span>
+<span id="cb12-47"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">lq_var =</span> SIC07_description,</span>
+<span id="cb12-48"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">valuevar =</span> value</span>
+<span id="cb12-49"><a aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> glimpse</span>
+<span id="cb12-50"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-51"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Finding location quotients for each year in the data </span></span>
+<span id="cb12-52"><a aria-hidden="true" tabindex="-1"></a><span class="co">#And then overwriting the df variable with the result</span></span>
+<span id="cb12-53"><a aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb12-54"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_split</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb12-55"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(add_location_quotient_and_proportions,</span>
+<span id="cb12-56"><a aria-hidden="true" tabindex="-1"></a>      <span class="at">regionvar =</span> Region_name,</span>
+<span id="cb12-57"><a aria-hidden="true" tabindex="-1"></a>      <span class="at">lq_var =</span> SIC07_description,</span>
+<span id="cb12-58"><a aria-hidden="true" tabindex="-1"></a>      <span class="at">valuevar =</span> value) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-59"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>()</span>
+<span id="cb12-60"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-61"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-62"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-63"><a aria-hidden="true" tabindex="-1"></a><span class="co">#View a single place...</span></span>
+<span id="cb12-64"><a aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(</span>
+<span id="cb12-65"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">qg</span>(<span class="st">'rotherham'</span>,Region_name),</span>
+<span id="cb12-66"><a aria-hidden="true" tabindex="-1"></a>  year <span class="sc">==</span> <span class="fu">max</span>(year)<span class="co">#get latest year in data</span></span>
+<span id="cb12-67"><a aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-68"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">regional_percent =</span> sector_regional_proportion <span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-69"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(SIC07_description,regional_percent, LQ) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-70"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>LQ) </span>
+<span id="cb12-71"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-72"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-73"><a aria-hidden="true" tabindex="-1"></a><span class="co"># PLOT STRUCTURAL CHANGE OVER TIME IN ITL3 ZONE----</span></span>
+<span id="cb12-74"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-75"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Processing before plot</span></span>
+<span id="cb12-76"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-77"><a aria-hidden="true" tabindex="-1"></a><span class="co">#1. Set window for rolling average: 3 years</span></span>
+<span id="cb12-78"><a aria-hidden="true" tabindex="-1"></a>smoothband <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb12-79"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-80"><a aria-hidden="true" tabindex="-1"></a><span class="co">#2. Make new column with rolling average in (applying to all places and sectors)</span></span>
+<span id="cb12-81"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Years are already in the right order, so will roll apply across those correctly</span></span>
+<span id="cb12-82"><a aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb12-83"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Region_name,SIC07_description) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-84"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb12-85"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">sector_regional_prop_movingav =</span> <span class="fu">rollapply</span>(</span>
+<span id="cb12-86"><a aria-hidden="true" tabindex="-1"></a>      sector_regional_proportion,smoothband,mean,<span class="at">align=</span><span class="st">'center'</span>,<span class="at">fill=</span><span class="cn">NA</span></span>
+<span id="cb12-87"><a aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb12-88"><a aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-89"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb12-90"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-91"><a aria-hidden="true" tabindex="-1"></a><span class="co">#3. Pick out the name of the place / ITl3 zone to look at</span></span>
+<span id="cb12-92"><a aria-hidden="true" tabindex="-1"></a><span class="co">#We only need a bit of the name...</span></span>
+<span id="cb12-93"><a aria-hidden="true" tabindex="-1"></a>place <span class="ot">=</span> <span class="fu">getdistinct</span>(<span class="st">'doncas'</span>,df<span class="sc">$</span>Region_name)</span>
+<span id="cb12-94"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-95"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Check we found the single place we wanted (some search terms will pick up none or more than one)</span></span>
+<span id="cb12-96"><a aria-hidden="true" tabindex="-1"></a>place</span>
+<span id="cb12-97"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-98"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-99"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-100"><a aria-hidden="true" tabindex="-1"></a><span class="co"># top 12 sectors in latest year</span></span>
+<span id="cb12-101"><a aria-hidden="true" tabindex="-1"></a>top12sectors <span class="ot">=</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb12-102"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb12-103"><a aria-hidden="true" tabindex="-1"></a>    Region_name <span class="sc">==</span> place,</span>
+<span id="cb12-104"><a aria-hidden="true" tabindex="-1"></a>    year <span class="sc">==</span> <span class="fu">max</span>(year) <span class="sc">-</span> <span class="dv">1</span><span class="co">#to get 3 year moving average value</span></span>
+<span id="cb12-105"><a aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb12-106"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>sector_regional_prop_movingav) <span class="sc">%&gt;%</span></span>
+<span id="cb12-107"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span> <span class="dv">12</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-108"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(SIC07_description) <span class="sc">%&gt;%</span></span>
+<span id="cb12-109"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>()</span>
+<span id="cb12-110"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-111"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-112"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-113"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Plot! </span></span>
+<span id="cb12-114"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df <span class="sc">%&gt;%</span></span>
+<span id="cb12-115"><a aria-hidden="true" tabindex="-1"></a>         <span class="fu">filter</span>(</span>
+<span id="cb12-116"><a aria-hidden="true" tabindex="-1"></a>           Region_name <span class="sc">==</span> place,</span>
+<span id="cb12-117"><a aria-hidden="true" tabindex="-1"></a>           SIC07_description <span class="sc">%in%</span> top12sectors,</span>
+<span id="cb12-118"><a aria-hidden="true" tabindex="-1"></a>           <span class="sc">!</span><span class="fu">is.na</span>(sector_regional_prop_movingav)<span class="co">#Remove NAs created by 3 year moving average</span></span>
+<span id="cb12-119"><a aria-hidden="true" tabindex="-1"></a>           ),</span>
+<span id="cb12-120"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> sector_regional_prop_movingav <span class="sc">*</span> <span class="dv">100</span>, <span class="at">colour =</span></span>
+<span id="cb12-121"><a aria-hidden="true" tabindex="-1"></a>             <span class="fu">fct_reorder</span>(SIC07_description,<span class="sc">-</span>sector_regional_prop_movingav) )) <span class="sc">+</span></span>
+<span id="cb12-122"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb12-123"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb12-124"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">'Paired'</span>, <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb12-125"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">'Sector: percent of regional economy'</span>) <span class="sc">+</span></span>
+<span id="cb12-126"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">colour =</span> <span class="fu">paste0</span>(<span class="st">'Largest 12 sectors in '</span>,<span class="fu">max</span>(df<span class="sc">$</span>year))) <span class="sc">+</span></span>
+<span id="cb12-127"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">paste0</span>(place, <span class="st">' GVA % of economy over time ('</span>, smoothband,<span class="st">' year moving average)'</span>))</span>
+<span id="cb12-128"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-129"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-130"><a aria-hidden="true" tabindex="-1"></a><span class="co"># CHAINED VOLUME ITL3 DATA----</span></span>
+<span id="cb12-131"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-132"><a aria-hidden="true" tabindex="-1"></a>df.cv <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">'https://bit.ly/rtasteritl3cvnoir'</span>)</span>
+<span id="cb12-133"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-134"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Get the text for an ITL3 zone by searching for a bit of the name</span></span>
+<span id="cb12-135"><a aria-hidden="true" tabindex="-1"></a>place <span class="ot">=</span> <span class="fu">getdistinct</span>(<span class="st">'barns'</span>,df<span class="sc">$</span>Region_name)</span>
+<span id="cb12-136"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-137"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Check we got just one place!</span></span>
+<span id="cb12-138"><a aria-hidden="true" tabindex="-1"></a>place</span>
+<span id="cb12-139"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-140"><a aria-hidden="true" tabindex="-1"></a><span class="co">#If needed, code to list all ITL3 place names again</span></span>
+<span id="cb12-141"><a aria-hidden="true" tabindex="-1"></a><span class="co">#unique(df.cv$Region_name)</span></span>
+<span id="cb12-142"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-143"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-144"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-145"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-146"><a aria-hidden="true" tabindex="-1"></a>startyear <span class="ot">=</span> <span class="dv">2014</span></span>
+<span id="cb12-147"><a aria-hidden="true" tabindex="-1"></a>endyear <span class="ot">=</span> <span class="dv">2023</span></span>
+<span id="cb12-148"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-149"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Pick out single slopes to illustrate</span></span>
+<span id="cb12-150"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb12-151"><a aria-hidden="true" tabindex="-1"></a>  df.cv <span class="sc">%&gt;%</span> <span class="fu">filter</span>(</span>
+<span id="cb12-152"><a aria-hidden="true" tabindex="-1"></a>    year <span class="sc">%in%</span> startyear<span class="sc">:</span>endyear,</span>
+<span id="cb12-153"><a aria-hidden="true" tabindex="-1"></a>    Region_name <span class="sc">==</span> place,</span>
+<span id="cb12-154"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">qg</span>(<span class="st">'information|professional'</span>, SIC07_description)</span>
+<span id="cb12-155"><a aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb12-156"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> value, <span class="at">colour =</span> SIC07_description)</span>
+<span id="cb12-157"><a aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb12-158"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb12-159"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb12-160"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">'lm'</span>) <span class="sc">+</span></span>
+<span id="cb12-161"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">paste0</span>(place, <span class="st">' selected sectors</span><span class="sc">\n</span><span class="st">GVA change over time (chained volume)'</span>))</span>
+<span id="cb12-162"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-163"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-164"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Get all slopes for sectors in that place</span></span>
+<span id="cb12-165"><a aria-hidden="true" tabindex="-1"></a>slopes <span class="ot">=</span> <span class="fu">get_slope_and_se_safely</span>(</span>
+<span id="cb12-166"><a aria-hidden="true" tabindex="-1"></a>  df.cv <span class="sc">%&gt;%</span> <span class="fu">filter</span>(</span>
+<span id="cb12-167"><a aria-hidden="true" tabindex="-1"></a>    year <span class="sc">%in%</span> startyear<span class="sc">:</span>endyear,</span>
+<span id="cb12-168"><a aria-hidden="true" tabindex="-1"></a>    Region_name <span class="sc">==</span> place,</span>
+<span id="cb12-169"><a aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">qg</span>(<span class="st">'households'</span>, SIC07_description)</span>
+<span id="cb12-170"><a aria-hidden="true" tabindex="-1"></a>    ), </span>
+<span id="cb12-171"><a aria-hidden="true" tabindex="-1"></a>  SIC07_description, </span>
+<span id="cb12-172"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">log</span>(value), </span>
+<span id="cb12-173"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> year, </span>
+<span id="cb12-174"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">neweywest =</span> T)</span>
+<span id="cb12-175"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-176"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-177"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Add 95% confidence intervals around the slope</span></span>
+<span id="cb12-178"><a aria-hidden="true" tabindex="-1"></a>slopes <span class="ot">=</span> slopes <span class="sc">%&gt;%</span> </span>
+<span id="cb12-179"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb12-180"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">ci95min =</span> slope <span class="sc">-</span> (se <span class="sc">*</span> <span class="fl">1.96</span>),</span>
+<span id="cb12-181"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">ci95max =</span> slope <span class="sc">+</span> (se <span class="sc">*</span> <span class="fl">1.96</span>)</span>
+<span id="cb12-182"><a aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-183"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-184"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-185"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-186"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-187"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Adjust to get percentage change per year from log slopes</span></span>
+<span id="cb12-188"><a aria-hidden="true" tabindex="-1"></a>slopes <span class="ot">=</span> slopes <span class="sc">%&gt;%</span> </span>
+<span id="cb12-189"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(slope,ci95min,ci95max), <span class="sc">~</span>(<span class="fu">exp</span>(.) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="dv">100</span>, <span class="at">.names =</span> <span class="st">'{.col}_percentperyear'</span>))</span>
+<span id="cb12-190"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-191"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Plot the slope with those confidence intervals</span></span>
+<span id="cb12-192"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(slopes, <span class="fu">aes</span>(<span class="at">x =</span> slope_percentperyear, <span class="at">y =</span> <span class="fu">fct_reorder</span>(SIC07_description,slope))) <span class="sc">+</span></span>
+<span id="cb12-193"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb12-194"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> ci95min_percentperyear, <span class="at">xmax =</span> ci95max_percentperyear), <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb12-195"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">'black'</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb12-196"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">25</span>,<span class="dv">25</span>)) <span class="sc">+</span></span>
+<span id="cb12-197"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">'Av. % change per year'</span>) <span class="sc">+</span></span>
+<span id="cb12-198"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb12-199"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">paste0</span>(place, <span class="st">' broad sectors av. chained volume GVA % change per year</span><span class="sc">\n</span><span class="st">'</span>,startyear,<span class="st">'-'</span>,endyear,<span class="st">', 95% conf intervals'</span>))</span>
+<span id="cb12-200"><a aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-201"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-202"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-203"><a aria-hidden="true" tabindex="-1"></a><span class="co"># EXAMPLE OF GETTING DATA DIRECTLY (GET NATIONAL SIC SECTION DATA)----</span></span>
+<span id="cb12-204"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-205"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Check readxl is already installed, install if not.</span></span>
+<span id="cb12-206"><a aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(readxl)){</span>
+<span id="cb12-207"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"readxl"</span>)</span>
+<span id="cb12-208"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(readxl)</span>
+<span id="cb12-209"><a aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-210"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-211"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-212"><a aria-hidden="true" tabindex="-1"></a><span class="co">#2025:</span></span>
+<span id="cb12-213"><a aria-hidden="true" tabindex="-1"></a>url1 <span class="ot">&lt;-</span> <span class="st">'https://www.ons.gov.uk/file?uri=/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry/current/regionalgrossvalueaddedbalancedbyindustryandallinternationalterritoriallevelsitlregions.xlsx'</span></span>
+<span id="cb12-214"><a aria-hidden="true" tabindex="-1"></a>p1f <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext=</span><span class="st">".xlsx"</span>)</span>
+<span id="cb12-215"><a aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(url1, p1f, <span class="at">mode=</span><span class="st">"wb"</span>) </span>
+<span id="cb12-216"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-217"><a aria-hidden="true" tabindex="-1"></a>itl2.all <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="at">path =</span> p1f,<span class="at">range =</span> <span class="st">"Table 2a!A2:AD4556"</span>)</span>
+<span id="cb12-218"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-219"><a aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(itl2.all) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="at">x =</span> <span class="fu">names</span>(itl2.all), <span class="at">pattern =</span> <span class="st">' '</span>, <span class="at">replacement =</span> <span class="st">'_'</span>)</span>
+<span id="cb12-220"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-221"><a aria-hidden="true" tabindex="-1"></a>itl2.all <span class="ot">=</span> itl2.all <span class="sc">%&gt;%</span> </span>
+<span id="cb12-222"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(SIC07_description <span class="sc">==</span> <span class="st">'All industries'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-223"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="st">`</span><span class="at">1998</span><span class="st">`</span><span class="sc">:</span><span class="fu">names</span>(itl2.all)[<span class="fu">length</span>(<span class="fu">names</span>(itl2.all))], <span class="at">names_to =</span> <span class="st">'year'</span>, <span class="at">values_to =</span> <span class="st">'value'</span>) <span class="sc">%&gt;%</span> <span class="co">#get most recent year</span></span>
+<span id="cb12-224"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year))</span>
+<span id="cb12-225"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-226"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-227"><a aria-hidden="true" tabindex="-1"></a>startyear <span class="ot">=</span> <span class="dv">2011</span></span>
+<span id="cb12-228"><a aria-hidden="true" tabindex="-1"></a>endyear <span class="ot">=</span> <span class="dv">2023</span></span>
+<span id="cb12-229"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-230"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Get all slopes for sectors in that place</span></span>
+<span id="cb12-231"><a aria-hidden="true" tabindex="-1"></a>slopes <span class="ot">=</span> <span class="fu">get_slope_and_se_safely</span>(</span>
+<span id="cb12-232"><a aria-hidden="true" tabindex="-1"></a>  itl2.all <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="fu">c</span>(startyear<span class="sc">:</span>endyear)), </span>
+<span id="cb12-233"><a aria-hidden="true" tabindex="-1"></a>  Region_name,</span>
+<span id="cb12-234"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">log</span>(value), </span>
+<span id="cb12-235"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> year, </span>
+<span id="cb12-236"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">neweywest =</span> T)</span>
+<span id="cb12-237"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-238"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-239"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Add 95% confidence intervals around the slope</span></span>
+<span id="cb12-240"><a aria-hidden="true" tabindex="-1"></a>slopes <span class="ot">=</span> slopes <span class="sc">%&gt;%</span> </span>
+<span id="cb12-241"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb12-242"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">ci95min =</span> slope <span class="sc">-</span> (se <span class="sc">*</span> <span class="fl">1.96</span>),</span>
+<span id="cb12-243"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">ci95max =</span> slope <span class="sc">+</span> (se <span class="sc">*</span> <span class="fl">1.96</span>)</span>
+<span id="cb12-244"><a aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-245"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-246"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-247"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-248"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-249"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Adjust to get percentage change per year from log slopes</span></span>
+<span id="cb12-250"><a aria-hidden="true" tabindex="-1"></a>slopes <span class="ot">=</span> slopes <span class="sc">%&gt;%</span> </span>
+<span id="cb12-251"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(slope,ci95min,ci95max), <span class="sc">~</span>(<span class="fu">exp</span>(.) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="dv">100</span>, <span class="at">.names =</span> <span class="st">'{.col}_percentperyear'</span>))</span>
+<span id="cb12-252"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-253"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Plot the slope with those confidence intervals</span></span>
+<span id="cb12-254"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(slopes, <span class="fu">aes</span>(<span class="at">x =</span> slope_percentperyear, <span class="at">y =</span> <span class="fu">fct_reorder</span>(Region_name,slope))) <span class="sc">+</span></span>
+<span id="cb12-255"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb12-256"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> ci95min_percentperyear, <span class="at">xmax =</span> ci95max_percentperyear), <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb12-257"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">'black'</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb12-258"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">'Av. % change per year'</span>) <span class="sc">+</span></span>
+<span id="cb12-259"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb12-260"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">'All industries in ITL2 zones, chained volume GVA</span><span class="sc">\n</span><span class="st">Av. % change per year</span><span class="sc">\n</span><span class="st">2014-2023, 95% conf intervals'</span>)</span>
+<span id="cb12-261"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-262"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-263"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-264"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-265"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-266"><a aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(df<span class="sc">$</span>SIC07_description))</span>
+<span id="cb12-267"><a aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12</span>)</span>
+<span id="cb12-268"><a aria-hidden="true" tabindex="-1"></a>qual_col_pals <span class="ot">=</span> RColorBrewer<span class="sc">::</span>brewer.pal.info[RColorBrewer<span class="sc">::</span>brewer.pal.info<span class="sc">$</span>category <span class="sc">==</span> <span class="st">'qual'</span>,]</span>
+<span id="cb12-269"><a aria-hidden="true" tabindex="-1"></a>col_vector <span class="ot">=</span> <span class="fu">unlist</span>(<span class="fu">mapply</span>(RColorBrewer<span class="sc">::</span>brewer.pal, qual_col_pals<span class="sc">$</span>maxcolors, <span class="fu">rownames</span>(qual_col_pals)))</span>
+<span id="cb12-270"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-271"><a aria-hidden="true" tabindex="-1"></a>randomcols <span class="ot">&lt;-</span> col_vector[<span class="dv">10</span><span class="sc">:</span>(<span class="dv">10</span><span class="sc">+</span>(n<span class="dv">-1</span>))]</span>
+<span id="cb12-272"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-273"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Do once!</span></span>
+<span id="cb12-274"><a aria-hidden="true" tabindex="-1"></a>getplot <span class="ot">&lt;-</span> <span class="cf">function</span>(place){</span>
+<span id="cb12-275"><a aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-276"><a aria-hidden="true" tabindex="-1"></a>  df <span class="ot">=</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb12-277"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">qg</span>(<span class="st">"Activities of households|agri"</span>,SIC07_description)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-278"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb12-279"><a aria-hidden="true" tabindex="-1"></a>      <span class="at">SIC07_description =</span> <span class="fu">case_when</span>(</span>
+<span id="cb12-280"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'defence'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'public/defence'</span>,</span>
+<span id="cb12-281"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'support'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'admin/support'</span>,</span>
+<span id="cb12-282"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'financ'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'finance/insu'</span>,</span>
+<span id="cb12-283"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'agri'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Agri/mining'</span>,</span>
+<span id="cb12-284"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'electr'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'power/water'</span>,</span>
+<span id="cb12-285"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'information'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'ICT'</span>,</span>
+<span id="cb12-286"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'manuf'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Manuf'</span>,</span>
+<span id="cb12-287"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'other'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'other'</span>,</span>
+<span id="cb12-288"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'scientific'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Scientific'</span>,</span>
+<span id="cb12-289"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'real estate'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Real est'</span>,</span>
+<span id="cb12-290"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'transport'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Transport'</span>,</span>
+<span id="cb12-291"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'entertainment'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Entertainment'</span>,</span>
+<span id="cb12-292"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'human health'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Health/soc'</span>,</span>
+<span id="cb12-293"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'food service activities'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Food/service'</span>,</span>
+<span id="cb12-294"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'wholesale'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Retail'</span>,</span>
+<span id="cb12-295"><a aria-hidden="true" tabindex="-1"></a>        <span class="at">.default =</span> SIC07_description</span>
+<span id="cb12-296"><a aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb12-297"><a aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-298"><a aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-299"><a aria-hidden="true" tabindex="-1"></a>  top12sectors <span class="ot">=</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb12-300"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(</span>
+<span id="cb12-301"><a aria-hidden="true" tabindex="-1"></a>      Region_name <span class="sc">==</span> place,</span>
+<span id="cb12-302"><a aria-hidden="true" tabindex="-1"></a>      year <span class="sc">==</span> <span class="fu">max</span>(year) <span class="sc">-</span> <span class="dv">1</span><span class="co">#to get 3 year moving average value</span></span>
+<span id="cb12-303"><a aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb12-304"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="sc">-</span>sector_regional_prop_movingav) <span class="sc">%&gt;%</span></span>
+<span id="cb12-305"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice_head</span>(<span class="at">n=</span> <span class="dv">12</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-306"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(SIC07_description) <span class="sc">%&gt;%</span></span>
+<span id="cb12-307"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>()</span>
+<span id="cb12-308"><a aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-309"><a aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-310"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(df <span class="sc">%&gt;%</span> </span>
+<span id="cb12-311"><a aria-hidden="true" tabindex="-1"></a>           <span class="fu">filter</span>(</span>
+<span id="cb12-312"><a aria-hidden="true" tabindex="-1"></a>             Region_name <span class="sc">==</span> place, </span>
+<span id="cb12-313"><a aria-hidden="true" tabindex="-1"></a>             SIC07_description <span class="sc">%in%</span> top12sectors,</span>
+<span id="cb12-314"><a aria-hidden="true" tabindex="-1"></a>             <span class="sc">!</span><span class="fu">is.na</span>(sector_regional_prop_movingav)<span class="co">#Remove NAs created by 3 year moving average</span></span>
+<span id="cb12-315"><a aria-hidden="true" tabindex="-1"></a>           ), </span>
+<span id="cb12-316"><a aria-hidden="true" tabindex="-1"></a>         <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> sector_regional_prop_movingav <span class="sc">*</span> <span class="dv">100</span>, <span class="at">colour =</span> <span class="fu">fct_reorder</span>(SIC07_description,<span class="sc">-</span>sector_regional_prop_movingav) )) <span class="sc">+</span></span>
+<span id="cb12-317"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb12-318"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb12-319"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">setNames</span>(randomcols,<span class="fu">unique</span>(df<span class="sc">$</span>SIC07_description))) <span class="sc">+</span><span class="co">#set manual pastel colours matching sector name</span></span>
+<span id="cb12-320"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">'Sector: percent of regional economy'</span>) <span class="sc">+</span></span>
+<span id="cb12-321"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">'bold'</span>)) <span class="sc">+</span></span>
+<span id="cb12-322"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">colour =</span> <span class="st">'SIC section'</span>) <span class="sc">+</span></span>
+<span id="cb12-323"><a aria-hidden="true" tabindex="-1"></a>    <span class="co"># scale_y_log10() +</span></span>
+<span id="cb12-324"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="fu">paste0</span>(place, <span class="st">' GVA % of economy over time</span><span class="sc">\n</span><span class="st">Top 12 sectors in '</span>,<span class="fu">max</span>(df<span class="sc">$</span>year),<span class="st">'</span><span class="sc">\n</span><span class="st"> ('</span>, smoothband,<span class="st">' year moving average)'</span>))</span>
+<span id="cb12-325"><a aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-326"><a aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-327"><a aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-328"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-329"><a aria-hidden="true" tabindex="-1"></a>places <span class="ot">=</span> <span class="fu">getdistinct</span>(<span class="st">'doncas|roth|barns|sheff'</span>,df<span class="sc">$</span>Region_name)</span>
+<span id="cb12-330"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-331"><a aria-hidden="true" tabindex="-1"></a>plots <span class="ot">&lt;-</span> <span class="fu">map</span>(places, getplot)</span>
+<span id="cb12-332"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-333"><a aria-hidden="true" tabindex="-1"></a>patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(plots)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -669,7 +1020,7 @@
 <div class="callout-content">
 <p>Type or paste the following text at the top of the newly opened R script in the top left panel.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>When you’ve put that in, <strong>the script title will go red</strong>, showing it can now be saved (it should look something like the image below).</p>
 <div class="center">
@@ -729,8 +1080,8 @@
 <p>As this will <strong>install a couple of libraries for the first time</strong> it’ll take <strong>about a minute</strong> to run.</p>
 <p><strong>Note: comments in R begin with a #hash.</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Load some functions and two libraries (and install those libraries if they're not already present)</span></span>
-<span id="cb13-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'https://bit.ly/rtasterfunctions'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Load some functions and two libraries (and install those libraries if they're not already present)</span></span>
+<span id="cb14-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'https://bit.ly/rtasterfunctions'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -748,13 +1099,13 @@
 <p>This line takes a <strong>comma-separated variable (CSV) file from the web</strong> and names it / assigns it to <code>df</code>. <strong>Paste it into your script (below the other code we’ve added) and run it.</strong></p>
 <p>If you <strong>look at the environment pane, top right</strong>. <code>df</code> should now be there (as in the pic below). <strong>Click anywhere on that line in the environment pane</strong> - it’ll open a <strong>new tab in RStudio</strong> with a view of the data attached to <code>df</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># LOAD ITL3 GVA DATA----</span></span>
-<span id="cb14-2"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#ITL3 zones, SIC sections, current prices, 2023 latest data (minus imputed rent)</span></span>
-<span id="cb14-4"><a aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">'https://bit.ly/rtasteritl3noir'</span>)</span>
-<span id="cb14-5"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#This one has imputed rent included if you want it</span></span>
-<span id="cb14-7"><a aria-hidden="true" tabindex="-1"></a><span class="co"># df = read_csv('https://bit.ly/rtasteritl3')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># LOAD ITL3 GVA DATA----</span></span>
+<span id="cb15-2"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#ITL3 zones, SIC sections, current prices, 2023 latest data (minus imputed rent)</span></span>
+<span id="cb15-4"><a aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">'https://bit.ly/rtasteritl3noir'</span>)</span>
+<span id="cb15-5"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a aria-hidden="true" tabindex="-1"></a><span class="co">#This one has imputed rent included if you want it</span></span>
+<span id="cb15-7"><a aria-hidden="true" tabindex="-1"></a><span class="co"># df = read_csv('https://bit.ly/rtasteritl3')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -793,7 +1144,7 @@
 <p>We can do this by pulling out the unique values from a column.</p>
 <p>In R, there are <strong>different ways to refer to columns.</strong> Here’s a key one: use the object’s name, then a dollar sign. R will then let you autocomplete the column name.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(df<span class="sc">$</span>SIC07_description)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(df<span class="sc">$</span>SIC07_description)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "Agriculture, forestry and fishing; mining and quarrying"
  [2] "Manufacturing"                                          
@@ -829,7 +1180,7 @@
 <div class="callout-content">
 <p>We can use the same method to get the full list of ITL3 place names too (though we’ll use an easier method to pick them out later). Here, we also stick them into alphabetical order.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(df<span class="sc">$</span>Region_name)[<span class="fu">order</span>(<span class="fu">unique</span>(df<span class="sc">$</span>Region_name))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(df<span class="sc">$</span>Region_name)[<span class="fu">order</span>(<span class="fu">unique</span>(df<span class="sc">$</span>Region_name))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -871,15 +1222,15 @@
 <p>We’ll talk about what’s going on here a bit more in the next slide. For now - copy and run the code.</p>
 <p><strong>Note: RStudio will run the whole block if press CTRL + ENTER with cursor anywhere in it.</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
-<span id="cb18-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="fu">max</span>(year)) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(SIC07_description) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb18-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">median_gva =</span> <span class="fu">median</span>(value),</span>
-<span id="cb18-6"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">min_gva =</span> <span class="fu">min</span>(value),</span>
-<span id="cb18-7"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">max_gva =</span> <span class="fu">max</span>(value)</span>
-<span id="cb18-8"><a aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>median_gva)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="fu">max</span>(year)) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(SIC07_description) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb19-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">median_gva =</span> <span class="fu">median</span>(value),</span>
+<span id="cb19-6"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">min_gva =</span> <span class="fu">min</span>(value),</span>
+<span id="cb19-7"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">max_gva =</span> <span class="fu">max</span>(value)</span>
+<span id="cb19-8"><a aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>median_gva)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 18 × 4
    SIC07_description                                  median_gva min_gva max_gva
@@ -926,13 +1277,13 @@
 <div class="callout-content">
 <p>If typing these out, the keyboard shortcut in RStudio for the pipe operator is <strong>CTRL + SHIFT + M</strong>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Boooo, nested brackets...</span></span>
-<span id="cb20-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">log10</span>(<span class="dv">10000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Boooo, nested brackets...</span></span>
+<span id="cb21-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">log10</span>(<span class="dv">10000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Wooo! Lovely piped functions!</span></span>
-<span id="cb22-2"><a aria-hidden="true" tabindex="-1"></a><span class="dv">10000</span> <span class="sc">%&gt;%</span> sqrt <span class="sc">%&gt;%</span> log10</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Wooo! Lovely piped functions!</span></span>
+<span id="cb23-2"><a aria-hidden="true" tabindex="-1"></a><span class="dv">10000</span> <span class="sc">%&gt;%</span> sqrt <span class="sc">%&gt;%</span> log10</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2</code></pre>
 </div>
@@ -981,14 +1332,14 @@
 <p>We stick <strong>four arguments</strong> into the function - including the data itself, which here we filter to the latest year.</p>
 <p>It’s then piped to <code>glimpse</code>, which lets us look at all columns at once by <strong>sticking them on their side in the console</strong> (a nice way to check our results look sane).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># LOCATION QUOTIENTS/PROPORTIONS----</span></span>
-<span id="cb24-2"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">add_location_quotient_and_proportions</span>(</span>
-<span id="cb24-4"><a aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="fu">max</span>(year)),</span>
-<span id="cb24-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">regionvar =</span> Region_name,</span>
-<span id="cb24-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">lq_var =</span> SIC07_description,</span>
-<span id="cb24-7"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">valuevar =</span> value</span>
-<span id="cb24-8"><a aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> glimpse</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># LOCATION QUOTIENTS/PROPORTIONS----</span></span>
+<span id="cb25-2"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">add_location_quotient_and_proportions</span>(</span>
+<span id="cb25-4"><a aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="fu">max</span>(year)),</span>
+<span id="cb25-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">regionvar =</span> Region_name,</span>
+<span id="cb25-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">lq_var =</span> SIC07_description,</span>
+<span id="cb25-7"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">valuevar =</span> value</span>
+<span id="cb25-8"><a aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> glimpse</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 3,276
 Columns: 13
@@ -1050,15 +1401,15 @@ $ LQ_log                     &lt;dbl&gt; -1.22942932, 0.25151194, 0.25894546, 0.
 <p>(Note: you’ll probably <strong>get a warning</strong> - this is due to a single negative GVA value, it won’t affect anything here.)</p>
 <p>While we’re here: <strong>highlight just this bit of code: <code>df %&gt;% group_split(year)</code> and then run</strong>. We can see what just that chunk is doing exactly what the function name suggests.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Finding location quotients for each year in the data </span></span>
-<span id="cb26-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#And then overwriting the df variable with the result</span></span>
-<span id="cb26-3"><a aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb26-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_split</span>(year) <span class="sc">%&gt;%</span></span>
-<span id="cb26-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(add_location_quotient_and_proportions,</span>
-<span id="cb26-6"><a aria-hidden="true" tabindex="-1"></a>      <span class="at">regionvar =</span> Region_name,</span>
-<span id="cb26-7"><a aria-hidden="true" tabindex="-1"></a>      <span class="at">lq_var =</span> SIC07_description,</span>
-<span id="cb26-8"><a aria-hidden="true" tabindex="-1"></a>      <span class="at">valuevar =</span> value) <span class="sc">%&gt;%</span> </span>
-<span id="cb26-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Finding location quotients for each year in the data </span></span>
+<span id="cb27-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#And then overwriting the df variable with the result</span></span>
+<span id="cb27-3"><a aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb27-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_split</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb27-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(add_location_quotient_and_proportions,</span>
+<span id="cb27-6"><a aria-hidden="true" tabindex="-1"></a>      <span class="at">regionvar =</span> Region_name,</span>
+<span id="cb27-7"><a aria-hidden="true" tabindex="-1"></a>      <span class="at">lq_var =</span> SIC07_description,</span>
+<span id="cb27-8"><a aria-hidden="true" tabindex="-1"></a>      <span class="at">valuevar =</span> value) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1078,14 +1429,14 @@ $ LQ_log                     &lt;dbl&gt; -1.22942932, 0.25151194, 0.25894546, 0.
 </div>
 <div class="callout-content">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#View a single place...</span></span>
-<span id="cb27-2"><a aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(</span>
-<span id="cb27-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">qg</span>(<span class="st">'rotherh'</span>,Region_name),</span>
-<span id="cb27-4"><a aria-hidden="true" tabindex="-1"></a>  year <span class="sc">==</span> <span class="fu">max</span>(year)<span class="co">#get latest year in data</span></span>
-<span id="cb27-5"><a aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> </span>
-<span id="cb27-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">regional_percent =</span> sector_regional_proportion <span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb27-7"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(SIC07_description,regional_percent, LQ) <span class="sc">%&gt;%</span> </span>
-<span id="cb27-8"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>LQ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#View a single place...</span></span>
+<span id="cb28-2"><a aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(</span>
+<span id="cb28-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">qg</span>(<span class="st">'rotherh'</span>,Region_name),</span>
+<span id="cb28-4"><a aria-hidden="true" tabindex="-1"></a>  year <span class="sc">==</span> <span class="fu">max</span>(year)<span class="co">#get latest year in data</span></span>
+<span id="cb28-5"><a aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">regional_percent =</span> sector_regional_proportion <span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-7"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(SIC07_description,regional_percent, LQ) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-8"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>LQ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1161,30 +1512,30 @@ $ LQ_log                     &lt;dbl&gt; -1.22942932, 0.25151194, 0.25894546, 0.
 <div class="callout-content">
 <p>You can look at the available ITL3 zones at <a href="https://geoportal.statistics.gov.uk/datasets/1121eb5cb03245d787e97426f9ebe699_2/explore?location=52.100456%2C-0.493217%2C6.92" target="_blank">geoportal.statistics.gov.uk here</a>, if useful for checking names. (Opens in new tab.)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># PLOT STRUCTURAL CHANGE OVER TIME IN ITL3 ZONE----</span></span>
-<span id="cb29-2"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Processing before plot</span></span>
-<span id="cb29-4"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#1. Set window for rolling average: 3 years</span></span>
-<span id="cb29-6"><a aria-hidden="true" tabindex="-1"></a>smoothband <span class="ot">=</span> <span class="dv">3</span></span>
-<span id="cb29-7"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#2. Make new column with rolling average in (applying to all places and sectors)</span></span>
-<span id="cb29-9"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Years are already in the right order, so will roll apply across those correctly</span></span>
-<span id="cb29-10"><a aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> df <span class="sc">%&gt;%</span> </span>
-<span id="cb29-11"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Region_name,SIC07_description) <span class="sc">%&gt;%</span> </span>
-<span id="cb29-12"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb29-13"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">sector_regional_prop_movingav =</span> <span class="fu">rollapply</span>(</span>
-<span id="cb29-14"><a aria-hidden="true" tabindex="-1"></a>      sector_regional_proportion,smoothband,mean,<span class="at">align=</span><span class="st">'center'</span>,<span class="at">fill=</span><span class="cn">NA</span></span>
-<span id="cb29-15"><a aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb29-16"><a aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb29-17"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb29-18"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-19"><a aria-hidden="true" tabindex="-1"></a><span class="co">#3. Pick out the name of the place / ITl3 zone to look at</span></span>
-<span id="cb29-20"><a aria-hidden="true" tabindex="-1"></a><span class="co">#We only need a bit of the name...</span></span>
-<span id="cb29-21"><a aria-hidden="true" tabindex="-1"></a>place <span class="ot">=</span> <span class="fu">getdistinct</span>(<span class="st">'doncas'</span>,df<span class="sc">$</span>Region_name)</span>
-<span id="cb29-22"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-23"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Check we found the single place we wanted (some search terms will pick up none or more than one)</span></span>
-<span id="cb29-24"><a aria-hidden="true" tabindex="-1"></a>place</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># PLOT STRUCTURAL CHANGE OVER TIME IN ITL3 ZONE----</span></span>
+<span id="cb30-2"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Processing before plot</span></span>
+<span id="cb30-4"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#1. Set window for rolling average: 3 years</span></span>
+<span id="cb30-6"><a aria-hidden="true" tabindex="-1"></a>smoothband <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb30-7"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#2. Make new column with rolling average in (applying to all places and sectors)</span></span>
+<span id="cb30-9"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Years are already in the right order, so will roll apply across those correctly</span></span>
+<span id="cb30-10"><a aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb30-11"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Region_name,SIC07_description) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-12"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb30-13"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">sector_regional_prop_movingav =</span> <span class="fu">rollapply</span>(</span>
+<span id="cb30-14"><a aria-hidden="true" tabindex="-1"></a>      sector_regional_proportion,smoothband,mean,<span class="at">align=</span><span class="st">'center'</span>,<span class="at">fill=</span><span class="cn">NA</span></span>
+<span id="cb30-15"><a aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb30-16"><a aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-17"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb30-18"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-19"><a aria-hidden="true" tabindex="-1"></a><span class="co">#3. Pick out the name of the place / ITl3 zone to look at</span></span>
+<span id="cb30-20"><a aria-hidden="true" tabindex="-1"></a><span class="co">#We only need a bit of the name...</span></span>
+<span id="cb30-21"><a aria-hidden="true" tabindex="-1"></a>place <span class="ot">=</span> <span class="fu">getdistinct</span>(<span class="st">'doncas'</span>,df<span class="sc">$</span>Region_name)</span>
+<span id="cb30-22"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-23"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Check we found the single place we wanted (some search terms will pick up none or more than one)</span></span>
+<span id="cb30-24"><a aria-hidden="true" tabindex="-1"></a>place</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Doncaster"</code></pre>
 </div>
@@ -1203,16 +1554,16 @@ $ LQ_log                     &lt;dbl&gt; -1.22942932, 0.25151194, 0.25894546, 0.
 <div class="callout-content">
 <p>Here, we <code>filter</code> to get our place and year, <code>arrange</code> in reverse order of moving average, <code>slice</code> off the top 12 and <code>pull</code> out the sector names.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># top 12 sectors in latest year</span></span>
-<span id="cb31-2"><a aria-hidden="true" tabindex="-1"></a>top12sectors <span class="ot">=</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb31-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
-<span id="cb31-4"><a aria-hidden="true" tabindex="-1"></a>    Region_name <span class="sc">==</span> place,</span>
-<span id="cb31-5"><a aria-hidden="true" tabindex="-1"></a>    year <span class="sc">==</span> <span class="fu">max</span>(year) <span class="sc">-</span> <span class="dv">1</span><span class="co">#to get 3 year moving average value</span></span>
-<span id="cb31-6"><a aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb31-7"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>sector_regional_prop_movingav) <span class="sc">%&gt;%</span></span>
-<span id="cb31-8"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span> <span class="dv">12</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb31-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(SIC07_description) <span class="sc">%&gt;%</span></span>
-<span id="cb31-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># top 12 sectors in latest year</span></span>
+<span id="cb32-2"><a aria-hidden="true" tabindex="-1"></a>top12sectors <span class="ot">=</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb32-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb32-4"><a aria-hidden="true" tabindex="-1"></a>    Region_name <span class="sc">==</span> place,</span>
+<span id="cb32-5"><a aria-hidden="true" tabindex="-1"></a>    year <span class="sc">==</span> <span class="fu">max</span>(year) <span class="sc">-</span> <span class="dv">1</span><span class="co">#to get 3 year moving average value</span></span>
+<span id="cb32-6"><a aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb32-7"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>sector_regional_prop_movingav) <span class="sc">%&gt;%</span></span>
+<span id="cb32-8"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span> <span class="dv">12</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(SIC07_description) <span class="sc">%&gt;%</span></span>
+<span id="cb32-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1243,21 +1594,21 @@ $ LQ_log                     &lt;dbl&gt; -1.22942932, 0.25151194, 0.25894546, 0.
 </div>
 <div class="callout-content">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Plot! </span></span>
-<span id="cb32-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df <span class="sc">%&gt;%</span></span>
-<span id="cb32-3"><a aria-hidden="true" tabindex="-1"></a>         <span class="fu">filter</span>(</span>
-<span id="cb32-4"><a aria-hidden="true" tabindex="-1"></a>           Region_name <span class="sc">==</span> place,</span>
-<span id="cb32-5"><a aria-hidden="true" tabindex="-1"></a>           SIC07_description <span class="sc">%in%</span> top12sectors,</span>
-<span id="cb32-6"><a aria-hidden="true" tabindex="-1"></a>           <span class="sc">!</span><span class="fu">is.na</span>(sector_regional_prop_movingav)<span class="co">#Remove NAs created by 3 year moving average</span></span>
-<span id="cb32-7"><a aria-hidden="true" tabindex="-1"></a>           ),</span>
-<span id="cb32-8"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> sector_regional_prop_movingav <span class="sc">*</span> <span class="dv">100</span>, <span class="at">colour =</span></span>
-<span id="cb32-9"><a aria-hidden="true" tabindex="-1"></a>             <span class="fu">fct_reorder</span>(SIC07_description,<span class="sc">-</span>sector_regional_prop_movingav) )) <span class="sc">+</span></span>
-<span id="cb32-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb32-11"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb32-12"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">'Paired'</span>, <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb32-13"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">'Sector: percent of regional economy'</span>) <span class="sc">+</span></span>
-<span id="cb32-14"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">colour =</span> <span class="fu">paste0</span>(<span class="st">'Largest 12 sectors in '</span>,<span class="fu">max</span>(df<span class="sc">$</span>year))) <span class="sc">+</span></span>
-<span id="cb32-15"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">paste0</span>(place, <span class="st">' GVA % of economy over time ('</span>, smoothband,<span class="st">' year moving average)'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Plot! </span></span>
+<span id="cb33-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df <span class="sc">%&gt;%</span></span>
+<span id="cb33-3"><a aria-hidden="true" tabindex="-1"></a>         <span class="fu">filter</span>(</span>
+<span id="cb33-4"><a aria-hidden="true" tabindex="-1"></a>           Region_name <span class="sc">==</span> place,</span>
+<span id="cb33-5"><a aria-hidden="true" tabindex="-1"></a>           SIC07_description <span class="sc">%in%</span> top12sectors,</span>
+<span id="cb33-6"><a aria-hidden="true" tabindex="-1"></a>           <span class="sc">!</span><span class="fu">is.na</span>(sector_regional_prop_movingav)<span class="co">#Remove NAs created by 3 year moving average</span></span>
+<span id="cb33-7"><a aria-hidden="true" tabindex="-1"></a>           ),</span>
+<span id="cb33-8"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> sector_regional_prop_movingav <span class="sc">*</span> <span class="dv">100</span>, <span class="at">colour =</span></span>
+<span id="cb33-9"><a aria-hidden="true" tabindex="-1"></a>             <span class="fu">fct_reorder</span>(SIC07_description,<span class="sc">-</span>sector_regional_prop_movingav) )) <span class="sc">+</span></span>
+<span id="cb33-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb33-11"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb33-12"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">'Paired'</span>, <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb33-13"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">'Sector: percent of regional economy'</span>) <span class="sc">+</span></span>
+<span id="cb33-14"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">colour =</span> <span class="fu">paste0</span>(<span class="st">'Largest 12 sectors in '</span>,<span class="fu">max</span>(df<span class="sc">$</span>year))) <span class="sc">+</span></span>
+<span id="cb33-15"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">paste0</span>(place, <span class="st">' GVA % of economy over time ('</span>, smoothband,<span class="st">' year moving average)'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1296,20 +1647,20 @@ $ LQ_log                     &lt;dbl&gt; -1.22942932, 0.25151194, 0.25894546, 0.
 </div>
 <div class="callout-content">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># CHAINED VOLUME ITL3 DATA----</span></span>
-<span id="cb33-2"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-3"><a aria-hidden="true" tabindex="-1"></a>df.cv <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">'https://bit.ly/rtasteritl3cvnoir'</span>)</span>
-<span id="cb33-4"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Get the text for an ITL3 zone by searching for a bit of the name</span></span>
-<span id="cb33-6"><a aria-hidden="true" tabindex="-1"></a>place <span class="ot">=</span> <span class="fu">getdistinct</span>(<span class="st">'barns'</span>,df<span class="sc">$</span>Region_name)</span>
-<span id="cb33-7"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Check we got just one place!</span></span>
-<span id="cb33-9"><a aria-hidden="true" tabindex="-1"></a>place</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># CHAINED VOLUME ITL3 DATA----</span></span>
+<span id="cb34-2"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a aria-hidden="true" tabindex="-1"></a>df.cv <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">'https://bit.ly/rtasteritl3cvnoir'</span>)</span>
+<span id="cb34-4"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Get the text for an ITL3 zone by searching for a bit of the name</span></span>
+<span id="cb34-6"><a aria-hidden="true" tabindex="-1"></a>place <span class="ot">=</span> <span class="fu">getdistinct</span>(<span class="st">'barns'</span>,df<span class="sc">$</span>Region_name)</span>
+<span id="cb34-7"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Check we got just one place!</span></span>
+<span id="cb34-9"><a aria-hidden="true" tabindex="-1"></a>place</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Barnsley"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#If needed, code to list all ITL3 place names again</span></span>
-<span id="cb35-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#unique(df.cv$Region_name)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#If needed, code to list all ITL3 place names again</span></span>
+<span id="cb36-2"><a aria-hidden="true" tabindex="-1"></a><span class="co">#unique(df.cv$Region_name)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1326,22 +1677,22 @@ $ LQ_log                     &lt;dbl&gt; -1.22942932, 0.25151194, 0.25894546, 0.
 <div class="callout-content">
 <p>Set a start/end year (here, the most recent decade). <strong>Note: two sector names are searched for here</strong>, separating with a <code>|</code> vertical bar meaning <code>or</code>. Reminder: you can look at the full list of available sectors with <strong>unique(df.cv$SIC07_description)</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a aria-hidden="true" tabindex="-1"></a>startyear <span class="ot">=</span> <span class="dv">2014</span></span>
-<span id="cb36-2"><a aria-hidden="true" tabindex="-1"></a>endyear <span class="ot">=</span> <span class="dv">2023</span></span>
-<span id="cb36-3"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Pick out single slopes to illustrate</span></span>
-<span id="cb36-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
-<span id="cb36-6"><a aria-hidden="true" tabindex="-1"></a>  df.cv <span class="sc">%&gt;%</span> <span class="fu">filter</span>(</span>
-<span id="cb36-7"><a aria-hidden="true" tabindex="-1"></a>    year <span class="sc">%in%</span> startyear<span class="sc">:</span>endyear,</span>
-<span id="cb36-8"><a aria-hidden="true" tabindex="-1"></a>    Region_name <span class="sc">==</span> place,</span>
-<span id="cb36-9"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">qg</span>(<span class="st">'information|professional'</span>, SIC07_description)</span>
-<span id="cb36-10"><a aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb36-11"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> value, <span class="at">colour =</span> SIC07_description)</span>
-<span id="cb36-12"><a aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
-<span id="cb36-13"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb36-14"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb36-15"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">'lm'</span>) <span class="sc">+</span></span>
-<span id="cb36-16"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">paste0</span>(place, <span class="st">' selected sectors</span><span class="sc">\n</span><span class="st">GVA change over time (chained volume)'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a aria-hidden="true" tabindex="-1"></a>startyear <span class="ot">=</span> <span class="dv">2014</span></span>
+<span id="cb37-2"><a aria-hidden="true" tabindex="-1"></a>endyear <span class="ot">=</span> <span class="dv">2023</span></span>
+<span id="cb37-3"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Pick out single slopes to illustrate</span></span>
+<span id="cb37-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb37-6"><a aria-hidden="true" tabindex="-1"></a>  df.cv <span class="sc">%&gt;%</span> <span class="fu">filter</span>(</span>
+<span id="cb37-7"><a aria-hidden="true" tabindex="-1"></a>    year <span class="sc">%in%</span> startyear<span class="sc">:</span>endyear,</span>
+<span id="cb37-8"><a aria-hidden="true" tabindex="-1"></a>    Region_name <span class="sc">==</span> place,</span>
+<span id="cb37-9"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">qg</span>(<span class="st">'information|professional'</span>, SIC07_description)</span>
+<span id="cb37-10"><a aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb37-11"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> value, <span class="at">colour =</span> SIC07_description)</span>
+<span id="cb37-12"><a aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb37-13"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb37-14"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb37-15"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">'lm'</span>) <span class="sc">+</span></span>
+<span id="cb37-16"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">paste0</span>(place, <span class="st">' selected sectors</span><span class="sc">\n</span><span class="st">GVA change over time (chained volume)'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1350,7 +1701,7 @@ $ LQ_log                     &lt;dbl&gt; -1.22942932, 0.25151194, 0.25894546, 0.
 <section class="slide level2">
 
 
-<img data-src="R_regecon_taster_2025_revealjs_files/figure-revealjs/unnamed-chunk-21-1.png" width="1152" class="r-stretch"></section>
+<img data-src="R_regecon_taster_2025_revealjs_files/figure-revealjs/unnamed-chunk-22-1.png" width="1152" class="r-stretch"></section>
 <section class="slide level2">
 
 <p>Next, we’re going to <strong>find linear trends for every sector in our chosen place and compare them, including some confidence intervals</strong>. To do this we’ll:</p>
@@ -1369,25 +1720,25 @@ $ LQ_log                     &lt;dbl&gt; -1.22942932, 0.25151194, 0.25894546, 0.
 <div class="callout-content">
 <p>The function has a ‘use <a href="https://en.wikipedia.org/wiki/Newey%E2%80%93West_estimator" target="_blank">Newey West estimators</a>’ option - better standard errors for sticking lines through time series data (<strong>open contibutions to improve trend analysis here would be very welcome!</strong>)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Get all slopes for sectors in that place</span></span>
-<span id="cb37-2"><a aria-hidden="true" tabindex="-1"></a>slopes <span class="ot">=</span> <span class="fu">get_slope_and_se_safely</span>(</span>
-<span id="cb37-3"><a aria-hidden="true" tabindex="-1"></a>  df.cv <span class="sc">%&gt;%</span> <span class="fu">filter</span>(</span>
-<span id="cb37-4"><a aria-hidden="true" tabindex="-1"></a>    year <span class="sc">%in%</span> startyear<span class="sc">:</span>endyear,</span>
-<span id="cb37-5"><a aria-hidden="true" tabindex="-1"></a>    Region_name <span class="sc">==</span> place,</span>
-<span id="cb37-6"><a aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">qg</span>(<span class="st">'households'</span>, SIC07_description)</span>
-<span id="cb37-7"><a aria-hidden="true" tabindex="-1"></a>    ), </span>
-<span id="cb37-8"><a aria-hidden="true" tabindex="-1"></a>  SIC07_description, </span>
-<span id="cb37-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">log</span>(value), </span>
-<span id="cb37-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> year, </span>
-<span id="cb37-11"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">neweywest =</span> T)</span>
-<span id="cb37-12"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-13"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-14"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Add 95% confidence intervals around the slope</span></span>
-<span id="cb37-15"><a aria-hidden="true" tabindex="-1"></a>slopes <span class="ot">=</span> slopes <span class="sc">%&gt;%</span> </span>
-<span id="cb37-16"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb37-17"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">ci95min =</span> slope <span class="sc">-</span> (se <span class="sc">*</span> <span class="fl">1.96</span>),</span>
-<span id="cb37-18"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">ci95max =</span> slope <span class="sc">+</span> (se <span class="sc">*</span> <span class="fl">1.96</span>)</span>
-<span id="cb37-19"><a aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Get all slopes for sectors in that place</span></span>
+<span id="cb38-2"><a aria-hidden="true" tabindex="-1"></a>slopes <span class="ot">=</span> <span class="fu">get_slope_and_se_safely</span>(</span>
+<span id="cb38-3"><a aria-hidden="true" tabindex="-1"></a>  df.cv <span class="sc">%&gt;%</span> <span class="fu">filter</span>(</span>
+<span id="cb38-4"><a aria-hidden="true" tabindex="-1"></a>    year <span class="sc">%in%</span> startyear<span class="sc">:</span>endyear,</span>
+<span id="cb38-5"><a aria-hidden="true" tabindex="-1"></a>    Region_name <span class="sc">==</span> place,</span>
+<span id="cb38-6"><a aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">qg</span>(<span class="st">'households'</span>, SIC07_description)</span>
+<span id="cb38-7"><a aria-hidden="true" tabindex="-1"></a>    ), </span>
+<span id="cb38-8"><a aria-hidden="true" tabindex="-1"></a>  SIC07_description, </span>
+<span id="cb38-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">log</span>(value), </span>
+<span id="cb38-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> year, </span>
+<span id="cb38-11"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">neweywest =</span> T)</span>
+<span id="cb38-12"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-13"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-14"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Add 95% confidence intervals around the slope</span></span>
+<span id="cb38-15"><a aria-hidden="true" tabindex="-1"></a>slopes <span class="ot">=</span> slopes <span class="sc">%&gt;%</span> </span>
+<span id="cb38-16"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb38-17"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">ci95min =</span> slope <span class="sc">-</span> (se <span class="sc">*</span> <span class="fl">1.96</span>),</span>
+<span id="cb38-18"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">ci95max =</span> slope <span class="sc">+</span> (se <span class="sc">*</span> <span class="fl">1.96</span>)</span>
+<span id="cb38-19"><a aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1402,19 +1753,19 @@ $ LQ_log                     &lt;dbl&gt; -1.22942932, 0.25151194, 0.25894546, 0.
 </div>
 <div class="callout-content">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Adjust to get percentage change per year</span></span>
-<span id="cb38-2"><a aria-hidden="true" tabindex="-1"></a>slopes <span class="ot">=</span> slopes <span class="sc">%&gt;%</span> </span>
-<span id="cb38-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(slope,ci95min,ci95max), <span class="sc">~</span>(<span class="fu">exp</span>(.) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="dv">100</span>, <span class="at">.names =</span> <span class="st">'{.col}_percentperyear'</span>))</span>
-<span id="cb38-4"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Plot the slope with those confidence intervals</span></span>
-<span id="cb38-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(slopes, <span class="fu">aes</span>(<span class="at">x =</span> slope_percentperyear, <span class="at">y =</span> <span class="fu">fct_reorder</span>(SIC07_description,slope))) <span class="sc">+</span></span>
-<span id="cb38-7"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb38-8"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> ci95min_percentperyear, <span class="at">xmax =</span> ci95max_percentperyear), <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb38-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">'black'</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb38-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">25</span>,<span class="dv">25</span>)) <span class="sc">+</span></span>
-<span id="cb38-11"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">'Av. % change per year'</span>) <span class="sc">+</span></span>
-<span id="cb38-12"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb38-13"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">paste0</span>(place, <span class="st">' broad sectors av. chained volume GVA % change per year</span><span class="sc">\n</span><span class="st">'</span>,startyear,<span class="st">'-'</span>,endyear,<span class="st">', 95% conf intervals'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Adjust to get percentage change per year</span></span>
+<span id="cb39-2"><a aria-hidden="true" tabindex="-1"></a>slopes <span class="ot">=</span> slopes <span class="sc">%&gt;%</span> </span>
+<span id="cb39-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(slope,ci95min,ci95max), <span class="sc">~</span>(<span class="fu">exp</span>(.) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="dv">100</span>, <span class="at">.names =</span> <span class="st">'{.col}_percentperyear'</span>))</span>
+<span id="cb39-4"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Plot the slope with those confidence intervals</span></span>
+<span id="cb39-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(slopes, <span class="fu">aes</span>(<span class="at">x =</span> slope_percentperyear, <span class="at">y =</span> <span class="fu">fct_reorder</span>(SIC07_description,slope))) <span class="sc">+</span></span>
+<span id="cb39-7"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb39-8"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> ci95min_percentperyear, <span class="at">xmax =</span> ci95max_percentperyear), <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb39-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">'black'</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb39-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">25</span>,<span class="dv">25</span>)) <span class="sc">+</span></span>
+<span id="cb39-11"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">'Av. % change per year'</span>) <span class="sc">+</span></span>
+<span id="cb39-12"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb39-13"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">paste0</span>(place, <span class="st">' broad sectors av. chained volume GVA % change per year</span><span class="sc">\n</span><span class="st">'</span>,startyear,<span class="st">'-'</span>,endyear,<span class="st">', 95% conf intervals'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1424,7 +1775,7 @@ $ LQ_log                     &lt;dbl&gt; -1.22942932, 0.25151194, 0.25894546, 0.
 <section class="slide level2">
 
 
-<img data-src="R_regecon_taster_2025_revealjs_files/figure-revealjs/unnamed-chunk-24-1.png" width="960" class="r-stretch"></section>
+<img data-src="R_regecon_taster_2025_revealjs_files/figure-revealjs/unnamed-chunk-25-1.png" width="960" class="r-stretch"></section>
 <section id="more-growth-analysis-itl2-zones" class="slide level2">
 <h2>More growth analysis: ITL2 zones</h2>
 <p>Let’s actually run through extracting data from an online Excel sheet. It’s not too much work. We’ll use it to look at <strong>growth rates for the entire economies of mayoral authorities and other ITL2 zones.</strong></p>
@@ -1436,13 +1787,13 @@ $ LQ_log                     &lt;dbl&gt; -1.22942932, 0.25151194, 0.25894546, 0.
 </div>
 <div class="callout-content">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># EXAMPLE OF GETTING DATA DIRECTLY (GET NATIONAL SIC SECTION DATA)----</span></span>
-<span id="cb39-2"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Check readxl is already installed, install if not.</span></span>
-<span id="cb39-4"><a aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(readxl)){</span>
-<span id="cb39-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"readxl"</span>)</span>
-<span id="cb39-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(readxl)</span>
-<span id="cb39-7"><a aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># EXAMPLE OF GETTING DATA DIRECTLY (GET NATIONAL SIC SECTION DATA)----</span></span>
+<span id="cb40-2"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Check readxl is already installed, install if not.</span></span>
+<span id="cb40-4"><a aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(readxl)){</span>
+<span id="cb40-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"readxl"</span>)</span>
+<span id="cb40-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(readxl)</span>
+<span id="cb40-7"><a aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1459,19 +1810,19 @@ $ LQ_log                     &lt;dbl&gt; -1.22942932, 0.25151194, 0.25894546, 0.
 <div class="callout-content">
 <p>We download a temporary local copy and then extract from a sheet and cell range we define using the <code>readxl</code> package.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#2025:</span></span>
-<span id="cb40-2"><a aria-hidden="true" tabindex="-1"></a>url1 <span class="ot">&lt;-</span> <span class="st">'https://www.ons.gov.uk/file?uri=/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry/current/regionalgrossvalueaddedbalancedbyindustryandallinternationalterritoriallevelsitlregions.xlsx'</span></span>
-<span id="cb40-3"><a aria-hidden="true" tabindex="-1"></a>p1f <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext=</span><span class="st">".xlsx"</span>)</span>
-<span id="cb40-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(url1, p1f, <span class="at">mode=</span><span class="st">"wb"</span>) </span>
-<span id="cb40-5"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-6"><a aria-hidden="true" tabindex="-1"></a>itl2.all <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="at">path =</span> p1f,<span class="at">range =</span> <span class="st">"Table 2a!A2:AD4556"</span>)</span>
-<span id="cb40-7"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-8"><a aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(itl2.all) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="at">x =</span> <span class="fu">names</span>(itl2.all), <span class="at">pattern =</span> <span class="st">' '</span>, <span class="at">replacement =</span> <span class="st">'_'</span>)</span>
-<span id="cb40-9"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-10"><a aria-hidden="true" tabindex="-1"></a>itl2.all <span class="ot">=</span> itl2.all <span class="sc">%&gt;%</span> </span>
-<span id="cb40-11"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(SIC07_description <span class="sc">==</span> <span class="st">'All industries'</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb40-12"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="st">`</span><span class="at">1998</span><span class="st">`</span><span class="sc">:</span><span class="fu">names</span>(itl2.all)[<span class="fu">length</span>(<span class="fu">names</span>(itl2.all))], <span class="at">names_to =</span> <span class="st">'year'</span>, <span class="at">values_to =</span> <span class="st">'value'</span>) <span class="sc">%&gt;%</span> <span class="co">#get most recent year</span></span>
-<span id="cb40-13"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#2025:</span></span>
+<span id="cb41-2"><a aria-hidden="true" tabindex="-1"></a>url1 <span class="ot">&lt;-</span> <span class="st">'https://www.ons.gov.uk/file?uri=/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry/current/regionalgrossvalueaddedbalancedbyindustryandallinternationalterritoriallevelsitlregions.xlsx'</span></span>
+<span id="cb41-3"><a aria-hidden="true" tabindex="-1"></a>p1f <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext=</span><span class="st">".xlsx"</span>)</span>
+<span id="cb41-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(url1, p1f, <span class="at">mode=</span><span class="st">"wb"</span>) </span>
+<span id="cb41-5"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-6"><a aria-hidden="true" tabindex="-1"></a>itl2.all <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="at">path =</span> p1f,<span class="at">range =</span> <span class="st">"Table 2a!A2:AD4556"</span>)</span>
+<span id="cb41-7"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-8"><a aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(itl2.all) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="at">x =</span> <span class="fu">names</span>(itl2.all), <span class="at">pattern =</span> <span class="st">' '</span>, <span class="at">replacement =</span> <span class="st">'_'</span>)</span>
+<span id="cb41-9"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-10"><a aria-hidden="true" tabindex="-1"></a>itl2.all <span class="ot">=</span> itl2.all <span class="sc">%&gt;%</span> </span>
+<span id="cb41-11"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(SIC07_description <span class="sc">==</span> <span class="st">'All industries'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-12"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="st">`</span><span class="at">1998</span><span class="st">`</span><span class="sc">:</span><span class="fu">names</span>(itl2.all)[<span class="fu">length</span>(<span class="fu">names</span>(itl2.all))], <span class="at">names_to =</span> <span class="st">'year'</span>, <span class="at">values_to =</span> <span class="st">'value'</span>) <span class="sc">%&gt;%</span> <span class="co">#get most recent year</span></span>
+<span id="cb41-13"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1487,24 +1838,24 @@ $ LQ_log                     &lt;dbl&gt; -1.22942932, 0.25151194, 0.25894546, 0.
 </div>
 <div class="callout-content">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a aria-hidden="true" tabindex="-1"></a>startyear <span class="ot">=</span> <span class="dv">2011</span></span>
-<span id="cb41-2"><a aria-hidden="true" tabindex="-1"></a>endyear <span class="ot">=</span> <span class="dv">2023</span></span>
-<span id="cb41-3"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Get all slopes for sectors in that place</span></span>
-<span id="cb41-5"><a aria-hidden="true" tabindex="-1"></a>slopes <span class="ot">=</span> <span class="fu">get_slope_and_se_safely</span>(</span>
-<span id="cb41-6"><a aria-hidden="true" tabindex="-1"></a>  itl2.all <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="fu">c</span>(startyear<span class="sc">:</span>endyear)), </span>
-<span id="cb41-7"><a aria-hidden="true" tabindex="-1"></a>  Region_name,</span>
-<span id="cb41-8"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">log</span>(value), </span>
-<span id="cb41-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> year, </span>
-<span id="cb41-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">neweywest =</span> T)</span>
-<span id="cb41-11"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-12"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-13"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Add 95% confidence intervals around the slope</span></span>
-<span id="cb41-14"><a aria-hidden="true" tabindex="-1"></a>slopes <span class="ot">=</span> slopes <span class="sc">%&gt;%</span> </span>
-<span id="cb41-15"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb41-16"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">ci95min =</span> slope <span class="sc">-</span> (se <span class="sc">*</span> <span class="fl">1.96</span>),</span>
-<span id="cb41-17"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">ci95max =</span> slope <span class="sc">+</span> (se <span class="sc">*</span> <span class="fl">1.96</span>)</span>
-<span id="cb41-18"><a aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a aria-hidden="true" tabindex="-1"></a>startyear <span class="ot">=</span> <span class="dv">2011</span></span>
+<span id="cb42-2"><a aria-hidden="true" tabindex="-1"></a>endyear <span class="ot">=</span> <span class="dv">2023</span></span>
+<span id="cb42-3"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Get all slopes for sectors in that place</span></span>
+<span id="cb42-5"><a aria-hidden="true" tabindex="-1"></a>slopes <span class="ot">=</span> <span class="fu">get_slope_and_se_safely</span>(</span>
+<span id="cb42-6"><a aria-hidden="true" tabindex="-1"></a>  itl2.all <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="fu">c</span>(startyear<span class="sc">:</span>endyear)), </span>
+<span id="cb42-7"><a aria-hidden="true" tabindex="-1"></a>  Region_name,</span>
+<span id="cb42-8"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">log</span>(value), </span>
+<span id="cb42-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> year, </span>
+<span id="cb42-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">neweywest =</span> T)</span>
+<span id="cb42-11"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-12"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-13"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Add 95% confidence intervals around the slope</span></span>
+<span id="cb42-14"><a aria-hidden="true" tabindex="-1"></a>slopes <span class="ot">=</span> slopes <span class="sc">%&gt;%</span> </span>
+<span id="cb42-15"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb42-16"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">ci95min =</span> slope <span class="sc">-</span> (se <span class="sc">*</span> <span class="fl">1.96</span>),</span>
+<span id="cb42-17"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">ci95max =</span> slope <span class="sc">+</span> (se <span class="sc">*</span> <span class="fl">1.96</span>)</span>
+<span id="cb42-18"><a aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1520,18 +1871,18 @@ $ LQ_log                     &lt;dbl&gt; -1.22942932, 0.25151194, 0.25894546, 0.
 </div>
 <div class="callout-content">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Adjust to get percentage change per year from log slopes</span></span>
-<span id="cb42-2"><a aria-hidden="true" tabindex="-1"></a>slopes <span class="ot">=</span> slopes <span class="sc">%&gt;%</span> </span>
-<span id="cb42-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(slope,ci95min,ci95max), <span class="sc">~</span>(<span class="fu">exp</span>(.) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="dv">100</span>, <span class="at">.names =</span> <span class="st">'{.col}_percentperyear'</span>))</span>
-<span id="cb42-4"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Plot the slope with those confidence intervals</span></span>
-<span id="cb42-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(slopes, <span class="fu">aes</span>(<span class="at">x =</span> slope_percentperyear, <span class="at">y =</span> <span class="fu">fct_reorder</span>(Region_name,slope))) <span class="sc">+</span></span>
-<span id="cb42-7"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb42-8"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> ci95min_percentperyear, <span class="at">xmax =</span> ci95max_percentperyear), <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb42-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">'black'</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb42-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">'Av. % change per year'</span>) <span class="sc">+</span></span>
-<span id="cb42-11"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb42-12"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">'All industries in ITL2 zones, chained volume GVA</span><span class="sc">\n</span><span class="st">Av. % change per year</span><span class="sc">\n</span><span class="st">2014-2023, 95% conf intervals'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Adjust to get percentage change per year from log slopes</span></span>
+<span id="cb43-2"><a aria-hidden="true" tabindex="-1"></a>slopes <span class="ot">=</span> slopes <span class="sc">%&gt;%</span> </span>
+<span id="cb43-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(slope,ci95min,ci95max), <span class="sc">~</span>(<span class="fu">exp</span>(.) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="dv">100</span>, <span class="at">.names =</span> <span class="st">'{.col}_percentperyear'</span>))</span>
+<span id="cb43-4"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-5"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Plot the slope with those confidence intervals</span></span>
+<span id="cb43-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(slopes, <span class="fu">aes</span>(<span class="at">x =</span> slope_percentperyear, <span class="at">y =</span> <span class="fu">fct_reorder</span>(Region_name,slope))) <span class="sc">+</span></span>
+<span id="cb43-7"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb43-8"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> ci95min_percentperyear, <span class="at">xmax =</span> ci95max_percentperyear), <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb43-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">'black'</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb43-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">'Av. % change per year'</span>) <span class="sc">+</span></span>
+<span id="cb43-11"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb43-12"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">'All industries in ITL2 zones, chained volume GVA</span><span class="sc">\n</span><span class="st">Av. % change per year</span><span class="sc">\n</span><span class="st">2014-2023, 95% conf intervals'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1540,7 +1891,7 @@ $ LQ_log                     &lt;dbl&gt; -1.22942932, 0.25151194, 0.25894546, 0.
 <section class="slide level2">
 
 
-<img data-src="R_regecon_taster_2025_revealjs_files/figure-revealjs/unnamed-chunk-29-1.png" width="960" class="r-stretch"></section>
+<img data-src="R_regecon_taster_2025_revealjs_files/figure-revealjs/unnamed-chunk-30-1.png" width="960" class="r-stretch"></section>
 <section id="things-we-havent-covered" class="slide level2">
 <h2>Things we haven’t covered</h2>
 <ul>
@@ -1582,74 +1933,74 @@ $ LQ_log                     &lt;dbl&gt; -1.22942932, 0.25151194, 0.25894546, 0.
 </div>
 <div class="callout-content">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(df<span class="sc">$</span>SIC07_description))</span>
-<span id="cb43-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12</span>)</span>
-<span id="cb43-3"><a aria-hidden="true" tabindex="-1"></a>qual_col_pals <span class="ot">=</span> RColorBrewer<span class="sc">::</span>brewer.pal.info[RColorBrewer<span class="sc">::</span>brewer.pal.info<span class="sc">$</span>category <span class="sc">==</span> <span class="st">'qual'</span>,]</span>
-<span id="cb43-4"><a aria-hidden="true" tabindex="-1"></a>col_vector <span class="ot">=</span> <span class="fu">unlist</span>(<span class="fu">mapply</span>(RColorBrewer<span class="sc">::</span>brewer.pal, qual_col_pals<span class="sc">$</span>maxcolors, <span class="fu">rownames</span>(qual_col_pals)))</span>
-<span id="cb43-5"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-6"><a aria-hidden="true" tabindex="-1"></a>randomcols <span class="ot">&lt;-</span> col_vector[<span class="dv">10</span><span class="sc">:</span>(<span class="dv">10</span><span class="sc">+</span>(n<span class="dv">-1</span>))]</span>
-<span id="cb43-7"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Do once!</span></span>
-<span id="cb43-9"><a aria-hidden="true" tabindex="-1"></a>getplot <span class="ot">&lt;-</span> <span class="cf">function</span>(place){</span>
-<span id="cb43-10"><a aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb43-11"><a aria-hidden="true" tabindex="-1"></a>  df <span class="ot">=</span> df <span class="sc">%&gt;%</span> </span>
-<span id="cb43-12"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">qg</span>(<span class="st">"Activities of households|agri"</span>,SIC07_description)) <span class="sc">%&gt;%</span> </span>
-<span id="cb43-13"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb43-14"><a aria-hidden="true" tabindex="-1"></a>      <span class="at">SIC07_description =</span> <span class="fu">case_when</span>(</span>
-<span id="cb43-15"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'defence'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'public/defence'</span>,</span>
-<span id="cb43-16"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'support'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'admin/support'</span>,</span>
-<span id="cb43-17"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'financ'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'finance/insu'</span>,</span>
-<span id="cb43-18"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'agri'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Agri/mining'</span>,</span>
-<span id="cb43-19"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'electr'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'power/water'</span>,</span>
-<span id="cb43-20"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'information'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'ICT'</span>,</span>
-<span id="cb43-21"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'manuf'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Manuf'</span>,</span>
-<span id="cb43-22"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'other'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'other'</span>,</span>
-<span id="cb43-23"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'scientific'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Scientific'</span>,</span>
-<span id="cb43-24"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'real estate'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Real est'</span>,</span>
-<span id="cb43-25"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'transport'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Transport'</span>,</span>
-<span id="cb43-26"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'entertainment'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Entertainment'</span>,</span>
-<span id="cb43-27"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'human health'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Health/soc'</span>,</span>
-<span id="cb43-28"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'food service activities'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Food/service'</span>,</span>
-<span id="cb43-29"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'wholesale'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Retail'</span>,</span>
-<span id="cb43-30"><a aria-hidden="true" tabindex="-1"></a>        <span class="at">.default =</span> SIC07_description</span>
-<span id="cb43-31"><a aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb43-32"><a aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb43-33"><a aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb43-34"><a aria-hidden="true" tabindex="-1"></a>  top12sectors <span class="ot">=</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb43-35"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(</span>
-<span id="cb43-36"><a aria-hidden="true" tabindex="-1"></a>      Region_name <span class="sc">==</span> place,</span>
-<span id="cb43-37"><a aria-hidden="true" tabindex="-1"></a>      year <span class="sc">==</span> <span class="fu">max</span>(year) <span class="sc">-</span> <span class="dv">1</span><span class="co">#to get 3 year moving average value</span></span>
-<span id="cb43-38"><a aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb43-39"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="sc">-</span>sector_regional_prop_movingav) <span class="sc">%&gt;%</span></span>
-<span id="cb43-40"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice_head</span>(<span class="at">n=</span> <span class="dv">12</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb43-41"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(SIC07_description) <span class="sc">%&gt;%</span></span>
-<span id="cb43-42"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>()</span>
-<span id="cb43-43"><a aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb43-44"><a aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb43-45"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(df <span class="sc">%&gt;%</span> </span>
-<span id="cb43-46"><a aria-hidden="true" tabindex="-1"></a>           <span class="fu">filter</span>(</span>
-<span id="cb43-47"><a aria-hidden="true" tabindex="-1"></a>             Region_name <span class="sc">==</span> place, </span>
-<span id="cb43-48"><a aria-hidden="true" tabindex="-1"></a>             SIC07_description <span class="sc">%in%</span> top12sectors,</span>
-<span id="cb43-49"><a aria-hidden="true" tabindex="-1"></a>             <span class="sc">!</span><span class="fu">is.na</span>(sector_regional_prop_movingav)<span class="co">#Remove NAs created by 3 year moving average</span></span>
-<span id="cb43-50"><a aria-hidden="true" tabindex="-1"></a>           ), </span>
-<span id="cb43-51"><a aria-hidden="true" tabindex="-1"></a>         <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> sector_regional_prop_movingav <span class="sc">*</span> <span class="dv">100</span>, <span class="at">colour =</span> <span class="fu">fct_reorder</span>(SIC07_description,<span class="sc">-</span>sector_regional_prop_movingav) )) <span class="sc">+</span></span>
-<span id="cb43-52"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb43-53"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb43-54"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">setNames</span>(randomcols,<span class="fu">unique</span>(df<span class="sc">$</span>SIC07_description))) <span class="sc">+</span><span class="co">#set manual pastel colours matching sector name</span></span>
-<span id="cb43-55"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">'Sector: percent of regional economy'</span>) <span class="sc">+</span></span>
-<span id="cb43-56"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">'bold'</span>)) <span class="sc">+</span></span>
-<span id="cb43-57"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">colour =</span> <span class="st">'SIC section'</span>) <span class="sc">+</span></span>
-<span id="cb43-58"><a aria-hidden="true" tabindex="-1"></a>    <span class="co"># scale_y_log10() +</span></span>
-<span id="cb43-59"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="fu">paste0</span>(place, <span class="st">' GVA % of economy over time</span><span class="sc">\n</span><span class="st">Top 12 sectors in '</span>,<span class="fu">max</span>(df<span class="sc">$</span>year),<span class="st">'</span><span class="sc">\n</span><span class="st"> ('</span>, smoothband,<span class="st">' year moving average)'</span>))</span>
-<span id="cb43-60"><a aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb43-61"><a aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb43-62"><a aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb43-63"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-64"><a aria-hidden="true" tabindex="-1"></a>places <span class="ot">=</span> <span class="fu">getdistinct</span>(<span class="st">'doncas|roth|barns|sheff'</span>,df<span class="sc">$</span>Region_name)</span>
-<span id="cb43-65"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-66"><a aria-hidden="true" tabindex="-1"></a>plots <span class="ot">&lt;-</span> <span class="fu">map</span>(places, getplot)</span>
-<span id="cb43-67"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-68"><a aria-hidden="true" tabindex="-1"></a>patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(plots)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(df<span class="sc">$</span>SIC07_description))</span>
+<span id="cb44-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12</span>)</span>
+<span id="cb44-3"><a aria-hidden="true" tabindex="-1"></a>qual_col_pals <span class="ot">=</span> RColorBrewer<span class="sc">::</span>brewer.pal.info[RColorBrewer<span class="sc">::</span>brewer.pal.info<span class="sc">$</span>category <span class="sc">==</span> <span class="st">'qual'</span>,]</span>
+<span id="cb44-4"><a aria-hidden="true" tabindex="-1"></a>col_vector <span class="ot">=</span> <span class="fu">unlist</span>(<span class="fu">mapply</span>(RColorBrewer<span class="sc">::</span>brewer.pal, qual_col_pals<span class="sc">$</span>maxcolors, <span class="fu">rownames</span>(qual_col_pals)))</span>
+<span id="cb44-5"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-6"><a aria-hidden="true" tabindex="-1"></a>randomcols <span class="ot">&lt;-</span> col_vector[<span class="dv">10</span><span class="sc">:</span>(<span class="dv">10</span><span class="sc">+</span>(n<span class="dv">-1</span>))]</span>
+<span id="cb44-7"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Do once!</span></span>
+<span id="cb44-9"><a aria-hidden="true" tabindex="-1"></a>getplot <span class="ot">&lt;-</span> <span class="cf">function</span>(place){</span>
+<span id="cb44-10"><a aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb44-11"><a aria-hidden="true" tabindex="-1"></a>  df <span class="ot">=</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb44-12"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">qg</span>(<span class="st">"Activities of households|agri"</span>,SIC07_description)) <span class="sc">%&gt;%</span> </span>
+<span id="cb44-13"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb44-14"><a aria-hidden="true" tabindex="-1"></a>      <span class="at">SIC07_description =</span> <span class="fu">case_when</span>(</span>
+<span id="cb44-15"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'defence'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'public/defence'</span>,</span>
+<span id="cb44-16"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'support'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'admin/support'</span>,</span>
+<span id="cb44-17"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'financ'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'finance/insu'</span>,</span>
+<span id="cb44-18"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'agri'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Agri/mining'</span>,</span>
+<span id="cb44-19"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'electr'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'power/water'</span>,</span>
+<span id="cb44-20"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'information'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'ICT'</span>,</span>
+<span id="cb44-21"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'manuf'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Manuf'</span>,</span>
+<span id="cb44-22"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'other'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'other'</span>,</span>
+<span id="cb44-23"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'scientific'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Scientific'</span>,</span>
+<span id="cb44-24"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'real estate'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Real est'</span>,</span>
+<span id="cb44-25"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'transport'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Transport'</span>,</span>
+<span id="cb44-26"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'entertainment'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Entertainment'</span>,</span>
+<span id="cb44-27"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'human health'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Health/soc'</span>,</span>
+<span id="cb44-28"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'food service activities'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Food/service'</span>,</span>
+<span id="cb44-29"><a aria-hidden="true" tabindex="-1"></a>        <span class="fu">grepl</span>(<span class="st">'wholesale'</span>,SIC07_description,<span class="at">ignore.case =</span> T) <span class="sc">~</span> <span class="st">'Retail'</span>,</span>
+<span id="cb44-30"><a aria-hidden="true" tabindex="-1"></a>        <span class="at">.default =</span> SIC07_description</span>
+<span id="cb44-31"><a aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb44-32"><a aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb44-33"><a aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb44-34"><a aria-hidden="true" tabindex="-1"></a>  top12sectors <span class="ot">=</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb44-35"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(</span>
+<span id="cb44-36"><a aria-hidden="true" tabindex="-1"></a>      Region_name <span class="sc">==</span> place,</span>
+<span id="cb44-37"><a aria-hidden="true" tabindex="-1"></a>      year <span class="sc">==</span> <span class="fu">max</span>(year) <span class="sc">-</span> <span class="dv">1</span><span class="co">#to get 3 year moving average value</span></span>
+<span id="cb44-38"><a aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb44-39"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="sc">-</span>sector_regional_prop_movingav) <span class="sc">%&gt;%</span></span>
+<span id="cb44-40"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice_head</span>(<span class="at">n=</span> <span class="dv">12</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb44-41"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(SIC07_description) <span class="sc">%&gt;%</span></span>
+<span id="cb44-42"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>()</span>
+<span id="cb44-43"><a aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb44-44"><a aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb44-45"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(df <span class="sc">%&gt;%</span> </span>
+<span id="cb44-46"><a aria-hidden="true" tabindex="-1"></a>           <span class="fu">filter</span>(</span>
+<span id="cb44-47"><a aria-hidden="true" tabindex="-1"></a>             Region_name <span class="sc">==</span> place, </span>
+<span id="cb44-48"><a aria-hidden="true" tabindex="-1"></a>             SIC07_description <span class="sc">%in%</span> top12sectors,</span>
+<span id="cb44-49"><a aria-hidden="true" tabindex="-1"></a>             <span class="sc">!</span><span class="fu">is.na</span>(sector_regional_prop_movingav)<span class="co">#Remove NAs created by 3 year moving average</span></span>
+<span id="cb44-50"><a aria-hidden="true" tabindex="-1"></a>           ), </span>
+<span id="cb44-51"><a aria-hidden="true" tabindex="-1"></a>         <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> sector_regional_prop_movingav <span class="sc">*</span> <span class="dv">100</span>, <span class="at">colour =</span> <span class="fu">fct_reorder</span>(SIC07_description,<span class="sc">-</span>sector_regional_prop_movingav) )) <span class="sc">+</span></span>
+<span id="cb44-52"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb44-53"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb44-54"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">setNames</span>(randomcols,<span class="fu">unique</span>(df<span class="sc">$</span>SIC07_description))) <span class="sc">+</span><span class="co">#set manual pastel colours matching sector name</span></span>
+<span id="cb44-55"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">'Sector: percent of regional economy'</span>) <span class="sc">+</span></span>
+<span id="cb44-56"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">'bold'</span>)) <span class="sc">+</span></span>
+<span id="cb44-57"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">colour =</span> <span class="st">'SIC section'</span>) <span class="sc">+</span></span>
+<span id="cb44-58"><a aria-hidden="true" tabindex="-1"></a>    <span class="co"># scale_y_log10() +</span></span>
+<span id="cb44-59"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="fu">paste0</span>(place, <span class="st">' GVA % of economy over time</span><span class="sc">\n</span><span class="st">Top 12 sectors in '</span>,<span class="fu">max</span>(df<span class="sc">$</span>year),<span class="st">'</span><span class="sc">\n</span><span class="st"> ('</span>, smoothband,<span class="st">' year moving average)'</span>))</span>
+<span id="cb44-60"><a aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb44-61"><a aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb44-62"><a aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb44-63"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-64"><a aria-hidden="true" tabindex="-1"></a>places <span class="ot">=</span> <span class="fu">getdistinct</span>(<span class="st">'doncas|roth|barns|sheff'</span>,df<span class="sc">$</span>Region_name)</span>
+<span id="cb44-65"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-66"><a aria-hidden="true" tabindex="-1"></a>plots <span class="ot">&lt;-</span> <span class="fu">map</span>(places, getplot)</span>
+<span id="cb44-67"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-68"><a aria-hidden="true" tabindex="-1"></a>patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(plots)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1658,7 +2009,7 @@ $ LQ_log                     &lt;dbl&gt; -1.22942932, 0.25151194, 0.25894546, 0.
 <section class="slide level2">
 
 
-<img data-src="R_regecon_taster_2025_revealjs_files/figure-revealjs/unnamed-chunk-31-1.png" width="1152" class="r-stretch"></section>
+<img data-src="R_regecon_taster_2025_revealjs_files/figure-revealjs/unnamed-chunk-32-1.png" width="1152" class="r-stretch"></section>
 <section class="slide level2">
 
 
