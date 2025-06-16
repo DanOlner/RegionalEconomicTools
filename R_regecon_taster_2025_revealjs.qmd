@@ -1151,7 +1151,7 @@ ggplot(df %>%
 ## Before moving on...
 
 * There are a load more examples of using this data for comparing places, doing location quotients etc at my [regional econ tools](https://danolner.github.io/RegionalEconomicTools/){target="_blank"} website (of course produced using R!)
-* [This intro](https://danolner.github.io/RegionalEconomicTools/intro_gvajobsdata_in_R.html){target="_blank"} has basic examples, [this digs more](https://danolner.github.io/RegionalEconomicTools/sector_locationquotients_and_proportions.html){target="_blank"} into using LQs to put places in national context, [this looks at](https://danolner.github.io/RegionalEconomicTools/gdp_gaps.html) ways to see how GVA 'gaps' between places change over time.
+* [This intro](https://danolner.github.io/RegionalEconomicTools/intro_gvajobsdata_in_R.html){target="_blank"} has basic examples, [this digs more](https://danolner.github.io/RegionalEconomicTools/sector_locationquotients_and_proportions.html){target="_blank"} into using LQs to put places in national context, [this looks at](https://danolner.github.io/RegionalEconomicTools/gdp_gaps.html){target="_blank"} ways to see how GVA 'gaps' between places change over time.
 
 
 
