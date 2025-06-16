@@ -12,7 +12,231 @@ source('functions/misc_functions.R')
 
 library(knitr)
 library(tidyverse)
+```
 
+## UPDATE 2025: Temporary holding pen for latest April 2025 GVA data while I re-harmonise
+
+The 2025 GVA data has different ITL geographies and different sector classifications. While I fix harmonising across BRES data, here's the 2025 GVA data CSVs.
+
+Below that, it's the older 2024-for-2022 data. Apologies, full update soon!
+
+See the 2024 section for a full explanation of the data.
+
+
+### 2025 REGIONAL GVA (including imputed rent)
+
+```{r create-download-table-regionalGVA2025, message=FALSE, warning=FALSE}
+
+#Set GitHub base URL
+base_url <- "https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/"
+
+#list files
+files <- list.files(path = "data/regionalGVA", pattern = "\\.csv$", full.names = FALSE)
+
+#Keep only latest
+files <- files[qg('2023', files)]
+
+#Filter down to ones we want initially
+#Add in related others when making the link text
+files <-files[qg('long',files)]
+files <-files[!qg('imputed',files)]
+files <-files[qg('current',files)]
+
+
+#Define the row and column terms.
+row_terms <- c("3GROUPS", "SIC_SECTION", "SIC_2DIGIT")
+col_terms <- c("ITL2", "ITL3")
+
+#Create an empty data frame to store links.
+#Use row_terms as row names and col_terms as column names.
+download_links <- matrix(NA, nrow = length(row_terms), ncol = length(col_terms),
+                         dimnames = list(row_terms, col_terms))
+download_links <- as.data.frame(download_links)
+
+#Populate the table by searching for files that contain both the column and row keywords.
+for (row in row_terms) {
+  for (col in col_terms) {
+    # Use stringr's str_detect to filter file names for both patterns (case-insensitive)
+    matching_files <- files[
+      str_detect(files, fixed(col, ignore_case = TRUE)) &
+      str_detect(files, fixed(row, ignore_case = TRUE))
+    ]
+    
+    if (length(matching_files) > 0) {
+      # If multiple files match, take the first one:
+      file_name <- matching_files[1]
+      
+      # Build the full URLs (base + file name)
+      #FOR LONG, WIDE, CP AND CV together
+      #Long CP is orig
+      full_url_long_CP <- paste0(base_url, file_name)
+      
+      #Stick wide version in, CP
+      full_url_wide_CP <- gsub('LONG','WIDE',full_url_long_CP) 
+      
+      #Long CV
+      full_url_long_CV <- gsub('currentprices','chainedvolume',full_url_long_CP) 
+      
+      #Wide CV
+      full_url_wide_CV <- gsub('currentprices','chainedvolume',full_url_wide_CP) 
+      
+      # Create markdown link
+      # download_links[row, col] <- paste0(
+      #   ""
+      # )
+      
+      download_links[row, col] <- sprintf("[long CP](%s), [wide CP](%s) -- [long CV](%s), [wide CV](%s)", 
+                                          full_url_long_CP, 
+                                          full_url_wide_CP,
+                                          full_url_long_CV, 
+                                          full_url_wide_CV
+                                          )
+      
+      # download_links[row, col] <- sprintf("[%s](%s)", file_name, full_url)
+      # download_links[row, col] <- sprintf("[long](%s)", full_url)
+      
+      
+      
+    } else {
+      download_links[row, col] <- "Not found"
+    }
+  }
+}
+
+#Render
+#escape = FALSE so that markdown in the cells (the links) is rendered correctly.
+kable(download_links, escape = FALSE, caption = "Table: regional GVA")
+# kable(download_links, escape = FALSE, caption = "Download Links for ITL2 and ITL3 Files")
+
+
+```
+
+<br>
+
+----
+
+### 2025 REGIONAL GVA *excluding* imputed rent
+
+
+```{r gva_excimputedrent2025, message=FALSE, warning=FALSE}
+# ```{r create-download-table-combo}
+
+#Set GitHub base URL
+base_url <- "https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/regionalGVA/"
+
+#list files
+files <- list.files(path = "data/regionalGVA", pattern = "\\.csv$", full.names = FALSE)
+
+#Keep only latest
+files <- files[qg('2023', files)]
+
+
+#Filter down to ones we want initially
+#Add in related others when making the link text
+files <-files[qg('long',files)]
+files <-files[qg('MINUSimputed',files)]
+
+#Work out current price or CV in code below
+
+#Define the row and column terms.
+#No SIC 2 digit data here - user can just remove that row
+row_terms <- c("3GROUPS", "SIC_SECTION")
+col_terms <- c("ITL2", "ITL3")
+
+#Create an empty data frame to store links.
+#Use row_terms as row names and col_terms as column names.
+download_links <- matrix(NA, nrow = length(row_terms), ncol = length(col_terms),
+                         dimnames = list(row_terms, col_terms))
+download_links <- as.data.frame(download_links)
+
+#Populate the table by searching for files that contain both the column and row keywords.
+for (row in row_terms) {
+  for (col in col_terms) {
+    # Use stringr's str_detect to filter file names for both patterns (case-insensitive)
+    matching_files <- files[
+      str_detect(files, fixed(col, ignore_case = TRUE)) &
+      str_detect(files, fixed(row, ignore_case = TRUE))
+    ]
+    
+    #Label as CV or CP as appropriate
+    #It just be one of them - if so, other of two, mark as blank
+    
+    #If first entry is current prices... if not, it'll be chained volume
+    if(qg('current',matching_files[[1]])){
+      
+      full_url_1 <- sprintf("[CP](%s)",paste0(base_url, matching_files[1]))
+      
+    } else {
+      
+      full_url_1 <- sprintf("[CV](%s)",paste0(base_url, matching_files[1]))
+      
+    }
+
+    
+    #repeat for second - which may be empty, so catch error if so and label correctly
+    full_url_2_catch <- possibly(
+      
+      function(x) {
+        if(qg('current',x)){
+          
+          y <- sprintf("[CP](%s)",paste0(base_url, matching_files[2]))
+          
+          } else {
+            
+            y <- sprintf("[CV](%s)",paste0(base_url, matching_files[2]))
+            
+          }
+        
+      }, otherwise = " -- "
+      )
+    
+    full_url_2 <- matching_files[[2]] %>% full_url_2_catch()
+    
+    
+    # if (length(matching_files) > 0) {
+    #   
+    #   # If multiple files match, we have both CV and CP, add both to link
+    #   
+    #   # cat("filename length:", length(matching_files),"\n")
+    #   
+    #   #Create full markdown text for each here, combine below
+    #   full_url_1 <- sprintf("[CP](%s)",paste0(base_url, matching_files[1]))
+    #   
+    #   # full_url_cv <- gsub('currentprices','chainedvolume',full_url_cp) 
+    #   
+    #   #If just one file, second is empty, no CV, leave a blank
+    #   full_url_2 <- if_else(
+    #     length(matching_files) == 2,
+    #     sprintf("[CV](%s)",paste0(base_url, matching_files[2])),
+    #     " -- "
+    #   )
+    #   
+      download_links[row, col] <- paste0(
+        full_url_1,
+        ", ",
+        full_url_2
+      )
+      
+    } 
+}
+
+#Render
+#escape = FALSE so that markdown in the cells (the links) is rendered correctly.
+kable(download_links, escape = FALSE, caption = "Table: regional GVA excluding imputed rent")
+# kable(download_links, escape = FALSE, caption = "Download Links for ITL2 and ITL3 Files")
+
+
+```
+
+
+
+****
+
+
+
+## 2024-for-2022 joined data below...
+
+```{r}
 #Get latest NUTS and ITL dates
 gva.latest <- read_csv('data/regionalGVA/regionalGVA_chainedvolume_ITL2_SIC_2DIGIT_LONG_2022.csv') %>% select(year) %>% filter(year==max(year)) %>% distinct() %>% pull
 
