@@ -665,7 +665,7 @@ source('https://bit.ly/rtasterfunctions')
 
 ---
 
-** *Now* we can load some regional GVA data!**
+***Now* we can load some regional GVA data!**
 
 ::: {.callout-note icon=false}
 ## Tasks: Load in regional economic data, then look at it in RStudio.
@@ -711,6 +711,25 @@ Plus...
 * Because it can be summed, this current price data is **great for digging into structural change** (e.g. "How have sector proportions changed over time?") But not so good for real growth analysis.
 
 Let's start looking at the data in R...
+
+---
+
+
+::: {.callout-note icon=false}
+## Getting the regional GVA data you want
+
+Today we're looking at **just one example pulled from the Excel sheet**. If you want any of the other ready-made CSVs, I've pipelined them all [to this webpage](https://danolner.github.io/RegionalEconomicTools/regionalgva_n_bres.html){target="_blank"} for the 2025 data.
+
+If you want code for doing any of those extractions, it's [here](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/regionalGVA_processing.R){target="_blank"}.
+
+Note: I haven't yet linked it to jobs data for this year, though that page has it linked for 2022 data.
+
+:::
+
+
+
+
+
 
 ---
 
@@ -1133,7 +1152,6 @@ ggplot(df %>%
 
 * There are a load more examples of using this data for comparing places, doing location quotients etc at my [regional econ tools](https://danolner.github.io/RegionalEconomicTools/){target="_blank"} website (of course produced using R!)
 * [This intro](https://danolner.github.io/RegionalEconomicTools/intro_gvajobsdata_in_R.html){target="_blank"} has basic examples, [this digs more](https://danolner.github.io/RegionalEconomicTools/sector_locationquotients_and_proportions.html){target="_blank"} into using LQs to put places in national context, [this looks at](https://danolner.github.io/RegionalEconomicTools/gdp_gaps.html) ways to see how GVA 'gaps' between places change over time.
-* And [this page](https://danolner.github.io/RegionalEconomicTools/regionalgva_n_bres.html){target="_blank"} has easy-access CSVs for all the data types in the regional industry data, including linked jobs data (but I haven't updated to 2023 entirely yet!)
 
 
 
@@ -1482,7 +1500,7 @@ ggplot(slopes, aes(x = slope_percentperyear, y = fct_reorder(Region_name,slope))
 ## Other things we could cover another time (links to examples)
 
 * Directly accessing NOMIS data in R and harmonising with other sources. Examples: [BRES jobs](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/BRES_API_download.R){target="_blank"}. [Good GVA demoninators](https://github.com/DanOlner/ukcompare/blob/master/explore_code/beatty_fothergill_update.R){target="_blank"} like 16-64s or 16+, per filled job, pop count, per hour worked ([example](https://danolner.github.io/ukcompare/plotly/GVA_measures_percentofUKaverage_excluding_LondonOutliers.html) of plotting GVA over each of these). [SICSOC](https://github.com/DanOlner/ukcompare/blob/master/explore_code/sic_soc_explore.R){target="_blank"} industry vs occupation (dashboard example in SICSOC tab [here](https://danolner.shinyapps.io/EconDataDashboard/){target="_blank"}).
-* Harmonised regional GVA and jobs data. I've done that [here](https://danolner.github.io/RegionalEconomicTools/regionalgva_n_bres.html) but needs a 2023 update.
+* Harmonised regional GVA and jobs data. I've done that [here](https://danolner.github.io/RegionalEconomicTools/regionalgva_n_bres.html) but the GVA/jobs link needs a 2023 update.
   
 
 ## Next?
