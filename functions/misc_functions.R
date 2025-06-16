@@ -11,6 +11,21 @@ if(!require(zoo)){
   library(zoo)
 }
 
+if(!require(patchwork)){
+  install.packages("patchwork")
+  library(patchwork)
+}
+
+if(!require(sandwich)){
+  install.packages("sandwich")
+  library(sandwich)
+}
+
+if(!require(lmtest)){
+  install.packages("lmtest")
+  library(lmtest)
+}
+
 #HELPER FUNCTIONS
 #reduce need to type glimpse every time...
 g <- function(x) glimpse(x)

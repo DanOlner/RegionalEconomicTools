@@ -1078,7 +1078,7 @@
     "href": "R_regecon_taster_2025_revealjs.html#the-plan",
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "The plan",
-    "text": "The plan\n\nI’ve got two tabs open I’ll move between:\n\nThese slides with the code and links in\nRStudio, open in posit.cloud.\n\nWe’ll work through these slides together, sometimes typing or copying code from the slides into RStudio.\nSo I’ll be flitting between the slides and RStudio myself to do the same steps you’ll be trying.\nYou can move between those two tabs, and also come back to Teams to see how I’m doing stuff.\nEach slide is numbered - I’ll say where we’re at as we progress."
+    "text": "The plan\n\nI’ve got two tabs open I’ll move between. 1: These slides with the code and links in. 2: RStudio, open in posit.cloud.\nWe’ll work through these slides together, sometimes typing or copying code from the slides into RStudio.\nNavigate the slides with the up/down or left/right keyboard arrows.\nYou can move between those two tabs, and also come back to Teams to see how I’m doing stuff.\nEach slide is numbered - I’ll say where we’re at as we progress."
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#the-slides",
@@ -1218,7 +1218,7 @@
     "href": "R_regecon_taster_2025_revealjs.html#before-we-start",
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "Before we start…",
-    "text": "Before we start…\n\nYou’ve got two ways to engage with this session:\n\n\nJust watch the screencast, let it wash over you and then come back to the materials in your own time. (These slides as well as ONS recording.)\nRun the R code yourself as we go. If you’re trying #2 - you’ll need a copy of these slides open. You’ll have got the link via email - it’s also in the chat, or just type bit.ly/rtasterslides into your browser address bar.\n\n\nNavigate the slides with the up/down or left/right keyboard arrows\nIf the slide link isn’t working for any reason, you’ll also have been sent a Word doc with the same material in"
+    "text": "Before we start…\n\nYou’ve got two ways to engage with this session:\n\n\nJust watch the screencast, let it wash over you and then come back to the materials in your own time. (These slides as well as ONS recording.)\nRun the R code yourself as we go. If you’re trying #2 - you’ll need a copy of these slides open. You’ll have got the link via email - it’s also in the chat, or just type bit.ly/rtasterslides into your browser address bar.\n\n\nIf the slide link isn’t working for any reason, you’ll also have been sent a Word doc with the same material in"
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#because-this-is-just-a-taster-session",
@@ -1247,5 +1247,68 @@
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "Now let’s do something with result",
     "text": "Now let’s do something with result\n\nPick out one place or local authority: you’ll only need some of the place name you want - here I’m using rotherh to find Rotherham.\nFor the latest year in the data, pull out the location quotient and sector proportion for that place. And then order, highest to lowest.\n\n\n\n\nTask:\n\n\n\n#View a single place...\ndf %&gt;% filter(\n  qg('rotherh',Region_name),\n  year == max(year)#get latest year in data\n) %&gt;% \n  mutate(regional_percent = sector_regional_proportion *100) %&gt;% \n  select(SIC07_description,regional_percent, LQ) %&gt;% \n  arrange(-LQ)"
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#before-moving-on-to-chained-volume-data",
+    "href": "R_regecon_taster_2025_revealjs.html#before-moving-on-to-chained-volume-data",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Before moving on to chained volume data…",
+    "text": "Before moving on to chained volume data…\n\nThere are a load more examples of using this data for comparing places, doing location quotients etc at my regional econ tools website (of course produced using R!)\nThis intro has basic examples, this digs more into using LQs to put places in national context, this looks at ways to see how GVA ‘gaps’ between places change over time.\nAnd this page has easy-access CSVs for all the data types in the regional industry data, including linked jobs data (but I haven’t updated to 2023 entirely yet!)"
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#other-stuff",
+    "href": "R_regecon_taster_2025_revealjs.html#other-stuff",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "OTHER STUFF",
+    "text": "OTHER STUFF"
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#some-data-things-we-could-cover-another-time-links-to-examples",
+    "href": "R_regecon_taster_2025_revealjs.html#some-data-things-we-could-cover-another-time-links-to-examples",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "SOME DATA THINGS WE COULD COVER ANOTHER TIME (links to examples)",
+    "text": "SOME DATA THINGS WE COULD COVER ANOTHER TIME (links to examples)\n\nHarmonised regional GVA and jobs data. I’ve done that here but needs a 2023 update.\nDirectly accessing NOMIS data in R. Examples: BRES jobs. Good GVA demoninators like 16-64s or 16+, per filled job, pop count, per hour worked (example of plotting GVA over each of these). SICSOC industry vs occupation (dashboard example in SICSOC tab here)."
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#before-moving-on",
+    "href": "R_regecon_taster_2025_revealjs.html#before-moving-on",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Before moving on…",
+    "text": "Before moving on…\n\nThere are a load more examples of using this data for comparing places, doing location quotients etc at my regional econ tools website (of course produced using R!)\nThis intro has basic examples, this digs more into using LQs to put places in national context, this looks at ways to see how GVA ‘gaps’ between places change over time.\nAnd this page has easy-access CSVs for all the data types in the regional industry data, including linked jobs data (but I haven’t updated to 2023 entirely yet!)"
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#lets-stop-there-heres-things-we-havent-covered",
+    "href": "R_regecon_taster_2025_revealjs.html#lets-stop-there-heres-things-we-havent-covered",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Let’s stop there! Here’s things we haven’t covered",
+    "text": "Let’s stop there! Here’s things we haven’t covered\n\nBuilding full pipelines from the data wrangling above can include:\n\nPreparing reports in R. Here’s an example looking at business dynamism using ONS data.\nUsing github to complete the pipeline by presenting online (e.g. these slides!)\nInteractive plots and maps in R e.g. Companies House ‘most common sector’ hexmap.\nMaking dashboards using R Shiny e.g. South Yorkshire Companies House employee change dashboard."
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#other-things-we-could-cover-another-time-links-to-examples",
+    "href": "R_regecon_taster_2025_revealjs.html#other-things-we-could-cover-another-time-links-to-examples",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Other things we could cover another time (links to examples)",
+    "text": "Other things we could cover another time (links to examples)\n\nDirectly accessing NOMIS data in R and harmonising with other sources. Examples: BRES jobs. Good GVA demoninators like 16-64s or 16+, per filled job, pop count, per hour worked (example of plotting GVA over each of these). SICSOC industry vs occupation (dashboard example in SICSOC tab here).\nHarmonised regional GVA and jobs data. I’ve done that here but needs a 2023 update."
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#next",
+    "href": "R_regecon_taster_2025_revealjs.html#next",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Next?",
+    "text": "Next?\n\nWould any of the above be of interest for future R sessions?\nIs there anything I’ve not mentioned that would be good?\nHappy to chat - d dot olner at sheffield dot ac dot uk or message me on LinkedIn."
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#heres-things-we-havent-covered",
+    "href": "R_regecon_taster_2025_revealjs.html#heres-things-we-havent-covered",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Here’s things we haven’t covered",
+    "text": "Here’s things we haven’t covered\n\nBuilding full pipelines from the data wrangling above can include:\n\nPreparing reports in R. Here’s an example looking at business dynamism using ONS data.\nUsing github to complete the pipeline by presenting online (e.g. these slides!)\nInteractive plots and maps in R e.g. Companies House ‘most common sector’ hexmap.\nMaking dashboards using R Shiny e.g. South Yorkshire Companies House employee change dashboard."
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#things-we-havent-covered",
+    "href": "R_regecon_taster_2025_revealjs.html#things-we-havent-covered",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Things we haven’t covered",
+    "text": "Things we haven’t covered\n\nBuilding full pipelines from the data wrangling above can include:\n\nPreparing reports in R. Here’s an example looking at business dynamism using ONS data.\nUsing github to complete the pipeline by presenting online (e.g. these slides!)\nInteractive plots and maps in R e.g. Companies House ‘most common sector’ hexmap.\nMaking dashboards using R Shiny e.g. South Yorkshire Companies House employee change dashboard."
   }
 ]

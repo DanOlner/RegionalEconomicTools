@@ -407,7 +407,6 @@
 <li>Run the R code yourself as we go. <strong>If you’re trying #2 - you’ll need a copy of these slides open.</strong> You’ll have got the link via email - it’s also in the chat, or just type <code>bit.ly/rtasterslides</code> into your browser address bar.</li>
 </ol>
 <ul>
-<li><strong>Navigate the slides with the up/down or left/right keyboard arrows</strong></li>
 <li>If the slide link isn’t working for any reason, you’ll also have been sent a Word doc with the same material in</li>
 </ul>
 </section>
@@ -460,7 +459,7 @@
 <section class="slide level2">
 
 <ul>
-<li>These are methods I’ve been developing working with <a href="https://www.southyorkshire-ca.gov.uk/" target="_blank">SYMCA</a> as a <a href="https://y-pern.org.uk/" target="_blank">Y-PERN</a> policy fellow, seconded from Sheffield University.</li>
+<li>These are methods I’ve been developing working with <a href="https://www.southyorkshire-ca.gov.uk/" target="_blank">SYMCA</a> as a <a href="https://y-pern.org.uk/" target="_blank">Y-PERN</a> policy fellow, seconded from Sheffield University. I’ve been compiling that work with all the open code <a href="https://danolner.github.io/posts/outputs_livelist/" target="_blank">here</a>.</li>
 <li>We’re now starting to use them to support other local authorities, and want to grow and improve these tools with collaboration/feedback from others.</li>
 </ul>
 </section>
@@ -509,13 +508,9 @@
 <section id="the-plan" class="slide level2">
 <h2>The plan</h2>
 <ul>
-<li>I’ve got <strong>two tabs open I’ll move between</strong>:
-<ul>
-<li>These slides with the code and links in</li>
-<li>RStudio, open in posit.cloud.</li>
-</ul></li>
+<li>I’ve got <strong>two tabs open I’ll move between</strong>. 1: These slides with the code and links in. 2: RStudio, open in posit.cloud.</li>
 <li>We’ll <strong>work through these slides together</strong>, sometimes typing or copying code from the slides into RStudio.</li>
-<li>So I’ll be <strong>flitting between the slides and RStudio myself</strong> to do the same steps you’ll be trying.</li>
+<li>Navigate the slides with the up/down or left/right keyboard arrows.</li>
 <li>You can move between those two tabs, and also come back to Teams to see how I’m doing stuff.</li>
 <li>Each slide is numbered - I’ll say where we’re at as we progress.</li>
 </ul>
@@ -1273,6 +1268,14 @@ $ LQ_log                     &lt;dbl&gt; -1.22942932, 0.25151194, 0.25894546, 0.
 
 
 <img data-src="R_regecon_taster_2025_revealjs_files/figure-revealjs/plot1output-1.png" width="960" class="r-stretch"></section>
+<section id="before-moving-on" class="slide level2">
+<h2>Before moving on…</h2>
+<ul>
+<li>There are a load more examples of using this data for comparing places, doing location quotients etc at my <a href="https://danolner.github.io/RegionalEconomicTools/" target="_blank">regional econ tools</a> website (of course produced using R!)</li>
+<li><a href="https://danolner.github.io/RegionalEconomicTools/intro_gvajobsdata_in_R.html" target="_blank">This intro</a> has basic examples, <a href="https://danolner.github.io/RegionalEconomicTools/sector_locationquotients_and_proportions.html" target="_blank">this digs more</a> into using LQs to put places in national context, <a href="https://danolner.github.io/RegionalEconomicTools/gdp_gaps.html">this looks at</a> ways to see how GVA ‘gaps’ between places change over time.</li>
+<li>And <a href="https://danolner.github.io/RegionalEconomicTools/regionalgva_n_bres.html" target="_blank">this page</a> has easy-access CSVs for all the data types in the regional industry data, including linked jobs data (but I haven’t updated to 2023 entirely yet!)</li>
+</ul>
+</section>
 <section id="real-gva-growth-over-time" class="slide level2">
 <h2>Real GVA growth over time</h2>
 <p>Current prices are great and everything - loads of value being able to examine relative change, and things actually adding up. <strong>But they’re not real prices</strong><sup>1</sup>, so can’t be used to understand <strong>real growth over time</strong>.</p>
@@ -1538,8 +1541,32 @@ $ LQ_log                     &lt;dbl&gt; -1.22942932, 0.25151194, 0.25894546, 0.
 
 
 <img data-src="R_regecon_taster_2025_revealjs_files/figure-revealjs/unnamed-chunk-29-1.png" width="960" class="r-stretch"></section>
-<section class="slide level2">
-
+<section id="things-we-havent-covered" class="slide level2">
+<h2>Things we haven’t covered</h2>
+<ul>
+<li>Building full pipelines from the data wrangling above can include:
+<ul>
+<li>Preparing reports in R. <a href="https://danolner.github.io/FirmAnalysis/ONS_business_demography.html" target="_blank">Here’s an example</a> looking at business dynamism using ONS data.</li>
+<li><a href="https://github.com/DanOlner" target="_blank">Using github</a> to complete the pipeline by presenting online (e.g.&nbsp;these slides!)</li>
+<li>Interactive plots and maps in R e.g.&nbsp;Companies House ‘<a href="https://danolner.github.io/companieshouseopen/maps/companieshouse_modal_SICsection_byemployeecount_minfiftyplus_hex5000.html" target="_blank">most common sector</a>’ hexmap.</li>
+<li>Making dashboards using R Shiny e.g.&nbsp;South Yorkshire Companies House employee change <a href="https://danolner.shinyapps.io/SY_companieshouse/" target="_blank">dashboard</a>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="other-things-we-could-cover-another-time-links-to-examples" class="slide level2">
+<h2>Other things we could cover another time (links to examples)</h2>
+<ul>
+<li>Directly accessing NOMIS data in R and harmonising with other sources. Examples: <a href="https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/BRES_API_download.R" target="_blank">BRES jobs</a>. <a href="https://github.com/DanOlner/ukcompare/blob/master/explore_code/beatty_fothergill_update.R" target="_blank">Good GVA demoninators</a> like 16-64s or 16+, per filled job, pop count, per hour worked (<a href="https://danolner.github.io/ukcompare/plotly/GVA_measures_percentofUKaverage_excluding_LondonOutliers.html">example</a> of plotting GVA over each of these). <a href="https://github.com/DanOlner/ukcompare/blob/master/explore_code/sic_soc_explore.R" target="_blank">SICSOC</a> industry vs occupation (dashboard example in SICSOC tab <a href="https://danolner.shinyapps.io/EconDataDashboard/" target="_blank">here</a>).</li>
+<li>Harmonised regional GVA and jobs data. I’ve done that <a href="https://danolner.github.io/RegionalEconomicTools/regionalgva_n_bres.html">here</a> but needs a 2023 update.</li>
+</ul>
+</section>
+<section id="next" class="slide level2">
+<h2>Next?</h2>
+<ul>
+<li>Would any of the above be of interest for future R sessions?</li>
+<li>Is there anything I’ve not mentioned that would be good?</li>
+<li>Happy to chat - d dot olner at sheffield dot ac dot uk or <a href="https://www.linkedin.com/in/danolner/" target="_blank">message me on LinkedIn</a>.</li>
+</ul>
 </section></section>
 <section>
 <section id="bonus-material" class="title-slide slide level1 center">

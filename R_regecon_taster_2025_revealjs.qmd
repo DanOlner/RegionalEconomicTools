@@ -29,7 +29,6 @@ knitr::opts_chunk$set(fig.height = 8, fig.width = 10, echo = TRUE, warning = F, 
 1. Just watch the screencast, let it wash over you and then come back to the materials in your own time. (These slides as well as ONS recording.)
 2. Run the R code yourself as we go. **If you're trying #2 - you'll need a copy of these slides open.** You'll have got the link via email - it's also in the chat, or just type `bit.ly/rtasterslides` into your browser address bar.
 
-* **Navigate the slides with the up/down or left/right keyboard arrows**
 * If the slide link isn't working for any reason, you'll also have been sent a Word doc with the same material in
 
 ## Not got R yet?
@@ -43,7 +42,7 @@ knitr::opts_chunk$set(fig.height = 8, fig.width = 10, echo = TRUE, warning = F, 
 
 * I've also stuck an **image of the 'set up posit.cloud' slide in the chat**, if useful.
 * Sorry - if posit.cloud doesn't work for any reason, **we won't have time during this session to troubleshoot via chat** - but we'll work out ways to offer support after, if that's useful.
-* And here's the link to your own slide copy in the browser again, just in case: `bit.ly/rtasterslides`
+* ( Link to your own slide copy in the browser again, just in case: `bit.ly/rtasterslides` )
 
 ---
 
@@ -71,7 +70,7 @@ knitr::opts_chunk$set(fig.height = 8, fig.width = 10, echo = TRUE, warning = F, 
 
 ---
 
-* These are methods I've been developing working with [SYMCA](https://www.southyorkshire-ca.gov.uk/){target="_blank"} as a [Y-PERN](https://y-pern.org.uk/){target="_blank"} policy fellow, seconded from Sheffield University.
+* These are methods I've been developing working with [SYMCA](https://www.southyorkshire-ca.gov.uk/){target="_blank"} as a [Y-PERN](https://y-pern.org.uk/){target="_blank"} policy fellow, seconded from Sheffield University. I've been compiling that work with all the open code [here](https://danolner.github.io/posts/outputs_livelist/){target="_blank"}.
 * We're now starting to use them to support other local authorities, and want to grow and improve these tools with collaboration/feedback from others.
 
 ## Goals for the session
@@ -84,7 +83,7 @@ knitr::opts_chunk$set(fig.height = 8, fig.width = 10, echo = TRUE, warning = F, 
 
 * I'll also be banging on about **how great R is for open, collaborative working.** It's build for openness and reproducibility, and this makes them **great for collaborative learning.**
 * I'll talk about **how to make reproducible pipelines all the way from data source to outputs**.
-* **These slides are an example:** code available [here](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/R_regecon_taster_2025_revealjs.qmd).
+* **The slides you're looking at are an example:** code available [here](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/R_regecon_taster_2025_revealjs.qmd).
 
 
 ## Because this is just a taster session...
@@ -108,11 +107,9 @@ knitr::opts_chunk$set(fig.height = 8, fig.width = 10, echo = TRUE, warning = F, 
 
 ## The plan
 
-* I've got **two tabs open I'll move between**: 
-    - These slides with the code and links in
-    - RStudio, open in posit.cloud. 
-* We'll **work through these slides together**, sometimes typing or copying code from the slides into RStudio.
-* So I'll be **flitting between the slides and RStudio myself** to do the same steps you'll be trying.
+* I've got **two tabs open I'll move between**. 1: These slides with the code and links in. 2: RStudio, open in posit.cloud. 
+* We'll **work through these slides together**, sometimes typing or copying code from the slides into RStudio. 
+* Navigate the slides with the up/down or left/right keyboard arrows.
 * You can move between those two tabs, and also come back to Teams to see how I'm doing stuff.
 * Each slide is numbered - I'll say where we're at as we progress.
 
@@ -238,6 +235,8 @@ It's a basket of tools that have become part of the R language - they all fit to
 The online book [R for Data Science](https://r4ds.hadley.nz/) is a great source to learn it, by the person who started it.
 
 :::
+
+
 
 ---
 
@@ -784,6 +783,13 @@ ggplot(df %>%
 ```
 
 
+## Before moving on...
+
+* There are a load more examples of using this data for comparing places, doing location quotients etc at my [regional econ tools](https://danolner.github.io/RegionalEconomicTools/){target="_blank"} website (of course produced using R!)
+* [This intro](https://danolner.github.io/RegionalEconomicTools/intro_gvajobsdata_in_R.html){target="_blank"} has basic examples, [this digs more](https://danolner.github.io/RegionalEconomicTools/sector_locationquotients_and_proportions.html){target="_blank"} into using LQs to put places in national context, [this looks at](https://danolner.github.io/RegionalEconomicTools/gdp_gaps.html) ways to see how GVA 'gaps' between places change over time.
+* And [this page](https://danolner.github.io/RegionalEconomicTools/regionalgva_n_bres.html){target="_blank"} has easy-access CSVs for all the data types in the regional industry data, including linked jobs data (but I haven't updated to 2023 entirely yet!)
+
+
 
 ## Real GVA growth over time
 
@@ -1114,10 +1120,30 @@ ggplot(slopes, aes(x = slope_percentperyear, y = fct_reorder(Region_name,slope))
 
 ```
 
----
+
+
+## Things we haven't covered
+
+* Building full pipelines from the data wrangling above can include:
+    - Preparing reports in R. [Here's an example](https://danolner.github.io/FirmAnalysis/ONS_business_demography.html){target="_blank"} looking at business dynamism using ONS data.
+    - [Using github](https://github.com/DanOlner){target="_blank"} to complete the pipeline by presenting online (e.g. these slides!)
+    - Interactive plots and maps in R e.g. Companies House '[most common sector](https://danolner.github.io/companieshouseopen/maps/companieshouse_modal_SICsection_byemployeecount_minfiftyplus_hex5000.html){target="_blank"}' hexmap.
+    - Making dashboards using R Shiny e.g. South Yorkshire Companies House employee change [dashboard](https://danolner.shinyapps.io/SY_companieshouse/){target="_blank"}.
 
 
 
+
+## Other things we could cover another time (links to examples)
+
+* Directly accessing NOMIS data in R and harmonising with other sources. Examples: [BRES jobs](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/BRES_API_download.R){target="_blank"}. [Good GVA demoninators](https://github.com/DanOlner/ukcompare/blob/master/explore_code/beatty_fothergill_update.R){target="_blank"} like 16-64s or 16+, per filled job, pop count, per hour worked ([example](https://danolner.github.io/ukcompare/plotly/GVA_measures_percentofUKaverage_excluding_LondonOutliers.html) of plotting GVA over each of these). [SICSOC](https://github.com/DanOlner/ukcompare/blob/master/explore_code/sic_soc_explore.R){target="_blank"} industry vs occupation (dashboard example in SICSOC tab [here](https://danolner.shinyapps.io/EconDataDashboard/){target="_blank"}).
+* Harmonised regional GVA and jobs data. I've done that [here](https://danolner.github.io/RegionalEconomicTools/regionalgva_n_bres.html) but needs a 2023 update.
+  
+
+## Next?
+
+* Would any of the above be of interest for future R sessions?
+* Is there anything I've not mentioned that would be good?
+* Happy to chat - d dot olner at sheffield dot ac dot uk or [message me on LinkedIn](https://www.linkedin.com/in/danolner/){target="_blank"}.
 
 
 
@@ -1284,7 +1310,6 @@ plots <- map(places, getplot)
 patchwork::wrap_plots(plots)
 
 ```
-
 
 
 
