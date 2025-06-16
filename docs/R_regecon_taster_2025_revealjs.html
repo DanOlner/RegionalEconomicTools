@@ -397,15 +397,36 @@
 </div>
 
 </section>
-<section id="introduction" class="slide level2">
-<h2>Introduction</h2>
-<p>We’ll be doing a <strong>whistlestop tour</strong> of using R for regional economic analysis of UK data. It’s the source we’ll run through in the June ’25 <a href="https://www.eventbrite.co.uk/e/ons-local-workshop-using-r-for-regional-economic-analysis-taster-session-tickets-1372930745819" target="_blank">ONS Presents taster session</a>.</p>
+<section id="before-we-start" class="slide level2">
+<h2>Before we start…</h2>
+<ul>
+<li>You’ve got two ways to engage with this session:</li>
+</ul>
+<ol type="1">
+<li>Just watch the screencast, let it wash over you and then come back to the materials in your own time. (These slides as well as ONS recording.)</li>
+<li>Run the R code yourself as we go. <strong>If you’re trying #2 - you’ll need a copy of these slides open.</strong> You’ll have got the link via email - it’s also in the chat, or just type <code>bit.ly/rtasterslides</code> into your browser address bar.</li>
+</ol>
+<p>If the slide link isn’t working for any reason, you’ll also have been sent a Word doc with the same material in.</p>
 </section>
 <section class="slide level2">
 
 <ul>
-<li><strong>If anyone hasn’t already got set up with R, I’ll talk for a couple of minutes now and give you a chance to create an account on posit.cloud. Just follow the three steps below and you’ll be ready to go</strong></li>
+<li>If you want to do some coding but didn’t have a chance to run through the little R setup guide, <strong>you’ve got some time now while I do all the pre-amble!</strong></li>
+<li>The next slide takes you through <strong>how to get RStudio working in the browser using (free) posit.cloud.</strong></li>
+<li>We’ll use the <strong>free version of posit.cloud</strong> - it’s only got 1GB RAM, so we can’t do some of the heavier stuff, but is perfect for an intro.</li>
+<li>(The paid tier isn’t too expensive and is powerful enough for most work.)</li>
 </ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>I’ve also stuck an <strong>image of the ‘set up posit.cloud’ slide in the chat</strong>, if useful.</li>
+<li>Sorry - if posit.cloud doesn’t work for any reason, <strong>we won’t have time during this session to troubleshoot via chat</strong> - but we’ll work out ways to offer support after, if that’s useful.</li>
+<li>And here’s the link to your own slide copy in the browser again, just in case: <code>bit.ly/rtasterslides</code></li>
+</ul>
+</section>
+<section class="slide level2">
+
 <div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -413,9 +434,10 @@
 </div>
 <div class="callout-content">
 <ul>
-<li><a href="https://login.posit.cloud/login" target="_blank">Create an account at posit.cloud</a> using the ‘sign up’ box, and then log in. That’ll take you to your online workspace.</li>
+<li><a href="https://login.posit.cloud/login" target="_blank">Use this link</a> (or type <code>bit.ly/positlogin</code> into the address bar) to create an account at posit.cloud, using the ‘sign up’ box. <strong>It’ll ask you to check your email for a verification link</strong> so do that before proceeding.</li>
+<li>Once verified, go back to the posit.cloud tab and log in. You should see a message: “You are logged into Posit. Please select your destination”. Choose ‘Posit Cloud’ (not Posit Connect Cloud). <strong>That’ll take you to your online workspace.</strong></li>
 <li>Click the <strong>new project</strong> button, top right</li>
-<li>Select ‘<strong>new project from template</strong>’ (as in the pic below) and then “Data Analysis in R with the tidyverse” (if not already selected). This template comes pre-installed with the tidyverse package, which we’ll be using. Select then click OK down at the bottom. <strong>This will open your RStudio project where we’ll do the coding.</strong></li>
+<li>Select ‘<strong>new project from template</strong>’ (as in the pic below) and then “Data Analysis in R with the tidyverse” (if not already selected). Select then click OK down at the bottom. <strong>This will open your RStudio project where we’ll do the coding.</strong></li>
 </ul>
 <div class="center">
 <p><img data-src="https://danolner.github.io/posts/setting_up_w_r_online/newproject.png" width="200"></p>
@@ -424,60 +446,76 @@
 </div>
 </div>
 </section>
+<section id="introduction" class="slide level2">
+<h2>Introduction</h2>
+<ul>
+<li>We’ll be doing a <strong>whistlestop tour</strong> of using R for digging into UK regional economies.</li>
+<li>For this session, we’re using <strong>just one ONS source - regional GVA broken down by industry</strong>. At the end I’ll list a bunch of other sources and ideas, and code for using them.</li>
+<li>We’ll also be asking which of these would be most useful to you for future sessions, and what other data or tools might interest you.</li>
+</ul>
+</section>
 <section id="goals-for-the-session" class="slide level2">
 <h2>Goals for the session</h2>
 <ul>
-<li>To actually <strong>get you started using R and RStudio</strong> if you haven’t before.</li>
-<li></li>
+<li>Actually <strong>get you started using R and RStudio</strong> if you haven’t used them before.</li>
+<li>Give you a sense of how R can be used for UK regional data analysis and output.</li>
+<li>Signpost to next steps if you want to do more. For anyone who does want to continue, <strong>I’d be keen on developing networks between us to collaborate on our capacity building.</strong></li>
+<li><strong>Evangelise for open, collaborative working.</strong> Platforms like R are built for openness and reproducibility, and this makes them <strong>great for collaborative learning.</strong> Or that’s what I’ll be arguing…</li>
+<li><strong>These slides are an example:</strong> all coded in R.</li>
+</ul>
+</section>
+<section id="because-this-is-just-a-taster-session" class="slide level2">
+<h2>Because this is just a taster session…</h2>
+<ul>
+<li>This is <strong>not a full training workshop</strong>. Whenever we’re learning new coding methods, <strong>things always go wrong, guaranteed</strong>. It’s all part of the fun.</li>
+<li>If in a workshop, we can take time to fix those problems. Sorry, <strong>we don’t have time for that today</strong>.</li>
 </ul>
 </section>
 <section class="slide level2">
 
 <ul>
-<li>First, apologies - because this is just a taster, we won’t be able to check in on everyone’s progress to make sure it’s working or making sense! I’ve designed the guide so it can be followed step by step - but if we lose you along the way, we’ve also got a poll and ways to stay in touch, if I can help to support outside of this session.</li>
+<li>Your options when things don’t work:
+<ul>
+<li>The slides are designed to be step-by-step, and the session is being recorded by ONS - so you can work back through that in your own time.</li>
+<li>If you think fuller training where we <strong>can</strong> work through snags would be good, <strong>let’s work out how to make that happen.</strong> Get in touch.</li>
+</ul></li>
 </ul>
 </section>
 <section class="slide level2">
 
 <ul>
-<li>If this happens, we’ll still run through some of things R can do, and we can set up support later…</li>
-<li>That could include smaller groups where making sure it’s working will be possible!</li>
-<li>The aim: this should work for anyone completely new to RStudio. May veer from insultingly simplistic to horribly complex</li>
-</ul>
-</section>
-<section class="slide level2">
-
-<ul>
-<li>This is a whistlestop tour - if you’re new to any of this, don’t worry about it making sense on first go! I’ll just try to highlight what R can do, and provide pointers to learning more.</li>
-<li>Sometimes things won’t work… [explain]</li>
-<li>Bugs and errors, explain.</li>
-<li>I will pick out one or two basic R things to highlight, but missing a load… [e.g.&nbsp;piping / functions]</li>
-<li>Other things…</li>
+<li>We’ll <strong>take time at the start getting set up with RStudio</strong> so you have a foundation to work from.</li>
+<li>But after that, we’ll be running some chunky code blocks - especially if you’re new to R <strong>don’t worry about these making sense!</strong> Again - a workshop’s required to get into the detail.</li>
+<li>The aim is just to <strong>run them in RStudio</strong> so you can get an idea of how it works.</li>
+<li>I will highlight a few key principles along the way, though.</li>
 </ul>
 </section>
 <section id="the-plan" class="slide level2">
 <h2>The plan</h2>
 <ul>
+<li>I’ve got <strong>two tabs open I’ll move between</strong>:
+<ul>
+<li>These slides with the code and links in</li>
+<li>RStudio, open in posit.cloud.</li>
+</ul></li>
 <li>We’ll <strong>work through these slides together</strong>, sometimes typing or copying code from the slides into RStudio.</li>
 <li>So I’ll be <strong>flitting between the slides and RStudio myself</strong> to do the same steps you’ll be trying.</li>
-<li>That could be vexing if you’re trying to look at slides! So <strong>make sure you have your own version of the slides open the a browser.</strong> I’ll post a link to it in the chat.</li>
-<li>Each slide is numbered - I’ll say where we’re at as we go on</li>
+<li>Each slide is numbered - I’ll say where we’re at as we progress.</li>
 </ul>
 </section>
 <section class="slide level2">
 
 <ul>
-<li>If you <strong>don’t fancy constantly flitting between slides and RStudio</strong> I’ve also made a single copy of the whole script we’ll work through, which you can get here (click on the little clipboard symbol top-right to copy, and then when we make a script below, paste the whole thing in).</li>
-<li>I’ll provide that link again below after we’ve made a script.</li>
-<li>Numbers in the comments on the script will (should!) match the slides so you can just follow along in RStudio.</li>
+<li>If you <strong>don’t fancy constantly flitting between slides and RStudio</strong> I’ve also made a single copy of the whole script we’ll work through that includes the slide text - <strong>I’ll show how to get that below at the point we’d stick it into RStudio.</strong></li>
 </ul>
 </section>
-<section id="the-slides" class="slide level2">
-<h2>The slides</h2>
+<section id="one-last-thing" class="slide level2">
+<h2>One last thing…</h2>
 <ul>
 <li>Once you have your own copy of the slides open, note the <strong>three-bar button, bottom left</strong>.</li>
-<li>That lets you see the full contents</li>
+<li>That lets you see the table of contents</li>
 </ul>
+<p>Also last chance to open own slide copy! Get them at <code>bit.ly/rtasterslides</code>.</p>
 </section>
 <section>
 <section id="coding-time" class="title-slide slide level1 center">
@@ -486,7 +524,7 @@
 </section>
 <section id="making-a-new-r-script-in-rstudio" class="slide level2">
 <h2>Making a new R script in RStudio</h2>
-<p><strong>RStudio is where you’ll be doing all the R loveliness</strong> (though see also the spangly new <a href="https://positron.posit.co/" target="_blank">positron</a>, I haven’t tried yet).</p>
+<p><strong>RStudio is where you’ll be doing all the R loveliness</strong>.</p>
 <p>Before looking at RStudio, let’s <strong>make a new R script, where we’ll do the coding</strong>.</p>
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">

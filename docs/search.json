@@ -1008,7 +1008,7 @@
     "href": "R_regecon_taster_2025_revealjs.html#introduction",
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "Introduction",
-    "text": "Introduction\nWe’ll be doing a whistlestop tour of using R for regional economic analysis of UK data. It’s the source we’ll run through in the June ’25 ONS Presents taster session."
+    "text": "Introduction\n\nWe’ll be doing a whistlestop tour of using R for digging into UK regional economies.\nFor this session, we’re using just one ONS source - regional GVA broken down by industry. At the end I’ll list a bunch of other sources and ideas, and code for using them.\nWe’ll also be asking which of these would be most useful to you for future sessions, and what other data or tools might interest you."
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#pre-amble",
@@ -1022,7 +1022,7 @@
     "href": "R_regecon_taster_2025_revealjs.html#making-a-new-r-script-in-rstudio",
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "Making a new R script in RStudio",
-    "text": "Making a new R script in RStudio\nRStudio is where you’ll be doing all the R loveliness (though see also the spangly new positron, I haven’t tried yet).\nBefore looking at RStudio, let’s make a new R script, where we’ll do the coding.\n\n\n\nTask: Open a new R script in RStudio\n\n\n\nIn the file menu in RStudio\nUse new file and R script (note: it tells you the keyboard shortcut for this)"
+    "text": "Making a new R script in RStudio\nRStudio is where you’ll be doing all the R loveliness.\nBefore looking at RStudio, let’s make a new R script, where we’ll do the coding.\n\n\n\nTask: Open a new R script in RStudio\n\n\n\nIn the file menu in RStudio\nUse new file and R script (note: it tells you the keyboard shortcut for this)"
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#tour-of-rstudio-getting-set-up",
@@ -1078,7 +1078,7 @@
     "href": "R_regecon_taster_2025_revealjs.html#the-plan",
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "The plan",
-    "text": "The plan\n\nWe’ll work through these slides together, sometimes typing or copying code from the slides into RStudio.\nSo I’ll be flitting between the slides and RStudio myself to do the same steps you’ll be trying.\nThat could be vexing if you’re trying to look at slides! So make sure you have your own version of the slides open the a browser. I’ll post a link to it in the chat.\nEach slide is numbered - I’ll say where we’re at as we go on"
+    "text": "The plan\n\nI’ve got two tabs open I’ll move between:\n\nThese slides with the code and links in\nRStudio, open in posit.cloud.\n\nWe’ll work through these slides together, sometimes typing or copying code from the slides into RStudio.\nSo I’ll be flitting between the slides and RStudio myself to do the same steps you’ll be trying.\nEach slide is numbered - I’ll say where we’re at as we progress."
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#the-slides",
@@ -1134,7 +1134,7 @@
     "href": "R_regecon_taster_2025_revealjs.html#goals-for-the-session",
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "Goals for the session",
-    "text": "Goals for the session\n\nTo actually get you started using R and RStudio if you haven’t before."
+    "text": "Goals for the session\n\nActually get you started using R and RStudio if you haven’t used them before.\nGive you a sense of how R can be used for UK regional data analysis and output.\nSignpost to next steps if you want to do more. For anyone who does want to continue, I’d be keen on developing networks between us to collaborate on our capacity building.\nEvangelise for open, collaborative working. Platforms like R are built for openness and reproducibility, and this makes them great for collaborative learning. Or that’s what I’ll be arguing…\nThese slides are an example: all coded in R."
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#getting-sector-proportions-and-location-quotients",
@@ -1212,5 +1212,26 @@
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "GGPLOT interlude!",
     "text": "GGPLOT interlude!\n\nIn the next slide, we finally make an actual chart. Phew.\nThere’s a lot going on in ggplot, the package we’ll be using to visualise data - but it’s worth mentioning that its principles are actually clear and consistent.\nYou’ll see it has an aes argument - that’s short for aesthetics. An aesthetic is any single distinct plot element - like the x or y axis, colour, shape, size etc."
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#before-we-start",
+    "href": "R_regecon_taster_2025_revealjs.html#before-we-start",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Before we start…",
+    "text": "Before we start…\n\nYou’ve got two ways to engage with this session:\n\n\nJust watch the screencast, let it wash over you and then come back to the materials in your own time. (These slides as well as ONS recording.)\nRun the R code yourself as we go. If you’re trying #2 - you’ll need a copy of these slides open. You’ll have got the link via email - it’s also in the chat, or just type bit.ly/rtasterslides into your browser address bar.\n\nIf the slide link isn’t working for any reason, you’ll also have been sent a Word doc with the same material in."
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#because-this-is-just-a-taster-session",
+    "href": "R_regecon_taster_2025_revealjs.html#because-this-is-just-a-taster-session",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Because this is just a taster session…",
+    "text": "Because this is just a taster session…\n\nThis is not a full training workshop. Whenever we’re learning new coding methods, things always go wrong, guaranteed. It’s all part of the fun.\nIf in a workshop, we can take time to fix those problems. Sorry, we don’t have time for that today."
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#one-last-thing",
+    "href": "R_regecon_taster_2025_revealjs.html#one-last-thing",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "One last thing…",
+    "text": "One last thing…\n\nOnce you have your own copy of the slides open, note the three-bar button, bottom left.\nThat lets you see the table of contents\n\nAlso last chance to open own slide copy! Get them at bit.ly/rtasterslides."
   }
 ]

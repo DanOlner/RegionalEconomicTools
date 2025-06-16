@@ -19,23 +19,41 @@ knitr::opts_chunk$set(fig.height = 8, fig.width = 10, echo = TRUE, warning = F, 
 
 ```
 
-## Introduction
-
-We'll be doing a **whistlestop tour** of using R for regional economic analysis of UK data. It's the source we'll run through in the June '25 [ONS Presents taster session](https://www.eventbrite.co.uk/e/ons-local-workshop-using-r-for-regional-economic-analysis-taster-session-tickets-1372930745819){target="_blank"}.
 
 
-----
 
-* **If anyone hasn't already got set up with R, I'll talk for a couple of minutes now and give you a chance to create an account on posit.cloud. Just follow the three steps below and you'll be ready to go**
+## Before we start...
 
+* You've got two ways to engage with this session: 
+
+1. Just watch the screencast, let it wash over you and then come back to the materials in your own time. (These slides as well as ONS recording.)
+2. Run the R code yourself as we go. **If you're trying #2 - you'll need a copy of these slides open.** You'll have got the link via email - it's also in the chat, or just type `bit.ly/rtasterslides` into your browser address bar.
+
+If the slide link isn't working for any reason, you'll also have been sent a Word doc with the same material in.
+
+---
+
+* If you want to do some coding but didn't have a chance to run through the little R setup guide, **you've got some time now while I do all the pre-amble!**
+* The next slide takes you through **how to get RStudio working in the browser using (free) posit.cloud.**
+* We'll use the **free version of posit.cloud** - it's only got 1GB RAM, so we can't do some of the heavier stuff, but is perfect for an intro.
+* (The paid tier isn't too expensive and is powerful enough for most work.)
+
+---
+
+* I've also stuck an **image of the 'set up posit.cloud' slide in the chat**, if useful.
+* Sorry - if posit.cloud doesn't work for any reason, **we won't have time during this session to troubleshoot via chat** - but we'll work out ways to offer support after, if that's useful.
+* And here's the link to your own slide copy in the browser again, just in case: `bit.ly/rtasterslides`
+
+---
 
 ::: {.callout-tip icon=false}
 
 ## Get up and running with RStudio in the cloud
 
-* [Create an account at posit.cloud](https://login.posit.cloud/login){target="_blank"} using the 'sign up' box, and then log in. That'll take you to your online workspace.
+* [Use this link](https://login.posit.cloud/login){target="_blank"} (or type `bit.ly/positlogin` into the address bar) to create an account at posit.cloud, using the 'sign up' box. **It'll ask you to check your email for a verification link** so do that before proceeding.
+* Once verified, go back to the posit.cloud tab and log in. You should see a message: "You are logged into Posit. Please select your destination". Choose 'Posit Cloud' (not Posit Connect Cloud). **That'll take you to your online workspace.**
 * Click the **new project** button, top right
-* Select '**new project from template**' (as in the pic below) and then "Data Analysis in R with the tidyverse" (if not already selected). This template comes pre-installed with the tidyverse package, which we'll be using. Select then click OK down at the bottom. **This will open your RStudio project where we'll do the coding.** 
+* Select '**new project from template**' (as in the pic below) and then "Data Analysis in R with the tidyverse" (if not already selected). Select then click OK down at the bottom. **This will open your RStudio project where we'll do the coding.** 
 
 ::: {.center}
 ![](https://danolner.github.io/posts/setting_up_w_r_online/newproject.png){width="200px"}
@@ -43,55 +61,72 @@ We'll be doing a **whistlestop tour** of using R for regional economic analysis 
 
 :::
 
-----
+
+## Introduction
+
+* We'll be doing a **whistlestop tour** of using R for digging into UK regional economies.
+* For this session, we're using **just one ONS source - regional GVA broken down by industry**. At the end I'll list a bunch of other sources and ideas, and code for using them. 
+* We'll also be asking which of these would be most useful to you for future sessions, and what other data or tools might interest you.
 
 ## Goals for the session
 
-* To actually **get you started using R and RStudio** if you haven't before.
-* 
+* Actually **get you started using R and RStudio** if you haven't used them before.
+* Give you a sense of how R can be used for UK regional data analysis and output.
+* Signpost to next steps if you want to do more. For anyone who does want to continue, **I'd be keen on developing networks between us to collaborate on our capacity building.**
 
 ---
 
-* First, apologies - because this is just a taster, we won't be able to check in on everyone's progress to make sure it's working or making sense! I've designed the guide so it can be followed step by step - but if we lose you along the way, we've also got a poll and ways to stay in touch, if I can help to support outside of this session.
+* I'll also be banging on about **how great R is for open, collaborative working.** It's build for openness and reproducibility, and this makes them **great for collaborative learning.**
+* I'll about **how to make reproducible pipelines all the way from data source to outputs**.
+* **These slides are an example:** code available here.
+
+
+## Because this is just a taster session...
+
+* This is **not a full training workshop**. Whenever we're learning new coding methods, **things always go wrong, guaranteed**. It's all part of the fun.
+* If in a workshop, we can take time to fix those problems. Sorry, **we don't have time for that today**.
 
 ---
 
-* If this happens, we'll still run through some of things R can do, and we can set up support later...
-* That could include smaller groups where making sure it's working will be possible!
-* The aim: this should work for anyone completely new to RStudio. May veer from insultingly simplistic to horribly complex
+* Your options when things don't work:
+    - The slides are designed to be step-by-step, and the session is being recorded by ONS - so you can work back through that in your own time.
+    - If you think fuller training where we **can** work through snags would be good, **let's work out how to make that happen.** Get in touch.
 
 ---
 
-* This is a whistlestop tour - if you're new to any of this, don't worry about it making sense on first go! I'll just try to highlight what R can do, and provide pointers to learning more.
-* Sometimes things won't work... [explain]
-* Bugs and errors, explain.
-* I will pick out one or two basic R things to highlight, but missing a load... [e.g. piping / functions]
-* Other things...
+* We'll **take time at the start getting set up with RStudio** so you have a foundation to work from.
+* But after that, we'll be running some chunky code blocks - especially if you're new to R **don't worry about these making sense!** Again - a workshop's required to get into the detail.
+* The aim is just to **run them in RStudio** so you can get an idea of how it works.
+* I will highlight a few key principles along the way, though.
+
 
 ## The plan
 
+* I've got **two tabs open I'll move between**: 
+    - These slides with the code and links in
+    - RStudio, open in posit.cloud. 
 * We'll **work through these slides together**, sometimes typing or copying code from the slides into RStudio.
 * So I'll be **flitting between the slides and RStudio myself** to do the same steps you'll be trying.
-* That could be vexing if you're trying to look at slides! So **make sure you have your own version of the slides open the a browser.** I'll post a link to it in the chat.
-* Each slide is numbered - I'll say where we're at as we go on
+* Each slide is numbered - I'll say where we're at as we progress.
 
 ---
 
-* If you **don't fancy constantly flitting between slides and RStudio** I've also made a single copy of the whole script we'll work through, which you can get here (click on the little clipboard symbol top-right to copy, and then when we make a script below, paste the whole thing in).
-* I'll provide that link again below after we've made a script.
-* Numbers in the comments on the script will (should!) match the slides so you can just follow along in RStudio.
+* If you **don't fancy constantly flitting between slides and RStudio** I've also made a single copy of the whole script we'll work through that includes the slide text - **I'll show how to get that below at the point we'd stick it into RStudio.**
 
-## The slides
+
+## One last thing...
 
 * Once you have your own copy of the slides open, note the **three-bar button, bottom left**. 
-* That lets you see the full contents
+* That lets you see the table of contents
+
+Also last chance to open own slide copy! Get them at `bit.ly/rtasterslides`.
 
 
 # CODING TIME!
 
 ## Making a new R script in RStudio
 
-**RStudio is where you'll be doing all the R loveliness** (though see also the spangly new [positron](https://positron.posit.co/){target="_blank"}, I haven't tried yet).
+**RStudio is where you'll be doing all the R loveliness**.
 
 Before looking at RStudio, let's **make a new R script, where we'll do the coding**.
 
@@ -1254,7 +1289,8 @@ patchwork::wrap_plots(plots)
 #* **Follow [this little guide here](https://danolner.github.io/posts/setting_up_w_r_online/#if-using-rstudio-online-set-up-a-posit.cloud-account-and-create-your-rstudio-project){target="_blank"} to do that (opens in new tab).**
 
 #Extract just code
-knitr::purl(input = "R_regecon_taster_2025_revealjs.qmd", output = "R_regecon_taster_2025_codeextract.R",documentation = 0)
+# knitr::purl(input = "R_regecon_taster_2025_revealjs.qmd", output = "R_regecon_taster_2025_codeextract.R",documentation = 0)
+knitr::purl(input = "R_regecon_taster_2025_revealjs.qmd", output = "R_regecon_taster_2025_codeextract.R",documentation = 2)
 
 #Mark time periods in the data to group by
 itl2.all = itl2.all %>% 
