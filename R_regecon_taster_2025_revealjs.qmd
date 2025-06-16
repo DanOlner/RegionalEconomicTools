@@ -29,12 +29,13 @@ knitr::opts_chunk$set(fig.height = 8, fig.width = 10, echo = TRUE, warning = F, 
 1. Just watch the screencast, let it wash over you and then come back to the materials in your own time. (These slides as well as ONS recording.)
 2. Run the R code yourself as we go. **If you're trying #2 - you'll need a copy of these slides open.** You'll have got the link via email - it's also in the chat, or just type `bit.ly/rtasterslides` into your browser address bar.
 
-If the slide link isn't working for any reason, you'll also have been sent a Word doc with the same material in.
+* **Navigate the slides with the up/down or left/right keyboard arrows**
+* If the slide link isn't working for any reason, you'll also have been sent a Word doc with the same material in
 
----
+## Not got R yet?
 
 * If you want to do some coding but didn't have a chance to run through the little R setup guide, **you've got some time now while I do all the pre-amble!**
-* The next slide takes you through **how to get RStudio working in the browser using (free) posit.cloud.**
+* The slide below takes you through **how to get RStudio working in the browser using (free) posit.cloud.**
 * We'll use the **free version of posit.cloud** - it's only got 1GB RAM, so we can't do some of the heavier stuff, but is perfect for an intro.
 * (The paid tier isn't too expensive and is powerful enough for most work.)
 
@@ -65,26 +66,31 @@ If the slide link isn't working for any reason, you'll also have been sent a Wor
 ## Introduction
 
 * We'll be doing a **whistlestop tour** of using R for digging into UK regional economies.
-* For this session, we're using **just one ONS source - regional GVA broken down by industry**. At the end I'll list a bunch of other sources and ideas, and code for using them. 
+* For this session, we're using **just one ONS source - [regional GVA broken down by industry](https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry){target="_blank"}**. At the end I'll list a bunch of other sources and ideas, and code for using them. 
 * We'll also be asking which of these would be most useful to you for future sessions, and what other data or tools might interest you.
+
+---
+
+* These are methods I've been developing working with [SYMCA](https://www.southyorkshire-ca.gov.uk/){target="_blank"} as a [Y-PERN](https://y-pern.org.uk/){target="_blank"} policy fellow, seconded from Sheffield University.
+* We're now starting to use them to support other local authorities, and want to grow and improve these tools with collaboration/feedback from others.
 
 ## Goals for the session
 
 * Actually **get you started using R and RStudio** if you haven't used them before.
 * Give you a sense of how R can be used for UK regional data analysis and output.
-* Signpost to next steps if you want to do more. For anyone who does want to continue, **I'd be keen on developing networks between us to collaborate on our capacity building.**
+* Signpost to next steps if you want to do more. For anyone who does want to continue, **I'm keen to grow our networks to collaborate on our capacity building.**
 
 ---
 
 * I'll also be banging on about **how great R is for open, collaborative working.** It's build for openness and reproducibility, and this makes them **great for collaborative learning.**
-* I'll about **how to make reproducible pipelines all the way from data source to outputs**.
-* **These slides are an example:** code available here.
+* I'll talk about **how to make reproducible pipelines all the way from data source to outputs**.
+* **These slides are an example:** code available [here](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/R_regecon_taster_2025_revealjs.qmd).
 
 
 ## Because this is just a taster session...
 
 * This is **not a full training workshop**. Whenever we're learning new coding methods, **things always go wrong, guaranteed**. It's all part of the fun.
-* If in a workshop, we can take time to fix those problems. Sorry, **we don't have time for that today**.
+* If in a workshop, we can take time to fix those problems. **Sorry, we won't have capacity for that today**.
 
 ---
 
@@ -107,6 +113,7 @@ If the slide link isn't working for any reason, you'll also have been sent a Wor
     - RStudio, open in posit.cloud. 
 * We'll **work through these slides together**, sometimes typing or copying code from the slides into RStudio.
 * So I'll be **flitting between the slides and RStudio myself** to do the same steps you'll be trying.
+* You can move between those two tabs, and also come back to Teams to see how I'm doing stuff.
 * Each slide is numbered - I'll say where we're at as we progress.
 
 ---
@@ -291,13 +298,13 @@ Let's do #1: **Run the code line by line**.
 
 **Just one more thing first before actual economic data, sorry. We're just going to **load some functions (and install a couple of libraries) that we'll need.
 
-If of interest (or you want to check the code isn't stealing your bank details!) code for these functions are [on the github site here](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/functions/misc_functions.R){target="_blank"}.
+If of interest, code for these functions are [on the github site here](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/functions/misc_functions.R){target="_blank"}.
 
 ::: {.callout-note icon=false}
 
 ## Task: In the R script, stick this code below the `library(tidyverse)` line and run it with CTRL+ENTER or the run command
 
-As this will **install a couple of libraries for the first time** it'll take about **25-30 seconds** to run.
+As this will **install a couple of libraries for the first time** it'll take **about a minute** to run.
 
 **Note: comments in R begin with a #hash.**
 
@@ -313,12 +320,12 @@ source('https://bit.ly/rtasterfunctions')
 
 ---
 
-**Now we can load some regional GVA data**.
+** *Now* we can load some regional GVA data!**
 
 ::: {.callout-note icon=false}
 ## Tasks: Load in regional economic data, then look at it in RStudio.
 
-This line takes a **comma-separated variable file from the web** and names it / assigns it to `df`. **Paste it into your script (below the other code we've added) and run it.**
+This line takes a **comma-separated variable (CSV) file from the web** and names it / assigns it to `df`. **Paste it into your script (below the other code we've added) and run it.**
 
 If you **look at the environment pane, top right**. `df` should now be there (as in the pic below). **Click anywhere on that line in the environment pane** - it'll open a **new tab in RStudio** with a view of the data attached to `df`.
 
@@ -344,7 +351,7 @@ df = read_csv('https://bit.ly/rtasteritl3noir')
 
 ## What data have we got here?
 
-This is from the latest ONS **"Regional gross value added (balanced) by industry: all International Territorial Level (ITL) regions"** (The Excel file is [available here](https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry){target="_blank"}). Released April 2025, it's got data up to 2023. It's got:
+This is from the latest ONS **"Regional gross value added (balanced) by industry: all International Territorial Level (ITL) regions"** (The Excel file is [available here](https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry){target="_blank"}). Released April 2025, it's got data up to 2023. It has:
 
 * GVA values from 1998 to 2023, broken down by:
 * ITL3 zones i.e. local authorities rather than MCAs
@@ -404,13 +411,13 @@ Here's a sample of what the data looks like in the original Excel file. Differen
 * The data we've attached to the `df` object comes from that ONS Excel sheet
 * I've used R to get it directly from the web and then extract each CSV separately that might be needed
 * Each of those nested sector groups gets separated out: goods/services, sections, the full SIC list (45 sectors in this data)
-* The code for that [is here](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/regionalGVA_processing.R){target="_blank"}.
+* The code for that [is here](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/prepcode/regionalGVA_processing.R){target="_blank"} and we run through another example later.
 * (Is this an example of R code that could be useful to run in powerBI to wrangle data for use?)
 
 
 ## Wrangling the data
 
-* We have our sector/region GVA data in R now - but **how to wrangle it by place and sector, to start getting useful info out of it?** 
+* So - we have our sector/region GVA data in R now - but **how to wrangle it by place and sector, to start getting useful info out of it?** 
 * Here's an example of using the `tidyverse` to do this - we'll group by sector for the latest year to see its median and range
 
 ---
@@ -504,7 +511,7 @@ sqrt(log10(10000))
 
 We stick **four arguments** into the function - including the data itself, which here we filter to the latest year.
 
-It's then piped to `glimpse`, which lets us look at all columns at once by **sticking them on their side** (a nice way to check our results look sane).
+It's then piped to `glimpse`, which lets us look at all columns at once by **sticking them on their side in the console** (a nice way to check our results look sane).
 
 
 ```{r}
@@ -574,11 +581,10 @@ df = df %>%
 
 ---
 
-**Now let's do something with result: **
+**Now let's do something with result:**
 
-* **Pick out one place or local authority**: you'll only need some of the place name you want - here I'm using `rotherh` to find Rotherham, but do change it to other places.
-* For the latest year in the data, **pull out the location quotient and sector proportion for that place**
-* And then order, highest to lowest.
+* **Pick out one place or local authority**: you'll only need some of the place name you want - here I'm using `rotherh` to find Rotherham.
+* For the latest year in the data, **pull out the location quotient and sector proportion for that place**. And then order, highest to lowest.
 
 ::: {.callout-note icon=false}
 ## Task: 
@@ -717,7 +723,7 @@ top12sectors = df %>%
 
 ---
 
-* The rule is simple: **you map one column to one aesthetic.** This is another **tidy data** principle, and its the reason - for example - why we have years all their own column, so year can be mapped to one axis.
+* The rule is simple: **you map one data column to one aesthetic.** This is another **tidy data** principle, and its the reason we have years in their own column, so year can be mapped to one axis.
 * We'll see later with geographical zones - categorical variables also get mapped to single aesthetics.
 * The [ggplot cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf){target="_blank"} shows, for **all plot types**, what aesthetics are available.
 
@@ -789,9 +795,9 @@ For this, we have to use **chained volume** data that adjusts for inflation...
 
 So next we **load data for the same sectors and ITL3 zones, but it's chained volume GVA figures**, inflation-adjusted to 2022 money value.
 
-We'll then **pick out a single place to examine**. I've chosen Barnsley - but note: **you can use a small part of a local authority / place name to return the full name that we'll use to filter the data**. 
+We'll then **pick out a single place to examine**. You can use a small part of a local authority / place name to return the full name that we'll use to filter the data. 
 
-Check it's returned what you want though. For example, `glouc` will return a couple of different places with 'Gloucester' in. 
+We'll check it's returned what you want though. For example, `glouc` will return a couple of different places with 'Gloucester' in. 
 ---
 
 ::: {.callout-note icon=false}
@@ -808,6 +814,9 @@ place = getdistinct('barns',df$Region_name)
 
 #Check we got just one place!
 place
+
+#If needed, code to list all ITL3 place names again
+#unique(df.cv$Region_name)
 
 ```
 

@@ -1071,14 +1071,14 @@
     "href": "R_regecon_taster_2025_revealjs.html#well-nearly",
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "Well nearly…",
-    "text": "Well nearly…\nJust one more thing first before actual economic data, sorry. We’re just going to load some functions (and install a couple of libraries) that we’ll need.\nIf of interest (or you want to check the code isn’t stealing your bank details!) code for these functions are on the github site here.\n\n\n\nTask: In the R script, stick this code below the library(tidyverse) line and run it with CTRL+ENTER or the run command\n\n\nAs this will install a couple of libraries for the first time it’ll take about 25-30 seconds to run.\nNote: comments in R begin with a #hash.\n\n#Load some functions and two libraries (and install those libraries if they're not already present)\nsource('https://bit.ly/rtasterfunctions')"
+    "text": "Well nearly…\nJust one more thing first before actual economic data, sorry. We’re just going to load some functions (and install a couple of libraries) that we’ll need.\nIf of interest, code for these functions are on the github site here.\n\n\n\nTask: In the R script, stick this code below the library(tidyverse) line and run it with CTRL+ENTER or the run command\n\n\nAs this will install a couple of libraries for the first time it’ll take about a minute to run.\nNote: comments in R begin with a #hash.\n\n#Load some functions and two libraries (and install those libraries if they're not already present)\nsource('https://bit.ly/rtasterfunctions')"
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#the-plan",
     "href": "R_regecon_taster_2025_revealjs.html#the-plan",
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "The plan",
-    "text": "The plan\n\nI’ve got two tabs open I’ll move between:\n\nThese slides with the code and links in\nRStudio, open in posit.cloud.\n\nWe’ll work through these slides together, sometimes typing or copying code from the slides into RStudio.\nSo I’ll be flitting between the slides and RStudio myself to do the same steps you’ll be trying.\nEach slide is numbered - I’ll say where we’re at as we progress."
+    "text": "The plan\n\nI’ve got two tabs open I’ll move between:\n\nThese slides with the code and links in\nRStudio, open in posit.cloud.\n\nWe’ll work through these slides together, sometimes typing or copying code from the slides into RStudio.\nSo I’ll be flitting between the slides and RStudio myself to do the same steps you’ll be trying.\nYou can move between those two tabs, and also come back to Teams to see how I’m doing stuff.\nEach slide is numbered - I’ll say where we’re at as we progress."
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#the-slides",
@@ -1092,7 +1092,7 @@
     "href": "R_regecon_taster_2025_revealjs.html#what-data-have-we-got-here",
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "What data have we got here?",
-    "text": "What data have we got here?\nThis is from the latest ONS “Regional gross value added (balanced) by industry: all International Territorial Level (ITL) regions” (The Excel file is available here). Released April 2025, it’s got data up to 2023. It’s got:\n\nGVA values from 1998 to 2023, broken down by:\nITL3 zones i.e. local authorities rather than MCAs\nSIC sections: 18 broad sector categories (max in this data is 45 categories)\n\nPlus…"
+    "text": "What data have we got here?\nThis is from the latest ONS “Regional gross value added (balanced) by industry: all International Territorial Level (ITL) regions” (The Excel file is available here). Released April 2025, it’s got data up to 2023. It has:\n\nGVA values from 1998 to 2023, broken down by:\nITL3 zones i.e. local authorities rather than MCAs\nSIC sections: 18 broad sector categories (max in this data is 45 categories)\n\nPlus…"
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#r-is-ace-exhibit-a-using-it-to-extract-data-like-this-easily",
@@ -1134,7 +1134,7 @@
     "href": "R_regecon_taster_2025_revealjs.html#goals-for-the-session",
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "Goals for the session",
-    "text": "Goals for the session\n\nActually get you started using R and RStudio if you haven’t used them before.\nGive you a sense of how R can be used for UK regional data analysis and output.\nSignpost to next steps if you want to do more. For anyone who does want to continue, I’d be keen on developing networks between us to collaborate on our capacity building.\nEvangelise for open, collaborative working. Platforms like R are built for openness and reproducibility, and this makes them great for collaborative learning. Or that’s what I’ll be arguing…\nThese slides are an example: all coded in R."
+    "text": "Goals for the session\n\nActually get you started using R and RStudio if you haven’t used them before.\nGive you a sense of how R can be used for UK regional data analysis and output.\nSignpost to next steps if you want to do more. For anyone who does want to continue, I’m keen to grow our networks to collaborate on our capacity building."
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#getting-sector-proportions-and-location-quotients",
@@ -1148,7 +1148,7 @@
     "href": "R_regecon_taster_2025_revealjs.html#wrangling-the-data",
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "Wrangling the data",
-    "text": "Wrangling the data\n\nWe have our sector/region GVA data in R now - but how to wrangle it by place and sector, to start getting useful info out of it?\nHere’s an example of using the tidyverse to do this - we’ll group by sector for the latest year to see its median and range"
+    "text": "Wrangling the data\n\nSo - we have our sector/region GVA data in R now - but how to wrangle it by place and sector, to start getting useful info out of it?\nHere’s an example of using the tidyverse to do this - we’ll group by sector for the latest year to see its median and range"
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#section",
@@ -1218,14 +1218,14 @@
     "href": "R_regecon_taster_2025_revealjs.html#before-we-start",
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "Before we start…",
-    "text": "Before we start…\n\nYou’ve got two ways to engage with this session:\n\n\nJust watch the screencast, let it wash over you and then come back to the materials in your own time. (These slides as well as ONS recording.)\nRun the R code yourself as we go. If you’re trying #2 - you’ll need a copy of these slides open. You’ll have got the link via email - it’s also in the chat, or just type bit.ly/rtasterslides into your browser address bar.\n\nIf the slide link isn’t working for any reason, you’ll also have been sent a Word doc with the same material in."
+    "text": "Before we start…\n\nYou’ve got two ways to engage with this session:\n\n\nJust watch the screencast, let it wash over you and then come back to the materials in your own time. (These slides as well as ONS recording.)\nRun the R code yourself as we go. If you’re trying #2 - you’ll need a copy of these slides open. You’ll have got the link via email - it’s also in the chat, or just type bit.ly/rtasterslides into your browser address bar.\n\n\nNavigate the slides with the up/down or left/right keyboard arrows\nIf the slide link isn’t working for any reason, you’ll also have been sent a Word doc with the same material in"
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#because-this-is-just-a-taster-session",
     "href": "R_regecon_taster_2025_revealjs.html#because-this-is-just-a-taster-session",
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "Because this is just a taster session…",
-    "text": "Because this is just a taster session…\n\nThis is not a full training workshop. Whenever we’re learning new coding methods, things always go wrong, guaranteed. It’s all part of the fun.\nIf in a workshop, we can take time to fix those problems. Sorry, we don’t have time for that today."
+    "text": "Because this is just a taster session…\n\nThis is not a full training workshop. Whenever we’re learning new coding methods, things always go wrong, guaranteed. It’s all part of the fun.\nIf in a workshop, we can take time to fix those problems. Sorry, we won’t have capacity for that today."
   },
   {
     "objectID": "R_regecon_taster_2025_revealjs.html#one-last-thing",
@@ -1233,5 +1233,19 @@
     "title": "Using R for regional economic analysis, taster session (17th June 2025)",
     "section": "One last thing…",
     "text": "One last thing…\n\nOnce you have your own copy of the slides open, note the three-bar button, bottom left.\nThat lets you see the table of contents\n\nAlso last chance to open own slide copy! Get them at bit.ly/rtasterslides."
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#not-got-r-yet",
+    "href": "R_regecon_taster_2025_revealjs.html#not-got-r-yet",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Not got R yet?",
+    "text": "Not got R yet?\n\nIf you want to do some coding but didn’t have a chance to run through the little R setup guide, you’ve got some time now while I do all the pre-amble!\nThe slide below takes you through how to get RStudio working in the browser using (free) posit.cloud.\nWe’ll use the free version of posit.cloud - it’s only got 1GB RAM, so we can’t do some of the heavier stuff, but is perfect for an intro.\n(The paid tier isn’t too expensive and is powerful enough for most work.)"
+  },
+  {
+    "objectID": "R_regecon_taster_2025_revealjs.html#now-lets-do-something-with-result",
+    "href": "R_regecon_taster_2025_revealjs.html#now-lets-do-something-with-result",
+    "title": "Using R for regional economic analysis, taster session (17th June 2025)",
+    "section": "Now let’s do something with result",
+    "text": "Now let’s do something with result\n\nPick out one place or local authority: you’ll only need some of the place name you want - here I’m using rotherh to find Rotherham.\nFor the latest year in the data, pull out the location quotient and sector proportion for that place. And then order, highest to lowest.\n\n\n\n\nTask:\n\n\n\n#View a single place...\ndf %&gt;% filter(\n  qg('rotherh',Region_name),\n  year == max(year)#get latest year in data\n) %&gt;% \n  mutate(regional_percent = sector_regional_proportion *100) %&gt;% \n  select(SIC07_description,regional_percent, LQ) %&gt;% \n  arrange(-LQ)"
   }
 ]
