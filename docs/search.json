@@ -1425,5 +1425,33 @@
     "title": "Gross Fixed Capital Formation bits and bobs",
     "section": "GFCF per hour worked map",
     "text": "GFCF per hour worked map\nA map of ITL2 GFCF per hour worked weekly for 2017-19 average shows clustering of low valuess for Northern ITL2 zones (same pattern is present in earlier map)."
+  },
+  {
+    "objectID": "quarto_docs/productivity_bitsandbobs_June2025.html",
+    "href": "quarto_docs/productivity_bitsandbobs_June2025.html",
+    "title": "productivity bits June 2025",
+    "section": "",
+    "text": "Hover for place names.\n\nSouth Yorkshire ITL3s in green\nCore cities in blue\nLondon ITL3s in red/pink\n\nAnd:\n\nAnything above/left of diagonal line is a productivity increase. So e.g. in this 1st plot, Rotherham’s productivity increased with a GVA increase and a number of hours worked decrease."
+  },
+  {
+    "objectID": "quarto_docs/productivity_bitsandbobs_June2025.html#plots",
+    "href": "quarto_docs/productivity_bitsandbobs_June2025.html#plots",
+    "title": "productivity bits June 2025",
+    "section": "PLOTS",
+    "text": "PLOTS"
+  },
+  {
+    "objectID": "quarto_docs/productivity_bitsandbobs_June2025.html#av.-percent-change-over-time-for-gva-vs-hours-worked-itl3-zones-hover-for-names",
+    "href": "quarto_docs/productivity_bitsandbobs_June2025.html#av.-percent-change-over-time-for-gva-vs-hours-worked-itl3-zones-hover-for-names",
+    "title": "productivity bits June 2025",
+    "section": "",
+    "text": "South Yorkshire ITL3s in green\nCore cities in blue\nLondon ITL3s in red/pink\n\nAnd:\n\nAnything above/left of diagonal line is a productivity increase. So e.g. in this 1st plot, Rotherham’s productivity increased with a GVA increase and a number of hours worked decrease."
+  },
+  {
+    "objectID": "quarto_docs/productivity_bitsandbobs_June2025.html#av.-percent-change-over-time-for-gva-vs-hours-worked-itl3-zones",
+    "href": "quarto_docs/productivity_bitsandbobs_June2025.html#av.-percent-change-over-time-for-gva-vs-hours-worked-itl3-zones",
+    "title": "productivity bits June 2025",
+    "section": "",
+    "text": "Hover for place names.\n\nSouth Yorkshire ITL3s in green\nCore cities in blue\nLondon ITL3s in red/pink\n\nAnd:\n\nAnything above/left of diagonal line is a productivity increase. So e.g. in this 1st plot, Rotherham’s productivity increased with a GVA increase and a number of hours worked decrease."
   }
 ]

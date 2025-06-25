@@ -1,0 +1,446 @@
+---
+title: "productivity bits June 2025"
+sidebar: false
+author:
+  - name: "Dan Olner"
+format: 
+  html:
+    output-file: "productivity_bitsandbobs_June2025"
+    fig-width: 8
+    fig-height: 8
+execute:
+  echo: false
+  message: false
+  warning: false
+fig-responsive: false
+---
+
+```{r setup}
+library(tidyverse)
+library(spdep)
+library(sf)#for geo stuff
+library(tmap)#for mapping
+library(zoo)#for making smoothed moving averages
+library(patchwork)#combine ggplots easily
+library(plotly)#For interactive plots
+# library(ggdist)
+# library(tidyr)
+# library(distributional)
+library(modelsummary)
+library(RColorBrewer)
+
+source('../functions/misc_functions.R')
+#source('functions/misc_functions.R')
+options(scipen = 999)
+
+#Set ggplot theme
+# theme_set(theme_light())
+
+
+```
+
+```{r dataprep}
+# ITL3 Hours % change v GVA % change on average----
+
+#So need the number of hours and chained volume GVA
+#Hours count is in the per hour productivity sheet
+#GVA in the region by industry sheet
+
+#hours worked first
+url1 <- 'https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions/current/labourproductivityitls1.xlsx'
+p1f <- tempfile(fileext=".xlsx")
+download.file(url1, p1f, mode="wb")
+
+#"Productivity Hours Worked per Week; ITL2 and ITL3 subregions (constrained to ITL1), 2004 - 2023"
+hoursworked <- readxl::read_excel(path = p1f,range = "Productivity Hours!A5:W247")
+
+names(hoursworked) <- gsub(x = names(hoursworked), pattern = ' ', replacement = '_')
+
+hoursworked = hoursworked %>%
+  filter(ITL_level == 'ITL3') %>% 
+  pivot_longer(Hours_2004:Hours_2023, names_to = 'year', values_to = 'hoursworkedperweek') %>% #get most recent year
+  mutate(
+    year = substr(year,7,10),
+    year = as.numeric(year)
+  ) %>% 
+  select(-ITL_level)
+
+
+
+#Then ITL3 CV for all industries (so has to include imputed rent as we can't sum CV)
+url2 <- 'https://www.ons.gov.uk/file?uri=/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry/current/regionalgrossvalueaddedbalancedbyindustryandallinternationalterritoriallevelsitlregions.xlsx'
+p2f <- tempfile(fileext=".xlsx")
+download.file(url2, p2f, mode="wb") 
+
+#"Table 3b: ITL3, chained volume measures in 2019 money value, pounds million [note 2]"
+itl3.all <- readxl::read_excel(path = p2f, range = "Table 3b!A2:AD11468")
+
+names(itl3.all) <- gsub(x = names(itl3.all), pattern = ' ', replacement = '_')
+
+itl3.all = itl3.all %>% 
+  filter(SIC07_description == 'All industries') %>% 
+  pivot_longer(`1998`:names(itl3.all)[length(names(itl3.all))], names_to = 'year', values_to = 'value') %>% #get most recent year
+  mutate(year = as.numeric(year)) %>% 
+  rename(gva_cv = value)
+
+
+
+#Check link between two is valid... tick
+# table(unique(hoursworked$ITL_code) %in% itl3.all$ITL_code)
+
+#2004:2023
+# unique(hoursworked$year)[unique(hoursworked$year) %in% unique(itl3.all$year)]
+
+#Get list of corecities
+corecities <- getdistinct('sheffield|Belfast|Birmingham|Bristol|Cardiff|Glasgow|Leeds|Liverpool|Manchester|Tyne|Nottingham', itl3.all$Region_name)
+
+#Yes, all in there, need to remove a few...
+corecities <- corecities[!grepl(x = corecities, pattern = 'Greater|shire', ignore.case = T)]
+corecities <- corecities[order(corecities)]
+
+#Check match also works in hours worked... tick
+# table(corecities %in% hoursworked$Region_name)
+
+
+
+#Get London ITL3s
+itl_lookup = read_csv("../data/LAD_(December_2024)_to_LAU1_to_ITL3_to_ITL2_to_ITL1_(January_2025)_Lookup_in_the_UK.csv")
+
+#Get all London ITL2 zones then use to get unique ITL3 zones
+itl3.lon = itl_lookup %>%
+  filter(qg('london',ITL225NM)) %>% 
+  select(ITL325CD,ITL325NM) %>% 
+  distinct()
+
+#Check itl3 code match... tick
+# table(itl3.lon$ITL325CD %in% hoursworked$ITL_code)
+# table(itl3.lon$ITL325CD %in% itl3.all$ITL_code)
+#tick
+# table(itl3.lon$ITL325NM %in% hoursworked$Region_name)
+# table(itl3.lon$ITL325NM %in% itl3.all$Region_name)
+
+
+```
+
+
+
+
+
+
+
+## AV. PERCENT CHANGE OVER TIME FOR GVA VS HOURS WORKED, ITL3 ZONES
+
+**Hover for place names**.
+
+* South Yorkshire ITL3s in green
+* Core cities in blue
+* London ITL3s in red/pink
+
+And:
+
+* Anything above/left of diagonal line is a **productivity increase**. So e.g. in this 1st plot, Rotherham's productivity increased with a **GVA increase** and a **number of hours worked *decrease***.
+
+### 2004 to 2013 av % change
+
+```{r plot1}
+# startyear = 2014
+# endyear = 2023
+
+startyear = 2004
+endyear = 2013
+
+#Hours per week first
+slopes.hours = get_slope_and_se_safely(
+  hoursworked %>% filter(year %in% c(startyear:endyear)), 
+  Region_name,
+  y = log(hoursworkedperweek), 
+  x = year, 
+  neweywest = F)
+
+#Add 95% confidence intervals around the slope
+slopes.hours = slopes.hours %>% 
+  mutate(
+    ci95min = slope - (se * 1.96),
+    ci95max = slope + (se * 1.96)
+  )
+
+
+#Mark 4 SY LAs and plot
+slopes.hours = slopes.hours %>% 
+  ungroup() %>% 
+  # mutate(
+  #   SY_LAs = ifelse(qg('rotherh|doncaste|sheffie|barnsley', Region_name),'SY LA','Other'),
+  #   corecities = ifelse(Region_name %in% corecities,'core city','Other'),
+  #   london = ifelse(qg('london',Region_name), 'London','Other')
+  # )
+  mutate(
+    itl3label = case_when(
+      # qg('york', Region_name) ~ 'SY LA',#will overwrite sheffield as core city
+      qg('rotherh|doncaste|sheffie|barnsley', Region_name) ~ 'SY LA',#will overwrite sheffield as core city
+      Region_name %in% corecities ~ 'Core city',
+      Region_name %in% itl3.lon$ITL325NM ~ 'London',
+      .default = 'Other'
+      ),
+    itl3label = factor(itl3label, ordered = T, levels = c('Other','London','Core city','SY LA'))
+  )
+
+#Adjust to get percentage change per year from log slopes
+slopes.hours = slopes.hours %>% 
+  mutate(
+    across(c(slope,ci95min,ci95max), ~(exp(.) - 1) * 100, .names = '{.col}_percentperyear'),
+    slopegroups = as.numeric(cut_number(slope_percentperyear,4))
+  )
+
+
+
+
+#Then GVA CV
+slopes.gva = get_slope_and_se_safely(
+  itl3.all %>% filter(year %in% c(startyear:endyear)), 
+  Region_name,
+  y = log(gva_cv), 
+  x = year, 
+  neweywest = F)
+
+#Add 95% confidence intervals around the slope
+slopes.gva = slopes.gva %>% 
+  mutate(
+    ci95min = slope - (se * 1.96),
+    ci95max = slope + (se * 1.96)
+  )
+
+
+
+#Mark 4 SY LAs and plot
+slopes.gva = slopes.gva %>% 
+  ungroup() %>% 
+  mutate(
+    itl3label = case_when(
+      # qg('york', Region_name) ~ 'SY LA',#will overwrite sheffield as core city
+      qg('rotherh|doncaste|sheffie|barnsley', Region_name) ~ 'SY LA',#will overwrite sheffield as core city
+      Region_name %in% corecities ~ 'Core city',
+      Region_name %in% itl3.lon$ITL325NM ~ 'London',
+      .default = 'Other'
+    ),
+    itl3label = factor(itl3label, ordered = T, levels = c('Other','London','Core city','SY LA'))
+  )
+
+#Adjust to get percentage change per year from log slopes
+slopes.gva = slopes.gva %>% 
+  mutate(
+    across(c(slope,ci95min,ci95max), ~(exp(.) - 1) * 100, .names = '{.col}_percentperyear'),
+    slopegroups = as.numeric(cut_number(slope_percentperyear,4))
+  )
+
+
+# table(slopes.hours$itl3label)
+# table(slopes.gva$itl3label)
+
+
+#Keep the bits we want and combine into single df
+both <- slopes.gva %>% 
+  select(Region_name,itl3label,
+         slope_percentperyear_GVA = slope_percentperyear,
+         ci95min_percentperyear_GVA = ci95min_percentperyear,
+         ci95max_percentperyear_GVA = ci95max_percentperyear) %>% 
+  inner_join(
+    slopes.hours %>% 
+      select(Region_name,
+             slope_percentperyear_HOURS = slope_percentperyear,
+             ci95min_percentperyear_HOURS = ci95min_percentperyear,
+             ci95max_percentperyear_HOURS = ci95max_percentperyear),
+    by = 'Region_name'
+  )
+
+
+#Poor control over visibility. Layer instead. Base plot then function.
+addtogva_hours_plot = function(p,plotdata, showerrors = T, sizeval = 1, colourval = 'black', alphaval = 1){
+  
+  p = p + geom_point(data = plotdata, aes(x = slope_percentperyear_HOURS, y = slope_percentperyear_GVA, group = Region_name), colour = colourval, size = sizeval, alpha = alphaval) 
+  
+  if(showerrors){
+    
+    p = p + geom_errorbar(data = plotdata, aes(x = slope_percentperyear_HOURS, y = slope_percentperyear_GVA, xmin = ci95min_percentperyear_HOURS, xmax = ci95max_percentperyear_HOURS),width = 0.1, size = 1, colour = colourval, alpha = alphaval) +
+    geom_errorbar(data = plotdata, aes(x = slope_percentperyear_HOURS, y = slope_percentperyear_GVA, ymin = ci95min_percentperyear_GVA, ymax = ci95max_percentperyear_GVA),width = 0.1, size = 1, colour = colourval, alpha = alphaval) 
+    
+  }
+  
+    p  + geom_abline(slope = 1, intercept = 0, colour = 'black', alpha = 0.5, size = 2) +
+      geom_hline(yintercept = 0, colour = 'black', alpha = 0.3, size = 1) +
+      geom_vline(xintercept = 0, colour = 'black', alpha = 0.3, size = 1)
+  
+}
+
+
+
+
+p = ggplot()
+
+p = addtogva_hours_plot(p, both %>% filter(itl3label == 'Other'), F, 1, 'black', 0.4)
+p = addtogva_hours_plot(p, both %>% filter(itl3label == 'London'), F, 2, 'red', 0.4)
+p = addtogva_hours_plot(p, both %>% filter(itl3label == 'Core city'), T, 3, RColorBrewer::brewer.pal(3, "Set1")[2], 0.5)
+p = addtogva_hours_plot(p, both %>% filter(itl3label == 'SY LA'), T, 7, RColorBrewer::brewer.pal(3, "Set1")[3], 1)
+
+p = p + 
+  coord_fixed() +
+  xlab("Average % change: hours worked per week") +
+  ylab("Average % change: GVA") 
+
+ggplotly(p, tooltip = 'Region_name')
+
+
+
+```
+
+### 2014 to 2023 av % change
+
+```{r plot2}
+startyear = 2014
+endyear = 2023
+
+# startyear = 2004
+# endyear = 2013
+
+#Hours per week first
+slopes.hours = get_slope_and_se_safely(
+  hoursworked %>% filter(year %in% c(startyear:endyear)), 
+  Region_name,
+  y = log(hoursworkedperweek), 
+  x = year, 
+  neweywest = F)
+
+#Add 95% confidence intervals around the slope
+slopes.hours = slopes.hours %>% 
+  mutate(
+    ci95min = slope - (se * 1.96),
+    ci95max = slope + (se * 1.96)
+  )
+
+
+#Mark 4 SY LAs and plot
+slopes.hours = slopes.hours %>% 
+  ungroup() %>% 
+  # mutate(
+  #   SY_LAs = ifelse(qg('rotherh|doncaste|sheffie|barnsley', Region_name),'SY LA','Other'),
+  #   corecities = ifelse(Region_name %in% corecities,'core city','Other'),
+  #   london = ifelse(qg('london',Region_name), 'London','Other')
+  # )
+  mutate(
+    itl3label = case_when(
+      # qg('york', Region_name) ~ 'SY LA',#will overwrite sheffield as core city
+      qg('rotherh|doncaste|sheffie|barnsley', Region_name) ~ 'SY LA',#will overwrite sheffield as core city
+      Region_name %in% corecities ~ 'Core city',
+      Region_name %in% itl3.lon$ITL325NM ~ 'London',
+      .default = 'Other'
+      ),
+    itl3label = factor(itl3label, ordered = T, levels = c('Other','London','Core city','SY LA'))
+  )
+
+#Adjust to get percentage change per year from log slopes
+slopes.hours = slopes.hours %>% 
+  mutate(
+    across(c(slope,ci95min,ci95max), ~(exp(.) - 1) * 100, .names = '{.col}_percentperyear'),
+    slopegroups = as.numeric(cut_number(slope_percentperyear,4))
+  )
+
+
+
+
+#Then GVA CV
+slopes.gva = get_slope_and_se_safely(
+  itl3.all %>% filter(year %in% c(startyear:endyear)), 
+  Region_name,
+  y = log(gva_cv), 
+  x = year, 
+  neweywest = F)
+
+#Add 95% confidence intervals around the slope
+slopes.gva = slopes.gva %>% 
+  mutate(
+    ci95min = slope - (se * 1.96),
+    ci95max = slope + (se * 1.96)
+  )
+
+
+
+#Mark 4 SY LAs and plot
+slopes.gva = slopes.gva %>% 
+  ungroup() %>% 
+  mutate(
+    itl3label = case_when(
+      # qg('york', Region_name) ~ 'SY LA',#will overwrite sheffield as core city
+      qg('rotherh|doncaste|sheffie|barnsley', Region_name) ~ 'SY LA',#will overwrite sheffield as core city
+      Region_name %in% corecities ~ 'Core city',
+      Region_name %in% itl3.lon$ITL325NM ~ 'London',
+      .default = 'Other'
+    ),
+    itl3label = factor(itl3label, ordered = T, levels = c('Other','London','Core city','SY LA'))
+  )
+
+#Adjust to get percentage change per year from log slopes
+slopes.gva = slopes.gva %>% 
+  mutate(
+    across(c(slope,ci95min,ci95max), ~(exp(.) - 1) * 100, .names = '{.col}_percentperyear'),
+    slopegroups = as.numeric(cut_number(slope_percentperyear,4))
+  )
+
+
+# table(slopes.hours$itl3label)
+# table(slopes.gva$itl3label)
+
+
+#Keep the bits we want and combine into single df
+both <- slopes.gva %>% 
+  select(Region_name,itl3label,
+         slope_percentperyear_GVA = slope_percentperyear,
+         ci95min_percentperyear_GVA = ci95min_percentperyear,
+         ci95max_percentperyear_GVA = ci95max_percentperyear) %>% 
+  inner_join(
+    slopes.hours %>% 
+      select(Region_name,
+             slope_percentperyear_HOURS = slope_percentperyear,
+             ci95min_percentperyear_HOURS = ci95min_percentperyear,
+             ci95max_percentperyear_HOURS = ci95max_percentperyear),
+    by = 'Region_name'
+  )
+
+
+#Poor control over visibility. Layer instead. Base plot then function.
+addtogva_hours_plot = function(p,plotdata, showerrors = T, sizeval = 1, colourval = 'black', alphaval = 1){
+  
+  p = p + geom_point(data = plotdata, aes(x = slope_percentperyear_HOURS, y = slope_percentperyear_GVA, group = Region_name), colour = colourval, size = sizeval, alpha = alphaval) 
+  
+  if(showerrors){
+    
+    p = p + geom_errorbar(data = plotdata, aes(x = slope_percentperyear_HOURS, y = slope_percentperyear_GVA, xmin = ci95min_percentperyear_HOURS, xmax = ci95max_percentperyear_HOURS),width = 0.1, size = 1, colour = colourval, alpha = alphaval) +
+    geom_errorbar(data = plotdata, aes(x = slope_percentperyear_HOURS, y = slope_percentperyear_GVA, ymin = ci95min_percentperyear_GVA, ymax = ci95max_percentperyear_GVA),width = 0.1, size = 1, colour = colourval, alpha = alphaval) 
+    
+  }
+  
+    p  + geom_abline(slope = 1, intercept = 0, colour = 'black', alpha = 0.5, size = 2) +
+      geom_hline(yintercept = 0, colour = 'black', alpha = 0.3, size = 1) +
+      geom_vline(xintercept = 0, colour = 'black', alpha = 0.3, size = 1)
+  
+}
+
+
+
+
+p = ggplot()
+
+p = addtogva_hours_plot(p, both %>% filter(itl3label == 'Other'), F, 1, 'black', 0.4)
+p = addtogva_hours_plot(p, both %>% filter(itl3label == 'London'), F, 2, 'red', 0.4)
+p = addtogva_hours_plot(p, both %>% filter(itl3label == 'Core city'), T, 3, RColorBrewer::brewer.pal(3, "Set1")[2], 0.5)
+p = addtogva_hours_plot(p, both %>% filter(itl3label == 'SY LA'), T, 7, RColorBrewer::brewer.pal(3, "Set1")[3], 1)
+
+p = p + coord_fixed() +
+  xlab("Average % change: hours worked per week") +
+  ylab("Average % change: GVA") 
+
+
+ggplotly(p, tooltip = 'Region_name')
+
+
+
+```
+

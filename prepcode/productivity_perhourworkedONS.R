@@ -588,6 +588,10 @@ both <- slopes.gva %>%
   )
 
 
+#save for elsewhere
+saveRDS(both,'local/data/GVA_v_hours_percentyrchange.rds')
+
+
 #PLOT
 # ggplot(both, aes(x = slope_percentperyear_HOURS, y = slope_percentperyear_GVA, colour = itl3label, size = itl3label)) +
 #   geom_point() +
