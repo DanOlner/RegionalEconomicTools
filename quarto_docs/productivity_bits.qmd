@@ -138,7 +138,7 @@ itl3.lon = itl_lookup %>%
 
 And:
 
-* Anything above/left of diagonal line is a **productivity increase**. So e.g. in this 1st plot, Rotherham's productivity increased with a **GVA increase** and a **number of hours worked *decrease***.
+* Anything above/left of diagonal line is a **productivity increase**. So e.g. in the plot below for 2014-2023, Rotherham's productivity increased with a **GVA increase** and a **number of hours worked *decrease***.
 
 ### 2004 to 2013 av % change
 
