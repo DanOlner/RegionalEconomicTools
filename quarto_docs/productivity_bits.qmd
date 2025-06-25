@@ -132,8 +132,8 @@ itl3.lon = itl_lookup %>%
 
 **Hover for place names**.
 
-* South Yorkshire ITL3s in green
-* Core cities in blue
+* South Yorkshire ITL3s in green (95% CIs)
+* Core cities in blue  (95% CIs)
 * London ITL3s in red/pink
 
 And:
