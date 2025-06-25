@@ -41,7 +41,7 @@ options(scipen = 999)
 
 ## INTRO
 
-Good gegional GFCF data is hard to come by - ONS [recently cancelled a scheduled update](https://www.ons.gov.uk/releases/experimentalregionalgrossfixedcapitalformationgfcfestimatesbyassettype1997to2023), delayed indefinitely, due to data issues. [Previous sources](https://www.ons.gov.uk/economy/regionalaccounts/grossdisposablehouseholdincome/articles/experimentalregionalgrossfixedcapitalformationgfcfestimatesbyassettype1997to2020/latest) are incomplete - they only include dwellings and structures at regional level, they're missing "tangible assets [including R&D spend] other than buildings and intellectual property products."
+Good regional GFCF data is hard to come by - ONS [recently cancelled a scheduled update](https://www.ons.gov.uk/releases/experimentalregionalgrossfixedcapitalformationgfcfestimatesbyassettype1997to2023), delayed indefinitely, due to data issues. [Previous sources](https://www.ons.gov.uk/economy/regionalaccounts/grossdisposablehouseholdincome/articles/experimentalregionalgrossfixedcapitalformationgfcfestimatesbyassettype1997to2020/latest) are incomplete - they only include dwellings and structures at regional level, they're missing "tangible assets [including R&D spend] other than buildings and intellectual property products."
 
 Note: [this ONS guide](https://www.ons.gov.uk/economy/grossdomesticproductgdp/articles/ashortguidetogrossfixedcapitalformationandbusinessinvestment/2017-05-25) lists all the components that go into GFCF.
 
