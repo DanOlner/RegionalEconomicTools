@@ -503,7 +503,7 @@ twod_proportionplot <- function(df, regionvar, category_var, valuevar, timevar, 
 #Label var, from the two time points, to display
 twod_generictimeplot <- function(df, category_var, x_var, y_var, timevar, label_var, start_time, end_time, compasspoints_to_display = c('NE','NW','SE','SW'), labeltextsize = 3){
   
-  category_var <- enquo(category_var)  
+  category_var <- enquo(category_var)   
   x_var <- enquo(x_var)
   y_var <- enquo(y_var)
   timevar <- enquo(timevar)

@@ -1,5 +1,6 @@
 #Explore modelled relationships between essential regional economic variables around employment and output
 library(tidyverse)
+library(modelsummary)
 library(zoo)
 library(plotly)
 library(sf)
@@ -279,6 +280,9 @@ ggplot(rez %>% mutate(SY = qg('south y',GEOGRAPHY_NAME)),
 
 
 
+
+#Save rez for elsewhere
+saveRDS(rez,'data/rez.rds')
 
 
 #Break into two, recombine
@@ -878,6 +882,366 @@ sy.latest %>%
 
 
 
+# GROSS FIXED CAPITAL FORMATION----
+
+#And how it also changes over time.
+#After a bunch of digging - see YPERN_planner2024 - there's only one good source from ONS via a request.
+#Other regional version delayed as I write.
+
+#One we're using (I think current prices but it doesn't say):
+#https://www.ons.gov.uk/economy/regionalaccounts/grossdisposablehouseholdincome/adhocs/13655regionalgrossfixedcapitalformationitl1anditl22000to2019
+
+#So for 2021 ITL2 (will match above handily):
+url1 <- 'https://www.ons.gov.uk/file?uri=/economy/regionalaccounts/grossdisposablehouseholdincome/adhocs/13655regionalgrossfixedcapitalformationitl1anditl22000to2019/regionalgfcf20002019itlcodes.xlsx'
+p1f <- tempfile(fileext=".xlsx")
+download.file(url1, p1f, mode="wb") 
+
+gfcf <- readxl::read_excel(path = p1f,range = "Rounded GFCF ITL2!A4:X496")
+
+names(gfcf) <- gsub(x = names(gfcf), pattern = ' ', replacement = '_')
+
+#Just going to use all sectors for now...
+gfcf = gfcf %>% 
+  filter(SIC07_description == 'Total GFCF') %>%
+  pivot_longer(`2000`:names(gfcf)[length(names(gfcf))], names_to = 'year', values_to = 'value') %>% #get most recent year
+  mutate(year = as.numeric(year))
+
+#Compare sector bins...
+# unique(gfcf$SIC07_description)
+# unique(itl2$SIC07_description)
+
+
+
+
+
+#Might be able to apply deflators from GVA data?
+#For 'all industries' at any rate
+#This should be correct ITL2s...
+url2 <- 'https://www.ons.gov.uk/file?uri=/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry/current/previous/v10/regionalgrossvalueaddedbalancedbyindustryandallitlregions.xlsx'
+p2f <- tempfile(fileext=".xlsx")
+download.file(url2, p2f, mode="wb") 
+
+#Table 2d: ITL2, implied deflators, 2019 equals 100 [note 3]
+itl2.deflators <- readxl::read_excel(path = p2f,range = "Table2d!A2:AB3938")
+
+names(itl2.deflators) <- gsub(x = names(itl2.deflators), pattern = ' ', replacement = '_')
+
+itl2.deflators = itl2.deflators %>% 
+  filter(SIC07_description == 'All industries') %>% 
+  pivot_longer(`1998`:names(itl2.deflators)[length(names(itl2.deflators))], names_to = 'year', values_to = 'value') %>% #get most recent year
+  mutate(year = as.numeric(year))
+
+#Matching ITL2s? Tick.
+table(unique(gfcf$ITL2_code) %in% unique(itl2.deflators$ITL_region_code))
+
+
+
+#Add deflators in (as proportion) to GFCF data so can just multiply through
+#Then need to invert to get re-inflator!
+gfcf = gfcf %>% 
+  left_join(
+    itl2.deflators %>% mutate(deflator = value / 100) %>% select(ITL_region_code,year,deflator),
+    by = c('ITL2_code' = 'ITL_region_code','year')
+  ) %>% 
+  mutate(
+    reinflator = 1/ deflator,
+    adjusted_value = value * reinflator
+  )
+
+
+
+
+
+#We now need:
+#CV GVA data for ITL2s for ALL INDUSTRIES (can't sum from above cos chained volume)
+#And then also a sum of BRES job numbers for all industries from above
+
+#CV GVA should come from that same Excel sheet as above to match, so that's handy
+itl2.cv.all = readxl::read_excel(path = p2f,range = "Table2b!A2:AB3938")
+
+names(itl2.cv.all) <- gsub(x = names(itl2.cv.all), pattern = ' ', replacement = '_')
+
+itl2.cv.all = itl2.cv.all %>% 
+  filter(SIC07_description == 'All industries') %>% 
+  pivot_longer(`1998`:names(itl2.cv.all)[length(names(itl2.cv.all))], names_to = 'year', values_to = 'value') %>% #get most recent year
+  mutate(year = as.numeric(year))
+
+
+#Then get sum of jobs for each year and place
+alljobs <- itl2 %>% 
+  select(year = DATE, ITL_region_code = ITL_code, JOBCOUNT_FULLTIME) %>% 
+  group_by(year,ITL_region_code) %>% 
+  summarise(JOBCOUNT_FULLTIME = sum(JOBCOUNT_FULLTIME)) %>% 
+  ungroup()
+  
+
+#Merge those into ITL2 gva all industry totals
+itl2.cv.all.jobs = itl2.cv.all %>% 
+  inner_join(
+    alljobs, by = c('year','ITL_region_code')
+  )
+
+
+#Then can add GFCF in
+gfcf.gva.jobs = itl2.cv.all.jobs %>% 
+  inner_join(
+    gfcf %>% select(ITL_region_code = ITL2_code, year, gfcf = value, gfcf_cv = adjusted_value),
+    by = c('year','ITL_region_code')
+  )
+
+
+
+
+
+
+  
+
+
+#Then do the same as above: get yearly deltas, but now for all three...
+deltas <- gfcf.gva.jobs %>% 
+  group_by(ITL_region_code) %>% 
+  mutate(
+    delta_gva = log(lag(value)) - log(value),
+    delta_gfcf = log(lag(gfcf_cv)) - log(gfcf_cv),
+    delta_jobs = log(lag(JOBCOUNT_FULLTIME)) - log(JOBCOUNT_FULLTIME)
+  ) %>% 
+  ungroup() %>% 
+  filter(,
+         !is.na(delta_gva),
+         !is.infinite(delta_jobs)
+  )
+
+
+
+#What's the rel for the entire set of pair points
+#Separately then together?
+summary(lm(data = deltas, formula = delta_gva ~ delta_gfcf))
+
+#This not terribly surprising given GVA is largely wages
+#In fact it almost makes sense to subtract change in wages from it to see what's left
+summary(lm(data = deltas, formula = delta_gva ~ delta_jobs))
+
+#Just out of interest...?
+summary(lm(
+  data = deltas %>% mutate(deltagva_minus_deltajobs = delta_gva - delta_jobs), 
+  formula = deltagva_minus_deltajobs ~ delta_gfcf))
+
+#Both
+summary(lm(data = deltas, formula = delta_gva ~ delta_jobs + delta_gfcf))
+
+
+
+#Just for SY now -- can't be enough data points here but let's see
+#Yeah, no!
+summary(lm(data = deltas %>% filter(qg('south y', ITL_region_name)), formula = delta_gva ~ delta_jobs + delta_gfcf))
+
+
+#Looksee
+ggplot(deltas %>% mutate(deltagva_minus_deltajobs = delta_gva - delta_jobs), 
+       # aes(x = delta_gfcf, y = deltagva_minus_deltajobs)) +
+       aes(x = delta_gfcf, y = delta_gva)) +
+  geom_point() +
+  geom_line() +
+  geom_smooth(method = 'lm')
+
+
+
+
+
+
+# GFCF - PULL OUT MORE DATA BY USING SECTORS THAT WE HAVE DATA FOR---
+
+# There are a few SIC sections in the GFCF data that will match across jobs and GVA
+#Look at those
+gfcf <- readxl::read_excel(path = p1f,range = "Rounded GFCF ITL2!A4:X496")
+
+names(gfcf) <- gsub(x = names(gfcf), pattern = ' ', replacement = '_')
+
+#Just going to use all sectors for now...
+gfcf = gfcf %>% 
+  # filter(SIC07_description == 'Total GFCF') %>%
+  pivot_longer(`2000`:names(gfcf)[length(names(gfcf))], names_to = 'year', values_to = 'value') %>% #get most recent year
+  mutate(year = as.numeric(year))
+
+#Compare sector bins...
+unique(gfcf$SIC07_description)
+unique(itl2$SIC07_description)
+
+#Agri - not really enough data in different places
+#Which leaves:
+#Manuf / construction / ICT / finance + insurance
+
+#Not a lot but better than nothing, and a decent cross section of physical + services
+
+#So: keep those sectors...
+gfcf = gfcf %>% filter(qg('manuf|construction|information|financ', SIC07_description))
+
+#Mutate names to match other ITL2 data
+#gfcf$SIC07_description %>% unique
+gfcf = gfcf %>%
+  mutate(
+    SIC07_description = case_when(
+      SIC07_description == 'Of which Manufacturing' ~ 'Manufacturing',
+      .default = SIC07_description#Rest match I think
+    )
+  )
+
+#Tick
+table(unique(gfcf$SIC07_description) %in% itl2$SIC07_description)
+
+
+#And same for ITL2 CV
+#Deflators first
+#Actually, just going to try without for now, on basis that year to year % changes won't be too far off
+
+# url2 <- 'https://www.ons.gov.uk/file?uri=/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry/current/previous/v10/regionalgrossvalueaddedbalancedbyindustryandallitlregions.xlsx'
+# p2f <- tempfile(fileext=".xlsx")
+# download.file(url2, p2f, mode="wb") 
+# 
+# #Table 2d: ITL2, implied deflators, 2019 equals 100 [note 3]
+# itl2.deflators <- readxl::read_excel(path = p2f,range = "Table2d!A2:AB3938")
+# 
+# names(itl2.deflators) <- gsub(x = names(itl2.deflators), pattern = ' ', replacement = '_')
+# 
+# itl2.deflators = itl2.deflators %>% 
+#   filter(SIC07_description %in% c('Manufacturing','Construction','Information and communication','Financial and insurance activities')) %>% 
+#   pivot_longer(`1998`:names(itl2.deflators)[length(names(itl2.deflators))], names_to = 'year', values_to = 'value') %>% #get most recent year
+#   mutate(year = as.numeric(year))
+
+
+#Select industries we want from the ITL2 data
+#itl2$SIC07_description %>% unique
+itl2.sub <- itl2 %>% 
+  filter(SIC07_description %in% c('Manufacturing','Construction','Information and communication','Financial and insurance activities'))
+
+
+
+#Then can add GFCF in
+itl2.sub.gfcf = itl2.sub %>% 
+  select(year = DATE, ITL_region_code = ITL_code, Region_name = GEOGRAPHY_NAME, SIC07_description, gva, JOBCOUNT_FULLTIME) %>% 
+  inner_join(
+    gfcf %>% select(ITL_region_code = ITL2_code, year, gfcf = value, SIC07_description),
+    by = c('year','ITL_region_code','SIC07_description')
+  )
+
+#save!
+saveRDS(itl2.sub.gfcf,'data/misc/gfcf_jobs_sectors.rds')
+
+
+
+
+
+#Then do the same as above: get yearly deltas, but now for all three...
+deltas <- itl2.sub.gfcf %>% 
+  group_by(ITL_region_code, SIC07_description) %>% 
+  mutate(
+    delta_gva = log(lag(gva)) - log(gva),
+    delta_gfcf = log(lag(gfcf)) - log(gfcf),
+    delta_jobs = log(lag(JOBCOUNT_FULLTIME)) - log(JOBCOUNT_FULLTIME)
+  ) %>% 
+  ungroup() %>% 
+  filter(,
+         !is.na(delta_gva),
+         !is.infinite(delta_jobs)
+  )
+
+
+#Right, few more data points!
+#Eyeball
+#Check on conversion back to % change
+deltas = deltas %>% 
+  mutate(across(c(delta_gva:delta_jobs), ~(exp(.) - 1) * 100, .names = '{.col}_percentperyear'))
+
+
+
+ggplot(deltas,aes(x = delta_gfcf_percentperyear, y = delta_gva_percentperyear)) +
+# ggplot(deltas,aes(x = delta_gfcf, y = delta_gva)) +
+  geom_point() +
+  geom_line() +
+  geom_smooth(method = 'lm')
+
+ggplot(deltas %>% filter(qg('south y', Region_name)),aes(x = delta_gfcf_percentperyear, y = delta_gva_percentperyear)) +
+# ggplot(deltas,aes(x = delta_gfcf, y = delta_gva)) +
+  geom_point() +
+  geom_line() +
+  geom_smooth(method = 'lm')
+
+
+#Pairs
+summary(lm(data = deltas, formula = delta_gva_percentperyear ~ delta_gfcf_percentperyear))
+
+#All
+# summary(lm(data = deltas, formula = delta_gva ~ delta_jobs + delta_gfcf))
+summary(lm(data = deltas, formula = delta_gva_percentperyear ~ delta_jobs_percentperyear + delta_gfcf_percentperyear))
+summary(lm(data = deltas, formula = delta_gva ~ delta_jobs + delta_gfcf))
+
+summary(lm(data = deltas %>% filter(qg('south y', Region_name)), formula = delta_gva_percentperyear ~ delta_jobs_percentperyear + delta_gfcf_percentperyear))
+summary(lm(data = deltas %>% filter(qg('south y', Region_name)), formula = delta_gva ~ delta_jobs + delta_gfcf))
+
+
+#Yes I know. But also...
+ggplot(deltas %>% filter(between(delta_gfcf_percentperyear,-25,25)),
+       aes(x = delta_gfcf_percentperyear, y = delta_gva_percentperyear)) +
+  # ggplot(deltas,aes(x = delta_gfcf, y = delta_gva)) +
+  geom_point() +
+  geom_line() +
+  geom_smooth(method = 'lm')
+
+#And! Sectors?
+ggplot(deltas 
+       %>% filter(between(delta_gfcf_percentperyear,-25,25))
+       ,
+       aes(x = delta_gfcf_percentperyear, y = delta_gva_percentperyear)) +
+  # ggplot(deltas,aes(x = delta_gfcf, y = delta_gva)) +
+  geom_point() +
+  geom_line() +
+  geom_smooth(method = 'lm') +
+  facet_wrap(~SIC07_description)
+
+
+
+
+#i'm not sure rel should be stronger for GFCF than job count...
+summary(lm(data = deltas %>% filter(between(delta_gfcf_percentperyear,-25,25)), 
+           formula = delta_gva_percentperyear ~ delta_jobs_percentperyear + delta_gfcf_percentperyear))
+
+#Sector breakdown
+diffsectors = function(sectorname){
+  print(sectorname)
+  print(summary(lm(data = deltas %>% filter(SIC07_description == sectorname), 
+             formula = delta_gva_percentperyear ~ delta_jobs_percentperyear + delta_gfcf_percentperyear)))
+  # print(summary(lm(data = deltas %>% filter(between(delta_gfcf_percentperyear,-25,25), SIC07_description == sectorname), 
+  #            formula = delta_gva_percentperyear ~ delta_jobs_percentperyear + delta_gfcf_percentperyear)))
+}
+
+map(unique(deltas$SIC07_description),diffsectors)
+
+
+
+#Function for extracting coeffs from those...
+#Test getting right numbers
+# model1 = summary(lm(data = deltas, formula = delta_gva ~ delta_jobs + delta_gfcf))
+# coef(model1)[3]
+# model1$coefficients[3, 2]
+
+diffsectors_coefs = function(sectorname){
+  
+  model1 = summary(lm(data = deltas %>% filter(SIC07_description == sectorname), 
+                   formula = delta_gva_percentperyear ~ delta_jobs_percentperyear + delta_gfcf_percentperyear))
+  
+  slopejobs <- coef(model1)[2]
+  sejobs <- model1$coefficients[2, 2]
+  slopegfcf <- coef(model1)[3]
+  segfcf <- model1$coefficients[3, 2]
+  
+  line1 = list(sector = sectorname, coef = 'jobs', slope = slopejobs, se = sejobs)
+  line2 = list(sector = sectorname, coef = 'gfcf', slope = slopegfcf, se = segfcf)
+  
+  return(bind_rows(line1,line2))
+  
+}
+
+allz = map(unique(deltas$SIC07_description),diffsectors_coefs) %>% bind_rows()
 
 
 
@@ -885,7 +1249,208 @@ sy.latest %>%
 
 
 
+summary(lm(data = deltas %>% filter(
+  between(delta_gfcf_percentperyear,-25,25),
+  qg('south y', Region_name)
+  ),formula = delta_gva_percentperyear ~ delta_jobs_percentperyear + delta_gfcf_percentperyear))
 
+
+
+
+
+
+# COMPARE JOBS / GFCF RATIOS FOR DIFFERENT PLACES----
+
+#To put SY in some context
+#Use FT jobs here but could use hours also
+
+#Sum to totals / use all industries from above
+#This is inflation adjusted
+# gfcf.gva.jobs
+
+#Ratio might look odd. Difference to national average might be good, though that should probably be weighted.
+#Hmm that intoduces extra weirdness. Let's just use the ratio, it's more direct.
+
+#Use non-adjusted val?
+gfcf.gva.jobs = gfcf.gva.jobs %>% 
+  mutate(
+    jobs_to_gfcf_ratio = JOBCOUNT_FULLTIME / gfcf
+    # sizegroup = cut_number(jobs_to_gfcf_ratio,4)#can't use this, breaks apart...
+  )
+
+#Let's see if that needs smoothing to pick up patterns
+p = ggplot(gfcf.gva.jobs, aes(x = year, y = jobs_to_gfcf_ratio, group = ITL_region_name)) +
+  geom_point() +
+  geom_line() 
+  # facet_wrap(~sizegroup, scales = 'free')
+
+ggplotly(p, tooltip = 'ITL_region_name')
+
+#I think inflation adjustment may be wrong, let's not use it!
+#Keep orig gfcf, use ranks instead
+
+
+
+
+
+
+#I should probably check that relationship holds if we use hours...
+# url1 <- 'https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions/current/labourproductivityitls1.xlsx'
+# p1f <- tempfile(fileext=".xlsx")
+# download.file(url1, p1f, mode="wb")
+# 
+# #"Productivity Hours Worked per Week; ITL2 and ITL3 subregions (constrained to ITL1), 2004 - 2023"
+# hoursworked <- readxl::read_excel(path = p1f,range = "Productivity Hours!A5:W247")
+# 
+# names(hoursworked) <- gsub(x = names(hoursworked), pattern = ' ', replacement = '_')
+# 
+# hoursworked = hoursworked %>%
+#   filter(ITL_level == 'ITL2') %>% 
+#   pivot_longer(Hours_2004:Hours_2023, names_to = 'year', values_to = 'hoursworkedperweek') %>% #get most recent year
+#   mutate(
+#     year = substr(year,7,10),
+#     year = as.numeric(year)
+#   ) %>% 
+#   select(-ITL_level)
+# 
+# #That may be 2025 ITL zones? Yep, need older hours worked sheet
+# table(unique(hoursworked$ITL_code) %in% gfcf.gva.jobs$ITL_region_code)
+
+
+#2022 version (from 2024!)
+url1 <- 'https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions/current/previous/v12/labourproductivityitls.xls'
+p1f <- tempfile(fileext=".xls")
+download.file(url1, p1f, mode="wb")
+
+#"Productivity Hours Worked per Week; ITL2 and ITL3 subregions (constrained to ITL1), 2004 - 2023"
+hoursworked <- readxl::read_excel(path = p1f,range = "Productivity Hours!A5:V239")
+
+names(hoursworked) <- gsub(x = names(hoursworked), pattern = ' ', replacement = '_')
+
+hoursworked = hoursworked %>%
+  filter(ITL_level == 'ITL2') %>% 
+  pivot_longer(Hours_2004:Hours_2022, names_to = 'year', values_to = 'hoursworkedperweek') %>% #get most recent year
+  mutate(
+    year = substr(year,7,10),
+    year = as.numeric(year)
+  ) %>% 
+  select(-ITL_level)
+
+#That may be 2025 ITL zones? Yep, need older hours worked sheet
+# table(unique(hoursworked$ITL_code) %in% gfcf.gva.jobs$ITL_region_code)
+#Good good...
+table(unique(gfcf.gva.jobs$ITL_region_code) %in% unique(hoursworked$ITL_code))
+
+
+#Add in hours per week
+gfcf.gva.jobs = gfcf.gva.jobs %>% 
+  left_join(
+    hoursworked %>% rename(ITL_region_code = ITL_code) %>% select(ITL_region_code,year,hoursworkedperweek),
+    by = c('ITL_region_code','year')
+  )
+
+#save for elsewhere
+saveRDS(gfcf.gva.jobs, 'data/misc/gfcf_jobs.rds')
+
+
+
+
+#While I'm here... how strongly is the FT job / weekly hours link?
+#Yeah pretty inseparable really, nothing shocking
+ggplot(gfcf.gva.jobs, aes(x = hoursworkedperweek, y = JOBCOUNT_FULLTIME)) +
+  geom_point() +
+  geom_smooth(method = 'lm')
+
+
+
+#Find ratio again
+gfcf.gva.jobs = gfcf.gva.jobs %>% 
+  mutate(
+    hoursperweek_to_gfcf_ratio = hoursworkedperweek / gfcf
+  )
+
+
+
+p = ggplot(gfcf.gva.jobs, aes(x = year, y = hoursperweek_to_gfcf_ratio, group = ITL_region_name)) +
+  geom_point() +
+  geom_line() 
+# facet_wrap(~sizegroup, scales = 'free')
+
+ggplotly(p, tooltip = 'ITL_region_name')
+
+#It occurs to me - the slope may be an artifact, if inflation not adjusted correctly.
+
+#So let's tell myself what that ratio means when the number's high v low
+#Let's just look at the numbers for a top and bottom example
+gfcf.gva.jobs %>% filter(ITL_region_name == 'South Yorkshire', year == 2019) %>% select(hoursworkedperweek,gfcf,hoursperweek_to_gfcf_ratio)
+gfcf.gva.jobs %>% filter(qg('berkshire',ITL_region_name), year == 2019) %>% select(hoursworkedperweek,gfcf,hoursperweek_to_gfcf_ratio)
+
+
+
+#Probably the wrong way round really. We'd be better with "GFCF per hour worked", right?
+gfcf.gva.jobs = gfcf.gva.jobs %>% 
+  mutate(
+    gfcf_perweeklyhour_worked = (gfcf / hoursworkedperweek) * 1000000
+  )
+
+
+
+p = ggplot(gfcf.gva.jobs, aes(x = year, y = gfcf_perweeklyhour_worked, group = ITL_region_name)) +
+  geom_point() +
+  geom_line() 
+# facet_wrap(~sizegroup, scales = 'free')
+
+ggplotly(p, tooltip = 'ITL_region_name')
+
+
+#So a way to show this for South Yorkshire? Shift in rank?
+#Rank moving average, do moving av first
+gfcf.gva.jobs.movingavrank = gfcf.gva.jobs %>% 
+  group_by(ITL_region_name) %>% 
+  mutate(
+    gfcf_perweeklyhour_worked_movingav = rollapply(gfcf_perweeklyhour_worked,3,mean,align='center',fill=NA)
+  ) %>% 
+  filter(!is.na(gfcf_perweeklyhour_worked_movingav)) %>% #remove years without data before ranking
+  group_by(year) %>% 
+  mutate(
+    rankpos = rank(-gfcf_perweeklyhour_worked_movingav)
+    ) %>% 
+  ungroup()
+
+#Check for one year... tick
+gfcf.gva.jobs.movingavrank %>% filter(year == 2018) %>% View
+
+
+#Moving av rank position change, mark SY
+p = ggplot(
+  gfcf.gva.jobs.movingavrank %>% mutate(SY = ITL_region_name == 'South Yorkshire'), 
+  aes(x = year, y = rankpos, group = ITL_region_name)) +
+  geom_point() +
+  geom_line() 
+
+ggplotly(p, tooltip = 'ITL_region_name')
+
+
+
+#Maaaap
+itl2.geo <- st_read('data/ITL_geographies/International_Territorial_Level_2_January_2021_UK_BFE_V2_2022_-4735199360818908762/ITL2_JAN_2021_UK_BFE_V2.shp', quiet = T) %>% 
+  st_simplify(preserveTopology = T, dTolerance = 100)
+
+#Join map data to a subset of the GVA data
+gfcfratiomap <- itl2.geo %>% 
+  right_join(
+    gfcf.gva.jobs.movingavrank %>% filter(
+      year==max(year)
+    ),
+    by = c('ITL221CD'='ITL_region_code')
+  )
+
+
+#Plot map
+tm_shape(gfcfratiomap) +
+  # tm_polygons('gfcf_perweeklyhour_worked', fill.scale = tm_scale(n = 9)) +
+  tm_polygons('gfcf_perweeklyhour_worked_movingav', fill.scale = tm_scale_intervals(style = "jenks", n = 9)) +
+  tm_layout(title = paste0('GFCF per weekly hour worked\n3 yr average\nITL2 regions ',gfcfratiomap$year[1]), legend.outside = T)
 
 
 

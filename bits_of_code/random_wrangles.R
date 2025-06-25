@@ -247,12 +247,123 @@ table(is.na(slopes.log1523.nw$se))
 
 
 
-# Sunburst test using BRES data for specific places----
+# Quick proportion plot----
 
-#Using pre-made BRES data
-bres <- readRDS('data/BRES/BRES_ALLYEARSWITHDATA_TYPE428_internationalterritoriallevelslevel3asofJan2021_2_Fulltimeemployees_2022_2023.rds')
+#Using this data
+df = read_csv('https://bit.ly/rtasteritl3noir')
 
-#Just save latest year to use with the R taster session June 2025
+#Core cities versus rest
+#Each needs to be in own column
+corecities = c("Tyneside","Manchester","Liverpool","Sheffield","Leeds","Nottingham","North Nottinghamshire","South Nottinghamshire","Birmingham","Bristol, City of","Cardiff and Vale of Glamorgan","Glasgow City","Belfast")
+
+df = df %>% 
+  mutate(
+    corecity = ifelse(
+      Region_name %in% corecities,
+      "Corecity",
+      "Other"
+    )
+  ) 
+
+#Check
+df$Region_name[df$corecity == "Corecity"] %>% unique
+
+
+#Sum SIC sections for each of those groups
+df = df %>%
+  group_by(year,corecity,SIC07_description) %>% 
+  summarise(value = sum(value)) %>% 
+  ungroup()
+
+
+#Find proportions for each of those groupings
+df = df %>%
+  group_split(year) %>%
+  map(add_location_quotient_and_proportions,
+      regionvar = corecity,
+      lq_var = SIC07_description,
+      valuevar = value) %>% 
+  bind_rows()
+
+smoothband = 3
+
+#find moving average,then make each its own column
+df = df %>% 
+  group_by(corecity,SIC07_description) %>% 
+  mutate(
+  sector_regional_percent_movingav = rollapply(
+    sector_regional_proportion * 100,smoothband,mean,align='center',fill=NA
+  ),
+  gva_movingav = rollapply(
+    value,smoothband,mean,align='center',fill=NA
+  )
+  ) %>% 
+  ungroup()
+
+
+#Keep key years and look
+startyear = 1999
+endyear = 2019
+
+plotdata = df %>% 
+  filter(year %in% c(startyear:endyear)) %>% 
+  select(corecity,gva_movingav,SIC07_description,year,sector_regional_percent_movingav) %>% 
+  pivot_wider(names_from = corecity, values_from = c(gva_movingav,sector_regional_percent_movingav))
+
+# plotdata = df %>% 
+#   filter(year %in% c(startyear,endyear)) %>% 
+#   select(corecity,SIC07_description,year,sector_regional_percent_movingav) %>% 
+#   pivot_wider(names_from = corecity, values_from = c(sector_regional_percent_movingav))
+
+
+p <- twod_generictimeplot_multipletimepoints(
+  df = plotdata,
+  category_var = SIC07_description,
+  x_var = sector_regional_percent_movingav_Corecity,
+  y_var = sector_regional_percent_movingav_Other,
+  label_var = gva_movingav_Corecity,
+  timevar = year,
+  # times = c(1999:2022) #3 yr moving av endpoints
+  times = c(startyear:endyear) #5 yr moving av endpoints
+  
+)
+
+# p + theme(aspect.ratio=1) +
+p + coord_fixed() +
+  geom_abline(slope = 1, intercept = 0, alpha = 0.5, size = 3) + 
+  # scale_x_log10() +
+  # scale_y_log10() +
+  xlab(paste0('Core cities')) +
+  ylab(paste0('Rest of UK'))
+
+
+
+
+
+
+# debugonce(twod_generictimeplot)
+p <- twod_generictimeplot(
+  df = plotdata,
+  category_var = SIC07_description,
+  x_var = sector_regional_percent_movingav_Corecity,
+  y_var = sector_regional_percent_movingav_Other,
+  label_var = gva_movingav_Corecity,
+  timevar = year,
+  start_time = startyear,
+  end_time = endyear
+  # compasspoints_to_display = c('NE')
+)
+
+# p + theme(aspect.ratio=1) +
+p <- p + coord_fixed() +
+  geom_abline(slope = 1, intercept = 0, alpha = 0.5, size = 3) + 
+  # scale_x_log10() +
+  # scale_y_log10() +
+  xlab(paste0('Core city')) +
+  ylab(paste0('Other'))
+
+p
+
 
 
 

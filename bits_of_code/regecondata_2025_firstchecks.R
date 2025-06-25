@@ -610,8 +610,88 @@ p + coord_fixed() +
 
 
 
+# CHAINED VOLUME ITL3 DATA OUTPUT SLOPES FOR FOUR PLACES----
+
+df.cv = read_csv('https://bit.ly/rtasteritl3cvnoir')
+
+#Get the text for an ITL3 zone by searching for a bit of the name
+place = getdistinct('barns',df.cv$Region_name)
+
+#Check we got just one place!
+place
+
+#If needed, code to list all ITL3 place names again
+#unique(df.cv$Region_name)
+
+startyear = 2014
+endyear = 2023
+
+#Pick out single slopes to illustrate
+ggplot(
+  df.cv %>% filter(
+    year %in% startyear:endyear,
+    Region_name == place,
+    qg('information|professional', SIC07_description)
+  ),
+  aes(x = year, y = value, colour = SIC07_description)
+) +
+  geom_line() +
+  geom_point() +
+  geom_smooth(method = 'lm') +
+  ggtitle(paste0(place, ' selected sectors\nGVA change over time (chained volume)'))
 
 
 
+#Function up to get several places
+makeslopeplot = function(place){
+
+  #Get all slopes for sectors in that place
+  slopes = get_slope_and_se_safely(
+    df.cv %>% filter(
+      year %in% startyear:endyear,
+      Region_name == place,
+      !qg('households', SIC07_description)
+    ), 
+    SIC07_description, 
+    y = log(value), 
+    x = year, 
+    neweywest = T)
+  
+  
+  #Add 95% confidence intervals around the slope
+  slopes = slopes %>% 
+    mutate(
+      ci95min = slope - (se * 1.96),
+      ci95max = slope + (se * 1.96)
+    )
+  
+  
+  
+  #Adjust to get percentage change per year from log slopes
+  slopes = slopes %>% 
+    mutate(across(c(slope,ci95min,ci95max), ~(exp(.) - 1) * 100, .names = '{.col}_percentperyear'))
+  
+  #Plot the slope with those confidence intervals
+  ggplot(slopes %>% filter(!is.na(slope)), 
+         aes(x = slope_percentperyear, y = fct_reorder(SIC07_description,slope))) +
+    geom_point() +
+    geom_errorbar(aes(xmin = ci95min_percentperyear, xmax = ci95max_percentperyear), width = 0.1) +
+    geom_vline(xintercept = 0, colour = 'black', alpha = 0.5) +
+    coord_cartesian(xlim = c(-25,25)) +
+    xlab('Av. % change per year') +
+    ylab("") +
+    ggtitle(paste0(place, ' broad sectors av. chained volume GVA % change per year\n',startyear,'-',endyear,', 95% conf intervals'))
+
+}
+
+
+places = getdistinct('rotherh|doncaste|sheffie|barnsley', df.cv$Region_name)
+
+startyear = 2014
+endyear = 2023
+
+plots = map(places, makeslopeplot)
+
+wrap_plots(plots, nrow = 2)
 
 

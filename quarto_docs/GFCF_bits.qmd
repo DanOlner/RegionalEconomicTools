@@ -1,0 +1,358 @@
+---
+title: "Gross Fixed Capital Formation bits and bobs"
+sidebar: false
+author:
+  - name: "Dan Olner"
+format: 
+  html:
+    output-file: "GFCF_bitsandbobs_June2025"
+    fig-width: 7.5
+    fig-height: 8
+execute:
+  echo: false
+  message: false
+  warning: false
+fig-responsive: false
+---
+
+```{r setup}
+library(tidyverse)
+library(spdep)
+library(sf)#for geo stuff
+library(tmap)#for mapping
+library(zoo)#for making smoothed moving averages
+library(patchwork)#combine ggplots easily
+library(plotly)#For interactive plots
+# library(ggdist)
+# library(tidyr)
+# library(distributional)
+library(modelsummary)
+library(RColorBrewer)
+
+source('../functions/misc_functions.R')
+#source('functions/misc_functions.R')
+options(scipen = 999)
+
+#Set ggplot theme
+# theme_set(theme_light())
+
+
+```
+
+## INTRO
+
+Good gegional GFCF data is hard to come by - ONS [recently cancelled a scheduled update](https://www.ons.gov.uk/releases/experimentalregionalgrossfixedcapitalformationgfcfestimatesbyassettype1997to2023), delayed indefinitely, due to data issues. [Previous sources](https://www.ons.gov.uk/economy/regionalaccounts/grossdisposablehouseholdincome/articles/experimentalregionalgrossfixedcapitalformationgfcfestimatesbyassettype1997to2020/latest) are incomplete - they only include dwellings and structures at regional level, they're missing "tangible assets [including R&D spend] other than buildings and intellectual property products."
+
+Note: [this ONS guide](https://www.ons.gov.uk/economy/grossdomesticproductgdp/articles/ashortguidetogrossfixedcapitalformationandbusinessinvestment/2017-05-25) lists all the components that go into GFCF.
+
+The [only half-good source](https://www.ons.gov.uk/economy/regionalaccounts/grossdisposablehouseholdincome/adhocs/13655regionalgrossfixedcapitalformationitl1anditl22000to2019) is via a 2021 user request to ONS, with data from 2000 to 2019 broken down by broad sector groups and ITL1 and 2 zones. But **it doesn't have a lot of quality information in there** e.g. it's not clear if the GFCF values given are inflation-adjusted, or how they've been sourced given the difficulties identified in those other datasets.
+
+Here I've:
+
+* Used that source and linked to jobs and hours worked to analyse **how work and GFCF (in this form) appear to affect regional GVA**.
+* Also looked at the **GFCF per weekly hour worked** to see what it says about relative regional investment levels in this dataset.
+
+
+
+## Model: elasticity of jobs and GFCF v GVA for whole UK
+
+There aren't enough data points to do this for South Yorkshire separately (model coefs are useless at ITL2 scale) but we can get an idea of the proportionate elasticity impact on GVA of GFCF vs jobs. (Noting this says nothing about causal direction...)
+
+This first dataset is using **year-to-year changes in GVA, GFCF and full time jobs** for **all industries combined**, for each ITL2 zone, and pooling.
+
+* **delta_jobs**: a 10% shift in job numbers ~ a 2.36% GVA shift.
+* **delta_gfcf**: a 10% shift in GFCF overall ~ a 0.9% GVA shift.
+
+Overall, shifts in job numbers appear to impact GVA shifts more.
+
+
+
+```{r gfcf_jobs_model}
+gfcf.gva.jobs = readRDS('../data/misc/gfcf_jobs.rds')
+#gfcf.gva.jobs = readRDS('data/misc/gfcf_jobs.rds')
+
+deltas <- gfcf.gva.jobs %>% 
+  group_by(ITL_region_code) %>% 
+  mutate(
+    delta_gva = log(lag(value)) - log(value),
+    delta_gfcf = log(lag(gfcf)) - log(gfcf),
+    # delta_gfcf = log(lag(gfcf_cv)) - log(gfcf_cv),
+    delta_jobs = log(lag(JOBCOUNT_FULLTIME)) - log(JOBCOUNT_FULLTIME)
+  ) %>% 
+  ungroup() %>% 
+  filter(,
+         !is.na(delta_gva),
+         !is.infinite(delta_jobs)
+  )
+
+#What's the rel for the entire set of pair points
+#Separately then together?
+# summary(lm(data = deltas, formula = delta_gva ~ delta_gfcf))
+
+#This not terribly surprising given GVA is largely wages
+#In fact it almost makes sense to subtract change in wages from it to see what's left
+# summary(lm(data = deltas, formula = delta_gva ~ delta_jobs))
+
+#Just out of interest...?
+# summary(lm(
+#   data = deltas %>% mutate(deltagva_minus_deltajobs = delta_gva - delta_jobs), 
+#   formula = deltagva_minus_deltajobs ~ delta_gfcf))
+
+#Both
+model1 = summary(lm(data = deltas, formula = delta_gva ~ delta_jobs + delta_gfcf))
+
+#Just for SY now -- can't be enough data points here but let's see
+#Yeah, no!
+# summary(lm(data = deltas %>% filter(qg('south y', ITL_region_name)), formula = delta_gva ~ delta_jobs + delta_gfcf))
+
+#https://www.alt-codes.net/triangle-symbols
+modelsummary(list("△GVA ~ △jobs + △gfcf" = model1), output = "html")
+
+
+```
+
+
+Here, we pull out **four broad sectors** that we can get to match across datasets, to get more year-to-year delta data. Unfortunately this still doesn't get us enough data for ITL2-level separate results, but it confirms the ratio of jobs vs GFCF.
+
+(Sectors are 'Manufacturing','Construction','Information and communication','Financial and insurance activities').
+
+Pooling all those sectors, we get these - again, about a 2 to 1 ratio between jobs and GFCF shifts, but smaller for these sectors.
+
+* **delta_jobs**: a 10% shift in job numbers ~ a 0.9% GVA shift.
+* **delta_gfcf**: a 10% shift in GFCF overall ~ a 0.4% GVA shift.
+
+
+
+```{r gfcf_jobs_model2}
+itl2.sub.gfcf = readRDS('../data/misc/gfcf_jobs_sectors.rds')
+
+
+#Then do the same as above: get yearly deltas, but now for all three...
+deltas <- itl2.sub.gfcf %>% 
+  group_by(ITL_region_code, SIC07_description) %>% 
+  mutate(
+    delta_gva = log(lag(gva)) - log(gva),
+    delta_gfcf = log(lag(gfcf)) - log(gfcf),
+    delta_jobs = log(lag(JOBCOUNT_FULLTIME)) - log(JOBCOUNT_FULLTIME)
+  ) %>% 
+  ungroup() %>% 
+  filter(,
+         !is.na(delta_gva),
+         !is.infinite(delta_jobs)
+  )
+
+
+model1 = summary(lm(data = deltas, formula = delta_gva ~ delta_jobs + delta_gfcf))
+
+modelsummary(list("△GVA ~ △jobs + △gfcf" = model1), output = "html")
+
+
+```
+
+
+Examining the sectors (at national level) is useful. Manufacturing and ICT GFCF elasticities about the same; maybe higher job elasticities in manufacturing; construction seems odd - why would GFCF GVA impact be so low?
+
+
+```{r sectors}
+
+diffsectors_coefs = function(sectorname){
+  
+  model1 = summary(lm(data = deltas %>% filter(SIC07_description == sectorname), 
+                   formula = delta_gva ~ delta_jobs + delta_gfcf))
+  
+  slopejobs <- coef(model1)[2]
+  sejobs <- model1$coefficients[2, 2]
+  slopegfcf <- coef(model1)[3]
+  segfcf <- model1$coefficients[3, 2]
+  
+  line1 = list(sector = sectorname, coef = 'jobs', slope = slopejobs, se = sejobs)
+  line2 = list(sector = sectorname, coef = 'gfcf', slope = slopegfcf, se = segfcf)
+  
+  return(bind_rows(line1,line2))
+  
+}
+
+allz = map(unique(deltas$SIC07_description),diffsectors_coefs) %>% 
+  bind_rows() %>% 
+  mutate(
+    ci95min = slope - (se * 1.96),
+    ci95max = slope + (se * 1.96)
+  ) 
+  # mutate(across(c(slope:ci95max), ~(exp(.) - 1) * 100, .names = '{.col}_percentperyear'))
+  
+##| fig-width: 7.5
+
+
+#Plot...
+ggplot(allz, aes(x = slope, y = fct_reorder(sector,slope), colour = coef)) +
+  geom_point(position = position_dodge(width = 0.5)) +
+  geom_errorbar(aes(xmin = ci95min, xmax = ci95max), width = 0.1, position = position_dodge(width = 0.5)) +
+  geom_vline(xintercept = 0, colour = 'black', alpha = 0.5) +
+  # coord_cartesian(xlim = c(-25,25)) +
+  xlab('1% shift in above ~ this % change in GVA') +
+  ylab("") +
+  ggtitle(paste0('Job / GFCF GVA elasticities\nin % change GVA\n95% conf intervals'))
+
+
+
+
+```
+
+
+
+## Jobs only (lets us pull out SY)
+
+We can get more information on South Yorkshire by just using jobs, where more sector year-to-year shifts can be pooled to get elasticities.
+
+The pre-pandemic relationship seems to confirm the above - a rough 25% jobs to GVA elasticity, with South Yorkshire's being at the higher end of that overall (at least until the pandemic breaks that - though probably not enough datapoints there to be conclusive).
+
+```{r jobsonly}
+#| fig-height: 12
+
+rez = readRDS('../data/rez.rds')
+
+
+#Break into two, recombine
+pre <- ggplot(rez %>% mutate(SY = qg('south y',GEOGRAPHY_NAME)) %>% filter(pandemic == 'pre'), 
+       aes(x = slope, y = fct_reorder(GEOGRAPHY_NAME,slope), size = SY)) +
+  geom_point(position = position_dodge(width = 0.5)) +
+  geom_errorbar(aes(xmin = ci95min, xmax = ci95max), width = 0.1, position = position_dodge(width = 0.5)) +
+  scale_size_manual(values = c(0.5,1)) +
+  # scale_colour_manual(values = c('grey','black')) +
+  # scale_color_brewer(palette = 'Paired') +
+  geom_vline(xintercept = 0, colour = 'black', alpha = 0.5) +
+  xlab('1% ^ in full time workers is associated with x% ^ in GVA on average') +
+  ggtitle('PRE-PANDEMIC')
+
+post <- ggplot(rez %>% mutate(SY = qg('south y',GEOGRAPHY_NAME)) %>% filter(pandemic == 'post'), 
+       aes(x = slope, y = fct_reorder(GEOGRAPHY_NAME,slope), size = SY)) +
+  geom_point(position = position_dodge(width = 0.5)) +
+  geom_errorbar(aes(xmin = ci95min, xmax = ci95max), width = 0.1, position = position_dodge(width = 0.5)) +
+  scale_size_manual(values = c(0.5,1)) +
+  # scale_colour_manual(values = c('grey','black')) +
+  # scale_color_brewer(palette = 'Paired') +
+  geom_vline(xintercept = 0, colour = 'black', alpha = 0.5) +
+  xlab('1% ^ in full time workers is associated with x% ^ in GVA on average') +
+  ggtitle('POST-PANDEMIC')
+
+
+pre / post
+
+
+
+```
+
+
+## GFCF per hour worked in a week
+
+Another way to get insight into this is to find the ratio of **GFCF per hour worked in a week**. South Yorkshire highlighted. Hover for other place names.
+
+South Yorkshire has had **one of the lowest GFCF per hour worked weekly** (West Yorkshires remained lower). Where South Yorkshire had £285 per hour worked a week (2017-19 av), Berkshire has £510.
+
+
+```{r}
+#| fig-height: 10
+
+gfcf.gva.jobs = gfcf.gva.jobs %>% 
+  mutate(
+    gfcf_perweeklyhour_worked = (gfcf / hoursworkedperweek) * 1000000
+  )
+
+
+#Rank moving average, do moving av first
+#Group by place to get moving av then by year to get separate ranks in each year
+gfcf.gva.jobs.movingavrank = gfcf.gva.jobs %>% 
+  group_by(ITL_region_name) %>% 
+  mutate(
+    gfcf_perweeklyhour_worked_movingav = rollapply(gfcf_perweeklyhour_worked,3,mean,align='center',fill=NA)
+  ) %>% 
+  filter(!is.na(gfcf_perweeklyhour_worked_movingav)) %>% #remove years without data before ranking
+  group_by(year) %>% 
+  mutate(
+    rankpos = rank(-gfcf_perweeklyhour_worked_movingav)
+    ) %>% 
+  ungroup()
+
+
+
+p = ggplot(
+  gfcf.gva.jobs.movingavrank %>% mutate(SY = ITL_region_name == 'South Yorkshire'), 
+  aes(x = year, y = rankpos, group = ITL_region_name, size = SY, colour = SY)) +
+  scale_color_brewer(palette = 'Paired') +
+  geom_point() +
+  geom_line() +
+  ylab("Rank position (higher on axis is lower GFCF per hour worked")
+
+ggplotly(p, tooltip = 'ITL_region_name')
+
+
+
+```
+
+
+## GFCF per hour worked map
+
+A map of ITL2 GFCF per hour worked weekly for 2017-19 average shows clustering of low valuess for Northern ITL2 zones (same pattern is present in earlier map).
+
+
+```{r}
+
+
+#Maaaap
+itl2.geo <- st_read('../data/ITL_geographies/International_Territorial_Level_2_January_2021_UK_BFE_V2_2022_-4735199360818908762/ITL2_JAN_2021_UK_BFE_V2.shp', quiet = T) %>% 
+  st_simplify(preserveTopology = T, dTolerance = 100)
+
+#Join map data to a subset of the GVA data
+# gfcfratiomap <- itl2.geo %>% 
+#   right_join(
+#     gfcf.gva.jobs.movingavrank %>% filter(
+#       year==min(year)
+#     ),
+#     by = c('ITL221CD'='ITL_region_code')
+#   )
+# 
+# 
+# #Plot map
+# tm_shape(gfcfratiomap) +
+#   # tm_polygons('gfcf_perweeklyhour_worked', fill.scale = tm_scale(n = 9)) +
+#   tm_polygons('gfcf_perweeklyhour_worked_movingav', fill.scale = tm_scale_intervals(style = "jenks", n = 9)) +
+#   tm_layout(title = paste0('GFCF per weekly hour worked\n3 yr average\nITL2 regions ',gfcfratiomap$year[1]), legend.outside = T)
+# 
+
+
+#Join map data to a subset of the GVA data
+gfcfratiomap <- itl2.geo %>% 
+  right_join(
+    gfcf.gva.jobs.movingavrank %>% filter(
+      year==max(year)
+    ),
+    by = c('ITL221CD'='ITL_region_code')
+  )
+
+
+#Plot map
+tm_shape(gfcfratiomap) +
+  # tm_polygons('gfcf_perweeklyhour_worked', fill.scale = tm_scale(n = 9)) +
+  tm_polygons('gfcf_perweeklyhour_worked_movingav', fill.scale = tm_scale_intervals(style = "jenks", n = 9)) +
+  tm_layout(title = paste0('GFCF per weekly hour worked\n3 yr average\nITL2 regions ',gfcfratiomap$year[1]), legend.outside = T)
+
+
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

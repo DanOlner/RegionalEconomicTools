@@ -1270,6 +1270,7 @@ leedsbradford <- itl3.2digit.cp %>%
 
 #save for output doc
 saveRDS(leedsbradford,'data/misc/leedsbradford_regprops.rds')
+leedsbradford <- readRDS('data/misc/leedsbradford_regprops.rds')
 
 
 

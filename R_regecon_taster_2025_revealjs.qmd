@@ -7,7 +7,7 @@ execute:
   warning: false
   error: false
 format:
-  revealjs:
+  docx:
     slide-number: true
     code-line-numbers: false
     code-overflow: wrap
@@ -370,6 +370,8 @@ ggplot(df %>%
   ylab('Sector: percent of regional economy') +
   labs(colour = paste0('Largest 12 sectors in ',max(df$year))) +
   ggtitle(paste0(place, ' GVA % of economy over time (', smoothband,' year moving average)'))
+
+
 
 
 # CHAINED VOLUME ITL3 DATA----
