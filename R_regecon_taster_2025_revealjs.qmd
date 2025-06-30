@@ -7,7 +7,7 @@ execute:
   warning: false
   error: false
 format:
-  docx:
+  revealjs:
     slide-number: true
     code-line-numbers: false
     code-overflow: wrap
