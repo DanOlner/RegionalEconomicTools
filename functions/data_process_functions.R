@@ -37,7 +37,7 @@ if(!exists("bres.var.labels")){
 #Use those also for filenames
 runBRESdownloader.fortheseyears <- function(years, ...){
   
-  x <- Sys.time() 
+  x <- Sys.time()
   lapply(years, function(x) download_BRES(x, ...))
   print(paste0('BRES single year downloads: ',Sys.time() - x))
   
@@ -79,7 +79,7 @@ download_BRES <- function(year, ...){
                       MEASURE = 1,#1 is "Count", 2 is "Industry percent"
                       MEASURES = 20100,#20100 is "value", 20301 is "percent" (which is redundant as "value" of "industry percent" is percent)
                       # EMPLOYMENT_STATUS = employment_status,
-                      select = c('DATE','GEOGRAPHY_NAME','INDUSTRY_NAME','INDUSTRY_TYPE','OBS_VALUE')
+                      select = c('DATE','GEOGRAPHY_CODE','GEOGRAPHY_NAME','INDUSTRY_NAME','INDUSTRY_TYPE','OBS_VALUE')
   )
   
   # Extract text of passed args for getting filename labels

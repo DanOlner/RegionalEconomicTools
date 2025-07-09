@@ -44,6 +44,7 @@ yearstoget = 2015:latestyear
 
 #TYPE438 is nuts 2016 level 2 - geography fully matches ITL2 2021
 #FULL TIME (run "EMPLOYMENT_STATUS" line above to see correct codes )
+#debugonce(runBRESdownloader.fortheseyears)
 runBRESdownloader.fortheseyears(years = yearstoget, geography = "TYPE438", EMPLOYMENT_STATUS = 2)
 #PART TIME
 runBRESdownloader.fortheseyears(years = yearstoget, geography = "TYPE438", EMPLOYMENT_STATUS = 3)
@@ -61,13 +62,13 @@ runBRESdownloader.fortheseyears(years = yearstoget, geography = "TYPE437", EMPLO
 #ITL2 and 3 (data only available for 2022 and 2023)
 #Full time for both
 #Run this version to prove data not available for anything but 2022 to 2023
-# runBRESdownloader.fortheseyears(years = years, geography = "TYPE429", EMPLOYMENT_STATUS = 2)
+# runBRESdownloader.fortheseyears(years = yearstoget, geography = "TYPE429", EMPLOYMENT_STATUS = 2)
 
 #FULL TIME
 runBRESdownloader.fortheseyears(years = 2022:latestyear, geography = "TYPE429", EMPLOYMENT_STATUS = 2)
 #PART TIME
 runBRESdownloader.fortheseyears(years = 2022:latestyear, geography = "TYPE429", EMPLOYMENT_STATUS = 3)
-
+#"EMPLOYEES"
 runBRESdownloader.fortheseyears(years = 2022:latestyear, geography = "TYPE429", EMPLOYMENT_STATUS = 4)
 
 

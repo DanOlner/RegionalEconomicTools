@@ -85,13 +85,15 @@ BRESdata.2digitsums <- BRESdata %>%
         group_by(DATE,GEOGRAPHY_NAME,SIC_2DIGIT_CODE) %>% 
         summarise(
           JOBCOUNT = sum(OBS_VALUE, na.rm = T),#Some agri points have no values via DEFRA
-          SIC_2DIGIT_NAME = max(SIC_2DIGIT_NAME)#will keep matching name
+          SIC_2DIGIT_NAME = max(SIC_2DIGIT_NAME),#will keep matching name
+          GEOGRAPHY_CODE = max(GEOGRAPHY_CODE)#will keep matching name
           ) %>% 
         ungroup() %>% 
         mutate(
           SIC_2DIGIT_CODE_NUMERIC = as.numeric(SIC_2DIGIT_CODE)#For matching later
         ) %>% 
         relocate(SIC_2DIGIT_CODE, .after = SIC_2DIGIT_NAME) %>% 
+        relocate(GEOGRAPHY_CODE, .before = GEOGRAPHY_NAME) %>% 
         relocate(JOBCOUNT,.after = SIC_2DIGIT_CODE_NUMERIC) 
   )
 
@@ -101,10 +103,12 @@ BRESdata.sectionsums <- BRESdata %>%
         group_by(DATE,GEOGRAPHY_NAME,SIC_SECTION_CODE) %>% 
         summarise(
           JOBCOUNT = sum(OBS_VALUE, na.rm = T),
-          SIC_SECTION_NAME = max(SIC_SECTION_NAME)#will keep matching name
+          SIC_SECTION_NAME = max(SIC_SECTION_NAME),#will keep matching name
+          GEOGRAPHY_CODE = max(GEOGRAPHY_CODE)#will keep matching name
           ) %>% 
         ungroup() %>% 
         relocate(SIC_SECTION_CODE, .after = SIC_SECTION_NAME) %>% 
+        relocate(GEOGRAPHY_CODE, .before = GEOGRAPHY_NAME) %>% 
         relocate(JOBCOUNT,.after = SIC_SECTION_CODE)
   )
 
@@ -114,14 +118,28 @@ BRESdata.3groupsums <- BRESdata %>%
         group_by(DATE,GEOGRAPHY_NAME,SIC_3GROUP_CODE) %>% 
         summarise(
           JOBCOUNT = sum(OBS_VALUE, na.rm = T),
-          SIC_3GROUP_NAME = max(SIC_3GROUP_NAME)#will keep matching name
+          SIC_3GROUP_NAME = max(SIC_3GROUP_NAME),#will keep matching name
+          GEOGRAPHY_CODE = max(GEOGRAPHY_CODE)#will keep matching name
           ) %>% 
         ungroup() %>% 
         relocate(SIC_3GROUP_CODE, .after = SIC_3GROUP_NAME) %>% 
         relocate(JOBCOUNT,.after = SIC_3GROUP_CODE) %>% 
+        relocate(GEOGRAPHY_CODE, .before = GEOGRAPHY_NAME) %>% 
         filter(!is.na(SIC_3GROUP_CODE))#drop sum columns we don't need (is extraterr again)
   )
 
+
+
+#While here, also make a matching version of the 5-digit SIC codes that we can use if we want to
+BRESdata.5digit <- BRESdata %>%
+  map(~ .x %>% 
+        select(DATE,GEOGRAPHY_CODE,GEOGRAPHY_NAME,SIC_5DIGIT_NAME = INDUSTRY_NAME,JOBCOUNT = OBS_VALUE) %>% 
+        mutate(SIC_5DIGIT_CODE = str_sub(SIC_5DIGIT_NAME,1,5)) %>% 
+        relocate(SIC_5DIGIT_CODE, .after = SIC_5DIGIT_NAME) %>% 
+        relocate(JOBCOUNT,.after = SIC_5DIGIT_CODE) %>% 
+        relocate(GEOGRAPHY_CODE, .before = GEOGRAPHY_NAME) %>% 
+        filter(!is.na(SIC_5DIGIT_CODE))#drop sum columns we don't need (is extraterr again)
+        )
 
 
 #3. SAVE ALL SEPARATELY----
@@ -159,6 +177,13 @@ walk2(BRESdata.sectionsums, finalfilenames, ~ {
 finalfilenames <- gsub('.rds','_SIC_3GROUPS.csv',updatefolder)
 
 walk2(BRESdata.3groupsums, finalfilenames, ~ {
+  .x %>% write_csv(file = .y)
+})
+
+
+finalfilenames <- gsub('.rds','_SIC_5DIGIT.csv',updatefolder)
+
+walk2(BRESdata.5digit, finalfilenames, ~ {
   .x %>% write_csv(file = .y)
 })
 

@@ -366,6 +366,59 @@ p
 
 
 
+# CHECKING BRES 2023 AND LATEST (2023) ONS DATA MATCH----
+
+#As of July 2025, we've already got the latest up-to-2023 BRES data downloaded.
+#But I think it uses ITL 2021, which means there won't be a perfect match with ITL 2025 now used in ONS GVA latest.
+
+#Let's check
+itl3.sections.cp <- read_csv('data/regionalGVA/regionalGVA_currentprices_ITL3_SIC_SECTION_LONG_2023.csv')
+
+#BRES latest... get from local file
+bres.sections.itl3 <- read_csv('data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE428_internationalterritoriallevelslevel3asofJan2021_2_Fulltimeemployees_2022_2023_SIC_SECTION.csv')
+
+#That's a lot of difference!
+table(unique(itl3.sections.cp$ITL_code) %in% unique(bres.sections.itl3$GEOGRAPHY_CODE))
+
+#What's changed? Compare...
+itl3.2021 <- st_read('data/ITL_geographies/International_Territorial_Level_3_January_2021_UK_BUC_V3_2022_6920195468392554877/ITL3_JAN_2021_UK_BUC_V3.shp') %>% st_set_geometry(NULL)
+
+itl3.2025 <- st_read("~/Dropbox/MapPolygons/UK/2025/International_Territorial_Level_3_(January_2025)_Boundaries_UK_BGC_V2.geojson") %>% st_set_geometry(NULL)
+
+table(unique(bres.sections.itl3$GEOGRAPHY_CODE) %in% unique(itl3.2021$ITL321CD))
+
+
+
+#For the current Bradford project, I may well want to have the 5 digit level
+#Let's just look at an example file
+x <- readRDS("data/BRES/BRES_ALLYEARSWITHDATA_TYPE429_internationalterritoriallevelslevel2asofJan2021_2_Fulltimeemployees_2022_2023.rds")
+
+unique(x$INDUSTRY_TYPE)
+
+
+
+# I've now updated BRES_sum_SIC5digit... to include outputting the 5 digit SICs themselves in the same format as the others.
+#Let's just dig into those to remind myself what we've got.
+#There's 2015-2022 NUTS level, then 2022-23 ITL3 2021 level. No 2025 as I type.
+
+#Just looking at 2022-23 for a couple of SIC sector levels including 5 digits
+bres.itl3.2digit.ft = read_csv("data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE428_internationalterritoriallevelslevel3asofJan2021_2_Fulltimeemployees_2022_2023_SIC_2DIGIT.csv")
+
+bres.itl3.5digit.ft = read_csv("data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE428_internationalterritoriallevelslevel3asofJan2021_2_Fulltimeemployees_2022_2023_SIC_5DIGIT.csv")
+
+#We know these will match as they nest because we summed them ourselves, didn't use the odd rounded versions for higher SIC levels in the orig data
+g(bres.itl3.2digit.ft)
+g(bres.itl3.5digit.ft)
+
+#sanity check. They're not in the same order, but all there.
+table(unique(bres.itl3.2digit.ft$GEOGRAPHY_CODE) %in% unique(bres.itl3.5digit.ft$GEOGRAPHY_CODE))
+
+
+
+
+
+
+
 
 
 
