@@ -44,9 +44,9 @@ bres.levels %>%
 #Then combine into single DF with different sector levels
 
 #Because just for Bradford, no need for geography harmonising at this point
-# bradford.2digit.ft = read_csv("data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE428_internationalterritoriallevelslevel3asofJan2021_2_Fulltimeemployees_2022_2023_SIC_2DIGIT.csv") %>% filter(qg('bradford',GEOGRAPHY_NAME))
+# bradford.2digit.ft = read_csv("local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE428_internationalterritoriallevelslevel3asofJan2021_2_Fulltimeemployees_2022_2023_SIC_2DIGIT.csv") %>% filter(qg('bradford',GEOGRAPHY_NAME))
 
-# bradford.section.ft = read_csv("data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE428_internationalterritoriallevelslevel3asofJan2021_2_Fulltimeemployees_2022_2023_SIC_SECTION.csv")
+# bradford.section.ft = read_csv("local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE428_internationalterritoriallevelslevel3asofJan2021_2_Fulltimeemployees_2022_2023_SIC_SECTION.csv")
 # 
 
 #For the sunburst code, we only need to keep the jobcounts for the highest hierarchical level - 5 digit
@@ -54,7 +54,7 @@ bres.levels %>%
 
 #Actually, just realised, we don't need anything BUT the 5 digit.
 #Can then just join the other SIC lookup and we're more or less done.
-bradford.5digit.ft = read_csv("data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE428_internationalterritoriallevelslevel3asofJan2021_2_Fulltimeemployees_2022_2023_SIC_5DIGIT.csv") %>% 
+bradford.5digit.ft = read_csv("local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE428_internationalterritoriallevelslevel3asofJan2021_2_Fulltimeemployees_2022_2023_SIC_5DIGIT.csv") %>% 
   filter(qg('bradford',GEOGRAPHY_NAME), DATE == 2023)
   # filter(qg('leeds',GEOGRAPHY_NAME), DATE == 2023)
   # filter(qg('sheffield',GEOGRAPHY_NAME), DATE == 2023)
@@ -150,7 +150,7 @@ bradford.ft.shorts %>%
 
 
 #Test for earliest year in the data (I wonder if there are other earlier sources for Bradford...?)
-bradford.nuts.5digit.ft = read_csv("data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE437_nuts2016level3_2_Fulltimeemployees_2015_2022_SIC_5DIGIT.csv") %>% 
+bradford.nuts.5digit.ft = read_csv("local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE437_nuts2016level3_2_Fulltimeemployees_2015_2022_SIC_5DIGIT.csv") %>% 
   filter(qg('bradford',GEOGRAPHY_NAME), DATE == 2015)
 
 #Check 5 digit name match between lookup and BRES... tick!
@@ -235,6 +235,40 @@ ch.la %>%
   count(localauthority_name,SIC_SECTION_NAME_SHORT,SIC_2DIGIT_NAME_SHORT,SIC_5DIGIT_NAME_SHORT, wt = Employees_thisyear) %>%
   # count(SIC_SECTION_NAME,SIC_3DIGIT_NAME,SIC_5DIGIT_NAME) %>% 
   count_to_treemap(sort_by_n = T)
+
+
+
+# LQ PLOT BUT FOR GVA VS BRES JOBS VS CH JOBS OVERLAID FOR BRADFORD----
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

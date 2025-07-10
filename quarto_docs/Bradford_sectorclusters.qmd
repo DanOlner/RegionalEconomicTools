@@ -1,0 +1,337 @@
+---
+title: "Bradford sectors and clusters: past, present"
+author:
+  - name: "Dan Olner (Yorkshire & Humber Policy Engagement & Research Network, University of Sheffield)"
+format: 
+  html:
+    output-file: "Bradford_sectorclusters_July2025"
+    fig-width: 9.5
+    fig-height: 8
+execute:
+  echo: false
+  message: false
+  warning: false
+fig-responsive: false
+---
+
+```{r setup}
+library(tidyverse)
+library(spdep)
+library(sf)#for geo stuff
+# library(tmap)#for mapping 
+library(zoo)#for making smoothed moving averages
+library(patchwork)#combine ggplots easily
+library(plotly)#For interactive plots
+# # library(ggdist)
+# library(tidyr)
+# library(distributional)
+library(RColorBrewer)
+
+source('../functions/misc_functions.R')
+#source('functions/misc_functions.R')
+options(scipen = 999)
+
+#Set ggplot theme
+theme_set(theme_light())
+
+
+```
+
+
+## Structural broad sectorGVA sector change 
+
+```{r struct}
+#| fig-width: 8
+#| fig-height: 16
+
+# LOAD ITL3 GVA DATA----
+
+#ITL3 zones, SIC sections, current prices, 2023 latest data (minus imputed rent)
+df = read_csv('https://bit.ly/rtasteritl3noir')
+
+#This one has imputed rent included if you want it
+# df = read_csv('https://bit.ly/rtasteritl3')
+
+
+
+#Finding location quotients for each year in the data 
+#And then overwriting the df variable with the result
+df = df %>%
+  group_split(year) %>%
+  map(add_location_quotient_and_proportions,
+      regionvar = Region_name,
+      lq_var = SIC07_description,
+      valuevar = value) %>% 
+  bind_rows()
+
+
+#1. Set window for rolling average: 3 years
+smoothband = 3
+
+#2. Make new column with rolling average in (applying to all places and sectors)
+#Years are already in the right order, so will roll apply across those correctly
+df = df %>% 
+  group_by(Region_name,SIC07_description) %>% 
+  mutate(
+    sector_regional_prop_movingav = rollapply(
+      sector_regional_proportion,smoothband,mean,align='center',fill=NA
+      )
+  ) %>% 
+  ungroup()
+
+
+#Get set pastel colours for each SIC section
+n <- length(unique(df$SIC07_description))
+set.seed(12)
+qual_col_pals = RColorBrewer::brewer.pal.info[RColorBrewer::brewer.pal.info$category == 'qual',]
+col_vector = unlist(mapply(RColorBrewer::brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
+
+randomcols <- col_vector[10:(10+(n-1))]
+
+#Do once!
+getplot <- function(place){
+  
+  df = df %>% 
+    filter(!qg("Activities of households|agri",SIC07_description)) %>% 
+    mutate(
+      SIC07_description = reduceSICnames(names = SIC07_description, level = 'section')
+    )
+  
+  top12sectors = df %>%
+    filter(
+      Region_name == place,
+      year == max(year) - 1#to get 3 year moving average value
+    ) %>%
+    arrange(-sector_regional_prop_movingav) %>%
+    slice_head(n= 12) %>%
+    select(SIC07_description) %>%
+    pull()
+  
+  
+  ggplot(df %>% 
+           filter(
+             Region_name == place, 
+             SIC07_description %in% top12sectors,
+             !is.na(sector_regional_prop_movingav)#Remove NAs created by 3 year moving average
+           ), 
+         aes(x = year, y = sector_regional_prop_movingav * 100, colour = fct_reorder(SIC07_description,-sector_regional_prop_movingav) )) +
+    geom_point() +
+    geom_line() +
+    scale_color_manual(values = setNames(randomcols,unique(df$SIC07_description))) +#set manual pastel colours matching sector name
+    ylab('Sector: percent of regional economy') +
+    theme(plot.title = element_text(face = 'bold')) +
+    labs(colour = 'SIC section') +
+    # scale_y_log10() +
+    ggtitle(paste0(place, ' GVA % of economy over time\nTop 12 sectors in ',max(df$year),'\n (', smoothband,' year moving average)'))
+  
+  
+}
+
+places = getdistinct('bradford|kirklees|calderdale|leeds|wakefield',df$Region_name)
+
+plots <- map(places, getplot)
+
+patchwork::wrap_plots(plots, ncol = 1)
+
+
+```
+
+
+
+
+## GVA V JOBS
+
+
+```{r gvajobs1}
+
+#2015 to 2023, linked on the regional GVA bespoke SIC categories
+#Note, can use lookup if need to also sum for sections (which we can do here cos current prices)
+gvabres <- readRDS('data/regionalGVA_plus_BRESjobcounts/regionalGVA_currentprices_BRES_FT_jobcount_bespoke2digitSIC_nONLY_MATCHING_GEOGs_2015_2023.rds')
+
+#Make abbreviated sector names
+shortsectornames = tibble(
+  SIC07_description = unique(gvabres$SIC07_description),
+  SIC07_description_shortened = c(
+  "Furniture",
+  "Machinery",
+  "Buildings",
+  "Engineering",
+  "Construction",
+  "Motor",
+  "Wholesale",
+  "Retail",
+  "Transport",
+  "Warehousing",
+  "Post",
+  "Accommodation",
+  "Food",
+  "Media",
+  "Telecoms",
+  "RealEstate",
+  "Legal",
+  "Consultancy",
+  "Architecture",
+  "Research",
+  "Professional",
+  "Rental",
+  "Employment",
+  "Cleaning/landscapes",
+  "Admin",
+  "Health",
+  "Care",
+  "SocialWork",
+  "Arts/ent",
+  "Recreation",
+  "Membership",
+  "Repair",
+  "Personal",
+  "Agri/mining",
+  "FoodManuf",
+  "Textiles",
+  "WoodPaper",
+  "Chemicals",
+  "Metals",
+  "Electronics",
+  "MachineryManuf",
+  "Utilities",
+  "Finance",
+  "PublicAdmin",
+  "Education",
+  "Households"
+  )
+)
+
+gvabres <- gvabres %>% 
+  left_join(
+    shortsectornames, by = 'SIC07_description'
+  )
+
+
+
+#For current prices - what we can do:
+#Find GVA as a proportion of total UK output for those years
+#Then that proportion per FT job
+#To see how productivity has shifted about internally / how sectors have changed relative to each other
+
+#That version is missing some places so isn't entire UK
+#Let's get entire UK's GVA per year
+#Can just sum from any current price source
+#2023:
+allgva <- read_csv('../data/regionalGVA/regionalGVA_currentprices_ITL2_SIC_2DIGIT_LONG_2023.csv')
+#allgva <- read_csv('data/regionalGVA/regionalGVA_currentprices_ITL2_SIC_2DIGIT_LONG_2023.csv')
+
+
+
+
+allgva <- allgva %>% 
+  group_by(year) %>% 
+  summarise(totalUKGVA_CP = sum(value)) %>% 
+  ungroup()
+
+#Add that in...
+gvabres <- gvabres %>% 
+  left_join(allgva, by = c('DATE'= 'year')
+  )
+
+#Some NAs in jobs - I think the issue with the missing values is just early years with no agri data...
+#filter
+gvabres <- gvabres %>% filter(!is.na(JOBCOUNT))
+
+
+#Find gva proportion of UK total then the job's proportion of that
+gvabres <- gvabres %>%
+  mutate(
+    gva_proportionofUKtotal = GVA / totalUKGVA_CP,
+    job_output_propofUKtotal = gva_proportionofUKtotal / JOBCOUNT
+  )
+
+
+
+
+smoothband = 3
+
+gvabres <- gvabres %>%
+  group_by(Region_name,SIC07_description) %>%
+  mutate(
+    jobcount_movingav = rollapply(JOBCOUNT,smoothband,mean,align='center',fill=NA),
+    gva_movingav = rollapply(GVA,smoothband,mean,align='center',fill=NA),
+    job_output_propofUKtotal_movingav = rollapply(job_output_propofUKtotal,smoothband,mean,align='center',fill=NA)
+  ) %>% 
+  ungroup()
+
+
+
+#ggplot won't give control over order very well... let's add on top manually, more control
+prod.data <- gvabres %>% 
+  mutate(
+    DATE = DATE - 2000,#Make dates 2 digit, more readable on axis
+    SIC07_description_shortened = fct_reorder(SIC07_description_shortened, job_output_propofUKtotal, .desc = T),
+    highlow = ifelse(SIC07_description_shortened %in% levels(SIC07_description_shortened)[1:23],'high','low')#Break into two plots to stack, split by total av productivity
+  ) %>% 
+  filter(!qg('hous',SIC07_description), !is.na(job_output_propofUKtotal_movingav))
+  
+
+
+p1 <- ggplot() +
+  geom_jitter(#Rest of UK first
+    data =  prod.data %>% filter(highlow == 'high'),
+    aes(x = DATE, y = job_output_propofUKtotal_movingav, group = Region_name),
+    alpha = 0.3, size = 1, 
+    width = 0.1) +
+  coord_cartesian(ylim = c(0,0.0000005)) +
+  geom_point(#Then Leeds and Bradford
+    data =  prod.data %>% filter(Region_name %in% c('Leeds','Bradford'), highlow == 'high'),
+    aes(x = DATE, y = job_output_propofUKtotal_movingav, group = Region_name, colour = Region_name, shape = Region_name),
+    alpha = 1, size = 5) +
+    scale_colour_brewer(palette = 'Set1', direction = 1, name="") +
+  geom_line(#Then Leeds and Bradford
+    data =  prod.data %>% filter(Region_name %in% c('Leeds','Bradford'), highlow == 'high'),
+    aes(x = DATE, y = job_output_propofUKtotal_movingav, group = Region_name, colour = Region_name),
+    alpha = 0.5, size = 1) +
+    scale_colour_brewer(palette = 'Set1', direction = 1, name="") +
+  scale_shape_manual(values = c(16,18), name="") +
+  xlab('year') +
+  facet_wrap(~SIC07_description_shortened, nrow = 1, labeller = labeller(groupwrap = label_wrap_gen(10)))
+
+p2 <- ggplot() +
+  geom_jitter(#Rest of UK first
+    data =  prod.data %>% filter(highlow == 'low'),
+    aes(x = DATE, y = job_output_propofUKtotal_movingav, group = Region_name),
+    alpha = 0.3, size = 1, 
+    width = 0.1) +
+  coord_cartesian(ylim = c(0,0.0000002)) +
+  geom_point(#Then Leeds and Bradford
+    data =  prod.data %>% filter(Region_name %in% c('Leeds','Bradford'), highlow == 'low'),
+    aes(x = DATE, y = job_output_propofUKtotal_movingav, group = Region_name, colour = Region_name, shape = Region_name),
+    alpha = 1, size = 5) +
+    scale_colour_brewer(palette = 'Set1', direction = 1, name="") +
+  geom_line(#Then Leeds and Bradford
+    data =  prod.data %>% filter(Region_name %in% c('Leeds','Bradford'), highlow == 'low'),
+    aes(x = DATE, y = job_output_propofUKtotal_movingav, group = Region_name, colour = Region_name),
+    alpha = 0.5, size = 1) +
+    scale_colour_brewer(palette = 'Set1', direction = 1, name="") +
+  scale_shape_manual(values = c(16,18), name="") +
+  xlab('year') +
+  facet_wrap(~SIC07_description_shortened, nrow = 1, labeller = labeller(groupwrap = label_wrap_gen(10)))
+
+
+  
+
+p1 / p2
+
+
+#Quick look
+#gvabres %>% filter(qg('architecture',SIC07_description_shortened), qg('bradford',Region_name)) %>% View
+
+
+```
+
+
+
+
+
+
+
+
+
+

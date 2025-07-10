@@ -1,4 +1,4 @@
-#Make a lookup for ONS SIC code cateogorisations from the GVA data (slightly different combos to full list)
+#Make a lookup for ONS SIC code categorisations from the GVA data (slightly different combos to full list)
 library(tidyverse)
 
 #Get the three different SIC code groupings

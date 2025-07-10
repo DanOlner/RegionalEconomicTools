@@ -1,9 +1,11 @@
 #Export CSV of counts for plotly output in python
 library(tidyverse)
+library(sf)
+source('functions/misc_functions.R')
 
 # From BRES data----
 
-bres.5digit.ft = read_csv("data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE428_internationalterritoriallevelslevel3asofJan2021_2_Fulltimeemployees_2022_2023_SIC_5DIGIT.csv") %>% 
+bres.5digit.ft = read_csv("local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE428_internationalterritoriallevelslevel3asofJan2021_2_Fulltimeemployees_2022_2023_SIC_5DIGIT.csv") %>% 
   filter(qg('bradford',GEOGRAPHY_NAME), DATE == 2023)
 # filter(qg('leeds',GEOGRAPHY_NAME), DATE == 2023)
 # filter(qg('sheffield',GEOGRAPHY_NAME), DATE == 2023)
@@ -57,28 +59,8 @@ bres.ft.shorts = bres.ft %>%
   left_join(chk.2digit %>% rename(SIC_2DIGIT_NAME_SHORT = shortnames), by = c('SIC_2DIGIT_NAME' = 'names')) %>% 
   left_join(chk.5digit %>% rename(SIC_5DIGIT_NAME_SHORT = shortnames), by = c('SIC_5DIGIT_NAME' = 'names')) 
 
-#Saving that in case I somehow lose the order...
-# saveRDS(bres.ft.shorts,'local/data/bradford_SICs_withshortnames.rds')
 
 
-#Failed attempts to be clever!
-# chk = map2(list(chk.sections,chk.2digit,chk.5digit), 
-#            list("SIC_SECTION_NAME","SIC_2DIGIT_NAME","SIC_5DIGIT_NAME"),
-#            function(brad_df) {
-#   bres.ft %>%
-#     reduce(~ .x %>% inner_join(
-#       .y,
-#       by = c('GEOGRAPHY_NAME', 'DATE', 'SIC_CODE')),
-#       .init = gva_df %>% rename(GEOGRAPHY_NAME = Region_name, DATE = year,
-#                                 SIC_CODE = SIC07_code ,gva = value)) 
-# })
-# 
-# 
-#   
-# chk = map2(list(chk.sections,chk.2digit,chk.5digit), list("SIC_SECTION_NAME","SIC_2DIGIT_NAME","SIC_5DIGIT_NAME"), ~ {
-#   
-#   .x %>% write_csv(file = .y)
-# })
 
 
 #Code nabbed from https://github.com/DanOlner/FirmAnalysis/blob/bcf06e46849eb7e08501c596955a247e5dadbe00/Fame_processing.R#L512
@@ -96,6 +78,47 @@ bres.ft.shorts %>%
   write_csv('local/data/backup/count_output.csv')
 
 
+
+
+#Repeat for multiple places
+bres.5digit.ft = read_csv("local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE428_internationalterritoriallevelslevel3asofJan2021_2_Fulltimeemployees_2022_2023_SIC_5DIGIT.csv") %>% 
+  filter(qg('bradford|kirklees|leeds|wakefield|calderdale',GEOGRAPHY_NAME), DATE == 2023)
+# filter(qg('leeds',GEOGRAPHY_NAME), DATE == 2023)
+# filter(qg('sheffield',GEOGRAPHY_NAME), DATE == 2023)
+# filter(qg('barnsley',GEOGRAPHY_NAME), DATE == 2023)#will get BDR in this data
+# filter(qg('kirklees',GEOGRAPHY_NAME), DATE == 2023)#will get BDR in this data
+# filter(qg('bristol',GEOGRAPHY_NAME), DATE == 2023)#will get BDR in this data
+
+SIClookup <- read_csv('data/SIClookup.csv')
+
+#Check 5 digit name match between lookup and BRES... tick!
+# table(unique(bres.5digit.ft$SIC_5DIGIT_NAME) %in% unique(SIClookup$SIC_5DIGIT_NAME))
+
+#Join SIC lookup on 5 digit name
+#Keep 2 digit and section codes
+#May shorten names in a mo...
+bres.ft <- bres.5digit.ft %>%
+  left_join(
+    SIClookup %>% select(SIC_5DIGIT_NAME,SIC_2DIGIT_NAME,SIC_SECTION_NAME),
+    by = 'SIC_5DIGIT_NAME'
+  )
+
+bres.ft.shorts = bres.ft %>% 
+  left_join(chk.sections %>% rename(SIC_SECTION_NAME_SHORT = shortnames), by = c('SIC_SECTION_NAME' = 'names')) %>% 
+  left_join(chk.2digit %>% rename(SIC_2DIGIT_NAME_SHORT = shortnames), by = c('SIC_2DIGIT_NAME' = 'names')) %>% 
+  left_join(chk.5digit %>% rename(SIC_5DIGIT_NAME_SHORT = shortnames), by = c('SIC_5DIGIT_NAME' = 'names')) 
+
+bres.ft.shorts %>%
+  mutate_if(is.character, function(x) {Encoding(x) <- 'latin1'; return(x)}) %>% 
+  count(GEOGRAPHY_NAME,SIC_SECTION_NAME_SHORT,SIC_2DIGIT_NAME_SHORT,SIC_5DIGIT_NAME_SHORT, wt = JOBCOUNT) %>% 
+  write_csv('local/data/backup/count_output_las.csv')
+
+
+
+
+
+
+
 # From Companies House data----
 
 ch = readRDS('../companieshouseopen/local/PROCESSED_accountextracts_n_livelist_geocoded_combined_July2025.rds')
@@ -103,7 +126,7 @@ ch = readRDS('../companieshouseopen/local/PROCESSED_accountextracts_n_livelist_g
 #Add in nicer SIC names
 ch = ch %>% 
   left_join(
-    bradford.ft.shorts %>% select(SIC_5DIGIT_CODE,SIC_SECTION_NAME_SHORT:SIC_5DIGIT_NAME_SHORT),
+    bres.ft.shorts %>% select(SIC_5DIGIT_CODE,SIC_SECTION_NAME_SHORT:SIC_5DIGIT_NAME_SHORT),
     by = 'SIC_5DIGIT_CODE'
   )
 
@@ -125,10 +148,11 @@ ch.la <- ch.emp1 %>%
 
 #Multiple places
 ch.la <- ch.emp1 %>% 
-  filter(qg('barnsley|sheffield|rotherham|doncaster',localauthority_name))
-  # filter(qg('bradford|kirklees|leeds|wakefield|calderdale',localauthority_name))
+  # filter(qg('barnsley|sheffield|rotherham|doncaster',localauthority_name))
+  filter(qg('bradford|kirklees|leeds|wakefield|calderdale',localauthority_name))
 
-#Ooo yes but could do with more control over colours
+#Ooo yes but could do with more control over colours...
+#Which we now have in Python, huzzah!
 ch.la %>%
   st_set_geometry(NULL) %>% 
   mutate_if(is.character, function(x) {Encoding(x) <- 'latin1'; return(x)}) %>% 
@@ -137,11 +161,40 @@ ch.la %>%
   write_csv('local/data/plotly_dataexportsfromR/CH_count_output.csv')
 
 #Check that...
-ch.la %>%
-  st_set_geometry(NULL) %>% 
-  mutate_if(is.character, function(x) {Encoding(x) <- 'latin1'; return(x)}) %>% 
-  count(localauthority_name,SIC_SECTION_NAME_SHORT,SIC_2DIGIT_NAME_SHORT,SIC_5DIGIT_NAME_SHORT, wt = Employees_thisyear) %>% 
-  View
+# chk <- ch.la %>%
+#   st_set_geometry(NULL) %>% 
+#   mutate_if(is.character, function(x) {Encoding(x) <- 'latin1'; return(x)}) %>% 
+#   count(localauthority_name,SIC_SECTION_NAME_SHORT,SIC_2DIGIT_NAME_SHORT,SIC_5DIGIT_NAME_SHORT, wt = Employees_thisyear) 
+# 
+# 
+# #Pick one example - a single row - and check that summed correctly
+# #Tick
+# ch.la %>% 
+#   st_set_geometry(NULL) %>% 
+#   select(localauthority_name,SIC_SECTION_NAME_SHORT,SIC_2DIGIT_NAME_SHORT,SIC_5DIGIT_NAME_SHORT, Employees_thisyear) %>% 
+#   filter(qg('brad',localauthority_name), SIC_5DIGIT_NAME_SHORT == 'Facilities') %>% 
+#   summarise(
+#     tot = sum(Employees_thisyear)
+#   )
+# 
+# 
+# #Now, is it summing correctly in treemap to higher SICs?
+# #E.g. Bradford manufacturing section is 11659
+# #Tick tick
+# ch.la %>% 
+#   st_set_geometry(NULL) %>% 
+#   select(localauthority_name,SIC_SECTION_NAME_SHORT,SIC_2DIGIT_NAME_SHORT,SIC_5DIGIT_NAME_SHORT, Employees_thisyear) %>% 
+#   filter(qg('brad',localauthority_name), SIC_SECTION_NAME_SHORT == 'Manuf') %>% 
+#   summarise(
+#     tot = sum(Employees_thisyear)
+#   )
+
+
+
+
+
+
+
 
 
 

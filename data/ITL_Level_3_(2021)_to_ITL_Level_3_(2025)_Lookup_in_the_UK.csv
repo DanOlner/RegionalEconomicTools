@@ -1,0 +1,194 @@
+﻿ITL321CD,ITL321NM,ITL325CD,ITL325NM,ObjectId
+TLC11,Hartlepool and Stockton-on-Tees,TLC31,Hartlepool and Stockton-on-Tees,1
+TLC12,South Teesside,TLC32,South Teesside,2
+TLC13,Darlington,TLC33,Darlington,3
+TLC14,Durham,TLC41,Durham,4
+TLC21,Northumberland,TLC42,Northumberland,5
+TLC22,Tyneside,TLC43,Tyneside,6
+TLC23,Sunderland,TLC44,Sunderland,7
+TLD11,West Cumbria,TLD13,Cumberland,8
+TLD12,East Cumbria,TLD13,Cumberland,9
+TLD11,West Cumbria,TLD14,Westmorland and Furness,10
+TLD12,East Cumbria,TLD14,Westmorland and Furness,11
+TLD33,Manchester,TLD33,Manchester,12
+TLD34,Greater Manchester South West,TLD34,Greater Manchester South West,13
+TLD35,Greater Manchester South East,TLD35,Greater Manchester South East,14
+TLD36,Greater Manchester North West,TLD36,Greater Manchester North West,15
+TLD37,Greater Manchester North East,TLD37,Greater Manchester North East,16
+TLD41,Blackburn with Darwen,TLD41,Blackburn with Darwen,17
+TLD42,Blackpool,TLD42,Blackpool,18
+TLD44,Lancaster and Wyre,TLD44,Lancaster and Wyre,19
+TLD45,Mid Lancashire,TLD45,Mid Lancashire,20
+TLD46,East Lancashire,TLD46,East Lancashire,21
+TLD47,Chorley and West Lancashire,TLD47,Chorley and West Lancashire,22
+TLD61,Warrington,TLD61,Warrington,23
+TLD62,Cheshire East,TLD62,Cheshire East,24
+TLD63,Cheshire West and Chester,TLD63,Cheshire West and Chester,25
+TLD71,East Merseyside,TLD71,East Merseyside,26
+TLD72,Liverpool,TLD72,Liverpool,27
+TLD73,Sefton,TLD73,Sefton,28
+TLD74,Wirral,TLD74,Wirral,29
+TLE11,"Kingston upon Hull, City of",TLE11,"Kingston upon Hull, City of",30
+TLE12,East Riding of Yorkshire,TLE12,East Riding of Yorkshire,31
+TLE13,North and North East Lincolnshire,TLE13,North and North East Lincolnshire,32
+TLE21,York,TLE21,York,33
+TLE22,North Yorkshire CC,TLE22,North Yorkshire,34
+TLE32,Sheffield,TLE32,Sheffield,35
+TLE31,"Barnsley, Doncaster and Rotherham",TLE33,Barnsley,36
+TLE31,"Barnsley, Doncaster and Rotherham",TLE34,Rotherham,37
+TLE31,"Barnsley, Doncaster and Rotherham",TLE35,Doncaster,38
+TLE41,Bradford,TLE41,Bradford,39
+TLE42,Leeds,TLE42,Leeds,40
+TLE44,Calderdale and Kirklees,TLE44,Calderdale and Kirklees,41
+TLE45,Wakefield,TLE45,Wakefield,42
+TLF11,Derby,TLF11,Derby,43
+TLF12,East Derbyshire,TLF12,East Derbyshire,44
+TLF13,South and West Derbyshire,TLF13,South and West Derbyshire,45
+TLF14,Nottingham,TLF14,Nottingham,46
+TLF15,North Nottinghamshire,TLF15,North Nottinghamshire,47
+TLF16,South Nottinghamshire,TLF16,South Nottinghamshire,48
+TLF21,Leicester,TLF21,Leicester,49
+TLF22,Leicestershire CC and Rutland,TLF22,Leicestershire CC and Rutland,50
+TLF24,West Northamptonshire,TLF24,West Northamptonshire,51
+TLF25,North Northamptonshire,TLF25,North Northamptonshire,52
+TLF30,Lincolnshire CC,TLF30,Lincolnshire CC,53
+TLG11,"Herefordshire, County of",TLG11,"Herefordshire, County of",54
+TLG12,Worcestershire CC,TLG12,Worcestershire CC,55
+TLG13,Warwickshire CC,TLG13,Warwickshire CC,56
+TLG21,Telford and Wrekin,TLG21,Telford and Wrekin,57
+TLG22,Shropshire,TLG22,Shropshire,58
+TLG23,Stoke-on-Trent,TLG23,Stoke-on-Trent,59
+TLG24,Staffordshire CC,TLG24,Staffordshire CC,60
+TLG31,Birmingham,TLG31,Birmingham,61
+TLG32,Solihull,TLG32,Solihull,62
+TLG33,Coventry,TLG33,Coventry,63
+TLG36,Dudley,TLG36,Dudley,64
+TLG37,Sandwell,TLG37,Sandwell,65
+TLJ46,West Kent,TLJ46,West Kent,66
+TLK30,Cornwall and Isles of Scilly,TLK30,Cornwall and Isles of Scilly,67
+TLK41,Plymouth,TLK41,Plymouth,68
+TLK42,Torbay,TLK42,Torbay,69
+TLK43,Devon CC,TLK43,Devon CC,70
+TLK11,"Bristol, City of",TLK51,"Bristol, City of",71
+TLK12,"Bath and North East Somerset, North Somerset and South Gloucestershire",TLK52,Bath & North East Somerset and South Gloucestershire,72
+TLK12,"Bath and North East Somerset, North Somerset and South Gloucestershire",TLK61,North Somerset,73
+TLK23,Somerset CC,TLK62,Somerset,74
+TLK24,"Bournemouth, Christchurch and Poole",TLK63,"Bournemouth, Christchurch and Poole",75
+TLK25,Dorset,TLK64,Dorset,76
+TLK14,Swindon,TLK71,Swindon,77
+TLK15,Wiltshire,TLK72,Wiltshire,78
+TLK13,Gloucestershire CC,TLK73,Gloucestershire CC,79
+TLL11,Isle of Anglesey,TLL31,Isle of Anglesey,80
+TLL12,Gwynedd,TLL32,Gwynedd,81
+TLL13,Conwy and Denbighshire,TLL33,Conwy and Denbighshire,82
+TLL23,Flintshire and Wrexham,TLL34,Flintshire and Wrexham,83
+TLL14,South West Wales,TLL41,Mid Wales,84
+TLL24,Powys,TLL41,Mid Wales,85
+TLL14,South West Wales,TLL42,South West Wales,86
+TLL18,Swansea,TLL43,Swansea,87
+TLL17,Bridgend and Neath Port Talbot,TLL44,Neath Port Talbot,88
+TLL15,Central Valleys,TLL51,Central Valleys and Bridgend,89
+TLL17,Bridgend and Neath Port Talbot,TLL51,Central Valleys and Bridgend,90
+TLL22,Cardiff and Vale of Glamorgan,TLL52,Cardiff and Vale of Glamorgan,91
+TLL16,Gwent Valleys,TLL53,Gwent Valleys,92
+TLL21,Monmouthshire and Newport,TLL54,Monmouthshire and Newport,93
+TLM72,Clackmannanshire and Fife,TLM01,Clackmannanshire and Fife,94
+TLM77,"Perth and Kinross, and Stirling",TLM02,"Perth and Kinross, and Stirling",95
+TLM71,Angus and Dundee City,TLM03,Angus and Dundee City,96
+TLM73,East Lothian and Midlothian,TLM11,East Lothian and Midlothian,97
+TLM76,Falkirk,TLM12,Falkirk,98
+TLM75,City of Edinburgh,TLM13,City of Edinburgh,99
+TLM78,West Lothian,TLM14,West Lothian,100
+TLM61,"Caithness and Sutherland, and Ross and Cromarty",TLM20,Highlands and Islands,101
+TLM62,"Inverness and Nairn, Moray, and Badenoch and Strathspey",TLM20,Highlands and Islands,102
+TLM63,"Lochaber, Skye and Lochalsh, Arran and Cumbrae, and Argyll and Bute",TLM20,Highlands and Islands,103
+TLM64,Na h-Eileanan Siar,TLM20,Highlands and Islands,104
+TLM65,Orkney Islands,TLM20,Highlands and Islands,105
+TLM66,Shetland Islands,TLM20,Highlands and Islands,106
+TLM81,"East Dunbartonshire, West Dunbartonshire, and Helensburgh and Lomond",TLM20,Highlands and Islands,107
+TLM81,"East Dunbartonshire, West Dunbartonshire, and Helensburgh and Lomond",TLM31,East Dunbartonshire and West Dunbartonshire,108
+TLM82,Glasgow City,TLM32,Glasgow City,109
+TLM83,"Inverclyde, East Renfrewshire, and Renfrewshire",TLM33,"Inverclyde, East Renfrewshire, and Renfrewshire",110
+TLM84,North Lanarkshire,TLM34,North Lanarkshire,111
+TLM50,Aberdeen City and Aberdeenshire,TLM50,Aberdeen City and Aberdeenshire,112
+TLM91,Scottish Borders,TLM91,Scottish Borders,113
+TLM92,Dumfries and Galloway,TLM92,Dumfries and Galloway,114
+TLM93,East Ayrshire and North Ayrshire mainland,TLM93,North Ayrshire and East Ayrshire,115
+TLM94,South Ayrshire,TLM94,South Ayrshire,116
+TLM95,South Lanarkshire,TLM95,South Lanarkshire,117
+TLN06,Belfast,TLN06,Belfast,118
+TLN07,"Armagh City, Banbridge and Craigavon",TLN07,"Armagh City, Banbridge and Craigavon",119
+TLN08,"Newry, Mourne and Down",TLN08,"Newry, Mourne and Down",120
+TLN09,Ards and North Down ,TLN09,Ards and North Down ,121
+TLN0A,Derry City and Strabane,TLN0A,Derry City and Strabane,122
+TLN0B,Mid Ulster,TLN0B,Mid Ulster,123
+TLN0C,Causeway Coast and Glens,TLN0C,Causeway Coast and Glens,124
+TLN0D,Antrim and Newtownabbey,TLN0D,Antrim and Newtownabbey,125
+TLN0E,Lisburn and Castlereagh,TLN0E,Lisburn and Castlereagh,126
+TLN0F,Mid and East Antrim,TLN0F,Mid and East Antrim,127
+TLN0G,Fermanagh and Omagh,TLN0G,Fermanagh and Omagh,128
+TLG38,Walsall,TLG38,Walsall,129
+TLG39,Wolverhampton,TLG39,Wolverhampton,130
+TLH21,Luton,TLH21,Luton,131
+TLH24,Bedford,TLH24,Bedford,132
+TLH25,Central Bedfordshire,TLH25,Central Bedfordshire,133
+TLH23,Hertfordshire CC,TLH26,North and East Hertfordshire,134
+TLH23,Hertfordshire CC,TLH27,South West Hertfordshire,135
+TLH31,Southend-on-Sea,TLH31,Southend-on-Sea,136
+TLH32,Thurrock,TLH32,Thurrock,137
+TLH34,Essex Haven Gateway,TLH34,Essex Haven Gateway,138
+TLH35,West Essex,TLH35,West Essex,139
+TLH36,Heart of Essex,TLH36,Heart of Essex,140
+TLH37,Essex Thames Gateway,TLH37,Essex Thames Gateway,141
+TLH11,Peterborough,TLH41,Peterborough,142
+TLH12,Cambridgeshire CC,TLH42,Cambridgeshire CC,143
+TLH15,Norwich and East Norfolk,TLH51,Norwich and East Norfolk,144
+TLH16,North and West Norfolk,TLH52,North and West Norfolk,145
+TLH17,Breckland and South Norfolk,TLH53,Breckland and South Norfolk,146
+TLH14,Suffolk CC,TLH61,Babergh and Mid Suffolk,147
+TLH14,Suffolk CC,TLH62,Ipswich,148
+TLH14,Suffolk CC,TLH63,East Suffolk,149
+TLH14,Suffolk CC,TLH64,West Suffolk,150
+TLI33,Kensington & Chelsea and Hammersmith & Fulham,TLI33,Kensington & Chelsea and Hammersmith & Fulham,151
+TLI34,Wandsworth,TLI34,Wandsworth,152
+TLI31,Camden and City of London,TLI35,Westminster and City of London,153
+TLI32,Westminster,TLI35,Westminster and City of London,154
+TLI31,Camden and City of London,TLI36,Camden,155
+TLI41,Hackney and Newham,TLI41,Hackney and Newham,156
+TLI42,Tower Hamlets,TLI42,Tower Hamlets,157
+TLI43,Haringey and Islington,TLI43,Haringey and Islington,158
+TLI44,Lewisham and Southwark,TLI44,Lewisham and Southwark,159
+TLI45,Lambeth,TLI45,Lambeth,160
+TLI51,Bexley and Greenwich,TLI51,Bexley and Greenwich,161
+TLI52,Barking & Dagenham and Havering,TLI52,Barking & Dagenham and Havering,162
+TLI53,Redbridge and Waltham Forest,TLI53,Redbridge and Waltham Forest,163
+TLI54,Enfield,TLI54,Enfield,164
+TLI61,Bromley,TLI61,Bromley,165
+TLI62,Croydon,TLI62,Croydon,166
+TLI63,"Merton, Kingston upon Thames and Sutton",TLI63,"Merton, Kingston upon Thames and Sutton",167
+TLI71,Barnet,TLI71,Barnet,168
+TLI72,Brent,TLI72,Brent,169
+TLI73,Ealing,TLI73,Ealing,170
+TLI74,Harrow and Hillingdon,TLI74,Harrow and Hillingdon,171
+TLI75,Hounslow and Richmond upon Thames,TLI75,Hounslow and Richmond upon Thames,172
+TLJ12,Milton Keynes,TLJ12,Milton Keynes,173
+TLJ13,Buckinghamshire,TLJ13,Buckinghamshire,174
+TLJ14,Oxfordshire CC,TLJ14,Oxfordshire CC,175
+TLJ11,Berkshire,TLJ15,Berkshire East,176
+TLJ11,Berkshire,TLJ16,Berkshire West,177
+TLJ21,Brighton and Hove,TLJ21,Brighton and Hove,178
+TLJ22,East Sussex CC,TLJ22,East Sussex CC,179
+TLJ25,West Surrey,TLJ25,West Surrey,180
+TLJ26,East Surrey,TLJ26,East Surrey,181
+TLJ27,West Sussex (South West),TLJ27,West Sussex (South West),182
+TLJ28,West Sussex (North East),TLJ28,West Sussex (North East),183
+TLJ31,Portsmouth,TLJ31,Portsmouth,184
+TLJ32,Southampton,TLJ32,Southampton,185
+TLJ34,Isle of Wight,TLJ34,Isle of Wight,186
+TLJ35,South Hampshire,TLJ35,South Hampshire,187
+TLJ36,Central Hampshire,TLJ36,Central Hampshire,188
+TLJ37,North Hampshire,TLJ37,North Hampshire,189
+TLJ41,Medway,TLJ41,Medway,190
+TLJ43,Kent Thames Gateway,TLJ43,Kent Thames Gateway,191
+TLJ44,East Kent,TLJ44,East Kent,192
+TLJ45,Mid Kent,TLJ45,Mid Kent,193

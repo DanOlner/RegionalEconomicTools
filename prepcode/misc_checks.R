@@ -4,6 +4,7 @@ library(nomisr)
 library(stringdist)
 library(sf)
 source('functions/misc_functions.R')
+source('functions/data_process_functions.R')
 
 options(scipen = 99)
 
@@ -1151,9 +1152,507 @@ unique(itl3$SIC07_code)[!unique(itl3$SIC07_code) %in% unique(itl2$SIC07_code)]
 
 
 
-# Look for advanced sectors in 5 digits----
+# RECHECK HARMONISING BRES DATA FOR 2023: 1. MAKING A BESPOKE SIC LOOKUP----
+
+#Goals: given new SIC and ITL 2025 categories in the latest GVA data
+#How best to link with the latest BRES (which still uses ITL 2021 as latest
+#and also NUTS prior to that, which doesn't match either).
+
+#I may have been overcomplicating it / think I can reduce the stages
+#Am doing this for July 2025 Bradford project, so will focus on ITL3 level first
+
+#So - a simple approach (which I already used to get higher accuracy job counts from 5 digit values)
+#Is just to use the BRES 5 digit files and add a lookup to it.
+#Already easy for the basic SIC lookup. Let's see about adding a lookup for the newer GVA SIC categories.
+
+#Thus (also used in "BradfordExplore.R" for making treemaps etc.)
+# bres = read_csv("local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE428_internationalterritoriallevelslevel3asofJan2021_2_Fulltimeemployees_2022_2023_SIC_5DIGIT.csv") 
 
 SIClookup <- read_csv('data/SIClookup.csv')
+
+#Check 5 digit name match between lookup and BRES... tick!
+# table(unique(bradford.5digit.ft$SIC_5DIGIT_NAME) %in% unique(SIClookup$SIC_5DIGIT_NAME))
+
+#Join SIC lookup on 5 digit name
+#Keep 2 digit and section codes
+#May shorten names in a mo...
+ # bres <- bres %>%
+ #  left_join(
+ #    SIClookup %>% select(SIC_5DIGIT_NAME,SIC_2DIGIT_NAME,SIC_SECTION_NAME),
+ #    by = 'SIC_5DIGIT_NAME'
+ #  )
+
+#Now we just need 2023-GVA-specific sections and 2-digit
+#Will this function still work, I wonder?
+
+#Let's get ITL3 current price file
+gva <- read_csv('data/regionalGVA/regionalGVA_currentprices_ITL3_SIC_2DIGIT_LONG_2023.csv')
+
+#47 categories (88 in the full list)
+unique(gva$SIC07_description)
+
+#87 here - what's missing?
+chk <- make.GVA.SICs.long(gva)
+#Activities of extraterritorial... is the missing one
+#That's not in the GVA data, which is that's missing...
+#However, it IS in the SIC lookup (as it should be) so make this one GVA and BRES specific
+SIClookup$SIC_2DIGIT_NAME[!SIClookup$SIC_2DIGIT_CODE_NUMERIC %in% chk$SIC07_code_numeric]
+
+#sanity check... tick
+# table(gva$SIC07_code %in% chk$SIC07_code_fromGVAdata)
+
+#There's code combine_regGVA... that can map across all appropriate BRES files
+#But let's test first
+#Reminder of the goal: JUST MAKE A LOOKUP that can be merged into the BRES files
+#To then count up jobs by the GVA categories
+
+#So...
+#Err can I just confirm that all 1st 2 digits of 5 digit values match the two digit ones?
+#Tick. So actually we only need that for matching / making GVA-specific lookup
+table(SIClookup$SIC_2DIGIT_CODE == str_sub(SIClookup$SIC_5DIGIT_CODE,1,2))
+table(SIClookup$SIC_3DIGIT_CODE == str_sub(SIClookup$SIC_5DIGIT_CODE,1,3))
+
+
+#We don't need to involve that 5 digit BRES file here at all.
+#We can match to the SIClookup and add in some more details to that instead
+#Maybe including the shortened names, if needed
+
+#They all match
+table(chk$SIC07_code_numeric %in% SIClookup$SIC_2DIGIT_CODE_NUMERIC)
+
+
+#So....
+SIClookup <- SIClookup %>% 
+  left_join(
+    chk %>% select(
+      SIC_2DIGIT_NAME_GVA2023 = SIC07_description, 
+      SIC_2DIGIT_CODE_GVA2023 = SIC07_code_fromGVAdata,
+      SIC_2DIGIT_CODE_NUMERIC = SIC07_code_numeric
+      ), by = 'SIC_2DIGIT_CODE_NUMERIC'
+  )
+
+#Mostly OK
+#Lack of an 'imputed rent' category to match against in that full list
+#That shouldn't matter for this job but keep an eye on
+#TODO: check on missing imputed rent in SIC lookup (possibly just add in manually, it's just one row)
+
+
+
+
+#Can we just repeat the same process for sections (minus imputed rent)?
+gva <- read_csv('data/regionalGVA/regionalGVA_currentprices_ITL3_SIC_SECTION_MINUSimputedrent_LONG_2023.csv')
+
+#18 categories (21 in the full list including extrat)
+unique(gva$SIC07_description)
+
+#87 again - right number to match against
+chk <- make.GVA.SICs.long(gva)
+
+SIClookup <- SIClookup %>% 
+  left_join(
+    chk %>% select(
+      SIC_SECTION_NAME_GVA2023 = SIC07_description, 
+      SIC_SECTION_CODE_GVA2023 = SIC07_code_fromGVAdata,
+      SIC_2DIGIT_CODE_NUMERIC = SIC07_code_numeric
+    ), by = 'SIC_2DIGIT_CODE_NUMERIC'
+  )
+
+#tick
+# unique(SIClookup$SIC_SECTION_NAME_GVA2023)
+
+#OK - can now join this to BRES 2023 to count up jobs by sector groupings in GVA 2023
+#Just then need to do the geographies
+#Keep
+write_csv(SIClookup,'data/SIClookup_forBRES_REGIONALGVA_2023_JOIN.csv')
+
+
+
+
+# AND MAKING NUTS3/ITL3 2021/2025 HARMONISER----
+
+#Or something appromimating that
+#Start by just looking at what categories we have in our 3 data sources
+#2 are BRES:
+#NUTS3 from 2015 to 2022
+#ITL3 2021 from 2022 to 2023
+#Then the 2023 GVA data, which uses ITL3 2025
+
+bres.nuts <- read_csv("local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE437_nuts2016level3_2_Fulltimeemployees_2015_2022_SIC_5DIGIT.csv")
+
+#Why is that missing some geog codes?
+#Hmm - missing for some years?
+#UPDATE: NOT THE CASE IN FULL TIME EMPLOYEES, IS TRUE FOR PART TIME. WHY?
+bres.nuts.unique <- bres.nuts %>% 
+  select(GEOGRAPHY_CODE,GEOGRAPHY_NAME) %>% 
+  distinct()
+
+
+#Then ITL3 2021
+bres.itl3 <- read_csv("local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE428_internationalterritoriallevelslevel3asofJan2021_2_Fulltimeemployees_2022_2023_SIC_5DIGIT.csv")
+
+bres.itl3.unique <- bres.itl3 %>% 
+  select(GEOGRAPHY_CODE,GEOGRAPHY_NAME) %>% 
+  distinct()
+
+#So: nuts2016 and ITL3 2021 have the SAME NUMBER CODE for ones that do match
+
+#Ah yes, reminder: the only difference here is:
+#ITL3 has "Bournemouth, Christchurch and Poole"
+#NUTS3 is "Bournemouth and Poole"
+#Christchurch moved from Dorset into the B+P zone for ITL3
+
+#Previous solution was to replace all those with the higher ITL2 zone
+#Since I'm getting this done a little quickly right now for Bradford comparison, might just drop them
+
+
+#ITL3 2025 is going to be the more exciting issue!
+#lLready loaded in previous section
+gva.itl32025.unique <- gva %>% 
+  select(ITL_code,Region_name) %>% 
+  distinct()
+
+#Unlike the Christchurch issue, I think every change is nested
+#Which means summing job counts should be possible
+#There is a lookup...
+#Note there's also a shapefile, which we may need
+#https://geoportal.statistics.gov.uk/datasets/itl-level-3-2021-to-itl-level-3-2025-lookup-in-the-uk/explore
+itl.lookup <- read_csv('data/ITL_Level_3_(2021)_to_ITL_Level_3_(2025)_Lookup_in_the_UK.csv')
+
+length(unique(itl.lookup$ITL321CD))
+length(unique(itl.lookup$ITL325CD))
+
+#Which differ?
+itl.lookup$ITL325NM[!itl.lookup$ITL325NM %in% itl.lookup$ITL321NM]
+
+#Ah OK - it goes in both directions
+#E.g. highlands/islands in 2025 combines 7 2021 zones into 1
+#So would involve some summing in both BRES and GVA to get match
+
+#Separate out ones with more in 2021 (2025 combined them in some way)
+#And more in 2025 (2025 separated them out e.g. BDR went into separate places)
+
+separatedintosmaller.2025 <- itl.lookup %>% 
+  group_by(ITL321NM) %>% 
+  summarise(count = n(), ITL321CD = max(ITL321CD)) %>%
+  filter(count > 1)
+
+combinedintolarger.2025 <- itl.lookup %>% 
+  group_by(ITL325NM) %>% 
+  summarise(count = n(), ITL325CD = max(ITL325CD)) %>%
+  filter(count > 1)
+
+#East Dunbartonshire, West Dunbartonshire, and Helensburgh and Lomond
+#Is I think the only one that gets split into two - 
+#Helensburgh and Lomond end up in "highlands and islands"
+#The rest tesselate.
+
+#Though let's double check that...
+itl.lookup %>% filter(ITL321NM %in% separatedintosmaller.2025$ITL321NM) %>% View
+
+#Ah no, also split:
+#Camden and City of London - now Westminster and City of London
+#Westminster was separate in 2021
+
+
+
+
+
+#And reminder: for chained volume - CANNOT SUM GVA FIGURES FROM SMALLER GEOGS
+#So would have to revert to picking the nearest shared ITL2 and replacing
+#Or bigger if overlap with more than one ITL2...
+
+#Lack of consistency acros time is...!!!!
+
+#Let's just pick out scots changes
+alldiffs <- itl.lookup$ITL325NM[!itl.lookup$ITL325NM %in% itl.lookup$ITL321NM]
+
+scotsdiffs <- alldiffs[qg('cumber|westmo|highlands|dunbar|ayr',alldiffs)]
+
+#Ah hang on, we do also have a 2021 ITL that got split up across two others as well
+#So the changes don't perfectly nest
+itl.lookup %>% filter(ITL325NM %in% scotsdiffs) %>% select(ITL325NM,ITL321NM) %>% View
+
+
+
+#Check ITL3 2021 and NUTS matches on the number code
+#How many have same number code / does it just leave Bournemouth etc?
+bres.itl3.unique <- bres.itl3.unique %>% 
+  mutate(code_numbers = str_sub(GEOGRAPHY_CODE,-2,-1))
+
+bres.nuts.unique <- bres.nuts.unique %>% 
+  mutate(code_numbers = str_sub(GEOGRAPHY_CODE,-2,-1))
+
+bres.comparison <- bres.itl3.unique %>% 
+  rename(GEOGRAPHY_CODE_ITL32021 = GEOGRAPHY_CODE, GEOGRAPHY_NAME_ITL32021 = GEOGRAPHY_NAME) %>% 
+  left_join(
+    bres.nuts.unique %>% 
+      rename(GEOGRAPHY_CODE_NUTS = GEOGRAPHY_CODE, GEOGRAPHY_NAME_NUTS = GEOGRAPHY_NAME)
+  )
+
+#Nope that doesn't work!
+#This site says there's a lookup, I've not managed to find it
+#https://www.ons.gov.uk/aboutus/whatwedo/programmesandprojects/europeancitystatistics
+
+#can't find existing NUTS/ITL2021 lookup
+#I did already do this by manually tweaking non matching names...
+
+
+#But let's just remind myself what we're aiming for here:
+#Partial/most places matches to have GVA and jobs counts values
+#for ITL3 2025 zones, so we can get GVA per FT job
+
+#BRES NUTS and BRES ITL3 2021 I can do full match, will just be missing Dorset
+#Check name match as is
+table(bres.nuts.unique$GEOGRAPHY_NAME %in% bres.itl3.unique$GEOGRAPHY_NAME)
+
+#Non match names...
+bres.nuts.unique$GEOGRAPHY_NAME[!bres.nuts.unique$GEOGRAPHY_NAME %in% bres.itl3.unique$GEOGRAPHY_NAME]
+bres.itl3.unique$GEOGRAPHY_NAME[!bres.itl3.unique$GEOGRAPHY_NAME %in% bres.nuts.unique$GEOGRAPHY_NAME]
+
+#Yeah I think I already manually fixed that... (tho possibly in the wrong direction but shouldn't matter)
+#Here: https://github.com/DanOlner/RegionalEconomicTools/blob/3188a0d1716e1d3498454c3f00e0c11e36bfae08/prepcode/combine_regGVA_and_BRES.R#L220 
+
+#Update the ITL3 zone names
+bres.itl3.unique.tweaknames <- bres.itl3.unique %>% 
+  mutate(
+    GEOGRAPHY_NAME = gsub(' CC','',GEOGRAPHY_NAME),
+    GEOGRAPHY_NAME = case_when(
+      GEOGRAPHY_NAME == "Inverness and Nairn, Moray, and Badenoch and Strathspey" ~ "Inverness & Nairn and Moray, Badenoch & Strathspey",
+      GEOGRAPHY_NAME == 'Caithness and Sutherland, and Ross and Cromarty' ~ 'Caithness & Sutherland and Ross & Cromarty',
+      GEOGRAPHY_NAME == 'Lochaber, Skye and Lochalsh, Arran and Cumbrae, and Argyll and Bute' ~ 'Lochaber, Skye & Lochalsh, Arran & Cumbrae and Argyll & Bute',
+      GEOGRAPHY_NAME == 'Na h-Eileanan Siar' ~ 'Na h-Eileanan Siar (Western Isles)',
+      GEOGRAPHY_NAME == 'City of Edinburgh' ~ 'Edinburgh, City of',
+      GEOGRAPHY_NAME == 'Perth and Kinross, and Stirling' ~ 'Perth & Kinross and Stirling',
+      GEOGRAPHY_NAME == 'East Dunbartonshire, West Dunbartonshire, and Helensburgh and Lomond' ~ 'East Dunbartonshire, West Dunbartonshire and Helensburgh & Lomond',
+      GEOGRAPHY_NAME == 'Inverclyde, East Renfrewshire, and Renfrewshire' ~ 'Inverclyde, East Renfrewshire and Renfrewshire',
+      GEOGRAPHY_NAME == 'Dumfries and Galloway' ~ 'Dumfries & Galloway',
+      .default = GEOGRAPHY_NAME
+    ))
+
+bres.nuts.unique$GEOGRAPHY_NAME[!bres.nuts.unique$GEOGRAPHY_NAME %in% bres.itl3.unique.tweaknames$GEOGRAPHY_NAME]
+bres.itl3.unique.tweaknames$GEOGRAPHY_NAME[!bres.itl3.unique.tweaknames$GEOGRAPHY_NAME %in% bres.nuts.unique$GEOGRAPHY_NAME]
+
+#Also need CCs removing from the nuts ones...
+bres.nuts.unique.tweaknames <- bres.nuts.unique %>% 
+  mutate(GEOGRAPHY_NAME = gsub(' CC','',GEOGRAPHY_NAME))
+
+#THERE, FULL MATCH APART FROM ALTERED BOURNEMOUTH GEOG
+bres.nuts.unique.tweaknames$GEOGRAPHY_NAME[!bres.nuts.unique.tweaknames$GEOGRAPHY_NAME %in% bres.itl3.unique.tweaknames$GEOGRAPHY_NAME]
+bres.itl3.unique.tweaknames$GEOGRAPHY_NAME[!bres.itl3.unique.tweaknames$GEOGRAPHY_NAME %in% bres.nuts.unique.tweaknames$GEOGRAPHY_NAME]
+
+
+
+#So we can make a consistent NUTS3/ITL3 across those two BRES files now
+#Before messing with ITL3 2025 at all
+
+#Make lookup first, then can keep from both
+#Do full join so we can see the bournemouth difference
+nuts3.itl321.lookup <- bres.nuts.unique.tweaknames %>% 
+  select(GEOGRAPHY_NAME,GEOGRAPHY_CODE_NUTS2018 = GEOGRAPHY_CODE) %>% 
+  full_join(
+    bres.itl3.unique.tweaknames %>% select(GEOGRAPHY_NAME,GEOGRAPHY_CODE_ITL321 = GEOGRAPHY_CODE),
+    by = 'GEOGRAPHY_NAME'
+  )
+
+#Save! 
+write_csv(nuts3.itl321.lookup, 'data/NUTS3_2018_v_ITL3_2021_lookup.csv')
+
+
+
+
+#So let's make a 2015-2023 ITL321 focused BRES df from that
+#Should really matter which way we do this but...
+
+#Merge in NUTS3 code lookup to connect
+# bres.itl3 <- bres.itl3 %>% 
+#   left_join(
+#     nuts3.itl321.lookup %>% select(GEOGRAPHY_CODE_NUTS2018,GEOGRAPHY_CODE = GEOGRAPHY_CODE_ITL321),
+#     by = 'GEOGRAPHY_CODE'
+#   )
+# 
+# table(!is.na(bres.itl3$GEOGRAPHY_CODE_NUTS2018))  
+# 
+# #Non-matches should just be bournemouth... tick
+# unique(bres.itl3$GEOGRAPHY_NAME[is.na(bres.itl3$GEOGRAPHY_CODE_NUTS2018)])
+
+#OH YES, ORDER WILL MATTER
+#We want to keep ITL3 2021 codes in both
+#So we can then use the 21-25 lookup after for GVA
+
+#Then we can just row bind them once all columns match...
+bres.nuts <- bres.nuts %>%
+  left_join(
+    nuts3.itl321.lookup %>% select(GEOGRAPHY_CODE_ITL321,GEOGRAPHY_CODE = GEOGRAPHY_CODE_NUTS2018),
+    by = 'GEOGRAPHY_CODE'
+  ) %>% 
+  rename(GEOGRAPHY_CODE_NUTS2018 = GEOGRAPHY_CODE) %>% 
+  relocate(GEOGRAPHY_CODE_ITL321, .before = GEOGRAPHY_CODE_NUTS2018)
+
+table(!is.na(bres.nuts$GEOGRAPHY_CODE_ITL321))
+
+#Non-matches should just be bournemouth... tick
+unique(bres.nuts$GEOGRAPHY_NAME[is.na(bres.nuts$GEOGRAPHY_CODE_ITL321)])
+
+
+#Keep the two different code names in, to keep code differences clear
+#Esp useful when then introducing third round of different geographies!
+bres.itl3 <- bres.itl3 %>% 
+  rename(GEOGRAPHY_CODE_ITL321 = GEOGRAPHY_CODE) %>% 
+  mutate(GEOGRAPHY_CODE_NUTS2018 = NA)
+
+#Then check names now match... tick
+table(names(bres.nuts) %in% names(bres.itl3))
+
+#stack on top of each other!
+bres15to23 <- bind_rows(bres.itl3,bres.nuts) 
+
+
+#Names aren't all entirely consistent - small hack, replace names from one source
+bres15to23 <- bres15to23 %>% 
+  select(-GEOGRAPHY_NAME) %>% 
+  left_join(
+    bres.itl3 %>% select(GEOGRAPHY_CODE_ITL321,GEOGRAPHY_NAME) %>% distinct(),
+    by = 'GEOGRAPHY_CODE_ITL321'
+  )
+
+
+#Confirm itl3 codes all there (minus bournemouth for the earlier years...)
+#Tick
+table(!is.na(bres15to23$GEOGRAPHY_CODE_ITL321))
+unique(bres15to23$GEOGRAPHY_NAME[is.na(bres15to23$GEOGRAPHY_CODE_ITL321)])
+
+
+#Save in same place with similar name
+write_csv(bres15to23,"local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_NUTS3_n_ITL321_stacked_2_Fulltimeemployees_2015_2023_SIC_5DIGIT.csv")
+
+
+
+
+# NEXT: create a version that uses as much of the gva ITL3 2025 as we can link to
+#Which might include some summing of GVA - if we're using current prices
+#Or some substituting for larger geographies, if chained volume e.g. SY for Shef + BDR
+
+#Not worrying about the SIC summations at the mo, let's just check on geographies...
+
+#Also - see above for separatedintosmaller.2025
+#Two places get shifted around in ways that don't tesselate - best drop those for now
+#For the rest - if using current prices - we can use this list to sum GVA
+#To make a slightly reduced ITL list
+
+#So - get gva for that bespoke 2 digit SIC list
+gva.2digit <- read_csv('data/regionalGVA/regionalGVA_currentprices_ITL3_SIC_2DIGIT_LONG_2023.csv')
+
+#Remove places that combined in 2025
+gva.2digit <- gva.2digit %>% 
+  filter(!ITL_code %in% combinedintolarger.2025$ITL325CD)
+
+#This will mean we get no "multiple matches" warning here
+#One place per code
+#But will need to remove a couple that split across places...
+#Merge in 2025 ITL codes
+gva.2digit <- gva.2digit %>% 
+  left_join(
+    itl.lookup %>% select(ITL321CD,ITL321NM,ITL_code = ITL325CD),#Will need names to keep
+    by = 'ITL_code'
+  )
+
+#Remove the two overlap ones (see above)
+gva.2digit <- gva.2digit %>% 
+  filter(!qg('city of lon|camden|East Dunbartonshire and West Dunbartonshire',Region_name))
+
+
+
+#AT THIS POINT, WE COULD REMOVE THOSE OTHERS, OR REPLACE LARGER AREAS FROM THE ITL2 DATA FOR CV
+#But for current prices - we can total up the GVA
+gva.2digit.sumplaces <- gva.2digit %>% 
+  group_by(ITL321CD,year,SIC07_code) %>% 
+  summarise(
+    value = sum(value),
+    Region_name = max(ITL321NM),
+    SIC07_description = max(SIC07_description)
+    )
+
+#OK, that's our best-for-now GVA 2 digit file that can match against BRES
+#Save
+write_csv(gva.2digit.sumplaces,'data/regionalGVA/regionalGVA_currentprices_COMBINED_ITL21_N_25_TO_MATCH_BRES2023_SIC_2DIGIT_LONG_2023.csv')
+
+
+
+# CHECKS ON BRES15TO23 AND BESPOKE GVA CURRENT PRICES BEFORE COMBINING IN NEXT STAGE
+
+#Check we now have geography match
+table(unique(bres15to23$GEOGRAPHY_CODE_ITL321) %in% gva.2digit.sumplaces$ITL321CD)
+table(unique(gva.2digit.sumplaces$ITL321CD) %in% bres15to23$GEOGRAPHY_CODE_ITL321)
+
+#Nom matches still christchurch, yes?
+unique(bres15to23$GEOGRAPHY_NAME)[!unique(bres15to23$GEOGRAPHY_CODE_ITL321) %in% gva.2digit.sumplaces$ITL321CD]
+unique(gva.2digit.sumplaces$Region_name)[!unique(gva.2digit.sumplaces$ITL321CD) %in% bres15to23$GEOGRAPHY_CODE_ITL321]
+
+
+#We now need to apply the BRES job summing to the bespoke GVA 2 digit categories
+#Use lookup made earlier!
+
+#Link to BRES, count jobs by GVA 2 digit SIC categories
+#May want to repeat for sections 
+# x <- bres15to23 %>% 
+bres15to23 <- bres15to23 %>% 
+  left_join(
+    SIClookup %>% select(SIC_5DIGIT_CODE,SIC_2DIGIT_CODE_GVA2023),
+    by = 'SIC_5DIGIT_CODE'
+  )
+
+#check - is just extrat, we don't want anyway
+table(!is.na(bres15to23$SIC_2DIGIT_CODE_GVA2023))
+bres15to23 %>% filter(is.na(SIC_2DIGIT_CODE_GVA2023)) %>% View
+
+bres15to23 <- bres15to23 %>% 
+  filter(!is.na(SIC_2DIGIT_CODE_GVA2023))
+
+#confirm correct GVA 2 digit count...
+length(unique(bres15to23$SIC_2DIGIT_CODE_GVA2023))
+length(unique(gva.2digit.sumplaces$SIC07_code))
+
+#No imputed rent match - again, fine, is meaningless for job count
+#Has already been removed via joins
+unique(gva.2digit.sumplaces$SIC07_code)[!unique(gva.2digit.sumplaces$SIC07_code) %in% unique(bres15to23$SIC_2DIGIT_CODE_GVA2023)]
+
+
+
+#Right - can now sum job counts by the bespoke 2 digit SICs
+bres15to23.gva2digitSICs <- bres15to23 %>% 
+  group_by(DATE,GEOGRAPHY_CODE_ITL321,SIC_2DIGIT_CODE_GVA2023) %>% 
+  summarise(
+    JOBCOUNT = sum(JOBCOUNT)
+    ) %>% 
+  ungroup()
+
+
+#I think we might finally be ready to join to the 2 digit 2023 GVA...
+bres.gva.2digit.2023 <- bres15to23.gva2digitSICs %>% 
+  inner_join(
+    gva.2digit.sumplaces,
+    by = c('DATE' = 'year','GEOGRAPHY_CODE_ITL321' = 'ITL321CD','SIC_2DIGIT_CODE_GVA2023' = 'SIC07_code')
+  ) %>% 
+  rename(GVA = value)
+
+
+#Why some NA job counts?
+#I think the issue with the missing values is just early years with no agri data...
+bres.gva.2digit.2023 %>% filter(is.na(JOBCOUNT)) %>% View
+
+
+#OK... SAAAAVE
+write_csv(bres.gva.2digit.2023,'data/regionalGVA_plus_BRESjobcounts/regionalGVA_currentprices_BRES_FT_jobcount_bespoke2digitSIC_nONLY_MATCHING_GEOGs_2015_2023.csv')
+
+saveRDS(bres.gva.2digit.2023,'data/regionalGVA_plus_BRESjobcounts/regionalGVA_currentprices_BRES_FT_jobcount_bespoke2digitSIC_nONLY_MATCHING_GEOGs_2015_2023.rds')
+
+
+
+
+
+
+
+
 
 
 

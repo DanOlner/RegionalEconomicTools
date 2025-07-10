@@ -1,0 +1,170 @@
+GEOGRAPHY_NAME,GEOGRAPHY_CODE_NUTS2018,GEOGRAPHY_CODE_ITL321
+Hartlepool and Stockton-on-Tees,UKC11,TLC11
+South Teesside,UKC12,TLC12
+Darlington,UKC13,TLC13
+Durham,UKC14,TLC14
+Northumberland,UKC21,TLC21
+Tyneside,UKC22,TLC22
+Sunderland,UKC23,TLC23
+West Cumbria,UKD11,TLD11
+East Cumbria,UKD12,TLD12
+Manchester,UKD33,TLD33
+Greater Manchester South West,UKD34,TLD34
+Greater Manchester South East,UKD35,TLD35
+Greater Manchester North West,UKD36,TLD36
+Greater Manchester North East,UKD37,TLD37
+Blackburn with Darwen,UKD41,TLD41
+Blackpool,UKD42,TLD42
+Lancaster and Wyre,UKD44,TLD44
+Mid Lancashire,UKD45,TLD45
+East Lancashire,UKD46,TLD46
+Chorley and West Lancashire,UKD47,TLD47
+Warrington,UKD61,TLD61
+Cheshire East,UKD62,TLD62
+Cheshire West and Chester,UKD63,TLD63
+East Merseyside,UKD71,TLD71
+Liverpool,UKD72,TLD72
+Sefton,UKD73,TLD73
+Wirral,UKD74,TLD74
+"Kingston upon Hull, City of",UKE11,TLE11
+East Riding of Yorkshire,UKE12,TLE12
+North and North East Lincolnshire,UKE13,TLE13
+York,UKE21,TLE21
+North Yorkshire,UKE22,TLE22
+"Barnsley, Doncaster and Rotherham",UKE31,TLE31
+Sheffield,UKE32,TLE32
+Bradford,UKE41,TLE41
+Leeds,UKE42,TLE42
+Calderdale and Kirklees,UKE44,TLE44
+Wakefield,UKE45,TLE45
+Derby,UKF11,TLF11
+East Derbyshire,UKF12,TLF12
+South and West Derbyshire,UKF13,TLF13
+Nottingham,UKF14,TLF14
+North Nottinghamshire,UKF15,TLF15
+South Nottinghamshire,UKF16,TLF16
+Leicester,UKF21,TLF21
+Leicestershire and Rutland,UKF22,TLF22
+West Northamptonshire,UKF24,TLF24
+North Northamptonshire,UKF25,TLF25
+Lincolnshire,UKF30,TLF30
+"Herefordshire, County of",UKG11,TLG11
+Worcestershire,UKG12,TLG12
+Warwickshire,UKG13,TLG13
+Telford and Wrekin,UKG21,TLG21
+Shropshire,UKG22,TLG22
+Stoke-on-Trent,UKG23,TLG23
+Staffordshire,UKG24,TLG24
+Birmingham,UKG31,TLG31
+Solihull,UKG32,TLG32
+Coventry,UKG33,TLG33
+Dudley,UKG36,TLG36
+Sandwell,UKG37,TLG37
+Walsall,UKG38,TLG38
+Wolverhampton,UKG39,TLG39
+Peterborough,UKH11,TLH11
+Cambridgeshire,UKH12,TLH12
+Suffolk,UKH14,TLH14
+Norwich and East Norfolk,UKH15,TLH15
+North and West Norfolk,UKH16,TLH16
+Breckland and South Norfolk,UKH17,TLH17
+Luton,UKH21,TLH21
+Hertfordshire,UKH23,TLH23
+Bedford,UKH24,TLH24
+Central Bedfordshire,UKH25,TLH25
+Southend-on-Sea,UKH31,TLH31
+Thurrock,UKH32,TLH32
+Essex Haven Gateway,UKH34,TLH34
+West Essex,UKH35,TLH35
+Heart of Essex,UKH36,TLH36
+Essex Thames Gateway,UKH37,TLH37
+Camden and City of London,UKI31,TLI31
+Westminster,UKI32,TLI32
+Kensington & Chelsea and Hammersmith & Fulham,UKI33,TLI33
+Wandsworth,UKI34,TLI34
+Hackney and Newham,UKI41,TLI41
+Tower Hamlets,UKI42,TLI42
+Haringey and Islington,UKI43,TLI43
+Lewisham and Southwark,UKI44,TLI44
+Lambeth,UKI45,TLI45
+Bexley and Greenwich,UKI51,TLI51
+Barking & Dagenham and Havering,UKI52,TLI52
+Redbridge and Waltham Forest,UKI53,TLI53
+Enfield,UKI54,TLI54
+Bromley,UKI61,TLI61
+Croydon,UKI62,TLI62
+"Merton, Kingston upon Thames and Sutton",UKI63,TLI63
+Barnet,UKI71,TLI71
+Brent,UKI72,TLI72
+Ealing,UKI73,TLI73
+Harrow and Hillingdon,UKI74,TLI74
+Hounslow and Richmond upon Thames,UKI75,TLI75
+Berkshire,UKJ11,TLJ11
+Milton Keynes,UKJ12,TLJ12
+Buckinghamshire,UKJ13,TLJ13
+Oxfordshire,UKJ14,TLJ14
+Brighton and Hove,UKJ21,TLJ21
+East Sussex,UKJ22,TLJ22
+West Surrey,UKJ25,TLJ25
+East Surrey,UKJ26,TLJ26
+West Sussex (South West),UKJ27,TLJ27
+West Sussex (North East),UKJ28,TLJ28
+Portsmouth,UKJ31,TLJ31
+Southampton,UKJ32,TLJ32
+Isle of Wight,UKJ34,TLJ34
+South Hampshire,UKJ35,TLJ35
+Central Hampshire,UKJ36,TLJ36
+North Hampshire,UKJ37,TLJ37
+Medway,UKJ41,TLJ41
+Kent Thames Gateway,UKJ43,TLJ43
+East Kent,UKJ44,TLJ44
+Mid Kent,UKJ45,TLJ45
+West Kent,UKJ46,TLJ46
+"Bristol, City of",UKK11,TLK11
+"Bath and North East Somerset, North Somerset and South Gloucestershire",UKK12,TLK12
+Gloucestershire,UKK13,TLK13
+Swindon,UKK14,TLK14
+Wiltshire,UKK15,TLK15
+Bournemouth and Poole,UKK21,NA
+Dorset,UKK22,TLK25
+Somerset,UKK23,TLK23
+Cornwall and Isles of Scilly,UKK30,TLK30
+Plymouth,UKK41,TLK41
+Torbay,UKK42,TLK42
+Devon,UKK43,TLK43
+Isle of Anglesey,UKL11,TLL11
+Gwynedd,UKL12,TLL12
+Conwy and Denbighshire,UKL13,TLL13
+South West Wales,UKL14,TLL14
+Central Valleys,UKL15,TLL15
+Gwent Valleys,UKL16,TLL16
+Bridgend and Neath Port Talbot,UKL17,TLL17
+Swansea,UKL18,TLL18
+Monmouthshire and Newport,UKL21,TLL21
+Cardiff and Vale of Glamorgan,UKL22,TLL22
+Flintshire and Wrexham,UKL23,TLL23
+Powys,UKL24,TLL24
+Aberdeen City and Aberdeenshire,UKM50,TLM50
+Caithness & Sutherland and Ross & Cromarty,UKM61,TLM61
+"Inverness & Nairn and Moray, Badenoch & Strathspey",UKM62,TLM62
+"Lochaber, Skye & Lochalsh, Arran & Cumbrae and Argyll & Bute",UKM63,TLM63
+Na h-Eileanan Siar (Western Isles),UKM64,TLM64
+Orkney Islands,UKM65,TLM65
+Shetland Islands,UKM66,TLM66
+Angus and Dundee City,UKM71,TLM71
+Clackmannanshire and Fife,UKM72,TLM72
+East Lothian and Midlothian,UKM73,TLM73
+"Edinburgh, City of",UKM75,TLM75
+Falkirk,UKM76,TLM76
+Perth & Kinross and Stirling,UKM77,TLM77
+West Lothian,UKM78,TLM78
+"East Dunbartonshire, West Dunbartonshire and Helensburgh & Lomond",UKM81,TLM81
+Glasgow City,UKM82,TLM82
+"Inverclyde, East Renfrewshire and Renfrewshire",UKM83,TLM83
+North Lanarkshire,UKM84,TLM84
+Scottish Borders,UKM91,TLM91
+Dumfries & Galloway,UKM92,TLM92
+East Ayrshire and North Ayrshire mainland,UKM93,TLM93
+South Ayrshire,UKM94,TLM94
+South Lanarkshire,UKM95,TLM95
+"Bournemouth, Christchurch and Poole",NA,TLK24

@@ -79,4 +79,28 @@ fig = px.treemap(
 
 fig.show()
 
-#fig.write_html("docs/miscdocs/SYLAs_CompaniesHouse2025_treemap.html", full_html=True, include_plotlyjs="cdn")
+#fig.write_html("docs/miscdocs/WYLAs_CompaniesHouse2025_treemap.html", full_html=True, include_plotlyjs="cdn")
+
+
+
+
+
+# MULTIPLE LOCAL AUTHORITIES: BRES----
+
+#What we're testing here: using those same colours above to keep consistent SIC section colours across places in the same plot
+
+dflas = pd.read_csv("local/data/backup/count_output_las.csv")
+
+fig = px.treemap(
+    dflas,
+    path=['GEOGRAPHY_NAME','SIC_SECTION_NAME_SHORT', 'SIC_2DIGIT_NAME_SHORT', 'SIC_5DIGIT_NAME_SHORT'],
+    values='n',
+    color='SIC_SECTION_NAME_SHORT',
+    color_discrete_map=colour_map,
+    branchvalues='total'
+)
+
+fig.show()
+
+#fig.write_html("docs/miscdocs/WYLAs_BRES_treemap.html", full_html=True, include_plotlyjs="cdn")
+
