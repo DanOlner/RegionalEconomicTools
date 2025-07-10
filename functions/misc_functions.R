@@ -342,24 +342,25 @@ addplacename_to_LQplot <- function(df, plot_to_addto, placename, shapenumber=16,
     
     }
     
-    #Test for one of these missing, don't display if so
-    if(!(missing(min_LQ_all_time)|missing(max_LQ_all_time)) ){
-      
-      min_LQ_all_time <- enquo(min_LQ_all_time)
-      max_LQ_all_time <- enquo(max_LQ_all_time)
-      
-      plot_to_addto <- plot_to_addto +
-        geom_errorbar(
-          data = df %>% filter(!!region_name == placename),
-          aes(y = !!sector_name, xmin = !!min_LQ_all_time, xmax = !!max_LQ_all_time),
-          width = 0.1,
-          position = position_nudge(y = nudgepos)
-        )
-      
-    }
-    
     
   }
+  
+  #Test for one of these missing, don't display if so
+  if(!(missing(min_LQ_all_time)|missing(max_LQ_all_time)) ){
+    
+    min_LQ_all_time <- enquo(min_LQ_all_time)
+    max_LQ_all_time <- enquo(max_LQ_all_time)
+    
+    plot_to_addto <- plot_to_addto +
+      geom_errorbar(
+        data = df %>% filter(!!region_name == placename),
+        aes(y = !!sector_name, xmin = !!min_LQ_all_time, xmax = !!max_LQ_all_time),
+        width = 0.1,
+        position = position_nudge(y = nudgepos)
+      )
+    
+  }
+  
   
   return(plot_to_addto)
   

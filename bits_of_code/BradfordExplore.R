@@ -238,12 +238,282 @@ ch.la %>%
 
 
 
+
 # LQ PLOT BUT FOR GVA VS BRES JOBS VS CH JOBS OVERLAID FOR BRADFORD----
 
+#I've just done the BRES / GVA linking process in misc_checks.R
+#Here: https://github.com/DanOlner/RegionalEconomicTools/blob/b047d96d6513005c3947dcda2833881e3f7cd0eb/prepcode/misc_checks.R#L1155
+
+#Sooo. Can we stick both LQs for jobs and GVA on same plot for a place?
+#And possibly for CH in the last year too? (Maybe av jobs over that time)
+#CH would need to be point not trajectory
+
+#Let's get both and see
+#Note, we'll also be able to check sector proportion similarity betw BRES and CH
+#Though correlation of counts might be more useful?
+
+gvabres <- readRDS('data/regionalGVA_plus_BRESjobcounts/regionalGVA_currentprices_BRES_FT_jobcount_bespoke2digitSIC_nONLY_MATCHING_GEOGs_2015_2023.rds') %>% 
+  filter(!qg('households|agri', SIC07_description))
+
+shortsectornames <- read_csv('data/shortsectornames_for_regionalGVA_2digitSICs.csv')
+
+gvabres <- gvabres %>% 
+  left_join(
+    shortsectornames, by = 'SIC07_description'
+  )
+
+#Get two versions of LQ/proportions - job count and GVA
+gva.props <- gvabres %>% 
+  group_split(DATE) %>%
+  map(add_location_quotient_and_proportions,
+      regionvar = Region_name,
+      lq_var = SIC07_description_shortened,
+      valuevar = GVA) %>% 
+  bind_rows()
+
+job.props <- gvabres %>% 
+  group_split(DATE) %>%
+  map(add_location_quotient_and_proportions,
+      regionvar = Region_name,
+      lq_var = SIC07_description_shortened,
+      valuevar = JOBCOUNT) %>% 
+  bind_rows()
+
+
+#Can I combine these into a single df to be able to process in one place?
+#I can label each variable type and use that to split the plot
+
+#SO - keep just bradford, drop region name, replace with variable name, combine
+gva.props.bradford <- gva.props %>% 
+  filter(qg('Bradford',Region_name)) %>% 
+  mutate(varname = "GVA") %>% 
+  select(DATE,varname,SIC07_description_shortened,sector_regional_proportion,value = GVA,LQ,LQ_log)
+
+job.props.bradford <- job.props %>% 
+  filter(qg('Bradford',Region_name)) %>% 
+  mutate(varname = "JOBCOUNT") %>% 
+  select(DATE,varname,SIC07_description_shortened,sector_regional_proportion,value = JOBCOUNT,LQ,LQ_log)
+
+#Should have same col names now... tick
+table(names(gva.props.bradford) == names(job.props.bradford))
+
+props.combo <- bind_rows(gva.props.bradford,job.props.bradford)
+
+
+#Make calcs for trajectory
+LQ_slopes <- compute_slope_or_zero(
+  data = props.combo, 
+  varname, SIC07_description_shortened,#slopes will be found within whatever grouping vars are added here
+  y = LQ_log, x = DATE)
+
+
+#Filter down to a single year... we may want to smooth years, let's see
+yeartoplot <- props.combo %>% filter(DATE == max(DATE))#use latest year
+
+#Add slopes into data to get LQ plots
+yeartoplot <- yeartoplot %>% 
+  left_join(
+    LQ_slopes,
+    by = c('varname', 'SIC07_description_shortened')
+  )
+
+#Get min/max values for LQ over time as well, for each sector and place, to add as bars so range of sector is easy to see
+minmaxes <- props.combo %>% 
+  group_by(varname, SIC07_description_shortened) %>% 
+  summarise(
+    min_LQ_all_time = min(LQ),
+    max_LQ_all_time = max(LQ)
+  )
+
+#Join min and max
+yeartoplot <- yeartoplot %>% 
+  left_join(
+    minmaxes,
+    by = c('varname', 'SIC07_description_shortened')
+  )
+
+
+
+sectorLQorder <- props.combo %>% filter(
+  DATE == max(DATE)#use latest data
+) %>% 
+  select(varname, SIC07_description_shortened, LQ) %>% 
+  pivot_wider(names_from = varname, values_from = LQ) %>% 
+  mutate(LQdiff = abs(GVA-JOBCOUNT)) %>%
+  arrange(-LQdiff) %>% 
+  select(SIC07_description_shortened) %>% 
+  pull()
+
+
+#Turn the sector column into a factor and order by LCR's LQs
+yeartoplot$SIC07_description_shortened <- factor(yeartoplot$SIC07_description_shortened, levels = sectorLQorder, ordered = T)
+
+#If I could plot both and space them out, that would be good (could get Bradford change showing too)
+p <- LQ_baseplot(df = yeartoplot, alpha = 0, sector_name = SIC07_description_shortened, 
+                 LQ_column = LQ, change_over_time = slope)
+
+p <- addplacename_to_LQplot(df = yeartoplot, plot_to_addto = p, 
+                            placename = 'GVA', shapenumber = 23,
+                            min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
+                            value_column = value, sector_regional_proportion = sector_regional_proportion,
+                            region_name = varname,
+                            sector_name = SIC07_description_shortened, change_over_time = slope, LQ_column = LQ,
+                            nudgepos = -0.1, text = 7)
+
+
+
+p <- addplacename_to_LQplot(df = yeartoplot, plot_to_addto = p,
+                            placename = 'JOBCOUNT', shapenumber = 16,
+                            min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
+                            # value_column = value, sector_regional_proportion = sector_regional_proportion,#include numbers
+                            region_name = varname,
+                            sector_name = SIC07_description_shortened, change_over_time = slope, LQ_column = LQ,
+                            nudgepos = 0.1, text = 7)
+p <- p + 
+  annotate(
+    "text",
+    label = "JOB COUNT in circles -->\nGVA in diamonds -->",
+    x = 0.2, y = sectorLQorder[which(qg('furnit',sectorLQorder))]
+  ) +
+  coord_cartesian(xlim = c(0.1,7))
+
+
+p 
 
 
 
 
+# GVA V JOBS RECTANGLE PLOT----
+
+# Example data
+df <- tibble::tibble(
+  sector = c("Manufacturing", "Services", "Construction", "Tech"),
+  gva = c(100, 200, 50, 80),
+  jobs = c(50, 300, 100, 40)
+)
+
+# Add x/y positions for rectangles
+df <- df %>%
+  mutate(xmin = cumsum(lag(gva, default = 0)),
+         xmax = xmin + gva,
+         ymin = 0,
+         ymax = jobs)
+
+ggplot(df) +
+  geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, fill = sector), color = "black") +
+  geom_text(aes(x = (xmin + xmax) / 2, y = (ymin + ymax) / 2, label = sector)) +
+  labs(x = "GVA", y = "Jobs", title = "Sectors by GVA and Jobs (Area = GVA × Jobs)") +
+  theme_minimal() +
+  guides(fill = F)
+
+
+
+
+#OK, apply to actual sector data
+#Get some consistent sector colours first
+n <- length(unique(gvabres$SIC07_description_shortened))
+set.seed(12)
+qual_col_pals = brewer.pal.info[brewer.pal.info$category == 'qual',]
+col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
+# pie(rep(1,n), col=sample(col_vector, n))
+
+# randomcols <- sample(col_vector, n)
+# n <- length(unique(itl3.sections.cv$SIC07_description))
+randomcols <- col_vector[10:(10+(n-1))]
+
+
+#Would also quite like to split manufacturing off
+#Check in orig GVA file for the codes...
+#This is the full list - some won't match but enough to label the correct ones at 2 digit for those that do
+productionsectors <- c(
+  'A-E',
+  'AB (1-9)',
+  'C (10-33)',
+  'CA (10-12)',
+  'CB (13-15)',
+  'CC (16-18)',
+  'CD-CG (19-23)',
+  'CH (24-25)',
+  'CI-CJ (26-27)',
+  'CK-CL (28-30)',
+  'CM (31-33)',
+  '31-32',
+  '33',
+  'DE (35-39)',
+  'F (41-43)',
+  '41',
+  '42',
+  '43'
+)
+
+#Yep
+table(productionsectors %in% gvabres$SIC_2DIGIT_CODE_GVA2023)
+unique(gvabres$SIC_2DIGIT_CODE_GVA2023)[unique(gvabres$SIC_2DIGIT_CODE_GVA2023) %in% productionsectors]
+
+#Label production sectors
+gvabres <- gvabres %>% 
+  mutate(
+    productionsector = ifelse(
+      SIC_2DIGIT_CODE_GVA2023 %in% productionsectors,
+      'production','other'
+    )
+  )
+
+
+
+place <- gvabres %>% 
+  filter(qg('bradford',Region_name), DATE == max(DATE))
+
+place <- gvabres %>% 
+  filter(qg('bradford',Region_name), DATE == max(DATE))
+
+#Sorts by actual order
+plot.df <- place %>%
+  arrange(GVA) %>% 
+  mutate(xmin = cumsum(lag(GVA, default = 0)),
+         xmax = xmin + GVA,
+         ymin = 0,
+         ymax = JOBCOUNT)
+
+ggplot(plot.df) +
+  geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, fill = SIC07_description_shortened), color = "black") +
+  geom_text(aes(x = (xmin + xmax) / 2, y = (ymin + ymax) / 2, label = SIC07_description_shortened)) +
+  labs(x = "GVA", y = "Job count", title = "Sectors by GVA and Jobs (Area = GVA × Jobs)") +
+  theme_minimal() +
+  scale_fill_manual(values = setNames(randomcols,unique(gvabres$SIC07_description_shortened))) +
+  guides(fill = F) +
+  coord_flip()
+
+
+
+#Multiple places?
+place <- gvabres %>% 
+  # filter(qg('sheffield|barnsley',Region_name), DATE == max(DATE))
+  filter(qg('bradford|kirkees|calderdale|wakefield|leeds',Region_name), DATE == max(DATE))
+
+#Sorts by actual order
+plot.df <- place %>%
+  # filter(productionsector == 'production') %>% 
+  # group_by(Region_name,productionsector) %>% 
+  group_by(Region_name) %>% 
+  arrange(-GVA) %>% 
+  mutate(xmin = cumsum(lag(GVA, default = 0)),
+         xmax = xmin + GVA,
+         ymin = 0,
+         ymax = JOBCOUNT) %>% 
+  ungroup()
+
+ggplot(plot.df) +
+  geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, fill = SIC07_description_shortened), color = "black", size =0.25) +
+  geom_text(aes(x = (xmin + xmax) / 2, y = (ymin + ymax) / 2, label = SIC07_description_shortened)) +
+  labs(x = "GVA", y = "Job count", title = "Sectors by GVA and Jobs (Area = GVA × Jobs)") +
+  # theme_minimal() +
+  scale_fill_manual(values = setNames(randomcols,unique(gvabres$SIC07_description_shortened))) +
+  guides(fill = F) +
+  coord_flip() +
+  # facet_wrap(~Region_name+productionsector, scales = 'free', ncol = 2)
+  facet_wrap(~Region_name, scales = 'free', ncol = 2)
+  # facet_wrap(~Region_name, ncol = 2)
 
 
 

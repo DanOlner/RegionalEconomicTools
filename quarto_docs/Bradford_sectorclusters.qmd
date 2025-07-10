@@ -201,6 +201,9 @@ shortsectornames = tibble(
   )
 )
 
+#save that for use elsewhere
+write_csv(shortsectornames, 'data/shortsectornames_for_regionalGVA_2digitSICs.csv')
+
 gvabres <- gvabres %>% 
   left_join(
     shortsectornames, by = 'SIC07_description'
