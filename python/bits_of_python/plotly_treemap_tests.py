@@ -5,8 +5,8 @@ import os
 os.chdir("/home/dano/Dropbox/YPERN/R/RegionalEcons_web")
 
 #test plotly
-fig = px.scatter(x=[1, 2, 3], y=[4, 5, 6])
-fig.show()
+#fig = px.scatter(x=[1, 2, 3], y=[4, 5, 6])
+#fig.show()
 
 #Load test count data output from R
 df = pd.read_csv("local/data/backup/count_output.csv")
@@ -66,7 +66,7 @@ fig.show()
 
 #What we're testing here: using those same colours above to keep consistent SIC section colours across places in the same plot
 
-dfch = pd.read_csv("local/data/plotly_dataexportsfromR/CH_count_output.csv")
+dfch = pd.read_csv("local/data/plotly_dataexportsfromR/CH_count_output_GMLAs.csv")
 
 fig = px.treemap(
     dfch,

@@ -1,5 +1,6 @@
 #Misc functions
 library(tidyverse)
+library(ggdist)
 
 if(!require(ggrepel)){
   install.packages("ggrepel")
@@ -262,6 +263,44 @@ LQ_baseplot <- function(df, alpha = 0.1, shape = 16, sector_name, LQ_column, cha
 }
   
 
+
+
+#Test version that shows other places' LQ as a distribution 
+# LQ_baseplot_dist <- function(df, alpha = 0.1, shape = 16, sector_name, LQ_column, change_over_time){
+#   
+#   sector_name <- enquo(sector_name)
+#   LQ_column <- enquo(LQ_column)
+#   change_over_time <- enquo(change_over_time)
+#   
+#   # p <- ggplot() +
+#   # geom_point(
+#   #   data = df %>% filter(!!change_over_time > 0), 
+#   #   aes(y = !!sector_name, x = !!LQ_column, size = !!change_over_time),
+#   #   alpha = alpha,
+#   #   shape = shape,
+#   #   colour = 'green'
+#   # ) +
+#   # geom_point(
+#   #   data = df %>% filter(!!change_over_time < 0), 
+#   #   aes(y = !!sector_name, x = !!LQ_column, size = !!change_over_time * -1),
+#   #   alpha = alpha,
+#   #   shape = shape,
+#   #   colour = 'red'
+#   # )  +
+#   # scale_size_continuous(range = c(1,17)) +
+#   # scale_x_continuous(trans = 'log10') +
+#   # geom_vline(xintercept = 1, colour = 'blue') +
+#   # guides(size = F) +
+#   # ylab("")
+#   
+#   p <- ggplot(df, aes(y = !!sector_name, x = !!LQ_column)) +
+#     stat_halfeye()
+#   
+#   return(p)
+# 
+# }
+#   
+
 #For LQ change plots, overlay another place on the base plot
 #It expects the following:
 #dataframe containing a region and sector column, where the sector column is an ordered factor, ordered before it gets here
@@ -272,12 +311,24 @@ LQ_baseplot <- function(df, alpha = 0.1, shape = 16, sector_name, LQ_column, cha
 #a column with min and max values to overlay as bars to indicate full range of the data
 addplacename_to_LQplot <- function(df, plot_to_addto, placename, shapenumber=16, backgroundcolour='black', add_gva = F, setalpha = 1,
                                    region_name, sector_name,change_over_time, value_column, LQ_column, sector_regional_proportion,
-                                   min_LQ_all_time,max_LQ_all_time, value_col_ismoney = T, nudgepos = 0, textx = 20){
+                                   min_LQ_all_time,max_LQ_all_time, value_col_ismoney = T, nudgepos = 0, textx = NULL){
   
   region_name <- enquo(region_name)  
   sector_name <- enquo(sector_name)
-  change_over_time <- enquo(change_over_time)
+  change_over_time <- enquo(change_over_time) 
   LQ_column <- enquo(LQ_column)
+  min_LQ_all_time <- enquo(min_LQ_all_time)
+  max_LQ_all_time <- enquo(max_LQ_all_time)
+  # 
+  
+  #Doing this here so value available for coord_cartesian at end
+  
+  #if textx position not supplied, set to distance from right
+  #If a negative value, subtract that amount from max LQ value
+  maxLQval = df %>% select(!!max_LQ_all_time) %>% filter(!!max_LQ_all_time == max(!!max_LQ_all_time)) %>% pull
+  # maxLQval = df %>% select(!!LQ_column) %>% filter(!!LQ_column == max(!!LQ_column)) %>% pull
+  # print(maxLQval)
+  
   
   plot_to_addto <- plot_to_addto +
     geom_point(
@@ -323,7 +374,7 @@ addplacename_to_LQplot <- function(df, plot_to_addto, placename, shapenumber=16,
     plot_to_addto <- plot_to_addto +  
       geom_text(
         data = df %>% filter(!!region_name == placename), 
-        aes(y = !!sector_name, x = textx, label = paste0('£',!!value_column,'M, ',round(!!sector_regional_proportion * 100, 2),'%')),
+        aes(y = !!sector_name, x = maxLQval * 2.7, label = paste0('£',!!value_column,'M, ',round(!!sector_regional_proportion * 100, 2),'%')),
         # nudge_x = 0.3, 
         hjust = 1, alpha = 0.7, size = 3,
         position = position_nudge(y = nudgepos)
@@ -334,7 +385,7 @@ addplacename_to_LQplot <- function(df, plot_to_addto, placename, shapenumber=16,
     plot_to_addto <- plot_to_addto +  
       geom_text(
         data = df %>% filter(!!region_name == placename), 
-        aes(y = !!sector_name, x = textx, label = paste0(!!value_column,', ',round(!!sector_regional_proportion * 100, 2),'%')),
+        aes(y = !!sector_name, x = maxLQval * 2.7, label = paste0(!!value_column,', ',round(!!sector_regional_proportion * 100, 2),'%')),
         # nudge_x = 0.3, 
         hjust = 1, alpha = 0.7, size = 3,
         position = position_nudge(y = nudgepos)
@@ -348,9 +399,9 @@ addplacename_to_LQplot <- function(df, plot_to_addto, placename, shapenumber=16,
   #Test for one of these missing, don't display if so
   if(!(missing(min_LQ_all_time)|missing(max_LQ_all_time)) ){
     
-    min_LQ_all_time <- enquo(min_LQ_all_time)
-    max_LQ_all_time <- enquo(max_LQ_all_time)
-    
+    # min_LQ_all_time <- enquo(min_LQ_all_time)
+    # max_LQ_all_time <- enquo(max_LQ_all_time)
+    # 
     plot_to_addto <- plot_to_addto +
       geom_errorbar(
         data = df %>% filter(!!region_name == placename),
@@ -361,6 +412,8 @@ addplacename_to_LQplot <- function(df, plot_to_addto, placename, shapenumber=16,
     
   }
   
+  plot_to_addto <- plot_to_addto +
+    coord_cartesian(xlim = c(0.1,maxLQval * 3))
   
   return(plot_to_addto)
   
@@ -2208,7 +2261,7 @@ reduceSICnames = function(names,level){
     
     #Bit more processing
     # returnnames = gsub(' manufacturing','',returnnames)
-    returnnames = gsub(' products| production','',returnnames)
+    # returnnames = gsub(' products| production','',returnnames)
     returnnames = gsub(' and ','/',returnnames)
     returnnames = gsub(' of | for ',': ',returnnames)
     returnnames = gsub('anisation','',returnnames)

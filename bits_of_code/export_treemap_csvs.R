@@ -127,7 +127,7 @@ ch = readRDS('../companieshouseopen/local/PROCESSED_accountextracts_n_livelist_g
 #Add in nicer SIC names
 ch = ch %>% 
   left_join(
-    bres.ft.shorts %>% select(SIC_5DIGIT_CODE,SIC_SECTION_NAME_SHORT:SIC_5DIGIT_NAME_SHORT),
+    bres.ft.shorts %>% select(SIC_5DIGIT_CODE,SIC_SECTION_NAME_SHORT:SIC_5DIGIT_NAME_SHORT) %>% distinct(),
     by = 'SIC_5DIGIT_CODE'
   )
 
@@ -136,7 +136,7 @@ ch = ch %>%
 #Keep only firms with at least 1 employee in the most recent year
 ch.emp1 <- ch %>% filter(Employees_thisyear >= 1)
 
-#Just for bradford...
+#Just for one place...
 ch.la <- ch.emp1 %>% 
   # filter(qg('bradford',localauthority_name))
   filter(qg('sheffield',localauthority_name))
@@ -147,10 +147,20 @@ ch.la <- ch.emp1 %>%
 # filter(qg('bristol',localauthority_name))
 
 
+#What LAs are in Greater Manchester in this data?
+gm <- ch.emp1 %>% filter(qg('greater manchester',ITL221NM))
+unique(gm$localauthority_name)[order(unique(gm$localauthority_name))]
+
+#This is oddly hard to find. You'd think would be more prominent on GMCA site.
+#https://www.gmmoving.co.uk/key-partners/greater-manchester-combined-authority/
+#Bolton, Bury, Manchester, Oldham, Rochdale, Salford, Stockport, Tameside, Trafford and Wigan
+#"Bolton"     "Bury"       "Manchester" "Oldham"     "Rochdale"   "Salford"    "Stockport"  "Tameside"   "Trafford"   "Wigan" 
+
+
 #Multiple places
 ch.la <- ch.emp1 %>% 
   # filter(qg('barnsley|sheffield|rotherham|doncaster',localauthority_name))
-  filter(qg('bradford|kirklees|leeds|wakefield|calderdale',localauthority_name))
+  filter(localauthority_name %in% c("Bolton", "Bury", "Manchester", "Oldham", "Rochdale", "Salford", "Stockport", "Tameside", "Trafford", "Wigan"))
 
 #Ooo yes but could do with more control over colours...
 #Which we now have in Python, huzzah!
@@ -159,7 +169,7 @@ ch.la %>%
   mutate_if(is.character, function(x) {Encoding(x) <- 'latin1'; return(x)}) %>% 
   count(localauthority_name,SIC_SECTION_NAME_SHORT,SIC_2DIGIT_NAME_SHORT,SIC_5DIGIT_NAME_SHORT, wt = Employees_thisyear) %>%
   filter(!is.na(SIC_SECTION_NAME_SHORT)) %>% 
-  write_csv('local/data/plotly_dataexportsfromR/CH_count_output.csv')
+  write_csv('local/data/plotly_dataexportsfromR/CH_count_output_GMLAs.csv')
 
 #Check that...
 # chk <- ch.la %>%
