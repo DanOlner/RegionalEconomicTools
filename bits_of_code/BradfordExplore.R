@@ -11,6 +11,7 @@ library(plotme)#For sunburst output
 # library(tidyr)
 # library(distributional)
 library(RColorBrewer)
+library(ggrepel)
 
 source('functions/misc_functions.R')
 options(scipen = 999)
@@ -253,7 +254,7 @@ ch.la %>%
 #Though correlation of counts might be more useful?
 
 gvabres <- readRDS('data/regionalGVA_plus_BRESjobcounts/regionalGVA_currentprices_BRES_FT_jobcount_bespoke2digitSIC_nONLY_MATCHING_GEOGs_2015_2023.rds') %>% 
-  filter(!qg('households|agri', SIC07_description))
+  filter(!qg('households|agri|membership', SIC07_description))
 
 shortsectornames <- read_csv('data/shortsectornames_for_regionalGVA_2digitSICs.csv')
 
@@ -261,6 +262,53 @@ gvabres <- gvabres %>%
   left_join(
     shortsectornames, by = 'SIC07_description'
   )
+
+#Would also quite like to split manufacturing off
+#Check in orig GVA file for the codes...
+#This is the full list - some won't match but enough to label the correct ones at 2 digit for those that do
+productionsectors <- c(
+  'A-E',
+  'AB (1-9)',
+  'C (10-33)',
+  'CA (10-12)',
+  'CB (13-15)',
+  'CC (16-18)',
+  'CD-CG (19-23)',
+  'CH (24-25)',
+  'CI-CJ (26-27)',
+  'CK-CL (28-30)',
+  'CM (31-33)',
+  '31-32',
+  '33',
+  'DE (35-39)',
+  'F (41-43)',
+  '41',
+  '42',
+  '43'
+)
+
+#Yep
+table(productionsectors %in% gvabres$SIC_2DIGIT_CODE_GVA2023)
+unique(gvabres$SIC_2DIGIT_CODE_GVA2023)[unique(gvabres$SIC_2DIGIT_CODE_GVA2023) %in% productionsectors]
+
+#Label production sectors
+gvabres <- gvabres %>% 
+  mutate(
+    productionsector = ifelse(
+      SIC_2DIGIT_CODE_GVA2023 %in% productionsectors,
+      'production','other'
+    )
+  )
+
+
+
+
+
+#couple of checks
+# table(is.na(gvabres$JOBCOUNT))
+# table(is.na(gvabres$GVA))
+# range(gvabres$JOBCOUNT)
+# range(gvabres$GVA)
 
 #Get two versions of LQ/proportions - job count and GVA
 gva.props <- gvabres %>% 
@@ -374,11 +422,164 @@ p <- p +
     "text",
     label = "JOB COUNT in circles -->\nGVA in diamonds -->",
     x = 0.2, y = sectorLQorder[which(qg('furnit',sectorLQorder))]
-  ) +
+  )  +
   coord_cartesian(xlim = c(0.1,7))
 
 
 p 
+
+
+
+
+
+
+# LET'S SEPARATE GVA AND JOBS OUT FOR BRADFORD AND COMPARE TO EVERYWHERE ELSE TOO
+place = "Bradford"
+
+#FUNCTION
+#Split both gva.props and job.props by subsector list
+makegvajoblqplots <- function(keepthesesectors){
+  
+  # gva.sub <- gva.props %>% filter(SIC07_description_shortened %in% keepthesesectors)
+
+  LQ_slopes <- compute_slope_or_zero(
+    data = gva.props, 
+    Region_name, SIC07_description_shortened,#slopes will be found within whatever grouping vars are added here
+    y = LQ_log, x = DATE)
+  
+  
+  #Filter down to a single year... we may want to smooth years, let's see
+  yeartoplot <- gva.props %>% filter(DATE == max(DATE))#use latest year
+  
+  #Add slopes into data to get LQ plots
+  yeartoplot <- yeartoplot %>% 
+    left_join(
+      LQ_slopes,
+      by = c('Region_name', 'SIC07_description_shortened')
+    )
+  
+  #Get min/max values for LQ over time as well, for each sector and place, to add as bars so range of sector is easy to see
+  minmaxes <- gva.props %>% 
+    group_by(Region_name, SIC07_description_shortened) %>% 
+    summarise(
+      min_LQ_all_time = min(LQ),
+      max_LQ_all_time = max(LQ)
+    )
+  
+  #Join min and max
+  yeartoplot <- yeartoplot %>% 
+    left_join(
+      minmaxes,
+      by = c('Region_name', 'SIC07_description_shortened')
+    )
+  
+  
+  #Shorten here to subset of sectors
+  yeartoplot <- yeartoplot %>% 
+    filter(SIC07_description_shortened %in% keepthesesectors)
+  
+  
+  sectorLQorder <- gva.props %>% filter(
+    Region_name == place,
+    DATE == max(DATE)#use latest data
+  ) %>% 
+    arrange(-LQ) %>% 
+    select(SIC07_description_shortened) %>% 
+    pull()
+  
+  
+  #Turn the sector column into a factor and order by LCR's LQs
+  yeartoplot$SIC07_description_shortened <- factor(yeartoplot$SIC07_description_shortened, levels = sectorLQorder, ordered = T)
+  
+  #If I could plot both and space them out, that would be good (could get Bradford change showing too)
+  p <- LQ_baseplot(df = yeartoplot, alpha = 0.1, shape = 0, sector_name = SIC07_description_shortened, 
+                   LQ_column = LQ, change_over_time = slope)
+  
+  p <- addplacename_to_LQplot(df = yeartoplot, plot_to_addto = p, 
+                              placename = place, shapenumber = 16,
+                              min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
+                              value_column = GVA, sector_regional_proportion = sector_regional_proportion,
+                              region_name = Region_name,
+                              sector_name = SIC07_description_shortened, change_over_time = slope, LQ_column = LQ,
+                              text = 7)
+  
+  p <- p + 
+    coord_cartesian(xlim = c(0.1,7)) +
+    ggtitle("GVA")
+  
+  
+  
+  
+  # job.sub <- job.props %>% filter(SIC07_description_shortened %in% keepthesesectors)
+  
+  # REPEAT FOR JOBS / BRADFORD (Using same factor order?)
+  LQ_slopes <- compute_slope_or_zero(
+    data = job.props, 
+    Region_name, SIC07_description_shortened,#slopes will be found within whatever grouping vars are added here
+    y = LQ_log, x = DATE)
+  
+  
+  #Filter down to a single year... we may want to smooth years, let's see
+  yeartoplot <- job.props %>% filter(DATE == max(DATE))#use latest year
+  
+  #Add slopes into data to get LQ plots
+  yeartoplot <- yeartoplot %>% 
+    left_join(
+      LQ_slopes,
+      by = c('Region_name', 'SIC07_description_shortened')
+    )
+  
+  #Get min/max values for LQ over time as well, for each sector and place, to add as bars so range of sector is easy to see
+  minmaxes <- job.props %>% 
+    group_by(Region_name, SIC07_description_shortened) %>% 
+    summarise(
+      min_LQ_all_time = min(LQ),
+      max_LQ_all_time = max(LQ)
+    )
+  
+  #Join min and max
+  yeartoplot <- yeartoplot %>% 
+    left_join(
+      minmaxes,
+      by = c('Region_name', 'SIC07_description_shortened')
+    )
+  
+  #Shorten here to subset of sectors
+  yeartoplot <- yeartoplot %>% 
+    filter(SIC07_description_shortened %in% keepthesesectors)
+  
+  
+  
+  #USE SECTOR ORDER FROM GVA LQS ABOVE
+  yeartoplot$SIC07_description_shortened <- factor(yeartoplot$SIC07_description_shortened, levels = sectorLQorder, ordered = T)
+  
+  #If I could plot both and space them out, that would be good (could get Bradford change showing too)
+  p2 <- LQ_baseplot(df = yeartoplot, alpha = 0.1, shape = 0, sector_name = SIC07_description_shortened, 
+                   LQ_column = LQ, change_over_time = slope)
+  
+  p2 <- addplacename_to_LQplot(df = yeartoplot, plot_to_addto = p2, 
+                              placename = place, shapenumber = 16,
+                              min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
+                              value_column = JOBCOUNT, sector_regional_proportion = sector_regional_proportion,
+                              region_name = Region_name,
+                              sector_name = SIC07_description_shortened, change_over_time = slope, LQ_column = LQ,
+                              text = 7, value_col_ismoney = F)
+  
+  p2 <- p2 + 
+    coord_cartesian(xlim = c(0.1,7)) +
+    ggtitle("Jobs")
+  
+  p2 <- p2 + scale_y_discrete(position = "right")
+  
+  p + p2 
+
+}
+
+
+
+#production sector plot first
+makegvajoblqplots(gva.props$SIC07_description_shortened[gva.props$productionsector == 'production'])
+makegvajoblqplots(gva.props$SIC07_description_shortened[gva.props$productionsector == 'other'])
 
 
 
@@ -490,6 +691,7 @@ ggplot(plot.df) +
 place <- gvabres %>% 
   # filter(qg('sheffield|barnsley',Region_name), DATE == max(DATE))
   filter(qg('bradford|kirkees|calderdale|wakefield|leeds',Region_name), DATE == max(DATE))
+  # filter(qg('Belfast|Birmingham|Bristol|Cardiff|Glasgow|Leeds|Liverpool|Manchester|Tyne|Sheffield|Nottingham',Region_name) & !qg('greater|shire', Region_name), DATE == max(DATE))#core cities
 
 #Sorts by actual order
 plot.df <- place %>%
@@ -497,31 +699,110 @@ plot.df <- place %>%
   # group_by(Region_name,productionsector) %>% 
   group_by(Region_name) %>% 
   arrange(-GVA) %>% 
+  # arrange(-JOBCOUNT) %>% 
   mutate(xmin = cumsum(lag(GVA, default = 0)),
          xmax = xmin + GVA,
          ymin = 0,
          ymax = JOBCOUNT) %>% 
   ungroup()
 
+# plot.df <- place %>%
+#   # filter(productionsector == 'production') %>% 
+#   # group_by(Region_name,productionsector) %>% 
+#   group_by(Region_name) %>% 
+#   arrange(-GVA) %>% 
+#   # arrange(-JOBCOUNT) %>% 
+#   mutate(xmin = cumsum(lag(JOBCOUNT, default = 0)),
+#          xmax = xmin + JOBCOUNT,
+#          ymin = 0,
+#          ymax = GVA) %>% 
+#   ungroup()
+
 ggplot(plot.df) +
   geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, fill = SIC07_description_shortened), color = "black", size =0.25) +
   geom_text(aes(x = (xmin + xmax) / 2, y = (ymin + ymax) / 2, label = SIC07_description_shortened)) +
+  # labs(y = "GVA", x = "Job count", title = "Sectors by GVA and Jobs (Area = GVA × Jobs)") +
   labs(x = "GVA", y = "Job count", title = "Sectors by GVA and Jobs (Area = GVA × Jobs)") +
   # theme_minimal() +
   scale_fill_manual(values = setNames(randomcols,unique(gvabres$SIC07_description_shortened))) +
   guides(fill = F) +
   coord_flip() +
   # facet_wrap(~Region_name+productionsector, scales = 'free', ncol = 2)
-  facet_wrap(~Region_name, scales = 'free', ncol = 2)
+  facet_wrap(~Region_name, scales = 'free', ncol = 5)
   # facet_wrap(~Region_name, ncol = 2)
 
+#So close but not quite. Could just use for upper labels?
+# p + geom_text_repel(
+#   aes(x = (xmin + xmax)/2.05, y = (ymin + ymax)/2, label = SIC07_description_shortened),
+#   alpha=1
+#   # nudge_x = .05,
+#   # box.padding = 1,
+#   # nudge_y = 0.05,
+#   # segment.curvature = -0.1,
+#   # segment.ncp = 0.3,
+#   # segment.angle = 20,
+#   # max.overlaps = 20
+# )
 
 
 
+# GET AS MUCH RESOLUTION AS POSSIBLE FROM BRES 5 DIGIT JOBS IN LQS----
+
+#Using the full resolution from the 2015-2023 linked BRES data
+#And maybe smooth it all out too.
+
+#Nabbed from misc_checks.R
+# bres = read_csv("local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE428_internationalterritoriallevelslevel3asofJan2021_2_Fulltimeemployees_2022_2023_SIC_5DIGIT.csv") 
+
+#Not that one! The one made in misc_checks.R that links geogs
+#Here: 
+bres <- read_csv("local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_NUTS3_n_ITL321_stacked_2_Fulltimeemployees_2015_2023_SIC_5DIGIT.csv")
+
+
+SIClookup <- read_csv('data/SIClookup.csv')
+
+#Join SIC lookup on 5 digit name
+#Keep 2 digit and section codes
+#May shorten names in a mo...
+bres <- bres %>%
+  left_join(
+    SIClookup %>% select(SIC_5DIGIT_NAME,SIC_2DIGIT_NAME,SIC_SECTION_NAME),
+    by = 'SIC_5DIGIT_NAME'
+  )
+
+#Make shorter names, use those.
+#Make lookup so can be merged in.
+names.sections = unique(bres$SIC_SECTION_NAME)
+shortnames.sections = reduceSICnames(unique(bres$SIC_SECTION_NAME),'section')
+
+chk.sections = data.frame(names = names.sections, shortnames = shortnames.sections)
+
+names.2digit = unique(bres$SIC_2DIGIT_NAME)
+shortnames.2digit = reduceSICnames(unique(bres$SIC_SECTION_NAME),'2 digit')
+
+chk.2digit = data.frame(names = names.2digit, shortnames = shortnames.2digit)
+
+
+#And 729 categories in the 5 digit...
+names.5digit = unique(bres$SIC_5DIGIT_NAME)
+#NOTE: THE ORDER HERE IS BASED ON THE ORDER IN bres
+#We should make an actual lookup to make sure we don't lose that order
+shortnames.5digit = reduceSICnames(unique(bres$SIC_5DIGIT_NAME),'5 digit')
+
+chk.5digit = data.frame(names = names.5digit, shortnames = shortnames.5digit)
+
+
+#Merge into bres
+bres <- bres %>% 
+  left_join(chk.sections %>% rename(SIC_SECTION_NAME_SHORT = shortnames), by = c('SIC_SECTION_NAME' = 'names')) %>% 
+  left_join(chk.2digit %>% rename(SIC_2DIGIT_NAME_SHORT = shortnames), by = c('SIC_2DIGIT_NAME' = 'names')) %>% 
+  left_join(chk.5digit %>% rename(SIC_5DIGIT_NAME_SHORT = shortnames), by = c('SIC_5DIGIT_NAME' = 'names')) 
 
 
 
-
+#5 digit is pretty noisy
+#Let's smooth before we do any LQ finding
+range(bres$DATE)
 
 
 

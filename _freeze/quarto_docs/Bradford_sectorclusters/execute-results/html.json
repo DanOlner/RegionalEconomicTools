@@ -1,8 +1,8 @@
 {
-  "hash": "e45b0d0acfe17f9f559fc0c6a3c00182",
+  "hash": "914e75ff8e8c0b8458f57f0a58463a78",
   "result": {
     "engine": "knitr",
-    "markdown": "---\ntitle: \"Bradford sectors and clusters: past, present\"\nauthor:\n  - name: \"Dan Olner (Yorkshire & Humber Policy Engagement & Research Network, University of Sheffield)\"\nformat: \n  html:\n    output-file: \"Bradford_sectorclusters_July2025\"\n    fig-width: 9.5\n    fig-height: 8\nexecute:\n  echo: false\n  message: false\n  warning: false\nfig-responsive: false\n---\n\n::: {.cell}\n\n:::\n\n\n\n\n## Structural GVA/sector change \n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](Bradford_sectorclusters_files/figure-html/struct-1.png){width=768}\n:::\n:::\n",
+    "markdown": "---\ntitle: \"Bradford sectors and clusters: past, present\"\nauthor:\n  - name: \"Dan Olner (Yorkshire & Humber Policy Engagement & Research Network, University of Sheffield)\"\nformat: \n  html:\n    output-file: \"Bradford_sectorclusters_July2025\"\n    fig-width: 8\n    fig-height: 8\nexecute:\n  echo: false\n  message: false\n  warning: false\nfig-responsive: false\n---\n\n::: {.cell}\n\n:::\n\n\n\n\n## Structural broad sectorGVA sector change \n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](Bradford_sectorclusters_files/figure-html/struct-1.png){width=768}\n:::\n:::\n\n\n\n\n\n\n## GVA V JOBS\n\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](Bradford_sectorclusters_files/figure-html/gvajobs1-1.png){width=768}\n:::\n:::\n\n\n\n\n\n## Location quotients for output and jobs: most recent and change over time\n\n### Production sectors\n\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](Bradford_sectorclusters_files/figure-html/productionLQs-1.png){width=864}\n:::\n:::\n\n\n\n\n### Rest of sectors\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](Bradford_sectorclusters_files/figure-html/otherLQs-1.png){width=864}\n:::\n:::\n",
     "supporting": [
       "Bradford_sectorclusters_files"
     ],

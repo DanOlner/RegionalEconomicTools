@@ -63,6 +63,7 @@ bres.ft.shorts = bres.ft %>%
 
 
 
+
 #Code nabbed from https://github.com/DanOlner/FirmAnalysis/blob/bcf06e46849eb7e08501c596955a247e5dadbe00/Fame_processing.R#L512
 bres.ft.shorts %>%
   mutate_if(is.character, function(x) {Encoding(x) <- 'latin1'; return(x)}) %>% 

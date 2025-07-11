@@ -230,7 +230,7 @@ add_location_quotient_and_proportions <- function(df, regionvar, lq_var, valueva
 
 
 #Make base plot for LQ plot, with option of setting alpha to zero if we don't want to see all other places
-LQ_baseplot <- function(df, alpha = 0.1, sector_name, LQ_column, change_over_time){
+LQ_baseplot <- function(df, alpha = 0.1, shape = 16, sector_name, LQ_column, change_over_time){
   
   sector_name <- enquo(sector_name)
   LQ_column <- enquo(LQ_column)
@@ -241,14 +241,14 @@ LQ_baseplot <- function(df, alpha = 0.1, sector_name, LQ_column, change_over_tim
     data = df %>% filter(!!change_over_time > 0), 
     aes(y = !!sector_name, x = !!LQ_column, size = !!change_over_time),
     alpha = alpha,
-    shape = 16,
+    shape = shape,
     colour = 'green'
   ) +
   geom_point(
     data = df %>% filter(!!change_over_time < 0), 
     aes(y = !!sector_name, x = !!LQ_column, size = !!change_over_time * -1),
     alpha = alpha,
-    shape = 16,
+    shape = shape,
     colour = 'red'
   )  +
   scale_size_continuous(range = c(1,17)) +

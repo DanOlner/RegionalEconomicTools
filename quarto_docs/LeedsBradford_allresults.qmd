@@ -1,5 +1,6 @@
 ---
 title: "Economic collaboration across Bradford and Leeds: what does the latest sector data show?"
+sidebar: false
 author:
   - name: "Dan Olner (Yorkshire & Humber Policy Engagement & Research Network, University of Sheffield)"
 format: 
@@ -466,7 +467,7 @@ p <- ggplot() +
     # data = empchange.summary.corecities %>% filter(firmcount > 9),
     data = empchange.summary.corecities %>% filter(
       firmcount > 9,
-      qg('Belfast|Birmingham|Bristol|Cardiff|Glasgow|Leeds|Liverpool|Manchester|Tyne|Nottingham', localauthority_name)#just core cities (minus four places below)
+      qg('Belfast|Birmingham|Bristol|Cardiff|Glasgow|Leeds|Liverpool|Manchester|Tyne|Sheffield|Nottingham', localauthority_name)#just core cities (minus four places below)
       ),
     aes(y = SIC_SECTION_REDUCED, x = employment_percentchange, group = `Place: `),
     alpha = 0.5)
