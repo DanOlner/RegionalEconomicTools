@@ -80,6 +80,7 @@ fig = px.treemap(
 fig.show()
 
 #fig.write_html("docs/miscdocs/WYLAs_CompaniesHouse2025_treemap.html", full_html=True, include_plotlyjs="cdn")
+#fig.write_html("docs/miscdocs/GMLAs_CompaniesHouse2025_treemap.html", full_html=True, include_plotlyjs="cdn")
 
 
 

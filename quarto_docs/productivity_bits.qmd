@@ -132,19 +132,22 @@ itl3.lon = itl_lookup %>%
 
 **Hover for place names**.
 
-* South Yorkshire ITL3s in green (95% CIs)
+* West Yorkshire ITL3s in green (95% CIs)
 * Core cities in blue  (95% CIs)
 * London ITL3s in red/pink
 
 And:
 
-* Anything above/left of diagonal line is a **productivity increase**. So e.g. in the plot below for 2014-2023, Rotherham's productivity increased with a **GVA increase** and a **number of hours worked *decrease***.
+* Anything above/left of diagonal line is a **productivity increase**. 
+
 
 ### 2004 to 2013 av % change
 
 ```{r plot1}
 # startyear = 2014
 # endyear = 2023
+
+#So e.g. in the plot below for 2014-2023, Rotherham's productivity increased with a **GVA increase** and a **number of hours worked *decrease***.
 
 startyear = 2004
 endyear = 2013
