@@ -409,9 +409,13 @@ prod.data <- gvabres %>%
     DATE = DATE - 2000,#Make dates 2 digit, more readable on axis
     SIC07_description_shortened = fct_reorder(SIC07_description_shortened, job_output_propofUKtotal, .desc = T),
     highlow = ifelse(SIC07_description_shortened %in% levels(SIC07_description_shortened)[1:23],'high','low'),#Break into two plots to stack, split by total av productivity
-    sectorgrouping = ntile(as.integer(SIC07_description_shortened), 5)
+    sectorgrouping = cut_number(as.integer(SIC07_description_shortened), 7) %>% as.integer
   ) %>% 
   filter(!qg('hous',SIC07_description), !is.na(job_output_propofUKtotal_movingav))
+
+#Break into n groups, using factor order created in previous line
+# sectorgrouping = ntile(as.integer(prod.data$SIC07_description_shortened), 5)
+
   
 #table(prod.data$sectorgroupings)
 
@@ -462,13 +466,19 @@ prod.data <- gvabres %>%
 #One plot function...
 plotprod <- function(df){
   
+  #find max bradford value and use that to set y axis max
+  #filter out any infs...
+  df <- df %>% filter(!is.infinite(job_output_propofUKtotal_movingav))
+  
+  maxfory = max(df$job_output_propofUKtotal_movingav[df$Region_name == 'Bradford'])
+  
   ggplot() +
     geom_jitter(#Rest of UK first
       data =  df,
       aes(x = DATE, y = job_output_propofUKtotal_movingav, group = Region_name),
       alpha = 0.3, size = 1,
       width = 0.1) +
-    coord_cartesian(ylim = c(0,0.0000005)) +
+    coord_cartesian(ylim = c(0,maxfory * 2)) +
     geom_point(#Then Leeds and Bradford
       data =  df %>% filter(Region_name %in% c('Leeds','Bradford')),
       aes(x = DATE, y = job_output_propofUKtotal_movingav, group = Region_name, colour = Region_name, shape = Region_name),
