@@ -28,7 +28,10 @@ library(plotly)#For interactive plots
 library(RColorBrewer)
 
 source('../functions/misc_functions.R')
+source('../functions/adhoc_functions.R')
 #source('functions/misc_functions.R')
+#source('functions/adhoc_functions.R')
+
 options(scipen = 999)
 
 #Set ggplot theme
@@ -233,6 +236,8 @@ patchwork::wrap_plots(plots, ncol = 1)
 
 
 ```{r gvajobs1}
+#| fig-height: 20
+#| fig-width: 8.5
 
 #2015 to 2023, linked on the regional GVA bespoke SIC categories
 #Note, can use lookup if need to also sum for sections (which we can do here cos current prices)
@@ -263,7 +268,7 @@ shortsectornames = tibble(
   "Consultancy",
   "Architecture",
   "Research",
-  "Professional",
+  "Professional/sci/tech",
   "Rental",
   "Employment",
   "Cleaning/landscapes",
@@ -340,9 +345,6 @@ gvabres <- gvabres %>%
 
 
 
-
-
-
 #For current prices - what we can do:
 #Find GVA as a proportion of total UK output for those years
 #Then that proportion per FT job
@@ -388,8 +390,6 @@ gvabres <- gvabres %>%
 
 
 
-
-
 smoothband = 3
 
 gvabres <- gvabres %>%
@@ -397,7 +397,8 @@ gvabres <- gvabres %>%
   mutate(
     jobcount_movingav = rollapply(JOBCOUNT,smoothband,mean,align='center',fill=NA),
     gva_movingav = rollapply(GVA,smoothband,mean,align='center',fill=NA),
-    job_output_propofUKtotal_movingav = rollapply(job_output_propofUKtotal,smoothband,mean,align='center',fill=NA)
+    job_output_propofUKtotal_movingav = rollapply(job_output_propofUKtotal,smoothband,mean,align='center',fill=NA),
+    job_PPM_ofUKtotal_movingav = job_output_propofUKtotal_movingav * 1000000#1% is 1 part per 100. Which we find by multiplying up the prop by 100. PPM is just x * a million.
   ) %>% 
   ungroup()
 
@@ -407,9 +408,9 @@ gvabres <- gvabres %>%
 prod.data <- gvabres %>% 
   mutate(
     DATE = DATE - 2000,#Make dates 2 digit, more readable on axis
-    SIC07_description_shortened = fct_reorder(SIC07_description_shortened, job_output_propofUKtotal, .desc = T),
+    SIC07_description_shortened = fct_reorder(SIC07_description_shortened, job_PPM_ofUKtotal_movingav, .desc = T),
     highlow = ifelse(SIC07_description_shortened %in% levels(SIC07_description_shortened)[1:23],'high','low'),#Break into two plots to stack, split by total av productivity
-    sectorgrouping = cut_number(as.integer(SIC07_description_shortened), 7) %>% as.integer
+    sectorgrouping = cut_number(as.integer(SIC07_description_shortened), 8) %>% as.integer
   ) %>% 
   filter(!qg('hous',SIC07_description), !is.na(job_output_propofUKtotal_movingav))
 
@@ -419,84 +420,12 @@ prod.data <- gvabres %>%
   
 #table(prod.data$sectorgroupings)
 
-
-# p1 <- ggplot() +
-#   geom_jitter(#Rest of UK first
-#     data =  prod.data %>% filter(highlow == 'high'),
-#     aes(x = DATE, y = job_output_propofUKtotal_movingav, group = Region_name),
-#     alpha = 0.3, size = 1, 
-#     width = 0.1) +
-#   coord_cartesian(ylim = c(0,0.0000005)) +
-#   geom_point(#Then Leeds and Bradford
-#     data =  prod.data %>% filter(Region_name %in% c('Leeds','Bradford'), highlow == 'high'),
-#     aes(x = DATE, y = job_output_propofUKtotal_movingav, group = Region_name, colour = Region_name, shape = Region_name),
-#     alpha = 1, size = 5) +
-#     scale_colour_brewer(palette = 'Set1', direction = 1, name="") +
-#   geom_line(#Then Leeds and Bradford
-#     data =  prod.data %>% filter(Region_name %in% c('Leeds','Bradford'), highlow == 'high'),
-#     aes(x = DATE, y = job_output_propofUKtotal_movingav, group = Region_name, colour = Region_name),
-#     alpha = 0.5, size = 1) +
-#     scale_colour_brewer(palette = 'Set1', direction = 1, name="") +
-#   scale_shape_manual(values = c(16,18), name="") +
-#   xlab('year') +
-#   facet_wrap(~SIC07_description_shortened, nrow = 1, labeller = labeller(groupwrap = label_wrap_gen(10)))
-# 
-# p2 <- ggplot() +
-#   geom_jitter(#Rest of UK first
-#     data =  prod.data %>% filter(highlow == 'low'),
-#     aes(x = DATE, y = job_output_propofUKtotal_movingav, group = Region_name),
-#     alpha = 0.3, size = 1, 
-#     width = 0.1) +
-#   coord_cartesian(ylim = c(0,0.0000002)) +
-#   geom_point(#Then Leeds and Bradford
-#     data =  prod.data %>% filter(Region_name %in% c('Leeds','Bradford'), highlow == 'low'),
-#     aes(x = DATE, y = job_output_propofUKtotal_movingav, group = Region_name, colour = Region_name, shape = Region_name),
-#     alpha = 1, size = 5) +
-#     scale_colour_brewer(palette = 'Set1', direction = 1, name="") +
-#   geom_line(#Then Leeds and Bradford
-#     data =  prod.data %>% filter(Region_name %in% c('Leeds','Bradford'), highlow == 'low'),
-#     aes(x = DATE, y = job_output_propofUKtotal_movingav, group = Region_name, colour = Region_name),
-#     alpha = 0.5, size = 1) +
-#     scale_colour_brewer(palette = 'Set1', direction = 1, name="") +
-#   scale_shape_manual(values = c(16,18), name="") +
-#   xlab('year') +
-#   facet_wrap(~SIC07_description_shortened, nrow = 1, labeller = labeller(groupwrap = label_wrap_gen(10)))
-
-
-#One plot function...
-plotprod <- function(df){
-  
-  #find max bradford value and use that to set y axis max
-  #filter out any infs...
-  df <- df %>% filter(!is.infinite(job_output_propofUKtotal_movingav))
-  
-  maxfory = max(df$job_output_propofUKtotal_movingav[df$Region_name == 'Bradford'])
-  
-  ggplot() +
-    geom_jitter(#Rest of UK first
-      data =  df,
-      aes(x = DATE, y = job_output_propofUKtotal_movingav, group = Region_name),
-      alpha = 0.3, size = 1,
-      width = 0.1) +
-    coord_cartesian(ylim = c(0,maxfory * 2)) +
-    geom_point(#Then Leeds and Bradford
-      data =  df %>% filter(Region_name %in% c('Leeds','Bradford')),
-      aes(x = DATE, y = job_output_propofUKtotal_movingav, group = Region_name, colour = Region_name, shape = Region_name),
-      alpha = 1, size = 5) +
-      scale_colour_brewer(palette = 'Set1', direction = 1, name="") +
-    geom_line(#Then Leeds and Bradford
-      data =  df %>% filter(Region_name %in% c('Leeds','Bradford')),
-      aes(x = DATE, y = job_output_propofUKtotal_movingav, group = Region_name, colour = Region_name),
-      alpha = 0.5, size = 1) +
-      scale_colour_brewer(palette = 'Set1', direction = 1, name="") +
-    scale_shape_manual(values = c(16,18), name="") +
-    xlab('year') +
-    facet_wrap(~SIC07_description_shortened, nrow = 1, labeller = labeller(groupwrap = label_wrap_gen(10)))
-    
-}
+#Test
+# debugonce(plotprod)
+# plotprod(prod.data %>% filter(sectorgrouping==7))
 
 plotz <- map(prod.data %>% group_split(sectorgrouping),plotprod)
-  
+
 patchwork::wrap_plots(plotz,ncol = 1)
 
 #Quick look

@@ -1010,45 +1010,45 @@ keeps <- yeartoplot %>%
 
 
 
-#FUNCTION FOR EACH SECTION GROUPING
-lqplot_bres_groupsof5digit <- function(keepthisSICgroup){
-  
-  # SICvartouse = enquo(SICvartouse)
-  
-  #Shorten here to subset of sectors
-  yeartoplot.sub <- yeartoplot %>% 
-    filter(
-      SIC_2DIGIT_NAME_SHORT %in% keepthisSICgroup,
-      SIC_5DIGIT_NAME_SHORT %in% keeps,
-      LQ_movingav > 0
-      # min_LQ_all_time > 0
-      ) %>% 
-    mutate(jobcount_movingav = round(jobcount_movingav,0))
-  
-  
-  #If I could plot both and space them out, that would be good (could get Bradford change showing too)
-  p <- LQ_baseplot(df = yeartoplot.sub, alpha = 0.15, shape = 0, sector_name = SIC_5DIGIT_NAME_SHORT, 
-                   LQ_column = LQ_movingav, change_over_time = slope)
-  
-  #Don't try if no values (but keep base plot...)
-  
-  if(nrow(yeartoplot.sub) > 0){
-  
-  p <- addplacename_to_LQplot(df = yeartoplot.sub, plot_to_addto = p, 
-                              placename = place, shapenumber = 16,
-                              min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
-                              value_column = jobcount_movingav, sector_regional_proportion = sector_regional_proportion,
-                              region_name = GEOGRAPHY_NAME,
-                              sector_name = SIC_5DIGIT_NAME_SHORT, change_over_time = slope, LQ_column = LQ_movingav,
-                              value_col_ismoney = F,
-                              text = 7)
-  
-  }
-  
-  p + ggtitle(keepthisSICgroup)
-  
-  
-}
+#FUNCTION FOR EACH BRES JOB GROUPING
+#TO OUTPUT GGPLOT LQs
+# lqplot_bres_groupsof5digit <- function(keepthisSICgroup){
+# 
+#   #Shorten here to subset of sectors
+#   yeartoplot.sub <- yeartoplot %>%
+#     filter(
+#       SIC_2DIGIT_NAME_SHORT %in% keepthisSICgroup,
+#       SIC_5DIGIT_NAME_SHORT %in% keeps,
+#       LQ_movingav > 0
+#       # min_LQ_all_time > 0
+#     ) %>%
+#     mutate(jobcount_movingav = round(jobcount_movingav,0))
+#   
+#   
+# 
+#   #If I could plot both and space them out, that would be good (could get Bradford change showing too)
+#   p <- LQ_baseplot(df = yeartoplot.sub, alpha = 0.15, shape = 0, sector_name = SIC_5DIGIT_NAME_SHORT,
+#                    LQ_column = LQ_movingav, change_over_time = slope)
+# 
+#   #Don't try if no values (but keep base plot...)
+# 
+#   if(nrow(yeartoplot.sub) > 0){
+# 
+#   p <- addplacename_to_LQplot(df = yeartoplot.sub, plot_to_addto = p,
+#                               placename = place, shapenumber = 16,
+#                               min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
+#                               value_column = jobcount_movingav, sector_regional_proportion = sector_regional_proportion,
+#                               region_name = GEOGRAPHY_NAME,
+#                               sector_name = SIC_5DIGIT_NAME_SHORT, change_over_time = slope, LQ_column = LQ_movingav,
+#                               value_col_ismoney = F,
+#                               text = 7)
+# 
+#   }
+# 
+#   p + ggtitle(keepthisSICgroup)
+# 
+# 
+# }
 
 
 
@@ -1074,7 +1074,26 @@ map2(filenamez,plotz,ggsave)
 
 
 
+
+
 #Test some alterations
+#Use function in adhoc_functions
+#And send in the actual df already filtered to what we want to plot
+#Don't plot any 2 digit SICs with no values we want to show
+#Shorten here to subset of sectors
+
+#Shortern the list of 2 digit SICs to ones that actually have values we want to look at
+
+
+
+yeartoplot.sub <- yeartoplot %>%
+  filter(
+    SIC_2DIGIT_NAME_SHORT %in% keepthisSICgroup,
+    SIC_5DIGIT_NAME_SHORT %in% keeps,
+    LQ_movingav > 0
+    # min_LQ_all_time > 0
+  ) %>%
+  mutate(jobcount_movingav = round(jobcount_movingav,0))
 
 
 
