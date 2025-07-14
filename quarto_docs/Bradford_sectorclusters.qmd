@@ -265,10 +265,10 @@ shortsectornames = tibble(
   "ICT",
   "Real estate",
   "Legal",
-  "Consultancy",
-  "Architecture",
+  "Head office/consult",
+  "Arch/Eng",
   "Research",
-  "Professional/sci/tech",
+  "Prof/sci/tech",
   "Rental",
   "Employment",
   "Cleaning/landscapes",
@@ -422,7 +422,7 @@ prod.data <- gvabres %>%
 
 #Test
 # debugonce(plotprod)
-# plotprod(prod.data %>% filter(sectorgrouping==7))
+# plotprod(prod.data %>% filter(sectorgrouping==6))
 
 plotz <- map(prod.data %>% group_split(sectorgrouping),plotprod)
 
@@ -436,7 +436,7 @@ patchwork::wrap_plots(plotz,ncol = 1)
 
 
 
-## Location quotients for output and jobs: most recent and change over time
+## Location quotients for GVA and jobs: most recent and change over time
 
 ### Production sectors
 
@@ -533,7 +533,7 @@ makegvajoblqplots <- function(keepthesesectors){
                               text = 7)
   
   p <- p + 
-    coord_cartesian(xlim = c(0.1,7)) +
+    # coord_cartesian(xlim = c(0.1,7)) +
     ggtitle("GVA")
   
   
@@ -595,7 +595,7 @@ makegvajoblqplots <- function(keepthesesectors){
                               text = 7, value_col_ismoney = F)
   
   p2 <- p2 + 
-    coord_cartesian(xlim = c(0.1,7)) +
+    # coord_cartesian(xlim = c(0.1,7)) +
     ggtitle("Jobs")
   
   # p2 <- p2 + scale_y_discrete(position = "right")

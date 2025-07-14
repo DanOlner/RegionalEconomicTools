@@ -311,7 +311,7 @@ LQ_baseplot <- function(df, alpha = 0.1, shape = 16, sector_name, LQ_column, cha
 #a column with min and max values to overlay as bars to indicate full range of the data
 addplacename_to_LQplot <- function(df, plot_to_addto, placename, shapenumber=16, backgroundcolour='black', add_gva = F, setalpha = 1,
                                    region_name, sector_name,change_over_time, value_column, LQ_column, sector_regional_proportion,
-                                   min_LQ_all_time,max_LQ_all_time, value_col_ismoney = T, nudgepos = 0, textx = NULL){
+                                   min_LQ_all_time,max_LQ_all_time, value_col_ismoney = T, nudgepos = 0, textx = NULL, maxLQvalmultiplier = 3){
   
   region_name <- enquo(region_name)  
   sector_name <- enquo(sector_name)
@@ -319,18 +319,27 @@ addplacename_to_LQplot <- function(df, plot_to_addto, placename, shapenumber=16,
   LQ_column <- enquo(LQ_column)
   min_LQ_all_time <- enquo(min_LQ_all_time)
   max_LQ_all_time <- enquo(max_LQ_all_time)
-  # 
   
   #Doing this here so value available for coord_cartesian at end
   
   #if textx position not supplied, set to distance from right
   #If a negative value, subtract that amount from max LQ value
-  maxLQval = df %>% select(!!max_LQ_all_time) %>% filter(!!max_LQ_all_time == max(!!max_LQ_all_time)) %>% pull
-  # maxLQval = df %>% select(!!LQ_column) %>% filter(!!LQ_column == max(!!LQ_column)) %>% pull
+  
+  #If available use max LQ, otherwise use LQ
+  if(rlang::quo_is_missing(max_LQ_all_time)){
+    
+    maxLQval <<- df %>% select(!!LQ_column) %>% filter(!!LQ_column == max(!!LQ_column)) %>% pull
+    
+  } else {
+  
+    maxLQval <<- df %>% select(!!max_LQ_all_time) %>% filter(!!max_LQ_all_time == max(!!max_LQ_all_time)) %>% pull
   # print(maxLQval)
   
+  }
   
-  plot_to_addto <- plot_to_addto +
+  
+  
+  plot_to_addto <- plot_to_addto + 
     geom_point(
       data = df %>% filter(!!region_name == placename, !!change_over_time > 0), 
       aes(y = !!sector_name, x = !!LQ_column, size = !!change_over_time *1.75),
@@ -397,7 +406,7 @@ addplacename_to_LQplot <- function(df, plot_to_addto, placename, shapenumber=16,
   }
   
   #Test for one of these missing, don't display if so
-  if(!(missing(min_LQ_all_time)|missing(max_LQ_all_time)) ){
+  if(!(rlang::quo_is_missing(min_LQ_all_time)|rlang::quo_is_missing(max_LQ_all_time)) ){
     
     # min_LQ_all_time <- enquo(min_LQ_all_time)
     # max_LQ_all_time <- enquo(max_LQ_all_time)
@@ -413,7 +422,7 @@ addplacename_to_LQplot <- function(df, plot_to_addto, placename, shapenumber=16,
   }
   
   plot_to_addto <- plot_to_addto +
-    coord_cartesian(xlim = c(0.1,maxLQval * 3))
+    coord_cartesian(xlim = c(0.1,maxLQval * maxLQvalmultiplier))
   
   return(plot_to_addto)
   

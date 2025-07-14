@@ -185,6 +185,7 @@ bradford.ft.shorts.2015 %>%
 
 # REPEAT SUNBURST FOR COMPANIES HOUSE DATA FROM LAST YEAR----
 
+#Already with suspicious looking employee counts removed etc
 ch = readRDS('../companieshouseopen/local/PROCESSED_accountextracts_n_livelist_geocoded_combined_July2025.rds')
 
 #Add in nicer SIC names
@@ -236,6 +237,8 @@ ch.la %>%
   count(localauthority_name,SIC_SECTION_NAME_SHORT,SIC_2DIGIT_NAME_SHORT,SIC_5DIGIT_NAME_SHORT, wt = Employees_thisyear) %>%
   # count(SIC_SECTION_NAME,SIC_3DIGIT_NAME,SIC_5DIGIT_NAME) %>% 
   count_to_treemap(sort_by_n = T)
+
+
 
 
 
@@ -820,7 +823,7 @@ bres <- bres %>%
   filter(!qg('households|membership', SIC_2DIGIT_NAME))
 
 #Check!
-bres %>% distinct(SIC_5DIGIT_NAME_SHORT,SIC_5DIGIT_NAME) %>% View
+# bres %>% distinct(SIC_5DIGIT_NAME_SHORT,SIC_5DIGIT_NAME) %>% View
 
 
 #Let's find LQ / proportions prior to smoothing those
@@ -995,85 +998,6 @@ yeartoplot$SIC_5DIGIT_NAME_SHORT <- factor(yeartoplot$SIC_5DIGIT_NAME_SHORT, lev
 yeartoplot %>% filter(GEOGRAPHY_NAME == 'Bradford') %>% View
 
 
-#Try a few
-# yeartoplot.filtered <- yeartoplot %>% 
-#   filter(LQ_movingav > 0)
-
-#To view properly, keep only sectors for the place we're viewing on top
-keeps <- yeartoplot %>% 
-  filter(GEOGRAPHY_NAME == 'Bradford') %>% 
-  filter(LQ_movingav > 0) %>% 
-  select(SIC_5DIGIT_NAME_SHORT) %>%
-  mutate(SIC_5DIGIT_NAME_SHORT = as.character(SIC_5DIGIT_NAME_SHORT)) %>% 
-  pull
-
-
-
-
-#FUNCTION FOR EACH BRES JOB GROUPING
-#TO OUTPUT GGPLOT LQs
-# lqplot_bres_groupsof5digit <- function(keepthisSICgroup){
-# 
-#   #Shorten here to subset of sectors
-#   yeartoplot.sub <- yeartoplot %>%
-#     filter(
-#       SIC_2DIGIT_NAME_SHORT %in% keepthisSICgroup,
-#       SIC_5DIGIT_NAME_SHORT %in% keeps,
-#       LQ_movingav > 0
-#       # min_LQ_all_time > 0
-#     ) %>%
-#     mutate(jobcount_movingav = round(jobcount_movingav,0))
-#   
-#   
-# 
-#   #If I could plot both and space them out, that would be good (could get Bradford change showing too)
-#   p <- LQ_baseplot(df = yeartoplot.sub, alpha = 0.15, shape = 0, sector_name = SIC_5DIGIT_NAME_SHORT,
-#                    LQ_column = LQ_movingav, change_over_time = slope)
-# 
-#   #Don't try if no values (but keep base plot...)
-# 
-#   if(nrow(yeartoplot.sub) > 0){
-# 
-#   p <- addplacename_to_LQplot(df = yeartoplot.sub, plot_to_addto = p,
-#                               placename = place, shapenumber = 16,
-#                               min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
-#                               value_column = jobcount_movingav, sector_regional_proportion = sector_regional_proportion,
-#                               region_name = GEOGRAPHY_NAME,
-#                               sector_name = SIC_5DIGIT_NAME_SHORT, change_over_time = slope, LQ_column = LQ_movingav,
-#                               value_col_ismoney = F,
-#                               text = 7)
-# 
-#   }
-# 
-#   p + ggtitle(keepthisSICgroup)
-# 
-# 
-# }
-
-
-
-plotz <- map(avLQvalues_in_groupings$SIC_2DIGIT_NAME_SHORT,lqplot_bres_groupsof5digit)
-# plotz[[2]]
-
-# x[[1]] + coord_cartesian(xlim = c(-50,100))
-
-# debugonce(addplacename_to_LQplot)
-map(avLQvalues_in_groupings$SIC_2DIGIT_NAME_SHORT[76],lqplot_bres_groupsof5digit)
-
-# wrap_plots(plotz,ncol = 4)
-
-#Too many! Let's output to folder to look through and decide on next steps (note tiny job numbers for lots of those)
-filenamez <- paste0(
-  'local/outputs/bresLQplots_bradford/',
-  gsub(' |/','',avLQvalues_in_groupings$SIC_2DIGIT_NAME_SHORT),
-  '.png')
-
-# map2(filenamez[1:2],plotz[1:2],ggsave)
-map2(filenamez,plotz,ggsave)
-
-
-
-
 
 
 #Test some alterations
@@ -1083,22 +1007,295 @@ map2(filenamez,plotz,ggsave)
 #Shorten here to subset of sectors
 
 #Shortern the list of 2 digit SICs to ones that actually have values we want to look at
+#Keep only these 5 digit sectors for Bradford
+keep.these.5digits <- yeartoplot %>% 
+  filter(GEOGRAPHY_NAME == 'Bradford') %>% 
+  filter(LQ_movingav > 0.001, jobcount_movingav >= 100) %>% 
+  select(SIC_5DIGIT_NAME_SHORT) %>%
+  mutate(SIC_5DIGIT_NAME_SHORT = as.character(SIC_5DIGIT_NAME_SHORT)) %>% 
+  pull
 
-
-
+#filter the yeartoplot data (which includes all other places)
+#Based on that, to get a list of what 2 digits are left
 yeartoplot.sub <- yeartoplot %>%
   filter(
-    SIC_2DIGIT_NAME_SHORT %in% keepthisSICgroup,
-    SIC_5DIGIT_NAME_SHORT %in% keeps,
-    LQ_movingav > 0
-    # min_LQ_all_time > 0
+    SIC_5DIGIT_NAME_SHORT %in% keep.these.5digits
   ) %>%
   mutate(jobcount_movingav = round(jobcount_movingav,0))
 
+# length(unique(yeartoplot$SIC_2DIGIT_NAME_SHORT))
+# length(unique(yeartoplot.sub$SIC_2DIGIT_NAME_SHORT))
+
+#Plot each SIC 2 digit for the 5 digits in them
+plotz <- map(yeartoplot.sub %>% group_split(SIC_2DIGIT_NAME_SHORT),LQplot_BRES_groupsof5digit)
+
+#Tests
+# debugonce(LQplot_BRES_groupsof5digit)
+# LQplot_BRES_groupsof5digit(yeartoplot.sub %>% filter(qg('machinery manuf',SIC_2DIGIT_NAME_SHORT)))
+
+#Get same order of 2 digits from that...
+#Err which I think was just alphabetical!
+twodigitnamesforsaves <- yeartoplot.sub %>% 
+  group_split(SIC_2DIGIT_NAME_SHORT) %>% 
+  map_chr(
+    ~ .x %>% select(SIC_2DIGIT_NAME_SHORT) %>% 
+        distinct() %>% 
+        pull
+        )
+
+filenamez <- paste0(
+  'local/outputs/bresLQplots_bradford/',
+  gsub(' |/','',twodigitnamesforsaves),
+  # gsub(' |/','',unique(yeartoplot.sub$SIC_2DIGIT_NAME_SHORT)),
+  '.png')
+
+# map2(filenamez[1:2],plotz[1:2],ggsave, height = 8, width = 9)
+map2(filenamez,plotz,ggsave,height = 8, width = 9)
+
+#Nearly but bit messy...
+# wrap_plots(plotz,ncol = 8)
 
 
 
 
+
+
+# COMPANIES HOUSE LQS (AND COMPARE TO ONS DATA)----
+
+#ch already got and linked to shortened names above
+#Note, we have local authorities here not ITL3 zones
+length(unique(ch$localauthority_name))
+length(unique(yeartoplot$GEOGRAPHY_NAME))#ITL3 2021
+
+#But LQs are relative to national totals...
+#Ah except of course CH is only GB
+#Ah except except - BRES is *also* GB
+
+#Bradford is the same shape as the ITL3
+
+#Let's use average employment over the two points we've got for this LQ
+#Rowwise seems slow compared to just adding column with base?
+ch.avemp <- ch %>% 
+  st_set_geometry(NULL) %>% 
+  # filter(!is.na(mean(c(Employees_thisyear,Employees_lastyear)))) %>% #Keep only firms with employees in both of the years
+  filter(!is.na(Employees_thisyear) | !is.na(Employees_lastyear)) %>% #Keep only firms with employees in one of the years
+  select(CompanyName,CompanyNumber,accountcode,CompanyCategory,incorporationdate_formatted,age_of_firm_years,localauthority_code:ITL221NM,Employees_thisyear,Employees_lastyear,SIC_2DIGIT_CODE,SIC_5DIGIT_CODE,SIC_SECTION_NAME_SHORT:SIC_5DIGIT_NAME_SHORT) %>%
+  rowwise() %>% 
+  mutate(
+    avemployeecount = mean(c(Employees_thisyear,Employees_lastyear), na.rm = T)#get mean if there's only one employee count in a year
+  )
+
+table(!is.na(ch.avemp$Employees_thisyear))
+table(!is.na(ch.avemp$Employees_lastyear))
+
+#Check on sample
+#slice_sample(ch.avemp, n = 10) %>% View #for some reason not running
+#ch.avemp[1:100,] %>% View
+
+#LQs at 2 digit first - 
+#For that, sum employee count by local authority and 2 digit sector
+ch.avemp.2digitsums <- ch.avemp %>% 
+  group_by(SIC_2DIGIT_NAME_SHORT,localauthority_name) %>% 
+  summarise(avemployeecount = sum(avemployeecount))
+
+
+#LQs from that!
+ch.avemp.2digitsums <- add_location_quotient_and_proportions(
+  df = ch.avemp.2digitsums,
+  regionvar = localauthority_name,
+  lq_var = SIC_2DIGIT_NAME_SHORT,
+  valuevar = avemployeecount
+)
+
+#sanity check... tick, all sector total proportions sum to 1 for whole of GB
+# ch.avemp.2digitsums %>% 
+#   select(SIC_2DIGIT_NAME_SHORT,sector_total_proportion) %>% 
+#   distinct() %>% 
+#   summarise(sum(sector_total_proportion))
+
+
+#Actuuuuaaaally
+#We could use the two employee time points to get a rudimentary "where going in last year"
+#datapoint to show LQ change. Though for that we'd need only firms with employee counts in both time points.
+#Remind me of percentages for that.
+
+#Firms with employees in one of the two years (and maybe both) 86.7%
+table(!is.na(ch$Employees_thisyear) | !is.na(ch$Employees_lastyear)) %>% prop.table()
+
+#Firms with employees in BOTH YEARS: 70%. Huh, not bad.
+#That seems higher than last time I did this?
+#Oh, it's ones with zero in
+table(!is.na(ch$Employees_thisyear) & !is.na(ch$Employees_lastyear)) %>% prop.table()
+
+# x <- ch %>% 
+#   filter(!is.na(Employees_thisyear) & !is.na(Employees_lastyear))
+# 
+# g(x)
+
+#Well that's OK for summing, don't need to filter out
+ch.2digitsums <- ch %>% 
+  st_set_geometry(NULL) %>% 
+  filter(!is.na(Employees_thisyear) & !is.na(Employees_lastyear)) %>% #Keep only firms with employees in BOTH years even if it's zero
+  select(CompanyName,CompanyNumber,accountcode,CompanyCategory,incorporationdate_formatted,age_of_firm_years,localauthority_code:ITL221NM,Employees_thisyear,Employees_lastyear,SIC_2DIGIT_CODE,SIC_2DIGIT_CODE_NUMERIC,SIC_5DIGIT_CODE,SIC_SECTION_NAME_SHORT:SIC_5DIGIT_NAME_SHORT) %>% 
+  group_by(SIC_2DIGIT_NAME_SHORT,localauthority_name) %>% 
+  summarise(
+    employeecount_thisyear = sum(Employees_thisyear),
+    employeecount_lastyear = sum(Employees_lastyear)
+    ) %>% ungroup()
+
+#Add 2 digit code numeric back in to label production easily
+#dplyr distinct weirdly slow
+#Do this instead, instant
+twodigitlookup <- tibble(
+  SIC_2DIGIT_CODE_NUMERIC = unique(ch$SIC_2DIGIT_CODE_NUMERIC),
+  SIC_2DIGIT_NAME_SHORT = unique(ch$SIC_2DIGIT_NAME_SHORT)
+)
+
+
+ch.2digitsums <- ch.2digitsums %>% 
+  left_join(
+    twodigitlookup, by = 'SIC_2DIGIT_NAME_SHORT'
+  )
+
+
+#Make those into pseudo dates in an order we can get an LQ size change from
+ch.2digitsums.long <- ch.2digitsums %>% 
+  pivot_longer(employeecount_thisyear:employeecount_lastyear, names_to = 'timepoint', values_to = 'jobcount') %>% 
+  mutate(
+    timepoint_numeric = ifelse(timepoint == 'employeecount_lastyear', 1,2)
+  )
+ 
+ 
+#LQs again!
+ch.2digitsums.long <- ch.2digitsums.long %>% 
+  group_split(timepoint) %>%
+  map(add_location_quotient_and_proportions,
+        regionvar = localauthority_name,
+        lq_var = SIC_2DIGIT_NAME_SHORT,
+        valuevar = jobcount) %>% 
+  bind_rows()
+
+#Label production and other
+#Production is 2 digits from 1 to 43
+ch.2digitsums.long <- ch.2digitsums.long %>% 
+  mutate(
+    production = ifelse(SIC_2DIGIT_CODE_NUMERIC %in% c(1:43), 'production','other')
+  )
+
+# table(ch.2digitsums.long$production)
+
+#sanity check again... tick, should sum to 1 here in each timepoint group
+# ch.2digitsums.long %>%
+#   select(timepoint,SIC_2DIGIT_NAME_SHORT,sector_total_proportion) %>%
+#   distinct() %>%
+#   group_by(timepoint) %>%
+#   summarise(sum(sector_total_proportion))
+
+#On to plotting
+#Linear slope between those two timepoints...
+#Could do with functioning this all up really
+
+#Make calcs for trajectory
+
+#Log vals here should give us rough % change between timepoints...
+#TODO: have version to get accurate % change (or can just convert back)
+LQ_slopes <- compute_slope_or_zero(
+  data = ch.2digitsums.long, 
+  localauthority_name, SIC_2DIGIT_NAME_SHORT,#slopes will be found within whatever grouping vars are added here
+  y = LQ_log, x = timepoint_numeric)
+
+
+#Filter down to a single year...
+#Might want the av of the two timepoints here maybe...
+yeartoplot <- ch.2digitsums.long %>% filter(timepoint_numeric == max(timepoint_numeric))#use latest point
+
+#Add slopes into data to get LQ plots
+yeartoplot <- yeartoplot %>% 
+  left_join(
+    LQ_slopes,
+    by = c('localauthority_name', 'SIC_2DIGIT_NAME_SHORT')
+  )
+
+place = 'Bradford'
+
+sectorLQorder <- ch.2digitsums.long %>% filter(
+  localauthority_name == place,
+  timepoint_numeric == max(timepoint_numeric)#use latest data
+) %>% 
+  arrange(-LQ) %>% 
+  select(SIC_2DIGIT_NAME_SHORT) %>% 
+  pull()
+
+
+#Turn the sector column into a factor and order by LCR's LQs
+yeartoplot$SIC_2DIGIT_NAME_SHORT <- factor(yeartoplot$SIC_2DIGIT_NAME_SHORT, levels = sectorLQorder, ordered = T)
+
+#Also keep only 2 digit sectors where Bradford has more than 100 workers recorded in that sector for CH
+morethanx <- yeartoplot %>% 
+  filter(
+    localauthority_name == place,
+    jobcount >= 100
+    ) %>% 
+  select(SIC_2DIGIT_NAME_SHORT) %>% 
+  distinct() %>% 
+  pull
+
+
+yeartoplot <- yeartoplot %>% filter(
+  !is.na(SIC_2DIGIT_NAME_SHORT),
+  SIC_2DIGIT_NAME_SHORT %in% as.character(morethanx)
+  )
+
+#If I could plot both and space them out, that would be good (could get Bradford change showing too)
+p <- LQ_baseplot(df = yeartoplot %>% filter(production == 'production'), alpha = 0.03, sector_name = SIC_2DIGIT_NAME_SHORT, 
+                 LQ_column = LQ, change_over_time = slope)
+
+# debugonce(addplacename_to_LQplot)
+p <- addplacename_to_LQplot(df = yeartoplot %>% filter(production == 'production'), plot_to_addto = p, 
+                            placename = place, shapenumber = 16,
+                            # min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
+                            value_column = jobcount, sector_regional_proportion = sector_regional_proportion,
+                            region_name = localauthority_name,
+                            sector_name = SIC_2DIGIT_NAME_SHORT, change_over_time = slope, LQ_column = LQ,
+                            value_col_ismoney = F, text = 7, maxLQvalmultiplier = 2)
+
+
+# p <- p +
+# annotate(
+#   "text",
+#   label = "JOB COUNT in circles -->\nGVA in diamonds -->",
+#   x = 0.2, y = sectorLQorder[which(qg('furnit',sectorLQorder))]
+# )  
+  # coord_cartesian(xlim = c(0.1,50))
+
+p <- p + ggtitle("production\n(2 digit sectors w/ 100+ employees in Bradford)")
+
+p2 <- LQ_baseplot(df = yeartoplot %>% filter(production == 'other'), alpha = 0.03, sector_name = SIC_2DIGIT_NAME_SHORT, 
+                 LQ_column = LQ, change_over_time = slope)
+
+# debugonce(addplacename_to_LQplot)
+p2 <- addplacename_to_LQplot(df = yeartoplot %>% filter(production == 'other'), plot_to_addto = p2, 
+                            placename = place, shapenumber = 16,
+                            # min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
+                            value_column = jobcount, sector_regional_proportion = sector_regional_proportion,
+                            region_name = localauthority_name,
+                            sector_name = SIC_2DIGIT_NAME_SHORT, change_over_time = slope, LQ_column = LQ,
+                            value_col_ismoney = F, text = 7, maxLQvalmultiplier = 2)
+
+p2 <- p2 + ggtitle("other\n(2 digit sectors w/ 100+ employees in Bradford)")
+
+p / p2
+
+
+
+
+# WOULD ALSO THEN BE GOOD TO KNOW HOW CH COMPARES TO BRES FOR THE SAME SECTORS...
+#Full BRES 2 digits, not the reduced version from BRES/GVA combo
+#Have I already done that somewhere? Nope, don't seem to have used it...
+bres15to23 <- read_csv("local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_NUTS3_n_ITL321_stacked_2_Fulltimeemployees_2015_2023_SIC_5DIGIT.csv")
+
+#Note that's prob got 2022 doubled up from the two different sources...
+2
 
 
 

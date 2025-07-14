@@ -1,6 +1,6 @@
 SIC07_description,SIC07_description_shortened
 Manufacture of furniture; other manufacturing,Furniture
-Repair and installation of machinery and equipment,Machinery
+Repair and installation of machinery and equipment,Machinery repair/install
 Construction of buildings,Buildings
 Civil engineering,Engineering
 Specialised construction activities,Construction
@@ -14,12 +14,12 @@ Accommodation,Accommodation
 Food and beverage service activities,Food
 Publishing; film and TV production and broadcasting,Media
 Telecommunications; information technology,ICT
-"Real estate activities, excluding imputed rental",RealEstate
+"Real estate activities, excluding imputed rental",Real estate
 Legal and accounting activities,Legal
 Head offices and management consultancy,Consultancy
 Architectural and engineering activities,Architecture
 Research and development; advertising and market research,Research
-"Other professional, scientific and technical activities",Professional
+"Other professional, scientific and technical activities",Professional/sci/tech
 Rental and leasing activities,Rental
 Employment activities; tourism and security services,Employment
 Services to buildings and landscape activities,Cleaning/landscapes
@@ -30,18 +30,18 @@ Social work activities,SocialWork
 "Creative, arts, entertainment and cultural activities",Arts/ent
 Gambling and betting; sports and recreation activities,Recreation
 Activities of membership organisations,Membership
-"Repair of computers, personal and household goods",Repair
+"Repair of computers, personal and household goods",Repair personal/computer
 Other personal service activities,Personal
 "Agriculture, forestry and fishing; mining and quarrying",Agri/mining
-"Manufacture of food, beverages and tobacco",FoodManuf
+"Manufacture of food, beverages and tobacco",Food manuf
 "Manufacture of textiles, wearing apparel and leather",Textiles
-Manufacture of wood and paper products and printing,WoodPaper
+Manufacture of wood and paper products and printing,Wood/paper
 "Manufacture of petroleum, chemicals and other minerals",Chemicals
 Manufacture of basic and fabricated metal products,Metals
 "Manufacture of electronic, optical and electrical products",Electronics
-Manufacture of machinery and transport equipment,MachineryManuf
+Manufacture of machinery and transport equipment,Machinery/transport manuf
 "Electricity, gas, water; sewerage and waste management",Utilities
 Financial and insurance activities,Finance
-Public administration and defence,PublicAdmin
+Public administration and defence,Public admin
 Education,Education
 Activities of households,Households
