@@ -196,7 +196,6 @@ ch = ch %>%
   )
 
 
-
 #Keep only firms with at least 1 employee in the most recent year
 ch.emp1 <- ch %>% filter(Employees_thisyear >= 1)
 
@@ -1288,16 +1287,342 @@ p / p2
 
 
 
+## COMPARE CH TO BRES----
 
 # WOULD ALSO THEN BE GOOD TO KNOW HOW CH COMPARES TO BRES FOR THE SAME SECTORS...
 #Full BRES 2 digits, not the reduced version from BRES/GVA combo
-#Have I already done that somewhere? Nope, don't seem to have used it...
-bres15to23 <- read_csv("local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_NUTS3_n_ITL321_stacked_2_Fulltimeemployees_2015_2023_SIC_5DIGIT.csv")
 
-#Note that's prob got 2022 doubled up from the two different sources...
-2
+#This is exactly the code used above but going to re-run so we can run the whole thing with any changes needed here
+bres <- read_csv("local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_NUTS3_n_ITL321_stacked_2_Fulltimeemployees_2015_2023_SIC_5DIGIT.csv")
+
+#This comes with ALL NUTS and ITL3 data
+#Which means 2022 is doubled up
+#E.g. see here: 
+#bres %>% filter(qg('bradford', GEOGRAPHY_NAME),qg('Museum activities',SIC_5DIGIT_NAME)) %>% View
+
+#Remove one of them...
+#Need to filter NOT year == 2022 NOT GEOGRAPHY_CODE_NUTS2018 is NA, keep the rest
+#(2023 we need to keep!)
+bres <- bres %>% 
+  filter(!(DATE == 2022 & is.na(GEOGRAPHY_CODE_NUTS2018)))
 
 
+#unique(bres$DATE)#tick
+
+SIClookup <- read_csv('data/SIClookup.csv')
+
+#Join SIC lookup on 5 digit name
+#Keep 2 digit and section codes
+#May shorten names in a mo...
+bres <- bres %>%
+  left_join(
+    SIClookup %>% select(SIC_5DIGIT_NAME,SIC_2DIGIT_NAME,SIC_SECTION_NAME),
+    by = 'SIC_5DIGIT_NAME'
+  )
+
+#Make shorter names, use those.
+#Make lookup so can be merged in.
+names.sections = unique(bres$SIC_SECTION_NAME)
+shortnames.sections = reduceSICnames(unique(bres$SIC_SECTION_NAME),'section')
+
+chk.sections = data.frame(names = names.sections, shortnames = shortnames.sections)
+
+names.2digit = unique(bres$SIC_2DIGIT_NAME)
+shortnames.2digit = reduceSICnames(unique(bres$SIC_SECTION_NAME),'2 digit')
+
+chk.2digit = data.frame(names = names.2digit, shortnames = shortnames.2digit)
+
+
+#And 729 categories in the 5 digit...
+names.5digit = unique(bres$SIC_5DIGIT_NAME)
+#NOTE: THE ORDER HERE IS BASED ON THE ORDER IN bres
+#We should make an actual lookup to make sure we don't lose that order
+shortnames.5digit = reduceSICnames(unique(bres$SIC_5DIGIT_NAME),'5 digit')
+
+chk.5digit = data.frame(names = names.5digit, shortnames = shortnames.5digit)
+
+
+#Merge into bres
+bres <- bres %>% 
+  left_join(chk.sections %>% rename(SIC_SECTION_NAME_SHORT = shortnames), by = c('SIC_SECTION_NAME' = 'names')) %>% 
+  left_join(chk.2digit %>% rename(SIC_2DIGIT_NAME_SHORT = shortnames), by = c('SIC_2DIGIT_NAME' = 'names')) %>% 
+  left_join(chk.5digit %>% rename(SIC_5DIGIT_NAME_SHORT = shortnames), by = c('SIC_5DIGIT_NAME' = 'names')) 
+
+
+#Drop some sectors
+bres <- bres %>% 
+  filter(!qg('households|membership', SIC_2DIGIT_NAME))
+
+#Good!
+# table(unique(bres$SIC_2DIGIT_NAME_SHORT) %in% ch.2digitsums$SIC_2DIGIT_NAME_SHORT)
+
+
+
+
+# BRES / CH CORRELATION CHECKS
+
+#Let's just correlate the job values to start with, check they're roughly the same ranking
+#Public sectors won't be...
+bres.2dig <- bres %>% 
+  group_by(DATE,GEOGRAPHY_NAME,SIC_2DIGIT_NAME_SHORT) %>% 
+  summarise(jobcount = sum(JOBCOUNT)) %>% 
+  ungroup()
+
+#Ah except we can't cos it's LAs vs ITL3!
+#Have got ITL2 code in CH but not ITL3. Hmmph.
+
+#A lot of LAs will match...
+table(unique(bres.2dig$GEOGRAPHY_NAME) %in% ch.2digitsums$localauthority_name)
+unique(bres.2dig$GEOGRAPHY_NAME)[unique(bres.2dig$GEOGRAPHY_NAME) %in% ch.2digitsums$localauthority_name]
+
+#Which is enough for a sanity check
+#Compare 2023 to 2025
+both <- ch.2digitsums %>% 
+  rename(jobcount_ch = employeecount_thisyear) %>% 
+  select(-employeecount_lastyear) %>% 
+  inner_join(
+    bres.2dig %>% 
+      filter(DATE == 2023) %>% 
+      rename(localauthority_name = GEOGRAPHY_NAME,jobcount_bres = jobcount),
+    by = c('localauthority_name','SIC_2DIGIT_NAME_SHORT')
+  )
+
+#length(unique(both$localauthority_name))#Yep
+
+#Overall correlation...
+#Broadly! 
+ggplot(both, aes(x = jobcount_ch, y = jobcount_bres)) +
+  geom_point(alpha = 0.5) +
+  scale_x_log10() +
+  scale_y_log10() 
+
+#Hmm!
+cor(both$jobcount_ch,both$jobcount_bres)
+
+#Correlation by sector
+tibble(
+  sector = both %>% group_split(SIC_2DIGIT_NAME_SHORT) %>% map_chr( ~ unique(.x$SIC_2DIGIT_NAME_SHORT)),
+  correlation = map_dbl(both %>% group_split(SIC_2DIGIT_NAME_SHORT),
+  ~ {
+    cor(.x$jobcount_ch,.x$jobcount_bres)
+  }
+)
+) %>% View
+
+#Looking at those - public sectors
+#And also sectors more likely not to be locally owned like pharma?
+
+#And in Bradford specifically (for all sectors)?
+# cor(both$jobcount_ch[both$localauthority_name == 'Bradford'],both$jobcount_bres[both$localauthority_name == 'Bradford'])
+
+#Aaaand all places available?
+placecor <- tibble(
+  place = both %>% group_split(localauthority_name) %>% map_chr( ~ unique(.x$localauthority_name)),
+  correlation = map_dbl(both %>% group_split(localauthority_name),
+  ~ {
+    cor(.x$jobcount_ch,.x$jobcount_bres)
+  }
+)
+)
+
+#Hella spread of places, Bradford on the higher end
+ggplot(placecor, aes(x = correlation)) +
+  geom_density() +
+  geom_vline(xintercept = placecor$correlation[placecor$place == 'Bradford'])
+
+
+
+
+
+#OK so getting on with LQs and thinking about what those mean...
+#The LQs won't differ because they're both for Bradford
+#And the national sums will be matching quantities across both
+
+
+
+
+# AND ON WITH LQS 
+#Hopefully putting them side by side again
+bres.2dig.2023 <- bres.2dig %>% 
+  filter(DATE == 2023) %>% 
+  add_location_quotient_and_proportions(
+    regionvar = GEOGRAPHY_NAME,
+    lq_var = SIC_2DIGIT_NAME_SHORT,
+    valuevar = jobcount
+)
+
+
+corname = 'Bradford'
+corname = 'Sheffield'
+corname = 'Wakefield'
+
+#Again, let's just look at the matching LQs for Bradford...
+breslq <- bres.2dig.2023 %>% 
+  filter(GEOGRAPHY_NAME == corname) %>% 
+  select(SIC_2DIGIT_NAME_SHORT,LQ,jobcount)
+
+#companies house latest
+chlq <- ch.2digitsums.long %>% 
+  filter(timepoint_numeric == max(timepoint_numeric)) %>% filter(localauthority_name == corname) %>% 
+  select(SIC_2DIGIT_NAME_SHORT,LQ,jobcount)
+
+#How many matching sectors?
+# table(breslq$SIC_2DIGIT_NAME_SHORT %in% chlq$SIC_2DIGIT_NAME_SHORT)
+#Slightly curious omissions!
+# breslq$SIC_2DIGIT_NAME_SHORT[!(breslq$SIC_2DIGIT_NAME_SHORT %in% chlq$SIC_2DIGIT_NAME_SHORT)]
+
+#Anyway...
+bothlq <- breslq %>% 
+  rename(bresLQ = LQ, bres_jobcount = jobcount) %>% 
+  inner_join(
+    chlq %>% rename(CHLQ = LQ, ch_jobcount = jobcount),
+    by = 'SIC_2DIGIT_NAME_SHORT'
+  )
+
+#Add col with vals on
+bothlq <- bothlq %>% 
+  mutate(
+    SIC_n_jobs = paste0(SIC_2DIGIT_NAME_SHORT,' ch:',ch_jobcount,' bres:',bres_jobcount)
+  )
+
+#Which is what?
+p <- ggplot(bothlq, aes(x = bresLQ, y = CHLQ, group = SIC_n_jobs)) +
+  geom_point() +
+  geom_abline(slope = 1,intercept = 0)
+
+ggplotly(p, tooltip = 'SIC_n_jobs')
+
+
+#Let's just correlate the actual numbers!
+p <- ggplot(bothlq, aes(x = bres_jobcount, y = ch_jobcount, group = SIC_n_jobs)) +
+  geom_point() +
+  geom_abline(slope = 1,intercept = 0)
+
+ggplotly(p, tooltip = 'SIC_n_jobs')
+
+
+
+
+#Actually... back again to comparing, let's look at national totals for all places and all sectors
+#Again, let's just look at the matching LQs for Bradford...
+breslq <- bres.2dig.2023 %>% 
+  select(SIC_2DIGIT_NAME_SHORT,LQ,jobcount) %>% 
+  group_by(SIC_2DIGIT_NAME_SHORT) %>% 
+  summarise(
+    jobcount = sum(jobcount)
+  )
+
+#companies house latest
+chlq <- ch.2digitsums.long %>% 
+  filter(timepoint_numeric == max(timepoint_numeric)) %>% 
+  select(SIC_2DIGIT_NAME_SHORT,LQ,jobcount) %>% 
+  group_by(SIC_2DIGIT_NAME_SHORT) %>% 
+  summarise(
+    jobcount = sum(jobcount)
+  )
+
+bothlq <- breslq %>% 
+  rename(bres_jobcount = jobcount) %>% 
+  inner_join(
+    chlq %>% rename(ch_jobcount = jobcount),
+    by = 'SIC_2DIGIT_NAME_SHORT'
+  )
+
+#Add col with vals on
+bothlq <- bothlq %>% 
+  mutate(
+    SIC_n_jobs = paste0(SIC_2DIGIT_NAME_SHORT,' ch:',ch_jobcount,' bres:',bres_jobcount)
+  )
+
+
+#TOTAL NUMBERS FOR ALL GB SECTORS IN BOTH
+p <- ggplot(bothlq, aes(x = bres_jobcount, y = ch_jobcount, group = SIC_n_jobs)) +
+  geom_point() +
+  geom_abline(slope = 1,intercept = 0)
+
+ggplotly(p, tooltip = 'SIC_n_jobs')
+
+
+
+
+
+# COMPANIES HOUSE PERCENT CHANGES----
+
+#Taken from CH code here
+#https://github.com/DanOlner/companieshouseopen/blob/2ddc26d4b89716b8755c02fc6626190ad624b888/testcode/initial_datadigging.R#L417
+empchange.summary <- ch %>% 
+  st_set_geometry(NULL) %>% 
+  filter(Employees_lastyear >= 10) %>%
+  group_by(localauthority_name,SIC_2DIGIT_NAME_SHORT) %>%
+  summarise(
+    total_employmentlastyear = sum(Employees_lastyear, na.rm = T),
+    total_employmentthisyear = sum(Employees_thisyear, na.rm = T),
+    employment_percentchange = percent_change(total_employmentlastyear,total_employmentthisyear),
+    firmcount = n()
+  ) %>% 
+  ungroup() %>% 
+  filter(firmcount > 5)#Reduce to sectors/places with 10+ firms
+
+#Order by percent change per sector in Bradford
+orderby <- empchange.summary %>% 
+  filter(qg('bradford',localauthority_name)) %>%
+  select(SIC_2DIGIT_NAME_SHORT,employment_percentchange) %>% 
+  arrange(employment_percentchange) %>% 
+  pull(SIC_2DIGIT_NAME_SHORT)
+
+#Order by those...
+empchange.summary <- empchange.summary %>% 
+  mutate(
+    SIC_2DIGIT_NAME_SHORT = factor(SIC_2DIGIT_NAME_SHORT, levels = orderby),
+    `Place: ` = paste0(localauthority_name, ', firm count: ', firmcount,', emp last/this yr: ', total_employmentlastyear,' > ',total_employmentthisyear)#for labels
+    # `Place: ` = paste0(SIC_2DIGIT_NAME_SHORT,',', localauthority_name, ', firm count: ', firmcount,', emp last/this yr: ', total_employmentlastyear,' > ',total_employmentthisyear)#for labels
+  ) %>% 
+  filter(!is.na(SIC_2DIGIT_NAME_SHORT))#Filter these here as some will be missing spefically from Bradford, will end up NA in the factor
+
+# table(is.na(empchange.summary$SIC_2DIGIT_NAME_SHORT))
+
+
+
+
+p <- ggplot() +
+  geom_point(
+    position = position_nudge(y = 0.2),
+    data = empchange.summary %>% filter(
+      qg('Belfast|Birmingham|Bristol|Cardiff|Glasgow|Leeds|Liverpool|Manchester|Tyne|Sheffield|Nottingham', localauthority_name)#just core cities (minus four places below)
+    ),
+    aes(y = SIC_2DIGIT_NAME_SHORT, x = employment_percentchange, group = `Place: `),
+    alpha = 0.5)
+
+#Add four places
+p <- p + 
+  geom_point(
+    position = position_nudge(y = -0.2),
+    data = empchange.summary %>% filter(qg('leeds|kirklees|wakefield|calderdale',localauthority_name)),
+    aes(y = SIC_2DIGIT_NAME_SHORT, x = employment_percentchange, colour = localauthority_name, group = `Place: `),
+    size = 7, shape = 17) +
+  scale_colour_brewer(palette = 'Paired', direction = 1, guide = guide_legend(title = NULL)) +
+  # coord_cartesian(xlim = c(-25,25)) +
+  geom_vline(xintercept = 0, alpha = 0.5, colour = 'green') +
+  ylab("") 
+
+#Add Bradford over the top to make sure visible
+p <- p + 
+  geom_point(
+    position = position_nudge(y = -0.2),
+    data = empchange.summary %>% filter(qg('bradford',localauthority_name)),
+    aes(y = SIC_2DIGIT_NAME_SHORT, x = employment_percentchange, colour = localauthority_name, group = `Place: `),
+    size = 8, shape = 17) +
+  scale_colour_brewer(palette = 'Paired', direction = 1, guide = guide_legend(title = NULL)) +
+  # coord_cartesian(xlim = c(-25,25)) +
+  geom_vline(xintercept = 0, alpha = 0.5, colour = 'green') +
+  ylab("") 
+
+
+
+#p
+
+# ggplotly(p, width = 800, height = 900, tooltip = 'localauthority_name')
+ggplotly(p, tooltip = 'Place: ')
 
 
 

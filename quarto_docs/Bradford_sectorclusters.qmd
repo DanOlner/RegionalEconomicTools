@@ -956,3 +956,220 @@ ggplotly(p, tooltip = 'Region_name')
 
 
 
+
+
+
+
+## From Companies House firm level data: in the last year (March 2024-March 2025), percent change in employment in firms with 10+ employees, five West Yorkshire local authorities compared to 'core cities' (hover for place names)
+
+
+```{r, fig-percentempfourplaces}
+#| fig-height: 20
+#| label: fig-percentempfourplaces
+#| fig-cap: "Companies House firm level data: percent change in employment for firms with ten+ employees between most recent accounts and previous year - core cities, with West Yorkshire's five local authorities overlaid. Hover for place name."
+
+
+#See here for fig-responsiveness (non)issue: https://github.com/quarto-dev/quarto-cli/issues/4836
+
+#30 seconds-ish
+# x <- Sys.time()
+ch = readRDS('../../companieshouseopen/local/PROCESSED_accountextracts_n_livelist_geocoded_combined_July2025.rds')
+# ch = readRDS('../companieshouseopen/local/PROCESSED_accountextracts_n_livelist_geocoded_combined_July2025.rds')
+# Sys.time() - x
+
+#get short SIC names
+shorts <- readRDS('../local/data/bradford_SICs_withshortnames.rds')
+#shorts <- readRDS('local/data/bradford_SICs_withshortnames.rds')
+
+ch = ch %>%
+  left_join(
+    shorts %>% select(SIC_5DIGIT_CODE,SIC_SECTION_NAME_SHORT:SIC_5DIGIT_NAME_SHORT),
+    by = 'SIC_5DIGIT_CODE'
+  )
+
+#Create the base summary, save, reuse
+#Taken from CH code here
+#https://github.com/DanOlner/companieshouseopen/blob/2ddc26d4b89716b8755c02fc6626190ad624b888/testcode/initial_datadigging.R#L417
+empchange.summary <- ch %>% 
+  st_set_geometry(NULL) %>% 
+  filter(Employees_lastyear >= 10) %>%#Need to load cos we need to filter here so we can accurately count employees in 10+ employee firms
+  group_by(localauthority_name,SIC_2DIGIT_NAME_SHORT) %>%
+  summarise(
+    total_employmentlastyear = sum(Employees_lastyear, na.rm = T),
+    total_employmentthisyear = sum(Employees_thisyear, na.rm = T),
+    employment_percentchange = percent_change(total_employmentlastyear,total_employmentthisyear),
+    firmcount = n()
+  ) %>% 
+  ungroup() %>% 
+  filter(firmcount > 5)#Reduce to sectors/places with 10+ firms
+# 
+# saveRDS(empchange.summary,'local/data/empchangsummary.rds')
+# empchange.summary <- readRDS('../local/data/empchangsummary.rds')
+#empchange.summary <- readRDS('local/data/empchangsummary.rds')
+
+# empchange10plus <- empchange.summary %>% 
+#   filter(
+#     firmcount > 5,
+#     Employees_lastyear >= 10#Reduce to sectors/places with 10+ firms
+#   )
+
+#Order by percent change per sector in Bradford
+orderby <- empchange.summary %>% 
+  filter(qg('bradford',localauthority_name)) %>%
+  select(SIC_2DIGIT_NAME_SHORT,employment_percentchange) %>% 
+  arrange(employment_percentchange) %>% 
+  pull(SIC_2DIGIT_NAME_SHORT)
+
+#Order by those...
+empchange.summary <- empchange.summary %>% 
+  mutate(
+    SIC_2DIGIT_NAME_SHORT = factor(SIC_2DIGIT_NAME_SHORT, levels = orderby),
+    `Place: ` = paste0(localauthority_name, ', firm count: ', firmcount,', emp last/this yr: ', total_employmentlastyear,' > ',total_employmentthisyear)#for labels
+    # `Place: ` = paste0(SIC_2DIGIT_NAME_SHORT,',', localauthority_name, ', firm count: ', firmcount,', emp last/this yr: ', total_employmentlastyear,' > ',total_employmentthisyear)#for labels
+  ) %>% 
+  filter(!is.na(SIC_2DIGIT_NAME_SHORT))#Filter these here as some will be missing spefically from Bradford, will end up NA in the factor
+
+# table(is.na(empchange.summary$SIC_2DIGIT_NAME_SHORT))
+
+
+
+
+p <- ggplot() +
+  geom_point(
+    position = position_nudge(y = 0.2),
+    data = empchange.summary %>% filter(
+      qg('Belfast|Birmingham|Bristol|Cardiff|Glasgow|Leeds|Liverpool|Manchester|Tyne|Sheffield|Nottingham', localauthority_name)#just core cities (minus four places below)
+    ),
+    aes(y = SIC_2DIGIT_NAME_SHORT, x = employment_percentchange, group = `Place: `),
+    alpha = 0.5)
+
+#Add four places
+p <- p + 
+  geom_point(
+    position = position_nudge(y = -0.2),
+    data = empchange.summary %>% filter(qg('leeds|kirklees|wakefield|calderdale',localauthority_name)),
+    aes(y = SIC_2DIGIT_NAME_SHORT, x = employment_percentchange, colour = localauthority_name, group = `Place: `),
+    size = 7, shape = 17) +
+  scale_colour_brewer(palette = 'Paired', direction = 1, guide = guide_legend(title = NULL)) +
+  # coord_cartesian(xlim = c(-25,25)) +
+  geom_vline(xintercept = 0, alpha = 0.5, colour = 'green') +
+  ylab("") 
+
+#Add Bradford over the top to make sure visible
+p <- p + 
+  geom_point(
+    position = position_nudge(y = -0.2),
+    data = empchange.summary %>% filter(qg('bradford',localauthority_name)),
+    aes(y = SIC_2DIGIT_NAME_SHORT, x = employment_percentchange, colour = localauthority_name, group = `Place: `),
+    size = 8, shape = 17) +
+  scale_colour_brewer(palette = 'Paired', direction = 1, guide = guide_legend(title = NULL)) +
+  # coord_cartesian(xlim = c(-25,25)) +
+  geom_vline(xintercept = 0, alpha = 0.5, colour = 'green') +
+  ylab("") 
+
+
+
+#p
+
+# ggplotly(p, width = 800, height = 900, tooltip = 'localauthority_name')
+ggplotly(p, tooltip = 'Place: ')
+
+
+```
+
+
+```{r, fig-percentempfourplaces_lessthan10}
+#| fig-height: 20
+#| label: fig-percentempfourplaces_lessthan10
+#| fig-cap: "From Companies House firm level data: percent change in employment for firms with fewer than 10 employees, between most recent accounts and previous year - core cities, with West Yorkshire's five local authorities overlaid. Hover for place name."
+
+empchange.summary <- ch %>% 
+  st_set_geometry(NULL) %>% 
+  filter(Employees_lastyear < 10) %>%#Need to load cos we need to filter here so we can accurately count employees in 10+ employee firms
+  group_by(localauthority_name,SIC_2DIGIT_NAME_SHORT) %>%
+  summarise(
+    total_employmentlastyear = sum(Employees_lastyear, na.rm = T),
+    total_employmentthisyear = sum(Employees_thisyear, na.rm = T),
+    employment_percentchange = percent_change(total_employmentlastyear,total_employmentthisyear),
+    firmcount = n()
+  ) %>% 
+  ungroup() %>% 
+  filter(firmcount > 5)#Reduce to sectors/places with 10+ firms
+# 
+# saveRDS(empchange.summary,'local/data/empchangsummary.rds')
+# empchange.summary <- readRDS('../local/data/empchangsummary.rds')
+#empchange.summary <- readRDS('local/data/empchangsummary.rds')
+
+# empchange10plus <- empchange.summary %>% 
+#   filter(
+#     firmcount > 5,
+#     Employees_lastyear >= 10#Reduce to sectors/places with 10+ firms
+#   )
+
+#Order by percent change per sector in Bradford
+orderby <- empchange.summary %>% 
+  filter(qg('bradford',localauthority_name)) %>%
+  select(SIC_2DIGIT_NAME_SHORT,employment_percentchange) %>% 
+  arrange(employment_percentchange) %>% 
+  pull(SIC_2DIGIT_NAME_SHORT)
+
+#Order by those...
+empchange.summary <- empchange.summary %>% 
+  mutate(
+    SIC_2DIGIT_NAME_SHORT = factor(SIC_2DIGIT_NAME_SHORT, levels = orderby),
+    `Place: ` = paste0(localauthority_name, ', firm count: ', firmcount,', emp last/this yr: ', total_employmentlastyear,' > ',total_employmentthisyear)#for labels
+    # `Place: ` = paste0(SIC_2DIGIT_NAME_SHORT,',', localauthority_name, ', firm count: ', firmcount,', emp last/this yr: ', total_employmentlastyear,' > ',total_employmentthisyear)#for labels
+  ) %>% 
+  filter(!is.na(SIC_2DIGIT_NAME_SHORT))#Filter these here as some will be missing spefically from Bradford, will end up NA in the factor
+
+# table(is.na(empchange.summary$SIC_2DIGIT_NAME_SHORT))
+
+
+
+
+p <- ggplot() +
+  geom_point(
+    position = position_nudge(y = 0.2),
+    data = empchange.summary %>% filter(
+      qg('Belfast|Birmingham|Bristol|Cardiff|Glasgow|Leeds|Liverpool|Manchester|Tyne|Sheffield|Nottingham', localauthority_name)#just core cities (minus four places below)
+    ),
+    aes(y = SIC_2DIGIT_NAME_SHORT, x = employment_percentchange, group = `Place: `),
+    alpha = 0.5)
+
+#Add four places
+p <- p + 
+  geom_point(
+    position = position_nudge(y = -0.2),
+    data = empchange.summary %>% filter(qg('leeds|kirklees|wakefield|calderdale',localauthority_name)),
+    aes(y = SIC_2DIGIT_NAME_SHORT, x = employment_percentchange, colour = localauthority_name, group = `Place: `),
+    size = 7, shape = 17) +
+  scale_colour_brewer(palette = 'Paired', direction = 1, guide = guide_legend(title = NULL)) +
+  # coord_cartesian(xlim = c(-25,25)) +
+  geom_vline(xintercept = 0, alpha = 0.5, colour = 'green') +
+  ylab("") 
+
+#Add Bradford over the top to make sure visible
+p <- p + 
+  geom_point(
+    position = position_nudge(y = -0.2),
+    data = empchange.summary %>% filter(qg('bradford',localauthority_name)),
+    aes(y = SIC_2DIGIT_NAME_SHORT, x = employment_percentchange, colour = localauthority_name, group = `Place: `),
+    size = 8, shape = 17) +
+  scale_colour_brewer(palette = 'Paired', direction = 1, guide = guide_legend(title = NULL)) +
+  # coord_cartesian(xlim = c(-25,25)) +
+  geom_vline(xintercept = 0, alpha = 0.5, colour = 'green') +
+  ylab("") 
+
+p <- p + coord_cartesian(xlim = c(-40,80))
+
+#p
+
+# ggplotly(p, width = 800, height = 900, tooltip = 'localauthority_name')
+ggplotly(p, tooltip = 'Place: ')
+
+
+
+
+
+
+```
