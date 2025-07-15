@@ -36,4 +36,8 @@ theme_set(theme_light())
 ```
 
 
-## 
+## Bradford sector / cluster analysis: sumamy doc
+
+Here are links to sources used to look at Bradford's sectors/clusters in context.
+
+1. [Main sector/cluster data doc](https://danolner.github.io/RegionalEconomicTools/quarto_docs/Bradford_sectorclusters_July2025.html) with a series of data plots 
