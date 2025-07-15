@@ -232,7 +232,11 @@ patchwork::wrap_plots(plots, ncol = 1)
 
 
 
-## GVA per full time job over time: Bradford v other ITL3 zones
+## GVA per full time job over time: Bradford v other ITL3 zones for 2 digit SIC sectors
+
+This is measured in **GVA per job parts per million of UK economy** - equivalent to e.g. 1% being "1 in 100 parts of economy", 0.1 here is "1 in 10 millionth of whole economy". So it's again examining **relative change in output per FT worker** across all sectors.
+
+GVA per job as a measure needs some caution: output is also due to other productive factors, so high capital intensity sectors (power, telecoms, other ICT though not all) can appear overly productive per worker. It's more representative for service sectors where an employee's output more clearly correlates to total output, such as legal services.
 
 
 ```{r gvajobs1}
@@ -251,7 +255,7 @@ shortsectornames = tibble(
   "Furniture",
   "Machinery repair/install",
   "Buildings",
-  "Engineering",
+  "Civil eng",
   "Construction",
   "Motor",
   "Wholesale",
@@ -1250,7 +1254,6 @@ ggplotly(p, tooltip = 'Place: ')
 This section is included to be able to identify individual firms (with 10+ employees) by hovering over the points. Each is plotted by what percentage their employee number grew between their latest accounts and a year prior.
 
 ```{r, fig-indivfirmsSY}
-<!-- #| label: fig-indivfirmsSY -->
 #| fig-height: 10
 #| fig-width: 9
 

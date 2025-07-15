@@ -1,0 +1,15 @@
+{
+  "hash": "2e3b357970c96765593dd2b73218fd36",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Bradford sector/cluster analysis: summary and links\"\nauthor:\n  - name: \"Dan Olner\"\nformat: \n  html:\n    output-file: \"Bradford_summary_July2025\"\n    fig-width: 8\n    fig-height: 8\nexecute:\n  echo: false\n  message: false\n  warning: false\nfig-responsive: false\n---\n\n::: {.cell}\n\n:::\n\n\n\n\n## Bradford sector / cluster analysis: summary doc\n\nHere are links to sources used to look at Bradford's sectors/clusters in context (all open in new tabs).\n\n1. [Main sector/cluster data doc](https://danolner.github.io/RegionalEconomicTools/quarto_docs/Bradford_sectorclusters_July2025.html){target=\"_blank\"} with a series of data plots \n2. [Full 5 digit SIC employment location quotients](https://danolner.github.io/RegionalEconomicTools/quarto_docs/Bradford_BRES_5digit_LQs_July2025.html){target=\"_blank\"} broken down by parent 2 digit SIC.\n3. A set of treemaps showing the relative size of sectors in Bradford (as well as comparing Bradford to other ITL3s in West Yorkshire). These are:\n    - Treemap for [BRES job count data (2023) for West Yorkshire ITL3 zones](https://danolner.github.io/RegionalEconomicTools/miscdocs/WYLAs_BRES_treemap.html){target=\"_blank\"} including Bradford - sectors with matching colours. Click to drill down into place then 3 SIC levels (section, 2 digit and 5 digit).\n    - Treemap for [Companies House job count data (up to end of June 2025) for West Yorkshire ITL3 zones](https://danolner.github.io/RegionalEconomicTools/miscdocs/WYLAs_CompaniesHouse2025_treemap.html){target=\"_blank\"}.\n4. [Companies House map](https://danolner.github.io/companieshouseopen/maps/companieshouse_modal_SICsection_byemployeecount_min10plus_hex1000m_wLADs.html){target=\"_blank\"} showing most common broad sector per 100m^2 hex. This is useful for getting a sense of Bradford's economic geography and the surrounding areas.\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

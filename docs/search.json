@@ -1508,7 +1508,7 @@
     "href": "quarto_docs/Bradford_sectorclusters_July2025.html",
     "title": "Bradford sectors and clusters: past, present",
     "section": "",
-    "text": "Hover for place names.\n\nWest Yorkshire ITL3s in green (95% CIs)\nCore cities in blue (95% CIs)\nLondon ITL3s in red/pink\n\nAnd:\n\nAnything above/left of diagonal line is a productivity increase."
+    "text": "This is measured in GVA per job parts per million of UK economy - equivalent to e.g. 1% being “1 in 100 parts of economy”, 0.1 here is “1 in 10 millionth of whole economy”. So it’s again examining relative change in output per FT worker across all sectors.\nGVA per job as a measure needs some caution: output is also due to other productive factors, so high capital intensity sectors (power, telecoms, other ICT though not all) can appear overly productive per worker. It’s more representative for service sectors where an employee’s output more clearly correlates to total output, such as legal services.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHover for place names.\n\nWest Yorkshire ITL3s in green (95% CIs)\nCore cities in blue (95% CIs)\nLondon ITL3s in red/pink\n\nAnd:\n\nAnything above/left of diagonal line is a productivity increase."
   },
   {
     "objectID": "quarto_docs/Bradford_sectorclusters_July2025.html#from-companies-house-firm-level-data-in-the-last-year-march-2024-march-2025-percent-change-in-employment-in-firms-five-west-yorkshire-local-authorities-compared-to-core-cities-hover-for-place-names",
@@ -1537,5 +1537,26 @@
     "title": "Bradford sectors and clusters: past, present",
     "section": "Comparing Companies House to BRES: location quotient plots",
     "text": "Comparing Companies House to BRES: location quotient plots\n\nProduction sectors\n\n\n\n\n\n\n\n\n\n\n\nOther sectors"
+  },
+  {
+    "objectID": "quarto_docs/Bradford_summary_July2025.html",
+    "href": "quarto_docs/Bradford_summary_July2025.html",
+    "title": "Bradford sector/cluster analysis: summary and links",
+    "section": "",
+    "text": "Here are links to sources used to look at Bradford’s sectors/clusters in context (all open in new tabs).\n\nMain sector/cluster data doc with a series of data plots\nFull 5 digit SIC employment location quotients broken down by parent 2 digit SIC.\nA set of treemaps showing the relative size of sectors in Bradford (as well as comparing Bradford to other ITL3s in West Yorkshire). These are:\n\nTreemap for BRES job count data (2023) for West Yorkshire ITL3 zones including Bradford - sectors with matching colours. Click to drill down into place then 3 SIC levels (section, 2 digit and 5 digit).\nTreemap for Companies House job count data (up to end of June 2025) for West Yorkshire ITL3 zones.\n\nCompanies House map showing most common broad sector per 100m^2 hex. This is useful for getting a sense of Bradford’s economic geography and the surrounding areas."
+  },
+  {
+    "objectID": "quarto_docs/Bradford_summary_July2025.html#bradford-sector-cluster-analysis-summary-doc",
+    "href": "quarto_docs/Bradford_summary_July2025.html#bradford-sector-cluster-analysis-summary-doc",
+    "title": "Bradford sector/cluster analysis: summary and links",
+    "section": "",
+    "text": "Here are links to sources used to look at Bradford’s sectors/clusters in context (all open in new tabs).\n\nMain sector/cluster data doc with a series of data plots\nFull 5 digit SIC employment location quotients broken down by parent 2 digit SIC.\nA set of treemaps showing the relative size of sectors in Bradford (as well as comparing Bradford to other ITL3s in West Yorkshire). These are:\n\nTreemap for BRES job count data (2023) for West Yorkshire ITL3 zones including Bradford - sectors with matching colours. Click to drill down into place then 3 SIC levels (section, 2 digit and 5 digit).\nTreemap for Companies House job count data (up to end of June 2025) for West Yorkshire ITL3 zones.\n\nCompanies House map showing most common broad sector per 100m^2 hex. This is useful for getting a sense of Bradford’s economic geography and the surrounding areas."
+  },
+  {
+    "objectID": "quarto_docs/Bradford_sectorclusters_July2025.html#gva-per-full-time-job-over-time-bradford-v-other-itl3-zones-for-2-digit-sic-sectors",
+    "href": "quarto_docs/Bradford_sectorclusters_July2025.html#gva-per-full-time-job-over-time-bradford-v-other-itl3-zones-for-2-digit-sic-sectors",
+    "title": "Bradford sectors and clusters: past, present",
+    "section": "",
+    "text": "This is measured in GVA per job parts per million of UK economy - equivalent to e.g. 1% being “1 in 100 parts of economy”, 0.1 here is “1 in 10 millionth of whole economy”. So it’s again examining relative change in output per FT worker across all sectors.\nGVA per job as a measure needs some caution: output is also due to other productive factors, so high capital intensity sectors (power, telecoms, other ICT though not all) can appear overly productive per worker. It’s more representative for service sectors where an employee’s output more clearly correlates to total output, such as legal services."
   }
 ]
