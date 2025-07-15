@@ -1473,7 +1473,7 @@
     "href": "quarto_docs/Bradford_sectorclusters_July2025.html#av.-percent-change-over-time-for-gva-vs-hours-worked-itl3-zones",
     "title": "Bradford sectors and clusters: past, present",
     "section": "AV. PERCENT CHANGE OVER TIME FOR GVA VS HOURS WORKED, ITL3 ZONES",
-    "text": "AV. PERCENT CHANGE OVER TIME FOR GVA VS HOURS WORKED, ITL3 ZONES\nHover for place names.\n\nWest Yorkshire ITL3s in green (95% CIs)\nCore cities in blue (95% CIs)\nLondon ITL3s in red/pink\n\nAnd:\n\nAnything above/left of diagonal line is a productivity increase.\n\n\n2004 to 2013 av % change\n\n\n\n\n\n\n\n\n2014 to 2023 av % change"
+    "text": "AV. PERCENT CHANGE OVER TIME FOR GVA VS HOURS WORKED, ITL3 ZONES\nHover for place names.\n\nWest Yorkshire ITL3s in green (95% CIs)\nCore cities in blue (95% CIs)\nLondon ITL3s in red/pink\n\nAnd:\n\nAnything above/left of diagonal line is a productivity increase.\n\n\n2004 to 2013 av % change\n\n\n\n\n\n\n\n\n2014 to 2023 av % change\n\n\n\n\n\n\nThe next few plots use data extracted from individual firms’ accounts filed with Companies House between June 2024 and end of June 2025. They mostly examine firms with 10+ employees.\n\n\n\nTable: Bradford count/% of firms by employee band\n\n\nFirm size\nCount\nPercent\n\n\n\n\n1\n4622\n39.51%\n\n\n2-4\n4658\n39.82%\n\n\n5-9\n1258\n10.75%\n\n\n10-20\n625\n5.34%\n\n\n21-50\n367\n3.14%\n\n\n51+\n169\n1.44%"
   },
   {
     "objectID": "quarto_docs/Bradford_sectorclusters_July2025.html#gva-per-ft-job-over-time-bradford-v-other-itl3s",
@@ -1495,5 +1495,12 @@
     "title": "Bradford sectors and clusters: past, present",
     "section": "From Companies House firm level data: in the last year (March 2024-March 2025), percent change in employment in firms with 10+ employees, five West Yorkshire local authorities compared to ‘core cities’ (hover for place names)",
     "text": "From Companies House firm level data: in the last year (March 2024-March 2025), percent change in employment in firms with 10+ employees, five West Yorkshire local authorities compared to ‘core cities’ (hover for place names)\n\n\n\n\n\n\n\n\nFigure 1: Companies House firm level data: percent change in employment for firms with ten+ employees between most recent accounts and previous year - core cities, with West Yorkshire’s five local authorities overlaid. Hover for place name.\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 2: From Companies House firm level data: percent change in employment for firms with fewer than 10 employees, between most recent accounts and previous year - core cities, with West Yorkshire’s five local authorities overlaid. Hover for place name."
+  },
+  {
+    "objectID": "quarto_docs/Bradford_sectorclusters_July2025.html#just-for-bradford-individual-firms-with-10-employees-percent-employee-change-from-last-accounts-hover-for-firm-names",
+    "href": "quarto_docs/Bradford_sectorclusters_July2025.html#just-for-bradford-individual-firms-with-10-employees-percent-employee-change-from-last-accounts-hover-for-firm-names",
+    "title": "Bradford sectors and clusters: past, present",
+    "section": "Just for Bradford, individual firms with 10+ employees, percent employee change from last accounts (hover for firm names)",
+    "text": "Just for Bradford, individual firms with 10+ employees, percent employee change from last accounts (hover for firm names)\n\n\n\n\n\n\n\n\nFigure 3: Percent change in employment between most recent accounts and previous year, all Bradford firms with 10+ employees, hover for firm name.\n\n\n\n\n\n\n\n\n\n\nFigure 4: Percent change in employment between most recent accounts and previous year, all Bradford firms with 10+ employees, hover for firm name.\n\n\n\n\n\n\n\n\n\n\nFigure 5: Percent change in employment between most recent accounts and previous year, all Bradford firms with 10+ employees, hover for firm name."
   }
 ]

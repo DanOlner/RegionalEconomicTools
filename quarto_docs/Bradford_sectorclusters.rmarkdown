@@ -131,7 +131,11 @@ itl3.lon = itl_lookup %>%
 
 
 
+
+
 ## Structural /  broad sector GVA change 
+
+
 
 ```{r struct}
 #| fig-width: 8
@@ -232,7 +236,11 @@ patchwork::wrap_plots(plots, ncol = 1)
 
 
 
+
+
 ## GVA PER FT JOB OVER TIME: BRADFORD V OTHER ITL3S
+
+
 
 
 ```{r gvajobs1}
@@ -436,9 +444,13 @@ patchwork::wrap_plots(plotz,ncol = 1)
 
 
 
+
+
 ## Location quotients for GVA and jobs: most recent and change over time
 
 ### Production sectors
+
+
 
 
 ```{r productionLQs}
@@ -615,7 +627,11 @@ makegvajoblqplots(gva.props$SIC07_description_shortened[gva.props$productionsect
 ```
 
 
+
+
 ### Rest of sectors
+
+
 
 ```{r otherLQs}
 #| fig-width: 9
@@ -624,6 +640,8 @@ makegvajoblqplots(gva.props$SIC07_description_shortened[gva.props$productionsect
 makegvajoblqplots(gva.props$SIC07_description_shortened[gva.props$productionsector == 'other'])
 
 ```
+
+
 
 
 
@@ -644,6 +662,8 @@ And:
 
 
 ### 2004 to 2013 av % change
+
+
 
 ```{r plot1}
 # startyear = 2014
@@ -798,7 +818,11 @@ ggplotly(p, tooltip = 'Region_name')
 
 ```
 
+
+
 ### 2014 to 2023 av % change
+
+
 
 ```{r plot2}
 startyear = 2014
@@ -951,17 +975,6 @@ ggplotly(p, tooltip = 'Region_name')
 
 ```
 
-
-
-
-
-
-
-
-
-
-
-
 ```{r, chplot}
 
 #See here for fig-responsiveness (non)issue: https://github.com/quarto-dev/quarto-cli/issues/4836
@@ -1052,7 +1065,11 @@ firmtable <- tibble(
 ```
 
 
+
+
 The next few plots use data extracted from individual firms' accounts **filed with Companies House between June 2024 and end of June 2025**. They mostly examine firms with 10+ employees. 
+
+
 
 
 ```{r bradch_summarytable}
@@ -1065,7 +1082,11 @@ knitr::kable(firmtable, escape = FALSE, caption = "Table: Bradford count/% of fi
 
 
 
+
+
 ## From Companies House firm level data: in the last year (March 2024-March 2025), percent change in employment in firms with 10+ employees, five West Yorkshire local authorities compared to 'core cities' (hover for place names)
+
+
 
 
 ```{r, fig-percentempfourplaces}
@@ -1116,10 +1137,6 @@ ggplotly(p, tooltip = 'Place: ')
 
 
 ```
-
-
-
-
 
 ```{r, fig-percentempfourplaces_lessthan10}
 #| fig-height: 20
@@ -1216,7 +1233,11 @@ ggplotly(p, tooltip = 'Place: ')
 
 
 
+
+
 ## Just for Bradford, individual firms with 10+ employees, percent employee change from last accounts (hover for firm names)
+
+
 
 
 ```{r, fig-indivfirmsSY}
@@ -1300,5 +1321,4 @@ ggplotly(p, tooltip = 'Firm: ')
 
 
 ```
-
 
