@@ -1778,7 +1778,13 @@ ggplotly(p, tooltip = 'Place: ')
 
 
 
+# Look inside Companies House data for some details----
 
-
+#E.g. about what cats space tech is under. Example:
+#Err it's registered in Manchester here. Definitely isn't based there!
+#Is this their accountants??
+ch %>% filter(qg('Produmax',CompanyName)) %>% View
+#Owned by these people??
+#"We invest in or acquire underperforming Mid-market industrial companies. Our aim is to affect a transformation of the key fundamentals of the businesses"
 
 

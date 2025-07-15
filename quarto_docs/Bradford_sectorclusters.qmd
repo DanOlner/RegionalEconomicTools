@@ -420,6 +420,7 @@ prod.data <- gvabres %>%
     highlow = ifelse(SIC07_description_shortened %in% levels(SIC07_description_shortened)[1:23],'high','low'),#Break into two plots to stack, split by total av productivity
     sectorgrouping = cut_number(as.integer(SIC07_description_shortened), 8) %>% as.integer
   ) %>% 
+  # filter(!qg('hous',SIC07_description))
   filter(!qg('hous',SIC07_description), !is.na(job_output_propofUKtotal_movingav))
 
 #Break into n groups, using factor order created in previous line
@@ -446,7 +447,7 @@ patchwork::wrap_plots(plotz,ncol = 1)
 
 ## Location quotients for GVA and jobs in 2 digit SIC sectors: most recent and change over time
 
-These LQ plots show location quotients for linked GVA and jobs data for Bradford, overlaid on top of LQs for all other ITL3 zones.
+These LQ plots show location quotients for linked GVA and jobs data for Bradford, overlaid on top of LQs for all other ITL3 zones, to give a sense of what the spread is across Great Britain.
 
 A location quotient is the ratio of a place's sector proportion to its national proportion. So e.g. if manufacturing in Bradford made up 20% of its economy compared to maufacturing being 10% of the UK economy, its LQ in Bradford would be 2.
 
@@ -653,7 +654,7 @@ makegvajoblqplots(gva.props$SIC07_description_shortened[gva.props$productionsect
 
 **Hover for place names**.
 
-* West Yorkshire ITL3s in green (95% CIs)
+* West Yorkshire ITL3s in green - Bradford's outlined in black (95% CIs in lines).
 * Core cities in blue  (95% CIs)
 * London ITL3s in red/pink
 
@@ -1040,7 +1041,7 @@ orderby <- empchange.summary %>%
 empchange.summary <- empchange.summary %>% 
   mutate(
     SIC_2DIGIT_NAME_SHORT = factor(SIC_2DIGIT_NAME_SHORT, levels = orderby),
-    `Place: ` = paste0(localauthority_name, ', firm count: ', firmcount,', emp last/this yr: ', total_employmentlastyear,' > ',total_employmentthisyear)#for labels
+    `Place: ` = paste0(localauthority_name, ', firm count: ', firmcount,', emp last/this yr: ', total_employmentlastyear,' > ',total_employmentthisyear,' = ',round(employment_percentchange,2),'%')#for labels
     # `Place: ` = paste0(SIC_2DIGIT_NAME_SHORT,',', localauthority_name, ', firm count: ', firmcount,', emp last/this yr: ', total_employmentlastyear,' > ',total_employmentthisyear)#for labels
   ) %>% 
   filter(!is.na(SIC_2DIGIT_NAME_SHORT))#Filter these here as some will be missing spefically from Bradford, will end up NA in the factor
@@ -1210,7 +1211,7 @@ orderby <- empchange.summary %>%
 empchange.summary <- empchange.summary %>% 
   mutate(
     SIC_2DIGIT_NAME_SHORT = factor(SIC_2DIGIT_NAME_SHORT, levels = orderby),
-    `Place: ` = paste0(localauthority_name, ', firm count: ', firmcount,', emp last/this yr: ', total_employmentlastyear,' > ',total_employmentthisyear)#for labels
+    `Place: ` = paste0(localauthority_name, ', firm count: ', firmcount,', emp last/this yr: ', total_employmentlastyear,' > ',total_employmentthisyear,' = ',round(employment_percentchange,2),'%')#for labels
     # `Place: ` = paste0(SIC_2DIGIT_NAME_SHORT,',', localauthority_name, ', firm count: ', firmcount,', emp last/this yr: ', total_employmentlastyear,' > ',total_employmentthisyear)#for labels
   ) %>% 
   filter(!is.na(SIC_2DIGIT_NAME_SHORT))#Filter these here as some will be missing spefically from Bradford, will end up NA in the factor
@@ -1292,6 +1293,7 @@ firm.change <- firm.change %>%
     SIC_2DIGIT_NAME_SHORT = fct_reorder(SIC_2DIGIT_NAME_SHORT, employee_percentchange),
     `Firm: ` = paste0(CompanyName,', ',Employees_lastyear,' >> ',Employees_thisyear),
     production = ifelse(SIC_2DIGIT_CODE_NUMERIC < 44, 'production','other'),
+    production = factor(production,levels = c('production','other')),
     sizecategory = case_when(
       between(Employees_thisyear,10,20) ~ "10-20",
       between(Employees_thisyear,21,50) ~ "21-50",
