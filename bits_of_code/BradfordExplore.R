@@ -1256,19 +1256,19 @@ yeartoplot <- yeartoplot %>%
 
 
 #If I could plot both and space them out, that would be good (could get Bradford change showing too)
-p <- LQ_baseplot(df = yeartoplot %>% filter(production == 'production'), alpha = 0.03, sector_name = SIC_2DIGIT_NAME_SHORT, 
+p1 <- LQ_baseplot(df = yeartoplot %>% filter(production == 'production'), alpha = 0.03, sector_name = SIC_2DIGIT_NAME_SHORT, 
                  LQ_column = LQ, change_over_time = slope)
 
 # debugonce(addplacename_to_LQplot)
-p <- addplacename_to_LQplot(df = yeartoplot %>% filter(production == 'production'), plot_to_addto = p, 
+p1 <- addplacename_to_LQplot(df = yeartoplot %>% filter(production == 'production'), plot_to_addto = p1, 
                             placename = place, shapenumber = 16,
                             # min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                             value_column = jobcount, sector_regional_proportion = sector_regional_proportion,
                             region_name = localauthority_name,
                             sector_name = SIC_2DIGIT_NAME_SHORT, change_over_time = slope, LQ_column = LQ,
-                            value_col_ismoney = F, text = 7, maxLQvalmultiplier = 2,useplacenameforminmaxdisplay = T)
+                            value_col_ismoney = F, text = 7, maxLQvalmultiplier = 2,useplacenameforminmaxdisplay = T, overridetextpos = 14)
 
-p <- p + ggtitle("production\n(2 digit sectors w/ 100+ employees in Bradford)")
+# p1 <- p1 + ggtitle("production\n(2 digit sectors w/ 100+ employees in Bradford)")
 
 # p <- p +
 # annotate(
@@ -1289,11 +1289,11 @@ p2 <- addplacename_to_LQplot(df = yeartoplot %>% filter(production == 'other'), 
                             value_column = jobcount, sector_regional_proportion = sector_regional_proportion,
                             region_name = localauthority_name,
                             sector_name = SIC_2DIGIT_NAME_SHORT, change_over_time = slope, LQ_column = LQ,
-                            value_col_ismoney = F, text = 7, maxLQvalmultiplier = 2,useplacenameforminmaxdisplay = T)
+                            value_col_ismoney = F, text = 7, maxLQvalmultiplier = 2,useplacenameforminmaxdisplay = T, overridetextpos = 4)
 
-p2 <- p2 + ggtitle("other\n(2 digit sectors w/ 100+ employees in Bradford)")
+# p2 <- p2 + ggtitle("other\n(2 digit sectors w/ 100+ employees in Bradford)")
 
-p / p2
+# p / p2
 
 
 
@@ -1464,7 +1464,7 @@ p3 <- addplacename_to_LQplot(df = yeartoplot %>% filter(production == 'productio
                             value_column = jobcount, sector_regional_proportion = sector_regional_proportion,
                             region_name = GEOGRAPHY_NAME,
                             sector_name = SIC_2DIGIT_NAME_SHORT, change_over_time = slope, LQ_column = LQ,
-                            value_col_ismoney = F, text = 7, useplacenameforminmaxdisplay = T)
+                            value_col_ismoney = F, text = 7, useplacenameforminmaxdisplay = T, maxLQvalmultiplier = 2, , overridetextpos = 14)
 
 # p3 <- p3 + ggtitle("production\n(2 digit sectors w/ 100+ employees in Bradford)")
 
@@ -1487,18 +1487,30 @@ p4 <- addplacename_to_LQplot(df = yeartoplot %>% filter(production == 'other'), 
                              value_column = jobcount, sector_regional_proportion = sector_regional_proportion,
                              region_name = GEOGRAPHY_NAME,
                              sector_name = SIC_2DIGIT_NAME_SHORT, change_over_time = slope, LQ_column = LQ,
-                             value_col_ismoney = F, text = 7, useplacenameforminmaxdisplay = T)
+                             value_col_ismoney = F, text = 7, useplacenameforminmaxdisplay = T, maxLQvalmultiplier = 2, overridetextpos = 4)
 
 # p4 <- p4 + ggtitle("other\n(2 digit sectors w/ 100+ employees in Bradford)")
 
-p3 / p4
+# p3 / p4
 
-p + p3
+p1 + p3
 
 p2 + p4
 
+#I think that patchwork may be stuffing this for us
+#Keeps on changing randomly
+#Try:
+cowplot::plot_grid(p1, p3)
 
 
+#Rename!
+p1 <- p1 + ggtitle('CH')
+p2 <- p2 + ggtitle('CH')
+p3 <- p3 + ggtitle('BRES')
+p4 <- p4 + ggtitle('BRES')
+
+#Save them all for output
+saveRDS(list(p1,p2,p3,p4),'local/data/ch_bres_lqplotlist.rds')
 
 
 # BRES and CH LQ and job count comparisons----

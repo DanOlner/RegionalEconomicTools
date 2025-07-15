@@ -1,0 +1,39 @@
+---
+title: "Bradford: BRES location quotients for 5 digit sectors, broken down by 2 digit"
+author:
+  - name: "Dan Olner"
+format: 
+  html:
+    output-file: "Bradford_BRES_5digit_LQs_July2025"
+    fig-width: 8
+    fig-height: 8
+execute:
+  echo: false
+  message: false
+  warning: false
+fig-responsive: false
+---
+
+```{r setup}
+library(tidyverse)
+library(sf)#for geo stuff
+library(zoo)#for making smoothed moving averages
+library(patchwork)#combine ggplots easily
+# library(plotly)#For interactive plots
+library(RColorBrewer)
+
+source('../functions/misc_functions.R')
+source('../functions/adhoc_functions.R')
+#source('functions/misc_functions.R')
+#source('functions/adhoc_functions.R')
+
+options(scipen = 999)
+
+#Set ggplot theme
+theme_set(theme_light())
+
+
+```
+
+
+## 

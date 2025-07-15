@@ -311,14 +311,14 @@ LQ_baseplot <- function(df, alpha = 0.1, shape = 16, sector_name, LQ_column, cha
 #a column with min and max values to overlay as bars to indicate full range of the data
 addplacename_to_LQplot <- function(df, plot_to_addto, placename, shapenumber=16, backgroundcolour='black', add_gva = F, setalpha = 1,
                                    region_name, sector_name,change_over_time, value_column, LQ_column, sector_regional_proportion,
-                                   min_LQ_all_time,max_LQ_all_time, value_col_ismoney = T, nudgepos = 0, textx = NULL, maxLQvalmultiplier = 3, useplacenameforminmaxdisplay = F){
+                                   min_LQ_all_time,max_LQ_all_time, value_col_ismoney = T, nudgepos = 0, textx = NULL, maxLQvalmultiplier = 3, useplacenameforminmaxdisplay = F, overridetextpos = -1){
   
-  region_name <- enquo(region_name)  
+  region_name <- enquo(region_name)   
   sector_name <- enquo(sector_name)
   change_over_time <- enquo(change_over_time) 
   LQ_column <- enquo(LQ_column)
   min_LQ_all_time <- enquo(min_LQ_all_time)
-  max_LQ_all_time <- enquo(max_LQ_all_time)
+  max_LQ_all_time <- enquo(max_LQ_all_time) 
   
   #Doing this here so value available for coord_cartesian at end
   
@@ -329,17 +329,17 @@ addplacename_to_LQplot <- function(df, plot_to_addto, placename, shapenumber=16,
   if(rlang::quo_is_missing(max_LQ_all_time)){
     
     if(useplacenameforminmaxdisplay){
-      maxLQval <<- df %>% select(!!LQ_column) %>% filter(!!LQ_column == max(!!LQ_column, na.rm = T)) %>% pull
+      maxLQval <<- df %>% filter(!!region_name == placename) %>% filter(!!LQ_column == max(!!LQ_column, na.rm = T)) %>% select(!!LQ_column) %>% pull
     } else {
-      maxLQval <<- df %>% filter(!!LQ_column == max(!!LQ_column, na.rm = T), !!region_name == placename) %>% select(!!LQ_column) %>% pull
+      maxLQval <<- df %>% select(!!LQ_column) %>% filter(!!LQ_column == max(!!LQ_column, na.rm = T)) %>% pull
     }
     
   } else {
   
     if(useplacenameforminmaxdisplay){
-      maxLQval <<- df %>% select(!!max_LQ_all_time) %>% filter(!!max_LQ_all_time == max(!!max_LQ_all_time)) %>% pull
+      maxLQval <<- df %>% filter(!!region_name == placename) %>% filter(!!max_LQ_all_time == max(!!max_LQ_all_time)) %>% select(!!LQ_column) %>% pull
     } else{
-      maxLQval <<- df %>% filter(!!max_LQ_all_time == max(!!max_LQ_all_time, !!region_name == placename)) %>% select(!!LQ_column) %>% pull
+      maxLQval <<- df %>% select(!!max_LQ_all_time) %>% filter(!!max_LQ_all_time == max(!!max_LQ_all_time)) %>% pull
     }
   # print(maxLQval)
   
@@ -391,7 +391,7 @@ addplacename_to_LQplot <- function(df, plot_to_addto, placename, shapenumber=16,
     plot_to_addto <- plot_to_addto +  
       geom_text(
         data = df %>% filter(!!region_name == placename), 
-        aes(y = !!sector_name, x = maxLQval * 2.7, label = paste0('£',!!value_column,'M, ',round(!!sector_regional_proportion * 100, 2),'%')),
+        aes(y = !!sector_name, x = maxLQval * maxLQvalmultiplier, label = paste0('£',!!value_column,'M, ',round(!!sector_regional_proportion * 100, 2),'%')),
         # nudge_x = 0.3, 
         hjust = 1, alpha = 0.7, size = 3,
         position = position_nudge(y = nudgepos)
@@ -399,14 +399,30 @@ addplacename_to_LQplot <- function(df, plot_to_addto, placename, shapenumber=16,
     
     } else {
       
+      #Hack!
+      if(overridetextpos == -1){
+      
     plot_to_addto <- plot_to_addto +  
       geom_text(
         data = df %>% filter(!!region_name == placename), 
-        aes(y = !!sector_name, x = maxLQval * 2.7, label = paste0(!!value_column,', ',round(!!sector_regional_proportion * 100, 2),'%')),
+        aes(y = !!sector_name, x = maxLQval * maxLQvalmultiplier, label = paste0(!!value_column,', ',round(!!sector_regional_proportion * 100, 2),'%')),
         # nudge_x = 0.3, 
         hjust = 1, alpha = 0.7, size = 3,
         position = position_nudge(y = nudgepos)
       )
+    
+      } else {
+        
+        plot_to_addto <- plot_to_addto +  
+          geom_text(
+            data = df %>% filter(!!region_name == placename), 
+            aes(y = !!sector_name, x = overridetextpos, label = paste0(!!value_column,', ',round(!!sector_regional_proportion * 100, 2),'%')),
+            # nudge_x = 0.3, 
+            hjust = 1, alpha = 0.7, size = 3,
+            position = position_nudge(y = nudgepos)
+          )
+        
+      }
     
     }
     
@@ -419,6 +435,7 @@ addplacename_to_LQplot <- function(df, plot_to_addto, placename, shapenumber=16,
     # min_LQ_all_time <- enquo(min_LQ_all_time)
     # max_LQ_all_time <- enquo(max_LQ_all_time)
     # 
+    
     plot_to_addto <- plot_to_addto +
       geom_errorbar(
         data = df %>% filter(!!region_name == placename),

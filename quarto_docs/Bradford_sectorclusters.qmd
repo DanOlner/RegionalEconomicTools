@@ -1052,13 +1052,40 @@ firmtable <- tibble(
 ```
 
 
-The next few plots use data extracted from individual firms' accounts **filed with Companies House between June 2024 and end of June 2025**. They mostly examine firms with 10+ employees. 
+The next few plots use data extracted from individual firms' accounts **filed with Companies House between June 2024 and end of June 2025**. 
+
+The following table shows the count (and percentage) of firms in Bradford that filed with CH, broken down by employee count.
 
 
 ```{r bradch_summarytable}
 
 #escape = FALSE so that markdown in the cells (the links) is rendered correctly.
 knitr::kable(firmtable, escape = FALSE, caption = "Table: Bradford count/% of firms by employee band")
+
+```
+
+## Comparing Companies House to BRES: location quotient plots
+
+### Production sectors
+
+```{r CHvBRESprod}
+#| fig-width: 9
+
+#Produced here:
+#https://github.com/DanOlner/RegionalEconomicTools/blob/927f1783bfbb66293dd75870e147c858f4761ef3/bits_of_code/BradfordExplore.R#L1062
+plotz <- readRDS('../local/data/ch_bres_lqplotlist.rds')
+#plotz <- readRDS('local/data/ch_bres_lqplotlist.rds')
+
+plotz[[1]] + plotz[[3]]
+
+```
+
+### Other sectors
+
+```{r CHvBRESother}
+#| fig-width: 9
+
+plotz[[2]] + plotz[[4]]
 
 ```
 
@@ -1223,7 +1250,7 @@ ggplotly(p, tooltip = 'Place: ')
 This section is included to be able to identify individual firms (with 10+ employees) by hovering over the points. Each is plotted by what percentage their employee number grew between their latest accounts and a year prior.
 
 ```{r, fig-indivfirmsSY}
-#| label: fig-indivfirmsSY
+<!-- #| label: fig-indivfirmsSY -->
 #| fig-height: 10
 #| fig-width: 9
 
