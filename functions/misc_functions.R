@@ -311,7 +311,7 @@ LQ_baseplot <- function(df, alpha = 0.1, shape = 16, sector_name, LQ_column, cha
 #a column with min and max values to overlay as bars to indicate full range of the data
 addplacename_to_LQplot <- function(df, plot_to_addto, placename, shapenumber=16, backgroundcolour='black', add_gva = F, setalpha = 1,
                                    region_name, sector_name,change_over_time, value_column, LQ_column, sector_regional_proportion,
-                                   min_LQ_all_time,max_LQ_all_time, value_col_ismoney = T, nudgepos = 0, textx = NULL, maxLQvalmultiplier = 3){
+                                   min_LQ_all_time,max_LQ_all_time, value_col_ismoney = T, nudgepos = 0, textx = NULL, maxLQvalmultiplier = 3, useplacenameforminmaxdisplay = F){
   
   region_name <- enquo(region_name)  
   sector_name <- enquo(sector_name)
@@ -328,11 +328,19 @@ addplacename_to_LQplot <- function(df, plot_to_addto, placename, shapenumber=16,
   #If available use max LQ, otherwise use LQ
   if(rlang::quo_is_missing(max_LQ_all_time)){
     
-    maxLQval <<- df %>% select(!!LQ_column) %>% filter(!!LQ_column == max(!!LQ_column)) %>% pull
+    if(useplacenameforminmaxdisplay){
+      maxLQval <<- df %>% select(!!LQ_column) %>% filter(!!LQ_column == max(!!LQ_column, na.rm = T)) %>% pull
+    } else {
+      maxLQval <<- df %>% filter(!!LQ_column == max(!!LQ_column, na.rm = T), !!region_name == placename) %>% select(!!LQ_column) %>% pull
+    }
     
   } else {
   
-    maxLQval <<- df %>% select(!!max_LQ_all_time) %>% filter(!!max_LQ_all_time == max(!!max_LQ_all_time)) %>% pull
+    if(useplacenameforminmaxdisplay){
+      maxLQval <<- df %>% select(!!max_LQ_all_time) %>% filter(!!max_LQ_all_time == max(!!max_LQ_all_time)) %>% pull
+    } else{
+      maxLQval <<- df %>% filter(!!max_LQ_all_time == max(!!max_LQ_all_time, !!region_name == placename)) %>% select(!!LQ_column) %>% pull
+    }
   # print(maxLQval)
   
   }
@@ -346,7 +354,7 @@ addplacename_to_LQplot <- function(df, plot_to_addto, placename, shapenumber=16,
       shape = shapenumber,
       colour = backgroundcolour,
       alpha = setalpha,
-      position = position_nudge(y = nudgepos)
+      position = position_nudge(y = nudgepos)  
     ) +
     geom_point(
       data = df %>% filter(!!region_name == placename, !!change_over_time < 0), 

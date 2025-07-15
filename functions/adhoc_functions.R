@@ -41,8 +41,8 @@ LQplot_BRES_groupsof5digit <- function(df_singletwodigitgrouping){
   p + ggtitle(
     paste0(
       unique(df_singletwodigitgrouping$SIC_2DIGIT_NAME_SHORT),' (2 digit)\n',
-      '5 digit SICs with av 100+ employees 2021-23\n', totjobs,' FT jobs (',totjobs.percent,'%)\n',
-      'LQ >= 1: ',totjobsLQmorethan1,' jobs (',totjobsLQmorethan1.percent,'%), LQ < 1: ',totjobsLQlessthan1,' jobs (',totjobsLQlessthan1.percent,'%)'
+      totjobs,' FT jobs (',totjobs.percent,'%)\n',
+      'LQ >= 1: ',totjobsLQmorethan1,' jobs (',totjobsLQmorethan1.percent,'%)\nLQ < 1: ',totjobsLQlessthan1,' jobs (',totjobsLQlessthan1.percent,'%)'
     )
     ) 
   

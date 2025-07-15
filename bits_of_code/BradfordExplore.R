@@ -1198,6 +1198,11 @@ ch.2digitsums.long <- ch.2digitsums.long %>%
 
 #Log vals here should give us rough % change between timepoints...
 #TODO: have version to get accurate % change (or can just convert back)
+
+#Get rid of household own use
+ch.2digitsums.long <- ch.2digitsums.long %>% 
+  filter(!qg('household own|membership',SIC_2DIGIT_NAME_SHORT))
+
 LQ_slopes <- compute_slope_or_zero(
   data = ch.2digitsums.long, 
   localauthority_name, SIC_2DIGIT_NAME_SHORT,#slopes will be found within whatever grouping vars are added here
@@ -1230,20 +1235,25 @@ sectorLQorder <- ch.2digitsums.long %>% filter(
 yeartoplot$SIC_2DIGIT_NAME_SHORT <- factor(yeartoplot$SIC_2DIGIT_NAME_SHORT, levels = sectorLQorder, ordered = T)
 
 #Also keep only 2 digit sectors where Bradford has more than 100 workers recorded in that sector for CH
-morethanx <- yeartoplot %>% 
-  filter(
-    localauthority_name == place,
-    jobcount >= 100
-    ) %>% 
-  select(SIC_2DIGIT_NAME_SHORT) %>% 
-  distinct() %>% 
-  pull
+# morethanx <- yeartoplot %>% 
+#   filter(
+#     localauthority_name == place,
+#     jobcount >= 100
+#     ) %>% 
+#   select(SIC_2DIGIT_NAME_SHORT) %>% 
+#   distinct() %>% 
+#   pull
+# 
+# 
+# yeartoplot <- yeartoplot %>% filter(
+#   !is.na(SIC_2DIGIT_NAME_SHORT),
+#   SIC_2DIGIT_NAME_SHORT %in% as.character(morethanx)
+#   )
 
+#Remove NA sector
+yeartoplot <- yeartoplot %>% 
+  filter(!is.na(SIC_2DIGIT_NAME_SHORT))
 
-yeartoplot <- yeartoplot %>% filter(
-  !is.na(SIC_2DIGIT_NAME_SHORT),
-  SIC_2DIGIT_NAME_SHORT %in% as.character(morethanx)
-  )
 
 #If I could plot both and space them out, that would be good (could get Bradford change showing too)
 p <- LQ_baseplot(df = yeartoplot %>% filter(production == 'production'), alpha = 0.03, sector_name = SIC_2DIGIT_NAME_SHORT, 
@@ -1256,8 +1266,9 @@ p <- addplacename_to_LQplot(df = yeartoplot %>% filter(production == 'production
                             value_column = jobcount, sector_regional_proportion = sector_regional_proportion,
                             region_name = localauthority_name,
                             sector_name = SIC_2DIGIT_NAME_SHORT, change_over_time = slope, LQ_column = LQ,
-                            value_col_ismoney = F, text = 7, maxLQvalmultiplier = 2)
+                            value_col_ismoney = F, text = 7, maxLQvalmultiplier = 2,useplacenameforminmaxdisplay = T)
 
+p <- p + ggtitle("production\n(2 digit sectors w/ 100+ employees in Bradford)")
 
 # p <- p +
 # annotate(
@@ -1267,7 +1278,6 @@ p <- addplacename_to_LQplot(df = yeartoplot %>% filter(production == 'production
 # )  
   # coord_cartesian(xlim = c(0.1,50))
 
-p <- p + ggtitle("production\n(2 digit sectors w/ 100+ employees in Bradford)")
 
 p2 <- LQ_baseplot(df = yeartoplot %>% filter(production == 'other'), alpha = 0.03, sector_name = SIC_2DIGIT_NAME_SHORT, 
                  LQ_column = LQ, change_over_time = slope)
@@ -1279,7 +1289,7 @@ p2 <- addplacename_to_LQplot(df = yeartoplot %>% filter(production == 'other'), 
                             value_column = jobcount, sector_regional_proportion = sector_regional_proportion,
                             region_name = localauthority_name,
                             sector_name = SIC_2DIGIT_NAME_SHORT, change_over_time = slope, LQ_column = LQ,
-                            value_col_ismoney = F, text = 7, maxLQvalmultiplier = 2)
+                            value_col_ismoney = F, text = 7, maxLQvalmultiplier = 2,useplacenameforminmaxdisplay = T)
 
 p2 <- p2 + ggtitle("other\n(2 digit sectors w/ 100+ employees in Bradford)")
 
@@ -1359,6 +1369,141 @@ bres <- bres %>%
 
 
 
+# AND ON WITH LQS 
+#OK so getting on with LQs and thinking about what those mean...
+#The LQ boundaries won't differ because they're both for Bradford
+#And the national sums will be matching quantities across both
+bres.2dig <- bres %>% 
+  group_by(DATE,GEOGRAPHY_NAME,SIC_2DIGIT_NAME_SHORT) %>% 
+  summarise(jobcount = sum(JOBCOUNT)) %>% 
+  ungroup()
+
+
+#LQ up entire thing
+bres.2dig <- bres.2dig %>% 
+  group_split(DATE) %>% 
+  map(~ .x %>% 
+  add_location_quotient_and_proportions(
+    regionvar = GEOGRAPHY_NAME,
+    lq_var = SIC_2DIGIT_NAME_SHORT,
+    valuevar = jobcount
+  )) %>% 
+  bind_rows()
+
+#Label production (by borrowing labelling from CH above as we don't have 2 digit numeric here to easily split)
+bres.2dig <- bres.2dig %>% 
+  left_join(
+    ch.2digitsums.long %>% select(SIC_2DIGIT_NAME_SHORT,production) %>% distinct(),
+    by = 'SIC_2DIGIT_NAME_SHORT'
+  )
+
+#table(bres.2dig$production)#tick
+
+
+LQ_slopes <- compute_slope_or_zero(
+  data = bres.2dig, 
+  GEOGRAPHY_NAME, SIC_2DIGIT_NAME_SHORT,#slopes will be found within whatever grouping vars are added here
+  y = LQ_log, x = DATE)
+
+
+#Filter down to a single year...
+#Might want the av of the two timepoints here maybe...
+yeartoplot <- bres.2dig %>% filter(DATE == max(DATE))#use latest point
+
+#Add slopes into data to get LQ plots
+yeartoplot <- yeartoplot %>% 
+  left_join(
+    LQ_slopes,
+    by = c('GEOGRAPHY_NAME', 'SIC_2DIGIT_NAME_SHORT')
+  )
+
+place = 'Bradford'
+
+# sectorLQorder <- ch.2digitsums.long %>% filter(
+#   GEOGRAPHY_NAME == place,
+#   timepoint_numeric == max(timepoint_numeric)#use latest data
+# ) %>% 
+#   arrange(-LQ) %>% 
+#   select(SIC_2DIGIT_NAME_SHORT) %>% 
+#   pull()
+
+
+#Turn the sector column into a factor and order by LCR's LQs
+#Use order that was worked out from CH calcs above so they match...
+yeartoplot$SIC_2DIGIT_NAME_SHORT <- factor(yeartoplot$SIC_2DIGIT_NAME_SHORT, levels = sectorLQorder, ordered = T)
+
+#Also keep only 2 digit sectors where Bradford has more than 100 workers recorded in that sector for CH
+# morethanx <- yeartoplot %>% 
+#   filter(
+#     GEOGRAPHY_NAME == place,
+#     jobcount >= 100
+#   ) %>% 
+#   select(SIC_2DIGIT_NAME_SHORT) %>% 
+#   distinct() %>% 
+#   pull
+# 
+# 
+# yeartoplot <- yeartoplot %>% filter(
+#   !is.na(SIC_2DIGIT_NAME_SHORT),
+#   SIC_2DIGIT_NAME_SHORT %in% as.character(morethanx)
+# )
+
+#Remove NA sectors
+yeartoplot <- yeartoplot %>% 
+  filter(!is.na(SIC_2DIGIT_NAME_SHORT))
+
+
+#If I could plot both and space them out, that would be good (could get Bradford change showing too)
+p3 <- LQ_baseplot(df = yeartoplot %>% filter(production == 'production'), alpha = 0.03, sector_name = SIC_2DIGIT_NAME_SHORT, 
+                 LQ_column = LQ, change_over_time = slope)
+
+# debugonce(addplacename_to_LQplot)
+p3 <- addplacename_to_LQplot(df = yeartoplot %>% filter(production == 'production'), plot_to_addto = p3, 
+                            placename = place, shapenumber = 16,
+                            # min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
+                            value_column = jobcount, sector_regional_proportion = sector_regional_proportion,
+                            region_name = GEOGRAPHY_NAME,
+                            sector_name = SIC_2DIGIT_NAME_SHORT, change_over_time = slope, LQ_column = LQ,
+                            value_col_ismoney = F, text = 7, useplacenameforminmaxdisplay = T)
+
+# p3 <- p3 + ggtitle("production\n(2 digit sectors w/ 100+ employees in Bradford)")
+
+# p <- p +
+# annotate(
+#   "text",
+#   label = "JOB COUNT in circles -->\nGVA in diamonds -->",
+#   x = 0.2, y = sectorLQorder[which(qg('furnit',sectorLQorder))]
+# )  
+# coord_cartesian(xlim = c(0.1,50))
+
+
+p4 <- LQ_baseplot(df = yeartoplot %>% filter(production == 'other'), alpha = 0.03, sector_name = SIC_2DIGIT_NAME_SHORT, 
+                  LQ_column = LQ, change_over_time = slope)
+
+# debugonce(addplacename_to_LQplot)
+p4 <- addplacename_to_LQplot(df = yeartoplot %>% filter(production == 'other'), plot_to_addto = p4, 
+                             placename = place, shapenumber = 16,
+                             # min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
+                             value_column = jobcount, sector_regional_proportion = sector_regional_proportion,
+                             region_name = GEOGRAPHY_NAME,
+                             sector_name = SIC_2DIGIT_NAME_SHORT, change_over_time = slope, LQ_column = LQ,
+                             value_col_ismoney = F, text = 7, useplacenameforminmaxdisplay = T)
+
+# p4 <- p4 + ggtitle("other\n(2 digit sectors w/ 100+ employees in Bradford)")
+
+p3 / p4
+
+p + p3
+
+p2 + p4
+
+
+
+
+
+# BRES and CH LQ and job count comparisons----
+
+# Keep these in their own section
 # BRES / CH CORRELATION CHECKS
 
 #Let's just correlate the job values to start with, check they're roughly the same ranking
@@ -1403,10 +1548,10 @@ cor(both$jobcount_ch,both$jobcount_bres)
 tibble(
   sector = both %>% group_split(SIC_2DIGIT_NAME_SHORT) %>% map_chr( ~ unique(.x$SIC_2DIGIT_NAME_SHORT)),
   correlation = map_dbl(both %>% group_split(SIC_2DIGIT_NAME_SHORT),
-  ~ {
-    cor(.x$jobcount_ch,.x$jobcount_bres)
-  }
-)
+                        ~ {
+                          cor(.x$jobcount_ch,.x$jobcount_bres)
+                        }
+  )
 ) %>% View
 
 #Looking at those - public sectors
@@ -1419,10 +1564,10 @@ tibble(
 placecor <- tibble(
   place = both %>% group_split(localauthority_name) %>% map_chr( ~ unique(.x$localauthority_name)),
   correlation = map_dbl(both %>% group_split(localauthority_name),
-  ~ {
-    cor(.x$jobcount_ch,.x$jobcount_bres)
-  }
-)
+                        ~ {
+                          cor(.x$jobcount_ch,.x$jobcount_bres)
+                        }
+  )
 )
 
 #Hella spread of places, Bradford on the higher end
@@ -1433,15 +1578,6 @@ ggplot(placecor, aes(x = correlation)) +
 
 
 
-
-#OK so getting on with LQs and thinking about what those mean...
-#The LQs won't differ because they're both for Bradford
-#And the national sums will be matching quantities across both
-
-
-
-
-# AND ON WITH LQS 
 #Hopefully putting them side by side again
 bres.2dig.2023 <- bres.2dig %>% 
   filter(DATE == 2023) %>% 
@@ -1449,7 +1585,7 @@ bres.2dig.2023 <- bres.2dig %>%
     regionvar = GEOGRAPHY_NAME,
     lq_var = SIC_2DIGIT_NAME_SHORT,
     valuevar = jobcount
-)
+  )
 
 
 corname = 'Bradford'
@@ -1541,6 +1677,8 @@ p <- ggplot(bothlq, aes(x = bres_jobcount, y = ch_jobcount, group = SIC_n_jobs))
   geom_abline(slope = 1,intercept = 0)
 
 ggplotly(p, tooltip = 'SIC_n_jobs')
+
+
 
 
 

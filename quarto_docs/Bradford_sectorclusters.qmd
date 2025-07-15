@@ -129,7 +129,7 @@ itl3.lon = itl_lookup %>%
 
 
 
-
+# ONS GVA AND JOBS DATA
 
 ## Structural /  broad sector GVA change 
 
@@ -232,7 +232,7 @@ patchwork::wrap_plots(plots, ncol = 1)
 
 
 
-## GVA PER FT JOB OVER TIME: BRADFORD V OTHER ITL3S
+## GVA per full time job over time: Bradford v other ITL3 zones
 
 
 ```{r gvajobs1}
@@ -628,7 +628,7 @@ makegvajoblqplots(gva.props$SIC07_description_shortened[gva.props$productionsect
 
 
 
-## AV. PERCENT CHANGE OVER TIME FOR GVA VS HOURS WORKED, ITL3 ZONES
+## Av. percent change over time for gva vs hours worked, ITL3 zones
 
 **Hover for place names**.
 
@@ -959,7 +959,7 @@ ggplotly(p, tooltip = 'Region_name')
 
 
 
-
+# COMPANIES HOUSE DATA
 
 
 ```{r, chplot}
@@ -1046,7 +1046,7 @@ firmcount <- firmcount %>%
 firmtable <- tibble(
   `Firm size` = levels(firmcount$sizecategory),
   `Count` = table(firmcount$sizecategory),
-  `Percent` = paste0(round(table(firmcount$sizecategory) %>% prop.table() * 100,2),"%")
+  `Percent of firms` = paste0(round(table(firmcount$sizecategory) %>% prop.table() * 100,2),"%")
 )
 
 ```
@@ -1065,7 +1065,9 @@ knitr::kable(firmtable, escape = FALSE, caption = "Table: Bradford count/% of fi
 
 
 
-## From Companies House firm level data: in the last year (March 2024-March 2025), percent change in employment in firms with 10+ employees, five West Yorkshire local authorities compared to 'core cities' (hover for place names)
+## From Companies House firm level data: in the last year (March 2024-March 2025), percent change in employment in firms, five West Yorkshire local authorities compared to 'core cities' (hover for place names)
+
+### Firms with 10+ employees
 
 
 ```{r, fig-percentempfourplaces}
@@ -1117,7 +1119,7 @@ ggplotly(p, tooltip = 'Place: ')
 
 ```
 
-
+###  Firms with fewer than 10 employees
 
 
 
@@ -1218,12 +1220,14 @@ ggplotly(p, tooltip = 'Place: ')
 
 ## Just for Bradford, individual firms with 10+ employees, percent employee change from last accounts (hover for firm names)
 
+This section is included to be able to identify individual firms (with 10+ employees) by hovering over the points. Each is plotted by what percentage their employee number grew between their latest accounts and a year prior.
 
 ```{r, fig-indivfirmsSY}
 #| label: fig-indivfirmsSY
 #| fig-height: 10
 #| fig-width: 9
-#| fig-cap: "Percent change in employment between most recent accounts and previous year, ALL Bradford firms with 10+ employees, hover for firm name."
+
+# fig-cap: "Percent change in employment between most recent accounts and previous year, ALL Bradford firms with 10+ employees, hover for firm name."
 
 firm.change <- ch %>% 
   filter(localauthority_name == 'Bradford', Employees_thisyear >= 10 & Employees_lastyear >= 10) %>% #10+ in both time periods
@@ -1264,7 +1268,8 @@ p <- ggplot(firm.change %>% filter(sizecategory == "10-20"),
     # panel.grid.major = element_line(linetype = "dotted"),
     # axis.title.x = element_text( size = 10, margin=margin(80,80,80,80)),
     axis.title.y = element_text( size = 10, margin=margin(30,30,30,30))
-  )
+  ) +
+  ggtitle("Firms with 10-20 employees")
 
 ggplotly(p, tooltip = 'Firm: ')
 
@@ -1278,7 +1283,9 @@ p <- ggplot(firm.change %>% filter(sizecategory == "21-50"),
     # panel.grid.major = element_line(linetype = "dotted"),
     # axis.title.x = element_text( size = 10, margin=margin(80,80,80,80)),
     axis.title.y = element_text( size = 10, margin=margin(30,30,30,30))
-  )
+  ) +
+  ggtitle("Firms with 21-50 employees")
+
 
 ggplotly(p, tooltip = 'Firm: ')
 
@@ -1292,7 +1299,9 @@ p <- ggplot(firm.change %>% filter(sizecategory == "51+"),
     # panel.grid.major = element_line(linetype = "dotted"),
     # axis.title.x = element_text( size = 10, margin=margin(80,80,80,80)),
     axis.title.y = element_text( size = 10, margin=margin(30,30,30,30))
-  )
+  ) +
+  ggtitle("Firms with 50+ employees")
+
 
 ggplotly(p, tooltip = 'Firm: ')
 

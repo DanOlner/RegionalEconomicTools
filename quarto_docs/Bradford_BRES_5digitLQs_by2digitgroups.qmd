@@ -1,0 +1,460 @@
+---
+title: "Bradford: BRES location quotients for 5 digit sectors, broken down by 2 digit"
+author:
+  - name: "Dan Olner"
+format: 
+  html:
+    output-file: "Bradford_BRES_5digit_LQs_July2025"
+    fig-width: 8
+    fig-height: 8
+execute:
+  echo: false
+  message: false
+  warning: false
+fig-responsive: false
+---
+
+```{r setup}
+library(tidyverse)
+library(sf)#for geo stuff
+library(zoo)#for making smoothed moving averages
+library(patchwork)#combine ggplots easily
+# library(plotly)#For interactive plots
+library(RColorBrewer)
+
+source('../functions/misc_functions.R')
+source('../functions/adhoc_functions.R')
+#source('functions/misc_functions.R')
+#source('functions/adhoc_functions.R')
+
+options(scipen = 999)
+
+#Set ggplot theme
+theme_set(theme_light())
+
+
+```
+
+
+## BRES 5 digit sector location quotients
+
+**5 digit SICs in Bradford with av 100+ employees 2021-23. 2 digit sectors in each plot.**
+
+```{r dataprep}
+#All worked out here:
+#
+# bres <- read_csv("../local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_NUTS3_n_ITL321_stacked_2_Fulltimeemployees_2015_2023_SIC_5DIGIT.csv")
+# 
+# #This comes with ALL NUTS and ITL3 data
+# #Which means 2022 is doubled up
+# #E.g. see here: 
+# #bres %>% filter(qg('bradford', GEOGRAPHY_NAME),qg('Museum activities',SIC_5DIGIT_NAME)) %>% View
+# 
+# #Remove one of them...
+# #Need to filter NOT year == 2022 NOT GEOGRAPHY_CODE_NUTS2018 is NA, keep the rest
+# #(2023 we need to keep!)
+# bres <- bres %>% 
+#   filter(!(DATE == 2022 & is.na(GEOGRAPHY_CODE_NUTS2018)))
+# 
+# 
+# #range(bres$DATE)#tick
+# 
+# SIClookup <- read_csv('../data/SIClookup.csv')
+# 
+# #Join SIC lookup on 5 digit name
+# #Keep 2 digit and section codes
+# #May shorten names in a mo...
+# bres <- bres %>%
+#   left_join(
+#     SIClookup %>% select(SIC_5DIGIT_NAME,SIC_2DIGIT_NAME,SIC_SECTION_NAME),
+#     by = 'SIC_5DIGIT_NAME'
+#   )
+# 
+# #Make shorter names, use those.
+# #Make lookup so can be merged in.
+# names.sections = unique(bres$SIC_SECTION_NAME)
+# shortnames.sections = reduceSICnames(unique(bres$SIC_SECTION_NAME),'section')
+# 
+# chk.sections = data.frame(names = names.sections, shortnames = shortnames.sections)
+# 
+# names.2digit = unique(bres$SIC_2DIGIT_NAME)
+# shortnames.2digit = reduceSICnames(unique(bres$SIC_SECTION_NAME),'2 digit')
+# 
+# chk.2digit = data.frame(names = names.2digit, shortnames = shortnames.2digit)
+# 
+# 
+# #And 729 categories in the 5 digit...
+# names.5digit = unique(bres$SIC_5DIGIT_NAME)
+# #NOTE: THE ORDER HERE IS BASED ON THE ORDER IN bres
+# #We should make an actual lookup to make sure we don't lose that order
+# shortnames.5digit = reduceSICnames(unique(bres$SIC_5DIGIT_NAME),'5 digit')
+# 
+# chk.5digit = data.frame(names = names.5digit, shortnames = shortnames.5digit)
+# 
+# 
+# #Merge into bres
+# bres <- bres %>% 
+#   left_join(chk.sections %>% rename(SIC_SECTION_NAME_SHORT = shortnames), by = c('SIC_SECTION_NAME' = 'names')) %>% 
+#   left_join(chk.2digit %>% rename(SIC_2DIGIT_NAME_SHORT = shortnames), by = c('SIC_2DIGIT_NAME' = 'names')) %>% 
+#   left_join(chk.5digit %>% rename(SIC_5DIGIT_NAME_SHORT = shortnames), by = c('SIC_5DIGIT_NAME' = 'names')) 
+# 
+# 
+# #Drop some sectors
+# bres <- bres %>% 
+#   filter(!qg('households|membership', SIC_2DIGIT_NAME))
+# 
+# #Check!
+# # bres %>% distinct(SIC_5DIGIT_NAME_SHORT,SIC_5DIGIT_NAME) %>% View
+# 
+# 
+# #Let's find LQ / proportions prior to smoothing those
+# #Rather than smoothing job count then doing LQ
+# #That way - jobs do sum in a particular year to the correct 100%
+# 
+# #Before doing that...
+# #We need to work out which 5 digits have all-zero job counts
+# #As those can't have LQs / aren't any use to us
+# #Though those will vary across years
+# #Might be easier to sort after calculating?
+# 
+# # checkonzeros <- bres %>% 
+# #   group_by(DATE,GEOGRAPHY_NAME,SIC_5DIGIT_NAME_SHORT) %>% 
+# #   summarise(
+# #     sectorpercent_zeroes = mean(JOBCOUNT == 0) * 100
+# #   )
+# # 
+# # unique(checkonzeros$sectorpercent_zeroes)
+# # 
+# # #OK, let's check if the zeroes persist over all the years in the data
+# # checkonzeros.allyears <- bres %>% 
+# #   group_by(GEOGRAPHY_NAME,SIC_5DIGIT_NAME_SHORT) %>% 
+# #   summarise(
+# #     sectorpercent_zeroes = mean(JOBCOUNT == 0) * 100
+# #   )
+# 
+# #And across both all years and all places?
+# checkonzeros.allyearsandplaces <- bres %>% 
+#   group_by(SIC_5DIGIT_NAME_SHORT) %>% 
+#   summarise(
+#     sectorpercent_zeroes = mean(JOBCOUNT == 0) * 100
+#   )
+# 
+# #Final - how does that vary per year?
+# # checkonzeros.peryear <- bres %>% 
+# #   group_by(DATE,SIC_5DIGIT_NAME_SHORT) %>% 
+# #   summarise(
+# #     sectorpercent_zeroes = mean(JOBCOUNT == 0) * 100
+# #   )
+# 
+# 
+# #OK - going to remove any sectors with 100% zeroes for all years
+# #Which are all agri
+# #And the one NA to (also agri!)
+# sectorstodrop <- checkonzeros.allyearsandplaces %>% 
+#   filter(sectorpercent_zeroes == 100 | is.na(sectorpercent_zeroes)) %>% 
+#   select(SIC_5DIGIT_NAME_SHORT) %>% 
+#   pull
+# 
+# bres <- bres %>% 
+#   filter(
+#     !SIC_5DIGIT_NAME_SHORT %in% sectorstodrop
+#   )
+# 
+# 
+# 
+# #NOW find props (will still have some issues but can deal with below)
+# bres <- bres %>% 
+#   arrange(DATE) %>% 
+#   group_split(DATE) %>%
+#   map(add_location_quotient_and_proportions,
+#       regionvar = GEOGRAPHY_NAME,
+#       lq_var = SIC_5DIGIT_NAME_SHORT,
+#       valuevar = JOBCOUNT) %>% 
+#   bind_rows()
+# 
+# 
+# #Then smooth the props and LQs...
+# bres.smooth <- bres %>% 
+#   arrange(DATE) %>% 
+#   group_by(GEOGRAPHY_NAME,SIC_5DIGIT_NAME_SHORT) %>%
+#   mutate(
+#     jobcount_movingav = rollapply(JOBCOUNT,3,mean,align='center',fill=NA),
+#     sector_regional_proportion_movingav = rollapply(sector_regional_proportion,3,mean,align='center',fill=NA),
+#     LQ_movingav = rollapply(LQ,3,mean,align='center',fill=NA)
+#   ) %>% 
+#   ungroup()
+# 
+# 
+# #Looking at one place / sector to check it looks sane
+# # bres.smooth %>% filter(qg('bradford', GEOGRAPHY_NAME),qg('prepared meals',SIC_5DIGIT_NAME_SHORT)) %>% View
+# # bres.smooth %>% 
+# #   # filter(qg('bradford', GEOGRAPHY_NAME)) %>% 
+# #   filter(qg('Liverpool', GEOGRAPHY_NAME)) %>% 
+# #   select(DATE,JOBCOUNT,SIC_5DIGIT_NAME_SHORT,sector_regional_proportion,LQ,jobcount_movingav,LQ_movingav) %>% 
+# #   arrange(SIC_5DIGIT_NAME_SHORT,DATE) %>% 
+# #   filter(!is.na(LQ_movingav)) %>% 
+# #   View
+# 
+# 
+# 
+# 
+# #Keep only smoothed years with data (the centre point)
+# #And re-find the log value after smoothing...
+# # x <- bres.smooth %>% 
+# bres.smooth <- bres.smooth %>%
+#   filter(!is.na(LQ_movingav)) %>% 
+#   mutate(LQ_movingav_log = log(LQ_movingav))
+# 
+# #RIGHT, NOW IT'S IN A FORM TO STICK IN THE LQ PLOTS
+# #Which I want to break down by section to begin with, though may make sector groupings bespoke
+# 
+# 
+# #So - run for each group of 5 digits
+# #But I want to put them in some LQ order for a place - 
+# #Average order for those sectors in each grouping would make sense
+# #Though could also do by section
+# 
+# #Get those values then we can use to order plot creation
+# #Average for the most recent (smoothed) year in our chosen place
+# 
+place = 'Bradford'
+# 
+# #sections too many! Try smaller
+# avLQvalues_in_groupings <- bres.smooth %>%
+#   filter(DATE == max(DATE), GEOGRAPHY_NAME == place) %>% 
+#   group_by(SIC_2DIGIT_NAME_SHORT) %>% 
+#   summarise(mean_LQ = mean(LQ, na.rm = T)) %>% 
+#   arrange(desc(mean_LQ))
+# 
+# 
+# #Can use each of those to feed subsets into an LQ plot
+# #In this case, can calculate everything beforehand then feed in
+# #Order should still hold in subplots filtered by section
+# LQ_slopes <- compute_slope_or_zero(
+#   data = bres.smooth, 
+#   GEOGRAPHY_NAME, SIC_5DIGIT_NAME_SHORT,#slopes will be found within whatever grouping vars are added here
+#   y = LQ_movingav_log, x = DATE)
+# 
+# #Filter down to a single year... we may want to smooth years, let's see
+# yeartoplot <- bres.smooth %>% filter(DATE == max(DATE))#use latest year
+# 
+# #Add slopes into data to get LQ plots
+# yeartoplot <- yeartoplot %>% 
+#   left_join(
+#     LQ_slopes,
+#     by = c('GEOGRAPHY_NAME', 'SIC_5DIGIT_NAME_SHORT')
+#   )
+# 
+# #Get min/max values for LQ over time as well, for each sector and place, to add as bars so range of sector is easy to see
+# minmaxes <- bres.smooth %>% 
+#   group_by(GEOGRAPHY_NAME, SIC_5DIGIT_NAME_SHORT) %>% 
+#   summarise(
+#     min_LQ_all_time = min(LQ_movingav),
+#     max_LQ_all_time = max(LQ_movingav)
+#   )
+# 
+# #Join min and max
+# yeartoplot <- yeartoplot %>% 
+#   left_join(
+#     minmaxes,
+#     by = c('GEOGRAPHY_NAME', 'SIC_5DIGIT_NAME_SHORT')
+#   )
+# 
+# 
+# 
+# 
+# sectorLQorder <- yeartoplot %>% filter(
+#   GEOGRAPHY_NAME == place,
+#   DATE == max(DATE)#use latest data
+# ) %>% 
+#   arrange(-LQ) %>% 
+#   select(SIC_5DIGIT_NAME_SHORT) %>% 
+#   pull()
+# 
+# 
+# #Turn the sector column into a factor and order by LCR's LQs
+# yeartoplot$SIC_5DIGIT_NAME_SHORT <- factor(yeartoplot$SIC_5DIGIT_NAME_SHORT, levels = sectorLQorder, ordered = T)
+# 
+# #Examine to check what to filter out
+# #yeartoplot %>% filter(GEOGRAPHY_NAME == 'Bradford') %>% View
+# 
+# 
+# 
+# 
+# #Test some alterations
+# #Use function in adhoc_functions
+# #And send in the actual df already filtered to what we want to plot
+# #Don't plot any 2 digit SICs with no values we want to show
+# #Shorten here to subset of sectors
+# 
+# #Shortern the list of 2 digit SICs to ones that actually have values we want to look at
+# #Keep only these 5 digit sectors for Bradford
+# keep.these.5digits <- yeartoplot %>% 
+#   filter(GEOGRAPHY_NAME == 'Bradford') %>% 
+#   filter(LQ_movingav > 0.001, jobcount_movingav >= 100) %>% 
+#   select(SIC_5DIGIT_NAME_SHORT) %>%
+#   mutate(SIC_5DIGIT_NAME_SHORT = as.character(SIC_5DIGIT_NAME_SHORT)) %>% 
+#   pull
+# 
+# #filter the yeartoplot data (which includes all other places)
+# #Based on that, to get a list of what 2 digits are left
+# yeartoplot.sub <- yeartoplot %>%
+#   filter(
+#     SIC_5DIGIT_NAME_SHORT %in% keep.these.5digits
+#   ) %>%
+#   mutate(jobcount_movingav = round(jobcount_movingav,0))
+
+# length(unique(yeartoplot$SIC_2DIGIT_NAME_SHORT))
+# length(unique(yeartoplot.sub$SIC_2DIGIT_NAME_SHORT))
+
+#Plot each SIC 2 digit for the 5 digits in them
+
+#Save and reuse
+# saveRDS(yeartoplot.sub,'local/data/2023BRES_5digit_LQs.rds')
+yeartoplot.sub <- readRDS('../local/data/2023BRES_5digit_LQs.rds')
+
+plotz <- map(yeartoplot.sub %>% group_split(SIC_2DIGIT_NAME_SHORT),LQplot_BRES_groupsof5digit)
+
+#Find which ones are in which sizes and output accordingly
+plotz.sectorcounts <- yeartoplot.sub %>% filter(GEOGRAPHY_NAME == 'Bradford') %>% group_by(SIC_2DIGIT_NAME_SHORT) %>% 
+  summarise(sectorcount = n()) %>% select(sectorcount) %>% pull
+
+
+
+```
+
+
+```{r larger}
+#| fig-height: 12
+
+#Output larger first
+subz <- plotz[which(plotz.sectorcounts >= 9)]
+
+#Avoid list numbers
+for(item in subz) print(item)
+
+```
+
+
+```{r medium}
+#| fig-height: 4
+
+#Output larger first
+subz <- plotz[which(between(plotz.sectorcounts,2,8))]
+
+#Avoid list numbers
+for(item in subz) print(item)
+
+
+```
+
+```{r small}
+#| fig-height: 2
+
+#Output larger first
+subz <- plotz[which(plotz.sectorcounts == 1)]
+
+#Avoid list numbers
+for(item in subz) print(item)
+
+
+```
+
+
+
+
+
+
+
+```{r}
+
+# indices <- seq(1, 6, by = 2)
+# indices <- seq(59, 62, by = 2)
+# indices <- seq(1, length(plotz), by = 2)
+
+#Avoid list numbers
+# for(item in plotz) print(item)
+# map(
+#   indices,
+#   ~ {
+#     if(.x+1 <= length(plotz)){
+#       patchwork::wrap_plots(plotz[.x:(.x+1)], ncol = 2)
+#     } else{
+#       patchwork::wrap_plots(plotz[[.x]], ncol = 2)
+#     }
+#   }
+#   )
+
+#x=1
+# patchwork::wrap_plots(plotz[x:(x+1)], ncol = 2)
+
+# Dynamically print each plot with custom height
+# for (item in plotz) {
+#   
+#   n_sectors <- length(unique(ggplot_build(item)$data[[1]]$y))
+#   height_in <- 1 + 0.3 * n_sectors  # adjust scale as needed
+#   
+#   cat(knitr::knit_print(
+#     knitr::asis_output(
+#       paste0(
+#         "```{r, fig.height=", height_in, ", fig.width=6, echo=FALSE}\n",
+#         "print(plot_list[[", i, "]])\n",
+#         "```\n"
+#       )
+#     )
+#   ))
+# }
+
+# for (i in seq_along(plotz[1:8])) {
+#   
+#   p <- plotz[[i]]
+#   
+#   n_sectors <- length(unique(ggplot_build(p)$data[[1]]$y))
+#   
+#   height_in <- 1 + 0.3 * n_sectors
+  
+  # cat(knitr::knit_print(
+  #   knitr::asis_output(
+  #     paste0(
+  #       "```{r, fig.height=", height_in, ", fig.width=6, echo=FALSE}\n",
+  #       "print(plot_list[[", i, "]])\n",
+  #       "```\n"
+  #     )
+  #   )
+  # ))
+  
+  # knitr::knit_child(text = 
+  #                     paste0(
+  #       "```{r, fig.height=", height_in, ", fig.width=6, echo=FALSE}\n",
+  #       "print(plotz[[", i, "]])\n",
+  #       "```\n"
+  #     )
+  # )
+  # 
+  
+  # Dynamically evaluate code chunks with plot + custom height
+  # for (i in seq_along(plotz)) {
+  #   
+  #   p <- plotz[[i]]
+  #   
+  #   n_sectors <- length(unique(ggplot_build(p)$data[[1]]$y))
+  #   
+  #   height_in <- 1 + 0.3 * n_sectors  # adjust as needed
+  #   
+  #   code <- paste0(
+  #     "```{r, fig.height=", height_in, ", fig.width=6, echo=FALSE}\n",
+  #     "print(plotz[[", i, "]])\n",
+  #     "```")
+  # 
+  #   evaluate::evaluate(code, envir = environment())  # evaluates and renders the chunk
+  # 
+  # 
+  # }
+
+
+
+```
+
+
+
+
