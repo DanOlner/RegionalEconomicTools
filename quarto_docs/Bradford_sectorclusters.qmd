@@ -12,6 +12,7 @@ execute:
   message: false
   warning: false
 fig-responsive: false
+collapse: false
 ---
 
 ```{r setup}
@@ -1049,7 +1050,7 @@ empchange.summary <- empchange.summary %>%
 # table(is.na(empchange.summary$SIC_2DIGIT_NAME_SHORT))
 
 #Get values for Bradford firms - count/%/employee counts
-firmcount <- ch %>% filter(localauthority_name == 'Bradford', Employees_thisyear > 0)
+firmcount <- ch %>% st_set_geometry(NULL) %>% filter(localauthority_name == 'Bradford', Employees_thisyear > 0)
 
 firmcount <- firmcount %>% 
   mutate(
@@ -1074,6 +1075,26 @@ firmtable <- tibble(
 ```
 
 
+```{r eval=F}
+firmcounts.by.2digit <- firmcount %>% 
+  group_by(sizecategory,SIC_2DIGIT_NAME_SHORT) %>% 
+  summarise(
+    count = n(),
+    section = max(SIC_SECTION_NAME_SHORT)
+    ) %>% 
+  group_by(SIC_2DIGIT_NAME_SHORT) %>% 
+  mutate(
+    percent = (count / sum(count)) * 100
+  )
+
+ggplot(firmcounts.by.2digit, aes(y = SIC_2DIGIT_NAME_SHORT, x = percent, fill = sizecategory)) +
+  geom_bar(stat = 'identity', position = position_dodge(width = 0.8)) +
+  facet_wrap(~section,ncol = 2, scales = 'free')
+
+```
+
+
+
 The next few plots use data extracted from individual firms' accounts **filed with Companies House between June 2024 and end of June 2025**. 
 
 The following table shows the count (and percentage) of firms in Bradford that filed with CH, broken down by employee count.
@@ -1085,6 +1106,8 @@ The following table shows the count (and percentage) of firms in Bradford that f
 knitr::kable(firmtable, escape = FALSE, caption = "Table: Bradford count/% of firms by employee band")
 
 ```
+
+
 
 ## Comparing Companies House to BRES: location quotient plots
 
