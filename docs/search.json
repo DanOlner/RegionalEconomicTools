@@ -1522,14 +1522,14 @@
     "href": "quarto_docs/Bradford_BRES_5digit_LQs_July2025.html",
     "title": "Bradford: BRES location quotients for 5 digit sectors, broken down by 2 digit",
     "section": "",
-    "text": "5 digit SICs in Bradford with av 100+ employees 2021-23. 2 digit sectors in each plot."
+    "text": "These plots show location quotients for full time job counts in 5 digit SIC sectors in Bradford with an average of 100+ employees 2021-23. There are 729 5 digit codes in total, though only the 100+ employee ones are shown here.\nThey are grouped into their parent 2 digit sectors in each plot (quite a few with only one 5 digit category in)."
   },
   {
     "objectID": "quarto_docs/Bradford_BRES_5digit_LQs_July2025.html#bres-5-digit-sector-location-quotients",
     "href": "quarto_docs/Bradford_BRES_5digit_LQs_July2025.html#bres-5-digit-sector-location-quotients",
     "title": "Bradford: BRES location quotients for 5 digit sectors, broken down by 2 digit",
     "section": "",
-    "text": "5 digit SICs in Bradford with av 100+ employees 2021-23. 2 digit sectors in each plot."
+    "text": "These plots show location quotients for full time job counts in 5 digit SIC sectors in Bradford with an average of 100+ employees 2021-23. There are 729 5 digit codes in total, though only the 100+ employee ones are shown here.\nThey are grouped into their parent 2 digit sectors in each plot (quite a few with only one 5 digit category in)."
   },
   {
     "objectID": "quarto_docs/Bradford_sectorclusters_July2025.html#comparing-companies-house-to-bres-location-quotient-plots",

@@ -38,7 +38,9 @@ theme_set(theme_light())
 
 ## BRES 5 digit sector location quotients
 
-**5 digit SICs in Bradford with av 100+ employees 2021-23. 2 digit sectors in each plot.**
+These plots show location quotients for full time job counts in **5 digit SIC sectors in Bradford with an average of 100+ employees 2021-23.** There are 729 5 digit codes in total, though only the 100+ employee ones are shown here.
+
+They are grouped into their parent 2 digit sectors in each plot (quite a few with only one 5 digit category in).
 
 ```{r dataprep}
 #All worked out here:

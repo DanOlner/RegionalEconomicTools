@@ -1,10 +1,10 @@
 ---
-title: "Bradford: BRES location quotients for 5 digit sectors, broken down by 2 digit"
+title: "Bradford sector/cluster analysis: summary and links"
 author:
   - name: "Dan Olner"
 format: 
   html:
-    output-file: "Bradford_BRES_5digit_LQs_July2025"
+    output-file: "Bradford_summary_July2025"
     fig-width: 8
     fig-height: 8
 execute:
