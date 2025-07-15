@@ -234,7 +234,11 @@ patchwork::wrap_plots(plots, ncol = 1)
 
 ## GVA per full time job over time: Bradford v other ITL3 zones for 2 digit SIC sectors
 
-This is measured in **GVA per job parts per million of UK economy** - equivalent to e.g. 1% being "1 in 100 parts of economy", 0.1 here is "1 in 10 millionth of whole economy". So it's again examining **relative change in output per FT worker** across all sectors.
+These plots use **linked regional GVA and BRES jobs data** to examine productivity, output and job changes. To make this link, sector categories have to be reduced to those in the ONS GVA data (46 categories rather than the full 88 two digit SICs).
+
+BRES does contain more detail - more on that below and in the separate [BRES 5 digit breakdown](https://danolner.github.io/RegionalEconomicTools/quarto_docs/Bradford_BRES_5digit_LQs_July2025.html){target="_blank"}.
+
+The plots below are measured in **GVA per job parts per million of UK economy** - equivalent to e.g. 1% being "1 in 100 parts of economy", 0.1 here is "1 in 10 millionth of whole economy". So it's again examining **relative change in output per FT worker** across all sectors.
 
 GVA per job as a measure needs some caution: output is also due to other productive factors, so high capital intensity sectors (power, telecoms, other ICT though not all) can appear overly productive per worker. It's more representative for service sectors where an employee's output more clearly correlates to total output, such as legal services.
 
@@ -256,7 +260,7 @@ shortsectornames = tibble(
   "Machinery repair/install",
   "Buildings",
   "Civil eng",
-  "Construction",
+  "Spec constr",
   "Motor",
   "Wholesale",
   "Retail",
@@ -272,7 +276,7 @@ shortsectornames = tibble(
   "Head office/consult",
   "Arch/Eng",
   "Research",
-  "Prof/sci/tech",
+  "Other PSTech",#"Prof/sci/tech",
   "Rental",
   "Employment",
   "Cleaning/landscapes",
@@ -292,7 +296,7 @@ shortsectornames = tibble(
   "Chemicals",
   "Metals",
   "Electronics",
-  "Machinery/transport manuf",
+  "Mach/transp manuf",
   "Utilities",
   "Finance",
   "Public admin",
@@ -440,7 +444,20 @@ patchwork::wrap_plots(plotz,ncol = 1)
 
 
 
-## Location quotients for GVA and jobs: most recent and change over time
+## Location quotients for GVA and jobs in 2 digit SIC sectors: most recent and change over time
+
+These LQ plots show location quotients for linked GVA and jobs data for Bradford, overlaid on top of LQs for all other ITL3 zones.
+
+A location quotient is the ratio of a place's sector proportion to its national proportion. So e.g. if manufacturing in Bradford made up 20% of its economy compared to maufacturing being 10% of the UK economy, its LQ in Bradford would be 2.
+
+Here’s an explanation of how to read these location quotient plots:
+
+* Location quotients for sectoral GVA in the selected region
+* Sectors to the right of the blue line are more concentrated in this region when compared to the national average. (e.g. LQ = 10, it is 10x more concentrated). To the left are less concentrated than nationally.
+* Green circles have been increasing in concentration over time (larger circles increasing the most)
+* Red circles have been decreasing in concentration over time (larger circles decreasing the most)
+* Black horizontal lines show the min and max of concentration in the data’s history (from 2015 to 2023) (so, often, large green circles will be at the right of this line because sector concentration has been steadily increasing)
+* Per sector GVA money amounts and percent of that region’s entire economy are shown on the right.
 
 ### Production sectors
 
