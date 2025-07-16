@@ -66,7 +66,7 @@ fig.show()
 
 #What we're testing here: using those same colours above to keep consistent SIC section colours across places in the same plot
 
-dfch = pd.read_csv("local/data/plotly_dataexportsfromR/CH_count_output_GMLAs.csv")
+dfch = pd.read_csv("local/data/plotly_dataexportsfromR/CH_count_output_HEYCA.csv")
 
 fig = px.treemap(
     dfch,
@@ -90,7 +90,7 @@ fig.show()
 
 #What we're testing here: using those same colours above to keep consistent SIC section colours across places in the same plot
 
-dflas = pd.read_csv("local/data/backup/count_output_las.csv")
+dflas = pd.read_csv("local/data/backup/count_output_HEYCA.csv")
 
 fig = px.treemap(
     dflas,
@@ -104,4 +104,5 @@ fig = px.treemap(
 fig.show()
 
 #fig.write_html("docs/miscdocs/WYLAs_BRES_treemap.html", full_html=True, include_plotlyjs="cdn")
+#fig.write_html("docs/miscdocs/HEYCA_BRES_treemap.html", full_html=True, include_plotlyjs="cdn")
 

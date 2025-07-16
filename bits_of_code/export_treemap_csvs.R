@@ -83,7 +83,8 @@ bres.ft.shorts %>%
 
 #Repeat for multiple places
 bres.5digit.ft = read_csv("local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE428_internationalterritoriallevelslevel3asofJan2021_2_Fulltimeemployees_2022_2023_SIC_5DIGIT.csv") %>% 
-  filter(qg('bradford|kirklees|leeds|wakefield|calderdale',GEOGRAPHY_NAME), DATE == 2023)
+  # filter(qg('bradford|kirklees|leeds|wakefield|calderdale',GEOGRAPHY_NAME), DATE == 2023)
+filter(qg('riding|upon hull',GEOGRAPHY_NAME), DATE == 2023)
 # filter(qg('leeds',GEOGRAPHY_NAME), DATE == 2023)
 # filter(qg('sheffield',GEOGRAPHY_NAME), DATE == 2023)
 # filter(qg('barnsley',GEOGRAPHY_NAME), DATE == 2023)#will get BDR in this data
@@ -112,7 +113,7 @@ bres.ft.shorts = bres.ft %>%
 bres.ft.shorts %>%
   mutate_if(is.character, function(x) {Encoding(x) <- 'latin1'; return(x)}) %>% 
   count(GEOGRAPHY_NAME,SIC_SECTION_NAME_SHORT,SIC_2DIGIT_NAME_SHORT,SIC_5DIGIT_NAME_SHORT, wt = JOBCOUNT) %>% 
-  write_csv('local/data/backup/count_output_las.csv')
+  write_csv('local/data/backup/count_output_HEYCA.csv')
 
 
 
@@ -159,8 +160,11 @@ unique(gm$localauthority_name)[order(unique(gm$localauthority_name))]
 
 #Multiple places
 ch.la <- ch.emp1 %>% 
+  filter(qg('upon hull|riding',localauthority_name))
   # filter(qg('barnsley|sheffield|rotherham|doncaster',localauthority_name))
-  filter(localauthority_name %in% c("Bolton", "Bury", "Manchester", "Oldham", "Rochdale", "Salford", "Stockport", "Tameside", "Trafford", "Wigan"))
+  # filter(localauthority_name %in% c("Bolton", "Bury", "Manchester", "Oldham", "Rochdale", "Salford", "Stockport", "Tameside", "Trafford", "Wigan"))
+
+# unique(ch.la$localauthority_name)
 
 #Ooo yes but could do with more control over colours...
 #Which we now have in Python, huzzah!
@@ -169,7 +173,7 @@ ch.la %>%
   mutate_if(is.character, function(x) {Encoding(x) <- 'latin1'; return(x)}) %>% 
   count(localauthority_name,SIC_SECTION_NAME_SHORT,SIC_2DIGIT_NAME_SHORT,SIC_5DIGIT_NAME_SHORT, wt = Employees_thisyear) %>%
   filter(!is.na(SIC_SECTION_NAME_SHORT)) %>% 
-  write_csv('local/data/plotly_dataexportsfromR/CH_count_output_GMLAs.csv')
+  write_csv('local/data/plotly_dataexportsfromR/CH_count_output_HEYCA.csv')
 
 #Check that...
 # chk <- ch.la %>%

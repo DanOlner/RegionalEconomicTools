@@ -1,5 +1,5 @@
 ---
-title: "Bradford sectors and clusters: past, present"
+title: "Bradford sector economy analysis plots"
 author:
   - name: "Dan Olner"
 format: 
@@ -130,9 +130,17 @@ itl3.lon = itl_lookup %>%
 
 
 
+
+
+
+
 # ONS GVA AND JOBS DATA
 
 ## Structural /  broad sector GVA change 
+
+
+
+
 
 ```{r struct}
 #| fig-width: 8
@@ -233,6 +241,10 @@ patchwork::wrap_plots(plots, ncol = 1)
 
 
 
+
+
+
+
 ## GVA per full time job over time: Bradford v other ITL3 zones for 2 digit SIC sectors
 
 These plots use **linked regional GVA and BRES jobs data** to examine productivity, output and job changes. To make this link, sector categories have to be reduced to those in the ONS GVA data (46 categories rather than the full 88 two digit SICs).
@@ -242,6 +254,10 @@ BRES does contain more detail - more on that below and in the separate [BRES 5 d
 The plots below are measured in **GVA per job parts per million of UK economy** - equivalent to e.g. 1% being "1 in 100 parts of economy", 0.1 here is "1 in 10 millionth of whole economy". So it's again examining **relative change in output per FT worker** across all sectors.
 
 GVA per job as a measure needs some caution: output is also due to other productive factors, so high capital intensity sectors (power, telecoms, other ICT though not all) can appear overly productive per worker. It's more representative for service sectors where an employee's output more clearly correlates to total output, such as legal services.
+
+
+
+
 
 
 ```{r gvajobs1}
@@ -446,6 +462,10 @@ patchwork::wrap_plots(plotz,ncol = 1)
 
 
 
+
+
+
+
 ## Location quotients for GVA and jobs in 2 digit SIC sectors: most recent and change over time
 
 These LQ plots show location quotients for linked GVA and jobs data for Bradford, overlaid on top of LQs for all other ITL3 zones, to give a sense of what the spread is across Great Britain.
@@ -462,6 +482,10 @@ Here’s an explanation of how to read these location quotient plots:
 * Per sector GVA money amounts and percent of that region’s entire economy are shown on the right.
 
 ### Production sectors
+
+
+
+
 
 
 ```{r productionLQs}
@@ -638,7 +662,15 @@ makegvajoblqplots(gva.props$SIC07_description_shortened[gva.props$productionsect
 ```
 
 
+
+
+
+
 ### Rest of sectors
+
+
+
+
 
 ```{r otherLQs}
 #| fig-width: 9
@@ -647,6 +679,10 @@ makegvajoblqplots(gva.props$SIC07_description_shortened[gva.props$productionsect
 makegvajoblqplots(gva.props$SIC07_description_shortened[gva.props$productionsector == 'other'])
 
 ```
+
+
+
+
 
 
 
@@ -667,6 +703,10 @@ And:
 
 
 ### 2004 to 2013 av % change
+
+
+
+
 
 ```{r plot1}
 # startyear = 2014
@@ -821,7 +861,15 @@ ggplotly(p, tooltip = 'Region_name')
 
 ```
 
+
+
+
+
 ### 2014 to 2023 av % change
+
+
+
+
 
 ```{r plot2}
 startyear = 2014
@@ -982,7 +1030,15 @@ ggplotly(p, tooltip = 'Region_name')
 
 
 
+
+
+
+
 # COMPANIES HOUSE DATA
+
+
+
+
 
 
 ```{r, chplot}
@@ -1074,7 +1130,6 @@ firmtable <- tibble(
 
 ```
 
-
 ```{r eval=F}
 firmcounts.by.2digit <- firmcount %>% 
   group_by(sizecategory,SIC_2DIGIT_NAME_SHORT) %>% 
@@ -1095,9 +1150,17 @@ ggplot(firmcounts.by.2digit, aes(y = SIC_2DIGIT_NAME_SHORT, x = percent, fill = 
 
 
 
+
+
+
+
 The next few plots use data extracted from individual firms' accounts **filed with Companies House between June 2024 and end of June 2025**. 
 
 The following table shows the count (and percentage) of firms in Bradford that filed with CH, broken down by employee count.
+
+
+
+
 
 
 ```{r bradch_summarytable}
@@ -1109,9 +1172,17 @@ knitr::kable(firmtable, escape = FALSE, caption = "Table: Bradford count/% of fi
 
 
 
+
+
+
+
 ## Comparing Companies House to BRES: location quotient plots
 
 ### Production sectors
+
+
+
+
 
 ```{r CHvBRESprod}
 #| fig-width: 9
@@ -1125,7 +1196,15 @@ plotz[[1]] + plotz[[3]]
 
 ```
 
+
+
+
+
 ### Other sectors
+
+
+
+
 
 ```{r CHvBRESother}
 #| fig-width: 9
@@ -1137,9 +1216,17 @@ plotz[[2]] + plotz[[4]]
 
 
 
+
+
+
+
 ## From Companies House firm level data: in the last year (March 2024-March 2025), percent change in employment in firms, five West Yorkshire local authorities compared to 'core cities' (hover for place names)
 
 ### Firms with 10+ employees
+
+
+
+
 
 
 ```{r, fig-percentempfourplaces}
@@ -1191,7 +1278,15 @@ ggplotly(p, tooltip = 'Place: ')
 
 ```
 
+
+
+
+
 ###  Firms with fewer than 10 employees
+
+
+
+
 
 
 
@@ -1290,9 +1385,17 @@ ggplotly(p, tooltip = 'Place: ')
 
 
 
+
+
+
+
 ## Just for Bradford, individual firms with 10+ employees, percent employee change from last accounts (hover for firm names)
 
 This section is included to be able to identify individual firms (with 10+ employees) by hovering over the points. Each is plotted by what percentage their employee number grew between their latest accounts and a year prior.
+
+
+
+
 
 ```{r, fig-indivfirmsSY}
 #| fig-height: 10
@@ -1381,5 +1484,4 @@ ggplotly(p, tooltip = 'Firm: ')
 
 
 ```
-
 
