@@ -1788,3 +1788,239 @@ ch %>% filter(qg('Produmax',CompanyName)) %>% View
 #"We invest in or acquire underperforming Mid-market industrial companies. Our aim is to affect a transformation of the key fundamentals of the businesses"
 
 
+
+
+# EXAMINE COMPANIES HOUSE 5 DIGIT SICS WHERE FIRMS USE MORE THAN ONE CATEGORY----
+
+#Looking for interesting ways to cluster
+
+#I've done this somewhere else before but
+#Check how many firms use more than one cat
+
+#It goes in order (1 filled then 2 then 3 then 4)
+#1 is always filled, this can be the default
+# table(is.na(ch$SICCode.SicText_1))
+
+#Easier version to work with 
+#Think there's prob a faster non dplyr way to do this, it's slooow for large data
+#Like REALLY slow
+# chx <- ch %>% 
+#   st_set_geometry(NULL) %>% 
+#   # slice_sample(n = 100) %>% 
+#   rowwise() %>%
+#   mutate(num_assignedSICs = 4 - sum(is.na(c_across(SICCode.SicText_1:SICCode.SicText_4)))) %>%
+#   ungroup() %>% 
+#   select(CompanyName,CompanyNumber,localauthority_code:ITL221NM,SICCode.SicText_1:SICCode.SicText_4,num_assignedSICs,Employees_thisyear:SIC_5DIGIT_NAME_SHORT)
+# 
+# table(chx$num_assignedSICs)
+
+#Try base R approach
+x <- ch %>%
+  st_set_geometry(NULL) %>%
+  # slice_sample(n = 100) %>%
+  select(SICCode.SicText_1:SICCode.SicText_4)
+  
+#Instantaneous!
+num_assignedSICs <- 4 - rowSums(is.na(x))
+
+table(num_assignedSICs) %>% prop.table() * 100
+
+#Add into df (and reduce)
+chx <- ch %>% 
+  st_set_geometry(NULL) %>%
+  select(CompanyName,CompanyNumber,localauthority_code:ITL221NM,SICCode.SicText_1:SICCode.SicText_4,Employees_thisyear:SIC_5DIGIT_NAME_SHORT)
+
+chx$num_assignedSICs <- num_assignedSICs  
+
+chx <- chx %>% relocate(num_assignedSICs, .after = SICCode.SicText_4)
+
+
+
+
+# GROWTH GRIDS FOR BRES / GVA / CH / BRES+GVA COMBO----
+
+#Counting sigs. Statisticians having kittens. Let's do it.
+itl3.2digit.cv <- read_csv('data/regionalGVA/regionalGVA_chainedvolume_ITL3_SIC_2DIGIT_LONG_2023.csv') %>% filter(!qg('imputed|agri',SIC07_description))
+
+
+#plotslopecounts function off to be made generic, the lucky so and so
+
+# leeds.2dig <- plotSlopeCounts(itl3.2digit.cv, 'Leeds',2014,2023)
+# bradford.2dig <- plotSlopeCounts(itl3.2digit.cv, 'Bradford',2014,2023)
+
+# leeds.2dig$plot
+# bradford.2dig$plot
+
+#Right - testing generic-ised version
+leeds.2dig <- plotSlopeCounts(
+  df = itl3.2digit.cv,
+  placename = 'Leeds',
+  startdate = 2014,
+  enddate = 2023,
+  date_colname = year,
+  region_colname = Region_name,
+  sector_colname = SIC07_description,#add shortened version in
+  value_colname = value,
+  conf_interval = 95,
+  neweywest = T
+    )
+
+#No NeweyWest
+leeds.2dig2 <- plotSlopeCounts(
+  df = itl3.2digit.cv,
+  placename = 'Leeds',
+  startdate = 2014,
+  enddate = 2023,
+  date_colname = year,
+  region_colname = Region_name,
+  sector_colname = SIC07_description,#add shortened version in
+  value_colname = value,
+  conf_interval = 95,
+  neweywest = F
+)
+
+leeds.2dig$plot + leeds.2dig2$plot
+
+
+#Neweywest
+bradford.2dig <- plotSlopeCounts(
+  df = itl3.2digit.cv,
+  placename = 'Bradford',
+  startdate = 2014,
+  enddate = 2023,
+  date_colname = year,
+  region_colname = Region_name,
+  sector_colname = SIC07_description,#add shortened version in
+  value_colname = value,
+  conf_interval = 95,
+  neweywest = T
+)
+
+#No NeweyWest
+bradford.2dig2 <- plotSlopeCounts(
+  df = itl3.2digit.cv,
+  placename = 'Bradford',
+  startdate = 2014,
+  enddate = 2023,
+  date_colname = year,
+  region_colname = Region_name,
+  sector_colname = SIC07_description,#add shortened version in
+  value_colname = value,
+  conf_interval = 95,
+  neweywest = F
+)
+
+bradford.2dig$plot + bradford.2dig2$plot
+
+#OK. Need a way to order it... but OK.
+
+#BRES + GVA joined... needs BRES joining to CV GVA to get GVA/job slopes. Hmmph.
+
+
+#Let's test BRES first, 2 digit.
+#I don't think CH will work, only two datapoints - though let's just sanity check that!
+# ch.2dig <- ch %>%
+#   st_set_geometry(NULL) %>% 
+#   group_by(localauthority_name,SIC_2DIGIT_NAME_SHORT) %>% 
+#   summarise(
+#     jobcount1 = sum(Employees_lastyear, na.rm=T),
+#     jobcount2 = sum(Employees_thisyear, na.rm=T)
+#     ) %>% 
+#   pivot_longer(jobcount1:jobcount2, names_to = 'timepoint', values_to = 'jobcount') %>% 
+#   mutate(
+#     timepoint = as.numeric(ifelse(timepoint == 'jobcount1', 1,2))
+#   )
+  
+
+# ggplot(
+#   ch.2dig %>% filter(localauthority_name == 'Bradford',qg('fab',SIC_2DIGIT_NAME_SHORT)),
+#   aes(x = timepoint, y = jobcount)
+#   ) +
+#   geom_line() +
+#   geom_smooth(method = 'lm')
+
+#Yeah no, you OBV cannot get error rates when drawing lines between two points!!
+# lm(data = ch.2dig %>% filter(localauthority_name == 'Bradford',qg('fab',SIC_2DIGIT_NAME_SHORT)), formula = jobcount ~ timepoint) %>% summary
+
+
+#Moving on to BRES
+#Got from "compare CH to BRES' above
+#Blimey, worked...!
+#Spoke too soon, nope, no data in plot!
+
+#debugonce(plotSlopeCounts)
+bradford.bres.2dig <- plotSlopeCounts(
+  df = bres.2dig,
+  placename = 'Bradford',
+  startdate = 2015,
+  enddate = 2023,
+  date_colname = DATE,
+  region_colname = GEOGRAPHY_NAME,
+  sector_colname = SIC_2DIGIT_NAME_SHORT,#add shortened version in
+  value_colname = jobcount,#Note, this gets log'd in the function, don't do it here
+  conf_interval = 95,
+  neweywest = T
+)
+
+#No NeweyWest
+bradford.bres.2dig2 <- plotSlopeCounts(
+  df = bres.2dig,
+  placename = 'Bradford',
+  startdate = 2015,
+  enddate = 2023,
+  date_colname = DATE,
+  region_colname = GEOGRAPHY_NAME,
+  sector_colname = SIC_2DIGIT_NAME_SHORT,#add shortened version in
+  value_colname = jobcount,#Note, this gets log'd in the function, don't do it here
+  conf_interval = 95,
+  neweywest = F
+)
+
+#I think newey west is finding slopes differ when one hasn't been worked out for other places - when they should be rejected
+bradford.bres.2dig$plot + bradford.bres.2dig2$plot
+
+# bradford.bres.2dig$data %>% View
+
+#GVA and BRES
+bradford.2dig2$plot + bradford.bres.2dig2$plot
+
+
+
+#Check more recent years
+bradford.bres.2dig2 <- plotSlopeCounts(
+  df = bres.2dig,
+  placename = 'Bradford',
+  startdate = 2018,
+  enddate = 2023,
+  date_colname = DATE,
+  region_colname = GEOGRAPHY_NAME,
+  sector_colname = SIC_2DIGIT_NAME_SHORT,#add shortened version in
+  value_colname = jobcount,#Note, this gets log'd in the function, don't do it here
+  conf_interval = 95,
+  neweywest = F
+)
+
+bradford.bres.2dig2$plot
+
+
+#Random places
+x.bres.2dig2 <- plotSlopeCounts(
+  df = bres.2dig,
+  placename = 'Sheffield',
+  startdate = 2015,
+  enddate = 2023,
+  date_colname = DATE,
+  region_colname = GEOGRAPHY_NAME,
+  sector_colname = SIC_2DIGIT_NAME_SHORT,#add shortened version in
+  value_colname = jobcount,#Note, this gets log'd in the function, don't do it here
+  conf_interval = 95,
+  neweywest = F
+)
+
+x.bres.2dig2$plot
+
+
+
+
+
+

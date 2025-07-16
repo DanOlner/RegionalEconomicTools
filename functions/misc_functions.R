@@ -1426,6 +1426,140 @@ pair_spearman_summarystats <- function(pairofplacenames){
 
 
 
+#get slope count differences from a place to all other places
+#Make generic so can take in data from several sources
+plotSlopeCounts <- function(df,placename,startdate,enddate,date_colname,region_colname,sector_colname,value_colname,conf_interval = 95, neweywest = F){
+  
+  date_colname = enquo(date_colname) 
+  region_colname = enquo(region_colname)
+  sector_colname = enquo(sector_colname)
+  value_colname = enquo(value_colname)
+  
+  slopes.log <- get_slope_and_se_safely(data = df %>% filter(!!date_colname %in% startdate:enddate), !!region_colname,!!sector_colname, y = log(!!value_colname), x = !!date_colname, neweywest = neweywest)
+  
+  #Ah, good ol' past me put this in (returnddata = T)
+  slopes.data <- slopeDiffGrid(slope_df = slopes.log, confidence_interval = conf_interval, column_to_grid = !!sector_colname, column_to_filter = !!region_colname, filterval = placename, returndata = T)
+  
+  
+  #Just need to count CIs overlap along one dimension of the grid (i.e. not its inverse at 90 degrees). 
+  #So need the correct unique pairs don't we?
+  #gridcol2 is on the y axis and has the 'if this sector positively different, show green' values.
+  #Same values then - it's just for gridcol2 sectors or places that we're counting the number of sigs
+  #Trickier for all sectors for all places, different loop needed to pull out SY, but step at a time
+  sy_slopediffcount <- slopes.data %>% 
+    mutate(slopetype = case_when(
+      !CIs_overlap & slopediff > 0 ~ 'sig pos',
+      !CIs_overlap & slopediff < 0 ~ 'sig neg',
+      .default = "not sig"
+    )) %>% 
+    mutate(slopetype = factor(slopetype, levels = c('sig pos','sig neg','not sig'))) %>% 
+    # mutate(slopetype = factor(slopetype)) %>% 
+    group_by(gridcol2,slopetype) %>% 
+    summarise(count = n()) %>% 
+    complete(slopetype, fill = list(count = 0)) %>% 
+    group_by(gridcol2) %>% 
+    mutate(percent = (count / sum(count)) * 100) %>% 
+    mutate(source = paste0(placename,' internal'))
+  
+  
+  
+  
+  #For place vs other places, bit trickier. Have to run for each sector and pull out place values each time
+  getsectorslopecounts <- function(sector){
+    
+    slopes.data <- slopeDiffGrid(slope_df = slopes.log, confidence_interval = conf_interval, column_to_grid = !!region_colname, column_to_filter = !!sector_colname, filterval = sector, returndata = T)
+    
+    #Again pulling out values from grid2 perspective, for South Yorkshire each time
+    slopes.data <- slopes.data %>% filter(gridcol2 == placename)
+    
+    #Now count slopes in same way
+    sector_slopediffcount <- slopes.data %>% 
+      mutate(slopetype = case_when(
+        !CIs_overlap & slopediff > 0 ~ 'sig pos',
+        !CIs_overlap & slopediff < 0 ~ 'sig neg',
+        .default = "not sig"
+      )) %>% 
+      mutate(slopetype = factor(slopetype, levels = c('sig pos','sig neg','not sig'))) %>% 
+      group_by(slopetype) %>% 
+      summarise(count = n()) %>% 
+      complete(slopetype, fill = list(count = 0)) %>% 
+      mutate(percent = (count / sum(count)) * 100) %>% 
+      mutate(gridcol2 = sector, source = paste0(placename,' to other places'))#add in sector name
+    
+  }
+  
+  allsectorslopecounts <- purrr::map(unique(slopes.log %>% select(!!sector_colname) %>% pull), getsectorslopecounts) %>% bind_rows()
+  
+  
+  #both
+  allslopecounts <- rbind(sy_slopediffcount,allsectorslopecounts) %>% rename(sector = gridcol2) 
+  
+  
+  #Add slope colours and values back in then use for axis text as in grids
+  #Slopes match to sectors, so can take from any source with those in here
+  allslopecounts <- allslopecounts %>% 
+    left_join(
+      slopes.data %>% select(gridcol2,slopecolour_y,slopetwo_percent,min.citwo_percent,max.citwo_percent) %>% distinct(gridcol2, .keep_all = T) %>% rename(sector = gridcol2), by = 'sector'
+    ) %>% 
+    ungroup() 
+  # mutate(
+  #   sector = gsub(x = sector, pattern = ' and ', replacement = ' / '),
+  #   sector = gsub(x = sector, pattern = 'of |activities|equipment|products', replacement = '')
+  # ) 
+  
+  
+  #Version with no factor order, to keep alphabetical...
+  allslopecounts <- allslopecounts %>%
+    mutate(
+      sector = paste0(sector,' (',slopetwo_percent,'% CI: ',min.citwo_percent,'%,',max.citwo_percent,'%)')
+    )
+  
+  
+  #Removing < 2%
+  
+  #Pull out slope colours
+  slopecolours_y <- allslopecounts %>% 
+    filter(slopetype == 'sig neg', !grepl('Real estate',sector,ignore.case = T)) %>% 
+    # filter(slopetype == 'sig neg', !grepl('Real estate',sector,ignore.case = T), regional_percent > 2) %>% 
+    distinct(sector, .keep_all = T) %>% 
+    arrange(sector) %>% #will arrange by factor
+    select(slopecolour_y) %>% 
+    pull
+  
+  p <- ggplot() +
+    geom_bar(data = allslopecounts %>% filter(slopetype == 'sig neg', !grepl('Real estate',sector,ignore.case = T)), 
+             aes(x = sector, y = -percent, fill = source), stat = 'identity', position = 'dodge', alpha = 0.7) +
+    geom_bar(data = allslopecounts %>% filter(slopetype == 'sig pos', !grepl('Real estate',sector,ignore.case = T)), 
+             aes(x = sector, y = percent, fill = source), stat = 'identity', position = 'dodge') +
+    geom_hline(yintercept = 0, size = 2) +
+    # scale_fill_distiller(type = 'qual', direction = -1) +
+    # scale_fill_brewer(palette = 'Dark2', direction = 1) +
+    scale_fill_brewer(palette = 'Paired', direction = 1) +
+    coord_flip() +
+    theme_bw() +
+    theme(
+      axis.text.y = element_text(colour = slopecolours_y),
+      legend.title = element_blank()
+    ) +
+    ylab('negative << Percent of slopes with significant differences >> positive') +
+    xlab('Sector (text gives yearly change + 95% confidence intervals, bold text are significant trends)') 
+  
+  return(list(plot = p, data = allslopecounts))
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 #Make shorter SIC category names at all category levels
 reduceSICnames = function(names,level){
   
