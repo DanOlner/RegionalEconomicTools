@@ -41,6 +41,10 @@ theme_set(theme_light())
 
 ```
 
+
+
+
+
 # TEST DOC: To save running whole main doc, test smaller sections as we go
 
 ## GROWTH TRENDS IN GVA, JOBS AND GVA PER JOB
@@ -59,6 +63,10 @@ Here's an explanation of what's in the plots below.
     - Red: slope drops over time - growth is on average going down
     - Bold green and red: the up or down slope is significantly different from zero (faded red and green can't be statitically separated from no change over time).
     - Text after the sector name is **percent change per year on average** with 95% confidence intervals.
+
+
+
+
 
 
 
@@ -156,9 +164,6 @@ bradford.2dig$plot + bradford.gvaperjob.2dig$plot
 
 ```
 
-
-
-
 ```{r, growthdata_bres2dig}
 #| fig-height: 14 
 
@@ -255,41 +260,6 @@ theme(
   ggtitle("BRES FT")
 
 bradford.bres.2dig$plot
-
-```
-
-
-## Examining a few sectors
-
-```{r}
-smoothband = 3
-
-gva.jobs.ITL3.for2dplot <- bres.gva.2digit.2023 %>% 
-  arrange(DATE) %>% 
-  group_by(Region_name,SIC07_description_shortened) %>%
-  mutate(
-  jobcount_movingav = rollapply(JOBCOUNT,smoothband,mean,align='center',fill=NA),
-  gva_movingav = rollapply(GVA,smoothband,mean,align='center',fill=NA),
-  `gva/job moving av` = rollapply(gvaperjob * 1000,smoothband,mean,align='center',fill=NA)
-) %>% 
-  ungroup()
-
-#Add into 2D percent plot
-twod_percentplot(
-  # df = gva.jobs.ITL3.for2dplot %>% filter(qg('head office',SIC07_description_shortened)),
-  df = gva.jobs.ITL3.for2dplot %>% filter(qg('metals',SIC07_description_shortened)),
-  # df = gva.jobs.ITL3.for2dplot %>% filter(qg('pstech',SIC07_description_shortened)),
-  category_var = Region_name,
-  x_var = gva_movingav,
-  y_var = jobcount_movingav,
-  timevar = DATE,
-  label_var = `gva/job moving av`,
-  category_var_value_to_highlight = 'Bradford',
-  start_time = 2016,
-  end_time = 2022
-)
-
-
 
 ```
 

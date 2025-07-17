@@ -1,0 +1,17 @@
+{
+  "hash": "1b8907c6d838130b705d5c389c833e90",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"TESTDOC Bradford sectors and clusters: past, present\"\nauthor:\n  - name: \"Dan Olner\"\nformat: \n  html:\n    output-file: \"TESTDOC_Bradford_sectorclusters_July2025\"\n    fig-width: 8\n    fig-height: 8\nexecute:\n  echo: false\n  message: false\n  warning: false\nfig-responsive: false\ncollapse: false\n---\n\n::: {.cell}\n\n:::\n\n\n\n# TEST DOC: To save running whole main doc, test smaller sections as we go\n\n## GROWTH TRENDS IN GVA, JOBS AND GVA PER JOB\n\nThis section examines **growth trends in Bradford** for **GVA and GVA per job** (both using the 46 sector categories available in the GVA data), as well as **growth in jobs using BRES data** (a larger list of x sectors).\n\nover the full range of the data as well as...\n\nHere's an explanation of what's in the plots below.\n\n* Linear slopes are found for each sector in Bradford, and each is compared to (a) all other sectors in Bradford (\"Bradford internal\", light blue) and (b) the same sector in all other ITL3s zones in the data (\"Bradford to other places\", dark blue).\n* For example - looking at the most obvious stand-out sector in the first plot is **head offices / consultancy**. Its GVA has grown significantly more than around 90% of other sectors in Bradford, and significantly more than around 70% of the head office / consultancy sector in other ITL3 zones. Its productivity (measured in GVA per full time job) has grown more than around 43% of other ITL3 zones.\n* The x axis gives the **percent of slopes that are significantly different to others** (i.e. 95% confidence intervals don't overlap).\n* The vertical axis lists all sectors in alphabetical order. These labels contain the following information:\n    - Green text: slope rises over time - growth is on average going up\n    - Red: slope drops over time - growth is on average going down\n    - Bold green and red: the up or down slope is significantly different from zero (faded red and green can't be statitically separated from no change over time).\n    - Text after the sector name is **percent change per year on average** with 95% confidence intervals.\n\n\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](TESTDOC_Bradford_sectorclusters_files/figure-html/growthdata_cv_andperFT-1.png){width=912}\n:::\n:::\n\n::: {.cell}\n::: {.cell-output-display}\n![](TESTDOC_Bradford_sectorclusters_files/figure-html/growthdata_bres2dig-1.png){width=768}\n:::\n:::\n",
+    "supporting": [
+      "TESTDOC_Bradford_sectorclusters_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
