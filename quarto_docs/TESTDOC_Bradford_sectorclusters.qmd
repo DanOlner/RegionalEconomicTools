@@ -1,0 +1,259 @@
+---
+title: "TESTDOC Bradford sectors and clusters: past, present"
+author:
+  - name: "Dan Olner"
+format: 
+  html:
+    output-file: "TESTDOC_Bradford_sectorclusters_July2025"
+    fig-width: 8
+    fig-height: 8
+execute:
+  echo: false
+  message: false
+  warning: false
+fig-responsive: false
+collapse: false
+---
+
+```{r setup}
+library(tidyverse)
+# library(spdep)
+library(sf)#for geo stuff
+# library(tmap)#for mapping 
+library(zoo)#for making smoothed moving averages
+library(patchwork)#combine ggplots easily
+library(plotly)#For interactive plots
+# # library(ggdist)
+# library(tidyr)
+# library(distributional)
+library(RColorBrewer)
+
+source('../functions/misc_functions.R')
+source('../functions/adhoc_functions.R')
+#source('functions/misc_functions.R')
+#source('functions/adhoc_functions.R')
+
+options(scipen = 999)
+
+#Set ggplot theme
+theme_set(theme_light())
+
+
+```
+
+# TEST DOC: To save running whole main doc, test smaller sections as we go
+
+## GROWTH TRENDS IN GVA, JOBS AND GVA PER JOB
+
+This section examines **growth trends in Bradford** for **GVA and GVA per job** (both using the 46 sector categories available in the GVA data), as well as **growth in jobs using BRES data** (a larger list of x sectors).
+
+over the full range of the data as well as...
+
+Here's an explanation of what's in the plots below.
+
+* Linear slopes are found for each sector in Bradford, and each is compared to (a) all other sectors in Bradford ("Bradford internal", light blue) and (b) the same sector in all other ITL3s zones in the data ("Bradford to other places", dark blue).
+* For example - looking at the most obvious stand-out sector in the first plot is **head offices / consultancy**. Its GVA has grown significantly more than around 90% of other sectors in Bradford, and significantly more than around 70% of the head office / consultancy sector in other ITL3 zones. Its productivity (measured in GVA per full time job) has grown more than around 43% of other ITL3 zones.
+* The x axis gives the **percent of slopes that are significantly different to others** (i.e. 95% confidence intervals don't overlap).
+* The vertical axis lists all sectors in alphabetical order. These labels contain the following information:
+    - Green text: slope rises over time - growth is on average going up
+    - Red: slope drops over time - growth is on average going down
+    - Bold green and red: the up or down slope is significantly different from zero (faded red and green can't be statitically separated from no change over time).
+    - Text after the sector name is **percent change per year on average** with 95% confidence intervals.
+
+
+
+```{r, growthdata_cv_andperFT}
+#| fig-height: 12 
+#| fig-width: 9.5
+
+#Counting sigs. Statisticians having kittens. Let's do it.
+itl3.2digit.cv <- read_csv('../data/regionalGVA/regionalGVA_chainedvolume_ITL3_SIC_2DIGIT_LONG_2023.csv') %>% filter(!qg('agri|Owner-occupiers|membership|activities of households',SIC07_description))
+
+#Add in shorter regional GVA SIC text
+shortsectornames <- read_csv('../data/shortsectornames_for_regionalGVA_2digitSICs.csv')
+
+#check match, tick
+# table(unique(itl3.2digit.cv$SIC07_description) %in% shortsectornames$SIC07_description)
+itl3.2digit.cv <- itl3.2digit.cv %>% 
+  left_join(
+    shortsectornames, by = 'SIC07_description'
+  )
+
+#CV first. No NeweyWest
+bradford.2dig <- plotSlopeCounts(
+  df = itl3.2digit.cv,
+  placename = 'Bradford',
+  startdate = 2014,
+  enddate = 2023,
+  date_colname = year,
+  region_colname = Region_name,
+  sector_colname = SIC07_description_shortened,
+  value_colname = value,
+  conf_interval = 95
+)
+
+
+
+
+#And for GVA per job - for the places we're able to combined data for these (done in miscchecks.R)
+bres.gva.2digit.2023 <- readRDS('../data/regionalGVA_plus_BRESjobcounts/regionalGVA_chainedvolume_BRES_FT_jobcount_bespoke2digitSIC_nONLY_MATCHING_GEOGs_2015_2023.rds') %>% 
+  filter(JOBCOUNT > 0, !qg('membership|activities of households|agri', SIC07_description)) %>% 
+  mutate(gvaperjob = GVA / JOBCOUNT)
+
+#check match, tick
+# table(unique(bres.gva.2digit.2023$SIC07_description) %in% shortsectornames$SIC07_description)
+bres.gva.2digit.2023 <- bres.gva.2digit.2023 %>% 
+  left_join(
+    shortsectornames, by = 'SIC07_description'
+  )
+
+
+#CHeck this has same list of sectors as the CV data above... tick
+#(With imputed rent removed from CV)
+# table(unique(bres.gva.2digit.2023$SIC07_description) %in% itl3.2digit.cv$SIC07_description)
+# unique(bres.gva.2digit.2023$SIC07_description)[!unique(bres.gva.2digit.2023$SIC07_description) %in% itl3.2digit.cv$SIC07_description]
+
+bradford.gvaperjob.2dig <- plotSlopeCounts(
+  df = bres.gva.2digit.2023,
+  placename = 'Bradford',
+  startdate = 2015,
+  enddate = 2023,
+  date_colname = DATE,
+  region_colname = Region_name,
+  sector_colname = SIC07_description_shortened,
+  value_colname = gvaperjob,#Note, this gets log'd in the function, don't do it here
+  conf_interval = 95,
+  includesectorname_on_axis = T
+)
+
+#Check sector match before alterations
+# bradford.2dig$plot + bradford.gvaperjob.2dig$plot
+
+
+#Axes match - remove from RHS
+bradford.gvaperjob.2dig$plot <- bradford.gvaperjob.2dig$plot +
+  theme(axis.title.y=element_blank(),
+        # axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(), 
+        axis.title.x=element_blank(),
+        legend.position = "bottom"
+        ) +
+        # axis.text.x=element_blank(),
+        # axis.ticks.x=element_blank()) +
+  guides(fill = F) +
+  ggtitle("GVA/FT") 
+
+#And only need the one legend!
+bradford.2dig$plot <- bradford.2dig$plot +
+  ggtitle("GVA") +
+  theme(
+    legend.position = "bottom",
+    axis.title.y=element_blank()#add this explanation in figure text
+  )
+
+bradford.2dig$plot + bradford.gvaperjob.2dig$plot
+
+
+```
+
+
+
+
+```{r, growthdata_bres2dig}
+#| fig-height: 14 
+
+bres <- read_csv("../local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_NUTS3_n_ITL321_stacked_2_Fulltimeemployees_2015_2023_SIC_5DIGIT.csv")
+
+#This comes with ALL NUTS and ITL3 data
+#Which means 2022 is doubled up
+#E.g. see here: 
+#bres %>% filter(qg('bradford', GEOGRAPHY_NAME),qg('Museum activities',SIC_5DIGIT_NAME)) %>% View
+
+#Remove one of them...
+#Need to filter NOT year == 2022 NOT GEOGRAPHY_CODE_NUTS2018 is NA, keep the rest
+#(2023 we need to keep!)
+bres <- bres %>% 
+  filter(!(DATE == 2022 & is.na(GEOGRAPHY_CODE_NUTS2018)))
+
+#unique(bres$DATE)#tick
+
+SIClookup <- read_csv('../data/SIClookup.csv')
+
+#Join SIC lookup on 5 digit name
+#Keep 2 digit and section codes
+#May shorten names in a mo...
+bres <- bres %>%
+  left_join(
+    SIClookup %>% select(SIC_5DIGIT_NAME,SIC_2DIGIT_NAME,SIC_SECTION_NAME),
+    by = 'SIC_5DIGIT_NAME'
+  )
+
+#Make shorter names, use those.
+#Make lookup so can be merged in.
+names.sections = unique(bres$SIC_SECTION_NAME)
+shortnames.sections = reduceSICnames(unique(bres$SIC_SECTION_NAME),'section')
+
+chk.sections = data.frame(names = names.sections, shortnames = shortnames.sections)
+
+names.2digit = unique(bres$SIC_2DIGIT_NAME)
+shortnames.2digit = reduceSICnames(unique(bres$SIC_SECTION_NAME),'2 digit')
+
+chk.2digit = data.frame(names = names.2digit, shortnames = shortnames.2digit)
+
+
+#And 729 categories in the 5 digit...
+names.5digit = unique(bres$SIC_5DIGIT_NAME)
+#NOTE: THE ORDER HERE IS BASED ON THE ORDER IN bres
+#We should make an actual lookup to make sure we don't lose that order
+shortnames.5digit = reduceSICnames(unique(bres$SIC_5DIGIT_NAME),'5 digit')
+
+chk.5digit = data.frame(names = names.5digit, shortnames = shortnames.5digit)
+
+
+#Merge into bres
+bres <- bres %>% 
+  left_join(chk.sections %>% rename(SIC_SECTION_NAME_SHORT = shortnames), by = c('SIC_SECTION_NAME' = 'names')) %>% 
+  left_join(chk.2digit %>% rename(SIC_2DIGIT_NAME_SHORT = shortnames), by = c('SIC_2DIGIT_NAME' = 'names')) %>% 
+  left_join(chk.5digit %>% rename(SIC_5DIGIT_NAME_SHORT = shortnames), by = c('SIC_5DIGIT_NAME' = 'names')) 
+
+
+#Drop some sectors
+bres <- bres %>% 
+  filter(!qg('activities of households|agri|membership', SIC_2DIGIT_NAME))
+
+#Good!
+# table(unique(bres$SIC_2DIGIT_NAME_SHORT) %in% ch.2digitsums$SIC_2DIGIT_NAME_SHORT)
+
+
+# AND ON WITH LQS 
+#OK so getting on with LQs and thinking about what those mean...
+#The LQ boundaries won't differ because they're both for Bradford
+#And the national sums will be matching quantities across both
+bres.2dig <- bres %>% 
+  group_by(DATE,GEOGRAPHY_NAME,SIC_2DIGIT_NAME_SHORT) %>% 
+  summarise(jobcount = sum(JOBCOUNT)) %>% 
+  ungroup()
+
+bradford.bres.2dig <- plotSlopeCounts(
+  df = bres.2dig,
+  placename = 'Bradford',
+  startdate = 2015,
+  enddate = 2023,
+  date_colname = DATE,
+  region_colname = GEOGRAPHY_NAME,
+  sector_colname = SIC_2DIGIT_NAME_SHORT,#add shortened version in
+  value_colname = jobcount,#Note, this gets log'd in the function, don't do it here
+  conf_interval = 95
+)
+
+#GVA and BRES
+# bradford.2dig2$plot + bradford.bres.2dig2$plot
+bradford.bres.2dig$plot <- bradford.bres.2dig$plot +
+theme(
+  axis.title.y=element_blank(),
+  legend.position = "bottom") +
+  ggtitle("BRES FT")
+
+bradford.bres.2dig$plot
+
+```

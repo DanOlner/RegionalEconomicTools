@@ -1428,7 +1428,7 @@ pair_spearman_summarystats <- function(pairofplacenames){
 
 #get slope count differences from a place to all other places
 #Make generic so can take in data from several sources
-plotSlopeCounts <- function(df,placename,startdate,enddate,date_colname,region_colname,sector_colname,value_colname,conf_interval = 95, neweywest = F){
+plotSlopeCounts <- function(df,placename,startdate,enddate,date_colname,region_colname,sector_colname,value_colname,includesectorname_on_axis = T,conf_interval = 95, neweywest = F){
   
   date_colname = enquo(date_colname) 
   region_colname = enquo(region_colname)
@@ -1509,17 +1509,18 @@ plotSlopeCounts <- function(df,placename,startdate,enddate,date_colname,region_c
   
   
   #Version with no factor order, to keep alphabetical...
+  #Option to not include sector text twice if we're putting plots next to each other
+  #Calculate both here, work out order with sector name in
   allslopecounts <- allslopecounts %>%
     mutate(
-      sector = paste0(sector,' (',slopetwo_percent,'% CI: ',min.citwo_percent,'%,',max.citwo_percent,'%)')
-    )
-  
-  
-  #Removing < 2%
+      sector = paste0(sector,' (',slopetwo_percent,'% CI: ',min.citwo_percent,'%,',max.citwo_percent,'%)'),
+      percents_n_cis = paste0(slopetwo_percent,'% CI: ',min.citwo_percent,'%,',max.citwo_percent,'%')
+      )
   
   #Pull out slope colours
   slopecolours_y <- allslopecounts %>% 
-    filter(slopetype == 'sig neg', !grepl('Real estate',sector,ignore.case = T)) %>% 
+    filter(slopetype == 'sig neg') %>% 
+    # filter(slopetype == 'sig neg', !grepl('Real estate',sector,ignore.case = T)) %>% 
     # filter(slopetype == 'sig neg', !grepl('Real estate',sector,ignore.case = T), regional_percent > 2) %>% 
     distinct(sector, .keep_all = T) %>% 
     arrange(sector) %>% #will arrange by factor
@@ -1542,7 +1543,8 @@ plotSlopeCounts <- function(df,placename,startdate,enddate,date_colname,region_c
       legend.title = element_blank()
     ) +
     ylab('negative << Percent of slopes with significant differences >> positive') +
-    xlab('Sector (text gives yearly change + 95% confidence intervals, bold text are significant trends)') 
+    xlab(paste0('Sector (text gives yearly change + ',conf_interval,'% confidence intervals, bold text = trends signif ↕ zero)')) 
+
   
   return(list(plot = p, data = allslopecounts))
   

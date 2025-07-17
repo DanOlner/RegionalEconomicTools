@@ -1,10 +1,10 @@
 ---
-title: "Bradford sector economy analysis plots"
+title: "HEYCA sector economy analysis plots"
 author:
   - name: "Dan Olner"
 format: 
   html:
-    output-file: "Bradford_sectorclusters_July2025"
+    output-file: "HEYCA_sectorclusters_July2025"
     fig-width: 8
     fig-height: 8
 execute:
@@ -133,11 +133,9 @@ itl3.lon = itl_lookup %>%
 
 
 
-
 # ONS GVA AND JOBS DATA
 
 ## Structural /  broad sector GVA change 
-
 
 
 
@@ -229,7 +227,7 @@ getplot <- function(place){
   
 }
 
-places = getdistinct('bradford|kirklees|calderdale|leeds|wakefield',df$Region_name)
+places = getdistinct('upon hull|east riding',df$Region_name)
 
 plots <- map(places, getplot)
 
@@ -237,7 +235,6 @@ patchwork::wrap_plots(plots, ncol = 1)
 
 
 ```
-
 
 
 
@@ -254,7 +251,6 @@ BRES does contain more detail - more on that below and in the separate [BRES 5 d
 The plots below are measured in **GVA per job parts per million of UK economy** - equivalent to e.g. 1% being "1 in 100 parts of economy", 0.1 here is "1 in 10 millionth of whole economy". So it's again examining **relative change in output per FT worker** across all sectors.
 
 GVA per job as a measure needs some caution: output is also due to other productive factors, so high capital intensity sectors (power, telecoms, other ICT though not all) can appear overly productive per worker. It's more representative for service sectors where an employee's output more clearly correlates to total output, such as legal services.
-
 
 
 
@@ -465,7 +461,6 @@ patchwork::wrap_plots(plotz,ncol = 1)
 
 
 
-
 ## Location quotients for GVA and jobs in 2 digit SIC sectors: most recent and change over time
 
 These LQ plots show location quotients for linked GVA and jobs data for Bradford, overlaid on top of LQs for all other ITL3 zones, to give a sense of what the spread is across Great Britain.
@@ -482,7 +477,6 @@ Here’s an explanation of how to read these location quotient plots:
 * Per sector GVA money amounts and percent of that region’s entire economy are shown on the right.
 
 ### Production sectors
-
 
 
 
@@ -665,9 +659,7 @@ makegvajoblqplots(gva.props$SIC07_description_shortened[gva.props$productionsect
 
 
 
-
 ### Rest of sectors
-
 
 
 
@@ -679,7 +671,6 @@ makegvajoblqplots(gva.props$SIC07_description_shortened[gva.props$productionsect
 makegvajoblqplots(gva.props$SIC07_description_shortened[gva.props$productionsector == 'other'])
 
 ```
-
 
 
 
@@ -703,7 +694,6 @@ And:
 
 
 ### 2004 to 2013 av % change
-
 
 
 
@@ -744,12 +734,12 @@ slopes.hours = slopes.hours %>%
   mutate(
     itl3label = case_when(
       # qg('york', Region_name) ~ 'SY LA',#will overwrite sheffield as core city
-      qg('bradford|kirklees|calderdale|leeds|wakefield', Region_name) ~ 'WY LA',#will overwrite sheffield as core city
+      qg('upon hull|east riding', Region_name) ~ 'HEY LA',#will overwrite sheffield as core city
       Region_name %in% corecities ~ 'Core city',
       Region_name %in% itl3.lon$ITL325NM ~ 'London',
       .default = 'Other'
       ),
-    itl3label = factor(itl3label, ordered = T, levels = c('Other','London','Core city','WY LA'))
+    itl3label = factor(itl3label, ordered = T, levels = c('Other','London','Core city','HEY LA'))
   )
 
 #Adjust to get percentage change per year from log slopes
@@ -784,13 +774,13 @@ slopes.gva = slopes.gva %>%
   ungroup() %>% 
   mutate(
     itl3label = case_when(
-      # qg('york', Region_name) ~ 'WY LA',#will overwrite sheffield as core city
-      qg('bradford|kirklees|calderdale|leeds|wakefield', Region_name) ~ 'WY LA',#will overwrite sheffield as core city
+      # qg('york', Region_name) ~ 'HEY LA',#will overwrite sheffield as core city
+      qg('upon hull|east riding', Region_name) ~ 'HEY LA',#will overwrite sheffield as core city
       Region_name %in% corecities ~ 'Core city',
       Region_name %in% itl3.lon$ITL325NM ~ 'London',
       .default = 'Other'
     ),
-    itl3label = factor(itl3label, ordered = T, levels = c('Other','London','Core city','WY LA'))
+    itl3label = factor(itl3label, ordered = T, levels = c('Other','London','Core city','HEY LA'))
   )
 
 #Adjust to get percentage change per year from log slopes
@@ -848,7 +838,7 @@ p = addtogva_hours_plot(p, both %>% filter(itl3label == 'Other'), F, 1, 'black',
 p = addtogva_hours_plot(p, both %>% filter(itl3label == 'London'), F, 2, 'red', 0.4)
 p = addtogva_hours_plot(p, both %>% filter(itl3label == 'Core city'), T, 3, RColorBrewer::brewer.pal(3, "Set1")[2], 0.5)
 p = addtogva_hours_plot(p, both %>% filter(Region_name == 'Bradford'), F, 10, 'black', 1)
-p = addtogva_hours_plot(p, both %>% filter(itl3label == 'WY LA'), T, 7, RColorBrewer::brewer.pal(3, "Set1")[3], 1)
+p = addtogva_hours_plot(p, both %>% filter(itl3label == 'HEY LA'), T, 7, RColorBrewer::brewer.pal(3, "Set1")[3], 1)
 
 p = p + coord_fixed() +
   xlab("Average % change: hours worked per week") +
@@ -864,9 +854,7 @@ ggplotly(p, tooltip = 'Region_name')
 
 
 
-
 ### 2014 to 2023 av % change
-
 
 
 
@@ -898,19 +886,19 @@ slopes.hours = slopes.hours %>%
 slopes.hours = slopes.hours %>% 
   ungroup() %>% 
   # mutate(
-  #   SY_LAs = ifelse(qg('rotherh|doncaste|sheffie|barnsley', Region_name),'WY LA','Other'),
+  #   SY_LAs = ifelse(qg('rotherh|doncaste|sheffie|barnsley', Region_name),'HEY LA','Other'),
   #   corecities = ifelse(Region_name %in% corecities,'core city','Other'),
   #   london = ifelse(qg('london',Region_name), 'London','Other')
   # )
   mutate(
     itl3label = case_when(
-      # qg('york', Region_name) ~ 'WY LA',#will overwrite sheffield as core city
-      qg('bradford|kirklees|calderdale|leeds|wakefield', Region_name) ~ 'WY LA',#will overwrite sheffield as core city
+      # qg('york', Region_name) ~ 'HEY LA',#will overwrite sheffield as core city
+      qg('upon hull|east riding', Region_name) ~ 'HEY LA',#will overwrite sheffield as core city
       Region_name %in% corecities ~ 'Core city',
       Region_name %in% itl3.lon$ITL325NM ~ 'London',
       .default = 'Other'
       ),
-    itl3label = factor(itl3label, ordered = T, levels = c('Other','London','Core city','WY LA'))
+    itl3label = factor(itl3label, ordered = T, levels = c('Other','London','Core city','HEY LA'))
   )
 
 #Adjust to get percentage change per year from log slopes
@@ -945,13 +933,13 @@ slopes.gva = slopes.gva %>%
   ungroup() %>% 
   mutate(
     itl3label = case_when(
-      # qg('york', Region_name) ~ 'WY LA',#will overwrite sheffield as core city
-      qg('bradford|kirklees|calderdale|leeds|wakefield', Region_name) ~ 'WY LA',#will overwrite sheffield as core city
+      # qg('york', Region_name) ~ 'HEY LA',#will overwrite sheffield as core city
+      qg('', Region_name) ~ 'HEY LA',#will overwrite sheffield as core city
       Region_name %in% corecities ~ 'Core city',
       Region_name %in% itl3.lon$ITL325NM ~ 'London',
       .default = 'Other'
     ),
-    itl3label = factor(itl3label, ordered = T, levels = c('Other','London','Core city','WY LA'))
+    itl3label = factor(itl3label, ordered = T, levels = c('Other','London','Core city','HEY LA'))
   )
 
 #Adjust to get percentage change per year from log slopes
@@ -1009,7 +997,7 @@ p = addtogva_hours_plot(p, both %>% filter(itl3label == 'Other'), F, 1, 'black',
 p = addtogva_hours_plot(p, both %>% filter(itl3label == 'London'), F, 2, 'red', 0.4)
 p = addtogva_hours_plot(p, both %>% filter(itl3label == 'Core city'), T, 3, RColorBrewer::brewer.pal(3, "Set1")[2], 0.5)
 p = addtogva_hours_plot(p, both %>% filter(Region_name == 'Bradford'), F, 10, 'black', 1)
-p = addtogva_hours_plot(p, both %>% filter(itl3label == 'WY LA'), T, 7, RColorBrewer::brewer.pal(3, "Set1")[3], 1)
+p = addtogva_hours_plot(p, both %>% filter(itl3label == 'HEY LA'), T, 7, RColorBrewer::brewer.pal(3, "Set1")[3], 1)
 
 p = p + coord_fixed() +
   xlab("Average % change: hours worked per week") +
@@ -1033,9 +1021,7 @@ ggplotly(p, tooltip = 'Region_name')
 
 
 
-
 # COMPANIES HOUSE DATA
-
 
 
 
@@ -1153,11 +1139,9 @@ ggplot(firmcounts.by.2digit, aes(y = SIC_2DIGIT_NAME_SHORT, x = percent, fill = 
 
 
 
-
 The next few plots use data extracted from individual firms' accounts **filed with Companies House between June 2024 and end of June 2025**. 
 
 The following table shows the count (and percentage) of firms in Bradford that filed with CH, broken down by employee count.
-
 
 
 
@@ -1175,11 +1159,9 @@ knitr::kable(firmtable, escape = FALSE, caption = "Table: Bradford count/% of fi
 
 
 
-
 ## Comparing Companies House to BRES: location quotient plots
 
 ### Production sectors
-
 
 
 
@@ -1199,9 +1181,7 @@ plotz[[1]] + plotz[[3]]
 
 
 
-
 ### Other sectors
-
 
 
 
@@ -1219,11 +1199,9 @@ plotz[[2]] + plotz[[4]]
 
 
 
-
 ## From Companies House firm level data: in the last year (March 2024-March 2025), percent change in employment in firms, five West Yorkshire local authorities compared to 'core cities' (hover for place names)
 
 ### Firms with 10+ employees
-
 
 
 
@@ -1248,7 +1226,7 @@ p <- ggplot() +
 p <- p + 
   geom_point(
     position = position_nudge(y = -0.2),
-    data = empchange.summary %>% filter(qg('leeds|kirklees|wakefield|calderdale',localauthority_name)),
+    data = empchange.summary %>% filter(qg('upon hull|east riding',localauthority_name)),
     aes(y = SIC_2DIGIT_NAME_SHORT, x = employment_percentchange, colour = localauthority_name, group = `Place: `),
     size = 7, shape = 17) +
   scale_colour_brewer(palette = 'Paired', direction = 1, guide = guide_legend(title = NULL)) +
@@ -1256,21 +1234,6 @@ p <- p +
   geom_vline(xintercept = 0, alpha = 0.5, colour = 'green') +
   ylab("") 
 
-#Add Bradford over the top to make sure visible
-p <- p + 
-  geom_point(
-    position = position_nudge(y = -0.2),
-    data = empchange.summary %>% filter(qg('bradford',localauthority_name)),
-    aes(y = SIC_2DIGIT_NAME_SHORT, x = employment_percentchange, colour = localauthority_name, group = `Place: `),
-    size = 8, shape = 17) +
-  scale_colour_brewer(palette = 'Paired', direction = 1, guide = guide_legend(title = NULL)) +
-  # coord_cartesian(xlim = c(-25,25)) +
-  geom_vline(xintercept = 0, alpha = 0.5, colour = 'green') +
-  ylab("") 
-
-
-
-#p
 
 # ggplotly(p, width = 800, height = 900, tooltip = 'localauthority_name')
 ggplotly(p, tooltip = 'Place: ')
@@ -1281,9 +1244,7 @@ ggplotly(p, tooltip = 'Place: ')
 
 
 
-
 ###  Firms with fewer than 10 employees
-
 
 
 
@@ -1352,7 +1313,7 @@ p <- ggplot() +
 p <- p + 
   geom_point(
     position = position_nudge(y = -0.2),
-    data = empchange.summary %>% filter(qg('leeds|kirklees|wakefield|calderdale',localauthority_name)),
+    data = empchange.summary %>% filter(qg('upon hull|east riding',localauthority_name)),
     aes(y = SIC_2DIGIT_NAME_SHORT, x = employment_percentchange, colour = localauthority_name, group = `Place: `),
     size = 7, shape = 17) +
   scale_colour_brewer(palette = 'Paired', direction = 1, guide = guide_legend(title = NULL)) +
@@ -1360,17 +1321,7 @@ p <- p +
   geom_vline(xintercept = 0, alpha = 0.5, colour = 'green') +
   ylab("") 
 
-#Add Bradford over the top to make sure visible
-p <- p + 
-  geom_point(
-    position = position_nudge(y = -0.2),
-    data = empchange.summary %>% filter(qg('bradford',localauthority_name)),
-    aes(y = SIC_2DIGIT_NAME_SHORT, x = employment_percentchange, colour = localauthority_name, group = `Place: `),
-    size = 8, shape = 17) +
-  scale_colour_brewer(palette = 'Paired', direction = 1, guide = guide_legend(title = NULL)) +
-  # coord_cartesian(xlim = c(-25,25)) +
-  geom_vline(xintercept = 0, alpha = 0.5, colour = 'green') +
-  ylab("") 
+
 
 p <- p + coord_cartesian(xlim = c(-40,80))
 
@@ -1388,11 +1339,9 @@ ggplotly(p, tooltip = 'Place: ')
 
 
 
-
 ## Just for Bradford, individual firms with 10+ employees, percent employee change from last accounts (hover for firm names)
 
 This section is included to be able to identify individual firms (with 10+ employees) by hovering over the points. Each is plotted by what percentage their employee number grew between their latest accounts and a year prior.
-
 
 
 
@@ -1404,7 +1353,7 @@ This section is included to be able to identify individual firms (with 10+ emplo
 # fig-cap: "Percent change in employment between most recent accounts and previous year, ALL Bradford firms with 10+ employees, hover for firm name."
 
 firm.change <- ch %>% 
-  filter(localauthority_name == 'Bradford', Employees_thisyear >= 10 & Employees_lastyear >= 10) %>% #10+ in both time periods
+  filter(qg('upon hull|east riding',localauthority_name), Employees_thisyear >= 10 & Employees_lastyear >= 10) %>% #10+ in both time periods
   mutate(
     employee_percentchange = percent_change(Employees_lastyear,Employees_thisyear)
   )

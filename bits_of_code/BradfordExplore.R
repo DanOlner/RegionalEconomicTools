@@ -1840,7 +1840,20 @@ chx <- chx %>% relocate(num_assignedSICs, .after = SICCode.SicText_4)
 # GROWTH GRIDS FOR BRES / GVA / CH / BRES+GVA COMBO----
 
 #Counting sigs. Statisticians having kittens. Let's do it.
-itl3.2digit.cv <- read_csv('data/regionalGVA/regionalGVA_chainedvolume_ITL3_SIC_2DIGIT_LONG_2023.csv') %>% filter(!qg('imputed|agri',SIC07_description))
+itl3.2digit.cv <- read_csv('data/regionalGVA/regionalGVA_chainedvolume_ITL3_SIC_2DIGIT_LONG_2023.csv') %>% filter(!qg('agri|Owner-occupiers|membership|activities of households',SIC07_description))
+
+#Add in shorter regional GVA SIC text
+shortsectornames <- read_csv('data/shortsectornames_for_regionalGVA_2digitSICs.csv')
+
+#check match, tick
+# table(unique(itl3.2digit.cv$SIC07_description) %in% shortsectornames$SIC07_description)
+itl3.2digit.cv <- itl3.2digit.cv %>% 
+  left_join(
+    shortsectornames, by = 'SIC07_description'
+  )
+
+
+
 
 
 #plotslopecounts function off to be made generic, the lucky so and so
@@ -1852,37 +1865,51 @@ itl3.2digit.cv <- read_csv('data/regionalGVA/regionalGVA_chainedvolume_ITL3_SIC_
 # bradford.2dig$plot
 
 #Right - testing generic-ised version
-leeds.2dig <- plotSlopeCounts(
-  df = itl3.2digit.cv,
-  placename = 'Leeds',
-  startdate = 2014,
-  enddate = 2023,
-  date_colname = year,
-  region_colname = Region_name,
-  sector_colname = SIC07_description,#add shortened version in
-  value_colname = value,
-  conf_interval = 95,
-  neweywest = T
-    )
-
-#No NeweyWest
-leeds.2dig2 <- plotSlopeCounts(
-  df = itl3.2digit.cv,
-  placename = 'Leeds',
-  startdate = 2014,
-  enddate = 2023,
-  date_colname = year,
-  region_colname = Region_name,
-  sector_colname = SIC07_description,#add shortened version in
-  value_colname = value,
-  conf_interval = 95,
-  neweywest = F
-)
-
-leeds.2dig$plot + leeds.2dig2$plot
+# leeds.2dig <- plotSlopeCounts(
+#   df = itl3.2digit.cv,
+#   placename = 'Leeds',
+#   startdate = 2014,
+#   enddate = 2023,
+#   date_colname = year,
+#   region_colname = Region_name,
+#   sector_colname = SIC07_description,#add shortened version in
+#   value_colname = value,
+#   conf_interval = 95,
+#   neweywest = T
+#     )
+# 
+# #No NeweyWest
+# leeds.2dig2 <- plotSlopeCounts(
+#   df = itl3.2digit.cv,
+#   placename = 'Leeds',
+#   startdate = 2014,
+#   enddate = 2023,
+#   date_colname = year,
+#   region_colname = Region_name,
+#   sector_colname = SIC07_description,#add shortened version in
+#   value_colname = value,
+#   conf_interval = 95,
+#   neweywest = F
+# )
+# 
+# leeds.2dig$plot + leeds.2dig2$plot
 
 
 #Neweywest
+# bradford.2dig <- plotSlopeCounts(
+#   df = itl3.2digit.cv,
+#   placename = 'Bradford',
+#   startdate = 2014,
+#   enddate = 2023,
+#   date_colname = year,
+#   region_colname = Region_name,
+#   sector_colname = SIC07_description,#add shortened version in
+#   value_colname = value,
+#   conf_interval = 95,
+#   neweywest = T
+# )
+
+#CV first. No NeweyWest
 bradford.2dig <- plotSlopeCounts(
   df = itl3.2digit.cv,
   placename = 'Bradford',
@@ -1890,29 +1917,16 @@ bradford.2dig <- plotSlopeCounts(
   enddate = 2023,
   date_colname = year,
   region_colname = Region_name,
-  sector_colname = SIC07_description,#add shortened version in
+  sector_colname = SIC07_description_shortened,
   value_colname = value,
-  conf_interval = 95,
-  neweywest = T
+  conf_interval = 95
 )
 
-#No NeweyWest
-bradford.2dig2 <- plotSlopeCounts(
-  df = itl3.2digit.cv,
-  placename = 'Bradford',
-  startdate = 2014,
-  enddate = 2023,
-  date_colname = year,
-  region_colname = Region_name,
-  sector_colname = SIC07_description,#add shortened version in
-  value_colname = value,
-  conf_interval = 95,
-  neweywest = F
-)
-
-bradford.2dig$plot + bradford.2dig2$plot
+# bradford.2dig$plot
 
 #OK. Need a way to order it... but OK.
+
+bradford.2dig$data %>% View
 
 #BRES + GVA joined... needs BRES joining to CV GVA to get GVA/job slopes. Hmmph.
 
@@ -1945,10 +1959,22 @@ bradford.2dig$plot + bradford.2dig2$plot
 
 #Moving on to BRES
 #Got from "compare CH to BRES' above
-#Blimey, worked...!
-#Spoke too soon, nope, no data in plot!
 
 #debugonce(plotSlopeCounts)
+# bradford.bres.2dig <- plotSlopeCounts(
+#   df = bres.2dig,
+#   placename = 'Bradford',
+#   startdate = 2015,
+#   enddate = 2023,
+#   date_colname = DATE,
+#   region_colname = GEOGRAPHY_NAME,
+#   sector_colname = SIC_2DIGIT_NAME_SHORT,#add shortened version in
+#   value_colname = jobcount,#Note, this gets log'd in the function, don't do it here
+#   conf_interval = 95,
+#   neweywest = T
+# )
+
+#No NeweyWest
 bradford.bres.2dig <- plotSlopeCounts(
   df = bres.2dig,
   placename = 'Bradford',
@@ -1958,66 +1984,146 @@ bradford.bres.2dig <- plotSlopeCounts(
   region_colname = GEOGRAPHY_NAME,
   sector_colname = SIC_2DIGIT_NAME_SHORT,#add shortened version in
   value_colname = jobcount,#Note, this gets log'd in the function, don't do it here
-  conf_interval = 95,
-  neweywest = T
-)
-
-#No NeweyWest
-bradford.bres.2dig2 <- plotSlopeCounts(
-  df = bres.2dig,
-  placename = 'Bradford',
-  startdate = 2015,
-  enddate = 2023,
-  date_colname = DATE,
-  region_colname = GEOGRAPHY_NAME,
-  sector_colname = SIC_2DIGIT_NAME_SHORT,#add shortened version in
-  value_colname = jobcount,#Note, this gets log'd in the function, don't do it here
-  conf_interval = 95,
-  neweywest = F
+  conf_interval = 95
 )
 
 #I think newey west is finding slopes differ when one hasn't been worked out for other places - when they should be rejected
-bradford.bres.2dig$plot + bradford.bres.2dig2$plot
+# bradford.bres.2dig$plot + bradford.bres.2dig2$plot
 
 # bradford.bres.2dig$data %>% View
 
 #GVA and BRES
-bradford.2dig2$plot + bradford.bres.2dig2$plot
+# bradford.2dig2$plot + bradford.bres.2dig2$plot
+bradford.bres.2dig$plot <- bradford.bres.2dig$plot +
+theme(
+  axis.title.y=element_blank(),
+  legend.position = "bottom") +
+  ggtitle("BRES FT")
+
+#That sewerage drop, what??
+ggplot(
+  bres.2dig %>% filter(GEOGRAPHY_NAME == 'Bradford', qg('aux',SIC_2DIGIT_NAME_SHORT)),
+  # bres.2dig %>% filter(GEOGRAPHY_NAME == 'Bradford', SIC_2DIGIT_NAME_SHORT == 'Sewerage'),
+  aes(x = DATE, y = jobcount)
+  ) +
+  geom_line() +
+  geom_point() +
+  geom_smooth(method = 'lm')
+
 
 
 
 #Check more recent years
-bradford.bres.2dig2 <- plotSlopeCounts(
-  df = bres.2dig,
-  placename = 'Bradford',
-  startdate = 2018,
-  enddate = 2023,
-  date_colname = DATE,
-  region_colname = GEOGRAPHY_NAME,
-  sector_colname = SIC_2DIGIT_NAME_SHORT,#add shortened version in
-  value_colname = jobcount,#Note, this gets log'd in the function, don't do it here
-  conf_interval = 95,
-  neweywest = F
-)
-
-bradford.bres.2dig2$plot
+# bradford.bres.2dig2 <- plotSlopeCounts(
+#   df = bres.2dig,
+#   placename = 'Bradford',
+#   startdate = 2018,
+#   enddate = 2023,
+#   date_colname = DATE,
+#   region_colname = GEOGRAPHY_NAME,
+#   sector_colname = SIC_2DIGIT_NAME_SHORT,#add shortened version in
+#   value_colname = jobcount,#Note, this gets log'd in the function, don't do it here
+#   conf_interval = 95,
+#   neweywest = F
+# )
+# 
+# bradford.bres.2dig2$plot
 
 
 #Random places
-x.bres.2dig2 <- plotSlopeCounts(
-  df = bres.2dig,
-  placename = 'Sheffield',
+# x.bres.2dig2 <- plotSlopeCounts(
+#   df = bres.2dig,
+#   placename = 'Sheffield',
+#   startdate = 2015,
+#   enddate = 2023,
+#   date_colname = DATE,
+#   region_colname = GEOGRAPHY_NAME,
+#   sector_colname = SIC_2DIGIT_NAME_SHORT,#add shortened version in
+#   value_colname = jobcount,#Note, this gets log'd in the function, don't do it here
+#   conf_interval = 95,
+#   neweywest = F
+# )
+# 
+# x.bres.2dig2$plot
+
+
+
+
+#And for GVA per job - for the places we're able to combined data for these (done in miscchecks.R)
+bres.gva.2digit.2023 <- readRDS('data/regionalGVA_plus_BRESjobcounts/regionalGVA_chainedvolume_BRES_FT_jobcount_bespoke2digitSIC_nONLY_MATCHING_GEOGs_2015_2023.rds') %>% 
+  filter(JOBCOUNT > 0, !qg('membership|activities of households|agri', SIC07_description)) %>% 
+  mutate(gvaperjob = GVA / JOBCOUNT)
+
+#Add in shorter regional GVA SIC text
+shortsectornames <- read_csv('data/shortsectornames_for_regionalGVA_2digitSICs.csv')
+
+#check match, tick
+# table(unique(bres.gva.2digit.2023$SIC07_description) %in% shortsectornames$SIC07_description)
+bres.gva.2digit.2023 <- bres.gva.2digit.2023 %>% 
+  left_join(
+    shortsectornames, by = 'SIC07_description'
+  )
+
+
+
+
+#CHeck this has same list of sectors as the CV data above... tick
+#(With imputed rent removed from CV)
+table(unique(bres.gva.2digit.2023$SIC07_description) %in% itl3.2digit.cv$SIC07_description)
+# unique(bres.gva.2digit.2023$SIC07_description)[!unique(bres.gva.2digit.2023$SIC07_description) %in% itl3.2digit.cv$SIC07_description]
+
+bradford.gvaperjob.2dig <- plotSlopeCounts(
+  df = bres.gva.2digit.2023,
+  placename = 'Bradford',
   startdate = 2015,
   enddate = 2023,
   date_colname = DATE,
-  region_colname = GEOGRAPHY_NAME,
-  sector_colname = SIC_2DIGIT_NAME_SHORT,#add shortened version in
-  value_colname = jobcount,#Note, this gets log'd in the function, don't do it here
+  region_colname = Region_name,
+  sector_colname = SIC07_description_shortened,
+  value_colname = gvaperjob,#Note, this gets log'd in the function, don't do it here
   conf_interval = 95,
-  neweywest = F
+  includesectorname_on_axis = T
 )
 
-x.bres.2dig2$plot
+#Check sector match before alterations
+bradford.2dig$plot + bradford.gvaperjob.2dig$plot
+
+
+#Axes match - remove from RHS
+# bradford.gvaperjob.2dig$plot <- bradford.gvaperjob.2dig$plot +
+#   theme(axis.title.y=element_blank(),
+#         axis.text.y=element_blank(),
+#         axis.ticks.y=element_blank(), 
+#         axis.title.x=element_blank(),
+#         legend.position = "bottom"
+#         ) +
+#         # axis.text.x=element_blank(),
+#         # axis.ticks.x=element_blank()) +
+#   ggtitle("GVA/FT")
+
+bradford.gvaperjob.2dig$plot <- bradford.gvaperjob.2dig$plot +
+  theme(axis.title.y=element_blank(),
+        axis.title.x=element_blank(),
+        legend.position = "bottom"
+        ) +
+  # scale_y_continuous(position = "right") +
+        # axis.text.x=element_blank(),
+        # axis.ticks.x=element_blank()) +
+  ggtitle("GVA/FT")
+
+#And only need the one legend!
+bradford.2dig$plot <- bradford.2dig$plot +
+  guides(fill = F) +
+  ggtitle("GVA") +
+  theme(
+    axis.title.y=element_blank()#add this explanation in figure text
+  )
+
+bradford.2dig$plot + bradford.gvaperjob.2dig$plot
+
+# bradford.gvaperjob.2dig$data %>% View
+
+
 
 
 

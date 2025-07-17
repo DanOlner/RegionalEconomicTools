@@ -1649,6 +1649,74 @@ saveRDS(bres.gva.2digit.2023,'data/regionalGVA_plus_BRESjobcounts/regionalGVA_cu
 
 
 
+#Version for chained volume at ITL3 as well, save as different file
+#Tho arguably easier just to stick these in one CSV, will leave separate...
+bres.gva.2digit.2023 <- readRDS('data/regionalGVA_plus_BRESjobcounts/regionalGVA_currentprices_BRES_FT_jobcount_bespoke2digitSIC_nONLY_MATCHING_GEOGs_2015_2023.rds')
+
+#checking... yeah, 2022-23, too many years
+#I think the diff is probably Christchurch and Poole in last two years
+table(bres.gva.2digit.2023$DATE)
+table(bres.gva.2digit.2023$DATE, bres.gva.2digit.2023$Region_name)
+
+
+
+
+
+itl3.cv <- read_csv('data/regionalGVA/regionalGVA_chainedvolume_ITL3_SIC_2DIGIT_LONG_2023.csv')
+
+#Check daft values... newp
+table(itl3.cv$value < 0)
+
+#Reminder: this 2023 BRES/GVA data *only* has matching ITL3 zones - 
+#i.e. BRES was ITL 2021 and not all of them now match, have kept only those that do
+#Except for a few where they could be combined e.g. Barnsley Doncaster Rotherham
+
+#Ah, so - this means for CV it's going to be EVEN LOWER
+#Because we can't sum, and can only match on direct one to one matches
+
+#Also, BRES is GB only. So check again what doesn't match...
+table(unique(bres.gva.2digit.2023$GEOGRAPHY_CODE_ITL321) %in% itl3.cv$ITL_code)
+
+unique(bres.gva.2digit.2023$Region_name)[!unique(bres.gva.2digit.2023$GEOGRAPHY_CODE_ITL321) %in% itl3.cv$ITL_code]
+
+#Hmm. ITL codes not matching... oh of course it's not, "ITL321" means ITL3 2021!
+#Check if names better... yep!
+table(unique(bres.gva.2digit.2023$GEOGRAPHY_CODE_ITL321) %in% itl3.cv$ITL_code)
+table(unique(bres.gva.2digit.2023$Region_name) %in% itl3.cv$Region_name)
+
+#Missings... yep, correct, just ones that got shifted about 21 -> 25
+unique(bres.gva.2digit.2023$Region_name)[!unique(bres.gva.2digit.2023$Region_name) %in% itl3.cv$Region_name]
+
+#And check SIC code match... tick
+table(unique(bres.gva.2digit.2023$SIC_2DIGIT_CODE_GVA2023) %in% itl3.cv$SIC07_code)
+
+
+#OK, we join on name! 
+
+
+#Right, join CV GVA value by place name, see what region's are left.
+#Should be 10 fewer, 145 total
+bres.gva.chainedvolume.2digit.2023 <- bres.gva.2digit.2023 %>% 
+  select(-GVA) %>% 
+  inner_join(
+    itl3.cv %>% select(DATE = year, GVA = value, GEOGRAPHY_CODE_ITL325 = ITL_code,Region_name,SIC_2DIGIT_CODE_GVA2023 = SIC07_code),
+    by = c('DATE','Region_name','SIC_2DIGIT_CODE_GVA2023')
+  )
+
+#Checks...
+unique(bres.gva.chainedvolume.2digit.2023$Region_name)
+
+#Should probably drop any places that don't appear in every year
+#TODO: keep only places with data in all years in BRES/GVA linked for current prices
+table(bres.gva.chainedvolume.2digit.2023$DATE, bres.gva.chainedvolume.2digit.2023$Region_name)
+
+bres.gva.chainedvolume.2digit.2023 <- bres.gva.chainedvolume.2digit.2023 %>% filter(!qg('bournemouth', Region_name))
+
+
+#SaaaHAhaaaave
+write_csv(bres.gva.2digit.2023,'data/regionalGVA_plus_BRESjobcounts/regionalGVA_chainedvolume_BRES_FT_jobcount_bespoke2digitSIC_nONLY_MATCHING_GEOGs_2015_2023.csv')
+
+saveRDS(bres.gva.2digit.2023,'data/regionalGVA_plus_BRESjobcounts/regionalGVA_chainedvolume_BRES_FT_jobcount_bespoke2digitSIC_nONLY_MATCHING_GEOGs_2015_2023.rds')
 
 
 
