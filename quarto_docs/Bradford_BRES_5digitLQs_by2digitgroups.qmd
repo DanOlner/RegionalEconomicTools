@@ -33,6 +33,8 @@ options(scipen = 999)
 theme_set(theme_light())
 
 
+
+
 ```
 
 
@@ -314,6 +316,10 @@ place = 'Bradford'
 #Save and reuse
 # saveRDS(yeartoplot.sub,'local/data/2023BRES_5digit_LQs.rds')
 yeartoplot.sub <- readRDS('../local/data/2023BRES_5digit_LQs.rds')
+#yeartoplot.sub <- readRDS('local/data/2023BRES_5digit_LQs.rds')
+
+#Quick look at orig SIC 2 digits and shortened versions
+yeartoplot.sub %>% select(SIC_2DIGIT_NAME,SIC_2DIGIT_NAME_SHORT) %>% distinct() %>% View
 
 plotz <- map(yeartoplot.sub %>% group_split(SIC_2DIGIT_NAME_SHORT),LQplot_BRES_groupsof5digit)
 
