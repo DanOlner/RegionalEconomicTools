@@ -276,7 +276,7 @@ shortsectornames = tibble(
   "Legal",
   "Head office/consult",
   "Arch/Eng",
-  "Research",
+  "Research/Ads",#This is a horrible combo that makes no sense! 72/73
   "Other PSTech",#"Prof/sci/tech",
   "Rental",
   "Employment",

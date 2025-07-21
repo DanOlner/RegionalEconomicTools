@@ -1,0 +1,154 @@
+---
+title: "Bradford: GVA vs jobs 2D percent change plots"
+author:
+  - name: "Dan Olner"
+format: 
+  html:
+    output-file: "Bradford_2D_gvajobs_percentchangeplots_July2025"
+    fig-width: 9
+    fig-height: 9
+execute:
+  echo: false
+  message: false
+  warning: false
+fig-responsive: false
+---
+
+```{r setup}
+library(tidyverse)
+library(sf)#for geo stuff
+library(zoo)#for making smoothed moving averages
+library(patchwork)#combine ggplots easily
+# library(plotly)#For interactive plots
+library(RColorBrewer)
+
+source('../functions/misc_functions.R')
+source('../functions/adhoc_functions.R')
+#source('functions/misc_functions.R')
+#source('functions/adhoc_functions.R')
+
+options(scipen = 999)
+
+#Set ggplot theme
+theme_set(theme_light())
+
+
+
+
+```
+
+
+## GVA (chained volume) vs jobs percent change plots: SIC 2 digit sectors
+
+These plots show **percent change in chained volume GVA and job count** on different axes, with **Bradford's change overlaid in blue** and job count plus percent of regional economy included in title (for the most recent year). It uses a 3 year moving average to smooth out jumps.
+
+Only places where a sector makes up 1.5% or more of the economy are included - except for Bradford, which is included in all plots.
+
+This is done for the shorter 2 digit SIC categories in the regional GVA data, joined to BRES jobs data.
+
+Any arrows in the **top left grey diagonal section** will have seen productivity drops (measured as GVA per FT job) over that time. In the bottom left diagonal, productivity went up.
+
+Arrows in the bottom right quadrant have seen **a combination of productivity increases with job decreases**.
+
+**NOTE: All sectors are included even if they're very small proportions of Bradford's economy - so percent changes could appear large for very tiny sectors. Look at the job count in the title to check. Including them all for completeness.**
+
+
+```{r plots}
+# OUTPUT ALL GVA * JOBS 2D PLOTS FOR BRAD SECTORS OVER 1% OF GVA----
+
+bres.gva.2digit.2023 <- readRDS('../data/regionalGVA_plus_BRESjobcounts/regionalGVA_chainedvolume_BRES_FT_jobcount_bespoke2digitSIC_nONLY_MATCHING_GEOGs_2015_2023.rds') %>% 
+  filter(JOBCOUNT > 0, !qg('membership|activities of households|agri', SIC07_description)) %>% 
+  mutate(gvaperjob = GVA / JOBCOUNT)
+
+shortsectornames <- read_csv('../data/shortsectornames_for_regionalGVA_2digitSICs.csv')
+
+#check match, tick
+# table(unique(bres.gva.2digit.2023$SIC07_description) %in% shortsectornames$SIC07_description)
+bres.gva.2digit.2023 <- bres.gva.2digit.2023 %>% 
+  left_join(
+    shortsectornames, by = 'SIC07_description'
+  )
+
+#Add in sector GVA proportions to be able to filter by sector size
+bres.gva.2digit.2023 <- bres.gva.2digit.2023 %>% 
+  group_split(DATE) %>%
+  map(add_location_quotient_and_proportions,
+      regionvar = Region_name,
+      lq_var = SIC07_description_shortened,
+      # valuevar = GVA) %>% #This is CV GVA, can't use that for proportions, involves summing!
+      valuevar = JOBCOUNT) %>% 
+  bind_rows() %>% 
+  select(DATE:SIC07_description_shortened,JOBS_sector_regional_proportion = sector_regional_proportion)
+
+
+smoothband = 3
+
+gva.jobs.ITL3.for2dplot <- bres.gva.2digit.2023 %>% 
+  arrange(DATE) %>% 
+  group_by(Region_name,SIC07_description_shortened) %>%
+  mutate(
+    JOBS_sector_regional_percent_movingav = rollapply(JOBS_sector_regional_proportion * 100,smoothband,mean,align='center',fill=NA),
+    jobcount_movingav = rollapply(JOBCOUNT,smoothband,mean,align='center',fill=NA),
+    gva_movingav = rollapply(GVA,smoothband,mean,align='center',fill=NA),
+    `gva/job moving av` = rollapply(gvaperjob * 1000,smoothband,mean,align='center',fill=NA)
+  ) %>% 
+  ungroup()
+
+
+#Err
+# gva.jobs.ITL3.for2dplot %>% filter(qg('accomm|admin',SIC07_description_shortened), Region_name == 'Bradford', DATE == 2022) %>% View
+
+#Filter by sector proportion for sector we're looking at, in latest smoothed years
+
+# selectedsector = getdistinct('chemicals', gva.jobs.ITL3.for2dplot$SIC07_description_shortened)
+# selectedsector = getdistinct('transp manuf', gva.jobs.ITL3.for2dplot$SIC07_description_shortened)
+# selectedsector = getdistinct('food manuf', gva.jobs.ITL3.for2dplot$SIC07_description_shortened)
+# selectedsector = getdistinct('metals', gva.jobs.ITL3.for2dplot$SIC07_description_shortened)
+# selectedsector = getdistinct('head office', gva.jobs.ITL3.for2dplot$SIC07_description_shortened)
+
+for(sector in unique(bres.gva.2digit.2023$SIC07_description_shortened)[order(unique(bres.gva.2digit.2023$SIC07_description_shortened))]){
+
+  placestokeep <- gva.jobs.ITL3.for2dplot %>% 
+    filter(!is.na(jobcount_movingav)) %>% 
+    filter(DATE == max(DATE), SIC07_description_shortened == sector) %>% 
+    filter(JOBS_sector_regional_percent_movingav > 1.5) %>%#Keep only places where this sector makes up 1%+ of reg econ
+    select(Region_name) %>% 
+    distinct() %>% 
+    pull
+  
+  #Always plot Bradford! Add in if not there
+  if(!"Bradford" %in% placestokeep) placestokeep = c(placestokeep,"Bradford")
+  
+  #Add into 2D percent plot
+  p <- twod_percentplot(
+    df = gva.jobs.ITL3.for2dplot %>% filter(SIC07_description_shortened == sector, Region_name %in% placestokeep),
+    category_var = Region_name,
+    x_var = gva_movingav,
+    y_var = jobcount_movingav,#
+    # y_var = JOBS_sector_regional_percent_movingav,#this shows structural change better - jobs have grown nominally in most sectors (but breaks GVA/job diagonal)
+    timevar = DATE,
+    label_var = `gva/job moving av`,
+    category_var_value_to_highlight = 'Bradford',
+    start_time = 2016,
+    end_time = 2022
+  )
+  
+  bradjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(jobcount_movingav) %>% pull 
+  bradpercentjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(JOBS_sector_regional_percent_movingav) %>% pull %>% round(2)
+
+  
+  p <- p + 
+    ggtitle(paste0(sector,': ', round(bradjobs/1000,1), 'K jobs, ',bradpercentjobs,'% of tot')) +
+    xlab("GVA % change 2015/17 av to 2021/23 av") +
+    ylab("JOB COUNT % change 2015/17 av to 2021/23 av") 
+  
+  print(p)
+  
+  # ggsave(paste0("local/outputs/gva_jobs_2dpercentplots_Bradfordhighlight/chainedvol/",gsub('/| ','_',sector),".png"), dpi = 150, width = 9)
+
+   
+
+}#end for
+
+
+```

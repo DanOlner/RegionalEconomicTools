@@ -66,7 +66,7 @@ Here's an explanation of what's in the plots below.
 
 ### 2015 to 2023
 
-```{r, growthdata_cv_andperFT}
+```{r eval=F, growthdata_cv_andperFT}
 #| fig-height: 12 
 #| fig-width: 9.5
 
@@ -100,7 +100,8 @@ bradford.2dig <- plotSlopeCounts(
 
 
 #And for GVA per job - for the places we're able to combined data for these (done in miscchecks.R)
-bres.gva.2digit.2023 <- readRDS('../data/regionalGVA_plus_BRESjobcounts/regionalGVA_chainedvolume_BRES_FT_jobcount_bespoke2digitSIC_nONLY_MATCHING_GEOGs_2015_2023.rds') %>% 
+# bres.gva.2digit.2023 <- readRDS('data/regionalGVA_plus_BRESjobcounts/regionalGVA_chainedvolume_BRES_FT_jobcount_bespoke2digitSIC_nONLY_MATCHING_GEOGs_2015_2023.rds') %>% 
+bres.gva.2digit.2023 <- readRDS('../data/regionalGVA_plus_BRESjobcounts/regionalGVA_chainedvolume_BRES_FT_jobcount_bespoke2digitSIC_nONLY_MATCHING_GEOGs_2015_2023.rds') %>%
   filter(JOBCOUNT > 0, !qg('membership|activities of households|agri', SIC07_description)) %>% 
   mutate(gvaperjob = GVA / JOBCOUNT)
 
@@ -163,7 +164,7 @@ bradford.2dig$plot + bradford.gvaperjob.2dig$plot
 
 
 
-```{r, growthdata_bres2dig}
+```{r eval=F, growthdata_bres2dig}
 #| fig-height: 14 
 
 bres <- read_csv("../local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_NUTS3_n_ITL321_stacked_2_Fulltimeemployees_2015_2023_SIC_5DIGIT.csv")
@@ -268,7 +269,7 @@ bradford.bres.2dig$plot
 ### Repeat for more recent time period: 2019-2023
 
 
-```{r, growthdata_cv_andperFT_later}
+```{r eval=F, growthdata_cv_andperFT_later}
 #| fig-height: 12 
 #| fig-width: 9.5
 
@@ -365,7 +366,7 @@ bradford.2dig$plot + bradford.gvaperjob.2dig$plot
 
 
 
-```{r, growthdata_bres2dig_later}
+```{r eval=F, growthdata_bres2dig_later}
 #| fig-height: 14 
 
 bres <- read_csv("../local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_NUTS3_n_ITL321_stacked_2_Fulltimeemployees_2015_2023_SIC_5DIGIT.csv")
@@ -472,22 +473,55 @@ bradford.bres.2dig$plot
 ## Examining a few sectors
 
 ```{r eval=F}
+#Add in sector GVA proportions to be able to filter by sector size
+bres.gva.2digit.2023 <- bres.gva.2digit.2023 %>% 
+  group_split(DATE) %>%
+  map(add_location_quotient_and_proportions,
+      regionvar = Region_name,
+      lq_var = SIC07_description_shortened,
+      valuevar = GVA) %>% 
+  bind_rows() %>% 
+  select(DATE:SIC07_description_shortened,GVA_sector_regional_proportion = sector_regional_proportion)
+
+
 smoothband = 3
 
 gva.jobs.ITL3.for2dplot <- bres.gva.2digit.2023 %>% 
   arrange(DATE) %>% 
   group_by(Region_name,SIC07_description_shortened) %>%
   mutate(
+  GVA_sector_regional_proportion_movingav = rollapply(GVA_sector_regional_proportion,smoothband,mean,align='center',fill=NA),
   jobcount_movingav = rollapply(JOBCOUNT,smoothband,mean,align='center',fill=NA),
   gva_movingav = rollapply(GVA,smoothband,mean,align='center',fill=NA),
   `gva/job moving av` = rollapply(gvaperjob * 1000,smoothband,mean,align='center',fill=NA)
 ) %>% 
   ungroup()
 
+#Filter by sector proportion for sector we're looking at, in latest smoothed years
+# selectedsector = gva.jobs.ITL3.for2dplot %>% filter(qg('head office',SIC07_description_shortened)) %>% select(SIC07_description_shortened) %>% distinct %>% pull()
+
+
+
+# selectedsector = getdistinct('chemicals', gva.jobs.ITL3.for2dplot$SIC07_description_shortened)
+selectedsector = getdistinct('transp manuf', gva.jobs.ITL3.for2dplot$SIC07_description_shortened)
+# selectedsector = getdistinct('food manuf', gva.jobs.ITL3.for2dplot$SIC07_description_shortened)
+# selectedsector = getdistinct('metals', gva.jobs.ITL3.for2dplot$SIC07_description_shortened)
+# selectedsector = getdistinct('head office', gva.jobs.ITL3.for2dplot$SIC07_description_shortened)
+
+placestokeep <- gva.jobs.ITL3.for2dplot %>% 
+  filter(!is.na(jobcount_movingav)) %>% 
+  filter(DATE == max(DATE), SIC07_description_shortened == selectedsector) %>% 
+  filter(GVA_sector_regional_proportion_movingav * 100 > 2) %>%
+  select(Region_name) %>% 
+  distinct() %>% 
+  pull
+
+
+
 #Add into 2D percent plot
-twod_percentplot(
-  # df = gva.jobs.ITL3.for2dplot %>% filter(qg('head office',SIC07_description_shortened)),
-  df = gva.jobs.ITL3.for2dplot %>% filter(qg('metals',SIC07_description_shortened)),
+p <- twod_percentplot(
+  df = gva.jobs.ITL3.for2dplot %>% filter(SIC07_description_shortened == selectedsector, Region_name %in% placestokeep),
+  # df = gva.jobs.ITL3.for2dplot %>% filter(qg('metals',SIC07_description_shortened)),
   # df = gva.jobs.ITL3.for2dplot %>% filter(qg('pstech',SIC07_description_shortened)),
   category_var = Region_name,
   x_var = gva_movingav,
@@ -499,6 +533,10 @@ twod_percentplot(
   end_time = 2022
 )
 
+#For metals
+# p + coord_cartesian(xlim = c(-50,150), ylim = c(-40,125))
+#for food
+p + coord_cartesian(xlim = c(-80,200), ylim = c(-60,850))
 
 
 ```

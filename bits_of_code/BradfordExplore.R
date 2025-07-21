@@ -662,13 +662,13 @@ gvabres <- gvabres %>%
     )
   )
 
-
-
-place <- gvabres %>% 
-  filter(qg('bradford',Region_name), DATE == max(DATE))
+table(gvabres$productionsector, gvabres$SIC07_description_shortened)
 
 place <- gvabres %>% 
   filter(qg('bradford',Region_name), DATE == max(DATE))
+
+# place <- gvabres %>% 
+#   filter(qg('bradford',Region_name), DATE == max(DATE))
 
 #Sorts by actual order
 plot.df <- place %>%
@@ -693,9 +693,13 @@ ggplot(plot.df) +
 place <- gvabres %>% 
   # filter(qg('sheffield|barnsley',Region_name), DATE == max(DATE))
   filter(qg('bradford|kirkees|calderdale|wakefield|leeds',Region_name), DATE == max(DATE))
+  # filter(qg("Bolton|Bury|Manchester|Oldham|Rochdale|Salford|Stockport|Tameside|Trafford|Wigan",Region_name), DATE == max(DATE))#Nope, not in ILT3 of course!
+  # filter(qg('manchester',Region_name), DATE == max(DATE))#This gets all 5 GM ITL3s
   # filter(qg('Belfast|Birmingham|Bristol|Cardiff|Glasgow|Leeds|Liverpool|Manchester|Tyne|Sheffield|Nottingham',Region_name) & !qg('greater|shire', Region_name), DATE == max(DATE))#core cities
 
-#Sorts by actual order
+unique(place$Region_name)
+
+#Sorts by actual dataframe order
 plot.df <- place %>%
   # filter(productionsector == 'production') %>% 
   # group_by(Region_name,productionsector) %>% 
@@ -2124,6 +2128,372 @@ bradford.2dig$plot + bradford.gvaperjob.2dig$plot
 # bradford.gvaperjob.2dig$data %>% View
 
 
+
+# GVA / JOB VALUE 2D PLOTS----
+
+# Proportion plots, no?
+# gvabres <- readRDS('data/regionalGVA_plus_BRESjobcounts/regionalGVA_currentprices_BRES_FT_jobcount_bespoke2digitSIC_nONLY_MATCHING_GEOGs_2015_2023.rds') 
+
+#No, actual vals, can use combo with chained vol
+gvabres <- readRDS('data/regionalGVA_plus_BRESjobcounts/regionalGVA_chainedvolume_BRES_FT_jobcount_bespoke2digitSIC_nONLY_MATCHING_GEOGs_2015_2023.rds') %>%
+# bres.gva.2digit.2023 <- readRDS('../data/regionalGVA_plus_BRESjobcounts/regionalGVA_chainedvolume_BRES_FT_jobcount_bespoke2digitSIC_nONLY_MATCHING_GEOGs_2015_2023.rds') %>%
+  filter(JOBCOUNT > 0, !qg('membership|activities of households|agri', SIC07_description)) 
+
+shortsectornames <- read_csv('data/shortsectornames_for_regionalGVA_2digitSICs.csv')
+
+gvabres <- gvabres %>% 
+  left_join(
+    shortsectornames, by = 'SIC07_description'
+  ) %>% 
+  filter(!qg('households|membership', SIC07_description_shortened))
+
+productionsectors <- c(
+  'A-E',
+  'AB (1-9)',
+  'C (10-33)',
+  'CA (10-12)',
+  'CB (13-15)',
+  'CC (16-18)',
+  'CD-CG (19-23)',
+  'CH (24-25)',
+  'CI-CJ (26-27)',
+  'CK-CL (28-30)',
+  'CM (31-33)',
+  '31-32',
+  '33',
+  'DE (35-39)',
+  'F (41-43)',
+  '41',
+  '42',
+  '43'
+)
+
+#Yep
+# table(productionsectors %in% gvabres$SIC_2DIGIT_CODE_GVA2023)
+# unique(gvabres$SIC_2DIGIT_CODE_GVA2023)[unique(gvabres$SIC_2DIGIT_CODE_GVA2023) %in% productionsectors]
+
+#Label production sectors
+gvabres <- gvabres %>% 
+  mutate(
+    productionsector = ifelse(
+      SIC_2DIGIT_CODE_GVA2023 %in% productionsectors,
+      'production','other'
+    )
+  )
+
+# gva.props <- gvabres %>% 
+#   group_split(DATE) %>%
+#   map(add_location_quotient_and_proportions,
+#       regionvar = Region_name,
+#       lq_var = SIC07_description_shortened,
+#       valuevar = GVA) %>% 
+#   bind_rows()
+# 
+# job.props <- gvabres %>% 
+#   group_split(DATE) %>%
+#   map(add_location_quotient_and_proportions,
+#       regionvar = Region_name,
+#       lq_var = SIC07_description_shortened,
+#       valuevar = JOBCOUNT) %>% 
+#   bind_rows()
+
+#Actual counts...
+#Oh look, did this in the guide
+#Find GVA per FT job and add moving avs 
+
+smoothband = 3
+
+gva.jobs.ITL3 <- gvabres %>% 
+  mutate(gvaperjob = GVA/JOBCOUNT) %>%
+  group_by(Region_name,SIC07_description_shortened) %>%
+  mutate(
+    jobcount_movingav = rollapply(JOBCOUNT,smoothband,mean,align='center',fill=NA),
+    gva_movingav = rollapply(GVA,smoothband,mean,align='center',fill=NA),
+    `gva/job moving av` = rollapply(gvaperjob * 1000,smoothband,mean,align='center',fill=NA)
+  ) %>% 
+  ungroup()
+
+
+p <- twod_generictimeplot_multipletimepoints(
+  df = gva.jobs.ITL3 %>% filter(
+    # qg('sheffield',Region_name),
+    qg('bradford',Region_name),
+    # productionsector == 'production'
+    productionsector != 'production'
+    # !qg('agri|constr',SIC07_description),
+    # !qg('agri|constr',SIC07_description),
+    # jobcount_movingav > 2500
+  ),
+  category_var = SIC07_description_shortened,
+  # x_var = gva,
+  # y_var = JOBCOUNT_FULLTIME,
+  # label_var = gvaperjobFT,
+  x_var = gva_movingav,
+  y_var = jobcount_movingav,
+  label_var = `gva/job moving av`,
+  timevar = DATE,
+  times = c(2016:2022) 
+)
+
+p + theme(aspect.ratio=1) +
+  # scale_x_log10() +
+  # scale_y_log10() +
+  xlab(paste0("GVA (",smoothband," year moving average)")) +
+  ylab(paste0("Job count FT (",smoothband," year moving average)"))
+
+
+ggplotly(p)
+
+
+
+# X-REF GVA 2 DIGIT SHORTENED NAMES WITH FULL 2 DIGIT LIST OF SHORTENED NAMES----
+
+#Checking for sane matches across both (and things like - what's head office/consult from gva 2 digit cover?)
+
+#Source for GVA 2 digit:
+gvabres <- readRDS('data/regionalGVA_plus_BRESjobcounts/regionalGVA_currentprices_BRES_FT_jobcount_bespoke2digitSIC_nONLY_MATCHING_GEOGs_2015_2023.rds') 
+
+shortsectornames <- read_csv('data/shortsectornames_for_regionalGVA_2digitSICs.csv')
+
+gvabres <- gvabres %>% 
+  left_join(
+    shortsectornames, by = 'SIC07_description'
+  )%>% 
+  filter(!qg('households|membership', SIC07_description_shortened))
+
+
+#Source for full 2 digit and shortened names we're using there (in their own function)
+#Made in section COMPARE CH TO BRES----
+
+#Get distinct lists for both
+gva.2digit <- gvabres %>% 
+  select(SIC_2DIGIT_CODE_GVA2023,SIC07_description,SIC07_description_shortened) %>% 
+  distinct()
+
+full.2digit <- bres %>% 
+  select(SIC_2DIGIT_NAME,SIC_2DIGIT_NAME_SHORT) %>% 
+  distinct()
+
+#Yeah so in full list, "mgt consultancy" is head office + management consult. Need to update that.
+
+#Let's just look at what CH firms are actually in SIC 70 / have put themselves there
+chbr <- ch %>% st_set_geometry(NULL) %>% 
+  filter(localauthority_name == 'Bradford')
+
+#Actually, we can look for head office / consultancy in any of the four codes
+#String subbing on something this size is slow - come back to
+# x <- ch %>% select(SICCode.SicText_1:SICCode.SicText_4) %>% 
+#   mutate(across(SICCode.SicText_1:SICCode.SicText_4, str_sub(., 1,2)))
+# 
+#
+# num_hoc <- rowSums(str_sub(x,1,2) == "70")
+
+#Just looking at hoc in first cat
+hoc <- chbr %>% filter(SIC_2DIGIT_CODE_NUMERIC == 70) %>% select(
+  CompanyName,SICCode.SicText_1:SICCode.SicText_4,Employees_lastyear,Employees_thisyear
+)
+
+metals <- chbr %>% filter(SIC_2DIGIT_CODE_NUMERIC == 25) %>% select(
+  CompanyName,SICCode.SicText_1:SICCode.SicText_4,Employees_lastyear,Employees_thisyear
+)
+
+
+
+
+
+# OUTPUT ALL GVA * JOBS 2D PLOTS FOR BRAD SECTORS OVER 1% OF GVA----
+
+bres.gva.2digit.2023 <- readRDS('data/regionalGVA_plus_BRESjobcounts/regionalGVA_chainedvolume_BRES_FT_jobcount_bespoke2digitSIC_nONLY_MATCHING_GEOGs_2015_2023.rds') %>% 
+  filter(JOBCOUNT > 0, !qg('membership|activities of households|agri', SIC07_description)) %>% 
+  mutate(gvaperjob = GVA / JOBCOUNT)
+
+#check match, tick
+# table(unique(bres.gva.2digit.2023$SIC07_description) %in% shortsectornames$SIC07_description)
+bres.gva.2digit.2023 <- bres.gva.2digit.2023 %>% 
+  left_join(
+    shortsectornames, by = 'SIC07_description'
+  )
+
+#Add in sector GVA proportions to be able to filter by sector size
+bres.gva.2digit.2023 <- bres.gva.2digit.2023 %>% 
+  group_split(DATE) %>%
+  map(add_location_quotient_and_proportions,
+      regionvar = Region_name,
+      lq_var = SIC07_description_shortened,
+      # valuevar = GVA) %>% #This is CV GVA, can't use that for proportions, involves summing!
+      valuevar = JOBCOUNT) %>% 
+  bind_rows() %>% 
+  select(DATE:SIC07_description_shortened,JOBS_sector_regional_proportion = sector_regional_proportion)
+
+
+smoothband = 3
+
+gva.jobs.ITL3.for2dplot <- bres.gva.2digit.2023 %>% 
+  arrange(DATE) %>% 
+  group_by(Region_name,SIC07_description_shortened) %>%
+  mutate(
+    JOBS_sector_regional_percent_movingav = rollapply(JOBS_sector_regional_proportion * 100,smoothband,mean,align='center',fill=NA),
+    jobcount_movingav = rollapply(JOBCOUNT,smoothband,mean,align='center',fill=NA),
+    gva_movingav = rollapply(GVA,smoothband,mean,align='center',fill=NA),
+    `gva/job moving av` = rollapply(gvaperjob * 1000,smoothband,mean,align='center',fill=NA)
+  ) %>% 
+  ungroup()
+
+
+#Err
+# gva.jobs.ITL3.for2dplot %>% filter(qg('accomm|admin',SIC07_description_shortened), Region_name == 'Bradford', DATE == 2022) %>% View
+
+#Filter by sector proportion for sector we're looking at, in latest smoothed years
+
+# selectedsector = getdistinct('chemicals', gva.jobs.ITL3.for2dplot$SIC07_description_shortened)
+# selectedsector = getdistinct('transp manuf', gva.jobs.ITL3.for2dplot$SIC07_description_shortened)
+# selectedsector = getdistinct('food manuf', gva.jobs.ITL3.for2dplot$SIC07_description_shortened)
+# selectedsector = getdistinct('metals', gva.jobs.ITL3.for2dplot$SIC07_description_shortened)
+# selectedsector = getdistinct('head office', gva.jobs.ITL3.for2dplot$SIC07_description_shortened)
+
+for(sector in unique(gva.jobs.ITL3$SIC07_description_shortened)){
+
+  placestokeep <- gva.jobs.ITL3.for2dplot %>% 
+    filter(!is.na(jobcount_movingav)) %>% 
+    filter(DATE == max(DATE), SIC07_description_shortened == sector) %>% 
+    filter(JOBS_sector_regional_percent_movingav > 0.2) %>%#Keep only places where this sector makes up 1%+ of reg econ
+    select(Region_name) %>% 
+    distinct() %>% 
+    pull
+  
+  #If Bradford isn't in that list, don't plot
+  
+  if("Bradford" %in% placestokeep){
+    
+    #Add into 2D percent plot
+    p <- twod_percentplot(
+      df = gva.jobs.ITL3.for2dplot %>% filter(SIC07_description_shortened == sector, Region_name %in% placestokeep),
+      category_var = Region_name,
+      x_var = gva_movingav,
+      y_var = jobcount_movingav,#
+      # y_var = JOBS_sector_regional_percent_movingav,#this shows structural change better - jobs have grown nominally in most sectors (but breaks GVA/job diagonal)
+      timevar = DATE,
+      label_var = `gva/job moving av`,
+      category_var_value_to_highlight = 'Bradford',
+      start_time = 2016,
+      end_time = 2022
+    )
+    
+    bradjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(jobcount_movingav) %>% pull 
+    bradpercentjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(JOBS_sector_regional_percent_movingav) %>% pull %>% round(2)
+
+    
+    p <- p + ggtitle(paste0(sector,': ', round(bradjobs/1000,1), 'K jobs, ',bradpercentjobs,'% of tot'))
+    
+    ggsave(paste0("local/outputs/gva_jobs_2dpercentplots_Bradfordhighlight/chainedvol/",gsub('/| ','_',sector),".png"), dpi = 150, width = 9)
+   
+  } else {
+    cat("<1%, not saving\n")
+  }
+
+}#end for
+
+
+
+#REPEAT FOR CURRENT PRICES TO GET STRUCTURAL CHANGE PICTURE (BREAKS DIAG ANALYSIS THOUGH)----
+
+bres.gva.2digit.2023.cp <- readRDS('data/regionalGVA_plus_BRESjobcounts/regionalGVA_currentprices_BRES_FT_jobcount_bespoke2digitSIC_nONLY_MATCHING_GEOGs_2015_2023.rds') %>% 
+  filter(JOBCOUNT > 0, !qg('membership|activities of households|agri', SIC07_description)) %>% 
+  mutate(gvaperjob = GVA / JOBCOUNT)
+
+#check match, tick
+# table(unique(bres.gva.2digit.2023.cp$SIC07_description) %in% shortsectornames$SIC07_description)
+bres.gva.2digit.2023.cp <- bres.gva.2digit.2023.cp %>% 
+  left_join(
+    shortsectornames, by = 'SIC07_description'
+  )
+
+#Add in sector GVA proportions to be able to filter by sector size
+bres.gva.2digit.2023.cp <- bres.gva.2digit.2023.cp %>% 
+  group_split(DATE) %>%
+  map(add_location_quotient_and_proportions,
+      regionvar = Region_name,
+      lq_var = SIC07_description_shortened,
+      # valuevar = GVA) %>%
+      valuevar = JOBCOUNT) %>% 
+  bind_rows() %>% 
+  select(DATE:SIC07_description_shortened,JOBS_sector_regional_proportion = sector_regional_proportion)
+
+#Repeat for current price GVA
+bres.gva.2digit.2023.cp <- bres.gva.2digit.2023.cp %>% 
+  group_split(DATE) %>%
+  map(add_location_quotient_and_proportions,
+      regionvar = Region_name,
+      lq_var = SIC07_description_shortened,
+      valuevar = GVA) %>%
+      # valuevar = JOBCOUNT) %>% 
+  bind_rows() %>% 
+  select(DATE:SIC07_description_shortened,GVA_sector_regional_proportion = sector_regional_proportion,JOBS_sector_regional_proportion)
+
+
+
+smoothband = 3
+
+gva.jobs.ITL3.for2dplot <- bres.gva.2digit.2023.cp %>% 
+  arrange(DATE) %>% 
+  group_by(Region_name,SIC07_description_shortened) %>%
+  mutate(
+    JOBS_sector_regional_percent_movingav = rollapply(JOBS_sector_regional_proportion * 100,smoothband,mean,align='center',fill=NA),
+    GVA_sector_regional_percent_movingav = rollapply(GVA_sector_regional_proportion * 100,smoothband,mean,align='center',fill=NA),
+    jobcount_movingav = rollapply(JOBCOUNT,smoothband,mean,align='center',fill=NA),
+    gva_movingav = rollapply(GVA,smoothband,mean,align='center',fill=NA),
+    `gva/job moving av` = rollapply(gvaperjob * 1000,smoothband,mean,align='center',fill=NA)
+  ) %>% 
+  ungroup()
+
+
+#Err
+# gva.jobs.ITL3.for2dplot %>% filter(qg('accomm|admin',SIC07_description_shortened), Region_name == 'Bradford', DATE == 2022) %>% View
+
+#Filter by sector proportion for sector we're looking at, in latest smoothed years
+
+# selectedsector = getdistinct('chemicals', gva.jobs.ITL3.for2dplot$SIC07_description_shortened)
+# selectedsector = getdistinct('transp manuf', gva.jobs.ITL3.for2dplot$SIC07_description_shortened)
+# selectedsector = getdistinct('food manuf', gva.jobs.ITL3.for2dplot$SIC07_description_shortened)
+# selectedsector = getdistinct('metals', gva.jobs.ITL3.for2dplot$SIC07_description_shortened)
+# selectedsector = getdistinct('head office', gva.jobs.ITL3.for2dplot$SIC07_description_shortened)
+
+for(sector in unique(gva.jobs.ITL3$SIC07_description_shortened)){
+  
+  placestokeep <- gva.jobs.ITL3.for2dplot %>% 
+    filter(!is.na(jobcount_movingav)) %>% 
+    filter(DATE == max(DATE), SIC07_description_shortened == sector) %>% 
+    filter(GVA_sector_regional_percent_movingav > 1 | JOBS_sector_regional_percent_movingav > 1) %>%#Keep only places where this sector makes up 1%+ of reg econ or 1% of jobs
+    select(Region_name) %>% 
+    distinct() %>% 
+    pull
+  
+  #If Bradford isn't in that list, don't plot
+  
+  if("Bradford" %in% placestokeep){
+    
+    #Add into 2D percent plot
+    p <- twod_percentplot(
+      df = gva.jobs.ITL3.for2dplot %>% filter(SIC07_description_shortened == sector, Region_name %in% placestokeep),
+      category_var = Region_name,
+      x_var = GVA_sector_regional_percent_movingav,
+      y_var = JOBS_sector_regional_percent_movingav,
+      timevar = DATE,
+      label_var = `gva/job moving av`,
+      category_var_value_to_highlight = 'Bradford',
+      start_time = 2016,
+      end_time = 2022
+    )
+    
+    p <- p + ggtitle(sector)
+    
+    ggsave(paste0("local/outputs/gva_jobs_2dpercentplots_Bradfordhighlight/structural/",gsub('/| ','_',sector),".png"))
+    
+  } else {
+    cat("<1%, not saving\n")
+  }
+  
+}#end for
 
 
 
