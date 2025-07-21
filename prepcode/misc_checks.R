@@ -1987,6 +1987,9 @@ sectorstokeep <- yeartoplot.lqfiltered %>% filter(GEOGRAPHY_NAME == place) %>% s
 
 yeartoplot.lqfiltered <- yeartoplot.lqfiltered %>% filter(sic_namefrom_indstrat %in% sectorstokeep)
 
+#save a copy of that to save processing time in quarto
+saveRDS(yeartoplot.lqfiltered,'local/data/bres_indstrat_LQs.rds')
+
 #If I could plot both and space them out, that would be good (could get Bradford change showing too)
 p <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), alpha = 0.1, shape = 0, sector_name = sic_namefrom_indstrat, LQ_column = LQ, change_over_time = slope)
 
@@ -2241,6 +2244,8 @@ yeartoplot.lqfiltered <- yeartoplot %>% filter(LQ > 0 & LQ < 100, total_jobs > 9
 sectorstokeep <- yeartoplot.lqfiltered %>% filter(localauthority_name == place) %>% select(sic_namefrom_indstrat) %>% pull
 yeartoplot.lqfiltered <- yeartoplot.lqfiltered %>% filter(sic_namefrom_indstrat %in% sectorstokeep)
 
+#save a copy of that to save processing time in quarto
+saveRDS(yeartoplot.lqfiltered,'local/data/companieshouse_indstrat_LQs.rds')
 
 
 

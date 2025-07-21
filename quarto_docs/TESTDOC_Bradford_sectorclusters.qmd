@@ -47,6 +47,27 @@ theme_set(theme_light())
 
 # TEST DOC: To save running whole main doc, test smaller sections as we go
 
+## Industrial strategy linkage
+
+### BRES
+
+
+```{r, bresindstrat}
+#Blue peter this up
+
+
+```
+
+
+
+### Companies House
+
+```{r, chindstrat}
+
+```
+
+
+
 ## GROWTH TRENDS IN GVA, JOBS AND GVA PER JOB
 
 This section examines **growth trends in Bradford** for **GVA and GVA per job** (both using the 46 sector categories available in the GVA data), as well as **growth in jobs using BRES data** (a larger list of x sectors).
