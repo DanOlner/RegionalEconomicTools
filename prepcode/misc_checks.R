@@ -2250,7 +2250,6 @@ saveRDS(yeartoplot.lqfiltered,'local/data/companieshouse_indstrat_LQs.rds')
 
 
 
-#If I could plot both and space them out, that would be good (could get Bradford change showing too)
 p1 <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), alpha = 0.03, sector_name = sic_namefrom_indstrat, 
                   LQ_column = LQ, change_over_time = slope)
 

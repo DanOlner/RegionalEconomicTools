@@ -1472,8 +1472,8 @@
     "objectID": "quarto_docs/Bradford_sectorclusters_July2025.html#av.-percent-change-over-time-for-gva-vs-hours-worked-itl3-zones",
     "href": "quarto_docs/Bradford_sectorclusters_July2025.html#av.-percent-change-over-time-for-gva-vs-hours-worked-itl3-zones",
     "title": "Bradford sectors and clusters: past, present",
-    "section": "",
-    "text": "Hover for place names.\n\nWest Yorkshire ITL3s in green - Bradford’s outlined in black (95% CIs in lines).\nCore cities in blue (95% CIs)\nLondon ITL3s in red/pink\n\nAnd:\n\nAnything above/left of diagonal line is a productivity increase."
+    "section": "Av. percent change over time for gva vs hours worked, ITL3 zones",
+    "text": "Av. percent change over time for gva vs hours worked, ITL3 zones\nHover for place names.\n\nWest Yorkshire ITL3s in green - Bradford’s outlined in black (95% CIs in lines).\nCore cities in blue (95% CIs)\nLondon ITL3s in red/pink\n\nAnd:\n\nAnything above/left of diagonal line is a productivity increase.\n\n\n2004 to 2013 av % change\n\n\n\n\n\n\n\n\n2014 to 2023 av % change"
   },
   {
     "objectID": "quarto_docs/Bradford_sectorclusters_July2025.html#gva-per-ft-job-over-time-bradford-v-other-itl3s",
@@ -1556,15 +1556,15 @@
     "objectID": "quarto_docs/Bradford_sectorclusters_July2025.html#gva-per-full-time-job-over-time-bradford-v-other-itl3-zones-for-2-digit-sic-sectors",
     "href": "quarto_docs/Bradford_sectorclusters_July2025.html#gva-per-full-time-job-over-time-bradford-v-other-itl3-zones-for-2-digit-sic-sectors",
     "title": "Bradford sectors and clusters: past, present",
-    "section": "",
-    "text": "These plots use linked regional GVA and BRES jobs data to examine productivity, output and job changes. To make this link, sector categories have to be reduced to those in the ONS GVA data (46 categories rather than the full 88 two digit SICs).\nBRES does contain more detail - more on that below and in the separate BRES 5 digit breakdown.\nThe plots below are measured in GVA per job parts per million of UK economy - equivalent to e.g. 1% being “1 in 100 parts of economy”, 0.1 here is “1 in 10 millionth of whole economy”. So it’s again examining relative change in output per FT worker across all sectors.\nGVA per job as a measure needs some caution: output is also due to other productive factors, so high capital intensity sectors (power, telecoms, other ICT though not all) can appear overly productive per worker. It’s more representative for service sectors where an employee’s output more clearly correlates to total output, such as legal services."
+    "section": "GVA per full time job over time: Bradford v other ITL3 zones for 2 digit SIC sectors",
+    "text": "GVA per full time job over time: Bradford v other ITL3 zones for 2 digit SIC sectors\nThese plots use linked regional GVA and BRES jobs data to examine productivity, output and job changes. To make this link, sector categories have to be reduced to those in the ONS GVA data (46 categories rather than the full 88 two digit SICs).\nBRES does contain more detail - more on that below and in the separate BRES 5 digit breakdown.\nThe plots below are measured in GVA per job parts per million of UK economy - equivalent to e.g. 1% being “1 in 100 parts of economy”, 0.1 here is “1 in 10 millionth of whole economy”. So it’s again examining relative change in output per FT worker across all sectors.\nGVA per job as a measure needs some caution: output is also due to other productive factors, so high capital intensity sectors (power, telecoms, other ICT though not all) can appear overly productive per worker. It’s more representative for service sectors where an employee’s output more clearly correlates to total output, such as legal services."
   },
   {
     "objectID": "quarto_docs/Bradford_sectorclusters_July2025.html#location-quotients-for-gva-and-jobs-in-2-digit-sic-sectors-most-recent-and-change-over-time",
     "href": "quarto_docs/Bradford_sectorclusters_July2025.html#location-quotients-for-gva-and-jobs-in-2-digit-sic-sectors-most-recent-and-change-over-time",
     "title": "Bradford sectors and clusters: past, present",
-    "section": "",
-    "text": "These LQ plots show location quotients for linked GVA and jobs data for Bradford, overlaid on top of LQs for all other ITL3 zones, to give a sense of what the spread is across Great Britain.\nA location quotient is the ratio of a place’s sector proportion to its national proportion. So e.g. if manufacturing in Bradford made up 20% of its economy compared to maufacturing being 10% of the UK economy, its LQ in Bradford would be 2.\nHere’s an explanation of how to read these location quotient plots:\n\nLocation quotients for sectoral GVA in the selected region\nSectors to the right of the blue line are more concentrated in this region when compared to the national average. (e.g. LQ = 10, it is 10x more concentrated). To the left are less concentrated than nationally.\nGreen circles have been increasing in concentration over time (larger circles increasing the most)\nRed circles have been decreasing in concentration over time (larger circles decreasing the most)\nBlack horizontal lines show the min and max of concentration in the data’s history (from 2015 to 2023) (so, often, large green circles will be at the right of this line because sector concentration has been steadily increasing)\nPer sector GVA money amounts and percent of that region’s entire economy are shown on the right."
+    "section": "Location quotients for GVA and jobs in 2 digit SIC sectors: most recent and change over time",
+    "text": "Location quotients for GVA and jobs in 2 digit SIC sectors: most recent and change over time\nThese LQ plots show location quotients for linked GVA and jobs data for Bradford, overlaid on top of LQs for all other ITL3 zones, to give a sense of what the spread is across Great Britain.\nA location quotient is the ratio of a place’s sector proportion to its national proportion. So e.g. if manufacturing in Bradford made up 20% of its economy compared to maufacturing being 10% of the UK economy, its LQ in Bradford would be 2.\nHere’s an explanation of how to read these location quotient plots:\n\nLocation quotients for sectoral GVA in the selected region\nSectors to the right of the blue line are more concentrated in this region when compared to the national average. (e.g. LQ = 10, it is 10x more concentrated). To the left are less concentrated than nationally.\nGreen circles have been increasing in concentration over time (larger circles increasing the most)\nRed circles have been decreasing in concentration over time (larger circles decreasing the most)\nBlack horizontal lines show the min and max of concentration in the data’s history (from 2015 to 2023) (so, often, large green circles will be at the right of this line because sector concentration has been steadily increasing)\nPer sector GVA money amounts and percent of that region’s entire economy are shown on the right.\n\n\nProduction sectors\n\n\n\n\n\n\n\n\n\n\n\nRest of sectors"
   },
   {
     "objectID": "quarto_docs/TESTDOC_Bradford_sectorclusters_July2025.html",
@@ -1607,5 +1607,47 @@
     "title": "Bradford: GVA vs jobs 2D percent change plots",
     "section": "",
     "text": "These plots show percent change in chained volume GVA and job count on different axes, with Bradford’s change overlaid in blue and job count plus percent of regional economy included in title (for the most recent year). It uses a 3 year moving average to smooth out jumps.\nOnly places where a sector makes up 1.5% or more of the economy are included - except for Bradford, which is included in all plots.\nThis is done for the shorter 2 digit SIC categories in the regional GVA data, joined to BRES jobs data.\nAny arrows in the top left grey diagonal section will have seen productivity drops (measured as GVA per FT job) over that time. In the bottom left diagonal, productivity went up.\nArrows in the bottom right quadrant have seen a combination of productivity increases with job decreases.\nNOTE: All sectors are included even if they’re very small proportions of Bradford’s economy - so percent changes could appear large for very tiny sectors. Look at the job count in the title to check. Including them all for completeness."
+  },
+  {
+    "objectID": "quarto_docs/Bradford_sectorclusters_July2025.html#explanation-of-the-data-used",
+    "href": "quarto_docs/Bradford_sectorclusters_July2025.html#explanation-of-the-data-used",
+    "title": "Bradford sectors and clusters: past, present",
+    "section": "Explanation of the data used",
+    "text": "Explanation of the data used"
+  },
+  {
+    "objectID": "quarto_docs/Bradford_sectorclusters_July2025.html#manufacturing-production-sectors",
+    "href": "quarto_docs/Bradford_sectorclusters_July2025.html#manufacturing-production-sectors",
+    "title": "Bradford sectors and clusters: past, present",
+    "section": "Manufacturing / production sectors",
+    "text": "Manufacturing / production sectors"
+  },
+  {
+    "objectID": "quarto_docs/Bradford_sectorclusters_July2025.html#service-other-sectors",
+    "href": "quarto_docs/Bradford_sectorclusters_July2025.html#service-other-sectors",
+    "title": "Bradford sectors and clusters: past, present",
+    "section": "Service / other sectors",
+    "text": "Service / other sectors"
+  },
+  {
+    "objectID": "quarto_docs/Bradford_sectorclusters_July2025.html#structural-broad-sector-gva-change",
+    "href": "quarto_docs/Bradford_sectorclusters_July2025.html#structural-broad-sector-gva-change",
+    "title": "Bradford sectors and clusters: past, present",
+    "section": "Structural / broad sector GVA change",
+    "text": "Structural / broad sector GVA change"
+  },
+  {
+    "objectID": "quarto_docs/Bradford_sectorclusters_July2025.html#bres",
+    "href": "quarto_docs/Bradford_sectorclusters_July2025.html#bres",
+    "title": "Bradford sectors and clusters: past, present",
+    "section": "BRES",
+    "text": "BRES\n\n“Frontier” SIC sectors\n\n\n\n\n\n\n\n\n\n\n\nOther industrial strategy SIC sectors"
+  },
+  {
+    "objectID": "quarto_docs/Bradford_sectorclusters_July2025.html#companies-house",
+    "href": "quarto_docs/Bradford_sectorclusters_July2025.html#companies-house",
+    "title": "Bradford sectors and clusters: past, present",
+    "section": "Companies House",
+    "text": "Companies House\n\n“Frontier” SIC sectors\n\n\n\n\n\n\n\n\n\n\n\nOther industrial strategy SIC sectors"
   }
 ]
