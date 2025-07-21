@@ -1,0 +1,132 @@
+sector_name,SIC_name,frontier_subsector_ifnotSIC,is_frontier,sic_code
+Advanced Manufacturing,Manufacture of chemicals and chemical products,NA,0,20
+Advanced Manufacturing,Manufacture of computer electronic and optical products,NA,0,26
+Advanced Manufacturing,Manufacture of electrical equipment,NA,0,27
+Advanced Manufacturing,Manufacture of machinery and equipment not elsewhere classified,NA,0,28
+Advanced Manufacturing,Manufacture of motor vehicles trailers and semi-trailers,NA,1,29
+Advanced Manufacturing,Manufacture of other transport equipment,NA,0,30
+Advanced Manufacturing,Agritech (manuf agri machinery),Agritech,1,283
+Advanced Manufacturing,Manufacture of air and spacecraft and related machinery,Aerospace manufacturing,1,303
+Advanced Manufacturing,Repair and maintenance of aircraft and spacecraft,Aerospace manufacturing,1,3316
+Advanced Manufacturing,Manufacture of motor vehicles trailers and semi-trailers,Automotive manufacturing,1,29
+Advanced Manufacturing,Batteries,Batteries,1,272
+Advanced Manufacturing,Space,Space,1,303
+Advanced Manufacturing,NA,Advanced materials,1,NA
+Clean Energy,NA,Carbon capture and undersea storage (CCUS) and greenhouse gas removal (GGR),1,NA
+Clean Energy,NA,Heat pumps,1,NA
+Clean Energy,NA,Hydrogen,1,NA
+Clean Energy,NA,Nuclear fission,1,NA
+Clean Energy,NA,Nuclear fusion,1,NA
+Clean Energy,NA,Offshore and onshore wind,1,NA
+Creative Industries,Manufacture of jewellery and related articles,NA,0,3212
+Creative Industries,Publishing activities,NA,0,58
+Creative Industries,Motion picture video and television programme production sound recording and music publishing activities,NA,0,59
+Creative Industries,Programming and broadcasting activities,NA,0,60
+Creative Industries,Computer programming activities,NA,0,6201
+Creative Industries,Computer consultancy activities,NA,0,6202
+Creative Industries,Public relations and communication activities,NA,1,7021
+Creative Industries,Architectural activities,NA,0,7111
+Creative Industries,Advertising,NA,1,731
+Creative Industries,Specialised design activities,NA,0,741
+Creative Industries,Photographic activities,NA,0,742
+Creative Industries,Translation and interpretation activities,NA,0,743
+Creative Industries,Cultural education,NA,1,8552
+Creative Industries,Creative arts and entertainment activities,NA,1,90
+Creative Industries,Library and archive activities,NA,0,9101
+Creative Industries,Museum activities,NA,0,9102
+Creative Industries,Motion picture video and television programme activities,NA,1,591
+Creative Industries,Television programming and broadcasting activities,NA,1,602
+Creative Industries,Publishing of computer games,NA,1,5821
+Creative Industries,Ready-made interactive leisure and entertainment software dev,NA,1,62011
+Defence,Manufacture of weapons and ammunition,NA,0,254
+Defence,Manufacture of military fighting vehicles,NA,0,304
+Defence,,Combat air,1,NA
+Defence,,Complex weapons,1,NA
+Defence,,Directed energy,1,NA
+Defence,,Drones and autonomous systems,1,NA
+Defence,,Maritime capabilities,1,NA
+Digital and Technologies,Manufacture of electronic components and boards,NA,0,261
+Digital and Technologies,Manufacture of computers and peripheral equipment,NA,0,262
+Digital and Technologies,Manufacture of communication equipment,NA,0,263
+Digital and Technologies,Manufacture of consumer electronics,NA,0,264
+Digital and Technologies,Manufacture of electronic instruments and appliances for measuring testing navigation,NA,0,26511
+Digital and Technologies,Manufacture of electronic industrial process control equipment,NA,0,26512
+Digital and Technologies,Manufacture of nonelectronic instruments and appliances for measuring testing navigation,NA,0,26513
+Digital and Technologies,Manufacture of optical precision instruments,NA,0,26701
+Digital and Technologies,Manufacture of magnetic and optical media,NA,0,268
+Digital and Technologies,Manufacture of fibre optic cables,NA,0,2731
+Digital and Technologies,Manufacture of other electronic and electric wires and cables,NA,0,2732
+Digital and Technologies,Manufacture of other electrical equipment,NA,0,279
+Digital and Technologies,Wholesale of information and communication equipment,NA,0,465
+Digital and Technologies,Publishing activities,NA,0,58
+Digital and Technologies,Motion picture video and television programme production sound recording and music publishing activities,NA,0,59
+Digital and Technologies,Programming and broadcasting activities,NA,0,60
+Digital and Technologies,Telecommunications,NA,0,61
+Digital and Technologies,Computer programming consultancy and related activities,NA,0,62
+Digital and Technologies,Information service activities,NA,0,63
+Digital and Technologies,Engineering activities and related technical consultancy,NA,0,7112
+Digital and Technologies,Technical testing and analysis,NA,0,712
+Digital and Technologies,Research and experimental development on natural sciences and engineering,NA,0,721
+Digital and Technologies,Repair of computers and communication equipment,NA,0,951
+Digital and Technologies,,Advanced connectivity technologies,1,NA
+Digital and Technologies,,Artificial intelligence,1,NA
+Digital and Technologies,,Cybersecurity,1,NA
+Digital and Technologies,,Engineering biology,1,NA
+Digital and Technologies,,Quantum technologies,1,NA
+Digital and Technologies,,Semiconductors,1,NA
+Financial Services,Financial service activities except insurance and pension funding,NA,0,64
+Financial Services,Insurance reinsurance and pension funding except compulsory social security,NA,0,65
+Financial Services,Activities auxiliary to financial services and insurance activities,NA,0,66
+Financial Services,Fund management activities,Asset management and wholesale services,1,663
+Financial Services,Trusts funds and similar financial entities,Asset management and wholesale services,1,643
+Financial Services,Banks,Capital markets and retail investment,1,64191
+Financial Services,Activities of holding companies,Capital markets and retail investment,1,642
+Financial Services,Activities of investment trusts,Capital markets and retail investment,1,64301
+Financial Services,Other financial service activities except insurance and pension funding NEC,Capital markets and retail investment,1,6499
+Financial Services,Administration of financial markets,Capital markets and retail investment,1,6611
+Financial Services,Security and commodity contracts brokerage,Capital markets and retail investment,1,6612
+Financial Services,,Fintech,1,NA
+Financial Services,Non life insurance,Insurance and reinsurance markets,1,6512
+Financial Services,Non life reinsurance,Insurance and reinsurance markets,1,65202
+Financial Services,Risk and damage evaluation,Insurance and reinsurance markets,1,6621
+Financial Services,Activities of insurance agents and brokers,Insurance and reinsurance markets,1,6622
+Financial Services,,Sustainable finance,1,NA
+Life Sciences,Manufacture of basic pharmaceutical products and pharmaceutical preparations,NA,0,21
+Life Sciences,Manufacture of irradiation electromedical and electrotherapeutic equipment,NA,0,266
+Life Sciences,Manufacture of medical and dental instruments and supplies,NA,0,325
+Life Sciences,Research and experimental development on biotechnology,NA,0,7211
+Life Sciences,,BioPharma,1,NA
+Life Sciences,,MedTech,1,NA
+Professional and Business Services,Legal and accounting activities,NA,0,69
+Professional and Business Services,Activities of head offices; management consultancy activities,NA,0,70
+Professional and Business Services,Architectural and engineering activities; technical testing and analysis,NA,0,71
+Professional and Business Services,Scientific research and development,NA,0,72
+Professional and Business Services,Advertising and market research,NA,0,73
+Professional and Business Services,Other professional scientific and technical activities,NA,0,74
+Professional and Business Services,Rental and leasing activities,NA,0,77
+Professional and Business Services,Employment activities,NA,0,78
+Professional and Business Services,Office administrative office support and other business support activities,NA,0,82
+Professional and Business Services,Accounting bookkeeping and auditing activities and tax consultancy,NA,1,692
+Professional and Business Services,Legal activities,NA,1,691
+Professional and Business Services,Management consultancy activities,NA,1,702
+Foundational industries and inputs,Manufacture of chemicals and chemical products,NA,2,20
+Foundational industries and inputs,,Critical minerals,2,NA
+Foundational industries and inputs,Manufacture and processing of other glass including technical glassware,Composites,2,2319
+Foundational industries and inputs,Manufacture of other non-metallic mineral products NEC,Composites,2,2399
+Foundational industries and inputs,Construction of buildings,Construction,2,41
+Foundational industries and inputs,Civil engineering,Construction,2,42
+Foundational industries and inputs,Specialised construction activities,Construction,2,43
+Foundational industries and inputs,Transmission of electricity,Electricity networks,2,3512
+Foundational industries and inputs,Distribution of electricity,Electricity networks,2,3513
+Foundational industries and inputs,Manufacture of glass and glass products,Materials,2,231
+Foundational industries and inputs,Manufacture of refractory products,Materials,2,232
+Foundational industries and inputs,Manufacture of clay building materials,Materials,2,233
+Foundational industries and inputs,Manufacture of other porcelain and ceramic products,Materials,2,234
+Foundational industries and inputs,Manufacture of cement lime and plaster,Materials,2,235
+Foundational industries and inputs,Manufacture of articles of concrete cement and plaster,Materials,2,236
+Foundational industries and inputs,Operation of warehousing and storage facilities for water transport activities,Ports,2,52101
+Foundational industries and inputs,Service activities incidental to water transportation,Ports,2,5222
+Foundational industries and inputs,Cargo handling for water transport activities,Ports,2,52241
+Foundational industries and inputs,Manufacture of basic iron and steel and of ferro-alloys,Steel,2,241
+Foundational industries and inputs,Manufacture of tubes pipes hollow profiles and related fittings of steel,Steel,2,242
+Foundational industries and inputs,Manufacture of other products of first processing of steel,Steel,2,243

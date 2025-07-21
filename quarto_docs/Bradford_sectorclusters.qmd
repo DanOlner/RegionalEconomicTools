@@ -41,6 +41,31 @@ theme_set(theme_light())
 
 ```
 
+# SUMMARY
+
+
+
+
+
+# HEADLINES FROM THE DATA ANALYSIS
+
+
+
+## Explanation of the data used
+
+
+
+## Manufacturing / production sectors
+
+
+
+## Service / other sectors
+
+
+
+
+
+
 ```{r gvaperhour_dataprep}
 # ITL3 Hours % change v GVA % change on average----
 
