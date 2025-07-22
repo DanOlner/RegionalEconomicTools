@@ -106,6 +106,10 @@ gva.jobs.ITL3.for2dplot <- bres.gva.2digit.2023 %>%
 # selectedsector = getdistinct('metals', gva.jobs.ITL3.for2dplot$SIC07_description_shortened)
 # selectedsector = getdistinct('head office', gva.jobs.ITL3.for2dplot$SIC07_description_shortened)
 
+#Saving for use elsewhere!
+#saveRDS(gva.jobs.ITL3.for2dplot,'local/data/gvajobsfor2dplot.rds')
+
+
 for(sector in unique(bres.gva.2digit.2023$SIC07_description_shortened)[order(unique(bres.gva.2digit.2023$SIC07_description_shortened))]){
 
   placestokeep <- gva.jobs.ITL3.for2dplot %>% 

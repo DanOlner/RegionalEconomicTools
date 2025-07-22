@@ -1571,7 +1571,7 @@
     "href": "quarto_docs/TESTDOC_Bradford_sectorclusters_July2025.html",
     "title": "TESTDOC Bradford sectors and clusters: past, present",
     "section": "",
-    "text": "Testing labelling with figures. Does Figure 1 work or does it need the label?\n\n\n\n\n\n\n\n\nFigure 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis section examines growth trends in Bradford for GVA and GVA per job (both using the 46 sector categories available in the GVA data), as well as growth in jobs using BRES data (a larger list of x sectors).\nover the full range of the data as well as…\nHere’s an explanation of what’s in the plots below.\n\nLinear slopes are found for each sector in Bradford, and each is compared to (a) all other sectors in Bradford (“Bradford internal”, light blue) and (b) the same sector in all other ITL3s zones in the data (“Bradford to other places”, dark blue).\nFor example - looking at the most obvious stand-out sector in the first plot is head offices / consultancy. Its GVA has grown significantly more than around 90% of other sectors in Bradford, and significantly more than around 70% of the head office / consultancy sector in other ITL3 zones. Its productivity (measured in GVA per full time job) has grown more than around 43% of other ITL3 zones.\nThe x axis gives the percent of slopes that are significantly different to others (i.e. 95% confidence intervals don’t overlap).\nThe vertical axis lists all sectors in alphabetical order. These labels contain the following information:\n\nGreen text: slope rises over time - growth is on average going up\nRed: slope drops over time - growth is on average going down\nBold green and red: the up or down slope is significantly different from zero (faded red and green can’t be statitically separated from no change over time).\nText after the sector name is percent change per year on average with 95% confidence intervals."
+    "text": "## Heading 1 \n\n\n\n\n\n\n\n\n\n\n\n## Heading 2 \n\n\n\n\n\n\n\n\n\n\n\n## Heading 3 \n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTesting labelling with figures. Does ?@fig-bresindstrat work or does it need the label? Nope, just name in header.\n\n\n\n\n\n\n\nThis section examines growth trends in Bradford for GVA and GVA per job (both using the 46 sector categories available in the GVA data), as well as growth in jobs using BRES data (a larger list of x sectors).\nover the full range of the data as well as…\nHere’s an explanation of what’s in the plots below.\n\nLinear slopes are found for each sector in Bradford, and each is compared to (a) all other sectors in Bradford (“Bradford internal”, light blue) and (b) the same sector in all other ITL3s zones in the data (“Bradford to other places”, dark blue).\nFor example - looking at the most obvious stand-out sector in the first plot is head offices / consultancy. Its GVA has grown significantly more than around 90% of other sectors in Bradford, and significantly more than around 70% of the head office / consultancy sector in other ITL3 zones. Its productivity (measured in GVA per full time job) has grown more than around 43% of other ITL3 zones.\nThe x axis gives the percent of slopes that are significantly different to others (i.e. 95% confidence intervals don’t overlap).\nThe vertical axis lists all sectors in alphabetical order. These labels contain the following information:\n\nGreen text: slope rises over time - growth is on average going up\nRed: slope drops over time - growth is on average going down\nBold green and red: the up or down slope is significantly different from zero (faded red and green can’t be statitically separated from no change over time).\nText after the sector name is percent change per year on average with 95% confidence intervals."
   },
   {
     "objectID": "quarto_docs/TESTDOC_Bradford_sectorclusters_July2025.html#growth-trends-in-gva-jobs-and-gva-per-job",
@@ -1585,7 +1585,7 @@
     "href": "quarto_docs/Bradford_sectorclusters_July2025.html#growth-trends-in-gva-jobs-and-gva-per-job",
     "title": "Bradford sectors and clusters: past, present",
     "section": "GROWTH TRENDS IN GVA, JOBS AND GVA PER JOB",
-    "text": "GROWTH TRENDS IN GVA, JOBS AND GVA PER JOB\nThis section examines growth trends in Bradford for GVA and GVA per full time job (a productivity measure) (both using the 46 sector categories available in the GVA data), as well as growth in jobs using BRES data (a larger list of 88 SIC 2 digit sectors).\nFirst, this is done for the full range of data - 2015 to 2023. Second, it’s repeated for the more recent time period from 2019 to 2023, to look for trends changes across the pandemic and more recently.\nHere’s an explanation of what’s in the plots below.\n\nLinear slopes are found for each sector in Bradford, and each is compared to (a) all other sectors in Bradford (“Bradford internal”, light blue) and (b) the same sector in all other ITL3s zones in the data (“Bradford to other places”, dark blue).\nFor example - looking at the most obvious stand-out sector in the first plot is head offices / consultancy. Its GVA has grown significantly more than around 90% of other sectors in Bradford, and significantly more than around 70% of the head office / consultancy sector in other ITL3 zones. Its productivity (measured in GVA per full time job) has grown more than around 43% of other ITL3 zones.\nThe x axis gives the percent of slopes that are significantly different to others (i.e. 95% confidence intervals don’t overlap).\nThe vertical axis lists all sectors in alphabetical order. These labels contain the following information:\n\nGreen text: slope rises over time - growth is on average going up\nRed: slope drops over time - growth is on average going down\nBold green and red: the up or down slope is significantly different from zero (faded red and green can’t be statitically separated from no change over time).\nText after the sector name is percent change per year on average with 95% confidence intervals.\n\n\nSo: * To see whether a sector has been growing or shrinking overall, use the sector text (green for growth, red for shrinkage, values given for average % change per year) * To compare that sector’s trend with other sectors in Bradford or the same sector in other places, use the bars in the plot. Note - these are relative: a slope could be relatively more positive than another, but the sector overall could still be shrinking. For example, ICT has been growing strongly in most places in the UK - but is growth in one place significantly stronger than others? That’s what the place and sector slope comparisons try to answer.\n\nFull data range: 2015 to 2023\n\n\n\n\n\n\n\n\nFigure 14\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 15\n\n\n\n\n\n\n\nMore recent years: 2019 to 2023\n\n\n\n\n\n\n\n\nFigure 16\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 17"
+    "text": "GROWTH TRENDS IN GVA, JOBS AND GVA PER JOB\nThis section examines growth trends in Bradford for GVA and GVA per full time job (a productivity measure) (both using the 46 sector categories available in the GVA data), as well as growth in jobs using BRES data (a larger list of 88 SIC 2 digit sectors).\nNOTE: There’s a section right at the end that digs more deeply into some selected sectors from this section (“Closer look at jobs vs GVA percent change in selected sectors”), taken from the GVA vs job percent change 2D plots catalogue page.\nFirst, this is done for the full range of data - 2015 to 2023. Second, it’s repeated for the more recent time period from 2019 to 2023, to look for trends changes across the pandemic and more recently.\nHere’s an explanation of what’s in the plots below.\n\nLinear slopes are found for each sector in Bradford, and each is compared to (a) all other sectors in Bradford (“Bradford internal”, light blue) and (b) the same sector in all other ITL3s zones in the data (“Bradford to other places”, dark blue).\nFor example - looking at the most obvious stand-out sector in the first plot is head offices / consultancy. Its GVA has grown significantly more than around 90% of other sectors in Bradford, and significantly more than around 70% of the head office / consultancy sector in other ITL3 zones. Its productivity (measured in GVA per full time job) has grown more than around 43% of other ITL3 zones.\nThe x axis gives the percent of slopes that are significantly different to others (i.e. 95% confidence intervals don’t overlap).\nThe vertical axis lists all sectors in alphabetical order. These labels contain the following information:\n\nGreen text: slope rises over time - growth is on average going up\nRed: slope drops over time - growth is on average going down\nBold green and red: the up or down slope is significantly different from zero (faded red and green can’t be statitically separated from no change over time).\nText after the sector name is percent change per year on average with 95% confidence intervals.\n\n\nSo: * To see whether a sector has been growing or shrinking overall, use the sector text (green for growth, red for shrinkage, values given for average % change per year) * To compare that sector’s trend with other sectors in Bradford or the same sector in other places, use the bars in the plot. Note - these are relative: a slope could be relatively more positive than another, but the sector overall could still be shrinking. For example, ICT has been growing strongly in most places in the UK - but is growth in one place significantly stronger than others? That’s what the place and sector slope comparisons try to answer.\n\nFull data range: 2015 to 2023\n\n\n\n\n\n\n\n\nFigure 14\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 15\n\n\n\n\n\n\n\nMore recent years: 2019 to 2023\n\n\n\n\n\n\n\n\nFigure 16\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 17"
   },
   {
     "objectID": "quarto_docs/Bradford_2D_gvajobs_percentchangeplots_July2025.html",
@@ -1613,14 +1613,14 @@
     "href": "quarto_docs/Bradford_sectorclusters_July2025.html#explanation-of-the-data-used",
     "title": "Bradford sectors and clusters: past, present",
     "section": "Explanation of the data used",
-    "text": "Explanation of the data used\nThree main data sources are used here (and one other smaller ONS source for the hourly productivity plots).\nThose three are:\n\nONS regional GVA data at ITL3 geographies, up to 2023 (the most recent available data)."
+    "text": "Explanation of the data used\nThree main data sources are used here (and one other smaller ONS source for the hourly productivity plots).\nThe main three data sources are:\n\nONS regional GVA data at ITL3 geographies, up to 2023 (the most recent available data).\nBRES (Business Register and Employment Survey) data for job counts by sector and place, again up to 2023 for the latest.\nData extracted from Companies House accounts for individual firms in the last year, between June 2024 and end of June 2025.\n\nFor some analyses, regional GVA and BRES jobs data are linked. To do this, BRES jobs are binned into the smaller list of 44 SIC sectors that the ONS uses for the GVA data, so e.g. GVA per full time job can be examined. Where possible, the most granular sector breakdowns are used.\nLastly, the UK government’s Industrial Strategy sector definition list is used to examine how Bradford’s economy meshes with that strategy.\nAll code for this data is available here, and here for processing Companies House accounts."
   },
   {
     "objectID": "quarto_docs/Bradford_sectorclusters_July2025.html#manufacturing-production-sectors",
     "href": "quarto_docs/Bradford_sectorclusters_July2025.html#manufacturing-production-sectors",
     "title": "Bradford sectors and clusters: past, present",
     "section": "Manufacturing / production sectors",
-    "text": "Manufacturing / production sectors"
+    "text": "Manufacturing / production sectors\nDespite an overall decline in the proportion of Bradford’s broad manufacturing economy (in line with the most of the rest of the UK and West Yorkshire, Figure 1), there is important production sector activity in the data."
   },
   {
     "objectID": "quarto_docs/Bradford_sectorclusters_July2025.html#service-other-sectors",
@@ -1669,6 +1669,48 @@
     "href": "quarto_docs/TESTDOC_Bradford_sectorclusters_July2025.html#industrial-strategy-linkage",
     "title": "TESTDOC Bradford sectors and clusters: past, present",
     "section": "",
-    "text": "Testing labelling with figures. Does Figure 1 work or does it need the label?\n\n\n\n\n\n\n\n\nFigure 1"
+    "text": "Testing labelling with figures. Does ?@fig-bresindstrat work or does it need the label? Nope, just name in header."
+  },
+  {
+    "objectID": "quarto_docs/TESTDOC_Bradford_sectorclusters_July2025.html#heading-1",
+    "href": "quarto_docs/TESTDOC_Bradford_sectorclusters_July2025.html#heading-1",
+    "title": "TESTDOC Bradford sectors and clusters: past, present",
+    "section": "",
+    "text": "Value: 10\n{r plot-1, echo=FALSE} plot(1:100, main = 'Plot 1')"
+  },
+  {
+    "objectID": "quarto_docs/TESTDOC_Bradford_sectorclusters_July2025.html#heading-2",
+    "href": "quarto_docs/TESTDOC_Bradford_sectorclusters_July2025.html#heading-2",
+    "title": "TESTDOC Bradford sectors and clusters: past, present",
+    "section": "",
+    "text": "Value: 20\n{r plot-2, echo=FALSE} plot(1:100, main = 'Plot 2')"
+  },
+  {
+    "objectID": "quarto_docs/TESTDOC_Bradford_sectorclusters_July2025.html#heading-3",
+    "href": "quarto_docs/TESTDOC_Bradford_sectorclusters_July2025.html#heading-3",
+    "title": "TESTDOC Bradford sectors and clusters: past, present",
+    "section": "",
+    "text": "Value: 30\n{r plot-3, echo=FALSE} plot(1:100, main = 'Plot 3')"
+  },
+  {
+    "objectID": "quarto_docs/TESTDOC_Bradford_sectorclusters_July2025.html#asis-test",
+    "href": "quarto_docs/TESTDOC_Bradford_sectorclusters_July2025.html#asis-test",
+    "title": "TESTDOC Bradford sectors and clusters: past, present",
+    "section": "",
+    "text": "## Heading 1 \n\n\n\n\n\n\n\n\n\n\n\n## Heading 2 \n\n\n\n\n\n\n\n\n\n\n\n## Heading 3"
+  },
+  {
+    "objectID": "quarto_docs/Bradford_sectorclusters_July2025.html#service-sectors",
+    "href": "quarto_docs/Bradford_sectorclusters_July2025.html#service-sectors",
+    "title": "Bradford sectors and clusters: past, present",
+    "section": "Service sectors",
+    "text": "Service sectors"
+  },
+  {
+    "objectID": "quarto_docs/Bradford_sectorclusters_July2025.html#manufacturing-sectors",
+    "href": "quarto_docs/Bradford_sectorclusters_July2025.html#manufacturing-sectors",
+    "title": "Bradford sectors and clusters: past, present",
+    "section": "Manufacturing sectors",
+    "text": "Manufacturing sectors\nDespite an overall decline in the proportion of Bradford’s broad manufacturing economy (in line with the most of the rest of the UK and West Yorkshire, Figure 1), there is important production sector activity in the data."
   }
 ]

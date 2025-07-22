@@ -66,16 +66,14 @@ Lastly, the UK government's Industrial Strategy [sector definition list](https:/
 All code for this data is available [here](https://github.com/DanOlner/RegionalEconomicTools), and [here](https://github.com/DanOlner/companieshouseopen) for processing Companies House accounts.
 
 
-
-
-## Manufacturing / production sectors
-
+## Service sectors
 
 
 
 
-## Service / other sectors
+## Manufacturing sectors
 
+Despite an overall decline in the proportion of Bradford's broad manufacturing economy (in line with the most of the rest of the UK and West Yorkshire, @fig-struct), there is important production sector activity in the data.
 
 
 
@@ -1434,6 +1432,8 @@ ggplotly(p, tooltip = 'Firm: ')
 
 This section examines **growth trends in Bradford** for **GVA and GVA per full time job (a productivity measure)** (both using the 46 sector categories available in the GVA data), as well as **growth in jobs using BRES data** (a larger list of 88 SIC 2 digit sectors).
 
+**NOTE: There's a section right at the end that digs more deeply into some selected sectors from this section ("Closer look at jobs vs GVA percent change in selected sectors"), taken from the [GVA vs job percent change 2D plots](https://danolner.github.io/RegionalEconomicTools/quarto_docs/Bradford_2D_gvajobs_percentchangeplots_July2025.html){target="_blank"} catalogue page.**
+
 First, this is done for **the full range of data - 2015 to 2023**. Second, it's **repeated for the more recent time period from 2019 to 2023**, to look for trends changes across the pandemic and more recently.
 
 Here's an explanation of what's in the plots below. 
@@ -1854,6 +1854,12 @@ bradford.bres.2dig$plot
 ```
 
 
+
+
+
+
+
+
 # UK INDUSTRIAL STRATEGY LINKAGE
 
 The UK Industrial Strategy includes a [sector definition list](https://www.gov.uk/government/publications/industrial-strategy/industrial-strategy-sector-definitions-list) that lists sectors (of differing specificity / SIC code number) that the government considers part of its target sectors. As that page says, most of these SIC codes cannot capture the full range of possible firms the strategy aims to cover, and it also contains entire sections that SIC codes can't cover at all - clean energy and certain digital sectors in particular.
@@ -1991,5 +1997,547 @@ p2
 
 ```
 
+
+
+# ANNEX: Closer look at jobs vs GVA percent change in selected sectors.
+
+These plots show **percent change in chained volume GVA and job count** on different axes for some selected sectors, with **Bradford's change overlaid in blue** and job count plus percent of regional economy included in title (for the most recent year). It uses a 3 year moving average to smooth out jumps.
+
+Some are chosen to illustrate their growth relative to other places, others to highlight productivity or job change issues.
+
+(See the [full catalogue here](https://danolner.github.io/RegionalEconomicTools/quarto_docs/Bradford_2D_gvajobs_percentchangeplots_July2025.html){target="_blank"} for every sector).
+
+Only places where a sector makes up 1.5% or more of the economy are included - except for Bradford, which is included in all plots.
+
+This is done for the shorter 2 digit SIC categories in the regional GVA data, joined to BRES jobs data.
+
+Any arrows in the **top left grey diagonal section** will have seen productivity drops (measured as GVA per FT job) over that time. In the bottom left diagonal, productivity went up.
+
+Arrows in the bottom right quadrant have seen **a combination of productivity increases with job decreases**.
+
+**NOTE: All sectors are included even if they're very small proportions of Bradford's economy - so percent changes could appear large for very tiny sectors. Look at the job count in the title to check. Including them all for completeness.**
+
+
+### Head offices / consultancy
+
+```{r, fig-gvajobshoc}
+
+gva.jobs.ITL3.for2dplot <- readRDS('../local/data/gvajobsfor2dplot.rds')
+
+sector <-  gva.jobs.ITL3.for2dplot$SIC07_description_shortened[qg('head office',gva.jobs.ITL3.for2dplot$SIC07_description_shortened)] %>% unique
+
+placestokeep <- gva.jobs.ITL3.for2dplot %>% 
+  filter(!is.na(jobcount_movingav)) %>% 
+  filter(DATE == max(DATE), SIC07_description_shortened == sector) %>% 
+  filter(JOBS_sector_regional_percent_movingav > 1.5) %>%#Keep only places where this sector makes up 1%+ of reg econ
+  select(Region_name) %>% 
+  distinct() %>% 
+  pull
+
+p <- twod_percentplot(
+    df = gva.jobs.ITL3.for2dplot %>% filter(SIC07_description_shortened == sector, Region_name %in% placestokeep),
+    category_var = Region_name,
+    x_var = gva_movingav,
+    y_var = jobcount_movingav,#
+    # y_var = JOBS_sector_regional_percent_movingav,#this shows structural change better - jobs have grown nominally in most sectors (but breaks GVA/job diagonal)
+    timevar = DATE,
+    label_var = `gva/job moving av`,
+    category_var_value_to_highlight = 'Bradford',
+    start_time = 2016,
+    end_time = 2022
+  )
+  
+  bradjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(jobcount_movingav) %>% pull 
+  bradpercentjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(JOBS_sector_regional_percent_movingav) %>% pull %>% round(2)
+
+  
+  p <- p + 
+    ggtitle(paste0(sector,': ', round(bradjobs/1000,1), 'K jobs in Bradford, ',bradpercentjobs,'% of tot')) +
+    xlab("GVA % change 2015/17 av to 2021/23 av") +
+    ylab("JOB COUNT % change 2015/17 av to 2021/23 av") 
+    # coord_cartesian(xlim = c(-50,130), ylim = c(-30,100))
+  
+  print(p)
+  
+
+
+```
+
+
+### Metals
+
+```{r, fig-gvajobsmetals}
+
+sector <-  gva.jobs.ITL3.for2dplot$SIC07_description_shortened[qg('metals',gva.jobs.ITL3.for2dplot$SIC07_description_shortened)] %>% unique
+
+placestokeep <- gva.jobs.ITL3.for2dplot %>% 
+  filter(!is.na(jobcount_movingav)) %>% 
+  filter(DATE == max(DATE), SIC07_description_shortened == sector) %>% 
+  filter(JOBS_sector_regional_percent_movingav > 1.5) %>%#Keep only places where this sector makes up 1%+ of reg econ
+  select(Region_name) %>% 
+  distinct() %>% 
+  pull
+
+#Always plot Bradford! Add in if not there
+if(!"Bradford" %in% placestokeep) placestokeep = c(placestokeep,"Bradford")
+
+
+p <- twod_percentplot(
+    df = gva.jobs.ITL3.for2dplot %>% filter(SIC07_description_shortened == sector, Region_name %in% placestokeep),
+    category_var = Region_name,
+    x_var = gva_movingav,
+    y_var = jobcount_movingav,#
+    # y_var = JOBS_sector_regional_percent_movingav,#this shows structural change better - jobs have grown nominally in most sectors (but breaks GVA/job diagonal)
+    timevar = DATE,
+    label_var = `gva/job moving av`,
+    category_var_value_to_highlight = 'Bradford',
+    start_time = 2016,
+    end_time = 2022
+  )
+  
+  bradjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(jobcount_movingav) %>% pull 
+  bradpercentjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(JOBS_sector_regional_percent_movingav) %>% pull %>% round(2)
+
+  
+  p <- p + 
+    ggtitle(paste0(sector,': ', round(bradjobs/1000,1), 'K jobs in Bradford, ',bradpercentjobs,'% of tot')) +
+    xlab("GVA % change 2015/17 av to 2021/23 av") +
+    ylab("JOB COUNT % change 2015/17 av to 2021/23 av") +
+    coord_cartesian(xlim = c(-50,130), ylim = c(-30,100))
+  
+  print(p)
+  
+
+
+```
+
+### Machinery/transport manufacture
+
+```{r, fig-gvajobs_mtf}
+
+sector <-  gva.jobs.ITL3.for2dplot$SIC07_description_shortened[qg('transp manuf',gva.jobs.ITL3.for2dplot$SIC07_description_shortened)] %>% unique
+
+placestokeep <- gva.jobs.ITL3.for2dplot %>% 
+  filter(!is.na(jobcount_movingav)) %>% 
+  filter(DATE == max(DATE), SIC07_description_shortened == sector) %>% 
+  filter(JOBS_sector_regional_percent_movingav > 1.5) %>%#Keep only places where this sector makes up 1%+ of reg econ
+  select(Region_name) %>% 
+  distinct() %>% 
+  pull
+
+#Always plot Bradford! Add in if not there
+if(!"Bradford" %in% placestokeep) placestokeep = c(placestokeep,"Bradford")
+
+
+p <- twod_percentplot(
+    df = gva.jobs.ITL3.for2dplot %>% filter(SIC07_description_shortened == sector, Region_name %in% placestokeep),
+    category_var = Region_name,
+    x_var = gva_movingav,
+    y_var = jobcount_movingav,#
+    # y_var = JOBS_sector_regional_percent_movingav,#this shows structural change better - jobs have grown nominally in most sectors (but breaks GVA/job diagonal)
+    timevar = DATE,
+    label_var = `gva/job moving av`,
+    category_var_value_to_highlight = 'Bradford',
+    start_time = 2016,
+    end_time = 2022
+  )
+  
+  bradjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(jobcount_movingav) %>% pull 
+  bradpercentjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(JOBS_sector_regional_percent_movingav) %>% pull %>% round(2)
+
+  
+  p <- p + 
+    ggtitle(paste0(sector,': ', round(bradjobs/1000,1), 'K jobs in Bradford, ',bradpercentjobs,'% of tot')) +
+    xlab("GVA % change 2015/17 av to 2021/23 av") +
+    ylab("JOB COUNT % change 2015/17 av to 2021/23 av") 
+    # coord_cartesian(xlim = c(-50,130), ylim = c(-30,100))
+  
+  print(p)
+  
+
+
+```
+
+
+
+### Textiles
+
+```{r, fig-textiles}
+
+sector <-  gva.jobs.ITL3.for2dplot$SIC07_description_shortened[qg('textiles',gva.jobs.ITL3.for2dplot$SIC07_description_shortened)] %>% unique
+
+placestokeep <- gva.jobs.ITL3.for2dplot %>% 
+  filter(!is.na(jobcount_movingav)) %>% 
+  filter(DATE == max(DATE), SIC07_description_shortened == sector) %>% 
+  filter(JOBS_sector_regional_percent_movingav > 1.5) %>%#Keep only places where this sector makes up 1%+ of reg econ
+  select(Region_name) %>% 
+  distinct() %>% 
+  pull
+
+#Always plot Bradford! Add in if not there
+if(!"Bradford" %in% placestokeep) placestokeep = c(placestokeep,"Bradford")
+
+
+p <- twod_percentplot(
+    df = gva.jobs.ITL3.for2dplot %>% filter(SIC07_description_shortened == sector, Region_name %in% placestokeep),
+    category_var = Region_name,
+    x_var = gva_movingav,
+    y_var = jobcount_movingav,#
+    # y_var = JOBS_sector_regional_percent_movingav,#this shows structural change better - jobs have grown nominally in most sectors (but breaks GVA/job diagonal)
+    timevar = DATE,
+    label_var = `gva/job moving av`,
+    category_var_value_to_highlight = 'Bradford',
+    start_time = 2016,
+    end_time = 2022
+  )
+  
+  bradjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(jobcount_movingav) %>% pull 
+  bradpercentjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(JOBS_sector_regional_percent_movingav) %>% pull %>% round(2)
+
+  
+  p <- p + 
+    ggtitle(paste0(sector,': ', round(bradjobs/1000,1), 'K jobs in Bradford, ',bradpercentjobs,'% of tot')) +
+    xlab("GVA % change 2015/17 av to 2021/23 av") +
+    ylab("JOB COUNT % change 2015/17 av to 2021/23 av") 
+    # coord_cartesian(xlim = c(-50,130), ylim = c(-30,100))
+  
+  print(p)
+  
+
+
+```
+
+### Other professional / sci / tech
+
+```{r, fig-gvajobsPST}
+
+sector <-  gva.jobs.ITL3.for2dplot$SIC07_description_shortened[qg('other ps',gva.jobs.ITL3.for2dplot$SIC07_description_shortened)] %>% unique
+
+placestokeep <- gva.jobs.ITL3.for2dplot %>% 
+  filter(!is.na(jobcount_movingav)) %>% 
+  filter(DATE == max(DATE), SIC07_description_shortened == sector) %>% 
+  filter(JOBS_sector_regional_percent_movingav > 1.5) %>%#Keep only places where this sector makes up 1%+ of reg econ
+  select(Region_name) %>% 
+  distinct() %>% 
+  pull
+
+#Always plot Bradford! Add in if not there
+if(!"Bradford" %in% placestokeep) placestokeep = c(placestokeep,"Bradford")
+
+
+p <- twod_percentplot(
+    df = gva.jobs.ITL3.for2dplot %>% filter(SIC07_description_shortened == sector, Region_name %in% placestokeep),
+    category_var = Region_name,
+    x_var = gva_movingav,
+    y_var = jobcount_movingav,#
+    # y_var = JOBS_sector_regional_percent_movingav,#this shows structural change better - jobs have grown nominally in most sectors (but breaks GVA/job diagonal)
+    timevar = DATE,
+    label_var = `gva/job moving av`,
+    category_var_value_to_highlight = 'Bradford',
+    start_time = 2016,
+    end_time = 2022
+  )
+  
+  bradjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(jobcount_movingav) %>% pull 
+  bradpercentjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(JOBS_sector_regional_percent_movingav) %>% pull %>% round(2)
+
+  
+  p <- p + 
+    ggtitle(paste0(sector,': ', round(bradjobs/1000,1), 'K jobs in Bradford, ',bradpercentjobs,'% of tot')) +
+    xlab("GVA % change 2015/17 av to 2021/23 av") +
+    ylab("JOB COUNT % change 2015/17 av to 2021/23 av") 
+    # coord_cartesian(xlim = c(-50,130), ylim = c(-30,100))
+  
+  print(p)
+  
+
+
+```
+
+
+
+### Buildings
+
+```{r, fig-gvajobsB}
+
+sector <-  gva.jobs.ITL3.for2dplot$SIC07_description_shortened[qg('buildings',gva.jobs.ITL3.for2dplot$SIC07_description_shortened)] %>% unique
+
+placestokeep <- gva.jobs.ITL3.for2dplot %>% 
+  filter(!is.na(jobcount_movingav)) %>% 
+  filter(DATE == max(DATE), SIC07_description_shortened == sector) %>% 
+  filter(JOBS_sector_regional_percent_movingav > 1.5) %>%#Keep only places where this sector makes up 1%+ of reg econ
+  select(Region_name) %>% 
+  distinct() %>% 
+  pull
+
+#Always plot Bradford! Add in if not there
+if(!"Bradford" %in% placestokeep) placestokeep = c(placestokeep,"Bradford")
+
+
+p <- twod_percentplot(
+    df = gva.jobs.ITL3.for2dplot %>% filter(SIC07_description_shortened == sector, Region_name %in% placestokeep),
+    category_var = Region_name,
+    x_var = gva_movingav,
+    y_var = jobcount_movingav,#
+    # y_var = JOBS_sector_regional_percent_movingav,#this shows structural change better - jobs have grown nominally in most sectors (but breaks GVA/job diagonal)
+    timevar = DATE,
+    label_var = `gva/job moving av`,
+    category_var_value_to_highlight = 'Bradford',
+    start_time = 2016,
+    end_time = 2022
+  )
+  
+  bradjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(jobcount_movingav) %>% pull 
+  bradpercentjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(JOBS_sector_regional_percent_movingav) %>% pull %>% round(2)
+
+  
+  p <- p + 
+    ggtitle(paste0(sector,': ', round(bradjobs/1000,1), 'K jobs in Bradford, ',bradpercentjobs,'% of tot')) +
+    xlab("GVA % change 2015/17 av to 2021/23 av") +
+    ylab("JOB COUNT % change 2015/17 av to 2021/23 av") 
+    # coord_cartesian(xlim = c(-50,130), ylim = c(-30,100))
+  
+  print(p)
+  
+
+
+```
+
+### Chemicals
+
+```{r, fig-gvajobsCh}
+
+sector <-  gva.jobs.ITL3.for2dplot$SIC07_description_shortened[qg('chemicals',gva.jobs.ITL3.for2dplot$SIC07_description_shortened)] %>% unique
+
+placestokeep <- gva.jobs.ITL3.for2dplot %>% 
+  filter(!is.na(jobcount_movingav)) %>% 
+  filter(DATE == max(DATE), SIC07_description_shortened == sector) %>% 
+  filter(JOBS_sector_regional_percent_movingav > 1.5) %>%#Keep only places where this sector makes up 1%+ of reg econ
+  select(Region_name) %>% 
+  distinct() %>% 
+  pull
+
+#Always plot Bradford! Add in if not there
+if(!"Bradford" %in% placestokeep) placestokeep = c(placestokeep,"Bradford")
+
+
+p <- twod_percentplot(
+    df = gva.jobs.ITL3.for2dplot %>% filter(SIC07_description_shortened == sector, Region_name %in% placestokeep),
+    category_var = Region_name,
+    x_var = gva_movingav,
+    y_var = jobcount_movingav,#
+    # y_var = JOBS_sector_regional_percent_movingav,#this shows structural change better - jobs have grown nominally in most sectors (but breaks GVA/job diagonal)
+    timevar = DATE,
+    label_var = `gva/job moving av`,
+    category_var_value_to_highlight = 'Bradford',
+    start_time = 2016,
+    end_time = 2022
+  )
+  
+  bradjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(jobcount_movingav) %>% pull 
+  bradpercentjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(JOBS_sector_regional_percent_movingav) %>% pull %>% round(2)
+
+  
+  p <- p + 
+    ggtitle(paste0(sector,': ', round(bradjobs/1000,1), 'K jobs in Bradford, ',bradpercentjobs,'% of tot')) +
+    xlab("GVA % change 2015/17 av to 2021/23 av") +
+    ylab("JOB COUNT % change 2015/17 av to 2021/23 av") 
+    # coord_cartesian(xlim = c(-50,130), ylim = c(-30,100))
+  
+  print(p)
+  
+
+
+```
+
+### Food manufacture
+
+```{r, fig-gvajobsFM}
+
+sector <-  gva.jobs.ITL3.for2dplot$SIC07_description_shortened[qg('food manuf',gva.jobs.ITL3.for2dplot$SIC07_description_shortened)] %>% unique
+
+placestokeep <- gva.jobs.ITL3.for2dplot %>% 
+  filter(!is.na(jobcount_movingav)) %>% 
+  filter(DATE == max(DATE), SIC07_description_shortened == sector) %>% 
+  filter(JOBS_sector_regional_percent_movingav > 1.5) %>%#Keep only places where this sector makes up 1%+ of reg econ
+  select(Region_name) %>% 
+  distinct() %>% 
+  pull
+
+#Always plot Bradford! Add in if not there
+if(!"Bradford" %in% placestokeep) placestokeep = c(placestokeep,"Bradford")
+
+
+p <- twod_percentplot(
+    df = gva.jobs.ITL3.for2dplot %>% filter(SIC07_description_shortened == sector, Region_name %in% placestokeep),
+    category_var = Region_name,
+    x_var = gva_movingav,
+    y_var = jobcount_movingav,#
+    # y_var = JOBS_sector_regional_percent_movingav,#this shows structural change better - jobs have grown nominally in most sectors (but breaks GVA/job diagonal)
+    timevar = DATE,
+    label_var = `gva/job moving av`,
+    category_var_value_to_highlight = 'Bradford',
+    start_time = 2016,
+    end_time = 2022
+  )
+  
+  bradjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(jobcount_movingav) %>% pull 
+  bradpercentjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(JOBS_sector_regional_percent_movingav) %>% pull %>% round(2)
+
+  
+  p <- p + 
+    ggtitle(paste0(sector,': ', round(bradjobs/1000,1), 'K jobs in Bradford, ',bradpercentjobs,'% of tot')) +
+    xlab("GVA % change 2015/17 av to 2021/23 av") +
+    ylab("JOB COUNT % change 2015/17 av to 2021/23 av") 
+    # coord_cartesian(xlim = c(-50,130), ylim = c(-30,100))
+  
+  print(p)
+  
+
+
+```
+
+
+### Research / advertising
+
+```{r, fig-gvajobsRA}
+
+sector <-  gva.jobs.ITL3.for2dplot$SIC07_description_shortened[qg('research',gva.jobs.ITL3.for2dplot$SIC07_description_shortened)] %>% unique
+
+placestokeep <- gva.jobs.ITL3.for2dplot %>% 
+  filter(!is.na(jobcount_movingav)) %>% 
+  filter(DATE == max(DATE), SIC07_description_shortened == sector) %>% 
+  filter(JOBS_sector_regional_percent_movingav > 1.5) %>%#Keep only places where this sector makes up 1%+ of reg econ
+  select(Region_name) %>% 
+  distinct() %>% 
+  pull
+
+#Always plot Bradford! Add in if not there
+if(!"Bradford" %in% placestokeep) placestokeep = c(placestokeep,"Bradford")
+
+
+p <- twod_percentplot(
+    df = gva.jobs.ITL3.for2dplot %>% filter(SIC07_description_shortened == sector, Region_name %in% placestokeep),
+    category_var = Region_name,
+    x_var = gva_movingav,
+    y_var = jobcount_movingav,#
+    # y_var = JOBS_sector_regional_percent_movingav,#this shows structural change better - jobs have grown nominally in most sectors (but breaks GVA/job diagonal)
+    timevar = DATE,
+    label_var = `gva/job moving av`,
+    category_var_value_to_highlight = 'Bradford',
+    start_time = 2016,
+    end_time = 2022
+  )
+  
+  bradjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(jobcount_movingav) %>% pull 
+  bradpercentjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(JOBS_sector_regional_percent_movingav) %>% pull %>% round(2)
+
+  
+  p <- p + 
+    ggtitle(paste0(sector,': ', round(bradjobs/1000,1), 'K jobs in Bradford, ',bradpercentjobs,'% of tot')) +
+    xlab("GVA % change 2015/17 av to 2021/23 av") +
+    ylab("JOB COUNT % change 2015/17 av to 2021/23 av") 
+    # coord_cartesian(xlim = c(-50,130), ylim = c(-30,100))
+  
+  print(p)
+  
+
+
+```
+
+### Specialised construction
+
+```{r, fig-gvajobsSC}
+
+sector <-  gva.jobs.ITL3.for2dplot$SIC07_description_shortened[qg('spec con',gva.jobs.ITL3.for2dplot$SIC07_description_shortened)] %>% unique
+
+placestokeep <- gva.jobs.ITL3.for2dplot %>% 
+  filter(!is.na(jobcount_movingav)) %>% 
+  filter(DATE == max(DATE), SIC07_description_shortened == sector) %>% 
+  filter(JOBS_sector_regional_percent_movingav > 1.5) %>%#Keep only places where this sector makes up 1%+ of reg econ
+  select(Region_name) %>% 
+  distinct() %>% 
+  pull
+
+#Always plot Bradford! Add in if not there
+if(!"Bradford" %in% placestokeep) placestokeep = c(placestokeep,"Bradford")
+
+
+p <- twod_percentplot(
+    df = gva.jobs.ITL3.for2dplot %>% filter(SIC07_description_shortened == sector, Region_name %in% placestokeep),
+    category_var = Region_name,
+    x_var = gva_movingav,
+    y_var = jobcount_movingav,#
+    # y_var = JOBS_sector_regional_percent_movingav,#this shows structural change better - jobs have grown nominally in most sectors (but breaks GVA/job diagonal)
+    timevar = DATE,
+    label_var = `gva/job moving av`,
+    category_var_value_to_highlight = 'Bradford',
+    start_time = 2016,
+    end_time = 2022
+  )
+  
+  bradjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(jobcount_movingav) %>% pull 
+  bradpercentjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(JOBS_sector_regional_percent_movingav) %>% pull %>% round(2)
+
+  
+  p <- p + 
+    ggtitle(paste0(sector,': ', round(bradjobs/1000,1), 'K jobs in Bradford, ',bradpercentjobs,'% of tot')) +
+    xlab("GVA % change 2015/17 av to 2021/23 av") +
+    ylab("JOB COUNT % change 2015/17 av to 2021/23 av") 
+    # coord_cartesian(xlim = c(-50,130), ylim = c(-30,100))
+  
+  print(p)
+  
+
+
+```
+
+
+### Transport
+
+```{r, fig-gvajobsTr}
+
+sector <-  gva.jobs.ITL3.for2dplot$SIC07_description_shortened[qg('transport',gva.jobs.ITL3.for2dplot$SIC07_description_shortened)] %>% unique
+
+placestokeep <- gva.jobs.ITL3.for2dplot %>% 
+  filter(!is.na(jobcount_movingav)) %>% 
+  filter(DATE == max(DATE), SIC07_description_shortened == sector) %>% 
+  filter(JOBS_sector_regional_percent_movingav > 1.5) %>%#Keep only places where this sector makes up 1%+ of reg econ
+  select(Region_name) %>% 
+  distinct() %>% 
+  pull
+
+#Always plot Bradford! Add in if not there
+if(!"Bradford" %in% placestokeep) placestokeep = c(placestokeep,"Bradford")
+
+
+p <- twod_percentplot(
+    df = gva.jobs.ITL3.for2dplot %>% filter(SIC07_description_shortened == sector, Region_name %in% placestokeep),
+    category_var = Region_name,
+    x_var = gva_movingav,
+    y_var = jobcount_movingav,#
+    # y_var = JOBS_sector_regional_percent_movingav,#this shows structural change better - jobs have grown nominally in most sectors (but breaks GVA/job diagonal)
+    timevar = DATE,
+    label_var = `gva/job moving av`,
+    category_var_value_to_highlight = 'Bradford',
+    start_time = 2016,
+    end_time = 2022
+  )
+  
+  bradjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(jobcount_movingav) %>% pull 
+  bradpercentjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(JOBS_sector_regional_percent_movingav) %>% pull %>% round(2)
+
+  
+  p <- p + 
+    ggtitle(paste0(sector,': ', round(bradjobs/1000,1), 'K jobs in Bradford, ',bradpercentjobs,'% of tot')) +
+    xlab("GVA % change 2015/17 av to 2021/23 av") +
+    ylab("JOB COUNT % change 2015/17 av to 2021/23 av") 
+    # coord_cartesian(xlim = c(-50,130), ylim = c(-30,100))
+  
+  print(p)
+  
+
+
+```
 
 

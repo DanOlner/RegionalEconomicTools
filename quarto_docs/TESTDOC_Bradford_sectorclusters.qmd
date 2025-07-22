@@ -47,6 +47,100 @@ theme_set(theme_light())
 
 # TEST DOC: To save running whole main doc, test smaller sections as we go
 
+## Asis test
+
+```{r eval = F}
+#| output: asis
+
+for(i in 1:3){
+  
+  cat("## Heading ",i,"\n")
+  
+  cat(" \n")
+  
+  cat(i * 10,"\n")
+  
+  cat(" \n")
+  
+  print(plot(1:100))
+  
+  cat(" \n")
+  
+}
+
+```
+
+
+
+```{r eval=F}
+# for(i in 1:3){
+#   
+#   # Output heading as raw markdown
+#   cat(knitr::asis_output(paste0("## Heading ", i, "\n\n")))
+#   
+#   # Output some text
+#   cat(i * 10, "\n\n")
+#   
+#   # Output plot
+#   plot(1:100, main = paste("Plot", i))  # This will display properly
+# }
+
+
+```
+
+
+```{r eval=F, attempt3}
+#| label: headings
+#| output: asis
+
+for(i in 1:3){
+  cat("## Heading ", i, "\n\n")
+  cat("Value: ", i * 10, "\n\n")
+  # cat(paste0("plot(1:100, main = 'Plot ", i, "')\n\n"))
+  cat(paste0("```{r plot-", i, ", echo=FALSE}\n",
+             "plot(1:100, main = 'Plot ", i, "')\n",
+             "```\n\n"))
+}
+
+
+```
+
+
+```{r, attempt4setup}
+#| label: setup-plots
+#| include: false
+
+library(ggplot2)
+library(purrr)
+
+titles <- paste("## Heading", 1:3)
+values <- 1:3 * 10
+plots <- map(1:3, ~ ggplot(data.frame(x = 1:100), aes(x, y = 1)) + 
+                geom_line() + 
+                ggtitle(paste("Plot", .x)))
+
+# Store for use in later chunk
+plot_data <- tibble::tibble(titles, values, plots)
+
+
+```
+
+```{r, alsonope}
+#| label: output-plots
+#| echo: false
+
+walk2(plot_data$titles, plot_data$plots, function(title, plot) {
+  cat(title, "\n\n")
+  print(plot)
+  cat("\n\n")
+})
+
+```
+
+
+
+
+
 ## Industrial strategy linkage
 
 ### BRES
@@ -54,7 +148,7 @@ theme_set(theme_light())
 Testing labelling with figures. Does @fig-bresindstrat work or does it need the label? Nope, just name in header.
 
 
-```{r, fig-bresindstrat}
+```{r eval=F, fig-bresindstrat}
 #| fig-width: 9
 
 place = "Bradford"
@@ -85,7 +179,7 @@ p
 
 ```
 
-```{r, bresindstrat2}
+```{r eval=F, bresindstrat2}
 #| fig-width: 9
 
 p <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), alpha = 0.1, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope)
@@ -111,7 +205,7 @@ p
 
 ### Companies House
 
-```{r, chindstrat}
+```{r eval=F, chindstrat}
 #| fig-width: 9
 
 #Blue peter this up
@@ -143,7 +237,7 @@ p1
 
 ```
 
-```{r,chindstrat2}
+```{r eval=F,chindstrat2}
 #| fig-width: 9
  
 p2 <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo, 

@@ -1788,6 +1788,8 @@ ggplotly(p, tooltip = 'Place: ')
 #Err it's registered in Manchester here. Definitely isn't based there!
 #Is this their accountants??
 ch %>% filter(qg('Produmax',CompanyName)) %>% View
+ch %>% filter(qg('borgwarner',CompanyName)) %>% View#no employees recorded - but it's not a Bradford HQ firm, it's intl
+ch %>% filter(qg('space',CompanyName), localauthority_name == 'Bradford') %>% View#no employees recorded - but it's not a Bradford HQ firm, it's intl
 #Owned by these people??
 #"We invest in or acquire underperforming Mid-market industrial companies. Our aim is to affect a transformation of the key fundamentals of the businesses"
 
