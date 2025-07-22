@@ -1795,9 +1795,7 @@ bres <- bres %>%
 # bres %>% distinct(SIC_5DIGIT_NAME_SHORT,SIC_5DIGIT_NAME) %>% View
 
 #Save sample of BRES just for one place and one year
-write_csv(
-  bres %>% filter(GEOGRAPHY_NAME == 'Bradford', DATE == 2023) %>% slice_sample(n = 30),
-  'local/data/sample5digitBRES.csv')
+# write_csv(bres %>% filter(GEOGRAPHY_NAME == 'Bradford', DATE == 2023) %>% slice_sample(n = 30),'local/data/sample5digitBRES.csv')
 
 
 
@@ -1860,19 +1858,6 @@ fourz[!fourz %in% SIClookup$SIC_5DIGIT_CODE]
 
 
 
-#Get moving av for jobs in BRES for 5 digit, use that latest year...
-smoothband = 3
-
-bres <- bres %>% 
-  arrange(DATE) %>% 
-  group_by(GEOGRAPHY_NAME,SIC_5DIGIT_NAME_SHORT) %>%
-  mutate(
-    jobcount_movingav = rollapply(JOBCOUNT,smoothband,mean,align='center',fill=NA)
-  ) %>% 
-  ungroup()
-    
-#check... tick
-table(is.na(bres$jobcount_movingav),bres$DATE)
 
 
 #BETTER APPROACH: JOIN SICS TO BRES THEN SUM BY THAT JOIN
@@ -1887,50 +1872,116 @@ strategy_df <- indsic %>%
 
 #Only use smoothed data values
 bres_annotated <- fuzzyjoin::regex_left_join(
-  bres %>% filter(!is.na(jobcount_movingav)),
+  bres,
+  # bres %>% filter(!is.na(jobcount_movingav)),
   strategy_df %>% distinct(sic_code, .keep_all = T),#Some like 20 are doubled up in e.g. foundationals, keep only one
   by = c("SIC_5DIGIT_CODE" = "regex")
 )
 
 #Then just summarise
+#Don't need to keep indstrat sectors we have no match for
 bres_summary <- bres_annotated %>%
-  group_by(DATE,GEOGRAPHY_NAME, sector_name, sic_code) %>%
+  filter(!is.na(sic_code)) %>% 
+  group_by(DATE,GEOGRAPHY_NAME,SIC_name) %>%
   summarise(
-    total_jobs = sum(jobcount_movingav, na.rm = TRUE), .groups = "drop",
-    sic_namefrom_indstrat = max(SIC_name),
-    SIC_5DIGIT_CODE = max(SIC_5DIGIT_CODE),
-    SIC_5DIGIT_NAME_SHORT = max(SIC_5DIGIT_NAME_SHORT),#some of these won't be right
+    JOBCOUNT = sum(JOBCOUNT, na.rm = TRUE), .groups = "drop",
+    sic_codefromindstrat = max(sic_code),
+    topsector_indstrat = max(sector_name),
+    # SIC_5DIGIT_CODE = max(SIC_5DIGIT_CODE),
+    # SIC_5DIGIT_NAME_SHORT = max(SIC_5DIGIT_NAME_SHORT),#some of these won't be right
     SIC_2DIGIT_NAME_SHORT = max(SIC_2DIGIT_NAME_SHORT),
     is_frontier = max(is_frontier)
     ) %>% 
-  filter(!is.na(sic_code))
+  rename(sic_namefrom_indstrat = SIC_name)
+  
 
 #Sanity checks... same number of cats, OK
-length(unique(bres_summary$sic_code))
+length(unique(bres_summary$sic_namefrom_indstrat))
 length(unique(indsic$sic_code))
 
 table(is.na(bres_summary$sic_code))
 # bres_summary %>% filter(is.na(sic_code)) %>% View
 
 
+#Some more sanity checks. Did things sum correctly? Pick a couple of test sectors
+chk <- bres_summary %>% 
+  filter(sic_namefrom_indstrat == 'Manufacture of chemicals and chemical products', DATE == 2023)
 
-#Have manually added in those specific ind strat codes
+
+
+
+#Find moving av AFTER summing
+#Should be moving av of those totals
+#Get moving av for jobs in BRES for 5 digit, use that latest year...
+smoothband = 3
+
+bres_summary <- bres_summary %>% 
+  arrange(DATE) %>% 
+  group_by(GEOGRAPHY_NAME,sic_namefrom_indstrat) %>%
+  mutate(
+    jobcount_movingav = rollapply(JOBCOUNT,smoothband,mean,align='center',fill=NA)
+  ) %>% 
+  ungroup() %>% 
+  filter(!is.na(jobcount_movingav))
+
+#check... tick
+table(is.na(bres_summary$jobcount_movingav),bres_summary$DATE)
+
+
+
+#MAKE SHORTER NAMES THAT COMBINE WITH THE INDSTRAT TOP CAT
+#Top level cats first, that we will combine with the shortened sector name
+unique(bres_summary$topsector_indstrat)
+
+bres_summary <- bres_summary %>% 
+  mutate(
+    toplevelindstrat = case_when(
+      qg('manufactur', topsector_indstrat) ~ "ADV MANUF",
+      qg('business', topsector_indstrat) ~ "PBS",
+      qg('financ', topsector_indstrat) ~ "FIN",
+      qg('creative', topsector_indstrat) ~ "CREATIVE",
+      qg('foundation', topsector_indstrat) ~ "FOUNDATION",
+      qg('digital', topsector_indstrat) ~ "DIGITAL",
+      qg('life sci', topsector_indstrat) ~ "LIFESCI",
+      qg('defence', topsector_indstrat) ~ "DEFENCE"
+    )
+  )
+
+#And shortern other names
+bres_summary <- bres_summary %>% 
+  mutate(
+    sic_namefrom_indstrat_short = removecommonSICnameelements(bres_summary$sic_namefrom_indstrat, removemanuf = T)
+  )
+
+# table(bres_summary$toplevelindstrat)
+# table(bres_summary$sic_namefrom_indstrat_short)
+
+#Make combo
+bres_summary <- bres_summary %>% 
+  mutate(
+    sic_namefrom_indstrat_combo = paste0(toplevelindstrat,": ",sic_namefrom_indstrat_short)
+  )
+
+table(bres_summary$sic_namefrom_indstrat_combo)
+
+
+#Have manually added in those specific ind strat codes into the CSV
 #Let's see if we can get LQs for those...
 islq <- bres_summary %>% 
   group_split(DATE) %>% 
   map(
     add_location_quotient_and_proportions,
     regionvar = GEOGRAPHY_NAME,
-    lq_var = sic_namefrom_indstrat,
-    valuevar = total_jobs
+    lq_var = sic_namefrom_indstrat_combo,
+    valuevar = jobcount_movingav
 ) %>% 
   bind_rows() %>% 
-  mutate(total_jobs = round(total_jobs,0))
+  mutate(jobcount_movingav = round(jobcount_movingav,0))
 
 
 LQ_slopes <- compute_slope_or_zero(
   data = islq, 
-  GEOGRAPHY_NAME, sic_namefrom_indstrat,#slopes will be found within whatever grouping vars are added here
+  GEOGRAPHY_NAME, sic_namefrom_indstrat_combo,#slopes will be found within whatever grouping vars are added here
   y = LQ_log, x = DATE)
 
 
@@ -1941,22 +1992,29 @@ yeartoplot <- islq %>% filter(DATE == max(DATE))#use latest year
 yeartoplot <- yeartoplot %>% 
   left_join(
     LQ_slopes,
-    by = c('GEOGRAPHY_NAME', 'sic_namefrom_indstrat')
+    by = c('GEOGRAPHY_NAME', 'sic_namefrom_indstrat_combo')
   )
 
 #Get min/max values for LQ over time as well, for each sector and place, to add as bars so range of sector is easy to see
 minmaxes <- islq %>% 
-  group_by(GEOGRAPHY_NAME, sic_namefrom_indstrat) %>% 
+  group_by(GEOGRAPHY_NAME, sic_namefrom_indstrat_combo) %>% 
   summarise(
     min_LQ_all_time = min(LQ, na.rm = T),
     max_LQ_all_time = max(LQ, na.rm = T)
+  ) %>% 
+  mutate(
+    min_LQ_all_time = ifelse(is.infinite(min_LQ_all_time),NA,min_LQ_all_time),
+    max_LQ_all_time = ifelse(is.infinite(max_LQ_all_time),NA,max_LQ_all_time)
   )
+
+# table(is.infinite(minmaxes$min_LQ_all_time))
+# table(is.infinite(minmaxes$max_LQ_all_time))
 
 #Join min and max
 yeartoplot <- yeartoplot %>% 
   left_join(
     minmaxes,
-    by = c('GEOGRAPHY_NAME', 'sic_namefrom_indstrat')
+    by = c('GEOGRAPHY_NAME', 'sic_namefrom_indstrat_combo')
   )
 
 
@@ -1970,35 +2028,34 @@ sectorLQorder <- islq %>% filter(
   DATE == max(DATE),#use latest data
   GEOGRAPHY_NAME == place) %>% 
   arrange(-LQ) %>% 
-  select(sic_namefrom_indstrat) %>% 
+  select(sic_namefrom_indstrat_combo) %>% 
   pull()
 
 
 #Split by frontier or not
 
 #Turn the sector column into a factor and order by LCR's LQs
-yeartoplot$sic_namefrom_indstrat <- factor(yeartoplot$sic_namefrom_indstrat, levels = sectorLQorder, ordered = T)
+yeartoplot$sic_namefrom_indstrat_combo <- factor(yeartoplot$sic_namefrom_indstrat_combo, levels = sectorLQorder, ordered = T)
 
 #Remove some LQs
-yeartoplot.lqfiltered <- yeartoplot %>% filter(LQ > 0 & LQ < 100, total_jobs > 99)
+yeartoplot.lqfiltered <- yeartoplot %>% filter(LQ > 0 & LQ < 100, jobcount_movingav > 99)
 
 #Drop any sectors that Bradford now doesn't have after that filter
-sectorstokeep <- yeartoplot.lqfiltered %>% filter(GEOGRAPHY_NAME == place) %>% select(sic_namefrom_indstrat) %>% pull
+sectorstokeep <- yeartoplot.lqfiltered %>% filter(GEOGRAPHY_NAME == place) %>% select(sic_namefrom_indstrat_combo) %>% pull
 
-yeartoplot.lqfiltered <- yeartoplot.lqfiltered %>% filter(sic_namefrom_indstrat %in% sectorstokeep)
+yeartoplot.lqfiltered <- yeartoplot.lqfiltered %>% filter(sic_namefrom_indstrat_combo %in% sectorstokeep)
 
 #save a copy of that to save processing time in quarto
 saveRDS(yeartoplot.lqfiltered,'local/data/bres_indstrat_LQs.rds')
 
-#If I could plot both and space them out, that would be good (could get Bradford change showing too)
-p <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), alpha = 0.1, shape = 0, sector_name = sic_namefrom_indstrat, LQ_column = LQ, change_over_time = slope)
+p <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), alpha = 0.1, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope)
 
 p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), plot_to_addto = p, 
                             placename = place, shapenumber = 16,
                             min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
-                            value_column = total_jobs, sector_regional_proportion = sector_regional_proportion,
+                            value_column = jobcount_movingav, sector_regional_proportion = sector_regional_proportion,
                             region_name = GEOGRAPHY_NAME,
-                            sector_name = sic_namefrom_indstrat, change_over_time = slope, LQ_column = LQ,
+                            sector_name = sic_namefrom_indstrat_combo, change_over_time = slope, LQ_column = LQ,
                             text = 7, value_col_ismoney = F)
 
 p <- p + 
@@ -2007,14 +2064,14 @@ p <- p +
 
 p
 
-p <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), alpha = 0.1, shape = 0, sector_name = sic_namefrom_indstrat, LQ_column = LQ, change_over_time = slope)
+p <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), alpha = 0.1, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope)
 
 p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), plot_to_addto = p, 
                             placename = place, shapenumber = 16,
                             min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
-                            value_column = total_jobs, sector_regional_proportion = sector_regional_proportion,
+                            value_column = jobcount_movingav, sector_regional_proportion = sector_regional_proportion,
                             region_name = GEOGRAPHY_NAME,
-                            sector_name = sic_namefrom_indstrat, change_over_time = slope, LQ_column = LQ,
+                            sector_name = sic_namefrom_indstrat_combo, change_over_time = slope, LQ_column = LQ,
                             text = 7, value_col_ismoney = F)
 
 p <- p + 
@@ -2155,10 +2212,11 @@ ch_annotated <- fuzzyjoin::regex_left_join(
 #Then just summarise
 ch_summary <- ch_annotated %>%
   filter(!is.na(sic_code)) %>% #remove any non ind strat firms
-  group_by(timepoint_numeric,localauthority_name, sector_name, sic_code) %>%
+  group_by(timepoint_numeric,localauthority_name, sic_code) %>%
   summarise(
     total_jobs = sum(jobcount, na.rm = TRUE), .groups = "drop",
     sic_namefrom_indstrat = max(SIC_name),
+    topsector_indstrat = max(sector_name),
     # SIC_5DIGIT_CODE = max(SIC_5DIGIT_CODE),
     # SIC_5DIGIT_NAME_SHORT = max(SIC_5DIGIT_NAME_SHORT),#some of these won't be right
     # SIC_2DIGIT_NAME_SHORT = max(SIC_2DIGIT_NAME_SHORT),
@@ -2169,12 +2227,47 @@ ch_summary <- ch_annotated %>%
 
 
 
+ch_summary <- ch_summary %>% 
+  mutate(
+    toplevelindstrat = case_when(
+      qg('manufactur', topsector_indstrat) ~ "ADV MANUF",
+      qg('business', topsector_indstrat) ~ "PBS",
+      qg('financ', topsector_indstrat) ~ "FIN",
+      qg('creative', topsector_indstrat) ~ "CREATIVE",
+      qg('foundation', topsector_indstrat) ~ "FOUNDATION",
+      qg('digital', topsector_indstrat) ~ "DIGITAL",
+      qg('life sci', topsector_indstrat) ~ "LIFESCI",
+      qg('defence', topsector_indstrat) ~ "DEFENCE"
+    )
+  )
+
+#And shortern other names
+ch_summary <- ch_summary %>% 
+  mutate(
+    sic_namefrom_indstrat_short = removecommonSICnameelements(ch_summary$sic_namefrom_indstrat, removemanuf = T)
+  )
+
+# table(bres_summary$toplevelindstrat)
+# table(bres_summary$sic_namefrom_indstrat_short)
+
+#Make combo
+ch_summary <- ch_summary %>% 
+  mutate(
+    sic_namefrom_indstrat_combo = paste0(toplevelindstrat,": ",sic_namefrom_indstrat_short)
+  )
+
+table(ch_summary$sic_namefrom_indstrat_combo)
+
+
+
+
+
 #Then LQs again!
 ch_summary <- ch_summary %>% 
   group_split(timepoint_numeric) %>%
   map(add_location_quotient_and_proportions,
       regionvar = localauthority_name,
-      lq_var = sic_namefrom_indstrat,
+      lq_var = sic_namefrom_indstrat_combo,
       valuevar = total_jobs) %>% 
   bind_rows()
 
@@ -2184,11 +2277,11 @@ ch_summary <- ch_summary %>%
 
 #Get rid of household own use
 ch_summary <- ch_summary %>% 
-  filter(!qg('household own|membership',sic_namefrom_indstrat))
+  filter(!qg('household own|membership',sic_namefrom_indstrat_combo))
 
 LQ_slopes <- compute_slope_or_zero(
   data = ch_summary, 
-  localauthority_name, sic_namefrom_indstrat,#slopes will be found within whatever grouping vars are added here
+  localauthority_name, sic_namefrom_indstrat_combo,#slopes will be found within whatever grouping vars are added here
   y = LQ_log, x = timepoint_numeric)
 
 
@@ -2200,7 +2293,7 @@ yeartoplot <- ch_summary %>% filter(timepoint_numeric == max(timepoint_numeric))
 yeartoplot <- yeartoplot %>% 
   left_join(
     LQ_slopes,
-    by = c('localauthority_name', 'sic_namefrom_indstrat')
+    by = c('localauthority_name', 'sic_namefrom_indstrat_combo')
   )
 
 place = 'Bradford'
@@ -2210,12 +2303,12 @@ sectorLQorder <- ch_summary %>% filter(
   timepoint_numeric == max(timepoint_numeric)#use latest data
 ) %>% 
   arrange(-LQ) %>% 
-  select(sic_namefrom_indstrat) %>% 
+  select(sic_namefrom_indstrat_combo) %>% 
   pull()
 
 
 #Turn the sector column into a factor and order by LCR's LQs
-yeartoplot$sic_namefrom_indstrat <- factor(yeartoplot$sic_namefrom_indstrat, levels = sectorLQorder, ordered = T)
+yeartoplot$sic_namefrom_indstrat_combo <- factor(yeartoplot$sic_namefrom_indstrat_combo, levels = sectorLQorder, ordered = T)
 
 #Also keep only 2 digit sectors where Bradford has more than 100 workers recorded in that sector for CH
 # morethanx <- yeartoplot %>% 
@@ -2241,8 +2334,8 @@ yeartoplot$sic_namefrom_indstrat <- factor(yeartoplot$sic_namefrom_indstrat, lev
 yeartoplot.lqfiltered <- yeartoplot %>% filter(LQ > 0 & LQ < 100, total_jobs > 99)
 
 #Drop any sectors that Bradford now doesn't have after that filter
-sectorstokeep <- yeartoplot.lqfiltered %>% filter(localauthority_name == place) %>% select(sic_namefrom_indstrat) %>% pull
-yeartoplot.lqfiltered <- yeartoplot.lqfiltered %>% filter(sic_namefrom_indstrat %in% sectorstokeep)
+sectorstokeep <- yeartoplot.lqfiltered %>% filter(localauthority_name == place) %>% select(sic_namefrom_indstrat_combo) %>% pull
+yeartoplot.lqfiltered <- yeartoplot.lqfiltered %>% filter(sic_namefrom_indstrat_combo %in% sectorstokeep)
 
 #save a copy of that to save processing time in quarto
 saveRDS(yeartoplot.lqfiltered,'local/data/companieshouse_indstrat_LQs.rds')
@@ -2250,7 +2343,7 @@ saveRDS(yeartoplot.lqfiltered,'local/data/companieshouse_indstrat_LQs.rds')
 
 
 
-p1 <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), alpha = 0.03, sector_name = sic_namefrom_indstrat, 
+p1 <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo, 
                   LQ_column = LQ, change_over_time = slope)
 
 # debugonce(addplacename_to_LQplot)
@@ -2259,7 +2352,7 @@ p1 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier =
                              # min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                              value_column = total_jobs, sector_regional_proportion = sector_regional_proportion,
                              region_name = localauthority_name,
-                             sector_name = sic_namefrom_indstrat, change_over_time = slope, LQ_column = LQ,
+                             sector_name = sic_namefrom_indstrat_combo, change_over_time = slope, LQ_column = LQ,
                              value_col_ismoney = F, text = 7)
                              # value_col_ismoney = F, text = 7, maxLQvalmultiplier = 2,useplacenameforminmaxdisplay = T, overridetextpos = 14)
 
@@ -2270,7 +2363,7 @@ p1 <- p1 +
 p1
 
 
-p2 <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), alpha = 0.03, sector_name = sic_namefrom_indstrat, 
+p2 <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo, 
                   LQ_column = LQ, change_over_time = slope)
 
 # debugonce(addplacename_to_LQplot)
@@ -2279,7 +2372,7 @@ p2 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier =
                              # min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                              value_column = total_jobs, sector_regional_proportion = sector_regional_proportion,
                              region_name = localauthority_name,
-                             sector_name = sic_namefrom_indstrat, change_over_time = slope, LQ_column = LQ,
+                             sector_name = sic_namefrom_indstrat_combo, change_over_time = slope, LQ_column = LQ,
                              value_col_ismoney = F, text = 7)
                              # value_col_ismoney = F, text = 7, maxLQvalmultiplier = 2,useplacenameforminmaxdisplay = T, overridetextpos = 14)
 

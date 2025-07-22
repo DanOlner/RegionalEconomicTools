@@ -2447,6 +2447,30 @@ reduceSICnames = function(names,level){
 
 
 
+removecommonSICnameelements = function(returnnames, removemanuf = F){
+  
+  # returnnames = enquo(returnnames)
+  # returnnames = quo_name(returnnames)
+  
+  returnnames = gsub(' and ','/',returnnames,ignore.case = T)
+  returnnames = gsub(' of | for ',': ',returnnames,ignore.case = T)
+  returnnames = gsub('anisation','',returnnames,ignore.case = T)
+  returnnames = gsub(': ','',returnnames,ignore.case = T)
+  returnnames = gsub('installation','install',returnnames,ignore.case = T)
+  returnnames = gsub('personnel employment','emp',returnnames,ignore.case = T)
+  returnnames = gsub(' support| services| supply| reproduction| equipment|eum|  (no accommodation)','',returnnames,ignore.case = T)
+  
+  if(removemanuf){
+    
+    returnnames = gsub('manufacture | manufacturing','',returnnames,ignore.case = T)
+    returnnames = gsub('manufacture|manufacturing','',returnnames,ignore.case = T)
+    
+  }
+  
+  return(returnnames)
+  
+  
+}
 
 
 
