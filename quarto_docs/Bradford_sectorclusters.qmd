@@ -75,6 +75,7 @@ All code for this data is available [here](https://github.com/DanOlner/RegionalE
 
 Despite an overall decline in the proportion of Bradford's broad manufacturing economy (in line with the most of the rest of the UK and West Yorkshire, @fig-struct), there is important production sector activity in the data.
 
+**Metals** sectors have been showing continuous GVA and jobs growth - an average of 4.1% (1.1-6.9%, @fig-growthdata_cv_andperFT) from 2015, increasing more since 2019. This covers many cutting-edge firms like Produmax (who classify themselves as 'manufacture of other fabricated metal products'). 
 
 
 
@@ -2253,6 +2254,53 @@ p <- twod_percentplot(
 
 
 ```
+
+
+### ICT
+
+```{r, fig-gvajobsict}
+
+gva.jobs.ITL3.for2dplot <- readRDS('../local/data/gvajobsfor2dplot.rds')
+
+sector <-  gva.jobs.ITL3.for2dplot$SIC07_description_shortened[qg('ict',gva.jobs.ITL3.for2dplot$SIC07_description_shortened)] %>% unique
+
+placestokeep <- gva.jobs.ITL3.for2dplot %>% 
+  filter(!is.na(jobcount_movingav)) %>% 
+  filter(DATE == max(DATE), SIC07_description_shortened == sector) %>% 
+  filter(JOBS_sector_regional_percent_movingav > 1.5) %>%#Keep only places where this sector makes up 1%+ of reg econ
+  select(Region_name) %>% 
+  distinct() %>% 
+  pull
+
+p <- twod_percentplot(
+    df = gva.jobs.ITL3.for2dplot %>% filter(SIC07_description_shortened == sector, Region_name %in% placestokeep),
+    category_var = Region_name,
+    x_var = gva_movingav,
+    y_var = jobcount_movingav,#
+    # y_var = JOBS_sector_regional_percent_movingav,#this shows structural change better - jobs have grown nominally in most sectors (but breaks GVA/job diagonal)
+    timevar = DATE,
+    label_var = `gva/job moving av`,
+    category_var_value_to_highlight = 'Bradford',
+    start_time = 2016,
+    end_time = 2022
+  )
+  
+  bradjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(jobcount_movingav) %>% pull 
+  bradpercentjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(JOBS_sector_regional_percent_movingav) %>% pull %>% round(2)
+
+  
+  p <- p + 
+    ggtitle(paste0(sector,': ', round(bradjobs/1000,1), 'K jobs in Bradford, ',bradpercentjobs,'% of tot')) +
+    xlab("GVA % change 2015/17 av to 2021/23 av") +
+    ylab("JOB COUNT % change 2015/17 av to 2021/23 av") + 
+    coord_cartesian(xlim = c(-50,130), ylim = c(-30,150))
+  
+  print(p)
+  
+
+
+```
+
 
 
 

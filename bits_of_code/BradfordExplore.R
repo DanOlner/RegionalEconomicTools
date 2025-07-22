@@ -2131,6 +2131,22 @@ bradford.2dig$plot + bradford.gvaperjob.2dig$plot
 
 
 
+
+# CHECK ON SOME SPECIFIC GVA GROWTH FOR SOME SECTORS----
+
+ggplot(
+  gvabres %>% filter(Region_name == 'Bradford', qg('metal',SIC07_description_shortened)),
+  aes(x = DATE, y = GVA)) +
+  geom_line() +
+  geom_point() +
+  geom_smooth(method = 'lm')
+
+
+
+
+
+
+
 # GVA / JOB VALUE 2D PLOTS----
 
 # Proportion plots, no?
