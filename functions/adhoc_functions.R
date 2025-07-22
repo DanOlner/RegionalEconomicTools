@@ -53,49 +53,61 @@ LQplot_BRES_groupsof5digit <- function(df_singletwodigitgrouping){
 
 #Plot repeater for Bradford QML output
 #Here: https://github.com/DanOlner/RegionalEconomicTools/blob/f91ff96d13740e6efe43d2ccb6ae7239766b9326/quarto_docs/Bradford_sectorclusters.qmd#L235
-plotprod <- function(df){
+plotprod <- function(df,vartouse){
   
-  # print(paste0('Grouping:',unique(df$sectorgrouping)))
+  vartouse = enquo(vartouse) 
   
-  #find max bradford value and use that to set y axis max
+  # print(paste0('Grouping:',unique(df$sectorgrouping))) 
+  
+  #find max bradford value and use that to set y axis max 
   #filter out any infs...
-  df <- df %>% filter(!is.infinite(job_PPM_ofUKtotal_movingav)) 
+  # df <- df %>% filter(!is.infinite(quo_name(vartouse))) 
+  df <- df %>% filter(!is.infinite(!!vartouse)) 
   
-  maxfory = max(df$job_PPM_ofUKtotal_movingav[df$Region_name == 'Bradford'])
+  # maxfory = max(df$!!vartouse[df$Region_name == 'Bradford'])
+  maxfory = df %>%
+    filter(Region_name == 'Bradford') %>% 
+    select(!!vartouse) %>%
+    filter(!!vartouse == max(!!vartouse)) %>% 
+    pull
   
+  #Multiplier for max y axis
+  maxfory <- maxfory * 1.5
+    
   # placestoadd = unique(df$Region_name[qg('Leeds|Bradford',df$Region_name)])
   placestoadd = unique(df$Region_name[qg('Leeds|Bradford|kirklees|wakef',df$Region_name)])
   
   ggplot() +
     geom_point(#Rest of UK first
       data =  df,
-      aes(x = DATE, y = job_PPM_ofUKtotal_movingav, group = Region_name),
+      aes(x = DATE, y = !!vartouse, group = Region_name),
       alpha = 0.15, size = 1) +
-    coord_cartesian(ylim = c(0,maxfory * 2)) +
+    coord_cartesian(ylim = c(0,maxfory)) +
     geom_point(#Then Leeds and Bradford
       data =  df %>% filter(Region_name %in% placestoadd),
-      aes(x = DATE, y = job_PPM_ofUKtotal_movingav, group = Region_name, colour = Region_name, shape = Region_name),
-      # aes(x = DATE, y = job_PPM_ofUKtotal_movingav, group = Region_name, colour = Region_name),
+      aes(x = DATE, y = !!vartouse, group = Region_name, colour = Region_name, shape = Region_name),
+      # aes(x = DATE, y = !!vartouse, group = Region_name, colour = Region_name),
       alpha = 0.8, size = 2) +
     scale_colour_brewer(palette = 'Set1', direction = 1, name="") +
     geom_line(#Then Leeds and Bradford
       data =  df %>% filter(Region_name %in% placestoadd),
-      aes(x = DATE, y = job_PPM_ofUKtotal_movingav, group = Region_name, colour = Region_name),
+      aes(x = DATE, y = !!vartouse, group = Region_name, colour = Region_name),
       alpha = 0.5, size = 1) +
     geom_point(#Then Leeds and Bradford
       data =  df %>% filter(Region_name == 'Bradford'),
-      aes(x = DATE, y = job_PPM_ofUKtotal_movingav, group = Region_name, colour = Region_name, shape = Region_name),
-      # aes(x = DATE, y = job_PPM_ofUKtotal_movingav, group = Region_name, colour = Region_name),
+      aes(x = DATE, y = !!vartouse, group = Region_name, colour = Region_name, shape = Region_name),
+      # aes(x = DATE, y = !!vartouse, group = Region_name, colour = Region_name),
       alpha = 1, size = 3) +
     scale_colour_brewer(palette = 'Set1', direction = 1, name="") +
     geom_line(#Then Leeds and Bradford
       data =  df %>% filter(Region_name == 'Bradford'),
-      aes(x = DATE, y = job_PPM_ofUKtotal_movingav, group = Region_name, colour = Region_name),
+      aes(x = DATE, y = !!vartouse, group = Region_name, colour = Region_name),
       alpha = 0.5, size = 1) +
     scale_colour_brewer(palette = 'Set1', direction = 1, name="") +
     scale_shape_manual(values = c(17,16,16,16), name="") +
     xlab('year') +
-    ylab('GVA/job PPM of UK economy') +
+    ylab('GVA/job (1000s)') +
+    # ylab('GVA/job PPM of UK economy') +
     facet_wrap(~SIC07_description_shortened, nrow = 1, labeller = labeller(groupwrap = label_wrap_gen(10)))
   
 }

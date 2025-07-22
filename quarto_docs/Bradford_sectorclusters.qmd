@@ -75,7 +75,12 @@ All code for this data is available [here](https://github.com/DanOlner/RegionalE
 
 Despite an overall decline in the proportion of Bradford's broad manufacturing economy (in line with the most of the rest of the UK and West Yorkshire, @fig-struct), there is important production sector activity in the data.
 
-**Metals** sectors have been showing continuous GVA and jobs growth - an average of 4.1% (1.1-6.9%, @fig-growthdata_cv_andperFT) from 2015, increasing more since 2019. This covers many cutting-edge firms like Produmax (who classify themselves as 'manufacture of other fabricated metal products'). 
+**Metals** sectors (~2.6% of Bradford jobs, @fig-productionLQs) have been showing continuous GVA and jobs growth - an average of 4.1% yearly GVA growth (1.1-6.9%, @fig-growthdata_cv_andperFT) from 2015, increasing more since 2019. This covers many cutting-edge firms like Produmax, who classify themselves as 'manufacture of other fabricated metal products'. (The 5 digit SIC jobs breakdown for fabricated metals shows this category is where the largest chunk of the fab metals jobs are in Bradford; BRES doesn't record many jobs in basic metals). 
+
+As the 2D GVA/jobs plots for metals shows (@fig-gvajobsmetals), the sector has maintained an output increase alongside its productivity - right in the centre of other places seeing productivity losses and gains.
+
+A related sector, **machinery and transport manufacture** (~2.5% of jobs in 2021-23 average), 
+
 
 
 
@@ -276,9 +281,9 @@ patchwork::wrap_plots(plots, ncol = 1)
 
 These plots use **linked regional GVA and BRES jobs data** to examine productivity, output and job changes. To make this link, sector categories have to be reduced to those in the ONS GVA data (46 categories rather than the full 88 two digit SICs).
 
-BRES does contain more detail - more on that below and in the separate [BRES 5 digit breakdown](https://danolner.github.io/RegionalEconomicTools/quarto_docs/Bradford_BRES_5digit_LQs_July2025.html){target="_blank"}.
+These are measured in GVA per full time job (GVA / jobs), using inflation-adjusted (chained volume) GVA.
 
-The plots below are measured in **GVA per job parts per million of UK economy** - equivalent to e.g. 1% being "1 in 100 parts of economy", 0.1 here is "1 in 10 millionth of whole economy". So it's again examining **relative change in output per FT worker** across all sectors.
+BRES does contain more detail - more on that below and in the separate [BRES 5 digit breakdown](https://danolner.github.io/RegionalEconomicTools/quarto_docs/Bradford_BRES_5digit_LQs_July2025.html){target="_blank"}.
 
 GVA per job as a measure needs some caution: output is also due to other productive factors, so high capital intensity sectors (power, telecoms, other ICT though not all) can appear overly productive per worker. It's more representative for service sectors where an employee's output more clearly correlates to total output, such as legal services.
 
@@ -287,10 +292,17 @@ GVA per job as a measure needs some caution: output is also due to other product
 #| fig-height: 20
 #| fig-width: 8.5
 
+#For current price version: The plots below are measured in **GVA per job parts per million of UK economy** - equivalent to e.g. 1% being "1 in 100 parts of economy", 0.1 here is "1 in 10 millionth of whole economy". So it's again examining **relative change in output per FT worker** across all sectors.
+
+
 #2015 to 2023, linked on the regional GVA bespoke SIC categories
 #Note, can use lookup if need to also sum for sections (which we can do here cos current prices)
-gvabres <- readRDS('../data/regionalGVA_plus_BRESjobcounts/regionalGVA_currentprices_BRES_FT_jobcount_bespoke2digitSIC_nONLY_MATCHING_GEOGs_2015_2023.rds') 
+
+# gvabres <- readRDS('../data/regionalGVA_plus_BRESjobcounts/regionalGVA_currentprices_BRES_FT_jobcount_bespoke2digitSIC_nONLY_MATCHING_GEOGs_2015_2023.rds') 
 #gvabres <- readRDS('data/regionalGVA_plus_BRESjobcounts/regionalGVA_currentprices_BRES_FT_jobcount_bespoke2digitSIC_nONLY_MATCHING_GEOGs_2015_2023.rds') 
+
+gvabres <- readRDS('../data/regionalGVA_plus_BRESjobcounts/regionalGVA_chainedvolume_BRES_FT_jobcount_bespoke2digitSIC_nONLY_MATCHING_GEOGs_2015_2023.rds') 
+#gvabres <- readRDS('data/regionalGVA_plus_BRESjobcounts/regionalGVA_chainedvolume_BRES_FT_jobcount_bespoke2digitSIC_nONLY_MATCHING_GEOGs_2015_2023.rds') 
 
 #Make abbreviated sector names
 shortsectornames = tibble(
@@ -431,7 +443,8 @@ gvabres <- gvabres %>% filter(!is.na(JOBCOUNT))
 gvabres <- gvabres %>%
   mutate(
     gva_proportionofUKtotal = GVA / totalUKGVA_CP,
-    job_output_propofUKtotal = gva_proportionofUKtotal / JOBCOUNT
+    job_output_propofUKtotal = gva_proportionofUKtotal / JOBCOUNT,
+    gvaperjob = GVA  / JOBCOUNT#assuming using chained volume
   )
 
 
@@ -449,6 +462,7 @@ gvabres <- gvabres %>%
   mutate(
     jobcount_movingav = rollapply(JOBCOUNT,smoothband,mean,align='center',fill=NA),
     gva_movingav = rollapply(GVA,smoothband,mean,align='center',fill=NA),
+    gvaperjob_movingav = rollapply(gvaperjob * 1000,smoothband,mean,align='center',fill=NA),
     job_output_propofUKtotal_movingav = rollapply(job_output_propofUKtotal,smoothband,mean,align='center',fill=NA),
     job_PPM_ofUKtotal_movingav = job_output_propofUKtotal_movingav * 1000000#1% is 1 part per 100. Which we find by multiplying up the prop by 100. PPM is just x * a million.
   ) %>% 
@@ -457,15 +471,29 @@ gvabres <- gvabres %>%
 
 
 #ggplot won't give control over order very well... let's add on top manually, more control
+
+#CURRENT PRICES VERSION
+# prod.data <- gvabres %>% 
+#   mutate(
+#     DATE = DATE - 2000,#Make dates 2 digit, more readable on axis
+#     SIC07_description_shortened = fct_reorder(SIC07_description_shortened, job_PPM_ofUKtotal_movingav, .desc = T),
+#     highlow = ifelse(SIC07_description_shortened %in% levels(SIC07_description_shortened)[1:23],'high','low'),#Break into two plots to stack, split by total av productivity
+#     sectorgrouping = cut_number(as.integer(SIC07_description_shortened), 8) %>% as.integer
+#   ) %>% 
+#   # filter(!qg('hous',SIC07_description))
+#   filter(!qg('hous',SIC07_description), !is.na(job_output_propofUKtotal_movingav))
+
+
+#CHAINED VOL VERSION
 prod.data <- gvabres %>% 
   mutate(
     DATE = DATE - 2000,#Make dates 2 digit, more readable on axis
-    SIC07_description_shortened = fct_reorder(SIC07_description_shortened, job_PPM_ofUKtotal_movingav, .desc = T),
+    SIC07_description_shortened = fct_reorder(SIC07_description_shortened, gvaperjob_movingav, .desc = T),
     highlow = ifelse(SIC07_description_shortened %in% levels(SIC07_description_shortened)[1:23],'high','low'),#Break into two plots to stack, split by total av productivity
     sectorgrouping = cut_number(as.integer(SIC07_description_shortened), 8) %>% as.integer
   ) %>% 
   # filter(!qg('hous',SIC07_description))
-  filter(!qg('hous',SIC07_description), !is.na(job_output_propofUKtotal_movingav))
+  filter(!qg('hous',SIC07_description), !is.na(gvaperjob_movingav))
 
 #Break into n groups, using factor order created in previous line
 # sectorgrouping = ntile(as.integer(prod.data$SIC07_description_shortened), 5)
@@ -475,9 +503,11 @@ prod.data <- gvabres %>%
 
 #Test
 # debugonce(plotprod)
-# plotprod(prod.data %>% filter(sectorgrouping==6))
+# plotprod(prod.data %>% filter(sectorgrouping==6),job_PPM_ofUKtotal_movingav)#current prices
+# plotprod(prod.data %>% filter(sectorgrouping==6),gvaperjob_movingav)#chained vol
 
-plotz <- map(prod.data %>% group_split(sectorgrouping),plotprod)
+# plotz <- map(prod.data %>% group_split(sectorgrouping),plotprod,job_PPM_ofUKtotal_movingav)
+plotz <- map(prod.data %>% group_split(sectorgrouping),plotprod,gvaperjob_movingav)
 
 patchwork::wrap_plots(plotz,ncol = 1)
 
