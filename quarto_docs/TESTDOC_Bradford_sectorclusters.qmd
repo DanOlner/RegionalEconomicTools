@@ -51,8 +51,10 @@ theme_set(theme_light())
 
 ### BRES
 
+Testing labelling with figures. Does @fig-bresindstrat work or does it need the label? Nope, just name in header.
 
-```{r, bresindstrat}
+
+```{r, fig-bresindstrat}
 #| fig-width: 9
 
 place = "Bradford"

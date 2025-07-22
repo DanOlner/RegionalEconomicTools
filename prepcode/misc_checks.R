@@ -2086,6 +2086,9 @@ p
 #And compare to UK
 #What proportion of jobs are ind strat ready? (Even without looking deeper into other sectors)
 
+#THERE'S SOME DOUBLE COUNTING TO REMOVE HERE I THINK
+#Where subsectors also have their parent sector included...
+#Not many of those but still needs fixing
 
 #For which we need 3 year smoothed BRES job counts
 brestots <- read_csv("local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_NUTS3_n_ITL321_stacked_2_Fulltimeemployees_2015_2023_SIC_5DIGIT.csv")

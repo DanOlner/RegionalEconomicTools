@@ -2263,7 +2263,7 @@ gvabres <- gvabres %>%
 
 
 #Source for full 2 digit and shortened names we're using there (in their own function)
-#Made in section COMPARE CH TO BRES----
+#Made in section COMPARE CH TO BRES
 
 #Get distinct lists for both
 gva.2digit <- gvabres %>% 

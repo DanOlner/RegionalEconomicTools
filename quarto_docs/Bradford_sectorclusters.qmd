@@ -49,13 +49,28 @@ theme_set(theme_light())
 
 # HEADLINES FROM THE DATA ANALYSIS
 
-
-
 ## Explanation of the data used
+
+Three main data sources are used here (and one other [smaller ONS source](https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions/current/labourproductivityitls1.xlsx) for the hourly productivity plots). 
+
+The main three data sources are:
+
+* [ONS regional GVA data](https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry) at ITL3 geographies, up to 2023 (the most recent available data).
+* [BRES](https://www.nomisweb.co.uk/datasets/newbres6pub) (Business Register and Employment Survey) data for job counts by sector and place, again up to 2023 for the latest.
+* Data extracted from [Companies House accounts](https://download.companieshouse.gov.uk/en_monthlyaccountsdata.html) for individual firms in the last year, between June 2024 and end of June 2025.
+
+For some analyses, **regional GVA and BRES jobs data are linked**. To do this, BRES jobs are binned into the smaller list of 44 SIC sectors that the ONS uses for the GVA data, so e.g. GVA per full time job can be examined. Where possible, the most granular sector breakdowns are used.
+
+Lastly, the UK government's Industrial Strategy [sector definition list](https://www.gov.uk/government/publications/industrial-strategy/industrial-strategy-sector-definitions-list) is used to examine how Bradford's economy meshes with that strategy.
+
+All code for this data is available [here](https://github.com/DanOlner/RegionalEconomicTools), and [here](https://github.com/DanOlner/companieshouseopen) for processing Companies House accounts.
+
 
 
 
 ## Manufacturing / production sectors
+
+
 
 
 
@@ -159,7 +174,7 @@ itl3.lon = itl_lookup %>%
 
 ## Structural /  broad sector GVA change 
 
-```{r struct}
+```{r, fig-struct}
 #| fig-width: 8
 #| fig-height: 16
 
@@ -269,7 +284,7 @@ The plots below are measured in **GVA per job parts per million of UK economy** 
 GVA per job as a measure needs some caution: output is also due to other productive factors, so high capital intensity sectors (power, telecoms, other ICT though not all) can appear overly productive per worker. It's more representative for service sectors where an employee's output more clearly correlates to total output, such as legal services.
 
 
-```{r gvajobs1}
+```{r, fig-gvajobs1}
 #| fig-height: 20
 #| fig-width: 8.5
 
@@ -493,7 +508,7 @@ Here’s an explanation of how to read these location quotient plots:
 ### Production sectors
 
 
-```{r productionLQs}
+```{r, fig-productionLQs}
 #| fig-width: 9
 #| fig-height: 10
 
@@ -669,7 +684,7 @@ makegvajoblqplots(gva.props$SIC07_description_shortened[gva.props$productionsect
 
 ### Rest of sectors
 
-```{r otherLQs}
+```{r, fig-otherLQs}
 #| fig-width: 9
 #| fig-height: 14
 
@@ -697,7 +712,7 @@ And:
 
 ### 2004 to 2013 av % change
 
-```{r plot1}
+```{r, fig-plot1}
 # startyear = 2014
 # endyear = 2023
 
@@ -852,7 +867,7 @@ ggplotly(p, tooltip = 'Region_name')
 
 ### 2014 to 2023 av % change
 
-```{r plot2}
+```{r, fig-plot2}
 startyear = 2014
 endyear = 2023
 
@@ -1014,7 +1029,7 @@ ggplotly(p, tooltip = 'Region_name')
 # COMPANIES HOUSE DATA
 
 
-```{r, chplot}
+```{r, fig-chplot}
 
 #See here for fig-responsiveness (non)issue: https://github.com/quarto-dev/quarto-cli/issues/4836
 
@@ -1142,7 +1157,7 @@ knitr::kable(firmtable, escape = FALSE, caption = "Table: Bradford count/% of fi
 
 ### Production sectors
 
-```{r CHvBRESprod}
+```{r, fig-CHvBRESprod}
 #| fig-width: 9
 
 #Produced here:
@@ -1156,7 +1171,7 @@ plotz[[1]] + plotz[[3]]
 
 ### Other sectors
 
-```{r CHvBRESother}
+```{r, fig-CHvBRESother}
 #| fig-width: 9
 
 plotz[[2]] + plotz[[4]]
@@ -1440,7 +1455,7 @@ So:
 ### Full data range: 2015 to 2023
 
 
-```{r, growthdata_cv_andperFT}
+```{r, fig-growthdata_cv_andperFT}
 #| fig-height: 12 
 #| fig-width: 9.5
 
@@ -1537,7 +1552,7 @@ bradford.2dig$plot + bradford.gvaperjob.2dig$plot
 
 
 
-```{r, growthdata_bres2dig}
+```{r, fig-growthdata_bres2dig}
 #| fig-height: 14 
 
 bres <- read_csv("../local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_NUTS3_n_ITL321_stacked_2_Fulltimeemployees_2015_2023_SIC_5DIGIT.csv")
@@ -1642,7 +1657,7 @@ bradford.bres.2dig$plot
 
 ### More recent years: 2019 to 2023
 
-```{r, growthdata_cv_andperFT_later}
+```{r, fig-growthdata_cv_andperFT_later}
 #| fig-height: 12 
 #| fig-width: 9.5
 
@@ -1739,7 +1754,7 @@ bradford.2dig$plot + bradford.gvaperjob.2dig$plot
 
 
 
-```{r, growthdata_bres2dig_later}
+```{r, fig-growthdata_bres2dig_later}
 #| fig-height: 14 
 
 bres <- read_csv("../local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_NUTS3_n_ITL321_stacked_2_Fulltimeemployees_2015_2023_SIC_5DIGIT.csv")
@@ -1858,7 +1873,7 @@ Note also: job percents for Bradford show **percent of *just* total industrial s
 
 ### BRES frontier sectors
 
-```{r, bresindstrat}
+```{r, fig-bresindstrat}
 #| fig-width: 9
 
 place = "Bradford"
@@ -1891,7 +1906,7 @@ p
 ### Companies house frontier sectors
 
 
-```{r, chindstrat}
+```{r, fig-chindstrat}
 #| fig-width: 9
 
 #Blue peter this up
@@ -1925,7 +1940,7 @@ p1
 
 ### BRES other sectors
 
-```{r, bresindstrat2}
+```{r, fig-bresindstrat2}
 #| fig-width: 9
 
 p <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), alpha = 0.1, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope)
@@ -1950,7 +1965,7 @@ p
 ### Companies House other sectors
 
 
-```{r,chindstrat2}
+```{r, fig-chindstrat2}
 #| fig-width: 9
  
 p2 <- LQ_baseplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 0), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo, 
