@@ -41,6 +41,8 @@ theme_set(theme_light())
 
 ```
 
+
+
 # INTRODUCTION
 
 
@@ -77,6 +79,8 @@ This document has [a data section ("UK INDUSTRIAL STRATEGY LINKAGE")](https://da
 
 The table below lists the IS-8 broad sector headings. In the IndStrat plots, the abbreviations for these IS-8 headings appear before the sector name. Clean energy - as mentioned above - has no SIC codes and so can't currently be matched. There are no matching defence sectors or firms in Bradford.
 
+
+
 ```{r brad_indstrattable}
 
 indstrat <- tibble(
@@ -105,6 +109,8 @@ indstrat <- tibble(
 knitr::kable(indstrat, escape = FALSE, caption = "Table: Industrial Strategy IS-8 names and abbreviations (dashes mean that sector doesn't appear for Bradford)")
 
 ```
+
+
 
 
 Also:
@@ -248,6 +254,8 @@ Despite an overall decline in the proportion of Bradford's broad manufacturing e
 * **Construction of buildings** ("Buildings" in the plots, SIC 41) is worth noting for its improving productivity (GVA growing faster than jobs but both growing, @fig-gvajobsB). The West Yorkshire pattern in @fig-gvajobs1 (panel 3) for output per full time job shows the region moving together, though Bradford is at the bottom of the sector's GVA per worker here - but it is also following the recent rise seen across the region.
 
 
+
+
 ```{r gvaperhour_dataprep}
 # ITL3 Hours % change v GVA % change on average----
 
@@ -337,9 +345,13 @@ itl3.lon = itl_lookup %>%
 
 
 
+
+
 # ONS GVA AND JOBS DATA
 
 ## Structural /  broad sector GVA change 
+
+
 
 ```{r, fig-struct}
 #| fig-width: 8
@@ -440,6 +452,8 @@ patchwork::wrap_plots(plots, ncol = 1)
 
 
 
+
+
 ## GVA per full time job over time: Bradford v other ITL3 zones for 2 digit SIC sectors
 
 These plots use **linked regional GVA and BRES jobs data** to examine productivity, output and job changes. To make this link, sector categories have to be reduced to those in the ONS GVA data (46 categories rather than the full 88 two digit SICs).
@@ -449,6 +463,8 @@ These are measured in GVA per full time job (GVA / jobs), using inflation-adjust
 BRES does contain more detail - more on that below and in the separate [BRES 5 digit breakdown](https://danolner.github.io/RegionalEconomicTools/quarto_docs/Bradford_BRES_5digit_LQs_July2025.html){target="_blank"}.
 
 GVA per job as a measure needs some caution: output is also due to other productive factors, so high capital intensity sectors (power, telecoms, other ICT though not all) can appear overly productive per worker. It's more representative for service sectors where an employee's output more clearly correlates to total output, such as legal services.
+
+
 
 
 ```{r, fig-gvajobs1}
@@ -685,6 +701,8 @@ patchwork::wrap_plots(plotz,ncol = 1)
 
 
 
+
+
 ## Location quotients for GVA and jobs in 2 digit SIC sectors: most recent and change over time
 
 These LQ plots show location quotients for linked GVA and jobs data for Bradford, overlaid on top of LQs for all other ITL3 zones, to give a sense of what the spread is across Great Britain.
@@ -701,6 +719,8 @@ Here’s an explanation of how to read these location quotient plots:
 * Per sector GVA money amounts and percent of that region’s entire economy are shown on the right.
 
 ### Production sectors
+
+
 
 
 ```{r, fig-productionLQs}
@@ -877,7 +897,11 @@ makegvajoblqplots(gva.props$SIC07_description_shortened[gva.props$productionsect
 ```
 
 
+
+
 ### Rest of sectors
+
+
 
 ```{r, fig-otherLQs}
 #| fig-width: 9
@@ -886,6 +910,8 @@ makegvajoblqplots(gva.props$SIC07_description_shortened[gva.props$productionsect
 makegvajoblqplots(gva.props$SIC07_description_shortened[gva.props$productionsector == 'other'])
 
 ```
+
+
 
 
 
@@ -906,6 +932,8 @@ And:
 
 
 ### 2004 to 2013 av % change
+
+
 
 ```{r, fig-plot1}
 # startyear = 2014
@@ -1060,7 +1088,11 @@ ggplotly(p, tooltip = 'Region_name')
 
 ```
 
+
+
 ### 2014 to 2023 av % change
+
+
 
 ```{r, fig-plot2}
 startyear = 2014
@@ -1221,7 +1253,11 @@ ggplotly(p, tooltip = 'Region_name')
 
 
 
+
+
 # COMPANIES HOUSE DATA
+
+
 
 
 ```{r, fig-chplot}
@@ -1313,7 +1349,6 @@ firmtable <- tibble(
 
 ```
 
-
 ```{r eval=F}
 firmcounts.by.2digit <- firmcount %>% 
   group_by(sizecategory,SIC_2DIGIT_NAME_SHORT) %>% 
@@ -1334,9 +1369,13 @@ ggplot(firmcounts.by.2digit, aes(y = SIC_2DIGIT_NAME_SHORT, x = percent, fill = 
 
 
 
+
+
 The next few plots use data extracted from individual firms' accounts **filed with Companies House between June 2024 and end of June 2025**. 
 
 The following table shows the count (and percentage) of firms in Bradford that filed with CH, broken down by employee count.
+
+
 
 
 ```{r bradch_summarytable}
@@ -1348,11 +1387,15 @@ knitr::kable(firmtable, escape = FALSE, caption = "Table: Bradford count/% of fi
 
 
 
+
+
 ## Comparing Companies House to BRES: location quotient plots
 
 Note: these plots use the **full 2 digit SIC list (85 sectors included here, compared to 44 in the regional GVA groupings)**. This means that some sectors are split into more than one - e.g. finance (SIC 64 to 66 in the GVA data) is split here into **three**: finance, finance auxiliaries and insurance.
 
 ### Production sectors
+
+
 
 ```{r, fig-CHvBRESprod}
 #| fig-width: 9
@@ -1366,7 +1409,11 @@ plotz[[1]] + plotz[[3]]
 
 ```
 
+
+
 ### Other sectors
+
+
 
 ```{r, fig-CHvBRESother}
 #| fig-width: 9
@@ -1378,9 +1425,13 @@ plotz[[2]] + plotz[[4]]
 
 
 
+
+
 ## From Companies House firm level data: in the last year (March 2024-March 2025), percent change in employment in firms, five West Yorkshire local authorities compared to 'core cities' (hover for place names)
 
 ### Firms with 10+ employees
+
+
 
 
 ```{r, fig-percentempfourplaces}
@@ -1432,7 +1483,11 @@ ggplotly(p, tooltip = 'Place: ')
 
 ```
 
+
+
 ###  Firms with fewer than 10 employees
+
+
 
 
 
@@ -1531,9 +1586,13 @@ ggplotly(p, tooltip = 'Place: ')
 
 
 
+
+
 ## Just for Bradford, individual firms with 10+ employees, percent employee change from last accounts (hover for firm names)
 
 **Hover over points** to identify individual Bradford firms (with 10+ employees). Each is plotted by what percentage their employee number grew between their latest accounts and a year prior.
+
+
 
 ```{r, fig-indivfirmsSY}
 #| fig-height: 10
@@ -1627,6 +1686,8 @@ ggplotly(p, tooltip = 'Firm: ')
 
 
 
+
+
 # GROWTH TRENDS IN GVA, JOBS AND GVA PER JOB
 
 This section examines **growth trends in Bradford** for **GVA and GVA per full time job (a productivity measure)** (both using the 46 sector categories available in the GVA data), as well as **growth in jobs using BRES data** (a larger list of 88 SIC 2 digit sectors).
@@ -1653,6 +1714,8 @@ So:
 
 
 ## Full data range: 2015 to 2023
+
+
 
 
 ```{r, fig-growthdata_cv_andperFT}
@@ -1748,9 +1811,6 @@ bradford.2dig$plot + bradford.gvaperjob.2dig$plot
 
 
 ```
-
-
-
 
 ```{r, fig-growthdata_bres2dig}
 #| fig-height: 14 
@@ -1855,7 +1915,11 @@ bradford.bres.2dig$plot
 
 
 
+
+
 ## More recent years: 2019 to 2023
+
+
 
 ```{r, fig-growthdata_cv_andperFT_later}
 #| fig-height: 12 
@@ -1950,9 +2014,6 @@ bradford.2dig$plot + bradford.gvaperjob.2dig$plot
 
 
 ```
-
-
-
 
 ```{r, fig-growthdata_bres2dig_later}
 #| fig-height: 14 
@@ -2060,6 +2121,8 @@ bradford.bres.2dig$plot
 
 
 
+
+
 # UK INDUSTRIAL STRATEGY LINKAGE
 
 The UK Industrial Strategy includes a [sector definition list](https://www.gov.uk/government/publications/industrial-strategy/industrial-strategy-sector-definitions-list) that lists sectors (of differing specificity / SIC code number) that the government considers part of its target sectors. As that page says, most of these SIC codes cannot capture the full range of possible firms the strategy aims to cover, and it also contains entire sections that SIC codes can't cover at all - clean energy and certain digital sectors in particular.
@@ -2078,6 +2141,8 @@ Note also: job percents for Bradford show **percent of *just* total industrial s
 ## "Frontier" SIC sectors 
 
 ### BRES frontier sectors
+
+
 
 ```{r, fig-bresindstrat}
 #| fig-width: 9
@@ -2109,7 +2174,11 @@ p
 
 ```
 
+
+
 ### Companies house frontier sectors
+
+
 
 
 ```{r, fig-chindstrat}
@@ -2142,9 +2211,13 @@ p1
 
 ```
 
+
+
 ## Other industrial strategy SIC sectors 
 
 ### BRES other sectors
+
+
 
 ```{r, fig-bresindstrat2}
 #| fig-width: 9
@@ -2168,7 +2241,11 @@ p
 
 ```
 
+
+
 ### Companies House other sectors
+
+
 
 
 ```{r, fig-chindstrat2}
@@ -2199,6 +2276,8 @@ p2
 
 
 
+
+
 # ANNEX: Closer look at jobs vs GVA percent change in selected sectors.
 
 These plots show **percent change in chained volume GVA and job count** on different axes for some selected sectors, with **Bradford's change overlaid in blue** and job count plus percent of regional economy included in title (for the most recent year). It uses a 3 year moving average to smooth out jumps.
@@ -2219,6 +2298,8 @@ Arrows in the bottom right quadrant have seen **a combination of productivity in
 
 
 ### Head offices / consultancy
+
+
 
 ```{r, fig-gvajobshoc}
 
@@ -2264,7 +2345,11 @@ p <- twod_percentplot(
 ```
 
 
+
+
 ### Architecture/Engineering/Tech testing
+
+
 
 ```{r, fig-gvajobsarcheng}
 
@@ -2312,7 +2397,11 @@ p <- twod_percentplot(
 ```
 
 
+
+
 ### Metals
+
+
 
 ```{r, fig-gvajobsmetals}
 
@@ -2359,7 +2448,11 @@ p <- twod_percentplot(
 
 ```
 
+
+
 ### Machinery/transport manufacture
+
+
 
 ```{r, fig-gvajobs_mtf}
 
@@ -2411,7 +2504,11 @@ p <- twod_percentplot(
 
 
 
+
+
 ### Textiles
+
+
 
 ```{r, fig-textiles}
 
@@ -2458,7 +2555,11 @@ p <- twod_percentplot(
 
 ```
 
+
+
 ### Other professional / sci / tech
+
+
 
 ```{r, fig-gvajobsPST}
 
@@ -2506,7 +2607,11 @@ p <- twod_percentplot(
 ```
 
 
+
+
 ### ICT
+
+
 
 ```{r, fig-gvajobsict}
 
@@ -2554,7 +2659,11 @@ p <- twod_percentplot(
 
 
 
+
+
 ### Buildings
+
+
 
 ```{r, fig-gvajobsB}
 
@@ -2602,7 +2711,11 @@ p <- twod_percentplot(
 ```
 
 
+
+
 ### Finance
+
+
 
 ```{r, fig-gvajobsFin}
 
@@ -2649,7 +2762,11 @@ p <- twod_percentplot(
 
 ```
 
+
+
 ### Real estate
+
+
 
 ```{r, fig-gvajobsrealestate}
 
@@ -2700,7 +2817,11 @@ p <- twod_percentplot(
 
 
 
+
+
 ### Office administration and business support activities
+
+
 
 ```{r, fig-gvajobsadmin}
 
@@ -2748,7 +2869,11 @@ p <- twod_percentplot(
 ```
 
 
+
+
 ### Chemicals
+
+
 
 ```{r, fig-gvajobsCh}
 
@@ -2795,7 +2920,11 @@ p <- twod_percentplot(
 
 ```
 
+
+
 ### Food manufacture
+
+
 
 ```{r, fig-gvajobsFM}
 
@@ -2843,7 +2972,11 @@ p <- twod_percentplot(
 ```
 
 
+
+
 ### Research / advertising
+
+
 
 ```{r, fig-gvajobsRA}
 
@@ -2890,7 +3023,11 @@ p <- twod_percentplot(
 
 ```
 
+
+
 ### Specialised construction
+
+
 
 ```{r, fig-gvajobsSC}
 
@@ -2938,7 +3075,11 @@ p <- twod_percentplot(
 ```
 
 
+
+
 ### Transport
+
+
 
 ```{r, fig-gvajobsTr}
 
@@ -2984,5 +3125,4 @@ p <- twod_percentplot(
 
 
 ```
-
 
