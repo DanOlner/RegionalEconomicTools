@@ -57,9 +57,9 @@ The main three data sources are:
 
 * [ONS regional GVA data](https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry) at ITL3 geographies, up to 2023 (the most recent available data).
 * [BRES](https://www.nomisweb.co.uk/datasets/newbres6pub) (Business Register and Employment Survey) data for job counts by sector and place, again up to 2023 for the latest.
-* Data extracted from [Companies House accounts](https://download.companieshouse.gov.uk/en_monthlyaccountsdata.html) for individual firms in the last year, between June 2024 and end of June 2025.
+* Data extracted from [Companies House accounts](https://download.companieshouse.gov.uk/en_monthlyaccountsdata.html) for individual firms in the last year, between June 2024 and end of June 2025. This data only contains firms with a registered address in Bradford, so it misses all firms with ownership registered elsewhere (e.g. this includes [Produmax](https://find-and-update.company-information.service.gov.uk/company/00878102), registered in Manchester). However, it can provide a highly granular and up-to-date picture of sector economies, including employment change in the last year.
 
-For some analyses, **regional GVA and BRES jobs data are linked**. To do this, BRES jobs are binned into the smaller list of 44 SIC sectors that the ONS uses for the GVA data, so e.g. GVA per full time job can be examined. Where possible, the most granular sector breakdowns are used.
+For some analyses, **regional GVA and BRES jobs data are linked**. To do this, BRES jobs are binned into the smaller list of 44 SIC groupings that the ONS uses for the GVA data, so e.g. GVA per full time job can be examined. Where possible, the most granular sector breakdowns are used.
 
 Lastly, the UK government's Industrial Strategy [sector definition list](https://www.gov.uk/government/publications/industrial-strategy/industrial-strategy-sector-definitions-list) is used to examine how Bradford's economy meshes with that strategy.
 
@@ -74,22 +74,23 @@ All code for this data is available [here](https://github.com/DanOlner/RegionalE
 
 
 
-## Manufacturing sectors
+## Manufacturing / production sectors
 
-Despite an overall decline in the proportion of Bradford's broad manufacturing economy (in line with the most of the rest of the UK and West Yorkshire, @fig-struct), there is important production sector activity in the data.
+Despite an overall decline in the proportion of Bradford's broad manufacturing economy (in line with the most of the rest of the UK and West Yorkshire, @fig-struct), there is important production sector activity to highlight.
 
-### Strongest manufacturing sectors
+### Strongest sectors
 
-* **Metals** sectors (a high LQ and ~2.6% of Bradford jobs, @fig-productionLQs) have been showing continuous GVA and jobs growth - an average of 4.1% yearly GVA growth (1.1-6.9%, @fig-growthdata_cv_andperFT) from 2015, increasing more since 2019. This covers many cutting-edge firms like Produmax, who classify themselves as 'manufacture of other fabricated metal products'. (The 5 digit SIC jobs breakdown for fabricated metals shows this category is where the largest chunk of the fab metals jobs are in Bradford; BRES doesn't record many jobs in basic metals).
-    - As the 2D GVA/jobs plots for metals shows (@fig-gvajobsmetals), the sector has maintained an output increase alongside its productivity - right in the centre of other places seeing productivity losses and gains. This mean its productivity (gva/job) hasn't actually changed much, while job and GVA amounts have both increased by more than 60% since 2015/17.
-* A related sector, **machinery and transport manufacture** (also high LQ, and ~2.5% of jobs in 2021-23 average), has been growing as a proportion of GVA and jobs in Bradford, and its GVA has been growing steadily (though GVA per job has been static, and at the lower end in West Yorkshire). Though more recent years (and Companies House data for the last year) don't show quite as strong performance. However, its productivity has increased a little - GVA output is proportionally slightly higher than jobs growth.
+* The **machinery and transport manufacture** sector (SIC 28-30, ~2.5% of jobs in 2021-23 average) has been growing in productivity since 2015/17, on a quite different upward trajectory from the rest of West Yorkshire (@fig-gvajobs1 panel 4). It has been growing as a proportion of GVA and jobs in Bradford and its GVA has been rising steadily in the 'increasing productivity' zone (fig-gvajobs_mtf) where most other places have seen productivity drops. It is now at or near the UK average sector productivity - a rare position for a Northern manufacturing sector (though Companies House data for the last year doesn't show quite as strong performance).
+    - Two thirds of these jobs are in machinery manufacturing, and every 5 digit subsector in that is increasing in concentration (only a tiny proportion in motor vehicles, according to BRES). 
+* **Metals** sectors (SIC 2 digit 13-15) has a high LQ and ~2.6% of Bradford jobs (@fig-productionLQs). It has had continuous GVA and jobs growth - an average of 4.1% yearly GVA growth (1.1-6.9%, @fig-growthdata_cv_andperFT) from 2015, increasing more since 2019. This covers many cutting-edge firms like Produmax, who classify themselves as 'manufacture of other fabricated metal products'. (The 5 digit SIC jobs breakdown for fabricated metals shows this category is where the largest chunk of the fab metals jobs are in Bradford; BRES doesn't record many jobs in basic metals).
+    - However, the metals sector has low average output per worker. As the 2D GVA/jobs plots for metals shows (@fig-gvajobsmetals), the sector has maintained an output increase alongside its productivity - right in the centre of other places seeing productivity losses and gains. This mean its productivity (gva/job) hasn't actually changed much, while job and GVA values have both increased by more than 60% since 2015/17.
 * **Textiles** continue to grow GVA and jobs concentration (GVA more than jobs, @fig-productionLQs) though the sector isn't quite 1% of total full time jobs. Companies House data, however, suggests the sector is probably larger than BRES' survey is picking up on - there are nearly 1000 jobs in apparel firms in CH (BRES finds only 20) - so it may well be more like 2% of total jobs.
-    - Historically, it has been quite high GVA per job, with all West Yorkshire authorities very close in output - but this has declined in more recent years (@fig-gvajobs1). The 2D GVA/job plot for textiles (@fig-textiles) shines some light on this. In the very few UK places where textiles are more than 1% of the economy, none have better productivity in 2021/23 than they did in 2015/17. Some (e.g. Calderdale/Kirklees) have seen jobs increase while GVA has *dropped*. Along with Blackburn, Bradford is doing relatively well on this metric - growth continues though with apparent productivity issues.
+    - Historically, it has been higher than average GVA per job for Bradford, with all West Yorkshire authorities very close in output - but this has declined since COVID (@fig-gvajobs1) and is now almost exactly average for Bradford but a little below UK average for the sector. The 2D GVA/job plot for textiles (@fig-textiles) shines some light on this. In the very few UK places where textiles are more than 1% of the economy, none have better productivity in 2021/23 than they did in 2015/17. Some (e.g. Calderdale/Kirklees) have seen jobs increase while GVA has *dropped*. Along with Blackburn, Bradford is doing relatively well on this metric - growth continues though with apparent productivity issues.
 
 
-### Notes on other manufacturing sectors
+### Notes on other manufacturing/production sectors
 
-* As Bradford's largest sector employer, **Food/beverage manufacturing** has 4% of full time employers according to BRES, and 2.5% of its GVA. Worker growth looks especially strong in the last year in the CH data: the 14 firms with 10+ employees have grown nearly 9% and 74 microfirms with fewer than 10 employees have gone from 212 to 218 employees.
+* As Bradford's largest 2-digit sector by job count, **Food/beverage manufacturing** has 3.6% of full time employers according to BRES, and 2.5% of its GVA. Worker growth looks especially strong in the last year in the Companies House data: the 14 firms with 10+ employees have grown nearly 9% (fig-percentempfourplaces) and 74 microfirms with fewer than 10 employees have gone from 212 to 281 employees (fig-percentempfourplaces_lessthan10), both higher than the rest of West Yorkshire. However, the sector overall has seen declining productivity, and Bradford's GVA per worker is at the lower end for West Yorkshire (along with Leeds - the other authorities are higher; @fig-gvajobs1). As the GVA vs jobs 2D plot for the sector shows (fig-gvajobsFM), most places have seen job increases with either GVA shrinkage or too slow GVA growth for productivity gains; Bradford's GVA growth in the sector has been static. 
 
 
 
@@ -507,7 +508,10 @@ prod.data <- gvabres %>%
 #Break into n groups, using factor order created in previous line
 # sectorgrouping = ntile(as.integer(prod.data$SIC07_description_shortened), 5)
 
-  
+#Save this for use elsewhere...
+# saveRDS(prod.data,'local/data/proddata.rds')
+
+
 #table(prod.data$sectorgroupings)
 
 #Test
@@ -1468,7 +1472,7 @@ ggplotly(p, tooltip = 'Firm: ')
 
 
 
-## GROWTH TRENDS IN GVA, JOBS AND GVA PER JOB
+# GROWTH TRENDS IN GVA, JOBS AND GVA PER JOB
 
 This section examines **growth trends in Bradford** for **GVA and GVA per full time job (a productivity measure)** (both using the 46 sector categories available in the GVA data), as well as **growth in jobs using BRES data** (a larger list of 88 SIC 2 digit sectors).
 
@@ -1493,7 +1497,7 @@ So:
 * To **compare that sector's trend with other sectors in Bradford or the same sector in other places**, use the bars in the plot. Note - these are relative: a slope could be relatively more positive than another, but the sector overall could still be shrinking. For example, ICT has been growing strongly in most places in the UK - but is growth in one place significantly stronger than others? That's what the place and sector slope comparisons try to answer.
 
 
-### Full data range: 2015 to 2023
+## Full data range: 2015 to 2023
 
 
 ```{r, fig-growthdata_cv_andperFT}
@@ -1696,7 +1700,7 @@ bradford.bres.2dig$plot
 
 
 
-### More recent years: 2019 to 2023
+## More recent years: 2019 to 2023
 
 ```{r, fig-growthdata_cv_andperFT_later}
 #| fig-height: 12 

@@ -2515,6 +2515,110 @@ for(sector in unique(gva.jobs.ITL3$SIC07_description_shortened)){
 
 
 
+# PICK OUT SOME GVA PER JOB NUMBERS----
+
+#Taken from main data doc
+prod.data <- readRDS('local/data/proddata.rds')
+
+thisyr <- prod.data %>% filter(DATE == 22) %>% 
+  mutate(displayval = paste0(Region_name,": ",gvaperjob_movingav %>% round(2)))
+
+#Bradford all sector GVA with WY
+p <- ggplot(
+  thisyr %>% filter(qg('bradford|kirklees|calderdale|leeds|wakefield',Region_name)),
+  aes(y = gvaperjob_movingav, x = SIC07_description_shortened, colour = Region_name, shape = Region_name, group = displayval)
+  ) +
+  geom_point() +
+  coord_flip()
+
+ggplotly(p, tooltip = 'displayval')
+
+
+
+#Bradford compared to its own sectors
+#Bradford weighted av
+bradav = thisyr %>% filter(qg('bradford',Region_name)) %>% 
+  summarise(avgvaperjob = weighted.mean(gvaperjob_movingav,jobcount_movingav)) %>% 
+  select(avgvaperjob) %>% pull
+
+
+p <- ggplot(
+  thisyr %>% filter(qg('bradford',Region_name)),
+  aes(y = gvaperjob_movingav, x = fct_reorder(SIC07_description_shortened,gvaperjob_movingav), colour = Region_name, shape = Region_name, group = displayval)
+) +
+  geom_point() +
+  coord_flip() +
+  geom_hline(yintercept = thisyr %>% filter(Region_name == 'Bradford', qg('head office', SIC07_description_shortened)) %>% 
+               select(gvaperjob_movingav)%>%pull, 
+             colour = 'green') +
+  geom_hline(yintercept = bradav, colour = 'blue')
+
+ggplotly(p, tooltip = 'displayval')
+
+
+
+#One sector in national context
+thisyr.1sec <- thisyr %>%
+  filter(qg('head office', SIC07_description_shortened))
+
+natav <- thisyr.1sec %>% 
+  filter(!is.infinite(gvaperjob_movingav)) %>% 
+  summarise(avgvaperjob = weighted.mean(gvaperjob_movingav,jobcount_movingav, na.rm = T)) %>% 
+  select(avgvaperjob) %>% pull
+
+p <- ggplot(
+  thisyr.1sec,
+  aes(y = gvaperjob_movingav, x = fct_reorder(Region_name,gvaperjob_movingav), group = displayval)
+) +
+  geom_point() +
+  coord_flip() +
+  geom_hline(yintercept = thisyr.1sec %>% filter(Region_name == 'Bradford') %>% 
+               select(gvaperjob_movingav)%>%pull, 
+             colour = 'green') +
+  geom_hline(yintercept = natav, colour = 'blue')
+
+ggplotly(p, tooltip = 'displayval')
+
+
+
+
+
+#And density pos for WY and for rest of UK
+# onesector <- thisyr %>% filter(qg('head office', SIC07_description_shortened))
+#Weighted by job numbers...
+wy_overallav <- thisyr %>% filter(qg('bradford|kirklees|calderdale|leeds|wakefield',Region_name)) %>% 
+  summarise(avgvaperjob = weighted.mean(gvaperjob_movingav,jobcount_movingav)) %>% 
+  select(avgvaperjob) %>% pull
+                                    
+
+#WY
+ggplot(
+  thisyr %>% filter(qg('bradford|kirklees|calderdale|leeds|wakefield',Region_name)),
+  aes(x = gvaperjob_movingav)
+) +
+  geom_density() +
+  geom_vline(xintercept = thisyr %>%
+               filter(Region_name == 'Bradford', qg('head office', SIC07_description_shortened))
+             %>% select(gvaperjob_movingav) %>%
+               pull) +
+  geom_vline(xintercept = wy_overallav, colour = 'blue')
+  
+#Rest of UK
+ggplot(
+  thisyr,
+  aes(x = gvaperjob_movingav)
+) +
+  geom_density() +
+  coord_cartesian(xlim = c(0,200)) +
+  geom_vline(xintercept = thisyr %>%
+               filter(Region_name == 'Bradford', qg('head office', SIC07_description_shortened))
+             %>% select(gvaperjob_movingav) %>%
+               pull) +
+  geom_vline(xintercept = wy_overallav, colour = 'blue')
+
+
+
+
 
 
 
