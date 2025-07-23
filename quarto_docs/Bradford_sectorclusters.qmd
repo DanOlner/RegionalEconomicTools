@@ -63,7 +63,7 @@ For some analyses, **regional GVA and BRES jobs data are linked**. To do this, B
 
 Lastly, the UK government's Industrial Strategy [sector definition list](https://www.gov.uk/government/publications/industrial-strategy/industrial-strategy-sector-definitions-list) is used to examine how Bradford's economy meshes with that strategy.
 
-All code for this data is available [here](https://github.com/DanOlner/RegionalEconomicTools), and [here](https://github.com/DanOlner/companieshouseopen) for processing Companies House accounts.
+All code for this analysis is available [here](https://github.com/DanOlner/RegionalEconomicTools), and [here](https://github.com/DanOlner/companieshouseopen) for processing Companies House accounts.
 
 
 
@@ -71,6 +71,25 @@ All code for this data is available [here](https://github.com/DanOlner/RegionalE
 
 ## Service sectors
 
+### Strongest service sectors
+
+* The **head offices and management consultancy** sector (SIC 70, 2.3% of FT jobs, 2.7% of GVA; @fig-otherLQs) jumps out in several of the plots below (looking at [5 digit job counts](https://danolner.github.io/RegionalEconomicTools/quarto_docs/Bradford_BRES_5digit_LQs_July2025.html) for this sector, this is mostly 'head office activities' in Bradford). While not a very productivity sector overall, it has the strongest GVA and jobs growth slopes of any sector, averaging 15% GVA and 16.7% GVA per FT job growth from 2015 to 2023 (@fig-growthdata_cv_andperFT), statistically separable from most other places, and becoming even stronger in more recent years (@fig-growthdata_cv_andperFT_later). Plotting its GVA percent change (2015/17 to 2021/23 averages) against the same for jobs (@fig-gvajobshoc) shows (in the lighter diagonal corner) how its productivity gains have come from GVA growth mostly, but including a jobs increases, and that Bradford's trajectory has been one of the strongest, percentage-wise. @fig-gvajobs1 (last panel) shows output per worker for the sector has been historically low everywhere, but Bradford has seen a large jump in trend since COVID, and it is now some way above the average for other ITL3 zones in the data (50K per FT versus 36).
+    - Location quotients for the sector show a contrast (@fig-otherLQs): GVA continuing to increase its concentration, but more recently Bradford's jobs in this sector being less concentrated in Bradford than the GB average (though the jobs LQ has hovered between more and less over time). The last year's Companies House (CH) data, though, sees the sector growing its job count more than any other in Bradford, and more than other West Yorkshire authorities for firms with 10+ employees (@fig-percentempfourplaces) - only a small number of firms in CH (8 showing a 14.2% employee increase overall) but indicative of sector growth.
+* **Finance** should possibly be at the top of this list, as it is 5.4% of Bradford's economy and 3.7% of its full time workforce (4900 jobs in BRES; @fig-otherLQs). However, it doesn't stand out in comparison to other Bradford sectors or the rest of GB. For example, in its 2D GVA vs jobs percent change plot (@fig-gvajobsFin), while its productivity has risen, it's only a little - though note, it is at least in the more positive half in that plot, compared to many other places with productivity drops (in the grey top left diagonal).
+    - The 'finance' SIC category in the GVA data covers SICs 64 to 66 (finance, auxiliaries and insurance) - looking deeper into the BRES 2 and 5 digit lists, building societies are the largest job chunk (1200 / 0.85%) and have been concentrated in Bradford (near the top of UK concentration) for the full data time period. There are actually more jobs in the 'banks' category (2400, 1,8%) but that is only a little above the GB average. Financial auxiliary jobs have been shrinking in number, and statistically more than most other places (@fig-growthdata_bres2dig) and insurance is a very small number of jobs.
+    - Companies House data also shows strong jobs growth in the last year (only Wakefield ahead in WY) - 14 firms with 10+ employees going from 1434 to 1558 employees (an 8.65% increase, @fig-percentempfourplaces). (CH data also shows over 300 "fewer than 10 employees") firms / lone traders, @fig-percentempfourplaces_lessthan10).
+* **Legal and accounting** is a stand-out related sector in the PBS (Professional and Business Services) category (average 3.2% of jobs in 2021-23, 1.8% of total).  With historically very high output per FT worker in Bradford (@fig-gvajobs1 panel 5), it has dropped more recently but is still very high - 93.5K per FT versus 78.4K average for other ITL3 zones.
+    - The sector has grown jobs only modestly over the data time period, but it started from a high GVA and jobs baseline. Digging into the 5 digit SICs for the sector, 'accounting/auditing' (1150 jobs in latest BRES year) has been growing its job concentration strongly - still below average GB concentration, but heading higher and very high output. BRES records 833 workers in 'solicitors', but the trajectory is not as strong as accounting. 
+    - Companies House data for the last year shows growth in "fewer than 10 employee" firms of 7.4% (now up to 670 employees), though 10+ employee firms have been fairly static.
+    
+
+
+
+### Notes on other service sectors
+
+* **Utilities and power** (5.7% of Bradford's GVA, 2500 jobs in BRES) are tricky sectors to analyse. While the sector appears highly productive in Bradford (187K per FT job versus 138K GB average), differences in this sector largely come down to the capital intensity of the sector. There can be innovative frontier firms in these SIC codes, but the fact that very few firms in these sectors appear in the Companies House data suggests this sector is largely external utilities in the area, and could be difficult to affect.
+* **Research / advertising**, while apparently a high productivity sector, is fewer than 300 jobs, and this SIC misses other places where important research activity takes place.
+* **Other professional, scientific and technical activities** ("Other PSTech", so any other apart from head offices, consultancy, legal, engineering - see the [BRES job treemap for 'professional/sci/techn'](https://danolner.github.io/RegionalEconomicTools/miscdocs/WYLAs_BRES_treemap.html)) appears productive, but is only a very small number of jobs. Bradford has been following the same trajectory as West Yorkshire, output per worker growing, and this is bucking the national trend where in places with more than 1% GVA in this sector, jobs have grown but productivity dropped. But it's a very small sector.
 
 
 
@@ -80,7 +99,7 @@ Despite an overall decline in the proportion of Bradford's broad manufacturing e
 
 ### Strongest sectors
 
-* The **machinery and transport manufacture** sector (SIC 28-30, ~2.5% of jobs in 2021-23 average) has been growing in productivity since 2015/17, on a quite different upward trajectory from the rest of West Yorkshire (@fig-gvajobs1 panel 4). It has been growing as a proportion of GVA and jobs in Bradford and its GVA has been rising steadily in the 'increasing productivity' zone (fig-gvajobs_mtf) where most other places have seen productivity drops. It is now at or near the UK average sector productivity - a rare position for a Northern manufacturing sector (though Companies House data for the last year doesn't show quite as strong performance).
+* The **machinery and transport manufacture** sector (SIC 28-30, ~2.5% of jobs in 2021-23 average) has been growing in productivity since 2015/17, on a quite different upward trajectory from the rest of West Yorkshire (@fig-gvajobs1 panel 4). It has been growing as a proportion of GVA and jobs in Bradford and its GVA has been rising steadily in the 'increasing productivity' zone (@fig-gvajobs_mtf) where most other places have seen productivity drops. It is now at or near the UK average sector productivity - a rare position for a Northern manufacturing sector (though Companies House data for the last year doesn't show quite as strong performance).
     - Two thirds of these jobs are in machinery manufacturing, and every 5 digit subsector in that is increasing in concentration (only a tiny proportion in motor vehicles, according to BRES). 
 * **Metals** sectors (SIC 2 digit 13-15) has a high LQ and ~2.6% of Bradford jobs (@fig-productionLQs). It has had continuous GVA and jobs growth - an average of 4.1% yearly GVA growth (1.1-6.9%, @fig-growthdata_cv_andperFT) from 2015, increasing more since 2019. This covers many cutting-edge firms like Produmax, who classify themselves as 'manufacture of other fabricated metal products'. (The 5 digit SIC jobs breakdown for fabricated metals shows this category is where the largest chunk of the fab metals jobs are in Bradford; BRES doesn't record many jobs in basic metals).
     - However, the metals sector has low average output per worker. As the 2D GVA/jobs plots for metals shows (@fig-gvajobsmetals), the sector has maintained an output increase alongside its productivity - right in the centre of other places seeing productivity losses and gains. This mean its productivity (gva/job) hasn't actually changed much, while job and GVA values have both increased by more than 60% since 2015/17.
@@ -90,8 +109,10 @@ Despite an overall decline in the proportion of Bradford's broad manufacturing e
 
 ### Notes on other manufacturing/production sectors
 
-* As Bradford's largest 2-digit sector by job count, **Food/beverage manufacturing** has 3.6% of full time employers according to BRES, and 2.5% of its GVA. Worker growth looks especially strong in the last year in the Companies House data: the 14 firms with 10+ employees have grown nearly 9% (fig-percentempfourplaces) and 74 microfirms with fewer than 10 employees have gone from 212 to 281 employees (fig-percentempfourplaces_lessthan10), both higher than the rest of West Yorkshire. However, the sector overall has seen declining productivity, and Bradford's GVA per worker is at the lower end for West Yorkshire (along with Leeds - the other authorities are higher; @fig-gvajobs1). As the GVA vs jobs 2D plot for the sector shows (fig-gvajobsFM), most places have seen job increases with either GVA shrinkage or too slow GVA growth for productivity gains; Bradford's GVA growth in the sector has been static. 
+* As Bradford's largest 2-digit sector by job count, **Food/beverage manufacturing** has 3.6% of full time employers according to BRES, and 2.5% of its GVA. Worker growth looks especially strong in the last year in the Companies House data: the 14 firms with 10+ employees have grown nearly 9% (@fig-percentempfourplaces) and 74 microfirms with fewer than 10 employees have gone from 212 to 281 employees (@fig-percentempfourplaces_lessthan10), both higher than the rest of West Yorkshire. However, the sector overall has seen declining productivity, and Bradford's GVA per worker is at the lower end for West Yorkshire (along with Leeds - the other authorities are higher; @fig-gvajobs1). As the GVA vs jobs 2D plot for the sector shows (@fig-gvajobsFM), most places have seen job increases with either GVA shrinkage or too slow GVA growth for productivity gains; Bradford's GVA growth in the sector has been static. 
+Buildings
 
+spec constr
 
 
 
@@ -1197,6 +1218,8 @@ knitr::kable(firmtable, escape = FALSE, caption = "Table: Bradford count/% of fi
 
 ## Comparing Companies House to BRES: location quotient plots
 
+Note: these plots use the **full 2 digit SIC list (85 sectors included here, compared to 44 in the regional GVA groupings)**. This means that some sectors are split into more than one - e.g. finance (SIC 64 to 66 in the GVA data) is split here into **three**: finance, finance auxiliaries and insurance.
+
 ### Production sectors
 
 ```{r, fig-CHvBRESprod}
@@ -1378,7 +1401,7 @@ ggplotly(p, tooltip = 'Place: ')
 
 ## Just for Bradford, individual firms with 10+ employees, percent employee change from last accounts (hover for firm names)
 
-This section is included to be able to identify individual firms (with 10+ employees) by hovering over the points. Each is plotted by what percentage their employee number grew between their latest accounts and a year prior.
+**Hover over points** to identify individual Bradford firms (with 10+ employees). Each is plotted by what percentage their employee number grew between their latest accounts and a year prior.
 
 ```{r, fig-indivfirmsSY}
 #| fig-height: 10
@@ -2190,6 +2213,9 @@ p <- twod_percentplot(
   bradjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(jobcount_movingav) %>% pull 
   bradpercentjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(JOBS_sector_regional_percent_movingav) %>% pull %>% round(2)
 
+  #Check... 
+  # gvabres %>% filter(Region_name == "Bradford", SIC07_description_shortened == sector, DATE %in% c(2021:2023)) %>% View
+  
   
   p <- p + 
     ggtitle(paste0(sector,': ', round(bradjobs/1000,1), 'K jobs in Bradford, ',bradpercentjobs,'% of tot')) +
@@ -2394,6 +2420,58 @@ p <- twod_percentplot(
 
 
 ```
+
+
+### Finance
+
+```{r, fig-gvajobsFin}
+
+sector <-  gva.jobs.ITL3.for2dplot$SIC07_description_shortened[qg('finance',gva.jobs.ITL3.for2dplot$SIC07_description_shortened)] %>% unique
+
+placestokeep <- gva.jobs.ITL3.for2dplot %>% 
+  filter(!is.na(jobcount_movingav)) %>% 
+  filter(DATE == max(DATE), SIC07_description_shortened == sector) %>% 
+  filter(JOBS_sector_regional_percent_movingav > 1.5) %>%#Keep only places where this sector makes up 1%+ of reg econ
+  select(Region_name) %>% 
+  distinct() %>% 
+  pull
+
+#Always plot Bradford! Add in if not there
+if(!"Bradford" %in% placestokeep) placestokeep = c(placestokeep,"Bradford")
+
+
+p <- twod_percentplot(
+    df = gva.jobs.ITL3.for2dplot %>% filter(SIC07_description_shortened == sector, Region_name %in% placestokeep),
+    category_var = Region_name,
+    x_var = gva_movingav,
+    y_var = jobcount_movingav,#
+    # y_var = JOBS_sector_regional_percent_movingav,#this shows structural change better - jobs have grown nominally in most sectors (but breaks GVA/job diagonal)
+    timevar = DATE,
+    label_var = `gva/job moving av`,
+    category_var_value_to_highlight = 'Bradford',
+    start_time = 2016,
+    end_time = 2022
+  )
+  
+  bradjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(jobcount_movingav) %>% pull 
+  bradpercentjobs <- gva.jobs.ITL3.for2dplot %>% filter(!is.na(jobcount_movingav), Region_name == "Bradford", SIC07_description_shortened == sector, DATE == 2022) %>% select(JOBS_sector_regional_percent_movingav) %>% pull %>% round(2)
+
+  
+  p <- p + 
+    ggtitle(paste0(sector,': ', round(bradjobs/1000,1), 'K jobs in Bradford, ',bradpercentjobs,'% of tot')) +
+    xlab("GVA % change 2015/17 av to 2021/23 av") +
+    ylab("JOB COUNT % change 2015/17 av to 2021/23 av") 
+    # coord_cartesian(xlim = c(-50,130), ylim = c(-30,100))
+  
+  print(p)
+  
+
+
+```
+
+
+
+
 
 ### Chemicals
 

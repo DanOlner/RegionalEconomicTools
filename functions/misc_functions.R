@@ -1656,7 +1656,7 @@ reduceSICnames = function(names,level){
       "Financial auxiliaries",
       "Real estate",
       "Legal and accounting",
-      "Management consultancy",
+      "Head office/consults",
       "Engineering and testing",
       "Scientific R&D",
       "Advertising and research",
