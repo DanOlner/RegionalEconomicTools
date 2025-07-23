@@ -2236,8 +2236,8 @@ p <- twod_generictimeplot_multipletimepoints(
   df = gva.jobs.ITL3 %>% filter(
     # qg('sheffield',Region_name),
     qg('bradford',Region_name),
-    # productionsector == 'production'
-    productionsector != 'production'
+    productionsector == 'production'
+    # productionsector != 'production'
     # !qg('agri|constr',SIC07_description),
     # !qg('agri|constr',SIC07_description),
     # jobcount_movingav > 2500
@@ -2260,8 +2260,18 @@ p + theme(aspect.ratio=1) +
   ylab(paste0("Job count FT (",smoothband," year moving average)"))
 
 
+#Add non ggrepel labels for plotly
+# p <- p + 
+#   geom_text(
+#     data = 
+#     label=SIC07_description_shortened, 
+#     nudge_x = 0.25, nudge_y = 0.25, 
+#     check_overlap = T
+#   )
+
 ggplotly(p)
 
+p + coord_cartesian(xlim = c(0,300),ylim = c(0,5000))
 
 
 # X-REF GVA 2 DIGIT SHORTENED NAMES WITH FULL 2 DIGIT LIST OF SHORTENED NAMES----
@@ -2538,6 +2548,12 @@ ggplotly(p, tooltip = 'displayval')
 sector = thisyr %>% select(SIC07_description_shortened) %>% filter(qg('finance',SIC07_description_shortened)) %>% pull %>% as.character %>% unique
 sector = thisyr %>% select(SIC07_description_shortened) %>% filter(qg('utilities',SIC07_description_shortened)) %>% pull %>% as.character %>% unique
 sector = thisyr %>% select(SIC07_description_shortened) %>% filter(qg('legal',SIC07_description_shortened)) %>% pull %>% as.character %>% unique
+sector = thisyr %>% select(SIC07_description_shortened) %>% filter(qg('arch/eng',SIC07_description_shortened)) %>% pull %>% as.character %>% unique
+sector = thisyr %>% select(SIC07_description_shortened) %>% filter(qg('food manuf',SIC07_description_shortened)) %>% pull %>% as.character %>% unique
+sector = thisyr %>% select(SIC07_description_shortened) %>% filter(qg('arts/ent',SIC07_description_shortened)) %>% pull %>% as.character %>% unique
+sector = thisyr %>% select(SIC07_description_shortened) %>% filter(qg('chemicals',SIC07_description_shortened)) %>% pull %>% as.character %>% unique
+sector = thisyr %>% select(SIC07_description_shortened) %>% filter(qg('real est',SIC07_description_shortened)) %>% pull %>% as.character %>% unique
+sector = "Admin"
 
 
 #Bradford compared to its own sectors
@@ -2553,7 +2569,7 @@ p <- ggplot(
 ) +
   geom_point() +
   coord_flip() +
-  geom_hline(yintercept = thisyr %>% filter(Region_name == 'Bradford', qg(sector, SIC07_description_shortened)) %>% 
+  geom_hline(yintercept = thisyr %>% filter(Region_name == 'Bradford', SIC07_description_shortened == sector) %>% 
                select(gvaperjob_movingav)%>%pull, 
              colour = 'green') +
   geom_hline(yintercept = bradav, colour = 'blue')
@@ -2564,7 +2580,7 @@ ggplotly(p, tooltip = 'displayval')
 
 #One sector in national context
 thisyr.1sec <- thisyr %>%
-  filter(qg(sector, SIC07_description_shortened))
+  filter(SIC07_description_shortened == sector)
 
 natav <- thisyr.1sec %>% 
   filter(!is.infinite(gvaperjob_movingav)) %>% 
@@ -2581,6 +2597,8 @@ p <- ggplot(
                select(gvaperjob_movingav)%>%pull, 
              colour = 'green') +
   geom_hline(yintercept = natav, colour = 'blue')
+
+# p <- p +coord_cartesian(ylim = c(0,200))
 
 ggplotly(p, tooltip = 'displayval')
 
