@@ -1886,7 +1886,7 @@
     "href": "SYMCA_YPERN_July2025.html#location-quotients-a-go-go",
     "title": "SYMCA / Y-PERN July 2025",
     "section": "Location quotients a-go-go",
-    "text": "Location quotients a-go-go\n\nInteractive here. bit.ly/lqecondash\nWihle that’s loading…\n\nLQs: a nice way to summarise where sectors are relative to the rest of the UK\nLQ &gt; 1 = sector more concentrated in a place than in the UK as whole\nE.g. if South Yorkshire fab metals manufacture is 10% of our economy and that sector is 5% of the UK’s as a whole, its LQ = 2.\n(LQ &lt; 1 = opposite)"
+    "text": "Location quotients a-go-go\n\nInteractive here or bit.ly/lqecondash\nWhile that’s loading…\nLQs: a nice way to summarise where sectors are relative to the rest of the UK\nLQ &gt; 1 = sector more concentrated in a place than in the UK as whole\nE.g. if South Yorkshire fab metals manufacture is 10% of our economy and that sector is 5% of the UK’s as a whole, its LQ = 2.\n(LQ &lt; 1 = opposite)"
   },
   {
     "objectID": "SYMCA_YPERN_July2025.html",
@@ -1907,6 +1907,62 @@
     "href": "SYMCA_YPERN_July2025.html#ch-1-hexmap-of-most-common-broad-sector",
     "title": "SYMCA / Y-PERN July 2025",
     "section": "CH 1: hexmap of most common broad sector",
-    "text": "CH 1: hexmap of most common broad sector\n\n5000m hex, 50+ employees min per firm - link!\nHigher res for zooming in - 1000m and min 10 employees per firm. Less informative of GB econ structure?"
+    "text": "CH 1: hexmap of most common broad sector\n\n5000m hex, 50+ employees min per firm - link!\nManufacturing doughnut and Southern Professional/sci/tech belt\nHigher res for zooming in - 1000m and min 10 employees per firm. Less informative of GB econ structure?"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#ons-hourly-productivity-data-for-2023-first-time-we-get-sy-4-places-separately-in-gva-data",
+    "href": "SYMCA_YPERN_July2025.html#ons-hourly-productivity-data-for-2023-first-time-we-get-sy-4-places-separately-in-gva-data",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "ONS hourly productivity data for 2023: first time we get SY 4 places separately in GVA data",
+    "text": "ONS hourly productivity data for 2023: first time we get SY 4 places separately in GVA data\n\nITL3 zones in 2025 used for latest 2023 data - we get all four places separated now\nCan see slightly different productivity story for Rotherham vs Doncaster\nLink"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#ch2-south-yorkshire-dashboard",
+    "href": "SYMCA_YPERN_July2025.html#ch2-south-yorkshire-dashboard",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "CH2: South Yorkshire dashboard",
+    "text": "CH2: South Yorkshire dashboard\n\nLink and also bit.ly/sy_ch"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#ch3-percent-change-in-firm-employee-counts-by-sector-west-yorkshire-example",
+    "href": "SYMCA_YPERN_July2025.html#ch3-percent-change-in-firm-employee-counts-by-sector-west-yorkshire-example",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "CH3: Percent change in firm employee counts by sector (West Yorkshire example!)",
+    "text": "CH3: Percent change in firm employee counts by sector (West Yorkshire example!)\n\nLink"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#use-all-the-data-where-possible",
+    "href": "SYMCA_YPERN_July2025.html#use-all-the-data-where-possible",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "Use all the data where possible!",
+    "text": "Use all the data where possible!\n\nBy which I mean:\nA big part of the ‘so what’ of any data analysis is “where does this place sit nationally?”\nSo if poss, always analyse national-level data and put a place in context\nWith open methods / code, this is usually just as easy as not doing it\nSomething e.g. fingertips data already does well"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#growth-what-grew-more-than-where",
+    "href": "SYMCA_YPERN_July2025.html#growth-what-grew-more-than-where",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "Growth! What grew more than where?",
+    "text": "Growth! What grew more than where?\n\nInflation-adjusted (chained volume) GVA for this one. Will make proper statisticians have kittens I think, but…\nAnd cramming as much as possible into a single image!"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#growth-what-grew-more-than-where-1",
+    "href": "SYMCA_YPERN_July2025.html#growth-what-grew-more-than-where-1",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "Growth! What grew more than where?",
+    "text": "Growth! What grew more than where?"
+  },
+  {
+    "objectID": "quarto_docs/Sheffield_2D_gvajobs_percentchangeplots_July2025.html",
+    "href": "quarto_docs/Sheffield_2D_gvajobs_percentchangeplots_July2025.html",
+    "title": "Sheffield: GVA vs jobs 2D percent change plots",
+    "section": "",
+    "text": "These plots show percent change in chained volume GVA and job count on different axes, with Sheffield’s change overlaid in blue and job count plus percent of regional economy included in title (for the most recent year). It uses a 3 year moving average to smooth out jumps.\nOnly places where a sector makes up 1.5% or more of the economy are included - except for Sheffield, which is included in all plots.\nThis is done for the shorter 2 digit SIC categories in the regional GVA data, joined to BRES jobs data.\nAny arrows in the top left grey diagonal section will have seen productivity drops (measured as GVA per FT job) over that time. In the bottom left diagonal, productivity went up.\nArrows in the bottom right quadrant have seen a combination of productivity increases with job decreases.\nNOTE: All sectors are included even if they’re very small proportions of Sheffield’s economy - so percent changes could appear large for very tiny sectors. Look at the job count in the title to check. Including them all for completeness."
+  },
+  {
+    "objectID": "quarto_docs/Sheffield_2D_gvajobs_percentchangeplots_July2025.html#gva-chained-volume-vs-jobs-percent-change-plots-sic-2-digit-sectors",
+    "href": "quarto_docs/Sheffield_2D_gvajobs_percentchangeplots_July2025.html#gva-chained-volume-vs-jobs-percent-change-plots-sic-2-digit-sectors",
+    "title": "Sheffield: GVA vs jobs 2D percent change plots",
+    "section": "",
+    "text": "These plots show percent change in chained volume GVA and job count on different axes, with Sheffield’s change overlaid in blue and job count plus percent of regional economy included in title (for the most recent year). It uses a 3 year moving average to smooth out jumps.\nOnly places where a sector makes up 1.5% or more of the economy are included - except for Sheffield, which is included in all plots.\nThis is done for the shorter 2 digit SIC categories in the regional GVA data, joined to BRES jobs data.\nAny arrows in the top left grey diagonal section will have seen productivity drops (measured as GVA per FT job) over that time. In the bottom left diagonal, productivity went up.\nArrows in the bottom right quadrant have seen a combination of productivity increases with job decreases.\nNOTE: All sectors are included even if they’re very small proportions of Sheffield’s economy - so percent changes could appear large for very tiny sectors. Look at the job count in the title to check. Including them all for completeness."
   }
 ]

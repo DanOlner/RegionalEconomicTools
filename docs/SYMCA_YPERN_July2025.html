@@ -339,7 +339,7 @@
 </section>
 <section id="slides" class="slide level2">
 <h2>Slides!</h2>
-<p>They’re online here if you want quick access to the links: <a href="https://bit.ly/ypernsymca">bit.ly/ypernsymca</a></p>
+<p>They’re online here if you want quick access to the links: <a href="https://bit.ly/ypernsymca" target="_blank">bit.ly/ypernsymca</a></p>
 </section>
 <section id="y-pern-yorkshire-humber-policy-exchange-and-research-network" class="slide level2">
 <h2>Y-PERN: “Yorkshire &amp; Humber Policy Exchange and Research Network”</h2>
@@ -353,7 +353,7 @@
 <li>Research England funded</li>
 <li>Aim: to <strong>experiment</strong> with ways of strengthening glue between Y&amp;H universities, regional authorities and communities</li>
 <li>So still open question - what’s worked, what hasn’t??</li>
-<li>Diverse range of things happened/happening across the region - see <a href="https://y-pern.org.uk/">y-pern.org.uk</a></li>
+<li>Diverse range of things happened/happening across the region - see <a href="https://y-pern.org.uk/" target="_blank">y-pern.org.uk</a></li>
 </ul>
 </section>
 <section id="south-yorkshire" class="slide level2">
@@ -395,6 +395,16 @@
 </ul></li>
 <li>Will come back to this in discussion: ideal vs reality?</li>
 </ul>
+</section>
+<section id="use-all-the-data-where-possible" class="slide level2">
+<h2>Use all the data where possible!</h2>
+<ul>
+<li>By which I mean:</li>
+<li>A big part of the ‘so what’ of any data analysis is “where does this place sit nationally?”</li>
+<li>So if poss, always <strong>analyse national-level data and put a place in context</strong></li>
+<li>With open methods / code, this is usually just as easy as not doing it</li>
+<li>Something e.g.&nbsp;<a href="https://fingertips.phe.org.uk/" target="_blank">fingertips data</a> already does well</li>
+</ul>
 </section></section>
 <section>
 <section id="data-and-plots-and-stuff" class="title-slide slide level1 center">
@@ -425,15 +435,26 @@
 <section id="location-quotients-a-go-go" class="slide level2">
 <h2>Location quotients a-go-go</h2>
 <ul>
-<li>Interactive <a href="https://danolner.shinyapps.io/EconDataDashboard/">here</a>. <a href="https://bit.ly/lqecondash">bit.ly/lqecondash</a></li>
-<li>Wihle that’s loading…
-<ul>
+<li>Interactive <a href="https://danolner.shinyapps.io/EconDataDashboard/" target="_blank">here</a> or <a href="https://bit.ly/lqecondash" target="_blank">bit.ly/lqecondash</a></li>
+<li>While that’s loading…</li>
 <li>LQs: a nice way to summarise where sectors are relative to the rest of the UK</li>
 <li>LQ &gt; 1 = sector more concentrated in a place than in the UK as whole</li>
 <li>E.g. if South Yorkshire fab metals manufacture is 10% of our economy and that sector is 5% of the UK’s as a whole, its LQ = 2.</li>
 <li>(LQ &lt; 1 = opposite)</li>
-</ul></li>
 </ul>
+</section>
+<section id="growth-what-grew-more-than-where" class="slide level2">
+<h2>Growth! What grew more than where?</h2>
+<ul>
+<li>Inflation-adjusted (chained volume) GVA for this one. Will make proper statisticians have kittens I think, but…</li>
+<li>And cramming as much as possible into a single image!</li>
+</ul>
+</section>
+<section id="growth-what-grew-more-than-where-1" class="slide level2">
+<h2>Growth! What grew more than where?</h2>
+<div class="center">
+<p><img data-src="miscimages/symcaypern/ICT_matrix.png"></p>
+</div>
 </section>
 <section id="business-register-and-employment-survey-bres" class="slide level2">
 <h2>Business Register and Employment Survey (BRES)</h2>
@@ -444,10 +465,18 @@
 <li><a href="https://danolner.github.io/RegionalEconomicTools/miscdocs/SYLAs_CompaniesHouse2025_treemap.html" target="_blank">Interactive</a>: job counts at different sector levels for latest year in South Yorkshire. <a href="https://bit.ly/bres_sy" target="_blank">bit.ly/bres_sy</a></li>
 </ul>
 </section>
+<section id="ons-hourly-productivity-data-for-2023-first-time-we-get-sy-4-places-separately-in-gva-data" class="slide level2">
+<h2>ONS hourly productivity data for 2023: first time we get SY 4 places separately in GVA data</h2>
+<ul>
+<li>ITL3 zones in 2025 used for latest 2023 data - we get all four places separated now</li>
+<li>Can see slightly different productivity story for Rotherham vs Doncaster</li>
+<li><a href="https://danolner.github.io/RegionalEconomicTools/quarto_docs/productivity_bitsandbobs_June2025.html" target="_blank">Link</a></li>
+</ul>
+</section>
 <section id="making-companies-house-data-open" class="slide level2">
 <h2>Making Companies House data open</h2>
 <ul>
-<li>UK Companies House data is already ‘open’ but it’s opaque and a <a href="https://dictionary.cambridge.org/dictionary/english/pita">PITA</a> to wrangle.</li>
+<li>UK Companies House data is already ‘open’ but it’s opaque and a <a href="https://dictionary.cambridge.org/dictionary/english/pita" target="_blank">PITA</a> to wrangle.</li>
 <li>Other firms package it up and resell it in useable form but access is limited e.g.&nbsp;&lt; 30K rows</li>
 <li>A lot of value in having entire dataset to play with - it’s amazingly rich (though with weaknesses e.g.&nbsp;only HQ’d firms misses a lot)</li>
 </ul>
@@ -455,20 +484,33 @@
 <section id="ch-1-hexmap-of-most-common-broad-sector" class="slide level2">
 <h2>CH 1: hexmap of most common broad sector</h2>
 <ul>
-<li>5000m hex, 50+ employees min per firm - <a href="https://danolner.github.io/companieshouseopen/maps/companieshouse_modal_SICsection_byemployeecount_minfiftyplus_hex5000.html">link</a>!</li>
-<li><a href="https://danolner.github.io/companieshouseopen/maps/companieshouse_modal_SICsection_byemployeecount_min10plus_hex1000m_wLADs.html">Higher res</a> for zooming in - 1000m and min 10 employees per firm. Less informative of GB econ structure?</li>
+<li>5000m hex, 50+ employees min per firm - <a href="https://danolner.github.io/companieshouseopen/maps/companieshouse_modal_SICsection_byemployeecount_minfiftyplus_hex5000.html" target="_blank">link</a>!</li>
+<li>Manufacturing doughnut and Southern Professional/sci/tech belt</li>
+<li><a href="https://danolner.github.io/companieshouseopen/maps/companieshouse_modal_SICsection_byemployeecount_min10plus_hex1000m_wLADs.html" target="_blank">Higher res</a> for zooming in - 1000m and min 10 employees per firm. Less informative of GB econ structure?</li>
+</ul>
+</section>
+<section id="ch2-south-yorkshire-dashboard" class="slide level2">
+<h2>CH2: South Yorkshire dashboard</h2>
+<ul>
+<li><a href="https://bit.ly/sy_ch" target="_blank">Link</a> and also <a href="https://bit.ly/sy_ch" target="_blank">bit.ly/sy_ch</a></li>
+</ul>
+</section>
+<section id="ch3-percent-change-in-firm-employee-counts-by-sector-west-yorkshire-example" class="slide level2">
+<h2>CH3: Percent change in firm employee counts by sector (West Yorkshire example!)</h2>
+<ul>
+<li><a href="https://danolner.github.io/RegionalEconomicTools/quarto_docs/LeedsBradford_overview_May2025.html" target="_blank">Link</a></li>
 </ul>
 </section>
 <section id="wheres-the-stuff" class="slide level2">
 <h2>Where’s the stuff?</h2>
 <ul>
 <li>So all this work/code is openly available (including some training materials)</li>
-<li><a href="https://github.com/DanOlner">github.com/DanOlner</a> for code (and where all the web stuff resides, including these slides)
+<li><a href="https://github.com/DanOlner" target="_blank">github.com/DanOlner</a> for code (and where all the web stuff resides, including these slides)
 <ul>
-<li>Some re-used for the <a href="https://yorkshireportal.org/">Yorkshire Engagement Portal</a></li>
+<li>Some re-used for the <a href="https://yorkshireportal.org/" target="_blank">Yorkshire Engagement Portal</a></li>
 </ul></li>
-<li>“<a href="https://danolner.github.io/RegionalEconomicTools/">Regecontools</a>” website where I’m trying to corral all the regional economics work and learning. (bit.ly/regecontools gets there too.)</li>
-<li>An <a href="https://danolner.github.io/posts/outputs_livelist/">outputs live list</a>: a reasonably complete list of all data, code and outputs</li>
+<li>“<a href="https://danolner.github.io/RegionalEconomicTools/" target="_blank">Regecontools</a>” website where I’m trying to corral all the regional economics work and learning. (bit.ly/regecontools gets there too.)</li>
+<li>An <a href="https://danolner.github.io/posts/outputs_livelist/" target="_blank">outputs live list</a>: a reasonably complete list of all data, code and outputs</li>
 </ul>
 </section></section>
 <section id="cuttings" class="title-slide slide level1 center">
