@@ -1780,15 +1780,15 @@
     "objectID": "SYMCA_YPERN_July2025.html#y-pern",
     "href": "SYMCA_YPERN_July2025.html#y-pern",
     "title": "SYMCA / Y-PERN July 2025",
-    "section": "",
-    "text": "Research England funded\nAim: to experiment with ways of strengthening glue between Y&H universities, regional authorities and communities\nSo still open question - what’s worked, what hasn’t??\nDiverse range of things happened/happening across the region - see y-pern.org.uk"
+    "section": "Y-PERN…?",
+    "text": "Y-PERN…?\n\nResearch England funded\nAim: to experiment with ways of strengthening glue between Y&H universities, regional authorities and communities\nSo still open question - what’s worked, what hasn’t??\nDiverse range of things happened/happening across the region - see y-pern.org.uk"
   },
   {
     "objectID": "SYMCA_YPERN_July2025.html#south-yorkshire",
     "href": "SYMCA_YPERN_July2025.html#south-yorkshire",
     "title": "SYMCA / Y-PERN July 2025",
-    "section": "",
-    "text": "Me: seconded to SYMCA 2 years ago\nWorking also with Hallam team (Peter Wells, Elizabeth Sanderson, Jamie Redman)\nI’m an economic geographer / data scientist by background (with some political studies thrown in)\nAnd a big fan of making pretty data pictures to try and see it / understand it in different ways…"
+    "section": "South Yorkshire",
+    "text": "South Yorkshire\n\nMe: seconded to SYMCA 2 years ago\nWorking also with Hallam team (Peter Wells, Elizabeth Sanderson, Jamie Redman)\nI’m an economic geographer / data scientist by background (with some political studies thrown in)\nAnd a big fan of making pretty data pictures to try and see it / understand it in different ways…"
   },
   {
     "objectID": "SYMCA_YPERN_July2025.html#stuff",
@@ -1801,15 +1801,15 @@
     "objectID": "SYMCA_YPERN_July2025.html#symca-work",
     "href": "SYMCA_YPERN_July2025.html#symca-work",
     "title": "SYMCA / Y-PERN July 2025",
-    "section": "",
-    "text": "Plan: I’ll run through examples of what I’ve worked on in my time with SYMCA\nPicking ones that I think tell a story\nThese will almost all be various plots, interative maps, dashboards, that kind of thing\nBut just a few thoughts on working openly…"
+    "section": "SYMCA work!",
+    "text": "SYMCA work!\n\nPlan: I’ll run through examples of what I’ve worked on in my time with SYMCA\nPicking ones that I think tell a story\nThese will almost all be various plots, interactive maps, dashboards, that kind of thing\nBut just a few thoughts on working openly…"
   },
   {
     "objectID": "SYMCA_YPERN_July2025.html#why-work-openly",
     "href": "SYMCA_YPERN_July2025.html#why-work-openly",
     "title": "SYMCA / Y-PERN July 2025",
-    "section": "",
-    "text": "Not all data work can be done openly. But a lot can, and I think there are compelling reasons to work this way:\n\nIt supports collaboration and learning (bootstrapping capacity building, everyone bringing their expertise)\nIt will help build a shared sense of ground truth\nIt will avoid wheel reinvention (reproducibility needs this)\n\nWhere possible, build automated pipelines from data source to output\n\nE.g. below, R reads data directly from Excel files on the web\n\nWill come back to this in discussion: ideal vs reality?"
+    "section": "Why work openly?",
+    "text": "Why work openly?\n\nNot all data work can be done openly. But a lot can, and I think there are compelling reasons to work this way:\n\nIt supports collaboration and learning (bootstrapping capacity building, everyone bringing their expertise)\nIt will help build a shared sense of ground truth\nIt will avoid wheel reinvention (reproducibility needs this)"
   },
   {
     "objectID": "SYMCA_YPERN_July2025.html#wheres-the-stuff",
@@ -1878,8 +1878,8 @@
     "objectID": "SYMCA_YPERN_July2025.html#slides",
     "href": "SYMCA_YPERN_July2025.html#slides",
     "title": "SYMCA / Y-PERN July 2025",
-    "section": "",
-    "text": "They’re online here if you want quick access to the links: bit.ly/ypernsymca"
+    "section": "Slides!",
+    "text": "Slides!\n\nThey’re online here if you want quick access to the links:\nbit.ly/ypernsymca"
   },
   {
     "objectID": "SYMCA_YPERN_July2025.html#location-quotients-a-go-go",
@@ -1934,8 +1934,8 @@
     "objectID": "SYMCA_YPERN_July2025.html#use-all-the-data-where-possible",
     "href": "SYMCA_YPERN_July2025.html#use-all-the-data-where-possible",
     "title": "SYMCA / Y-PERN July 2025",
-    "section": "",
-    "text": "By which I mean:\nA big part of the ‘so what’ of any data analysis is “where does this place sit nationally?”\nSo if poss, always analyse national-level data and put a place in context\nWith open methods / code, this is usually just as easy as not doing it\nSomething e.g. fingertips data already does well"
+    "section": "Use all the data where possible!",
+    "text": "Use all the data where possible!\n\nBy which I mean:\nA big part of the ‘so what’ of any data analysis is “where does this place sit nationally?”\nSo if poss, always analyse national-level data and put a place in context\nWith open methods / code, this is usually just as easy as not doing it\nSomething e.g. fingertips data already does well"
   },
   {
     "objectID": "SYMCA_YPERN_July2025.html#growth-what-grew-more-than-where",
@@ -2027,5 +2027,33 @@
     "title": "South Yorkshire / UK Industrial Strategy LQ links",
     "section": "Rotherham",
     "text": "Rotherham\n\nCompanies house frontier sectors\n\n\n\n\n\n\n\n\nFigure 11\n\n\n\n\n\n\n\nCompanies House other sectors\n\n\n\n\n\n\n\n\nFigure 12"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#last-example-linking-to-the-uk-industrial-strategy",
+    "href": "SYMCA_YPERN_July2025.html#last-example-linking-to-the-uk-industrial-strategy",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "Last example: linking to the UK Industrial Strategy",
+    "text": "Last example: linking to the UK Industrial Strategy\n\nAs an example of a point I’m about to make: repeating a recent piece of work for Bradford, linking South Yorkshire sectors to the UK’s Industrial Strategy\nFresh off the press today\nLink and bit.ly/syindstrat"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#back-to-the-dream-v-reality-thing",
+    "href": "SYMCA_YPERN_July2025.html#back-to-the-dream-v-reality-thing",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "Back to the ‘dream v reality’ thing",
+    "text": "Back to the ‘dream v reality’ thing\nThose points again. Open data…\n\nSupports collaboration and learning - but how to really make this work given all the pressures everyone’s under? What’s really needed?\nIt will help build a shared sense of ground truth - but regional knowledge is difficult to compare across places\nIt will avoid wheel reinvention / support reproducibility - but there also has to be a ‘mixed insight economy’ of methods / organisations / consultants / unis… how to make all that move forward?\nAnd: how to close the data gap between what the data says and our ground level knowledge?"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#wheres-the-data-stuff",
+    "href": "SYMCA_YPERN_July2025.html#wheres-the-data-stuff",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "Where’s the data stuff?",
+    "text": "Where’s the data stuff?\n\nSo all this work/code is openly available (including some training materials)\ngithub.com/DanOlner for code (and where all the web stuff resides, including these slides)\n\nSome re-used for the Yorkshire Engagement Portal\n\n“Regecontools” website where I’m trying to corral all the regional economics work and learning. (bit.ly/regecontools gets there too.)\nAn outputs live list: a reasonably complete list of all data, code and outputs"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#why-work-openly-1",
+    "href": "SYMCA_YPERN_July2025.html#why-work-openly-1",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "Why work openly?",
+    "text": "Why work openly?\n\nWhere possible, build automated pipelines from data source to output\n\nE.g. below, R reads data directly from Excel files on the web\n\nWill come back to this in discussion: ideal vs reality?"
   }
 ]

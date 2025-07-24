@@ -26,7 +26,8 @@ knitr::opts_chunk$set(fig.height = 8, fig.width = 10, warning = F, error = F, me
 
 ## Slides!
 
-They're online here if you want quick access to the links: [bit.ly/ypernsymca](https://bit.ly/ypernsymca){target="_blank"}
+* They're online here if you want quick access to the links: 
+* [bit.ly/ypernsymca](https://bit.ly/ypernsymca){target="_blank"}
 
 ## Y-PERN: "Yorkshire & Humber Policy Exchange and Research Network"
 
@@ -61,7 +62,7 @@ They're online here if you want quick access to the links: [bit.ly/ypernsymca](h
 
 * Plan: I'll run through examples of what I've worked on in my time with SYMCA
 * Picking ones that I think tell a story
-* These will almost all be various plots, interative maps, dashboards, that kind of thing
+* These will almost all be various plots, interactive maps, dashboards, that kind of thing
 * But just a few thoughts on working openly...
 
 ## Why work openly?
@@ -70,6 +71,9 @@ They're online here if you want quick access to the links: [bit.ly/ypernsymca](h
     - It supports collaboration and learning (bootstrapping capacity building, everyone bringing their expertise)
     - It will help build a shared sense of ground truth
     - It will avoid wheel reinvention (reproducibility **needs** this)
+    
+## Why work openly?
+    
 * Where possible, build **automated pipelines** from data source to output
     - E.g. below, R reads data directly from Excel files on the web
 * Will come back to this in discussion: ideal vs reality?
@@ -186,14 +190,27 @@ Here's what it looks like in its Excel home:
 * [Link](https://danolner.github.io/RegionalEconomicTools/quarto_docs/LeedsBradford_overview_May2025.html){target="_blank"}
 
 
+## Last example: linking to the UK Industrial Strategy
+
+* As an example of a point I'm about to make: repeating a recent piece of work for Bradford, linking South Yorkshire sectors to the UK's Industrial Strategy
+* Fresh off the press today
+* [Link](https://danolner.github.io/RegionalEconomicTools/quarto_docs/SY_indstrat_July2025.html){target="_blank"} and [bit.ly/syindstrat](https://bit.ly/syindstrat){target="_blank"} 
+
+
 
 # RAMBLING THOUGHTS
 
-## 
+## Back to the 'dream v reality' thing
+
+Those points again. Open data...
+
+* Supports collaboration and learning - **but how to really make this work given all the pressures everyone's under? What's really needed?**
+* It will help build a shared sense of ground truth - **but regional knowledge is difficult to compare across places**
+* It will avoid wheel reinvention / support reproducibility - **but there also has to be a 'mixed insight economy' of methods / organisations / consultants / unis... how to make all that move forward?** 
+* And: how to **close the data gap** between what the data says and our ground level knowledge?
 
 
-
-## Where's the stuff?
+## Where's the data stuff?
 
 * So all this work/code is openly available (including some training materials)
 * [github.com/DanOlner](https://github.com/DanOlner){target="_blank"} for code (and where all the web stuff resides, including these slides)
