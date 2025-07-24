@@ -148,7 +148,7 @@ Here's what it looks like in its Excel home:
 ## Combining GVA and BRES for GVA per worker (Bradford example)
 
 ::: {.center}
-![](miscimages/symcaypern/fig-gvajobsmetals-1.png) 
+![](miscimages/symcaypern/fig-gvajobsmetals-1.png){width="400px"} 
 :::
 
 
@@ -206,6 +206,9 @@ Those points again. Open data...
 
 * Supports collaboration and learning - **but how to really make this work given all the pressures everyone's under? What's really needed?**
 * It will help build a shared sense of ground truth - **but regional knowledge is difficult to compare across places**
+
+## Back to the 'dream v reality' thing
+
 * It will avoid wheel reinvention / support reproducibility - **but there also has to be a 'mixed insight economy' of methods / organisations / consultants / unis... how to make all that move forward?** 
 * And: how to **close the data gap** between what the data says and our ground level knowledge?
 

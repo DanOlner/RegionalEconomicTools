@@ -2040,7 +2040,7 @@
     "href": "SYMCA_YPERN_July2025.html#back-to-the-dream-v-reality-thing",
     "title": "SYMCA / Y-PERN July 2025",
     "section": "Back to the ‘dream v reality’ thing",
-    "text": "Back to the ‘dream v reality’ thing\nThose points again. Open data…\n\nSupports collaboration and learning - but how to really make this work given all the pressures everyone’s under? What’s really needed?\nIt will help build a shared sense of ground truth - but regional knowledge is difficult to compare across places\nIt will avoid wheel reinvention / support reproducibility - but there also has to be a ‘mixed insight economy’ of methods / organisations / consultants / unis… how to make all that move forward?\nAnd: how to close the data gap between what the data says and our ground level knowledge?"
+    "text": "Back to the ‘dream v reality’ thing\nThose points again. Open data…\n\nSupports collaboration and learning - but how to really make this work given all the pressures everyone’s under? What’s really needed?\nIt will help build a shared sense of ground truth - but regional knowledge is difficult to compare across places"
   },
   {
     "objectID": "SYMCA_YPERN_July2025.html#wheres-the-data-stuff",
@@ -2055,5 +2055,12 @@
     "title": "SYMCA / Y-PERN July 2025",
     "section": "Why work openly?",
     "text": "Why work openly?\n\nWhere possible, build automated pipelines from data source to output\n\nE.g. below, R reads data directly from Excel files on the web\n\nWill come back to this in discussion: ideal vs reality?"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#back-to-the-dream-v-reality-thing-1",
+    "href": "SYMCA_YPERN_July2025.html#back-to-the-dream-v-reality-thing-1",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "Back to the ‘dream v reality’ thing",
+    "text": "Back to the ‘dream v reality’ thing\n\nIt will avoid wheel reinvention / support reproducibility - but there also has to be a ‘mixed insight economy’ of methods / organisations / consultants / unis… how to make all that move forward?\nAnd: how to close the data gap between what the data says and our ground level knowledge?"
   }
 ]
