@@ -2017,11 +2017,14 @@ yeartoplot <- yeartoplot %>%
     by = c('GEOGRAPHY_NAME', 'sic_namefrom_indstrat_combo')
   )
 
-
+#Save all the bits! So we can repeat for different places easily
+saveRDS(islq,'local/islq.rds')
+saveRDS(yeartoplot,'local/is_bres_yeartoplot.rds')
 
 
 
 #Right ee ho...
+#place = "Sheffield"
 place = "Bradford"
 
 sectorLQorder <- islq %>% filter(
@@ -2182,10 +2185,27 @@ ecdf(both$percent_indstratjobs)(both %>% filter(GEOGRAPHY_NAME == 'Bradford') %>
 
 # REPEAT FOR CH----
 
+ch = readRDS('../companieshouseopen/local/PROCESSED_accountextracts_n_livelist_geocoded_combined_July2025.rds')
+# ch = readRDS('../companieshouseopen/local/PROCESSED_accountextracts_n_livelist_geocoded_combined_July2025.rds')
+# Sys.time() - x
+
+#get short SIC names
+shorts <- readRDS('local/data/bradford_SICs_withshortnames.rds')
+#shorts <- readRDS('local/data/bradford_SICs_withshortnames.rds')
+
+ch = ch %>%
+  left_join(
+    shorts %>% select(SIC_5DIGIT_CODE,SIC_SECTION_NAME_SHORT:SIC_5DIGIT_NAME_SHORT),
+    by = 'SIC_5DIGIT_CODE'
+  )
+
+
+
 #Somewhere I've got timepoint change between last two already done
 #Taking from BradfordExplore.R here
 #https://github.com/DanOlner/RegionalEconomicTools/blob/a517bdd5b37d3696de080160c68d772921afe4fa/bits_of_code/BradfordExplore.R#L1139
 ch.5digitsums <- ch %>% 
+  st_set_geometry(NULL) %>% #don't forget this!!
   filter(!is.na(Employees_thisyear) & !is.na(Employees_lastyear)) %>% #Keep only firms with employees in BOTH years even if it's zero
   select(CompanyName,CompanyNumber,accountcode,CompanyCategory,incorporationdate_formatted,age_of_firm_years,localauthority_code:ITL221NM,Employees_thisyear,Employees_lastyear,SIC_2DIGIT_CODE,SIC_2DIGIT_CODE_NUMERIC,SIC_5DIGIT_CODE,SIC_SECTION_NAME_SHORT:SIC_5DIGIT_NAME_SHORT) %>% 
   group_by(SIC_5DIGIT_CODE,localauthority_name) %>% 
@@ -2193,6 +2213,7 @@ ch.5digitsums <- ch %>%
     employeecount_thisyear = sum(Employees_thisyear),
     employeecount_lastyear = sum(Employees_lastyear)
   ) %>% ungroup()
+
 
 
 #Make those into pseudo dates in an order we can get an LQ size change from
@@ -2299,7 +2320,14 @@ yeartoplot <- yeartoplot %>%
     by = c('localauthority_name', 'sic_namefrom_indstrat_combo')
   )
 
-place = 'Bradford'
+
+
+#Save relevant bits!
+saveRDS(ch_summary,'local/ch_summary.rds')
+saveRDS(yeartoplot,'local/is_ch_yeartoplot.rds')
+
+
+place = 'Sheffield'
 
 sectorLQorder <- ch_summary %>% filter(
   localauthority_name == place,
@@ -2341,7 +2369,7 @@ sectorstokeep <- yeartoplot.lqfiltered %>% filter(localauthority_name == place) 
 yeartoplot.lqfiltered <- yeartoplot.lqfiltered %>% filter(sic_namefrom_indstrat_combo %in% sectorstokeep)
 
 #save a copy of that to save processing time in quarto
-saveRDS(yeartoplot.lqfiltered,'local/data/companieshouse_indstrat_LQs.rds')
+# saveRDS(yeartoplot.lqfiltered,'local/data/companieshouse_indstrat_LQs.rds')
 
 
 
@@ -2384,6 +2412,66 @@ p2 <- p2 +
   ggtitle("IndStrat other sector")
 
 p2
+
+
+
+
+
+
+
+
+# REPEAT INDSTRAT LINK FOR SHEFFIELD AND SOUTH YORKSHIRE----
+
+
+place = "Sheffield"
+
+#Blue peter this up
+#Done here: https://github.com/DanOlner/RegionalEconomicTools/blob/1d5df72210586d0570cd687534bcfb3c98827ece/prepcode/misc_checks.R#L1991
+#save a copy of that to save processing time in quarto
+yeartoplot.lqfiltered <- readRDS('local/data/bres_indstrat_LQs.rds')
+
+
+
+#If I could plot both and space them out, that would be good (could get Bradford change showing too)
+p <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), alpha = 0.1, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope)
+
+p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), plot_to_addto = p, 
+                            placename = place, shapenumber = 16,
+                            min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
+                            value_column = jobcount_movingav, sector_regional_proportion = sector_regional_proportion,
+                            region_name = GEOGRAPHY_NAME,
+                            sector_name = sic_namefrom_indstrat_combo, change_over_time = slope, LQ_column = LQ,
+                            text = 7, value_col_ismoney = F)
+
+p <- p + 
+  # coord_cartesian(xlim = c(0.1,7)) +
+  ggtitle("IndStrat frontier sector")
+
+p
+
+#Blue peter this up
+#Done here: https://github.com/DanOlner/RegionalEconomicTools/blob/1d5df72210586d0570cd687534bcfb3c98827ece/prepcode/misc_checks.R#L1991
+#save a copy of that to save processing time in quarto
+yeartoplot.lqfiltered.ch <- readRDS('local/data/companieshouse_indstrat_LQs.rds')
+
+p1 <- LQ_baseplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 1), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo, 
+                  LQ_column = LQ, change_over_time = slope)
+
+# debugonce(addplacename_to_LQplot)
+p1 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 1), plot_to_addto = p1, 
+                             placename = place, shapenumber = 16,
+                             # min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
+                             value_column = total_jobs, sector_regional_proportion = sector_regional_proportion,
+                             region_name = localauthority_name,
+                             sector_name = sic_namefrom_indstrat_combo, change_over_time = slope, LQ_column = LQ,
+                             value_col_ismoney = F, text = 7)
+# value_col_ismoney = F, text = 7, maxLQvalmultiplier = 2,useplacenameforminmaxdisplay = T, overridetextpos = 14)
+
+p1 <- p1 + 
+  # coord_cartesian(xlim = c(0.1,7)) +
+  ggtitle("IndStrat frontier sector")
+
+p1
 
 
 

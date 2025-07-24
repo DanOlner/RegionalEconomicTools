@@ -1780,15 +1780,15 @@
     "objectID": "SYMCA_YPERN_July2025.html#y-pern",
     "href": "SYMCA_YPERN_July2025.html#y-pern",
     "title": "SYMCA / Y-PERN July 2025",
-    "section": "Y-PERN…?",
-    "text": "Y-PERN…?\n\nResearch England funded\nAim: to experiment with ways of strengthening glue between Y&H universities, regional authorities and communities\nSo still open question - what’s worked, what hasn’t??\nDiverse range of things happened/happening across the region - see y-pern.org.uk"
+    "section": "",
+    "text": "Research England funded\nAim: to experiment with ways of strengthening glue between Y&H universities, regional authorities and communities\nSo still open question - what’s worked, what hasn’t??\nDiverse range of things happened/happening across the region - see y-pern.org.uk"
   },
   {
     "objectID": "SYMCA_YPERN_July2025.html#south-yorkshire",
     "href": "SYMCA_YPERN_July2025.html#south-yorkshire",
     "title": "SYMCA / Y-PERN July 2025",
-    "section": "South Yorkshire",
-    "text": "South Yorkshire\n\nMe: seconded to SYMCA 2 years ago\nWorking also with Hallam team (Peter Wells, Elizabeth Sanderson, Jamie Redman)\nI’m an economic geographer / data scientist by background (with some political studies thrown in)\nAnd a big fan of making pretty data pictures to try and see it / understand it in different ways…"
+    "section": "",
+    "text": "Me: seconded to SYMCA 2 years ago\nWorking also with Hallam team (Peter Wells, Elizabeth Sanderson, Jamie Redman)\nI’m an economic geographer / data scientist by background (with some political studies thrown in)\nAnd a big fan of making pretty data pictures to try and see it / understand it in different ways…"
   },
   {
     "objectID": "SYMCA_YPERN_July2025.html#stuff",
@@ -1801,15 +1801,15 @@
     "objectID": "SYMCA_YPERN_July2025.html#symca-work",
     "href": "SYMCA_YPERN_July2025.html#symca-work",
     "title": "SYMCA / Y-PERN July 2025",
-    "section": "SYMCA work!",
-    "text": "SYMCA work!\n\nPlan: I’ll run through examples of what I’ve worked on in my time with SYMCA\nPicking ones that I think tell a story\nThese will almost all be various plots, interative maps, dashboards, that kind of thing\nBut just a few thoughts on working openly…"
+    "section": "",
+    "text": "Plan: I’ll run through examples of what I’ve worked on in my time with SYMCA\nPicking ones that I think tell a story\nThese will almost all be various plots, interative maps, dashboards, that kind of thing\nBut just a few thoughts on working openly…"
   },
   {
     "objectID": "SYMCA_YPERN_July2025.html#why-work-openly",
     "href": "SYMCA_YPERN_July2025.html#why-work-openly",
     "title": "SYMCA / Y-PERN July 2025",
-    "section": "Why work openly?",
-    "text": "Why work openly?\n\nNot all data work can be done openly. But a lot can, and I think there are compelling reasons to work this way:\n\nIt supports collaboration and learning (bootstrapping capacity building, everyone bringing their expertise)\nIt will help build a shared sense of ground truth\nIt will avoid wheel reinvention (reproducibility needs this)\n\nWhere possible, build automated pipelines from data source to output\n\nE.g. below, R reads data directly from Excel files on the web\n\nWill come back to this in discussion: ideal vs reality?"
+    "section": "",
+    "text": "Not all data work can be done openly. But a lot can, and I think there are compelling reasons to work this way:\n\nIt supports collaboration and learning (bootstrapping capacity building, everyone bringing their expertise)\nIt will help build a shared sense of ground truth\nIt will avoid wheel reinvention (reproducibility needs this)\n\nWhere possible, build automated pipelines from data source to output\n\nE.g. below, R reads data directly from Excel files on the web\n\nWill come back to this in discussion: ideal vs reality?"
   },
   {
     "objectID": "SYMCA_YPERN_July2025.html#wheres-the-stuff",
@@ -1878,8 +1878,8 @@
     "objectID": "SYMCA_YPERN_July2025.html#slides",
     "href": "SYMCA_YPERN_July2025.html#slides",
     "title": "SYMCA / Y-PERN July 2025",
-    "section": "Slides!",
-    "text": "Slides!\nThey’re online here if you want quick access to the links: bit.ly/ypernsymca"
+    "section": "",
+    "text": "They’re online here if you want quick access to the links: bit.ly/ypernsymca"
   },
   {
     "objectID": "SYMCA_YPERN_July2025.html#location-quotients-a-go-go",
@@ -1893,7 +1893,7 @@
     "href": "SYMCA_YPERN_July2025.html",
     "title": "SYMCA / Y-PERN July 2025",
     "section": "",
-    "text": "They’re online here if you want quick access to the links: bit.ly/ypernsymca\n\n\n\n\n\n\n\n\n\n\nResearch England funded\nAim: to experiment with ways of strengthening glue between Y&H universities, regional authorities and communities\nSo still open question - what’s worked, what hasn’t??\nDiverse range of things happened/happening across the region - see y-pern.org.uk\n\n\n\n\n\nMe: seconded to SYMCA 2 years ago\nWorking also with Hallam team (Peter Wells, Elizabeth Sanderson, Jamie Redman)\nI’m an economic geographer / data scientist by background (with some political studies thrown in)\nAnd a big fan of making pretty data pictures to try and see it / understand it in different ways…\n\n\n\n\n\n\n\n\n\nPlan: I’ll run through examples of what I’ve worked on in my time with SYMCA\nPicking ones that I think tell a story\nThese will almost all be various plots, interative maps, dashboards, that kind of thing\nBut just a few thoughts on working openly…\n\n\n\n\n\nNot all data work can be done openly. But a lot can, and I think there are compelling reasons to work this way:\n\nIt supports collaboration and learning (bootstrapping capacity building, everyone bringing their expertise)\nIt will help build a shared sense of ground truth\nIt will avoid wheel reinvention (reproducibility needs this)\n\nWhere possible, build automated pipelines from data source to output\n\nE.g. below, R reads data directly from Excel files on the web\n\nWill come back to this in discussion: ideal vs reality?"
+    "text": "They’re online here if you want quick access to the links: bit.ly/ypernsymca\n\n\n\n\n\n\n\n\n\n\nResearch England funded\nAim: to experiment with ways of strengthening glue between Y&H universities, regional authorities and communities\nSo still open question - what’s worked, what hasn’t??\nDiverse range of things happened/happening across the region - see y-pern.org.uk\n\n\n\n\n\nMe: seconded to SYMCA 2 years ago\nWorking also with Hallam team (Peter Wells, Elizabeth Sanderson, Jamie Redman)\nI’m an economic geographer / data scientist by background (with some political studies thrown in)\nAnd a big fan of making pretty data pictures to try and see it / understand it in different ways…\n\n\n\n\n\n\n\n\n\nPlan: I’ll run through examples of what I’ve worked on in my time with SYMCA\nPicking ones that I think tell a story\nThese will almost all be various plots, interative maps, dashboards, that kind of thing\nBut just a few thoughts on working openly…\n\n\n\n\n\nNot all data work can be done openly. But a lot can, and I think there are compelling reasons to work this way:\n\nIt supports collaboration and learning (bootstrapping capacity building, everyone bringing their expertise)\nIt will help build a shared sense of ground truth\nIt will avoid wheel reinvention (reproducibility needs this)\n\nWhere possible, build automated pipelines from data source to output\n\nE.g. below, R reads data directly from Excel files on the web\n\nWill come back to this in discussion: ideal vs reality?\n\n\n\n\n\nBy which I mean:\nA big part of the ‘so what’ of any data analysis is “where does this place sit nationally?”\nSo if poss, always analyse national-level data and put a place in context\nWith open methods / code, this is usually just as easy as not doing it\nSomething e.g. fingertips data already does well"
   },
   {
     "objectID": "SYMCA_YPERN_July2025.html#making-companies-house-data-open",
@@ -1934,8 +1934,8 @@
     "objectID": "SYMCA_YPERN_July2025.html#use-all-the-data-where-possible",
     "href": "SYMCA_YPERN_July2025.html#use-all-the-data-where-possible",
     "title": "SYMCA / Y-PERN July 2025",
-    "section": "Use all the data where possible!",
-    "text": "Use all the data where possible!\n\nBy which I mean:\nA big part of the ‘so what’ of any data analysis is “where does this place sit nationally?”\nSo if poss, always analyse national-level data and put a place in context\nWith open methods / code, this is usually just as easy as not doing it\nSomething e.g. fingertips data already does well"
+    "section": "",
+    "text": "By which I mean:\nA big part of the ‘so what’ of any data analysis is “where does this place sit nationally?”\nSo if poss, always analyse national-level data and put a place in context\nWith open methods / code, this is usually just as easy as not doing it\nSomething e.g. fingertips data already does well"
   },
   {
     "objectID": "SYMCA_YPERN_July2025.html#growth-what-grew-more-than-where",
@@ -1964,5 +1964,68 @@
     "title": "Sheffield: GVA vs jobs 2D percent change plots",
     "section": "",
     "text": "These plots show percent change in chained volume GVA and job count on different axes, with Sheffield’s change overlaid in blue and job count plus percent of regional economy included in title (for the most recent year). It uses a 3 year moving average to smooth out jumps.\nOnly places where a sector makes up 1.5% or more of the economy are included - except for Sheffield, which is included in all plots.\nThis is done for the shorter 2 digit SIC categories in the regional GVA data, joined to BRES jobs data.\nAny arrows in the top left grey diagonal section will have seen productivity drops (measured as GVA per FT job) over that time. In the bottom left diagonal, productivity went up.\nArrows in the bottom right quadrant have seen a combination of productivity increases with job decreases.\nNOTE: All sectors are included even if they’re very small proportions of Sheffield’s economy - so percent changes could appear large for very tiny sectors. Look at the job count in the title to check. Including them all for completeness."
+  },
+  {
+    "objectID": "quarto_docs/SY_indstrat_July2025.html",
+    "href": "quarto_docs/SY_indstrat_July2025.html",
+    "title": "South Yorkshire / UK Industrial Strategy LQ links",
+    "section": "",
+    "text": "This doc shows job count location quotients for Sheffield, Barnsley, Doncaster and Rotherham for sectors that are part of the UK Industrial Strategy definition list (see below for more info on that). For BRES, Barnsley, Doncaster and Rotherham are combined. For Companies House data (here, June 2024 to end of June 2025) break down each of the the four places."
+  },
+  {
+    "objectID": "quarto_docs/SY_indstrat_July2025.html#frontier-sic-sectors",
+    "href": "quarto_docs/SY_indstrat_July2025.html#frontier-sic-sectors",
+    "title": "South Yorkshire / UK Industrial Strategy LQ links",
+    "section": "“Frontier” SIC sectors",
+    "text": "“Frontier” SIC sectors\n\nBRES frontier sectors\n\n\n\n\n\n\n\n\nFigure 1\n\n\n\n\n\n\n\nCompanies house frontier sectors\n\n\n\n\n\n\n\n\nFigure 2"
+  },
+  {
+    "objectID": "quarto_docs/SY_indstrat_July2025.html#other-industrial-strategy-sic-sectors",
+    "href": "quarto_docs/SY_indstrat_July2025.html#other-industrial-strategy-sic-sectors",
+    "title": "South Yorkshire / UK Industrial Strategy LQ links",
+    "section": "Other industrial strategy SIC sectors",
+    "text": "Other industrial strategy SIC sectors\n\nBRES other sectors\n\n\n\n\n\n\n\n\nFigure 3\n\n\n\n\n\n\n\nCompanies House other sectors\n\n\n\n\n\n\n\n\nFigure 4"
+  },
+  {
+    "objectID": "quarto_docs/SY_indstrat_July2025.html#frontier-sic-sectors-1",
+    "href": "quarto_docs/SY_indstrat_July2025.html#frontier-sic-sectors-1",
+    "title": "South Yorkshire / UK Industrial Strategy LQ links",
+    "section": "“Frontier” SIC sectors",
+    "text": "“Frontier” SIC sectors\n\nBRES frontier sectors\n\n\n\n\n\n\n\n\nFigure 5\n\n\n\n\n\n\n\nBRES other sectors\n\n\n\n\n\n\n\n\nFigure 6"
+  },
+  {
+    "objectID": "quarto_docs/SY_indstrat_July2025.html#other-industrial-strategy-sic-sectors-1",
+    "href": "quarto_docs/SY_indstrat_July2025.html#other-industrial-strategy-sic-sectors-1",
+    "title": "South Yorkshire / UK Industrial Strategy LQ links",
+    "section": "Other industrial strategy SIC sectors",
+    "text": "Other industrial strategy SIC sectors\n\nBRES other sectors\n\n\n\n\n\n\n\n\nFigure 7\n\n\n\n\n\n\n\nCompanies House other sectors\n\n\n\n\n\n\n\n\nFigure 8"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#combining-gva-and-bres-for-gva-per-worker-bradford-example",
+    "href": "SYMCA_YPERN_July2025.html#combining-gva-and-bres-for-gva-per-worker-bradford-example",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "Combining GVA and BRES for GVA per worker (Bradford example)",
+    "text": "Combining GVA and BRES for GVA per worker (Bradford example)"
+  },
+  {
+    "objectID": "quarto_docs/SY_indstrat_July2025.html#barnsley",
+    "href": "quarto_docs/SY_indstrat_July2025.html#barnsley",
+    "title": "South Yorkshire / UK Industrial Strategy LQ links",
+    "section": "Barnsley",
+    "text": "Barnsley\n\nCompanies house frontier sectors\n\n\n\n\n\n\n\n\nFigure 7\n\n\n\n\n\n\n\nCompanies House other sectors\n\n\n\n\n\n\n\n\nFigure 8"
+  },
+  {
+    "objectID": "quarto_docs/SY_indstrat_July2025.html#doncaster",
+    "href": "quarto_docs/SY_indstrat_July2025.html#doncaster",
+    "title": "South Yorkshire / UK Industrial Strategy LQ links",
+    "section": "Doncaster",
+    "text": "Doncaster\n\nCompanies house frontier sectors\n\n\n\n\n\n\n\n\nFigure 9\n\n\n\n\n\n\n\nCompanies House other sectors\n\n\n\n\n\n\n\n\nFigure 10"
+  },
+  {
+    "objectID": "quarto_docs/SY_indstrat_July2025.html#rotherham",
+    "href": "quarto_docs/SY_indstrat_July2025.html#rotherham",
+    "title": "South Yorkshire / UK Industrial Strategy LQ links",
+    "section": "Rotherham",
+    "text": "Rotherham\n\nCompanies house frontier sectors\n\n\n\n\n\n\n\n\nFigure 11\n\n\n\n\n\n\n\nCompanies House other sectors\n\n\n\n\n\n\n\n\nFigure 12"
   }
 ]

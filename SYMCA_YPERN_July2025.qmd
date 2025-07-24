@@ -141,6 +141,18 @@ Here's what it looks like in its Excel home:
 * [Interactive](https://danolner.github.io/RegionalEconomicTools/miscdocs/SYLAs_CompaniesHouse2025_treemap.html){target="_blank"}: job counts at different sector levels for latest year in South Yorkshire. [bit.ly/bres_sy](https://bit.ly/bres_sy){target="_blank"}
 
 
+## Combining GVA and BRES for GVA per worker (Bradford example)
+
+::: {.center}
+![](miscimages/symcaypern/fig-gvajobsmetals-1.png) 
+:::
+
+
+
+
+
+
+
 ## ONS hourly productivity data for 2023: first time we get SY 4 places separately in GVA data
 
 * ITL3 zones in 2025 used for latest 2023 data - we get all four places separated now
@@ -175,8 +187,9 @@ Here's what it looks like in its Excel home:
 
 
 
+# RAMBLING THOUGHTS
 
-
+## 
 
 
 
