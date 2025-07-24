@@ -1761,5 +1761,117 @@
     "title": "Bradford sectors and clusters: past, present",
     "section": "West Yorkshire LSIP (Local Skills Improvement Plan) published 2023",
     "text": "West Yorkshire LSIP (Local Skills Improvement Plan) published 2023\nPage 4 of the West Yorkshire LSIP says it aims “ro enable employers and individuals to access the technical skills they need to support growth, transformation and increased productivity in our key sectors, defined as:”\n\nHealth and Social Care\nEngineering and Advanced Manufacturing\nFinancial and Professional Services\nLow Carbon\nDigital and Technology\nCreative Industries\nEducation\nConstruction\nTransport and Logistics\n\nThe analysis below digs further into engineering, advanced manufacturing and financial and professional services - all Bradford sector strengths, with differing productivity challenges, though these are especially notable in engineering.\nOther sectors listed in LSIP could go into two categories:\n\nBroad sectors where, with the data here, it is difficult to shed much light on productivity issues. Health and social care faces the same issues as other mainly-public sectors in the data - they have clearly grown to be the largest or one of the largest broad sectors, but public sector productivity analysis is difficult (partly because of how ONS calculate it at a regional level - they just use job count times regional job average to estimate GVA). This in no way negates the need to improve health and social care skills, it just makes it hard to analyse productivity data.\n\nCompanies House data does show that both health and social care have a very large private sector presence in Bradford (Figure 9, Figure 10 and plots from ?@fig-indivfirmsSY on to identify specific firms), so these could well benefit / be benefiting from from LSIP-related support.\n\nOther sectors have not been picked out below for specific analysis, but are high job count with national-level productivity issues, and often not highly tradeable beyond Bradford. See for example the 2D GVA vs job plots for transport (Figure 37) and construction (Figure 36).\n\nThe following sections dig into what the data shows for Bradford’s sectors; plots and analyses follow that text."
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#y-pern-yorkshire-humber-policy-exchange-and-research-network",
+    "href": "SYMCA_YPERN_July2025.html#y-pern-yorkshire-humber-policy-exchange-and-research-network",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "Y-PERN: “Yorkshire & Humber Policy Exchange and Research Network”",
+    "text": "Y-PERN: “Yorkshire & Humber Policy Exchange and Research Network”"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#test",
+    "href": "SYMCA_YPERN_July2025.html#test",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "Test",
+    "text": "Test"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#y-pern",
+    "href": "SYMCA_YPERN_July2025.html#y-pern",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "Y-PERN…?",
+    "text": "Y-PERN…?\n\nResearch England funded\nAim: to experiment with ways of strengthening glue between Y&H universities, regional authorities and communities\nSo still open question - what’s worked, what hasn’t??\nDiverse range of things happened/happening across the region - see y-pern.org.uk"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#south-yorkshire",
+    "href": "SYMCA_YPERN_July2025.html#south-yorkshire",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "South Yorkshire",
+    "text": "South Yorkshire\n\nMe: seconded to SYMCA 2 years ago\nWorking also with Hallam team (Peter Wells, Elizabeth Sanderson, Jamie Redman)\nI’m an economic geographer / data scientist by background (with some political studies thrown in)\nAnd a big fan of making pretty data pictures to try and see it / understand it in different ways…"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#stuff",
+    "href": "SYMCA_YPERN_July2025.html#stuff",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "Stuff",
+    "text": "Stuff"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#symca-work",
+    "href": "SYMCA_YPERN_July2025.html#symca-work",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "SYMCA work!",
+    "text": "SYMCA work!\n\nPlan: I’ll run through examples of what I’ve worked on in my time with SYMCA\nPicking ones that I think tell a story\nThese will almost all be various plots, interative maps, dashboards, that kind of thing\nBut just a few thoughts on working openly…"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#why-work-openly",
+    "href": "SYMCA_YPERN_July2025.html#why-work-openly",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "Why work openly?",
+    "text": "Why work openly?\n\nNot all data work can be done openly. But a lot can, and I think there are compelling reasons to work this way:\n\nIt supports collaboration and learning (bootstrapping capacity building, everyone bringing their expertise)\nIt will help build a shared sense of ground truth\nIt will avoid wheel reinvention (reproducibility needs this)\n\nWill come back to this in discussion: reality vs fantasy?"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#wheres-the-stuff",
+    "href": "SYMCA_YPERN_July2025.html#wheres-the-stuff",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "Where’s the stuff?",
+    "text": "Where’s the stuff?\n\nSo all this work/code is openly available (including some training materials)\ngithub.com/DanOlner for code (and where all the web stuff resides, including these slides)\n\nSome re-used for the Yorkshire Engagement Portal\n\n“Regecontools” website where I’m trying to corral all the regional economics work and learning. (bit.ly/regecontools gets there too.)\nAn outputs live list: a reasonably complete list of all data, code and outputs"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#ons-regional-gva-data",
+    "href": "SYMCA_YPERN_July2025.html#ons-regional-gva-data",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "ONS Regional GVA data",
+    "text": "ONS Regional GVA data"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#ons-regional-gva-data-latest-2023",
+    "href": "SYMCA_YPERN_July2025.html#ons-regional-gva-data-latest-2023",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "ONS Regional GVA data (latest 2023)",
+    "text": "ONS Regional GVA data (latest 2023)\n\nSuper-rich, compact dataset - a pain to drag insights out of\nIf I had a favourite Excel document…\nFirst SYMCA ask: show what’s happened / happening to SY sectors"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#ons-regional-gva-data-latest-2023-1",
+    "href": "SYMCA_YPERN_July2025.html#ons-regional-gva-data-latest-2023-1",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "ONS Regional GVA data (latest 2023)",
+    "text": "ONS Regional GVA data (latest 2023)\nHere’s what it looks like in its Excel home:"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#gva-data-1-structural-change",
+    "href": "SYMCA_YPERN_July2025.html#gva-data-1-structural-change",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "GVA data 1: structural change",
+    "text": "GVA data 1: structural change"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#x-ray",
+    "href": "SYMCA_YPERN_July2025.html#x-ray",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "X-ray",
+    "text": "X-ray\n“At first the student is completely puzzled…”"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#infographic",
+    "href": "SYMCA_YPERN_July2025.html#infographic",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "Infographic",
+    "text": "Infographic"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#gva-data-1-structural-change-98-to-07",
+    "href": "SYMCA_YPERN_July2025.html#gva-data-1-structural-change-98-to-07",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "GVA data 1: structural change ’98 to ’07",
+    "text": "GVA data 1: structural change ’98 to ’07"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#business-register-and-employment-survey-bres",
+    "href": "SYMCA_YPERN_July2025.html#business-register-and-employment-survey-bres",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "Business Register and Employment Survey (BRES)",
+    "text": "Business Register and Employment Survey (BRES)\n\nJob counts down to 5-digit SIC categories (724 of them)\nSurvey based, so gets more uncertain, but…\nInteractive: job counts at different sector levels for latest year in South Yorkshire. bit.ly/bres_sy"
   }
 ]
