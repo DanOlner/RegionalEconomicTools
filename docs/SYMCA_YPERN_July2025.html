@@ -337,6 +337,10 @@
 <h1>INTRO</h1>
 
 </section>
+<section id="slides" class="slide level2">
+<h2>Slides!</h2>
+<p>They’re online here if you want quick access to the links: <a href="https://bit.ly/ypernsymca">bit.ly/ypernsymca</a></p>
+</section>
 <section id="y-pern-yorkshire-humber-policy-exchange-and-research-network" class="slide level2">
 <h2>Y-PERN: “Yorkshire &amp; Humber Policy Exchange and Research Network”</h2>
 <div class="center">
@@ -385,7 +389,11 @@
 <li>It will help build a shared sense of ground truth</li>
 <li>It will avoid wheel reinvention (reproducibility <strong>needs</strong> this)</li>
 </ul></li>
-<li>Will come back to this in discussion: reality vs fantasy?</li>
+<li>Where possible, build <strong>automated pipelines</strong> from data source to output
+<ul>
+<li>E.g. below, R reads data directly from Excel files on the web</li>
+</ul></li>
+<li>Will come back to this in discussion: ideal vs reality?</li>
 </ul>
 </section></section>
 <section>
@@ -414,12 +422,41 @@
 <p><img data-src="miscimages/symcaypern/structure.png"></p>
 </div>
 </section>
+<section id="location-quotients-a-go-go" class="slide level2">
+<h2>Location quotients a-go-go</h2>
+<ul>
+<li>Interactive <a href="https://danolner.shinyapps.io/EconDataDashboard/">here</a>. <a href="https://bit.ly/lqecondash">bit.ly/lqecondash</a></li>
+<li>Wihle that’s loading…
+<ul>
+<li>LQs: a nice way to summarise where sectors are relative to the rest of the UK</li>
+<li>LQ &gt; 1 = sector more concentrated in a place than in the UK as whole</li>
+<li>E.g. if South Yorkshire fab metals manufacture is 10% of our economy and that sector is 5% of the UK’s as a whole, its LQ = 2.</li>
+<li>(LQ &lt; 1 = opposite)</li>
+</ul></li>
+</ul>
+</section>
 <section id="business-register-and-employment-survey-bres" class="slide level2">
 <h2>Business Register and Employment Survey (BRES)</h2>
 <ul>
-<li>Job counts down to 5-digit SIC categories (724 of them)</li>
+<li>Job counts down to 5-digit SIC categories (723 of them)</li>
 <li>Survey based, so gets more uncertain, but…</li>
+<li>We can see how the different SIC sector levels nest –&gt;</li>
 <li><a href="https://danolner.github.io/RegionalEconomicTools/miscdocs/SYLAs_CompaniesHouse2025_treemap.html" target="_blank">Interactive</a>: job counts at different sector levels for latest year in South Yorkshire. <a href="https://bit.ly/bres_sy" target="_blank">bit.ly/bres_sy</a></li>
+</ul>
+</section>
+<section id="making-companies-house-data-open" class="slide level2">
+<h2>Making Companies House data open</h2>
+<ul>
+<li>UK Companies House data is already ‘open’ but it’s opaque and a <a href="https://dictionary.cambridge.org/dictionary/english/pita">PITA</a> to wrangle.</li>
+<li>Other firms package it up and resell it in useable form but access is limited e.g.&nbsp;&lt; 30K rows</li>
+<li>A lot of value in having entire dataset to play with - it’s amazingly rich (though with weaknesses e.g.&nbsp;only HQ’d firms misses a lot)</li>
+</ul>
+</section>
+<section id="ch-1-hexmap-of-most-common-broad-sector" class="slide level2">
+<h2>CH 1: hexmap of most common broad sector</h2>
+<ul>
+<li>5000m hex, 50+ employees min per firm - <a href="https://danolner.github.io/companieshouseopen/maps/companieshouse_modal_SICsection_byemployeecount_minfiftyplus_hex5000.html">link</a>!</li>
+<li><a href="https://danolner.github.io/companieshouseopen/maps/companieshouse_modal_SICsection_byemployeecount_min10plus_hex1000m_wLADs.html">Higher res</a> for zooming in - 1000m and min 10 employees per firm. Less informative of GB econ structure?</li>
 </ul>
 </section>
 <section id="wheres-the-stuff" class="slide level2">

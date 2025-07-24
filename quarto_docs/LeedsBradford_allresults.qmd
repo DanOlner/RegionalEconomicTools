@@ -1,6 +1,5 @@
 ---
 title: "Economic collaboration across Bradford and Leeds: what does the latest sector data show?"
-sidebar: false
 author:
   - name: "Dan Olner (Yorkshire & Humber Policy Engagement & Research Network, University of Sheffield)"
 format: 

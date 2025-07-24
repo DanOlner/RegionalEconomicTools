@@ -1809,7 +1809,7 @@
     "href": "SYMCA_YPERN_July2025.html#why-work-openly",
     "title": "SYMCA / Y-PERN July 2025",
     "section": "Why work openly?",
-    "text": "Why work openly?\n\nNot all data work can be done openly. But a lot can, and I think there are compelling reasons to work this way:\n\nIt supports collaboration and learning (bootstrapping capacity building, everyone bringing their expertise)\nIt will help build a shared sense of ground truth\nIt will avoid wheel reinvention (reproducibility needs this)\n\nWill come back to this in discussion: reality vs fantasy?"
+    "text": "Why work openly?\n\nNot all data work can be done openly. But a lot can, and I think there are compelling reasons to work this way:\n\nIt supports collaboration and learning (bootstrapping capacity building, everyone bringing their expertise)\nIt will help build a shared sense of ground truth\nIt will avoid wheel reinvention (reproducibility needs this)\n\nWhere possible, build automated pipelines from data source to output\n\nE.g. below, R reads data directly from Excel files on the web\n\nWill come back to this in discussion: ideal vs reality?"
   },
   {
     "objectID": "SYMCA_YPERN_July2025.html#wheres-the-stuff",
@@ -1872,6 +1872,41 @@
     "href": "SYMCA_YPERN_July2025.html#business-register-and-employment-survey-bres",
     "title": "SYMCA / Y-PERN July 2025",
     "section": "Business Register and Employment Survey (BRES)",
-    "text": "Business Register and Employment Survey (BRES)\n\nJob counts down to 5-digit SIC categories (724 of them)\nSurvey based, so gets more uncertain, but…\nInteractive: job counts at different sector levels for latest year in South Yorkshire. bit.ly/bres_sy"
+    "text": "Business Register and Employment Survey (BRES)\n\nJob counts down to 5-digit SIC categories (723 of them)\nSurvey based, so gets more uncertain, but…\nWe can see how the different SIC sector levels nest –&gt;\nInteractive: job counts at different sector levels for latest year in South Yorkshire. bit.ly/bres_sy"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#slides",
+    "href": "SYMCA_YPERN_July2025.html#slides",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "Slides!",
+    "text": "Slides!\nThey’re online here if you want quick access to the links: bit.ly/ypernsymca"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#location-quotients-a-go-go",
+    "href": "SYMCA_YPERN_July2025.html#location-quotients-a-go-go",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "Location quotients a-go-go",
+    "text": "Location quotients a-go-go\n\nInteractive here. bit.ly/lqecondash\nWihle that’s loading…\n\nLQs: a nice way to summarise where sectors are relative to the rest of the UK\nLQ &gt; 1 = sector more concentrated in a place than in the UK as whole\nE.g. if South Yorkshire fab metals manufacture is 10% of our economy and that sector is 5% of the UK’s as a whole, its LQ = 2.\n(LQ &lt; 1 = opposite)"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html",
+    "href": "SYMCA_YPERN_July2025.html",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "",
+    "text": "They’re online here if you want quick access to the links: bit.ly/ypernsymca\n\n\n\n\n\n\n\n\n\n\nResearch England funded\nAim: to experiment with ways of strengthening glue between Y&H universities, regional authorities and communities\nSo still open question - what’s worked, what hasn’t??\nDiverse range of things happened/happening across the region - see y-pern.org.uk\n\n\n\n\n\nMe: seconded to SYMCA 2 years ago\nWorking also with Hallam team (Peter Wells, Elizabeth Sanderson, Jamie Redman)\nI’m an economic geographer / data scientist by background (with some political studies thrown in)\nAnd a big fan of making pretty data pictures to try and see it / understand it in different ways…\n\n\n\n\n\n\n\n\n\nPlan: I’ll run through examples of what I’ve worked on in my time with SYMCA\nPicking ones that I think tell a story\nThese will almost all be various plots, interative maps, dashboards, that kind of thing\nBut just a few thoughts on working openly…\n\n\n\n\n\nNot all data work can be done openly. But a lot can, and I think there are compelling reasons to work this way:\n\nIt supports collaboration and learning (bootstrapping capacity building, everyone bringing their expertise)\nIt will help build a shared sense of ground truth\nIt will avoid wheel reinvention (reproducibility needs this)\n\nWhere possible, build automated pipelines from data source to output\n\nE.g. below, R reads data directly from Excel files on the web\n\nWill come back to this in discussion: ideal vs reality?"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#making-companies-house-data-open",
+    "href": "SYMCA_YPERN_July2025.html#making-companies-house-data-open",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "Making Companies House data open",
+    "text": "Making Companies House data open\n\nUK Companies House data is already ‘open’ but it’s opaque and a PITA to wrangle.\nOther firms package it up and resell it in useable form but access is limited e.g. &lt; 30K rows\nA lot of value in having entire dataset to play with - it’s amazingly rich (though with weaknesses e.g. only HQ’d firms misses a lot)"
+  },
+  {
+    "objectID": "SYMCA_YPERN_July2025.html#ch-1-hexmap-of-most-common-broad-sector",
+    "href": "SYMCA_YPERN_July2025.html#ch-1-hexmap-of-most-common-broad-sector",
+    "title": "SYMCA / Y-PERN July 2025",
+    "section": "CH 1: hexmap of most common broad sector",
+    "text": "CH 1: hexmap of most common broad sector\n\n5000m hex, 50+ employees min per firm - link!\nHigher res for zooming in - 1000m and min 10 employees per firm. Less informative of GB econ structure?"
   }
 ]

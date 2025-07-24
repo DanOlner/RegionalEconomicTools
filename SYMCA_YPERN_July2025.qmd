@@ -24,6 +24,10 @@ knitr::opts_chunk$set(fig.height = 8, fig.width = 10, warning = F, error = F, me
 
 # INTRO
 
+## Slides!
+
+They're online here if you want quick access to the links: [bit.ly/ypernsymca](https://bit.ly/ypernsymca)
+
 ## Y-PERN: "Yorkshire & Humber Policy Exchange and Research Network"
 
 ::: {.center}
@@ -66,7 +70,9 @@ knitr::opts_chunk$set(fig.height = 8, fig.width = 10, warning = F, error = F, me
     - It supports collaboration and learning (bootstrapping capacity building, everyone bringing their expertise)
     - It will help build a shared sense of ground truth
     - It will avoid wheel reinvention (reproducibility **needs** this)
-* Will come back to this in discussion: reality vs fantasy?
+* Where possible, build **automated pipelines** from data source to output
+    - E.g. below, R reads data directly from Excel files on the web
+* Will come back to this in discussion: ideal vs reality?
 
 
 
@@ -94,20 +100,37 @@ Here's what it looks like in its Excel home:
 ![](miscimages/symcaypern/structure.png) 
 :::
 
-## 
+## Location quotients a-go-go
 
+* Interactive [here](https://danolner.shinyapps.io/EconDataDashboard/). [bit.ly/lqecondash](https://bit.ly/lqecondash)
+* Wihle that's loading...
+    - LQs: a nice way to summarise where sectors are relative to the rest of the UK
+    - LQ > 1 = sector more concentrated in a place than in the UK as whole
+    - E.g. if South Yorkshire fab metals manufacture is 10% of our economy and that sector is 5% of the UK's as a whole, its LQ = 2.
+    - (LQ < 1 = opposite)
 
 
 
 ## Business Register and Employment Survey (BRES)
 
-* Job counts down to 5-digit SIC categories (724 of them)
+* Job counts down to 5-digit SIC categories (723 of them)
 * Survey based, so gets more uncertain, but...
+* We can see how the different SIC sector levels nest -->
 * [Interactive](https://danolner.github.io/RegionalEconomicTools/miscdocs/SYLAs_CompaniesHouse2025_treemap.html){target="_blank"}: job counts at different sector levels for latest year in South Yorkshire. [bit.ly/bres_sy](https://bit.ly/bres_sy){target="_blank"}
 
 
 
+## Making Companies House data open
 
+* UK Companies House data is already ‘open’ but it’s opaque and a [PITA](https://dictionary.cambridge.org/dictionary/english/pita) to wrangle.
+* Other firms package it up and resell it in useable form but access is limited e.g. < 30K rows
+* A lot of value in having entire dataset to play with - it's amazingly rich (though with weaknesses e.g. only HQ'd firms misses a lot)
+
+
+## CH 1: hexmap of most common broad sector
+
+* 5000m hex, 50+ employees min per firm - [link](https://danolner.github.io/companieshouseopen/maps/companieshouse_modal_SICsection_byemployeecount_minfiftyplus_hex5000.html)! 
+* [Higher res](https://danolner.github.io/companieshouseopen/maps/companieshouse_modal_SICsection_byemployeecount_min10plus_hex1000m_wLADs.html) for zooming in - 1000m and min 10 employees per firm. Less informative of GB econ structure?  
 
 
 
