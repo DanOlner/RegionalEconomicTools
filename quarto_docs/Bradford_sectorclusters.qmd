@@ -67,6 +67,10 @@ Here are links to other sources used in the analysis below to look at Bradford's
 
 
 
+Industrial strategy support for PBS SMEs "targeted and intensive" including support to strengthen export work.
+
+
+
 
 
 
@@ -161,7 +165,7 @@ Aleady mentioned, but a little more detail: "Delivering a new technology adoptio
 
 ### Points from the IndStrat LQ plots for Bradford
 
-The IndStrat LQ plots pick out for Bradford which IS-sectors are more concentrated job-wise, what their trajectory is and what the job counts are. This section can be read in conjunction with the more detailed data/sector analysis below, from which it draws.
+The IndStrat LQ plots pick out for Bradford which IS-8 sectors are more concentrated job-wise, what their trajectory is and what the job counts are. This section can be read in conjunction with the more detailed data/sector analysis below, from which it draws.
 
 There are three sectors in particular identified below as being important to Bradford but facing productivity challenges that could benefit from support flowing from the industrial strategy: **chemical production**, **head offices / management consultancy** and **architect/engineering/tech testing** services. See the analysis below for a description of the history of these sectors.
 
