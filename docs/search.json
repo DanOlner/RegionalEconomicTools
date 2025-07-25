@@ -1970,7 +1970,7 @@
     "href": "quarto_docs/SY_indstrat_July2025.html",
     "title": "South Yorkshire / UK Industrial Strategy LQ links",
     "section": "",
-    "text": "This doc shows job count location quotients for Sheffield, Barnsley, Doncaster and Rotherham for sectors that are part of the UK Industrial Strategy definition list (see below for more info on that). For BRES, Barnsley, Doncaster and Rotherham are combined. For Companies House data (here, June 2024 to end of June 2025) break down each of the the four places."
+    "text": "This doc shows job count location quotients for Sheffield, Barnsley, Doncaster and Rotherham for sectors that are part of the UK Industrial Strategy definition list (see below for more info on that).\n\nFor BRES, Barnsley, Doncaster and Rotherham are combined (BRES still uses ITL3 2021 zones where those three are in one zone).\nFor Companies House data (job counts extracted from accounts between June 2024 to end of June 2025), each of the four places have separate plots."
   },
   {
     "objectID": "quarto_docs/SY_indstrat_July2025.html#frontier-sic-sectors",

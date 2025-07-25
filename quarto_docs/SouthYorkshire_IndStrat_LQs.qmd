@@ -46,7 +46,10 @@ theme_set(theme_light())
 
 # INTRO
 
-This doc shows **job count location quotients** for Sheffield, Barnsley, Doncaster and Rotherham for **sectors that are part of the UK Industrial Strategy definition list** (see below for more info on that). For BRES, Barnsley, Doncaster and Rotherham are combined. For Companies House data (here, June 2024 to end of June 2025) break down each of the the four places.
+This doc shows **job count location quotients** for Sheffield, Barnsley, Doncaster and Rotherham for **sectors that are part of the UK Industrial Strategy definition list** (see below for more info on that). 
+
+* For BRES, Barnsley, Doncaster and Rotherham are combined (BRES still uses ITL3 2021 zones where those three are in one zone). 
+* For Companies House data (job counts extracted from accounts between June 2024 to end of June 2025), each of the four places have separate plots.
 
 
 
@@ -88,13 +91,22 @@ knitr::kable(indstrat, escape = FALSE, caption = "Table: Industrial Strategy IS-
 ```
 
 
+# Location quotient plots
+
+The outputs below use **location quotient plots**. Here's a guide to reading them:
+
+* Location quotients for sectoral GVA in the selected region
+* Sectors to the right of the blue line are more concentrated in this region when compared to the national average. (e.g. LQ = 10, it is 10x more concentrated)
+* Green circles have been increasing in concentration over time (larger circles increasing the most)
+* Red circles have been decreasing in concentration over time (larger circles decreasing the most)
+* Black horizontal lines show the min and max of concentration in the data’s history (from 2015 to 2023) (so, often, large green circles will be at the right of this line because sector concentration has been increasing and is continuing)
+* Per sector job counts and percent of the full IndStrat jobcount are shown on the right (not percent of entire regional jobs)
+* Fainter background squares are other place's LQs (ITL3 zones for BRES, local authorities for Companies House data)
+
 Also:
 
 * The LQ plots only shows IndStrat SIC sectors where South Yorkshire has 100+ employees (for 2021-23 average)
-* And breaks them down into 'frontier' sectors and the others (a few of which overlap)
-
-
-
+* And breaks them down into 'frontier' sectors and the others (a few of which overlap) - see the definitions web link above for a full explanation of those.
 
 
 
