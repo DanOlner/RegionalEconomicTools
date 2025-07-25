@@ -81,7 +81,7 @@ With **head offices/consultancy** quite a lot lower productivity than either **f
     
 ICT is showing reasonable growth compared to other places in GB, but there is a disconnect between that and jobs growth (which may be shrinking, and is static in the Companies House data) and the sector is still relatively small. Again, however, it contains important Industrial Strategy firms that overlap with engineering in the IS-8 sector definitions.
 
-Real estate appears to have very strong productivity, but identifying its source in the data is difficult - see its full subsection below. That makes it tricky to put in productivity or tradeablility context.
+Real estate appears to have very strong productivity even compared to the rest of GB, but identifying its source in the data is difficult - see its full subsection below. That makes it tricky to put in productivity or tradeablility context, but it needs noting.
 
 
 * Manufacturing/production:
@@ -92,17 +92,27 @@ Real estate appears to have very strong productivity, but identifying its source
 
 **Machinery & transport manufacture** ticks several boxes that put it at the top of that list: steady productivity rise putting it higher than Leeds now, with increased output and job count, putting it on a par with the sector's national average - not something many Northern places can say. Every subsector under this SIC are increasing their job concentration (with the majority in machine manufacture). Companies House shows a range of SMEs in this sector, though in the last year jobs growth hasn't been large.
 
+The **metals sector** is where many cutting edge firms like Produmax reside, and stands out strongly in the growth slope analysis, though its productivity faces issues. However, its job and GVA trajectory have steadily continued throughout the data time period.
+
 **Textiles** is on this list partly due to raw job count, but also because it has historically been reasonably good productivity, and has West Yorkshire-wide support in its Local Growth Plan. In many ways its data is similar to the **food manufacture** sector (where strong jobs growth is evident in last year's Companies House data) but the productivity gap between the two sectors is large, and Bradford's food sector is tracking below other WY authorities (though the most recent data might suggest that's changing). The raw numbers: textiles in Bradford is 62.4K per full time worker (85.5K GB average); food manufacture is 38.4K per full time (73.7K nationally). 
 
 
+## Strategy context
 
+The [section below](https://danolner.github.io/RegionalEconomicTools/quarto_docs/Bradford_sectorclusters_July2025.html#connection-to-other-sector-strategies) and the [data section](https://danolner.github.io/RegionalEconomicTools/quarto_docs/Bradford_sectorclusters_July2025.html#uk-industrial-strategy-linkage) linking to Industrial Strategy sector definitions dig into the detail of how Bradford's economy fits into other sector strategies. This is a short synthesis of points from those.
 
+Where the UK Industrial Strategy focuses on strategic and high growth sectors, both the West Yorkshire LGP and LSIP are more focused on sectors that include large job numbers but may not necessarily have high productivity or tradeability. Two of the sectors identified in the LGP - **food manufacture** and **chemicals** - face intense productivity challenges, though the LGP does also argue eloquently for support of the **textiles** industry in the region. 
 
-Industrial strategy support for PBS SMEs "targeted and intensive" including support to strengthen export work.
+**Chemical production** has had national issues, but as the section below details, Bradford jobs growth has been undermined by a severe productivity drop. There may be support for chemical production as a key part of the IndStrat's focus on foundational production that underpins all other output, but Bradford's chemicals productivity trajectory is on the lower end of anywhere in GB.
 
-West Yorkshire level strategies (the Local Growth Plan and LSIP) both target high-job-number but not always high-productivity sectors.
+The LSIP also aims to support **health and care** sector skills development, and Bradford does have many private firms in those sectors that show up in the Companies House data, with a large number of jobs. However, it is difficult to check the productivity of these sectors; they are historically very low, but there is also a national data issue for parts of the sector that are public. At any rate, it is not likely to be a very tradeable sector (though it is of course hugely foundational and important).
 
+The LSIP also identifies (and combines) **engineering and advanced manufacturing** - this is a canny combination given the historic challenges engineering has faced in Bradford, despite being an essential element for other aspects of manufacturing. 
 
+Both the LGP and LSIP pick out some high growth cluster firms (the LGP with a detailed Cluster Action Framework). The LGP provides a linked network diagram of high-growth cluster firms, but - in terms of the data here - it is quite broad, covering most sectors (some productive but not all e.g. logistics). It is is difficult in this data to pick out, for example, low carbon / clean tech firms; as the IndStrat dector definition page points out, there are no direct matching SIC codes, making it hard to track them. 
+
+That said, for SIC codes the IndStrat *does* supply, Bradford clearly has many strengths that align very well with the stand-out sectors identified here. 
+It aligns, for instance, with PBS SMEs - offering "targeted and intensive" support, including to strengthen export work. As discussed below, there are some key 'frontier' manufacturing sectors where Bradford also has clear strengths, including its communications, space and other tech sectors.
 
 
 
