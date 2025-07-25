@@ -1332,8 +1332,8 @@ slopeDiffGrid <- function(slope_df, confidence_interval, column_to_grid, column_
     y = paste0(substr(gridcol2,0,24),' (',slopetwo_percent,'% CI: ',min.citwo_percent,'%,',max.citwo_percent,'%)'), 
     fill= slopediff, colour = CIs_overlap)
   ) + 
-    geom_tile() +
-    # geom_tile(width = 0.8, height = 0.8, size = 1) +
+    # geom_tile() +
+    geom_tile(width = 0.8, height = 0.8, size = 1) +
     scale_fill_gradientn(
       colours = c("red", "white", "darkgreen"),
       values = c(0, zerocutoff, 1)#https://stackoverflow.com/a/58725778/5023561
@@ -1430,16 +1430,19 @@ pair_spearman_summarystats <- function(pairofplacenames){
 #Make generic so can take in data from several sources
 plotSlopeCounts <- function(df,placename,startdate,enddate,date_colname,region_colname,sector_colname,value_colname,includesectorname_on_axis = T,conf_interval = 95, neweywest = F){
   
-  date_colname = enquo(date_colname) 
+  date_colname = enquo(date_colname)
   region_colname = enquo(region_colname)
   sector_colname = enquo(sector_colname)
   value_colname = enquo(value_colname)
   
   slopes.log <- get_slope_and_se_safely(data = df %>% filter(!!date_colname %in% startdate:enddate), !!region_colname,!!sector_colname, y = log(!!value_colname), x = !!date_colname, neweywest = neweywest)
   
+  
   #Ah, good ol' past me put this in (returnddata = T)
   slopes.data <- slopeDiffGrid(slope_df = slopes.log, confidence_interval = conf_interval, column_to_grid = !!sector_colname, column_to_filter = !!region_colname, filterval = placename, returndata = T)
   
+  #Actually output the grid
+  #slopeDiffGrid(slope_df = slopes.log, confidence_interval = conf_interval, column_to_grid = !!sector_colname, column_to_filter = !!region_colname, filterval = placename)
   
   #Just need to count CIs overlap along one dimension of the grid (i.e. not its inverse at 90 degrees). 
   #So need the correct unique pairs don't we?
@@ -1469,14 +1472,18 @@ plotSlopeCounts <- function(df,placename,startdate,enddate,date_colname,region_c
     
     slopes.data <- slopeDiffGrid(slope_df = slopes.log, confidence_interval = conf_interval, column_to_grid = !!region_colname, column_to_filter = !!sector_colname, filterval = sector, returndata = T)
     
+    #Get actual grid for certain sectors
+    #unique(df$SIC07_description_shortened)
+    # slopes.data <- slopeDiffGrid(slope_df = slopes.log, confidence_interval = conf_interval, column_to_grid = !!region_colname, column_to_filter = !!sector_colname, filterval = sector)
+    
     #Again pulling out values from grid2 perspective, for South Yorkshire each time
     slopes.data <- slopes.data %>% filter(gridcol2 == placename)
     
     #Now count slopes in same way
-    sector_slopediffcount <- slopes.data %>% 
+    sector_slopediffcount <- slopes.data %>%
       mutate(slopetype = case_when(
         !CIs_overlap & slopediff > 0 ~ 'sig pos',
-        !CIs_overlap & slopediff < 0 ~ 'sig neg',
+        !CIs_overlap & slopediff < 0 ~ 'sig neg', 
         .default = "not sig"
       )) %>% 
       mutate(slopetype = factor(slopetype, levels = c('sig pos','sig neg','not sig'))) %>% 
@@ -1494,6 +1501,9 @@ plotSlopeCounts <- function(df,placename,startdate,enddate,date_colname,region_c
   #both
   allslopecounts <- rbind(sy_slopediffcount,allsectorslopecounts) %>% rename(sector = gridcol2) 
   
+  
+  #Test.... was I getting wrong slopes data for colours? That's not it...
+  # slopes.data <- slopeDiffGrid(slope_df = slopes.log, confidence_interval = conf_interval, column_to_grid = !!sector_colname, column_to_filter = !!region_colname, filterval = placename, returndata = T)
   
   #Add slope colours and values back in then use for axis text as in grids
   #Slopes match to sectors, so can take from any source with those in here
@@ -1518,20 +1528,27 @@ plotSlopeCounts <- function(df,placename,startdate,enddate,date_colname,region_c
       )
   
   #Pull out slope colours
-  slopecolours_y <- allslopecounts %>% 
-    filter(slopetype == 'sig neg') %>% 
-    # filter(slopetype == 'sig neg', !grepl('Real estate',sector,ignore.case = T)) %>% 
-    # filter(slopetype == 'sig neg', !grepl('Real estate',sector,ignore.case = T), regional_percent > 2) %>% 
-    distinct(sector, .keep_all = T) %>% 
+  slopecolours_y <- allslopecounts %>%
+    filter(slopetype == 'sig neg') %>%
+    # filter(slopetype == 'sig neg', !grepl('Real estate',sector,ignore.case = T)) %>%
+    # filter(slopetype == 'sig neg', !grepl('Real estate',sector,ignore.case = T), regional_percent > 2) %>%
+    distinct(sector, .keep_all = T) %>%
     arrange(sector) %>% #will arrange by factor
-    select(slopecolour_y) %>% 
+    select(slopecolour_y) %>%
     pull
   
+  #Can we just pull directly and get correct colours? Values are all OK...
+  # slopecolours_y <- slopes.data %>% select(gridcol2,slopecolour_y,slopetwo_percent,min.citwo_percent,max.citwo_percent) %>% distinct(gridcol2, .keep_all = T) %>% rename(sector = gridcol2) %>% arrange(sector) %>% select(slopecolour_y) %>% pull
+  
   p <- ggplot() +
-    geom_bar(data = allslopecounts %>% filter(slopetype == 'sig neg', !grepl('Real estate',sector,ignore.case = T)), 
+    geom_bar(data = allslopecounts %>% filter(slopetype == 'sig neg'), 
              aes(x = sector, y = -percent, fill = source), stat = 'identity', position = 'dodge', alpha = 0.7) +
-    geom_bar(data = allslopecounts %>% filter(slopetype == 'sig pos', !grepl('Real estate',sector,ignore.case = T)), 
+    geom_bar(data = allslopecounts %>% filter(slopetype == 'sig pos'), 
              aes(x = sector, y = percent, fill = source), stat = 'identity', position = 'dodge') +
+    # geom_bar(data = allslopecounts %>% filter(slopetype == 'sig neg', !grepl('Real estate',sector,ignore.case = T)), 
+    #          aes(x = sector, y = -percent, fill = source), stat = 'identity', position = 'dodge', alpha = 0.7) +
+    # geom_bar(data = allslopecounts %>% filter(slopetype == 'sig pos', !grepl('Real estate',sector,ignore.case = T)), 
+    #          aes(x = sector, y = percent, fill = source), stat = 'identity', position = 'dodge') +
     geom_hline(yintercept = 0, size = 2) +
     # scale_fill_distiller(type = 'qual', direction = -1) +
     # scale_fill_brewer(palette = 'Dark2', direction = 1) +

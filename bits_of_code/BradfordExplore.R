@@ -1916,6 +1916,7 @@ itl3.2digit.cv <- itl3.2digit.cv %>%
 # )
 
 #CV first. No NeweyWest
+#debugonce(plotSlopeCounts)
 bradford.2dig <- plotSlopeCounts(
   df = itl3.2digit.cv,
   placename = 'Bradford',
@@ -1928,7 +1929,7 @@ bradford.2dig <- plotSlopeCounts(
   conf_interval = 95
 )
 
-# bradford.2dig$plot
+bradford.2dig$plot
 
 #OK. Need a way to order it... but OK.
 
