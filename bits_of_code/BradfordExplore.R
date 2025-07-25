@@ -2553,6 +2553,7 @@ sector = thisyr %>% select(SIC07_description_shortened) %>% filter(qg('food manu
 sector = thisyr %>% select(SIC07_description_shortened) %>% filter(qg('arts/ent',SIC07_description_shortened)) %>% pull %>% as.character %>% unique
 sector = thisyr %>% select(SIC07_description_shortened) %>% filter(qg('chemicals',SIC07_description_shortened)) %>% pull %>% as.character %>% unique
 sector = thisyr %>% select(SIC07_description_shortened) %>% filter(qg('real est',SIC07_description_shortened)) %>% pull %>% as.character %>% unique
+sector = thisyr %>% select(SIC07_description_shortened) %>% filter(qg('ict',SIC07_description_shortened)) %>% pull %>% as.character %>% unique
 sector = "Admin"
 
 
