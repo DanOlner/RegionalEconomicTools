@@ -2554,6 +2554,7 @@ sector = thisyr %>% select(SIC07_description_shortened) %>% filter(qg('arts/ent'
 sector = thisyr %>% select(SIC07_description_shortened) %>% filter(qg('chemicals',SIC07_description_shortened)) %>% pull %>% as.character %>% unique
 sector = thisyr %>% select(SIC07_description_shortened) %>% filter(qg('real est',SIC07_description_shortened)) %>% pull %>% as.character %>% unique
 sector = thisyr %>% select(SIC07_description_shortened) %>% filter(qg('ict',SIC07_description_shortened)) %>% pull %>% as.character %>% unique
+sector = thisyr %>% select(SIC07_description_shortened) %>% filter(qg('textiles',SIC07_description_shortened)) %>% pull %>% as.character %>% unique
 sector = "Admin"
 
 
@@ -2594,8 +2595,9 @@ p <- ggplot(
 ) +
   geom_point() +
   coord_flip() +
-  geom_hline(yintercept = thisyr.1sec %>% filter(Region_name == 'Bradford') %>% 
-               select(gvaperjob_movingav)%>%pull, 
+  geom_hline(yintercept = 
+               thisyr.1sec %>% filter(Region_name == 'Bradford') %>% select(gvaperjob_movingav)%>%pull
+             , 
              colour = 'green') +
   geom_hline(yintercept = natav, colour = 'blue')
 

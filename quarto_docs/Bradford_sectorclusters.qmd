@@ -45,10 +45,10 @@ theme_set(theme_light())
 
 This document contains the following sections - all accessible via the table of contents on the right hand side of this page. **Click on a top-level heading to open up its subheadings.**
 
-1. A summary/synthesis of the findings 
-2. Connections to other sector strategies - including a detailed data driven link to the UK Industrial Strategy
-3. Headlines from the data analysis, including a sector-by-sector breakdown of sectors (examining strongest and other important sectors). Hover on figure references for a preview or click to jump to them.
-4. A series of data sections used as the basis for the analysis - see the 'data' section at the top of the headlines below for a full explanation of what has been used.
+1. **A summary/synthesis of the findings**
+2. **Connections to other sector strategies** - including a detailed data driven link to the UK Industrial Strategy
+3. **Headlines from the data analysis** including a sector-by-sector breakdown of sectors (examining strongest and other important sectors). Hover on figure references for a preview or click to jump to them.
+4. **A series of data sections used as the basis for the analysis** - see the 'data' section at the top of the headlines below for a full explanation of what has been used.
 
 Here are links to other sources used in the analysis below to look at Bradford's sectors/clusters in context (all open in new tabs).
 
@@ -64,6 +64,37 @@ Here are links to other sources used in the analysis below to look at Bradford's
 
 
 # SUMMARY
+
+## Stand-out sectors
+
+There are stand-out sectors in both the production and services categories, analysed in detail below in the [data headlines](https://danolner.github.io/RegionalEconomicTools/quarto_docs/Bradford_sectorclusters_July2025.html#headlines-from-the-data-analysis) section. The focus here is on sectors with strong growth trajectories and tradeability potential (which naturally aligns with Industrial Strategy goals). Those are:
+
+
+* Services:
+    - **Head offices/management consultancy**
+    - **Finance**
+    - **Legal/accounting**
+    - With **ICT** and **real estate** both arguably on this list
+    - **Engineering / tech testing** an historically important sector - has such strong declining productivity, it is difficult to include in a 'strongest' list, but may well be an essential element of productivity success in connected sectors
+    
+With **head offices/consultancy** quite a lot lower productivity than either **finance** or **legal/accounting**, it gets to the top of this list because of its stand-out growth trajectory, in a sector recognised as important in the Industrial Strategy. Those three all align with the Industrial Strategy under the 'Professional and Business Services' (PBS) heading. **Finance** obviously includes large, long-established firms in Bradford - but there is also evident dynamism in SME firms that shows up in this year's Companies House data. **Legal/accounting** has had ups and downs historically, but it is still some way ahead of national average productivity.
+    
+ICT is showing reasonable growth compared to other places in GB, but there is a disconnect between that and jobs growth (which may be shrinking, and is static in the Companies House data) and the sector is still relatively small. Again, however, it contains important Industrial Strategy firms that overlap with engineering in the IS-8 sector definitions.
+
+Real estate appears to have very strong productivity, but identifying its source in the data is difficult - see its full subsection below. That makes it tricky to put in productivity or tradeablility context.
+
+
+* Manufacturing/production:
+    - **Machinery & transport manufacture**
+    - The **metals sector (including fabricated metal)**
+    - **Textiles**
+    - (Building construction has notable productivity growth, and could be an important Industrial Strategy sector, but is low productivity compared to other WY local authorities).
+
+**Machinery & transport manufacture** ticks several boxes that put it at the top of that list: steady productivity rise putting it higher than Leeds now, with increased output and job count, putting it on a par with the sector's national average - not something many Northern places can say. Every subsector under this SIC are increasing their job concentration (with the majority in machine manufacture). Companies House shows a range of SMEs in this sector, though in the last year jobs growth hasn't been large.
+
+**Textiles** is on this list partly due to raw job count, but also because it has historically been reasonably good productivity, and has West Yorkshire-wide support in its Local Growth Plan. In many ways its data is similar to the **food manufacture** sector (where strong jobs growth is evident in last year's Companies House data) but the productivity gap between the two sectors is large, and Bradford's food sector is tracking below other WY authorities (though the most recent data might suggest that's changing). The raw numbers: textiles in Bradford is 62.4K per full time worker (85.5K GB average); food manufacture is 38.4K per full time (73.7K nationally). 
+
+
 
 
 
@@ -249,7 +280,7 @@ All code for this analysis is available [here](https://github.com/DanOlner/Regio
 * **Finance** should possibly be at the top of this list, as it is 5.4% of Bradford's economy and 3.7% of its full time workforce (4900 jobs in BRES; @fig-otherLQs). However, it doesn't stand out in comparison to other Bradford sectors or the rest of GB. For example, in its 2D GVA vs jobs percent change plot (@fig-gvajobsFin), while its productivity has risen, it's only a little - though note, it is at least in the more positive half in that plot, compared to many other places with productivity drops (in the grey top left diagonal).
     - The 'finance' SIC category in the GVA data covers SICs 64 to 66 (finance, auxiliaries and insurance) - looking deeper into the BRES 2 and 5 digit lists, building societies are the largest job chunk (1200 / 0.85%) and have been concentrated in Bradford (near the top of UK concentration) for the full data time period. There are actually more jobs in the 'banks' category (2400, 1,8%) but that is only a little above the GB average. Financial auxiliary jobs have been shrinking in number, and statistically more than most other places (@fig-growthdata_bres2dig) and insurance is a very small number of jobs.
     - Companies House data also shows strong jobs growth in the last year (only Wakefield ahead in WY) - 14 firms with 10+ employees going from 1434 to 1558 employees (an 8.65% increase, @fig-percentempfourplaces). (CH data also shows over 300 "fewer than 10 employees") firms / lone traders, @fig-percentempfourplaces_lessthan10).
-* **Legal and accounting** is a stand-out related sector in the PBS (Professional and Business Services) category (average 3.2% of jobs in 2021-23, 1.8% of total).  With historically very high output per FT worker in Bradford (@fig-gvajobs1 panel 5), it has dropped more recently but is still very high - 93.5K per FT versus 78.4K average for other ITL3 zones.
+* **Legal and accounting** is a stand-out related sector in the PBS (Professional and Business Services) category (average 3.2% of jobs in 2021-23, 1.8% of total).  With historically very high output per FT worker in Bradford (@fig-gvajobs1 panel 5), it has dropped more recently but is still very high - 93.5K per FT versus 78.4K average for other ITL3 zones, some way above the national average.
     - The sector has grown jobs only modestly over the data time period, but it started from a high GVA and jobs baseline. Digging into the 5 digit SICs for the sector, 'accounting/auditing' (1150 jobs in latest BRES year) has been growing its job concentration strongly - still below average GB concentration, but heading higher and very high output. BRES records 833 workers in 'solicitors', but the trajectory is not as strong as accounting. 
     - Companies House data for the last year shows growth in "fewer than 10 employee" firms of 7.4% (now up to 670 employees), though 10+ employee firms have been fairly static.
 
@@ -258,7 +289,7 @@ All code for this analysis is available [here](https://github.com/DanOlner/Regio
 ### Notes on other service sectors
 
 * **Real estate** has a high output per worker everywhere (with imputed rent removed, so this is purely real estate itself, not a reflection of rising house prices). This should arguably be in "strongest service sectors", but it is difficult to discern from the data where the productivity is coming from. Exactly half of the job count in this sector is in 'housing association renting'. Jobs *are* increasing in each of the other subsectors (real estate, agencies, other letting) which are another 1000 jobs and, looking in Companies House data, there are firms like [Dacre, Son and Hartley](https://find-and-update.company-information.service.gov.uk/company/03090769) who employ 100 people and are clearly strong. Job numbers have risen since 2015/17 but output hasn't risen quite as quickly (see GVA vs jobs plot, @fig-gvajobsrealestate). The sector is also productive even by UK standards (195K per FT worker versus 167K). But in this data, it cannot be seen what role housing associations versus other real estate is playing in this.
-* The **ICT sector** in Bradford is relatively small as a proportion of GVA and jobs (though not tiny - it's 1,800 jobs and 1.73% of the economy). But after a fairly stagnant productivity path (@fig-gvajobs1 panel 3), the sector has seen a productivity jump in more recent years (showing up as both reasonable GVA and jobs growth over the whole data period; @fig-gvajobsict), putting it clsoer to the national average (76.8K per FT worker versus 86.K, 2021-23 average). This stronger growth trend than around 45% of other places puts it second only to Leeds in a West Yorkshire productivity ranking, and continuing to climb. Reading the LQ plot for GVA and jobs (@fig-otherLQs) it appears its GVA concentration - steady for a long time - is more recently going up, but possibly with a decline in job concentration. In the last year in the Companies House data, jobs are static (Leeds has grown; other WY local authorities have shrunk). So a mixed picture in a possibly important sector that aligns with the Industrial Strategy.
+* The **ICT sector** in Bradford is relatively small as a proportion of GVA and jobs (though not tiny - it's 1,800 jobs and 1.73% of the economy). But after a fairly stagnant productivity path (@fig-gvajobs1 panel 3), the sector has seen a productivity jump in more recent years (showing up as both reasonable GVA and jobs growth over the whole data period; @fig-gvajobsict), putting it closer to the national average (76.8K per FT worker versus 86.K, 2021-23 average). This stronger growth trend than around 45% of other places puts it second only to Leeds in a West Yorkshire productivity ranking, and continuing to climb. Reading the LQ plot for GVA and jobs (@fig-otherLQs) it appears its GVA concentration - steady for a long time - is more recently going up, but possibly with a decline in job concentration. In the last year in the Companies House data, jobs are static (Leeds has grown; other WY local authorities have shrunk). So a mixed picture in a possibly important sector that aligns with the Industrial Strategy.
 * It is tricky to define **architecture/engineering/tech testing's** place in Bradford (SIC 71). It is a large chunk of Bradford's economy - more than 2000 jobs, 1.5% of full time workforce in latest BRES year, and has historically kept around the same number. However - while its GVA per worker in @fig-gvajobs1 was very high in 2015-17, it has dropped off constantly since (while other places in WY have slowly climbed), now approaching the same output per worker as head offices / consultancy (though it is still above the average of other ITL3s). Jobs in the sector have grown in most places, but Bradford is some way into the group where GVA has dropped (@fig-gvajobsarcheng). There has been a jump in job numbers in the most recent data but no GVA jump, suggesting productivity continues to decline. Companies House shows a large number of SMEs in the sector, with modest jobs growth. But this sector (despite technically being under a 'services' heading) is obviously important to manufacturing and other productive output.
     - What factors underpin this steady slope? This data isn't able to say directly, but identifying what's happening here could be a first step to addressing it.
 * **Utilities and power** (5.7% of Bradford's GVA, 2500 jobs in BRES) are tricky sectors to analyse. While the sector appears highly productive in Bradford (187K per FT job versus 138K GB average), differences in this sector largely come down to the capital intensity of the sector. There can be innovative frontier firms in these SIC codes, but the fact that very few firms in these sectors appear in the Companies House data suggests this sector is largely external utilities in the area, and could be difficult to affect.
