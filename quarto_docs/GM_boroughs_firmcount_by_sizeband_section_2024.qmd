@@ -168,7 +168,7 @@ both <- bind_rows(gm.sectionsums,eng.sectionsums) %>%
     GEOGRAPHY_NAME = factor(GEOGRAPHY_NAME, levels = c(
       "Bolton", "Bury", "Manchester", "Oldham", "Rochdale", "Salford", "Stockport", "Tameside", "Trafford", "Wigan","England"
     )),
-    `%:` = paste0(round(percent_firmcount,1), ', count: ',totalfirmcount_per_LA)
+    `Place` = paste0(' ',GEOGRAPHY_NAME,', ',round(percent_firmcount,1), '%, count: ',firmcount)
   ) %>% rename(
     Borough = GEOGRAPHY_NAME
   )
@@ -176,7 +176,7 @@ both <- bind_rows(gm.sectionsums,eng.sectionsums) %>%
 p <- ggplot(
   both, 
   # gm.sectionsums, 
-  aes(x = SIC_SECTION_NAME_SHORTERNED, y = percent_firmcount, fill = Borough, label = `%:`)
+  aes(x = SIC_SECTION_NAME_SHORTERNED, y = percent_firmcount, fill = Borough, label = `Place`)
 ) +
   geom_bar(stat='identity', position = 'dodge') +
   xlab("SIC section") +
@@ -189,7 +189,7 @@ p <- ggplot(
   # theme(legend.title=element_blank())#doesn't work in ggplotly
   # scale_color_discrete(name="")#Neither does this!
 
-ggplotly(p, tooltip = '%:')
+ggplotly(p, tooltip = 'Place')
 
 
 
@@ -323,7 +323,7 @@ both <- bind_rows(gm.sectionsums,eng.sectionsums) %>%
     GEOGRAPHY_NAME = factor(GEOGRAPHY_NAME, levels = c(
       "Bolton", "Bury", "Manchester", "Oldham", "Rochdale", "Salford", "Stockport", "Tameside", "Trafford", "Wigan","England"
     )),
-    `%:` = paste0(round(percent_firmcount,1), ', count: ',totalfirmcount_per_LA)
+    `Place` = paste0(' ',GEOGRAPHY_NAME,', ',round(percent_firmcount,1), '%, count: ',firmcount)
   ) %>% rename(
     Borough = GEOGRAPHY_NAME
   )
@@ -331,20 +331,21 @@ both <- bind_rows(gm.sectionsums,eng.sectionsums) %>%
 p <- ggplot(
   both, 
   # gm.sectionsums, 
-  aes(x = SIC_SECTION_NAME_SHORTERNED, y = percent_firmcount, fill = Borough, label = `%:`)
+  aes(x = SIC_SECTION_NAME_SHORTERNED, y = percent_firmcount, fill = Borough, label = `Place`)
 ) +
   geom_bar(stat='identity', position = 'dodge') +
   xlab("SIC section") +
-  ylab("% of borough's total enterprise count (with England av)") +
+  ylab("% of borough's total local unit count (with England av)") +
   scale_fill_brewer(palette = "Paired", direction = 1) +
   theme(legend.title=element_blank()) +
   facet_wrap(~EMPLOYMENT_SIZEBAND_NAME, nrow = 1, scales = 'free_x') +
   coord_flip() +
   xlab("")
-# theme(legend.title=element_blank())#doesn't work in ggplotly
-# scale_color_discrete(name="")#Neither does this!
+  # theme(legend.title=element_blank())#doesn't work in ggplotly
+  # scale_color_discrete(name="")#Neither does this!
 
-ggplotly(p, tooltip = '%:')
+ggplotly(p, tooltip = 'Place')
+
 
 
 
