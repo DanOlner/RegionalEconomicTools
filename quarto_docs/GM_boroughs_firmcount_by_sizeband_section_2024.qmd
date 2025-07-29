@@ -1,0 +1,350 @@
+---
+title: "Greater Manchester: firm counts and percents broken down by borough, size band and broad sector"
+author:
+  - name: "Dan Olner"
+format: 
+  html:
+    output-file: "GM_firmcounts_bysize_sector"
+    fig-width: 9
+    fig-height: 12
+execute:
+  echo: false
+  message: false
+  warning: false
+fig-responsive: false
+collapse: false
+---
+
+```{r setup}
+library(tidyverse)
+library(plotly)#For interactive plots
+library(RColorBrewer)
+source('../functions/misc_functions.R')
+
+options(scipen = 999)
+
+#orig code in businesscounts_explore.R
+
+```
+
+
+## What's this?
+
+* Business count data (via [NOMIS](https://www.nomisweb.co.uk/sources/ukbc)) for Greater Manchester boroughs, broken down into four firm size bands and broad sectors (SIC sections). This latest data is for 2024.
+* Two separate plots for local units vs enterprises. See below for more on that.
+* Every data point is "percent of a borough's **total unit count**", to make them comparable across places. **Hover for exact percent as well as firm count**.
+* England values included for comparison.
+* Prep code here, code for this quarto doc here.
+
+## Enterprises vs local units
+
+[This doc](https://www.ons.gov.uk/file?uri=%2Fbusinessindustryandtrade%2Fbusiness%2Factivitysizeandlocation%2Fmethodologies%2Fbusinesspopulation%2Ffurtherinformationaboutidbrsourcestcm77325481.pdf) has as good outline that includes the different data sources used for each. Both will include public and private organisations. Quick summary:
+
+* Local units are **all business units** including head offices, branches, factories etc. These can be located in different places (e.g. supermarket branches). Source is BRES survey data.
+* Enterprises are where HQs are located. From NOMIS: "An Enterprise is the smallest combination of legal units which has a certain degree of autonomy within an Enterprise Group."
+
+
+# Plots
+
+## Local units
+
+
+```{r, fig1}
+
+gm <- readRDS('../local/data/greatermanchester_businesscounts_localunits_byfirmsizeandsector2024.rds')
+
+# saveRDS(eng,'../local/data/england_businesscounts_localunits_byfirmsizeandsector2024.rds')
+eng <- readRDS('../local/data/england_businesscounts_localunits_byfirmsizeandsector2024.rds')
+
+#Keep just two digit
+gm <- gm %>% filter(INDUSTRY_TYPE == 'SIC 2007 division (2 digit)') 
+
+#Merge in sections
+SIClookup <- read_csv('../data/SIClookup.csv')
+
+#Check match... tick
+# table(unique(SIClookup$SIC_2DIGIT_CODE) %in% gm$INDUSTRY_CODE)
+
+#Merge in sections...
+gm <- gm %>% 
+  rename(SIC_2DIGIT_CODE = INDUSTRY_CODE) %>% 
+  left_join(
+    SIClookup %>% select(SIC_2DIGIT_CODE,SIC_SECTION_CODE,SIC_SECTION_NAME) %>% distinct(),
+    by = 'SIC_2DIGIT_CODE'
+  )
+
+#Shortemed!
+gm <- gm %>% mutate(SIC_SECTION_NAME_SHORTERNED = reduceSICnames(SIC_SECTION_NAME,'section'))
+
+# unique(gm$SIC_SECTION_NAME_SHORTERNED)
+
+
+#Remove a couple we don't want
+gm <- gm %>% filter(!qg('extrat|households',SIC_SECTION_NAME_SHORTERNED))
+
+
+#So plot wise...
+#Prob want 1 section, 1 firm size, all 10 boroughs on one plot? Test...
+
+#We want "count of firms of different sizes as a percent of total firm count" in each borough
+#Note also at the moment, haven't summed counts per section
+
+#Sums per section! Let's do that first
+#We don't want every single employment size band (some overlap e.g. there's 0-4 and micro 0-9) 
+#Drop the ones we don't want
+gm.sectionsums <- gm %>% 
+  filter(
+    EMPLOYMENT_SIZEBAND_NAME %in% c('Micro (0 to 9)','Small (10 to 49)','Medium-sized (50 to 249)','Large (250+)')
+    # EMPLOYMENT_SIZEBAND_NAME %in% c('0 to 4','10 to 19','20 to 49','')
+  ) %>% 
+  group_by(EMPLOYMENT_SIZEBAND_NAME,SIC_SECTION_NAME_SHORTERNED,GEOGRAPHY_NAME) %>% 
+  summarise(firmcount = sum(OBS_VALUE)) %>% 
+  ungroup()
+  
+
+#Add in total firm count per borough, so can then find percent of firm count for each sizeband/section combo
+#(And mull if that's the best denominator... e.g. could examine a particular sector like ICT)
+gm.sectionsums <- gm.sectionsums %>% 
+  group_by(GEOGRAPHY_NAME) %>% 
+  mutate(
+    totalfirmcount_per_LA = sum(firmcount),
+    percent_firmcount = (firmcount/totalfirmcount_per_LA) * 100,
+    EMPLOYMENT_SIZEBAND_NAME = factor(EMPLOYMENT_SIZEBAND_NAME, levels = c('Micro (0 to 9)','Small (10 to 49)','Medium-sized (50 to 249)','Large (250+)'))) %>% 
+  ungroup() 
+
+
+
+#REPEAT FOR ENGLAND
+eng <- eng %>% filter(INDUSTRY_TYPE == 'SIC 2007 division (2 digit)') 
+
+#Merge in sections
+#Check match... tick
+# table(unique(SIClookup$SIC_2DIGIT_CODE) %in% eng$INDUSTRY_CODE)
+
+#Merge in sections...
+eng <- eng %>% 
+  rename(SIC_2DIGIT_CODE = INDUSTRY_CODE) %>% 
+  left_join(
+    SIClookup %>% select(SIC_2DIGIT_CODE,SIC_SECTION_CODE,SIC_SECTION_NAME) %>% distinct(),
+    by = 'SIC_2DIGIT_CODE'
+  )
+
+#Shortemed!
+eng <- eng %>% mutate(SIC_SECTION_NAME_SHORTERNED = reduceSICnames(SIC_SECTION_NAME,'section'))
+
+# unique(eng$SIC_SECTION_NAME_SHORTERNED)
+
+
+#Remove a couple we don't want
+eng <- eng %>% filter(!qg('extrat|households',SIC_SECTION_NAME_SHORTERNED))
+
+#Sums per section! Let's do that first
+#We don't want every single employment size band (some overlap e.g. there's 0-4 and micro 0-9) 
+#Drop the ones we don't want
+eng.sectionsums <- eng %>% 
+  filter(
+    EMPLOYMENT_SIZEBAND_NAME %in% c('Micro (0 to 9)','Small (10 to 49)','Medium-sized (50 to 249)','Large (250+)')
+  ) %>% 
+  group_by(EMPLOYMENT_SIZEBAND_NAME,SIC_SECTION_NAME_SHORTERNED) %>% 
+  summarise(firmcount = sum(OBS_VALUE)) %>% 
+  ungroup()
+
+
+#Add in total firm count per borough, so can then find percent of firm count for each sizeband/section combo
+#(And mull if that's the best denominator... e.g. could examine a particular sector like ICT)
+eng.sectionsums <- eng.sectionsums %>% 
+  mutate(
+    GEOGRAPHY_NAME = "England",#add this back in to combine below
+    totalfirmcount_per_LA = sum(firmcount),
+    percent_firmcount = (firmcount/totalfirmcount_per_LA) * 100,
+    EMPLOYMENT_SIZEBAND_NAME = factor(EMPLOYMENT_SIZEBAND_NAME, levels = c('Micro (0 to 9)','Small (10 to 49)','Medium-sized (50 to 249)','Large (250+)'))) %>% 
+  ungroup() 
+
+#EVERYTHING PLUS ENGLAND
+both <- bind_rows(gm.sectionsums,eng.sectionsums) %>% 
+  mutate(
+    GEOGRAPHY_NAME = factor(GEOGRAPHY_NAME, levels = c(
+      "Bolton", "Bury", "Manchester", "Oldham", "Rochdale", "Salford", "Stockport", "Tameside", "Trafford", "Wigan","England"
+    )),
+    `%:` = paste0(round(percent_firmcount,1), ', count: ',totalfirmcount_per_LA)
+  ) %>% rename(
+    Borough = GEOGRAPHY_NAME
+  )
+
+p <- ggplot(
+  both, 
+  # gm.sectionsums, 
+  aes(x = SIC_SECTION_NAME_SHORTERNED, y = percent_firmcount, fill = Borough, label = `%:`)
+) +
+  geom_bar(stat='identity', position = 'dodge') +
+  xlab("SIC section") +
+  ylab("% of borough's total local unit count (with England av)") +
+  scale_fill_brewer(palette = "Paired", direction = 1) +
+  theme(legend.title=element_blank()) +
+  facet_wrap(~EMPLOYMENT_SIZEBAND_NAME, nrow = 1, scales = 'free_x') +
+  coord_flip() +
+  xlab("")
+  # theme(legend.title=element_blank())#doesn't work in ggplotly
+  # scale_color_discrete(name="")#Neither does this!
+
+ggplotly(p, tooltip = '%:')
+
+
+
+```
+
+
+
+## Enterprises
+
+
+```{r, fig2}
+
+gm <- readRDS('../local/data/greatermanchester_businesscounts_enterprises_byfirmsizeandsector2024.rds')
+
+
+#Also get for England, too add average... 2092957699
+# d <- nomis_get_metadata(id = "NM_142_1", concept = "geography", type = "TYPE499")
+
+# eng <- nomis_get_data(id = "NM_142_1", time = "latest", MEASURES = 20100, LEGAL_STATUS = 0, geography = "2092957699")
+
+# saveRDS(eng,'../local/data/england_businesscounts_enterprises_byfirmsizeandsector2024.rds')
+eng <- readRDS('../local/data/england_businesscounts_enterprises_byfirmsizeandsector2024.rds')
+
+#Keep just two digit
+gm <- gm %>% filter(INDUSTRY_TYPE == 'SIC 2007 division (2 digit)') 
+
+#Merge in sections
+#Check match... tick
+# table(unique(SIClookup$SIC_2DIGIT_CODE) %in% gm$INDUSTRY_CODE)
+
+#Merge in sections...
+gm <- gm %>% 
+  rename(SIC_2DIGIT_CODE = INDUSTRY_CODE) %>% 
+  left_join(
+    SIClookup %>% select(SIC_2DIGIT_CODE,SIC_SECTION_CODE,SIC_SECTION_NAME) %>% distinct(),
+    by = 'SIC_2DIGIT_CODE'
+  )
+
+#Shortemed!
+gm <- gm %>% mutate(SIC_SECTION_NAME_SHORTERNED = reduceSICnames(SIC_SECTION_NAME,'section'))
+
+# unique(gm$SIC_SECTION_NAME_SHORTERNED)
+
+
+#Remove a couple we don't want
+gm <- gm %>% filter(!qg('extrat|households',SIC_SECTION_NAME_SHORTERNED))
+
+
+#So plot wise...
+#Prob want 1 section, 1 firm size, all 10 boroughs on one plot? Test...
+
+#We want "count of firms of different sizes as a percent of total firm count" in each borough
+#Note also at the moment, haven't summed counts per section
+
+#Sums per section! Let's do that first
+#We don't want every single employment size band (some overlap e.g. there's 0-4 and micro 0-9) 
+#Drop the ones we don't want
+gm.sectionsums <- gm %>% 
+  filter(
+    EMPLOYMENT_SIZEBAND_NAME %in% c('Micro (0 to 9)','Small (10 to 49)','Medium-sized (50 to 249)','Large (250+)')
+    # EMPLOYMENT_SIZEBAND_NAME %in% c('0 to 4','10 to 19','20 to 49','')
+  ) %>% 
+  group_by(EMPLOYMENT_SIZEBAND_NAME,SIC_SECTION_NAME_SHORTERNED,GEOGRAPHY_NAME) %>% 
+  summarise(firmcount = sum(OBS_VALUE)) %>% 
+  ungroup()
+
+
+#Add in total firm count per borough, so can then find percent of firm count for each sizeband/section combo
+#(And mull if that's the best denominator... e.g. could examine a particular sector like ICT)
+gm.sectionsums <- gm.sectionsums %>% 
+  group_by(GEOGRAPHY_NAME) %>% 
+  mutate(
+    totalfirmcount_per_LA = sum(firmcount),
+    percent_firmcount = (firmcount/totalfirmcount_per_LA) * 100,
+    EMPLOYMENT_SIZEBAND_NAME = factor(EMPLOYMENT_SIZEBAND_NAME, levels = c('Micro (0 to 9)','Small (10 to 49)','Medium-sized (50 to 249)','Large (250+)'))) %>% 
+  ungroup() 
+
+
+
+#REPEAT FOR ENGLAND
+eng <- eng %>% filter(INDUSTRY_TYPE == 'SIC 2007 division (2 digit)') 
+
+#Merge in sections
+#Check match... tick
+# table(unique(SIClookup$SIC_2DIGIT_CODE) %in% eng$INDUSTRY_CODE)
+
+#Merge in sections...
+eng <- eng %>% 
+  rename(SIC_2DIGIT_CODE = INDUSTRY_CODE) %>% 
+  left_join(
+    SIClookup %>% select(SIC_2DIGIT_CODE,SIC_SECTION_CODE,SIC_SECTION_NAME) %>% distinct(),
+    by = 'SIC_2DIGIT_CODE'
+  )
+
+#Shortemed!
+eng <- eng %>% mutate(SIC_SECTION_NAME_SHORTERNED = reduceSICnames(SIC_SECTION_NAME,'section'))
+
+# unique(eng$SIC_SECTION_NAME_SHORTERNED)
+
+
+#Remove a couple we don't want
+eng <- eng %>% filter(!qg('extrat|households',SIC_SECTION_NAME_SHORTERNED))
+
+#Sums per section! Let's do that first
+#We don't want every single employment size band (some overlap e.g. there's 0-4 and micro 0-9) 
+#Drop the ones we don't want
+eng.sectionsums <- eng %>% 
+  filter(
+    EMPLOYMENT_SIZEBAND_NAME %in% c('Micro (0 to 9)','Small (10 to 49)','Medium-sized (50 to 249)','Large (250+)')
+  ) %>% 
+  group_by(EMPLOYMENT_SIZEBAND_NAME,SIC_SECTION_NAME_SHORTERNED) %>% 
+  summarise(firmcount = sum(OBS_VALUE)) %>% 
+  ungroup()
+
+
+#Add in total firm count per borough, so can then find percent of firm count for each sizeband/section combo
+#(And mull if that's the best denominator... e.g. could examine a particular sector like ICT)
+eng.sectionsums <- eng.sectionsums %>% 
+  mutate(
+    GEOGRAPHY_NAME = "England",#add this back in to combine below
+    totalfirmcount_per_LA = sum(firmcount),
+    percent_firmcount = (firmcount/totalfirmcount_per_LA) * 100,
+    EMPLOYMENT_SIZEBAND_NAME = factor(EMPLOYMENT_SIZEBAND_NAME, levels = c('Micro (0 to 9)','Small (10 to 49)','Medium-sized (50 to 249)','Large (250+)'))) %>% 
+  ungroup() 
+
+
+#EVERYTHING
+#EVERYTHING PLUS ENGLAND
+both <- bind_rows(gm.sectionsums,eng.sectionsums) %>% 
+  mutate(
+    GEOGRAPHY_NAME = factor(GEOGRAPHY_NAME, levels = c(
+      "Bolton", "Bury", "Manchester", "Oldham", "Rochdale", "Salford", "Stockport", "Tameside", "Trafford", "Wigan","England"
+    )),
+    `%:` = paste0(round(percent_firmcount,1), ', count: ',totalfirmcount_per_LA)
+  ) %>% rename(
+    Borough = GEOGRAPHY_NAME
+  )
+
+p <- ggplot(
+  both, 
+  # gm.sectionsums, 
+  aes(x = SIC_SECTION_NAME_SHORTERNED, y = percent_firmcount, fill = Borough, label = `%:`)
+) +
+  geom_bar(stat='identity', position = 'dodge') +
+  xlab("SIC section") +
+  ylab("% of borough's total enterprise count (with England av)") +
+  scale_fill_brewer(palette = "Paired", direction = 1) +
+  theme(legend.title=element_blank()) +
+  facet_wrap(~EMPLOYMENT_SIZEBAND_NAME, nrow = 1, scales = 'free_x') +
+  coord_flip() +
+  xlab("")
+# theme(legend.title=element_blank())#doesn't work in ggplotly
+# scale_color_discrete(name="")#Neither does this!
+
+ggplotly(p, tooltip = '%:')
+
+
+
+
+```

@@ -2076,5 +2076,40 @@
     "title": "Bradford sectors and clusters: past, present",
     "section": "Strategy context",
     "text": "Strategy context\nThe section below and the data section linking to Industrial Strategy sector definitions dig into the detail of how Bradford’s economy fits into other sector strategies. This is a short synthesis of points from those.\nWhere the UK Industrial Strategy focuses on strategic and high growth sectors, both the West Yorkshire LGP and LSIP are more focused on sectors that include large job numbers but may not necessarily have high productivity or tradeability. Two of the sectors identified in the LGP - food manufacture and chemicals - face intense productivity challenges, though the LGP does also argue eloquently for support of the textiles industry in the region.\nChemical production has had national issues, but as the section below details, Bradford jobs growth has been undermined by a severe productivity drop. There may be support for chemical production as a key part of the IndStrat’s focus on foundational production that underpins all other output, but Bradford’s chemicals productivity trajectory is on the lower end of anywhere in GB.\nThe LSIP also aims to support health and care sector skills development, and Bradford does have many private firms in those sectors that show up in the Companies House data, with a large number of jobs. However, it is difficult to check the productivity of these sectors; they are historically very low, but there is also a national data issue for parts of the sector that are public. At any rate, it is not likely to be a very tradeable sector (though it is of course hugely foundational and important).\nThe LSIP also identifies (and combines) engineering and advanced manufacturing - this is a canny combination given the historic challenges engineering has faced in Bradford, despite being an essential element for other aspects of manufacturing.\nBoth the LGP and LSIP pick out some high growth cluster firms (the LGP with a detailed Cluster Action Framework). The LGP provides a linked network diagram of high-growth cluster firms, but - in terms of the data here - it is quite broad, covering most sectors (some productive but not all e.g. logistics). It is is difficult in this data to pick out, for example, low carbon / clean tech firms; as the IndStrat dector definition page points out, there are no direct matching SIC codes, making it hard to track them.\nThat said, for SIC codes the IndStrat does supply, Bradford clearly has many strengths that align very well with the stand-out sectors identified here. It aligns, for instance, with PBS SMEs - offering “targeted and intensive” support, including to strengthen export work. As discussed below, there are some key ‘frontier’ manufacturing sectors where Bradford also has clear strengths, including its communications, space and other tech sectors."
+  },
+  {
+    "objectID": "quarto_docs/GM_firmcounts_bysize_sector.html",
+    "href": "quarto_docs/GM_firmcounts_bysize_sector.html",
+    "title": "Greater Manchester: firm counts and percents broken down by borough, size band and broad sector",
+    "section": "",
+    "text": "Business count data (via NOMIS) for Greater Manchester boroughs, broken down into four firm size bands and broad sectors (SIC sections). This latest data is for 2024.\nTwo separate plots for local units vs enterprises. See below for more on that.\nEvery data point is “percent of a borough’s total unit count”, to make them comparable across places. Hover for exact percent as well as firm count.\nEngland values included for comparison."
+  },
+  {
+    "objectID": "quarto_docs/GM_firmcounts_bysize_sector.html#whats-this",
+    "href": "quarto_docs/GM_firmcounts_bysize_sector.html#whats-this",
+    "title": "Greater Manchester: firm counts and percents broken down by borough, size band and broad sector",
+    "section": "",
+    "text": "Business count data (via NOMIS) for Greater Manchester boroughs, broken down into four firm size bands and broad sectors (SIC sections). This latest data is for 2024.\nTwo separate plots for local units vs enterprises. See below for more on that.\nEvery data point is “percent of a borough’s total unit count”, to make them comparable across places. Hover for exact percent as well as firm count.\nEngland values included for comparison."
+  },
+  {
+    "objectID": "quarto_docs/GM_firmcounts_bysize_sector.html#local-units",
+    "href": "quarto_docs/GM_firmcounts_bysize_sector.html#local-units",
+    "title": "Greater Manchester: firm counts and percents broken down by borough, size band and broad sector",
+    "section": "Local units",
+    "text": "Local units"
+  },
+  {
+    "objectID": "quarto_docs/GM_firmcounts_bysize_sector.html#enterprises",
+    "href": "quarto_docs/GM_firmcounts_bysize_sector.html#enterprises",
+    "title": "Greater Manchester: firm counts and percents broken down by borough, size band and broad sector",
+    "section": "Enterprises",
+    "text": "Enterprises"
+  },
+  {
+    "objectID": "quarto_docs/GM_firmcounts_bysize_sector.html#enterprises-vs-local-units",
+    "href": "quarto_docs/GM_firmcounts_bysize_sector.html#enterprises-vs-local-units",
+    "title": "Greater Manchester: firm counts and percents broken down by borough, size band and broad sector",
+    "section": "Enterprises vs local units",
+    "text": "Enterprises vs local units\nThis doc has as good outline that includes the different data sources used for each. Both will include public and private organisations. Quick summary:\n\nLocal units are all business units including head offices, branches, factories etc. These can be located in different places (e.g. supermarket branches). Source is BRES survey data.\nEnterprises are where HQs are located. From NOMIS: “An Enterprise is the smallest combination of legal units which has a certain degree of autonomy within an Enterprise Group.”"
   }
 ]

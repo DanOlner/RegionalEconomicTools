@@ -1597,7 +1597,7 @@ reduceSICnames = function(names,level){
       qg('information',names) ~ 'ICT',
       qg('manuf',names) ~ 'Manuf',
       qg('other',names) ~ 'Other',
-      qg('scientific',names) ~ 'Professional/sci/techn',
+      qg('scientific',names) ~ 'Prof/sci/techn',
       qg('real estate',names) ~ 'Real est',
       qg('transport',names) ~ 'Transport',
       qg('entertainment',names) ~ 'Entertainment',
