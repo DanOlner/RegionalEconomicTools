@@ -34,7 +34,9 @@ options(scipen = 999)
 * Two separate plots for local units vs enterprises. See below for more on that.
 * Every data point is "percent of a borough's **total unit count**", to make them comparable across places. **Hover for exact percent as well as firm count**.
 * England values included for comparison.
-* Prep code here, code for this quarto doc here.
+
+Prep code [here](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/bits_of_code/businesscounts_explore.R), code for this quarto doc [here](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/quarto_docs/GM_boroughs_firmcount_by_sizeband_section_2024.qmd).
+
 
 ## Enterprises vs local units
 

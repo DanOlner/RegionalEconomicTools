@@ -2082,14 +2082,14 @@
     "href": "quarto_docs/GM_firmcounts_bysize_sector.html",
     "title": "Greater Manchester: firm counts and percents broken down by borough, size band and broad sector",
     "section": "",
-    "text": "Business count data (via NOMIS) for Greater Manchester boroughs, broken down into four firm size bands and broad sectors (SIC sections). This latest data is for 2024.\nTwo separate plots for local units vs enterprises. See below for more on that.\nEvery data point is “percent of a borough’s total unit count”, to make them comparable across places. Hover for exact percent as well as firm count.\nEngland values included for comparison."
+    "text": "Business count data (via NOMIS) for Greater Manchester boroughs, broken down into four firm size bands and broad sectors (SIC sections). This latest data is for 2024.\nTwo separate plots for local units vs enterprises. See below for more on that.\nEvery data point is “percent of a borough’s total unit count”, to make them comparable across places. Hover for exact percent as well as firm count.\nEngland values included for comparison.\n\nPrep code here, code for this quarto doc here."
   },
   {
     "objectID": "quarto_docs/GM_firmcounts_bysize_sector.html#whats-this",
     "href": "quarto_docs/GM_firmcounts_bysize_sector.html#whats-this",
     "title": "Greater Manchester: firm counts and percents broken down by borough, size band and broad sector",
     "section": "",
-    "text": "Business count data (via NOMIS) for Greater Manchester boroughs, broken down into four firm size bands and broad sectors (SIC sections). This latest data is for 2024.\nTwo separate plots for local units vs enterprises. See below for more on that.\nEvery data point is “percent of a borough’s total unit count”, to make them comparable across places. Hover for exact percent as well as firm count.\nEngland values included for comparison."
+    "text": "Business count data (via NOMIS) for Greater Manchester boroughs, broken down into four firm size bands and broad sectors (SIC sections). This latest data is for 2024.\nTwo separate plots for local units vs enterprises. See below for more on that.\nEvery data point is “percent of a borough’s total unit count”, to make them comparable across places. Hover for exact percent as well as firm count.\nEngland values included for comparison.\n\nPrep code here, code for this quarto doc here."
   },
   {
     "objectID": "quarto_docs/GM_firmcounts_bysize_sector.html#local-units",
