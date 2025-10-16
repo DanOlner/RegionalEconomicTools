@@ -380,11 +380,11 @@ yeartoplot.lqfiltered.ch <- yeartoplot.lqfiltered.ch %>% filter(sic_namefrom_ind
 
 
 
-p1 <- LQ_baseplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 1), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo, 
+p1 <- LQ_baseplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 1, !is.na(sic_namefrom_indstrat_combo)), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo, 
                   LQ_column = LQ, change_over_time = slope)
 
 # debugonce(addplacename_to_LQplot)
-p1 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 1), plot_to_addto = p1, 
+p1 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 1, !is.na(sic_namefrom_indstrat_combo)), plot_to_addto = p1, 
                              placename = place, shapenumber = 16,
                              # min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                              value_column = total_jobs, sector_regional_proportion = sector_regional_proportion,
@@ -408,6 +408,8 @@ p1
 
 ```{r, fig-bresindstrat2ny}
 #| fig-width: 9
+
+place = "North Yorkshire CC"
 
 p <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), alpha = 0.1, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope)
 
@@ -436,6 +438,9 @@ p
 ```{r, fig-chindstrat2ny}
 #| fig-width: 9
  
+
+place = "North Yorkshire"
+
 p2 <- LQ_baseplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 0, !is.na(sic_namefrom_indstrat_combo)), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo, 
                   LQ_column = LQ, change_over_time = slope)
 
