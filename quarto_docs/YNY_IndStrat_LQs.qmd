@@ -101,7 +101,8 @@ The outputs below use **location quotient plots**. Here's a guide to reading the
 * Sectors to the right of the blue line are more concentrated in this region when compared to the national average. (e.g. LQ = 10, it is 10x more concentrated)
 * Green circles have been increasing in concentration over time (larger circles increasing the most)
 * Red circles have been decreasing in concentration over time (larger circles decreasing the most)
-* Black horizontal lines show the min and max of concentration in the data’s history (from 2015 to 2023) (so, often, large green circles will be at the right of this line because sector concentration has been increasing and is continuing)
+* For BRES, increases and decreases are average slope from 2015 to 2023; for Companies House, it's just the average percent change between most recent accounts and the previous year.
+* For BRES only, black horizontal lines show the min and max of concentration in the data’s history (from 2015 to 2023) (so, often, large green circles will be at the right of this line because sector concentration has been increasing and is continuing)
 * Per sector job counts and percent of the full IndStrat jobcount are shown on the right (not percent of entire regional jobs)
 * Fainter background squares are other place's LQs (ITL3 zones for BRES, local authorities for Companies House data)
 
@@ -283,7 +284,7 @@ p2
 
 
 
-# North Yorkshire
+# NORTH YORKSHIRE
 
 ## "Frontier" SIC sectors 
 
