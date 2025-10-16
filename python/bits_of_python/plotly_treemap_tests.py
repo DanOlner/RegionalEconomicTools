@@ -66,7 +66,8 @@ fig.show()
 
 #What we're testing here: using those same colours above to keep consistent SIC section colours across places in the same plot
 
-dfch = pd.read_csv("local/data/plotly_dataexportsfromR/CH_count_output_HEYCA.csv")
+#dfch = pd.read_csv("local/data/plotly_dataexportsfromR/CH_count_output_HEYCA.csv")
+dfch = pd.read_csv("local/data/plotly_dataexportsfromR/CH_count_output_YNY.csv")
 
 fig = px.treemap(
     dfch,
@@ -81,6 +82,7 @@ fig.show()
 
 #fig.write_html("docs/miscdocs/WYLAs_CompaniesHouse2025_treemap.html", full_html=True, include_plotlyjs="cdn")
 #fig.write_html("docs/miscdocs/GMLAs_CompaniesHouse2025_treemap.html", full_html=True, include_plotlyjs="cdn")
+#fig.write_html("docs/miscdocs/HEYCA_CompaniesHouse2025_treemap.html", full_html=True, include_plotlyjs="cdn")
 
 
 
@@ -90,7 +92,8 @@ fig.show()
 
 #What we're testing here: using those same colours above to keep consistent SIC section colours across places in the same plot
 
-dflas = pd.read_csv("local/data/backup/count_output_HEYCA.csv")
+#dflas = pd.read_csv("local/data/backup/count_output_HEYCA.csv")
+dflas = pd.read_csv("local/data/backup/count_output_YNY.csv")
 
 fig = px.treemap(
     dflas,

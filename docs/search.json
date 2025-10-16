@@ -2111,5 +2111,33 @@
     "title": "Greater Manchester: firm counts and percents broken down by borough, size band and broad sector",
     "section": "Enterprises vs local units",
     "text": "Enterprises vs local units\nThis doc has as good outline that includes the different data sources used for each. Both will include public and private organisations. Quick summary:\n\nLocal units are all business units including head offices, branches, factories etc. These can be located in different places (e.g. supermarket branches). Source is BRES survey data.\nEnterprises are where HQs are located. From NOMIS: “An Enterprise is the smallest combination of legal units which has a certain degree of autonomy within an Enterprise Group.”"
+  },
+  {
+    "objectID": "quarto_docs/YNY_indstrat_July2025.html",
+    "href": "quarto_docs/YNY_indstrat_July2025.html",
+    "title": "York / North Yorkshire UK Industrial Strategy LQ links",
+    "section": "",
+    "text": "This doc shows job count location quotients for York and North Yorkshire separately, for sectors that are part of the UK Industrial Strategy definition list (see below for more info on that).\nTwo data sources are used:\n\nBRES job count data.\nCompanies House accounts extracts (job counts extracted from accounts between June 2024 to end of June 2025)\n\nJob counts are used as both BRES and Companies House have the full 5 digit SIC codes, and so these can be matched against the Industrial Strategy sector definition list (see next section)."
+  },
+  {
+    "objectID": "quarto_docs/YNY_indstrat_July2025.html#frontier-sic-sectors",
+    "href": "quarto_docs/YNY_indstrat_July2025.html#frontier-sic-sectors",
+    "title": "York / North Yorkshire UK Industrial Strategy LQ links",
+    "section": "“Frontier” SIC sectors",
+    "text": "“Frontier” SIC sectors\n\nBRES frontier sectors\n\n\n\n\n\n\n\n\nFigure 1\n\n\n\n\n\n\n\nCompanies house frontier sectors\n\n\n\n\n\n\n\n\nFigure 2"
+  },
+  {
+    "objectID": "quarto_docs/YNY_indstrat_July2025.html#other-industrial-strategy-sic-sectors",
+    "href": "quarto_docs/YNY_indstrat_July2025.html#other-industrial-strategy-sic-sectors",
+    "title": "York / North Yorkshire UK Industrial Strategy LQ links",
+    "section": "Other industrial strategy SIC sectors",
+    "text": "Other industrial strategy SIC sectors\n\nBRES other sectors\n\n\n\n\n\n\n\n\nFigure 3\n\n\n\n\n\n\n\nCompanies House other sectors\n\n\n\n\n\n\n\n\nFigure 4"
+  },
+  {
+    "objectID": "quarto_docs/YNY_indstrat_July2025.html#frontier-sic-sectors-1",
+    "href": "quarto_docs/YNY_indstrat_July2025.html#frontier-sic-sectors-1",
+    "title": "York / North Yorkshire UK Industrial Strategy LQ links",
+    "section": "“Frontier” SIC sectors",
+    "text": "“Frontier” SIC sectors\n\nBRES frontier sectors\n\n\n\n\n\n\n\n\nFigure 5\n\n\n\n\n\n\n\nCompanies house frontier sectors\n\n\n\n\n\n\n\n\nFigure 6\n\n\n\n\n\n\n\nBRES other sectors\n\n\n\n\n\n\n\n\nFigure 7\n\n\n\n\n\n\n\nCompanies House other sectors\n\n\n\n\n\n\n\n\nFigure 8"
   }
 ]

@@ -141,6 +141,7 @@ ch.emp1 <- ch %>% filter(Employees_thisyear >= 1)
 ch.la <- ch.emp1 %>% 
   # filter(qg('bradford',localauthority_name))
   filter(qg('sheffield',localauthority_name))
+  # filter(qg('sheffield',localauthority_name))
 # filter(qg('leicester',localauthority_name))
 # filter(qg('barnsley',localauthority_name))
 # filter(qg('rotherham',localauthority_name))
@@ -160,7 +161,8 @@ unique(gm$localauthority_name)[order(unique(gm$localauthority_name))]
 
 #Multiple places
 ch.la <- ch.emp1 %>% 
-  filter(qg('upon hull|riding',localauthority_name))
+  # filter(qg('upon hull|riding',localauthority_name))
+  filter(localauthority_name %in% c('York','North Yorkshire'))
   # filter(qg('barnsley|sheffield|rotherham|doncaster',localauthority_name))
   # filter(localauthority_name %in% c("Bolton", "Bury", "Manchester", "Oldham", "Rochdale", "Salford", "Stockport", "Tameside", "Trafford", "Wigan"))
 
