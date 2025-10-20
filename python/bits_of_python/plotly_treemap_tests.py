@@ -67,7 +67,8 @@ fig.show()
 #What we're testing here: using those same colours above to keep consistent SIC section colours across places in the same plot
 
 #dfch = pd.read_csv("local/data/plotly_dataexportsfromR/CH_count_output_HEYCA.csv")
-dfch = pd.read_csv("local/data/plotly_dataexportsfromR/CH_count_output_YNY.csv")
+#dfch = pd.read_csv("local/data/plotly_dataexportsfromR/CH_count_output_YNY.csv")
+dfch = pd.read_csv("local/data/plotly_dataexportsfromR/CH_count_output_GMLAs.csv")
 
 fig = px.treemap(
     dfch,
@@ -83,8 +84,27 @@ fig.show()
 #fig.write_html("docs/miscdocs/WYLAs_CompaniesHouse2025_treemap.html", full_html=True, include_plotlyjs="cdn")
 #fig.write_html("docs/miscdocs/GMLAs_CompaniesHouse2025_treemap.html", full_html=True, include_plotlyjs="cdn")
 #fig.write_html("docs/miscdocs/HEYCA_CompaniesHouse2025_treemap.html", full_html=True, include_plotlyjs="cdn")
+#fig.write_html("docs/miscdocs/YNY_CompaniesHouse2025_treemap.html", full_html=True, include_plotlyjs="cdn")
 
 
+#SUNBURST VERSION
+#filter down just to one local authority
+dfch = dfch[(dfch.localauthority_name == 'Salford')]
+
+
+fig = px.sunburst(
+    dfch,
+    #path=['localauthority_name','SIC_SECTION_NAME_SHORT', 'SIC_2DIGIT_NAME_SHORT', 'SIC_5DIGIT_NAME_SHORT'],
+    path=['SIC_SECTION_NAME_SHORT', 'SIC_2DIGIT_NAME_SHORT'],
+    #path=['SIC_SECTION_NAME_SHORT', 'SIC_2DIGIT_NAME_SHORT', 'SIC_5DIGIT_NAME_SHORT'],
+    #path=['localauthority_name','SIC_SECTION_NAME_SHORT', 'SIC_2DIGIT_NAME_SHORT'],
+    values='n',
+    color='SIC_SECTION_NAME_SHORT',
+    color_discrete_map=colour_map,
+    branchvalues='total'
+)
+
+fig.show()
 
 
 

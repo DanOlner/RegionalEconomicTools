@@ -195,7 +195,66 @@ ggplotly(p, tooltip = 'Place')
 
 ```
 
+```{r eval=F}
+# Redo these outputs and save. Doing here for ease of wotsit (but won't be output when rendered).
 
+# Just for Salford (one with England comparison, one without)
+# p <- ggplot(
+#   both %>% filter(Borough %in% c('Salford','England')), 
+#   # gm.sectionsums, 
+#   aes(x = SIC_SECTION_NAME_SHORTERNED, y = percent_firmcount, fill = Borough, label = `Place`)
+# ) +
+#   geom_bar(stat='identity', position = 'dodge') +
+#   xlab("SIC section") +
+#   ylab("% of borough's total local unit count (with England av)") +
+#   scale_fill_brewer(palette = "Paired", direction = 1) +
+#   theme(legend.title=element_blank()) +
+#   facet_wrap(~EMPLOYMENT_SIZEBAND_NAME, nrow = 1, scales = 'free_x') +
+#   coord_flip() +
+#   xlab("")
+
+# Let's try an overlaid one... yes, that's better
+p = ggplot(
+  both %>% filter(Borough %in% c('Salford','England')), 
+  # gm.sectionsums, 
+  aes(x = SIC_SECTION_NAME_SHORTERNED, y = percent_firmcount, fill = Borough, linetype = Borough, linewidth = Borough, label = `Place`)
+) +
+  geom_bar(stat='identity', position = 'identity', colour = 'grey33') +
+  xlab("SIC section") +
+  ylab("% of borough's total local unit count (with England av)") +
+  scale_fill_manual(values = c('Salford' = 'grey', 'England' = NA)) +
+  scale_linetype_manual(values = c('Salford' = NA, 'England' = 1)) +
+  scale_linewidth_manual(values = c('Salford' = NA, 'England' = 0.5)) +
+  theme(legend.title=element_blank()) +
+  facet_wrap(~EMPLOYMENT_SIZEBAND_NAME, nrow = 1, scales = 'free_x') +
+  coord_flip() +
+  xlab("") +
+  ggtitle("Salford business counts as % of total local units (all bars sum to 100)\n(England av % overlaid)")
+
+ggsave('../local/outputs/businesscounts_localunits_salford_w_england.png',width = 10, height = 7)
+
+
+# And just Salford without Eng
+p <- ggplot(
+  both %>% filter(Borough == 'Salford'), 
+  # gm.sectionsums, 
+  aes(x = SIC_SECTION_NAME_SHORTERNED, y = percent_firmcount, label = `Place`)
+) +
+  geom_bar(stat='identity', position = 'dodge') +
+  xlab("SIC section") +
+  ylab("% of borough's total local unit count (with England av)") +
+  scale_fill_brewer(palette = "Paired", direction = 1) +
+  theme(legend.title=element_blank()) +
+  facet_wrap(~EMPLOYMENT_SIZEBAND_NAME, nrow = 1, scales = 'free_x') +
+  coord_flip() +
+  xlab("") +
+  ggtitle("Salford business counts as % of total local units")
+
+ggsave('../local/outputs/businesscounts_localunits_salford_byitself.png',width = 10, height = 7)
+
+
+
+```
 
 ## Enterprises
 
@@ -351,3 +410,55 @@ ggplotly(p, tooltip = 'Place')
 
 
 ```
+
+
+
+```{r eval=F}
+# Redo these outputs and save. Doing here for ease of wotsit (but won't be output when rendered).
+
+
+# Let's try an overlaid one... yes, that's better
+p = ggplot(
+  both %>% filter(Borough %in% c('Salford','England')), 
+  # gm.sectionsums, 
+  aes(x = SIC_SECTION_NAME_SHORTERNED, y = percent_firmcount, fill = Borough, linetype = Borough, linewidth = Borough, label = `Place`)
+) +
+  geom_bar(stat='identity', position = 'identity', colour = 'grey33') +
+  xlab("SIC section") +
+  ylab("% of borough's total local unit count (with England av)") +
+  scale_fill_manual(values = c('Salford' = 'grey', 'England' = NA)) +
+  scale_linetype_manual(values = c('Salford' = NA, 'England' = 1)) +
+  scale_linewidth_manual(values = c('Salford' = NA, 'England' = 0.5)) +
+  theme(legend.title=element_blank()) +
+  facet_wrap(~EMPLOYMENT_SIZEBAND_NAME, nrow = 1, scales = 'free_x') +
+  coord_flip() +
+  xlab("") +
+  ggtitle("Salford business counts as % of total enterprises (all bars sum to 100)\n(England av % overlaid)")
+
+ggsave('../local/outputs/businesscounts_enterprises_salford_w_england.png',width = 10, height = 7)
+
+
+
+# And just Salford without Eng
+p <- ggplot(
+  both %>% filter(Borough == 'Salford'), 
+  # gm.sectionsums, 
+  aes(x = SIC_SECTION_NAME_SHORTERNED, y = percent_firmcount, label = `Place`)
+) +
+  geom_bar(stat='identity', position = 'dodge') +
+  xlab("SIC section") +
+  ylab("% of borough's total local unit count (with England av)") +
+  scale_fill_brewer(palette = "Paired", direction = 1) +
+  theme(legend.title=element_blank()) +
+  facet_wrap(~EMPLOYMENT_SIZEBAND_NAME, nrow = 1, scales = 'free_x') +
+  coord_flip() +
+  xlab("") +
+  ggtitle("Salford business counts as % of total enterprises")
+
+ggsave('../local/outputs/businesscounts_enterprises_salford_byitself.png',width = 10, height = 7)
+
+
+```
+
+
+
