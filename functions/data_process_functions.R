@@ -73,16 +73,8 @@ runBRESdownloader.fortheseyears <- function(years, ...){
 # download_BRES <- function(year,geog_type,employment_status){
 download_BRES <- function(year, ...){ 
   
-  z <- nomis_get_data(id = "NM_189_1", time = as.character(year), 
-                      # geography = geog_type, 
-                      ...,#geography and EMPLOYMENT_STATUS passed through to NOMIS directly
-                      MEASURE = 1,#1 is "Count", 2 is "Industry percent"
-                      MEASURES = 20100,#20100 is "value", 20301 is "percent" (which is redundant as "value" of "industry percent" is percent)
-                      # EMPLOYMENT_STATUS = employment_status,
-                      select = c('DATE','GEOGRAPHY_CODE','GEOGRAPHY_NAME','INDUSTRY_NAME','INDUSTRY_TYPE','OBS_VALUE')
-  )
-  
   # Extract text of passed args for getting filename labels
+  # Do this first so we can check if the file has already been downloaded
   dots <- list(...)
   
   geography <- dots[["geography"]]
@@ -96,11 +88,28 @@ download_BRES <- function(year, ...){
   # geog_text_forfilename <- bres.var.labels$labelforfilename[bres.var.labels$id == geog_type]
   # employmentstatus_forfilename <- bres.var.labels$labelforfilename[bres.var.labels$id == employment_status]
   
-  filename_text = paste0('local/data/BRES/INDIV_YEARS/BRES_',geog_text_forfilename,'_', employmentstatus_forfilename  ,'_',year,'.rds')
+  filename_text = paste0('local/data/BRES/INDIV_YEARS/BRES_',
+                         geog_text_forfilename,'_', employmentstatus_forfilename  ,'_',year,'.rds')
+  
+  if(!file.exists(filename_text)){
+  
+  z <- nomis_get_data(id = "NM_189_1", time = as.character(year), 
+                      # geography = geog_type, 
+                      ...,#geography and EMPLOYMENT_STATUS passed through to NOMIS directly
+                      MEASURE = 1,#1 is "Count", 2 is "Industry percent"
+                      MEASURES = 20100,#20100 is "value", 20301 is "percent" (which is redundant as "value" of "industry percent" is percent)
+                      # EMPLOYMENT_STATUS = employment_status,
+                      select = c('DATE','GEOGRAPHY_CODE','GEOGRAPHY_NAME','INDUSTRY_NAME','INDUSTRY_TYPE','OBS_VALUE')
+                      
+  )
   
   cat('Saving ', filename_text, '\n')
-  
   saveRDS(z,filename_text)
+  
+  } else {
+    cat(year, 'already downloaded, moving on. (Delete contents of folder if you want to replace.)\n')
+  }
+  
   
 }
 
@@ -155,7 +164,7 @@ recombineBRESsingleyears.intoONE.RDS <- function(...){
   cat('Years with actual data (keeping only these): ', min(itl2.bres$DATE),' to ',max(itl2.bres$DATE), '\n')
   
   filename_text = paste0(
-    'data/BRES/BRES_ALLYEARSWITHDATA_',filepattern,'_',
+    'local/data/BRES/BRES_ALLYEARSWITHDATA_',filepattern,'_',
     #years[1],'_',years[length(years)],
     min(itl2.bres$DATE),'_',max(itl2.bres$DATE),
     '.rds'

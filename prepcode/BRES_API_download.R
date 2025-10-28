@@ -81,6 +81,17 @@ runBRESdownloader.fortheseyears(years = 2022:latestyear, geography = "TYPE428", 
 
 
 
+# These are local authorities (county/unitary)
+# Will either use as is, or drop in e.g. the four LAs in SY (where ITL3 2021 only has BDR combined)
+#debugonce(runBRESdownloader.fortheseyears)
+runBRESdownloader.fortheseyears(years = yearstoget, geography = "TYPE423", EMPLOYMENT_STATUS = 2)
+#PART TIME
+runBRESdownloader.fortheseyears(years = yearstoget, geography = "TYPE423", EMPLOYMENT_STATUS = 3)
+#"EMPLOYEES"
+runBRESdownloader.fortheseyears(years = yearstoget, geography = "TYPE423", EMPLOYMENT_STATUS = 4)
+
+
+
 
 
 

@@ -16,7 +16,7 @@ library(zoo)
 source('../functions/misc_functions.R')
 
 #MINUS IMPUTED RENT, BETTER FOR ACCURATE GVA PER JOB
-itl2 <- readRDS('../data/LCREE_BRES_GVAcurrentprices_combo_2015to2022_MINUS_IMPUTED_RENT.rds') %>% rename(jobcountFT = COUNT) %>% ungroup()
+itl2 <- readRDS('../data/misc/LCREE_BRES_GVAcurrentprices_combo_2015to2022_MINUS_IMPUTED_RENT.rds') %>% rename(jobcountFT = COUNT) %>% ungroup()
 
 #Reminder: the "if then" we've done here (in LCREE_linkToBres...) - if green jobs had the national proportion in e.g. SY
 #What would be number be given the number of e.g. construction FT jobs there?
@@ -142,7 +142,7 @@ The 2024 CBI net zero report suggest LCREE type jobs are 1.6 times more producti
 #| fig-cap: "Percent of sector jobs identified as LCREE. 95% error bars. Total jobs in that sector / percent of total jobs in brackets."
 
 
-greenjobs.percent <- readRDS('../data/greenjobspercent.rds')
+greenjobs.percent <- readRDS('../data/misc/greenjobspercent.rds')
 
 ggplot(greenjobs.percent %>% 
          filter(!grepl(x = SIC_SECTION_NAME_LCREE, pattern = 'agri|mining|other', ignore.case = T),
@@ -171,8 +171,8 @@ ggplot(greenjobs.percent %>%
 #| label: fig-itl2gvalcree
 #| fig-cap: "If/then estimate of ITL2 region % green (LCREE) GVA by sector, South Yorkshire in caps/arrows (bottom quarter), Grey lines are South Yorkshire 95% CIs"
 
-sectors4plot <- readRDS('../data/itl2_percent_gva_by_sector.rds')
-sectors4plot.RANGE <- readRDS('../data/itl2_percent_gva_by_sector_rangebars.rds')  
+sectors4plot <- readRDS('../data/misc/itl2_percent_gva_by_sector.rds')
+sectors4plot.RANGE <- readRDS('../data/misc/itl2_percent_gva_by_sector_rangebars.rds')  
 
 #PLOT: ITL2 REGION % GREEN GVA BY SECTOR----
 ggplot() +
@@ -343,7 +343,7 @@ For sectors where it makes sense, is it possible to keep job, skills and investm
 #| fig-cap: "MANUFACTURING Percent change GVA and jobs in ITL2 zones, moving average between 2015/17 and 2018/20. South Yorkshire in Blue. See text for full breakdown."
 
 #Via YPERNdataexplore
-itl2.gvaperjob <- readRDS('../data/itl2_gvaperjob.rds')
+itl2.gvaperjob <- readRDS('../data/misc/itl2_gvaperjob.rds')
 
 p <- twod_generictimeplot_normalisetozero(
   # df = itl2.gvaperjob %>% filter(SIC07_description=='Construction', ITL_region_name != 'Inner London - West') %>% mutate(gvaperjob = gvaperjob/1000) %>% 
@@ -416,7 +416,7 @@ The next section looks more closely at what different scenarios these numbers mi
 ```{r}
 
 #Worked out in Analysis_of_lcree_jobs_gva_linked...
-jobnumbers.table <- readRDS('../data/GVAjobnumberestimates.rds') %>% select(-place)
+jobnumbers.table <- readRDS('../data/misc/GVAjobnumberestimates.rds') %>% select(-place)
 #jobnumbers.table <- readRDS('data/GVAjobnumberestimates.rds') %>% select(-place)
 
 itl2 <- itl2 %>% 

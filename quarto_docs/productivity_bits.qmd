@@ -1,5 +1,5 @@
 ---
-title: "productivity bits June 2025"
+title: "South Yorkshire GVA per hour worked changes, June 2025"
 sidebar: false
 author:
   - name: "Dan Olner"
@@ -132,7 +132,7 @@ itl3.lon = itl_lookup %>%
 
 **Hover for place names**.
 
-* West Yorkshire ITL3s in green (95% CIs)
+* South Yorkshire ITL3s in green (95% CIs)
 * Core cities in blue  (95% CIs)
 * London ITL3s in red/pink
 

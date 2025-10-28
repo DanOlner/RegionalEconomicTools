@@ -11,9 +11,9 @@ source('functions/misc_functions.R')
 
 #1. LOAD AND PREP EACH ALL-YEARS BRES RDS----
 
-#Get all relevant filenames from the public-facing BRES data folder
+#Get all relevant filenames from the local BRES data folder
 #(Keep filenames for later to resave; code is agnostic about each file's source, job counts will get summed the same)
-bresfilenames <- list.files(path = "data/BRES/", pattern = 'ALLYEARSWITHDATA', full.names = T) 
+bresfilenames <- list.files(path = "local/data/BRES/", pattern = 'ALLYEARSWITHDATA', full.names = T) 
 
 #Put into a list to carry out the same summing task on each
 BRESdata <- bresfilenames %>% map(readRDS)

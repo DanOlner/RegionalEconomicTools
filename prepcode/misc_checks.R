@@ -19,11 +19,13 @@ a <- nomis_get_metadata(id = "NM_189_1")
 #Note, MEASURE in the actual downloaded data is "MEASURE_NAME" column...
 nomis_get_metadata(id = "NM_189_1", concept = "MEASURE")
 nomis_get_metadata(id = "NM_189_1", concept = "MEASURES")
+geogz = nomis_get_metadata(id = "NM_189_1", concept = "GEOGRAPHY", type = "type")
 
 #Point of confusion here - 
 #Look at the full column range and how it's broken down:
 #(for some sample data)
-placeid <- nomis_get_metadata(id = "NM_189_1", concept = "geography", type = "TYPE428") %>% filter(qg('sheffield',.$label.en)) %>% select(id) %>% pull
+placeid <- nomis_get_metadata(id = "NM_189_1", concept = "geography", type = "TYPE428") %>% 
+  filter(qg('sheffield',.$label.en)) %>% select(id) %>% pull
 
 z <- nomis_get_data(id = "NM_189_1",  time = "2023", geography = placeid
                     # MEASURE = 1,
@@ -1898,6 +1900,7 @@ bres_summary <- bres_annotated %>%
 #Sanity checks... same number of cats, OK
 length(unique(bres_summary$sic_namefrom_indstrat))
 length(unique(indsic$sic_code))
+unique(bres_summary$DATE)
 
 table(is.na(bres_summary$sic_code))
 # bres_summary %>% filter(is.na(sic_code)) %>% View
@@ -2176,6 +2179,384 @@ ecdf(both$percent_indstratjobs)(both %>% filter(GEOGRAPHY_NAME == 'Bradford') %>
 
 
 
+# REPEAT FOR BRES 2024 LOCAL AUTHORITY LEVEL----
+
+#Excluded codes: Frontier areas without clear SIC mappings (e.g., Clean Tech, Hydrogen, Heat Pumps, Nuclear) not included
+indsic <- read_csv('data/industrialstrategy2025sectordefs.csv')
+# indsic <- read_csv('data/industrialstrategy2025sectordefs_test.csv')
+
+
+#LOAD BRES 5 DIGIT
+bres <- read_csv("local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE423_localauthoritiescountyunitaryasofApril2023_2_Fulltimeemployees_2015_2024_SIC_5DIGIT.csv")
+
+SIClookup <- read_csv('data/SIClookup.csv')
+
+#Join SIC lookup on 5 digit name
+#Keep 2 digit and section codes
+#May shorten names in a mo...
+bres <- bres %>%
+  left_join(
+    SIClookup %>% select(SIC_5DIGIT_NAME,SIC_2DIGIT_NAME,SIC_SECTION_NAME),
+    by = 'SIC_5DIGIT_NAME'
+  )
+
+#Make shorter names, use those.
+#Make lookup so can be merged in.
+names.sections = unique(bres$SIC_SECTION_NAME)
+shortnames.sections = reduceSICnames(unique(bres$SIC_SECTION_NAME),'section')
+
+chk.sections = data.frame(names = names.sections, shortnames = shortnames.sections)
+
+names.2digit = unique(bres$SIC_2DIGIT_NAME)
+shortnames.2digit = reduceSICnames(unique(bres$SIC_SECTION_NAME),'2 digit')
+
+chk.2digit = data.frame(names = names.2digit, shortnames = shortnames.2digit)
+
+
+#And 729 categories in the 5 digit...
+names.5digit = unique(bres$SIC_5DIGIT_NAME)
+#NOTE: THE ORDER HERE IS BASED ON THE ORDER IN bres
+#We should make an actual lookup to make sure we don't lose that order
+shortnames.5digit = reduceSICnames(unique(bres$SIC_5DIGIT_NAME),'5 digit')
+
+chk.5digit = data.frame(names = names.5digit, shortnames = shortnames.5digit)
+
+
+#Merge into bres
+bres <- bres %>%
+  left_join(chk.sections %>% rename(SIC_SECTION_NAME_SHORT = shortnames), by = c('SIC_SECTION_NAME' = 'names')) %>%
+  left_join(chk.2digit %>% rename(SIC_2DIGIT_NAME_SHORT = shortnames), by = c('SIC_2DIGIT_NAME' = 'names')) %>%
+  left_join(chk.5digit %>% rename(SIC_5DIGIT_NAME_SHORT = shortnames), by = c('SIC_5DIGIT_NAME' = 'names'))
+
+
+#Drop some sectors
+bres <- bres %>%
+  filter(!qg('households|membership', SIC_2DIGIT_NAME))
+
+#Check!
+# bres %>% distinct(SIC_5DIGIT_NAME_SHORT,SIC_5DIGIT_NAME) %>% View
+
+#Save sample of BRES just for one place and one year
+# write_csv(bres %>% filter(GEOGRAPHY_NAME == 'Bradford', DATE == 2023) %>% slice_sample(n = 30),'local/data/sample5digitBRES.csv')
+
+
+
+#THEN: need to find way to match against differing levels of code in the indstrat list
+#And summing if necessary
+#One way would be to join against the indstrat and use to group
+
+
+#BETTER APPROACH: JOIN SICS TO BRES THEN SUM BY THAT JOIN
+#Use fuzzy join to get easy match
+#^ = match on just these first characters
+
+#Ind sic codes, a few filters:
+#Don't keep any NAs in SIC_name - those are ind strat categories with no SIC code
+strategy_df <- indsic %>%
+  filter(!is.na(SIC_name)) %>% 
+  mutate(regex = paste0("^", sic_code))
+
+#Only use smoothed data values
+bres_annotated <- fuzzyjoin::regex_left_join(
+  bres,
+  # bres %>% filter(!is.na(jobcount_movingav)),
+  strategy_df %>% distinct(sic_code, .keep_all = T),#Some like 20 are doubled up in e.g. foundationals, keep only one
+  by = c("SIC_5DIGIT_CODE" = "regex")
+)
+
+#Then just summarise
+#Don't need to keep indstrat sectors we have no match for
+bres_summary <- bres_annotated %>%
+  filter(!is.na(sic_code)) %>% 
+  group_by(DATE,GEOGRAPHY_NAME,SIC_name) %>%
+  summarise(
+    JOBCOUNT = sum(JOBCOUNT, na.rm = TRUE), .groups = "drop",
+    sic_codefromindstrat = max(sic_code),
+    topsector_indstrat = max(sector_name),
+    # SIC_5DIGIT_CODE = max(SIC_5DIGIT_CODE),
+    # SIC_5DIGIT_NAME_SHORT = max(SIC_5DIGIT_NAME_SHORT),#some of these won't be right
+    SIC_2DIGIT_NAME_SHORT = max(SIC_2DIGIT_NAME_SHORT),
+    is_frontier = max(is_frontier)
+  ) %>% 
+  rename(sic_namefrom_indstrat = SIC_name)
+
+
+#Sanity checks... same number of cats, OK
+length(unique(bres_summary$sic_namefrom_indstrat))
+length(unique(indsic$sic_code))
+unique(bres_summary$DATE)
+
+# table(is.na(bres_summary$sic_code))
+# bres_summary %>% filter(is.na(sic_code)) %>% View
+
+
+#Some more sanity checks. Did things sum correctly? Pick a couple of test sectors
+chk <- bres_summary %>% 
+  filter(sic_namefrom_indstrat == 'Manufacture of chemicals and chemical products', DATE == 2023)
+
+
+
+
+#Find moving av AFTER summing
+#Should be moving av of those totals
+#Get moving av for jobs in BRES for 5 digit, use that latest year...
+smoothband = 3
+
+bres_summary <- bres_summary %>% 
+  arrange(DATE) %>% 
+  group_by(GEOGRAPHY_NAME,sic_namefrom_indstrat) %>%
+  mutate(
+    jobcount_movingav = rollapply(JOBCOUNT,smoothband,mean,align='center',fill=NA)
+  ) %>% 
+  ungroup() %>% 
+  filter(!is.na(jobcount_movingav))
+
+#check... tick
+table(is.na(bres_summary$jobcount_movingav),bres_summary$DATE)
+
+
+
+#MAKE SHORTER NAMES THAT COMBINE WITH THE INDSTRAT TOP CAT
+#Top level cats first, that we will combine with the shortened sector name
+unique(bres_summary$topsector_indstrat)
+
+bres_summary <- bres_summary %>% 
+  mutate(
+    toplevelindstrat = case_when(
+      qg('manufactur', topsector_indstrat) ~ "ADV MANUF",
+      qg('business', topsector_indstrat) ~ "PBS",
+      qg('financ', topsector_indstrat) ~ "FIN",
+      qg('creative', topsector_indstrat) ~ "CREATIVE",
+      qg('foundation', topsector_indstrat) ~ "FOUNDATION",
+      qg('digital', topsector_indstrat) ~ "DIGITAL",
+      qg('life sci', topsector_indstrat) ~ "LIFESCI",
+      qg('defence', topsector_indstrat) ~ "DEFENCE"
+    )
+  )
+
+#And shortern other names
+bres_summary <- bres_summary %>% 
+  mutate(
+    sic_namefrom_indstrat_short = removecommonSICnameelements(bres_summary$sic_namefrom_indstrat, removemanuf = T)
+  )
+
+# table(bres_summary$toplevelindstrat)
+# table(bres_summary$sic_namefrom_indstrat_short)
+
+#Make combo
+bres_summary <- bres_summary %>% 
+  mutate(
+    sic_namefrom_indstrat_combo = paste0(toplevelindstrat,": ",sic_namefrom_indstrat_short)
+  )
+
+table(bres_summary$sic_namefrom_indstrat_combo)
+
+
+#Have manually added in those specific ind strat codes into the CSV
+#Let's see if we can get LQs for those...
+islq <- bres_summary %>% 
+  group_split(DATE) %>% 
+  map(
+    add_location_quotient_and_proportions,
+    regionvar = GEOGRAPHY_NAME,
+    lq_var = sic_namefrom_indstrat_combo,
+    valuevar = jobcount_movingav
+  ) %>% 
+  bind_rows() %>% 
+  mutate(jobcount_movingav = round(jobcount_movingav,0))
+
+
+LQ_slopes <- compute_slope_or_zero(
+  data = islq, 
+  GEOGRAPHY_NAME, sic_namefrom_indstrat_combo,#slopes will be found within whatever grouping vars are added here
+  y = LQ_log, x = DATE)
+
+
+#Filter down to a single year... we may want to smooth years, let's see
+yeartoplot <- islq %>% filter(DATE == max(DATE))#use latest year
+
+#Add slopes into data to get LQ plots
+yeartoplot <- yeartoplot %>% 
+  left_join(
+    LQ_slopes,
+    by = c('GEOGRAPHY_NAME', 'sic_namefrom_indstrat_combo')
+  )
+
+#Get min/max values for LQ over time as well, for each sector and place, to add as bars so range of sector is easy to see
+minmaxes <- islq %>% 
+  group_by(GEOGRAPHY_NAME, sic_namefrom_indstrat_combo) %>% 
+  summarise(
+    min_LQ_all_time = min(LQ, na.rm = T),
+    max_LQ_all_time = max(LQ, na.rm = T)
+  ) %>% 
+  mutate(
+    min_LQ_all_time = ifelse(is.infinite(min_LQ_all_time),NA,min_LQ_all_time),
+    max_LQ_all_time = ifelse(is.infinite(max_LQ_all_time),NA,max_LQ_all_time)
+  )
+
+# table(is.infinite(minmaxes$min_LQ_all_time))
+# table(is.infinite(minmaxes$max_LQ_all_time))
+
+#Join min and max
+yeartoplot <- yeartoplot %>% 
+  left_join(
+    minmaxes,
+    by = c('GEOGRAPHY_NAME', 'sic_namefrom_indstrat_combo')
+  )
+
+#Save all the bits! So we can repeat for different places easily
+# saveRDS(islq,'local/islq.rds')
+# saveRDS(yeartoplot,'local/is_bres_yeartoplot.rds')
+
+
+
+#Right ee ho...
+#place = "Sheffield"
+place = "Bradford"
+
+sectorLQorder <- islq %>% filter(
+  DATE == max(DATE),#use latest data
+  GEOGRAPHY_NAME == place) %>% 
+  arrange(-LQ) %>% 
+  select(sic_namefrom_indstrat_combo) %>% 
+  pull()
+
+
+#Split by frontier or not
+
+#Turn the sector column into a factor and order by LCR's LQs
+yeartoplot$sic_namefrom_indstrat_combo <- factor(yeartoplot$sic_namefrom_indstrat_combo, levels = sectorLQorder, ordered = T)
+
+#Remove some LQs
+yeartoplot.lqfiltered <- yeartoplot %>% filter(LQ > 0 & LQ < 100, jobcount_movingav > 99)
+
+#Drop any sectors that Bradford now doesn't have after that filter
+sectorstokeep <- yeartoplot.lqfiltered %>% filter(GEOGRAPHY_NAME == place) %>% select(sic_namefrom_indstrat_combo) %>% pull
+
+yeartoplot.lqfiltered <- yeartoplot.lqfiltered %>% filter(sic_namefrom_indstrat_combo %in% sectorstokeep)
+
+#save a copy of that to save processing time in quarto
+saveRDS(yeartoplot.lqfiltered,'local/data/bres_indstrat_LQs.rds')
+
+p <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), alpha = 0.1, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope)
+
+p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), plot_to_addto = p, 
+                            placename = place, shapenumber = 16,
+                            min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
+                            value_column = jobcount_movingav, sector_regional_proportion = sector_regional_proportion,
+                            region_name = GEOGRAPHY_NAME,
+                            sector_name = sic_namefrom_indstrat_combo, change_over_time = slope, LQ_column = LQ,
+                            text = 7, value_col_ismoney = F)
+
+p <- p + 
+  # coord_cartesian(xlim = c(0.1,7)) +
+  ggtitle("IndStrat frontier sector")
+
+p
+
+p <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), alpha = 0.1, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope)
+
+p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), plot_to_addto = p, 
+                            placename = place, shapenumber = 16,
+                            min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
+                            value_column = jobcount_movingav, sector_regional_proportion = sector_regional_proportion,
+                            region_name = GEOGRAPHY_NAME,
+                            sector_name = sic_namefrom_indstrat_combo, change_over_time = slope, LQ_column = LQ,
+                            text = 7, value_col_ismoney = F)
+
+p <- p + 
+  # coord_cartesian(xlim = c(0.1,7)) +
+  ggtitle("IndStrat other sector")
+
+p
+
+
+#While we're here... compare the job totals for Bradford in these
+#To full job totals in BRES as a whole 
+#And compare to UK
+#What proportion of jobs are ind strat ready? (Even without looking deeper into other sectors)
+
+#THERE'S SOME DOUBLE COUNTING TO REMOVE HERE I THINK
+#Where subsectors also have their parent sector included...
+#Not many of those but still needs fixing
+
+#For which we need 3 year smoothed BRES job counts
+brestots <- read_csv("local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_NUTS3_n_ITL321_stacked_2_Fulltimeemployees_2015_2023_SIC_5DIGIT.csv")
+
+#Remove one of them...
+#Need to filter NOT year == 2022 NOT GEOGRAPHY_CODE_NUTS2018 is NA, keep the rest
+#(2023 we need to keep!)
+brestots <- brestots %>%
+  filter(!(DATE == 2022 & is.na(GEOGRAPHY_CODE_NUTS2018)))
+
+#Get totals first then smooth
+totjobsperITL3 <- brestots %>% 
+  group_by(DATE,GEOGRAPHY_NAME) %>% 
+  summarise(
+    total_jobs = sum(JOBCOUNT, na.rm = T)
+  )
+
+#Then smooth...
+totjobsperITL3 <- totjobsperITL3 %>% 
+  arrange(DATE) %>% 
+  group_by(GEOGRAPHY_NAME) %>% 
+  mutate(
+    totaljobs_movingav = rollapply(total_jobs,smoothband,mean,align='center',fill=NA)
+  ) %>% 
+  ungroup()
+
+
+#Same vals for ind-strat-only sectors
+indstrat_totjobsperITL3 <- fuzzyjoin::regex_left_join(
+  bres,
+  strategy_df %>% distinct(sic_code, .keep_all = T),#Some like 20 are doubled up in e.g. foundationals, keep only one
+  by = c("SIC_5DIGIT_CODE" = "regex")
+) %>% 
+  filter(!is.na(sector_name))
+
+#Then just summarise totals in places for each year
+indstrat_totjobsperITL3 <- indstrat_totjobsperITL3 %>%
+  group_by(DATE,GEOGRAPHY_NAME) %>%
+  summarise(
+    total_jobs = sum(JOBCOUNT, na.rm = TRUE), .groups = "drop",
+    sic_namefrom_indstrat = max(SIC_name),
+    is_frontier = max(is_frontier)
+  ) 
+
+#Smooth years...
+indstrat_totjobsperITL3 <- indstrat_totjobsperITL3 %>%
+  arrange(DATE) %>% 
+  group_by(GEOGRAPHY_NAME) %>% 
+  mutate(
+    totaljobs_movingav = rollapply(total_jobs,smoothband,mean,align='center',fill=NA)
+  ) %>% 
+  ungroup()
+
+
+#Now can just join on geography name for the appropriate smoothed year to find ratios
+both <- totjobsperITL3 %>% 
+  filter(DATE == max(DATE)-1) %>% 
+  select(-total_jobs) %>% 
+  inner_join(
+    indstrat_totjobsperITL3 %>% filter(DATE == max(DATE)-1) %>% select(-total_jobs) %>% rename(totINDSTRATjobs_movingav = totaljobs_movingav),
+    by = 'GEOGRAPHY_NAME'
+  ) %>% 
+  mutate(
+    percent_indstratjobs = (totINDSTRATjobs_movingav/totaljobs_movingav) * 100
+  )
+
+#Err... two places with more than 100%. Right you are.
+#OK, Bradford very average!
+ggplot(both,aes(x = percent_indstratjobs)) +
+  geom_histogram(binwidth = 4) +
+  geom_vline(
+    xintercept = both %>% filter(GEOGRAPHY_NAME == 'Bradford') %>% select(percent_indstratjobs) %>% pull
+  ) +
+  coord_cartesian(xlim = c(0,90))
+
+
+#Oh maybe not average
+ecdf(both$percent_indstratjobs)(both %>% filter(GEOGRAPHY_NAME == 'Bradford') %>% select(percent_indstratjobs) %>% pull)
 
 
 
@@ -2185,7 +2566,7 @@ ecdf(both$percent_indstratjobs)(both %>% filter(GEOGRAPHY_NAME == 'Bradford') %>
 
 # REPEAT FOR CH----
 
-ch = readRDS('../companieshouseopen/local/PROCESSED_accountextracts_n_livelist_geocoded_combined_July2025.rds')
+ch = readRDS('../companieshouseopen/local/PROCESSED_accountextracts_n_livelist_geocoded_combined_Oct2025.rds')
 # ch = readRDS('../companieshouseopen/local/PROCESSED_accountextracts_n_livelist_geocoded_combined_July2025.rds')
 # Sys.time() - x
 
@@ -2207,7 +2588,10 @@ ch = ch %>%
 ch.5digitsums <- ch %>% 
   st_set_geometry(NULL) %>% #don't forget this!!
   filter(!is.na(Employees_thisyear) & !is.na(Employees_lastyear)) %>% #Keep only firms with employees in BOTH years even if it's zero
-  select(CompanyName,CompanyNumber,accountcode,CompanyCategory,incorporationdate_formatted,age_of_firm_years,localauthority_code:ITL221NM,Employees_thisyear,Employees_lastyear,SIC_2DIGIT_CODE,SIC_2DIGIT_CODE_NUMERIC,SIC_5DIGIT_CODE,SIC_SECTION_NAME_SHORT:SIC_5DIGIT_NAME_SHORT) %>% 
+  select(CompanyName,CompanyNumber,accountcode,CompanyCategory,
+         incorporationdate_formatted,age_of_firm_years,localauthority_code:ITL221NM,
+         Employees_thisyear,Employees_lastyear,SIC_2DIGIT_CODE,SIC_2DIGIT_CODE_NUMERIC,SIC_5DIGIT_CODE,
+         SIC_SECTION_NAME_SHORT:SIC_5DIGIT_NAME_SHORT) %>% 
   group_by(SIC_5DIGIT_CODE,localauthority_name) %>% 
   summarise(
     employeecount_thisyear = sum(Employees_thisyear),
