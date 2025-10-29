@@ -189,7 +189,7 @@ p
 
 
 ```{r, fig-chindstrat}
-#| fig-width: 9
+
 
 # ch_summary = readRDS('../local/CH_lqs_for_indstrat.rds') 
 # yeartoplot.ch = readRDS('../local/CH_yeartoplots_for_indstrat.rds')
@@ -247,7 +247,7 @@ p1
 ### BRES other sectors
 
 ```{r, fig-bresindstrat2}
-#| fig-width: 9
+
 
 p <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), alpha = 0.1, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope)
 
@@ -272,7 +272,7 @@ p
 
 
 ```{r, fig-chindstrat2}
-#| fig-width: 9
+
  
 p2 <- LQ_baseplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 0), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo, 
                   LQ_column = LQ, change_over_time = slope)
@@ -305,7 +305,7 @@ p2
 ### BRES frontier sectors
 
 ```{r, fig-bresindstrat_bn}
-#| fig-width: 9
+
 
 # Filter to just creative sectors
 # islq <- readRDS('../local/islq2024.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
@@ -370,7 +370,7 @@ p
 
 
 ```{r, fig-chindstrat_bn}
-#| fig-width: 9
+
 
 # ch_summary = readRDS('../local/CH_lqs_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
 # yeartoplot.ch = readRDS('../local/CH_yeartoplots_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
@@ -430,7 +430,7 @@ p1
 ### BRES other sectors
 
 ```{r, fig-bresindstrat2_bn}
-#| fig-width: 9
+
 
 p <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), alpha = 0.1, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope)
 
@@ -455,7 +455,7 @@ p
 
 
 ```{r, fig-chindstrat2_bn}
-#| fig-width: 9
+
  
 p2 <- LQ_baseplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 0), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo, 
                   LQ_column = LQ, change_over_time = slope)
@@ -488,7 +488,7 @@ p2
 ### BRES frontier sectors
 
 ```{r, fig-bresindstrat_dn}
-#| fig-width: 9
+
 
 # Filter to just creative sectors
 # islq <- readRDS('../local/islq2024.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
@@ -553,7 +553,7 @@ p
 
 
 ```{r, fig-chindstrat_dn}
-#| fig-width: 9
+
 
 # ch_summary = readRDS('../local/CH_lqs_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
 # yeartoplot.ch = readRDS('../local/CH_yeartoplots_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
@@ -613,7 +613,7 @@ p1
 ### BRES other sectors
 
 ```{r, fig-bresindstrat2_dn}
-#| fig-width: 9
+
 
 p <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), alpha = 0.1, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope)
 
@@ -638,7 +638,7 @@ p
 
 
 ```{r, fig-chindstrat2_dn}
-#| fig-width: 9
+
  
 p2 <- LQ_baseplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 0), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo, 
                   LQ_column = LQ, change_over_time = slope)
@@ -673,7 +673,7 @@ p2
 ### BRES frontier sectors
 
 ```{r, fig-bresindstrat_rth}
-#| fig-width: 9
+
 
 # Filter to just creative sectors
 # islq <- readRDS('../local/islq2024.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
@@ -738,7 +738,7 @@ p
 
 
 ```{r, fig-chindstrat_rth}
-#| fig-width: 9
+
 
 # ch_summary = readRDS('../local/CH_lqs_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
 # yeartoplot.ch = readRDS('../local/CH_yeartoplots_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
@@ -798,7 +798,7 @@ p1
 ### BRES other sectors
 
 ```{r, fig-bresindstrat2_rth}
-#| fig-width: 9
+
 
 p <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), alpha = 0.1, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope)
 
@@ -823,7 +823,7 @@ p
 
 
 ```{r, fig-chindstrat2_rth}
-#| fig-width: 9
+
 
 p2 <- LQ_baseplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 0), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo,
                   LQ_column = LQ, change_over_time = slope)
