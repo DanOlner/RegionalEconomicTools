@@ -1726,7 +1726,9 @@ saveRDS(bres.gva.2digit.2023,'data/regionalGVA_plus_BRESjobcounts/regionalGVA_ch
 
 
 
-# CHECK SIC MATCHES PULLED FROM IND STRATEGY DOC----
+# [NOTE: NOW MOVED TO industrial_strategy_datalinkage.R] CHECK SIC MATCHES PULLED FROM IND STRATEGY DOC----
+
+# Well, the correct code in the following sections has been moved there...
 
 #Excluded codes: Frontier areas without clear SIC mappings (e.g., Clean Tech, Hydrogen, Heat Pumps, Nuclear) not included
 indsic <- read_csv('data/industrialstrategy2025sectordefs.csv')
