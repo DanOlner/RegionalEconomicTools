@@ -64,6 +64,7 @@ runBRESdownloader.fortheseyears(years = yearstoget, geography = "TYPE437", EMPLO
 #Run this version to prove data not available for anything but 2022 to 2023
 # runBRESdownloader.fortheseyears(years = yearstoget, geography = "TYPE429", EMPLOYMENT_STATUS = 2)
 
+# ITL2
 #FULL TIME
 runBRESdownloader.fortheseyears(years = 2022:latestyear, geography = "TYPE429", EMPLOYMENT_STATUS = 2)
 #PART TIME
@@ -71,7 +72,7 @@ runBRESdownloader.fortheseyears(years = 2022:latestyear, geography = "TYPE429", 
 #"EMPLOYEES"
 runBRESdownloader.fortheseyears(years = 2022:latestyear, geography = "TYPE429", EMPLOYMENT_STATUS = 4)
 
-
+# ITL3
 #FULL TIME
 runBRESdownloader.fortheseyears(years = 2022:latestyear, geography = "TYPE428", EMPLOYMENT_STATUS = 2)
 #PART TIME

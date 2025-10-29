@@ -313,7 +313,7 @@ addplacename_to_LQplot <- function(df, plot_to_addto, placename, shapenumber=16,
                                    region_name, sector_name,change_over_time, value_column, LQ_column, sector_regional_proportion,
                                    min_LQ_all_time,max_LQ_all_time, value_col_ismoney = T, nudgepos = 0, textx = NULL, maxLQvalmultiplier = 3, useplacenameforminmaxdisplay = F, overridetextpos = -1){
   
-  region_name <- enquo(region_name)   
+  region_name <- enquo(region_name)
   sector_name <- enquo(sector_name)
   change_over_time <- enquo(change_over_time) 
   LQ_column <- enquo(LQ_column)

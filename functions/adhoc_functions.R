@@ -111,3 +111,90 @@ plotprod <- function(df,vartouse){
     facet_wrap(~SIC07_description_shortened, nrow = 1, labeller = labeller(groupwrap = label_wrap_gen(10)))
   
 }
+
+
+# For BRES 5 digit, return a summarised job count of different SIC code levels based on digit length
+bres_countjobs_by_SICdigitlevel = function(digitlevel,bres){
+  
+  bres = bres %>% 
+    mutate(newsic = str_sub(SIC_5DIGIT_CODE,1,digitlevel)) %>% 
+    group_by(DATE,GEOGRAPHY_NAME,newsic) %>% 
+    summarise(
+      JOBCOUNT = sum(JOBCOUNT)
+    ) %>% 
+    ungroup()
+  
+  names(bres)[names(bres) == 'newsic'] = paste0('sic',digitlevel)
+  
+  return(bres)
+  
+}
+
+
+# Function up LQ and hanger-on bits and bobs
+# So can all be repeated easily for e.g. different SIC code levels
+# Currently only for BRES stuff in misc_checks.R, while doing indstrat work
+getLQs_and_attachedstuff = function(bres_df){
+  
+  # cat("BRES level: ", bres_df %>% select(contains('sic')) %>% distinct() %>% pull(),"\n")
+  levelcolname = names(bres_df)[3]
+  
+  cat("BRES level: ", levelcolname,"\n")
+  
+  islq <- bres_df %>% 
+    group_split(DATE) %>% 
+    map(
+      add_location_quotient_and_proportions,
+      regionvar = GEOGRAPHY_NAME,
+      lq_var = !!sym(levelcolname),#string name to symbol
+      valuevar = JOBCOUNT
+    ) %>% 
+    bind_rows() 
+  
+  LQ_slopes <- compute_slope_or_zero(
+    data = islq, 
+    GEOGRAPHY_NAME, !!sym(levelcolname),#slopes will be found within whatever grouping vars are added here
+    y = LQ_log, x = DATE)
+  
+  #Filter down to a single year... we may want to smooth years, let's see
+  yeartoplot <- islq %>% filter(DATE == max(DATE))#use latest year
+  
+  #Add slopes into data to get LQ plots
+  yeartoplot <- yeartoplot %>% 
+    left_join(
+      LQ_slopes,
+      by = c('GEOGRAPHY_NAME', levelcolname)
+    )
+  
+  #Get min/max values for LQ over time as well, for each sector and place, to add as bars so range of sector is easy to see
+  minmaxes <- islq %>% 
+    group_by(GEOGRAPHY_NAME, !!sym(levelcolname)) %>% 
+    summarise(
+      min_LQ_all_time = min(LQ, na.rm = T),
+      max_LQ_all_time = max(LQ, na.rm = T)
+    ) %>% 
+    mutate(
+      min_LQ_all_time = ifelse(is.infinite(min_LQ_all_time),NA,min_LQ_all_time),
+      max_LQ_all_time = ifelse(is.infinite(max_LQ_all_time),NA,max_LQ_all_time)
+    )
+  
+  # table(is.infinite(minmaxes$min_LQ_all_time))
+  # table(is.infinite(minmaxes$max_LQ_all_time))
+  
+  #Join min and max
+  yeartoplot <- yeartoplot %>% 
+    left_join(
+      minmaxes,
+      by = c('GEOGRAPHY_NAME', levelcolname)
+    )
+  
+  return(list(lqs = islq, yeartoplot = yeartoplot))
+  
+}
+
+
+
+
+
+
+
