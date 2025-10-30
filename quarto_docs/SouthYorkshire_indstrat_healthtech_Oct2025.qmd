@@ -1,10 +1,10 @@
 ---
-title: "South Yorkshire creative industries"
+title: "South Yorkshire: industrial strategy health tech sector LQs"
 author:
   - name: "Dan Olner"
 format: 
   html:
-    output-file: "SY_creativeindustries_Oct2025"
+    output-file: "SY_indstrat_healthtech_Oct2025"
     fig-width: 8
     fig-height: 8
 execute:
@@ -44,7 +44,7 @@ theme_set(theme_light())
 # minjobs = 99
 minjobs = 1
 
-greplsector = 'CREATIVE|LIFESCI'
+sectorgrepl = 'LIFESCI'
 
 ```
 
@@ -126,17 +126,17 @@ Also:
 ```{r, fig-bresindstrat}
 
 # Filter to just creative sectors
-# islq <- readRDS('../local/islq2024.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-# yeartoplot <- readRDS('../local/is_bres_yeartoplot2024.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
+# islq <- readRDS('../local/islq2024.rds') %>% filter(toplevelindstrat %in% c(sectorgrepl,'LIFESCI'))
+# yeartoplot <- readRDS('../local/is_bres_yeartoplot2024.rds') %>% filter(toplevelindstrat %in% c(sectorgrepl,'LIFESCI'))
 
 # Maybe more correct ones
 # islq = readRDS('../local/lqs_for_indstrat.rds') 
 # yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds')
-islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
-yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
+islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(qg(sectorgrepl,sic_namefrom_indstrat_combo))
+yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds') %>% filter(qg(sectorgrepl,sic_namefrom_indstrat_combo))
 
-# islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-# yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds')%>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
+# islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(toplevelindstrat %in% c(sectorgrepl,'LIFESCI'))
+# yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds')%>% filter(toplevelindstrat %in% c(sectorgrepl,'LIFESCI'))
 
 place = "Sheffield"
 
@@ -164,10 +164,12 @@ sectorstokeep <- yeartoplot.lqfiltered %>% filter(GEOGRAPHY_NAME == place) %>% s
 
 yeartoplot.lqfiltered <- yeartoplot.lqfiltered %>% filter(sic_namefrom_indstrat_combo %in% sectorstokeep)
 
-
+# Might not have any frontier sectors...
+if(nrow(yeartoplot.lqfiltered %>% filter(is_frontier == 1))!=0){
 
 p <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), alpha = 0.1, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope)
 
+# debugonce(addplacename_to_LQplot)
 p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), plot_to_addto = p, 
                             placename = place, shapenumber = 16,
                             min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
@@ -182,6 +184,14 @@ p <- p +
 
 p
 
+} else {
+  
+  cat('No data for frontier sectors')
+  
+}
+  
+
+
 
 ```
 
@@ -194,8 +204,8 @@ p
 
 # ch_summary = readRDS('../local/CH_lqs_for_indstrat.rds') 
 # yeartoplot.ch = readRDS('../local/CH_yeartoplots_for_indstrat.rds')
-ch_summary = readRDS('../local/CH_lqs_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
-yeartoplot.ch = readRDS('../local/CH_yeartoplots_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
+ch_summary = readRDS('../local/CH_lqs_for_indstrat.rds') %>% filter(qg(sectorgrepl,sic_namefrom_indstrat_combo))
+yeartoplot.ch = readRDS('../local/CH_yeartoplots_for_indstrat.rds') %>% filter(qg(sectorgrepl,sic_namefrom_indstrat_combo))
 
 
 sectorLQorder <- ch_summary %>% filter(
@@ -309,15 +319,15 @@ p2
 
 
 # Filter to just creative sectors
-# islq <- readRDS('../local/islq2024.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-# yeartoplot <- readRDS('../local/is_bres_yeartoplot2024.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
+# islq <- readRDS('../local/islq2024.rds') %>% filter(toplevelindstrat %in% c(sectorgrepl,'LIFESCI'))
+# yeartoplot <- readRDS('../local/is_bres_yeartoplot2024.rds') %>% filter(toplevelindstrat %in% c(sectorgrepl,'LIFESCI'))
 
 # Maybe more correct ones
-# islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
-# yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
+# islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(qg(sectorgrepl,sic_namefrom_indstrat_combo))
+# yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds') %>% filter(qg(sectorgrepl,sic_namefrom_indstrat_combo))
 
-# islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-# yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds')%>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
+# islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(toplevelindstrat %in% c(sectorgrepl,'LIFESCI'))
+# yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds')%>% filter(toplevelindstrat %in% c(sectorgrepl,'LIFESCI'))
 
 place = "Barnsley"
 
@@ -373,11 +383,11 @@ p
 ```{r, fig-chindstrat_bn}
 
 
-# ch_summary = readRDS('../local/CH_lqs_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
-# yeartoplot.ch = readRDS('../local/CH_yeartoplots_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
+# ch_summary = readRDS('../local/CH_lqs_for_indstrat.rds') %>% filter(qg(sectorgrepl,sic_namefrom_indstrat_combo))
+# yeartoplot.ch = readRDS('../local/CH_yeartoplots_for_indstrat.rds') %>% filter(qg(sectorgrepl,sic_namefrom_indstrat_combo))
 
-# ch_summary <- readRDS('../local/ch_summary.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-# yeartoplot.ch <- readRDS('../local/is_ch_yeartoplot.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
+# ch_summary <- readRDS('../local/ch_summary.rds') %>% filter(toplevelindstrat %in% c(sectorgrepl,'LIFESCI'))
+# yeartoplot.ch <- readRDS('../local/is_ch_yeartoplot.rds') %>% filter(toplevelindstrat %in% c(sectorgrepl,'LIFESCI'))
 
 # place = 'Sheffield'
 
@@ -492,15 +502,15 @@ p2
 
 
 # Filter to just creative sectors
-# islq <- readRDS('../local/islq2024.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-# yeartoplot <- readRDS('../local/is_bres_yeartoplot2024.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
+# islq <- readRDS('../local/islq2024.rds') %>% filter(toplevelindstrat %in% c(sectorgrepl,'LIFESCI'))
+# yeartoplot <- readRDS('../local/is_bres_yeartoplot2024.rds') %>% filter(toplevelindstrat %in% c(sectorgrepl,'LIFESCI'))
 
 # Maybe more correct ones
-# islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
-# yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
+# islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(qg(sectorgrepl,sic_namefrom_indstrat_combo))
+# yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds') %>% filter(qg(sectorgrepl,sic_namefrom_indstrat_combo))
 
-# islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-# yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds')%>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
+# islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(toplevelindstrat %in% c(sectorgrepl,'LIFESCI'))
+# yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds')%>% filter(toplevelindstrat %in% c(sectorgrepl,'LIFESCI'))
 
 place = "Doncaster"
 
@@ -556,11 +566,11 @@ p
 ```{r, fig-chindstrat_dn}
 
 
-# ch_summary = readRDS('../local/CH_lqs_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
-# yeartoplot.ch = readRDS('../local/CH_yeartoplots_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
+# ch_summary = readRDS('../local/CH_lqs_for_indstrat.rds') %>% filter(qg(sectorgrepl,sic_namefrom_indstrat_combo))
+# yeartoplot.ch = readRDS('../local/CH_yeartoplots_for_indstrat.rds') %>% filter(qg(sectorgrepl,sic_namefrom_indstrat_combo))
 
-# ch_summary <- readRDS('../local/ch_summary.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-# yeartoplot.ch <- readRDS('../local/is_ch_yeartoplot.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
+# ch_summary <- readRDS('../local/ch_summary.rds') %>% filter(toplevelindstrat %in% c(sectorgrepl,'LIFESCI'))
+# yeartoplot.ch <- readRDS('../local/is_ch_yeartoplot.rds') %>% filter(toplevelindstrat %in% c(sectorgrepl,'LIFESCI'))
 
 # place = 'Sheffield'
 
@@ -677,15 +687,15 @@ p2
 
 
 # Filter to just creative sectors
-# islq <- readRDS('../local/islq2024.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-# yeartoplot <- readRDS('../local/is_bres_yeartoplot2024.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
+# islq <- readRDS('../local/islq2024.rds') %>% filter(toplevelindstrat %in% c(sectorgrepl,'LIFESCI'))
+# yeartoplot <- readRDS('../local/is_bres_yeartoplot2024.rds') %>% filter(toplevelindstrat %in% c(sectorgrepl,'LIFESCI'))
 
 # Maybe more correct ones
-# islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
-# yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
+# islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(qg(sectorgrepl,sic_namefrom_indstrat_combo))
+# yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds') %>% filter(qg(sectorgrepl,sic_namefrom_indstrat_combo))
 
-# islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-# yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds')%>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
+# islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(toplevelindstrat %in% c(sectorgrepl,'LIFESCI'))
+# yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds')%>% filter(toplevelindstrat %in% c(sectorgrepl,'LIFESCI'))
 
 place = "Rotherham"
 
@@ -741,11 +751,11 @@ p
 ```{r, fig-chindstrat_rth}
 
 
-# ch_summary = readRDS('../local/CH_lqs_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
-# yeartoplot.ch = readRDS('../local/CH_yeartoplots_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
+# ch_summary = readRDS('../local/CH_lqs_for_indstrat.rds') %>% filter(qg(sectorgrepl,sic_namefrom_indstrat_combo))
+# yeartoplot.ch = readRDS('../local/CH_yeartoplots_for_indstrat.rds') %>% filter(qg(sectorgrepl,sic_namefrom_indstrat_combo))
 
-# ch_summary <- readRDS('../local/ch_summary.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-# yeartoplot.ch <- readRDS('../local/is_ch_yeartoplot.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
+# ch_summary <- readRDS('../local/ch_summary.rds') %>% filter(toplevelindstrat %in% c(sectorgrepl,'LIFESCI'))
+# yeartoplot.ch <- readRDS('../local/is_ch_yeartoplot.rds') %>% filter(toplevelindstrat %in% c(sectorgrepl,'LIFESCI'))
 
 # place = 'Sheffield'
 
