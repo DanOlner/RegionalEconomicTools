@@ -44,21 +44,41 @@ theme_set(theme_light())
 # minjobs = 99
 minjobs = 1
 
-greplsector = 'CREATIVE|LIFESCI'
+greplsector = 'CREATIVE'
+
+corecities = readRDS('../data/corecitiesvector.rds')
 
 ```
 
-
-
-
 # INTRODUCTION
 
-This doc shows **job count location quotients** for Sheffield, Barnsley, Doncaster and Rotherham for **sectors that are part of the UK Industrial Strategy definition list** (see below for more info on that). 
+This doc shows **job count location quotients** for Sheffield, Barnsley, Doncaster and Rotherham for **sectors that are part of the UK Industrial Strategy definition list** (see below for more info on that).
 
-* For BRES, Barnsley, Doncaster and Rotherham are combined (BRES still uses ITL3 2021 zones where those three are in one zone). 
-* For Companies House data (job counts extracted from accounts between June 2024 to end of June 2025), each of the four places have separate plots.
+-   For BRES, Barnsley, Doncaster and Rotherham are combined (BRES still uses ITL3 2021 zones where those three are in one zone).
+-   For Companies House data (job counts extracted from accounts between June 2024 to end of June 2025), each of the four places have separate plots.
 
+# EXISTING (OR RECENTLY ENDED) UKRI CCI CLUSTERS
 
+Original cohort:
+
+-   “Business of Fashion, Textiles and Technology” has centres in London, Cambs, Chelsea, Leeds, Loughborough.
+-   (“Future Fashion Factory” is a cluster based at Leeds University Institute of Textiles and Colour.)
+-   Creative Industries Policy and Evidence Centre (Newcastle University, with ‘Southern hub’): policy research+exchange across all CCI.
+-   Future Screens NI: “delivering expert technical skills, opportunity and growth across film and broadcast, animation, games and immersive technologies and industries in Northern Ireland.” (Queens and University of Ulster.)
+-   Creative informatics (Edinburgh): “Funding and development opportunities to creative individuals and organisations working in Edinburgh and Southeast Scotland that want to develop new products, businesses and experiences using data and data-driven technology.”
+-   InGame: R&D in Dundee’s games cluster.
+-   XR Stories (University of York): Extended reality research with industry, lab at York University.
+
+More recent projects funded (Nov 2024 announcement):
+
+-   https://www.liverpool.ac.uk/institute-of-popular-music/projects/music-futures/
+-   [Createch Frontiers](https://www.bcu.ac.uk/research/createch-frontiers), Birmingham City, Coventry and Warwick Universities.
+
+Funding period ended:
+
+-   Bath/Bristol Creative R&D: screen / performance / publishing (ended 2024)
+-   Cardiff (ended): “Creates platforms for independent companies, SMEs, micro-businesses and freelancers to compete with global media companies.” (Some Bath/Bristol overlap)
+-   StoryFutures (Surrey, Royal Holloway University, ended): “placing innovative storytelling at the heart of the next generation of immersive technologies and experiences.”
 
 # UK INDUSTRIAL STRATEGY LINKAGE
 
@@ -66,7 +86,7 @@ The [UK Industrial Strategy](https://www.gov.uk/government/collections/the-uks-m
 
 As that webpage says, most of these SIC codes cannot capture the full range of possible firms the strategy aims to cover, and it also contains entire sections that SIC codes can't cover at all - clean energy and certain digital sectors in particular. However, it does allow an analysis of which sectors are *definitely* within those industrial strategy categories. This section gathers job details for those specific sectors - a distinct range of types and breadth - and compares South Yorkshire to the rest of the UK where possible, to see which sectors align with the industrial strategy and other analysis above. This is done for both BRES and Companies House job counts, to pick up on different job types.
 
-The table below lists the IS-8 broad sector headings. In the IndStrat plots, the abbreviations for these IS-8 headings appear before the sector name. Clean energy - as mentioned above - has no SIC codes and so can't currently be matched. 
+The table below lists the IS-8 broad sector headings. In the IndStrat plots, the abbreviations for these IS-8 headings appear before the sector name. Clean energy - as mentioned above - has no SIC codes and so can't currently be matched.
 
 ```{r brad_indstrattable}
 
@@ -97,25 +117,22 @@ knitr::kable(indstrat, escape = FALSE, caption = "Table: Industrial Strategy IS-
 
 ```
 
-
 # Location quotient plots
 
 The outputs below use **location quotient plots**. Here's a guide to reading them:
 
-* Location quotients for sectoral GVA in the selected region
-* Sectors to the right of the blue line are more concentrated in this region when compared to the national average. (e.g. LQ = 10, it is 10x more concentrated)
-* Green circles have been increasing in concentration over time (larger circles increasing the most)
-* Red circles have been decreasing in concentration over time (larger circles decreasing the most)
-* Black horizontal lines show the min and max of concentration in the data’s history (from 2015 to 2023) (so, often, large green circles will be at the right of this line because sector concentration has been increasing and is continuing)
-* Per sector job counts and percent of the full IndStrat jobcount are shown on the right (not percent of entire regional jobs)
-* Fainter background squares are other place's LQs (ITL3 zones for BRES, local authorities for Companies House data)
+-   Location quotients for sectoral GVA in the selected region
+-   Sectors to the right of the blue line are more concentrated in this region when compared to the national average. (e.g. LQ = 10, it is 10x more concentrated)
+-   Green circles have been increasing in concentration over time (larger circles increasing the most)
+-   Red circles have been decreasing in concentration over time (larger circles decreasing the most)
+-   Black horizontal lines show the min and max of concentration in the data’s history (from 2015 to 2023) (so, often, large green circles will be at the right of this line because sector concentration has been increasing and is continuing)
+-   Per sector job counts and percent of the full IndStrat jobcount are shown on the right (not percent of entire regional jobs)
+-   Fainter background squares are other place's LQs (ITL3 zones for BRES, local authorities for Companies House data)
 
 Also:
 
-* The LQ plots only shows IndStrat SIC sectors where South Yorkshire has 100+ employees (for 2021-23 average)
-* And breaks them down into 'frontier' sectors and the others (a few of which overlap) - see the definitions web link above for a full explanation of those.
-
-
+-   The LQ plots only shows IndStrat SIC sectors where South Yorkshire has 100+ employees (for 2021-23 average)
+-   And breaks them down into 'frontier' sectors and the others (a few of which overlap) - see the definitions web link above for a full explanation of those.
 
 # SHEFFIELD
 
@@ -126,17 +143,17 @@ Also:
 ```{r, fig-bresindstrat}
 
 # Filter to just creative sectors
-# islq <- readRDS('../local/islq2024.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-# yeartoplot <- readRDS('../local/is_bres_yeartoplot2024.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
+# islq <- readRDS('../local/islq2024.rds') %>% filter(toplevelindstrat %in% c(greplsector,'LIFESCI'))
+# yeartoplot <- readRDS('../local/is_bres_yeartoplot2024.rds') %>% filter(toplevelindstrat %in% c(greplsector,'LIFESCI'))
 
 # Maybe more correct ones
 # islq = readRDS('../local/lqs_for_indstrat.rds') 
 # yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds')
-islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
-yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
+islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(qg(greplsector,sic_namefrom_indstrat_combo))
+yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds') %>% filter(qg(greplsector,sic_namefrom_indstrat_combo))
 
-# islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-# yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds')%>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
+# islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(toplevelindstrat %in% c(greplsector,'LIFESCI'))
+# yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds')%>% filter(toplevelindstrat %in% c(greplsector,'LIFESCI'))
 
 place = "Sheffield"
 
@@ -153,7 +170,7 @@ sectorLQorder <- islq %>% filter(
 
 #Split by frontier or not
 
-#Turn the sector column into a factor and order by LCR's LQs
+#Turn the sector column into a factor and order by LQs
 yeartoplot$sic_namefrom_indstrat_combo <- factor(yeartoplot$sic_namefrom_indstrat_combo, levels = sectorLQorder, ordered = T)
 
 #Remove some LQs
@@ -164,9 +181,18 @@ sectorstokeep <- yeartoplot.lqfiltered %>% filter(GEOGRAPHY_NAME == place) %>% s
 
 yeartoplot.lqfiltered <- yeartoplot.lqfiltered %>% filter(sic_namefrom_indstrat_combo %in% sectorstokeep)
 
+# Make base layer just of labelled core cities
+# Remove sheffield also, don't want that labelled
+corecities_baselayer = yeartoplot.lqfiltered %>% filter(GEOGRAPHY_NAME %in% corecities[!qg('sheffield',corecities)])
 
+# Add in placename abbreviations
+corecities_baselayer = corecities_baselayer %>% 
+  mutate(
+    placename_short = str_sub(GEOGRAPHY_NAME,1,2)
+  )
 
-p <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), alpha = 0.1, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope)
+# debugonce(LQ_baseplot)
+p <- LQ_baseplot(df = corecities_baselayer %>% filter(is_frontier == 1), alpha = 0.8, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
 
 p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), plot_to_addto = p, 
                             placename = place, shapenumber = 16,
@@ -185,17 +211,24 @@ p
 
 ```
 
-
 ### Companies house frontier sectors
-
 
 ```{r, fig-chindstrat}
 
 
 # ch_summary = readRDS('../local/CH_lqs_for_indstrat.rds') 
 # yeartoplot.ch = readRDS('../local/CH_yeartoplots_for_indstrat.rds')
-ch_summary = readRDS('../local/CH_lqs_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
-yeartoplot.ch = readRDS('../local/CH_yeartoplots_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
+ch_summary = readRDS('../local/CH_lqs_for_indstrat.rds') %>% 
+  filter(
+    qg(greplsector,sic_namefrom_indstrat_combo),
+    !is.na(sic_namefrom_indstrat_combo)
+    )
+
+yeartoplot.ch = readRDS('../local/CH_yeartoplots_for_indstrat.rds') %>%
+  filter(
+    qg(greplsector,sic_namefrom_indstrat_combo),
+    !is.na(sic_namefrom_indstrat_combo)
+    )
 
 
 sectorLQorder <- ch_summary %>% filter(
@@ -213,14 +246,23 @@ yeartoplot.ch$sic_namefrom_indstrat_combo <- factor(yeartoplot.ch$sic_namefrom_i
 #Remove some LQs
 yeartoplot.lqfiltered.ch <- yeartoplot.ch %>% filter(LQ > 0 & LQ < 100, JOBCOUNT >= minjobs)
 
+
 #Drop any sectors that Bradford now doesn't have after that filter
 sectorstokeep <- yeartoplot.lqfiltered.ch %>% filter(GEOGRAPHY_NAME == place) %>% select(sic_namefrom_indstrat_combo) %>% pull
 yeartoplot.lqfiltered.ch <- yeartoplot.lqfiltered.ch %>% filter(sic_namefrom_indstrat_combo %in% sectorstokeep)
 
+# Make base layer just of labelled core cities
+# Remove sheffield also, don't want that labelled
+corecities_baselayer.ch = yeartoplot.lqfiltered.ch %>% filter(GEOGRAPHY_NAME %in% corecities[!qg('sheffield',corecities)])
 
+corecities_baselayer.ch = corecities_baselayer.ch %>% 
+  mutate(
+    placename_short = str_sub(GEOGRAPHY_NAME,1,2)
+  )
 
-p1 <- LQ_baseplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 1), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo, 
-                  LQ_column = LQ, change_over_time = slope)
+p1 <- LQ_baseplot(df = corecities_baselayer.ch %>% filter(is_frontier == 1), alpha = 0.8, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
+# p1 <- LQ_baseplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 1), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo, 
+#                   LQ_column = LQ, change_over_time = slope)
 
 # debugonce(addplacename_to_LQplot)
 p1 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 1), plot_to_addto = p1, 
@@ -241,16 +283,15 @@ p1
 
 ```
 
-
-
-## Other industrial strategy SIC sectors 
+## Other industrial strategy SIC sectors
 
 ### BRES other sectors
 
 ```{r, fig-bresindstrat2}
+#| fig-height: 13
 
 
-p <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), alpha = 0.1, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope)
+p <- LQ_baseplot(df = corecities_baselayer %>% filter(is_frontier == 0), alpha = 0.8, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
 
 p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), plot_to_addto = p, 
                             placename = place, shapenumber = 16,
@@ -271,12 +312,12 @@ p
 
 ### Companies House other sectors
 
-
 ```{r, fig-chindstrat2}
+#| fig-height: 13
 
- 
-p2 <- LQ_baseplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 0), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo, 
-                  LQ_column = LQ, change_over_time = slope)
+p2 <- LQ_baseplot(df = corecities_baselayer.ch %>% filter(is_frontier == 0), alpha = 0.8, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
+# p2 <- LQ_baseplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 0), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo, 
+#                   LQ_column = LQ, change_over_time = slope)
 
 # debugonce(addplacename_to_LQplot)
 p2 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 0), plot_to_addto = p2, 
@@ -298,26 +339,13 @@ p2
 
 ```
 
-
 # BARNSLEY
 
 ## "Frontier" SIC sectors
 
 ### BRES frontier sectors
 
-```{r, fig-bresindstrat_bn}
-
-
-# Filter to just creative sectors
-# islq <- readRDS('../local/islq2024.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-# yeartoplot <- readRDS('../local/is_bres_yeartoplot2024.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-
-# Maybe more correct ones
-# islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
-# yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
-
-# islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-# yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds')%>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
+```{r, fig-bresindstratb}
 
 place = "Barnsley"
 
@@ -334,7 +362,7 @@ sectorLQorder <- islq %>% filter(
 
 #Split by frontier or not
 
-#Turn the sector column into a factor and order by LCR's LQs
+#Turn the sector column into a factor and order by LQs
 yeartoplot$sic_namefrom_indstrat_combo <- factor(yeartoplot$sic_namefrom_indstrat_combo, levels = sectorLQorder, ordered = T)
 
 #Remove some LQs
@@ -345,9 +373,17 @@ sectorstokeep <- yeartoplot.lqfiltered %>% filter(GEOGRAPHY_NAME == place) %>% s
 
 yeartoplot.lqfiltered <- yeartoplot.lqfiltered %>% filter(sic_namefrom_indstrat_combo %in% sectorstokeep)
 
+# Make base layer just of labelled core cities
+corecities_baselayer = yeartoplot.lqfiltered %>% filter(GEOGRAPHY_NAME %in% corecities)
 
+# Add in placename abbreviations
+corecities_baselayer = corecities_baselayer %>% 
+  mutate(
+    placename_short = str_sub(GEOGRAPHY_NAME,1,2)
+  )
 
-p <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), alpha = 0.1, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope)
+# debugonce(LQ_baseplot)
+p <- LQ_baseplot(df = corecities_baselayer %>% filter(is_frontier == 1), alpha = 0.8, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
 
 p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), plot_to_addto = p, 
                             placename = place, shapenumber = 16,
@@ -366,20 +402,9 @@ p
 
 ```
 
-
 ### Companies house frontier sectors
 
-
-```{r, fig-chindstrat_bn}
-
-
-# ch_summary = readRDS('../local/CH_lqs_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
-# yeartoplot.ch = readRDS('../local/CH_yeartoplots_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
-
-# ch_summary <- readRDS('../local/ch_summary.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-# yeartoplot.ch <- readRDS('../local/is_ch_yeartoplot.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-
-# place = 'Sheffield'
+```{r, fig-chindstratb}
 
 sectorLQorder <- ch_summary %>% filter(
   GEOGRAPHY_NAME == place,
@@ -396,14 +421,22 @@ yeartoplot.ch$sic_namefrom_indstrat_combo <- factor(yeartoplot.ch$sic_namefrom_i
 #Remove some LQs
 yeartoplot.lqfiltered.ch <- yeartoplot.ch %>% filter(LQ > 0 & LQ < 100, JOBCOUNT >= minjobs)
 
+
 #Drop any sectors that Bradford now doesn't have after that filter
 sectorstokeep <- yeartoplot.lqfiltered.ch %>% filter(GEOGRAPHY_NAME == place) %>% select(sic_namefrom_indstrat_combo) %>% pull
 yeartoplot.lqfiltered.ch <- yeartoplot.lqfiltered.ch %>% filter(sic_namefrom_indstrat_combo %in% sectorstokeep)
 
+# Make base layer just of labelled core cities
+corecities_baselayer.ch = yeartoplot.lqfiltered.ch %>% filter(GEOGRAPHY_NAME %in% corecities)
 
+corecities_baselayer.ch = corecities_baselayer.ch %>% 
+  mutate(
+    placename_short = str_sub(GEOGRAPHY_NAME,1,2)
+  )
 
-p1 <- LQ_baseplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 1), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo, 
-                  LQ_column = LQ, change_over_time = slope)
+p1 <- LQ_baseplot(df = corecities_baselayer.ch %>% filter(is_frontier == 1), alpha = 0.8, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
+# p1 <- LQ_baseplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 1), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo, 
+#                   LQ_column = LQ, change_over_time = slope)
 
 # debugonce(addplacename_to_LQplot)
 p1 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 1), plot_to_addto = p1, 
@@ -424,16 +457,15 @@ p1
 
 ```
 
-
-
-## Other industrial strategy SIC sectors 
+## Other industrial strategy SIC sectors
 
 ### BRES other sectors
 
-```{r, fig-bresindstrat2_bn}
+```{r, fig-bresindstrat2b}
+#| fig-height: 13
 
 
-p <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), alpha = 0.1, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope)
+p <- LQ_baseplot(df = corecities_baselayer %>% filter(is_frontier == 0), alpha = 0.8, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
 
 p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), plot_to_addto = p, 
                             placename = place, shapenumber = 16,
@@ -454,12 +486,12 @@ p
 
 ### Companies House other sectors
 
+```{r, fig-chindstrat2b}
+#| fig-height: 13
 
-```{r, fig-chindstrat2_bn}
-
- 
-p2 <- LQ_baseplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 0), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo, 
-                  LQ_column = LQ, change_over_time = slope)
+p2 <- LQ_baseplot(df = corecities_baselayer.ch %>% filter(is_frontier == 0), alpha = 0.8, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
+# p2 <- LQ_baseplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 0), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo, 
+#                   LQ_column = LQ, change_over_time = slope)
 
 # debugonce(addplacename_to_LQplot)
 p2 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 0), plot_to_addto = p2, 
@@ -481,26 +513,13 @@ p2
 
 ```
 
-
 # DONCASTER
 
 ## "Frontier" SIC sectors
 
 ### BRES frontier sectors
 
-```{r, fig-bresindstrat_dn}
-
-
-# Filter to just creative sectors
-# islq <- readRDS('../local/islq2024.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-# yeartoplot <- readRDS('../local/is_bres_yeartoplot2024.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-
-# Maybe more correct ones
-# islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
-# yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
-
-# islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-# yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds')%>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
+```{r, fig-bresindstratd}
 
 place = "Doncaster"
 
@@ -517,7 +536,7 @@ sectorLQorder <- islq %>% filter(
 
 #Split by frontier or not
 
-#Turn the sector column into a factor and order by LCR's LQs
+#Turn the sector column into a factor and order by LQs
 yeartoplot$sic_namefrom_indstrat_combo <- factor(yeartoplot$sic_namefrom_indstrat_combo, levels = sectorLQorder, ordered = T)
 
 #Remove some LQs
@@ -528,9 +547,17 @@ sectorstokeep <- yeartoplot.lqfiltered %>% filter(GEOGRAPHY_NAME == place) %>% s
 
 yeartoplot.lqfiltered <- yeartoplot.lqfiltered %>% filter(sic_namefrom_indstrat_combo %in% sectorstokeep)
 
+# Make base layer just of labelled core cities
+corecities_baselayer = yeartoplot.lqfiltered %>% filter(GEOGRAPHY_NAME %in% corecities)
 
+# Add in placename abbreviations
+corecities_baselayer = corecities_baselayer %>% 
+  mutate(
+    placename_short = str_sub(GEOGRAPHY_NAME,1,2)
+  )
 
-p <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), alpha = 0.1, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope)
+# debugonce(LQ_baseplot)
+p <- LQ_baseplot(df = corecities_baselayer %>% filter(is_frontier == 1), alpha = 0.8, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
 
 p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), plot_to_addto = p, 
                             placename = place, shapenumber = 16,
@@ -549,20 +576,9 @@ p
 
 ```
 
-
 ### Companies house frontier sectors
 
-
-```{r, fig-chindstrat_dn}
-
-
-# ch_summary = readRDS('../local/CH_lqs_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
-# yeartoplot.ch = readRDS('../local/CH_yeartoplots_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
-
-# ch_summary <- readRDS('../local/ch_summary.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-# yeartoplot.ch <- readRDS('../local/is_ch_yeartoplot.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-
-# place = 'Sheffield'
+```{r, fig-chindstratd}
 
 sectorLQorder <- ch_summary %>% filter(
   GEOGRAPHY_NAME == place,
@@ -579,17 +595,25 @@ yeartoplot.ch$sic_namefrom_indstrat_combo <- factor(yeartoplot.ch$sic_namefrom_i
 #Remove some LQs
 yeartoplot.lqfiltered.ch <- yeartoplot.ch %>% filter(LQ > 0 & LQ < 100, JOBCOUNT >= minjobs)
 
+
 #Drop any sectors that Bradford now doesn't have after that filter
 sectorstokeep <- yeartoplot.lqfiltered.ch %>% filter(GEOGRAPHY_NAME == place) %>% select(sic_namefrom_indstrat_combo) %>% pull
 yeartoplot.lqfiltered.ch <- yeartoplot.lqfiltered.ch %>% filter(sic_namefrom_indstrat_combo %in% sectorstokeep)
 
+# Make base layer just of labelled core cities
+corecities_baselayer.ch = yeartoplot.lqfiltered.ch %>% filter(GEOGRAPHY_NAME %in% corecities)
 
+corecities_baselayer.ch = corecities_baselayer.ch %>% 
+  mutate(
+    placename_short = str_sub(GEOGRAPHY_NAME,1,2)
+  )
 
-p1 <- LQ_baseplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 1), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo, 
-                  LQ_column = LQ, change_over_time = slope)
+p1 <- LQ_baseplot(df = corecities_baselayer.ch %>% filter(is_frontier == 1, !is.na(sic_namefrom_indstrat_combo)), alpha = 0.8, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
+# p1 <- LQ_baseplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 1), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo, 
+#                   LQ_column = LQ, change_over_time = slope)
 
 # debugonce(addplacename_to_LQplot)
-p1 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 1), plot_to_addto = p1, 
+p1 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 1, !is.na(sic_namefrom_indstrat_combo)), plot_to_addto = p1, 
                              placename = place, shapenumber = 16,
                              # min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                              value_column = JOBCOUNT, sector_regional_proportion = sector_regional_proportion,
@@ -607,16 +631,15 @@ p1
 
 ```
 
-
-
-## Other industrial strategy SIC sectors 
+## Other industrial strategy SIC sectors
 
 ### BRES other sectors
 
-```{r, fig-bresindstrat2_dn}
+```{r, fig-bresindstrat2d}
+#| fig-height: 13
 
 
-p <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), alpha = 0.1, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope)
+p <- LQ_baseplot(df = corecities_baselayer %>% filter(is_frontier == 0), alpha = 0.8, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
 
 p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), plot_to_addto = p, 
                             placename = place, shapenumber = 16,
@@ -637,15 +660,15 @@ p
 
 ### Companies House other sectors
 
+```{r, fig-chindstrat2d}
+#| fig-height: 13
 
-```{r, fig-chindstrat2_dn}
-
- 
-p2 <- LQ_baseplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 0), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo, 
-                  LQ_column = LQ, change_over_time = slope)
+p2 <- LQ_baseplot(df = corecities_baselayer.ch %>% filter(is_frontier == 0, !is.na(sic_namefrom_indstrat_combo)), alpha = 0.8, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
+# p2 <- LQ_baseplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 0), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo, 
+#                   LQ_column = LQ, change_over_time = slope)
 
 # debugonce(addplacename_to_LQplot)
-p2 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 0), plot_to_addto = p2, 
+p2 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 0, !is.na(sic_namefrom_indstrat_combo)), plot_to_addto = p2, 
                              placename = place, shapenumber = 16,
                              # min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                              value_column = JOBCOUNT, sector_regional_proportion = sector_regional_proportion,
@@ -664,36 +687,21 @@ p2
 
 ```
 
-
-
-
 # ROTHERHAM
 
 ## "Frontier" SIC sectors
 
 ### BRES frontier sectors
 
-```{r, fig-bresindstrat_rth}
-
-
-# Filter to just creative sectors
-# islq <- readRDS('../local/islq2024.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-# yeartoplot <- readRDS('../local/is_bres_yeartoplot2024.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-
-# Maybe more correct ones
-# islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
-# yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
-
-# islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-# yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds')%>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
+```{r, fig-bresindstratr}
 
 place = "Rotherham"
 
 sectorLQorder <- islq %>% filter(
   DATE == max(DATE),#use latest data
-  GEOGRAPHY_NAME == place) %>%
-  arrange(-LQ) %>%
-  select(sic_namefrom_indstrat_combo) %>%
+  GEOGRAPHY_NAME == place) %>% 
+  arrange(-LQ) %>% 
+  select(sic_namefrom_indstrat_combo) %>% 
   pull()
 
 # Tick
@@ -702,7 +710,7 @@ sectorLQorder <- islq %>% filter(
 
 #Split by frontier or not
 
-#Turn the sector column into a factor and order by LCR's LQs
+#Turn the sector column into a factor and order by LQs
 yeartoplot$sic_namefrom_indstrat_combo <- factor(yeartoplot$sic_namefrom_indstrat_combo, levels = sectorLQorder, ordered = T)
 
 #Remove some LQs
@@ -713,11 +721,19 @@ sectorstokeep <- yeartoplot.lqfiltered %>% filter(GEOGRAPHY_NAME == place) %>% s
 
 yeartoplot.lqfiltered <- yeartoplot.lqfiltered %>% filter(sic_namefrom_indstrat_combo %in% sectorstokeep)
 
+# Make base layer just of labelled core cities
+corecities_baselayer = yeartoplot.lqfiltered %>% filter(GEOGRAPHY_NAME %in% corecities)
 
+# Add in placename abbreviations
+corecities_baselayer = corecities_baselayer %>% 
+  mutate(
+    placename_short = str_sub(GEOGRAPHY_NAME,1,2)
+  )
 
-p <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), alpha = 0.1, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope)
+# debugonce(LQ_baseplot)
+p <- LQ_baseplot(df = corecities_baselayer %>% filter(is_frontier == 1), alpha = 0.8, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
 
-p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), plot_to_addto = p,
+p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), plot_to_addto = p, 
                             placename = place, shapenumber = 16,
                             min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                             value_column = JOBCOUNT, sector_regional_proportion = sector_regional_proportion,
@@ -725,7 +741,7 @@ p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier ==
                             sector_name = sic_namefrom_indstrat_combo, change_over_time = slope, LQ_column = LQ,
                             text = 7, value_col_ismoney = F)
 
-p <- p +
+p <- p + 
   # coord_cartesian(xlim = c(0.1,7)) +
   ggtitle("IndStrat frontier sector")
 
@@ -734,27 +750,16 @@ p
 
 ```
 
-
 ### Companies house frontier sectors
 
-
-```{r, fig-chindstrat_rth}
-
-
-# ch_summary = readRDS('../local/CH_lqs_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
-# yeartoplot.ch = readRDS('../local/CH_yeartoplots_for_indstrat.rds') %>% filter(qg('CREATIVE',sic_namefrom_indstrat_combo))
-
-# ch_summary <- readRDS('../local/ch_summary.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-# yeartoplot.ch <- readRDS('../local/is_ch_yeartoplot.rds') %>% filter(toplevelindstrat %in% c('CREATIVE','LIFESCI'))
-
-# place = 'Sheffield'
+```{r, fig-chindstratr}
 
 sectorLQorder <- ch_summary %>% filter(
   GEOGRAPHY_NAME == place,
   DATE == max(DATE)#use latest data
-) %>%
-  arrange(-LQ) %>%
-  select(sic_namefrom_indstrat_combo) %>%
+) %>% 
+  arrange(-LQ) %>% 
+  select(sic_namefrom_indstrat_combo) %>% 
   pull()
 
 
@@ -764,26 +769,34 @@ yeartoplot.ch$sic_namefrom_indstrat_combo <- factor(yeartoplot.ch$sic_namefrom_i
 #Remove some LQs
 yeartoplot.lqfiltered.ch <- yeartoplot.ch %>% filter(LQ > 0 & LQ < 100, JOBCOUNT >= minjobs)
 
+
 #Drop any sectors that Bradford now doesn't have after that filter
 sectorstokeep <- yeartoplot.lqfiltered.ch %>% filter(GEOGRAPHY_NAME == place) %>% select(sic_namefrom_indstrat_combo) %>% pull
 yeartoplot.lqfiltered.ch <- yeartoplot.lqfiltered.ch %>% filter(sic_namefrom_indstrat_combo %in% sectorstokeep)
 
+# Make base layer just of labelled core cities
+corecities_baselayer.ch = yeartoplot.lqfiltered.ch %>% filter(GEOGRAPHY_NAME %in% corecities)
 
+corecities_baselayer.ch = corecities_baselayer.ch %>% 
+  mutate(
+    placename_short = str_sub(GEOGRAPHY_NAME,1,2)
+  )
 
-p1 <- LQ_baseplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 1), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo,
-                  LQ_column = LQ, change_over_time = slope)
+p1 <- LQ_baseplot(df = corecities_baselayer.ch %>% filter(is_frontier == 1, !is.na(sic_namefrom_indstrat_combo)), alpha = 0.8, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
+# p1 <- LQ_baseplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 1), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo, 
+#                   LQ_column = LQ, change_over_time = slope)
 
 # debugonce(addplacename_to_LQplot)
-p1 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 1), plot_to_addto = p1,
+p1 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 1, !is.na(sic_namefrom_indstrat_combo)), plot_to_addto = p1, 
                              placename = place, shapenumber = 16,
                              # min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                              value_column = JOBCOUNT, sector_regional_proportion = sector_regional_proportion,
                              region_name = GEOGRAPHY_NAME,
                              sector_name = sic_namefrom_indstrat_combo, change_over_time = slope, LQ_column = LQ,
                              value_col_ismoney = F, text = 7)
-# value_col_ismoney = F, text = 7, maxLQvalmultiplier = 2,useplacenameforminmaxdisplay = T, overridetextpos = 14)
+                             # value_col_ismoney = F, text = 7, maxLQvalmultiplier = 2,useplacenameforminmaxdisplay = T, overridetextpos = 14)
 
-p1 <- p1 +
+p1 <- p1 + 
   # coord_cartesian(xlim = c(0.1,7)) +
   ggtitle("IndStrat frontier sector")
 
@@ -792,18 +805,17 @@ p1
 
 ```
 
-
-
 ## Other industrial strategy SIC sectors
 
 ### BRES other sectors
 
-```{r, fig-bresindstrat2_rth}
+```{r, fig-bresindstrat2r}
+#| fig-height: 13
 
 
-p <- LQ_baseplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), alpha = 0.1, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope)
+p <- LQ_baseplot(df = corecities_baselayer %>% filter(is_frontier == 0), alpha = 0.8, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
 
-p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), plot_to_addto = p,
+p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), plot_to_addto = p, 
                             placename = place, shapenumber = 16,
                             min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                             value_column = JOBCOUNT, sector_regional_proportion = sector_regional_proportion,
@@ -811,7 +823,7 @@ p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier ==
                             sector_name = sic_namefrom_indstrat_combo, change_over_time = slope, LQ_column = LQ,
                             text = 7, value_col_ismoney = F)
 
-p <- p +
+p <- p + 
   # coord_cartesian(xlim = c(0.1,7)) +
   ggtitle("IndStrat other sector")
 
@@ -822,24 +834,24 @@ p
 
 ### Companies House other sectors
 
+```{r, fig-chindstrat2r}
+#| fig-height: 13
 
-```{r, fig-chindstrat2_rth}
-
-
-p2 <- LQ_baseplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 0), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo,
-                  LQ_column = LQ, change_over_time = slope)
+p2 <- LQ_baseplot(df = corecities_baselayer.ch %>% filter(is_frontier == 0, !is.na(sic_namefrom_indstrat_combo)), alpha = 0.8, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
+# p2 <- LQ_baseplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 0), alpha = 0.03, sector_name = sic_namefrom_indstrat_combo, 
+#                   LQ_column = LQ, change_over_time = slope)
 
 # debugonce(addplacename_to_LQplot)
-p2 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 0), plot_to_addto = p2,
+p2 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 0, !is.na(sic_namefrom_indstrat_combo)), plot_to_addto = p2, 
                              placename = place, shapenumber = 16,
                              # min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                              value_column = JOBCOUNT, sector_regional_proportion = sector_regional_proportion,
                              region_name = GEOGRAPHY_NAME,
                              sector_name = sic_namefrom_indstrat_combo, change_over_time = slope, LQ_column = LQ,
                              value_col_ismoney = F, text = 7)
-# value_col_ismoney = F, text = 7, maxLQvalmultiplier = 2,useplacenameforminmaxdisplay = T, overridetextpos = 14)
+                             # value_col_ismoney = F, text = 7, maxLQvalmultiplier = 2,useplacenameforminmaxdisplay = T, overridetextpos = 14)
 
-p2 <- p2 +
+p2 <- p2 + 
   # coord_cartesian(xlim = c(0.1,7)) +
   ggtitle("IndStrat other sector")
 
@@ -848,5 +860,3 @@ p2
 
 
 ```
-
-

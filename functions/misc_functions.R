@@ -1,6 +1,7 @@
 #Misc functions
 library(tidyverse)
 library(ggdist)
+library(ggrepel)
 
 # if(!require(ggrepel)){
 #   install.packages("ggrepel")
@@ -231,11 +232,12 @@ add_location_quotient_and_proportions <- function(df, regionvar, lq_var, valueva
 
 
 #Make base plot for LQ plot, with option of setting alpha to zero if we don't want to see all other places
-LQ_baseplot <- function(df, alpha = 0.1, shape = 16, sector_name, LQ_column, change_over_time){
+LQ_baseplot <- function(df, alpha = 0.1, shape = 16, sector_name, LQ_column, change_over_time, labelcolumn){
   
   sector_name <- enquo(sector_name)
   LQ_column <- enquo(LQ_column)
   change_over_time <- enquo(change_over_time)
+  labelcolumn <- enquo(labelcolumn)
   
   p <- ggplot() +
   geom_point(
@@ -257,6 +259,30 @@ LQ_baseplot <- function(df, alpha = 0.1, shape = 16, sector_name, LQ_column, cha
   geom_vline(xintercept = 1, colour = 'blue') +
   guides(size = F) +
   ylab("")
+  
+  if(!rlang::quo_is_missing(labelcolumn)){
+   
+    # p = p + geom_text_repel(
+    #   data = df %>% filter(!!change_over_time > 0),#Just pick one!
+    #   aes(y = !!sector_name, x = !!LQ_column, label = !!labelcolumn),
+    #   colour = 'green', size = 3
+    # ) + geom_text_repel(
+    #   data = df %>% filter(!!change_over_time < 0),#Just pick one!
+    #   aes(y = !!sector_name, x = !!LQ_column, label = !!labelcolumn),
+    #   colour = 'red', size = 3
+    # )
+    p = p + geom_text(
+      data = df %>% filter(!!change_over_time > 0),#Just pick one!
+      aes(y = !!sector_name, x = !!LQ_column, label = !!labelcolumn),
+      colour = 'green', size = 3
+    ) + geom_text(
+      data = df %>% filter(!!change_over_time < 0),#Just pick one!
+      aes(y = !!sector_name, x = !!LQ_column, label = !!labelcolumn),
+      colour = 'red', size = 3
+    )
+      
+  
+  }
   
   return(p)
 
@@ -2464,7 +2490,7 @@ reduceSICnames = function(names,level){
 
 
 
-removecommonSICnameelements = function(returnnames, removemanuf = F){
+removecommonSICnameelements = function(returnnames, removemanuf = F, removeactivities = F){
   
   # returnnames = enquo(returnnames)
   # returnnames = quo_name(returnnames)
@@ -2475,12 +2501,19 @@ removecommonSICnameelements = function(returnnames, removemanuf = F){
   returnnames = gsub(': ','',returnnames,ignore.case = T)
   returnnames = gsub('installation','install',returnnames,ignore.case = T)
   returnnames = gsub('personnel employment','emp',returnnames,ignore.case = T)
-  returnnames = gsub(' support| services| supply| reproduction| equipment|eum|  (no accommodation)','',returnnames,ignore.case = T)
+  returnnames = gsub(' support| services| supply| reproduction| equipment|  (no accommodation)','',returnnames,ignore.case = T)
   
   if(removemanuf){
     
     returnnames = gsub('manufacture | manufacturing','',returnnames,ignore.case = T)
     returnnames = gsub('manufacture|manufacturing','',returnnames,ignore.case = T)
+    
+  }
+  
+  if(removeactivities){
+    
+    returnnames = gsub(' activities| articles','',returnnames,ignore.case = T)
+    returnnames = gsub('activities|articles','',returnnames,ignore.case = T)
     
   }
   
