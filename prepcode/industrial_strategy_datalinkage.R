@@ -409,6 +409,9 @@ cciplot = cciplot %>%
     GEOGRAPHY_NAME = factor(GEOGRAPHY_NAME, levels = placeorder)
   )
 
+# Save for qml
+saveRDS(cciplot,'local/cciplot.rds')
+
 # PLOOOOT
 ggplot(cciplot %>% filter(!is.na(percent_indstrat_cci_movingav)),
        aes(x = DATE, y = percent_indstrat_cci_movingav, 
@@ -660,6 +663,9 @@ sections.plot = sections.plot %>%
   mutate(
     Region_name = factor(Region_name, levels = placeorder)
   )
+
+# Save for qml
+saveRDS(sections.plot,'local/cci_gva_plot.rds')
 
 # PLOOOOT
 ggplot(sections.plot,
