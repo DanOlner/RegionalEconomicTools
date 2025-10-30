@@ -617,18 +617,6 @@ itl3.cci.cp <- itl3.cci.cp %>%
 
 smoothband = 3
 
-#Get colours same for same SIC codes
-#https://stackoverflow.com/a/33144808/5023561
-#Make different pastel-ish colours
-n <- length(unique(itl3.cci.cp$SIC07_description))
-set.seed(12)
-qual_col_pals = brewer.pal.info[brewer.pal.info$category == 'qual',]
-col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
-# pie(rep(1,n), col=sample(col_vector, n))
-
-# randomcols <- sample(col_vector, n)
-# n <- length(unique(itl3.sections.cv$SIC07_description))
-randomcols <- col_vector[10:(10+(n-1))]
 
 
 #Find the average within each place and each sector in each place
@@ -646,7 +634,7 @@ itl3.cci.cp <- itl3.cci.cp %>%
 sections.plot = itl3.cci.cp %>% 
   filter(
     qg('cci',SIC07_description),
-    Region_name %in% c(corecities,c('Barnsley','Doncaster','Rotherham')),
+    Region_name %in% c(corecities,c('Barnsley','Doncaster','Rotherham','Cardiff and Vale of Glamorgan','Tyneside')),
     !is.na(year)
     )
 
@@ -666,6 +654,20 @@ sections.plot = sections.plot %>%
 
 # Save for qml
 saveRDS(sections.plot,'local/cci_gva_plot.rds')
+
+#Get colours same for same SIC codes
+#https://stackoverflow.com/a/33144808/5023561
+#Make different pastel-ish colours
+n <- length(unique(sections.plot$Region_name))
+set.seed(12)
+qual_col_pals = brewer.pal.info[brewer.pal.info$category == 'qual',]
+col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
+# pie(rep(1,n), col=sample(col_vector, n))
+
+# randomcols <- sample(col_vector, n)
+# n <- length(unique(itl3.sections.cv$SIC07_description))
+randomcols <- col_vector[12:(12+(n-1))]
+
 
 # PLOOOOT
 ggplot(sections.plot,

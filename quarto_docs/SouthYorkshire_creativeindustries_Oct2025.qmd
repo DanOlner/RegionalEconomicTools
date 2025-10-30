@@ -59,26 +59,25 @@ This doc shows **job count location quotients** for Sheffield, Barnsley, Doncast
 
 # EXISTING (OR RECENTLY ENDED) UKRI CCI CLUSTERS
 
-Original cohort:
+Original projects:
 
--   “Business of Fashion, Textiles and Technology” has centres in London, Cambs, Chelsea, Leeds, Loughborough.
--   (“Future Fashion Factory” is a cluster based at Leeds University Institute of Textiles and Colour.)
--   Creative Industries Policy and Evidence Centre (Newcastle University, with ‘Southern hub’): policy research+exchange across all CCI.
--   Future Screens NI: “delivering expert technical skills, opportunity and growth across film and broadcast, animation, games and immersive technologies and industries in Northern Ireland.” (Queens and University of Ulster.)
--   Creative informatics (Edinburgh): “Funding and development opportunities to creative individuals and organisations working in Edinburgh and Southeast Scotland that want to develop new products, businesses and experiences using data and data-driven technology.”
--   InGame: R&D in Dundee’s games cluster.
--   XR Stories (University of York): Extended reality research with industry, lab at York University.
+-   “[Business of Fashion, Textiles and Technology](https://bftt.org.uk/)” has centres in London, Cambs, Chelsea, Leeds, Loughborough. (“[Future Fashion Factory](https://futurefashionfactory.org/)” is a cluster based at Leeds University Institute of Textiles and Colour.)
+-   [Creative Industries Policy and Evidence Centre](https://pec.ac.uk/) (Newcastle University, with ‘Southern hub’): policy research+exchange across all CCI.
+-   [Future Screens NI](https://www.futurescreens.org/): “delivering expert technical skills, opportunity and growth across film and broadcast, animation, games and immersive technologies and industries in Northern Ireland.” (Queens and University of Ulster.)
+-   [Creative informatics](https://creativeinformatics.org/) (Edinburgh): “Funding and development opportunities to creative individuals and organisations working in Edinburgh and Southeast Scotland that want to develop new products, businesses and experiences using data and data-driven technology.”
+-   [InGame](https://innovationforgames.com/): R&D in Dundee’s games cluster.
+-   [XR Stories](https://xrstories.co.uk/) (University of York): Extended reality research with industry, lab at York University.
 
 More recent projects funded (Nov 2024 announcement):
 
--   https://www.liverpool.ac.uk/institute-of-popular-music/projects/music-futures/
+-   [Music Futures](https://www.liverpool.ac.uk/institute-of-popular-music/projects/music-futures/) in Liverpool.
 -   [Createch Frontiers](https://www.bcu.ac.uk/research/createch-frontiers), Birmingham City, Coventry and Warwick Universities.
 
 Funding period ended:
 
--   Bath/Bristol Creative R&D: screen / performance / publishing (ended 2024)
--   Cardiff (ended): “Creates platforms for independent companies, SMEs, micro-businesses and freelancers to compete with global media companies.” (Some Bath/Bristol overlap)
--   StoryFutures (Surrey, Royal Holloway University, ended): “placing innovative storytelling at the heart of the next generation of immersive technologies and experiences.”
+-   [Bath/Bristol Creative R&D](https://bristolbathcreative.org/): screen / performance / publishing (ended 2024)
+-   [Clwstwr](https://clwstwr.org.uk/) in Cardiff (ended): “Creates platforms for independent companies, SMEs, micro-businesses and freelancers to compete with global media companies.” (Some Bath/Bristol overlap)
+-   [StoryFutures](https://www.storyfutures.com/) (Surrey, Royal Holloway University, ended): “placing innovative storytelling at the heart of the next generation of immersive technologies and experiences.”
 
 # UK INDUSTRIAL STRATEGY LINKAGE
 
@@ -114,6 +113,130 @@ indstrat <- tibble(
 
 #escape = FALSE so that markdown in the cells (the links) is rendered correctly.
 knitr::kable(indstrat, escape = FALSE, caption = "Table: Industrial Strategy IS-8 names and abbreviations (dashes mean that sector doesn't appear for South Yorkshire)")
+
+```
+
+# History of CCI jobs and GVA in South Yorkshire
+
+## CCI jobs as a percent of the total for core cities and South Yorkshire
+
+Here, job counts from BRES are summed for all industrial strategy creative SIC codes to find how the percent of South Yorkshire's CCI jobs has changed over the data's history, alongside Great Britain core cities for comparison. BRES has data from 2015 to 2024 - a 3 year running average is used here to smooth its volatility.
+
+A couple of things to note here:
+
+-   Sheffield's CCI job count is in a lower core city group with three others, percentage-wise: Birmingham, Liverpool and Nottingham.
+
+-   In all core cities, CCI jobs as a proportion of each city's total jobs has been climbing, including through COVID for most, though not all.
+
+-   Barnsley, Doncaster and Rotherham are here for comparison, but are not similar to other core cities and so not too much should be read into their position here (same for the GVA plot below).
+
+```{r, fig-ccijobs}
+#| fig-height: 6
+
+cciplot = readRDS('../local/cciplot.rds')
+
+# Loading this here to get order of colours - GVA covers UK so includes Belfast
+sections.plot = readRDS('../local/cci_gva_plot.rds')
+
+
+
+#Get colours same for same SIC codes
+#https://stackoverflow.com/a/33144808/5023561
+#Make different pastel-ish colours
+n <- length(unique(sections.plot$Region_name))
+set.seed(12)
+qual_col_pals = brewer.pal.info[brewer.pal.info$category == 'qual',]
+col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
+# pie(rep(1,n), col=sample(col_vector, n))
+
+# randomcols <- sample(col_vector, n)
+# n <- length(unique(itl3.sections.cv$SIC07_description))
+randomcols <- col_vector[12:(12+(n-1))]
+
+# Need to have two different names in the unique list to colour them correctly. Faff!
+uniquesforjobs = as.character(unique(sections.plot$Region_name))
+
+uniquesforjobs[qg('cardiff',uniquesforjobs)] = 'Cardiff'
+uniquesforjobs[qg('tyne',uniquesforjobs)] = 'Newcastle upon Tyne'
+
+#Get colours same for same SIC codes
+#https://stackoverflow.com/a/33144808/5023561
+#Make different pastel-ish colours
+# n <- length(unique(cciplot$GEOGRAPHY_NAME))
+# set.seed(15)
+# qual_col_pals = brewer.pal.info[brewer.pal.info$category == 'qual',]
+# col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
+# pie(rep(1,n), col=sample(col_vector, n))
+
+# randomcols <- sample(col_vector, n)
+# n <- length(unique(itl3.sections.cv$SIC07_description))
+# randomcols <- col_vector[12:(12+(n-1))]
+
+# PLOOOOT
+ggplot(cciplot %>% 
+         filter(!is.na(percent_indstrat_cci_movingav)) %>% 
+         mutate(is_sy = qg('sheff|barnsl|doncast|rotherh',GEOGRAPHY_NAME)),
+       aes(x = DATE, y = percent_indstrat_cci_movingav, 
+                   colour = GEOGRAPHY_NAME, size = is_sy
+                   # colour = fct_reorder(GEOGRAPHY_NAME,-percent_indstrat_cci_movingav) 
+           )) +
+  geom_line() +
+  geom_point() +
+  scale_size_manual(values = c(0.5,2)) +
+  scale_color_manual(values = setNames(randomcols,
+                                       # unique(sections.plot$Region_name)
+                                       uniquesforjobs
+                                       )) +
+  # scale_color_manual(values = setNames(randomcols,unique(cciplot$GEOGRAPHY_NAME))) +
+    # scale_color_manual(values = randomcols) +
+  # scale_x_continuous(breaks = c(2013,2017,2019,2021,2023)) +
+  theme(legend.title = element_blank()) +
+  guides(size = F) +
+  xlab('year') +
+  ylab('CCI jobs: percent of total jobs') +
+  ggtitle('CCI jobs: percent of total for core cities and SY\n3 year moving average')
+
+
+```
+
+## CCI GVA as a percent of the total for core cities and South Yorkshire
+
+Economic output for CCI sectors has to use a slightly different sector list, as the regional GVA data only has '58-60' and '90-91' SIC codes at ITL3 level (the level that most closely matches local authorities).
+
+But it's close enough to give an indication of how CCI output has changed over time. While this data goes back much further, to 1998, it is show here for the same time range as the BRES data, for direct comparison. Again, a 3 year smoothed average is used and core cities included for comparison.
+
+-   Out of core cities, Sheffield and Tyneside (the ITL3 zone) have historically had the lowest proportion of their economies made up by CCI sectors.
+
+```{r, fig-ccigva}
+#| fig-height: 6
+
+# Save for qml
+# sections.plot = readRDS('../local/cci_gva_plot.rds')
+
+# PLOOOOT
+ggplot(sections.plot %>%
+         filter(!is.na(sector_regional_percent_movingav), year >= 2016) %>% 
+         mutate(is_sy = qg('sheff|barnsl|doncast|rotherh',Region_name)),
+       aes(x = year, 
+           y = sector_regional_percent_movingav,
+           # y = sector_regional_proportion,
+           colour = Region_name, size = is_sy
+           )) +
+  geom_line() +
+  geom_point() +
+  # scale_color_manual(values = randomcols) +
+  scale_color_manual(values = setNames(randomcols,unique(sections.plot$Region_name))) +
+  scale_size_manual(values = c(0.5,2)) +
+  theme(legend.title = element_blank()) +
+  guides(size = F) +
+  xlab('year') +
+  ylab('CCI GVA: percent of total GVA') +
+  ggtitle('CCI GVA: percent of total GVA for core cities and SY\n3 year moving average')
+
+
+
+
+
 
 ```
 
