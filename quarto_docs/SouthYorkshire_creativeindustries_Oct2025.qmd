@@ -1,5 +1,5 @@
 ---
-title: "South Yorkshire creative industries"
+title: "South Yorkshire creative & cultural industries: data from BRES and Companies House (October 2025)"
 author:
   - name: "Dan Olner"
 format: 
@@ -52,10 +52,50 @@ corecities = readRDS('../data/corecitiesvector.rds')
 
 # Introduction
 
-This doc shows **job count location quotients** for Sheffield, Barnsley, Doncaster and Rotherham for **sectors that are part of the UK Industrial Strategy definition list** (see below for more info on that).
+This web report examines data for Sheffield, Barnsley, Doncaster and Rotherham for **sectors that are part of the UK Industrial Strategy definition of the creative and cultural industries (CCI).** (See below for more info on the Industrial Strategy.)
 
--   For BRES, Barnsley, Doncaster and Rotherham are combined (BRES still uses ITL3 2021 zones where those three are in one zone).
--   For Companies House data (job counts extracted from accounts between June 2024 to end of June 2025), each of the four places have separate plots.
+As well as a short overview of the jobs and GVA history of South Yorkshire for CCI, each place is examined using **location quotient (LQ) plots**, placing them in the context of the UK's core cities.
+
+For the LQ analysis, two data sources with different strengths and weaknesses are used, to triangulate a fuller picture:
+
+-   **Business Register and Employment Survey** (BRES) from 2015 to 2024, job counts. (2024 data was released 28th October.) The survey captures larger firms and their related sites, as well as smaller firms, but sample sizes become small at granular levels, so it can miss the full picture and is volatile between years.
+
+-   **Companies House (CH) firm level data**, scraped for accounts submitted between September 2024 and end of September 2025. CH data's main weakness: it records only firms HQ'd in South Yorkshire. But it captures a sizeable proportion of economic activity, and can often indicate (comparing to BRES) which sectors are more 'home grown' (a high CH / BRES ratio) and sometimes pick up on jobs BRES misses, as it's not sample based. Here, it can also only compare job counts from when accounts were submitted and a year previously.
+
+These are the following sections (see also table of contents on the right):
+
+-   Some headlines from the analysis follow next.
+
+-   Existing UKRI CCI clusters are listed.
+
+-   An overview of the UK Industrial Strategy.
+
+-   Data on the history of CCI in South Yorkshire (compared to core cities).
+
+-   Bullet points on the location quotient results for the four places.
+
+-   Full location quotient plot results.
+
+# Headlines
+
+There's a [section below with bullet points](#bullet-points-from-the-lq-plots-below) on all the LQ results. Here are some headlines from those (as well as the other data sources used below).
+
+-   Unsurprisingly, Sheffield dominates CCI jobs in South Yorkshire. Some clusters exist in Barnsley, Doncaster and Rotherham but proportions are lower. In the LQ plots, other core cities have clear specialisms (high LQs in sectors like interactive leisure and games); Sheffield and South Yorkshire are more mixed.
+
+-   Sound recording and music publishing (SIC 592) show up strongly in both BRES and Companies House data in Sheffield. Though not a large proportion of jobs (BRES had 300 pre-COVID; CH has 130 as of September 2025), Sheffield is high compared to the LQ positions for the other core cities, suggesting a strong cluster underneath. Companies House picks up on more SIC 592 jobs than BRES does - the 'home grown' factor may be high. As [Neil McSweeney's in-depth report](https://docs.google.com/document/d/18VY8wIikzF2FpNmF3BJlzEvV2YO7JV_g9fySctIVWis/edit?tab=t.0#heading=h.hnkgpo7t962h) shows, it is important to understand where the strands of economic connection go. He finds the music sector in Sheffield connects to "40 different SIC codes across 11 economic categories", looking at Companies House firms. The relatively high LQ concentration found in Sheffield is likely a reflection of that integration.
+
+-   The 'creative arts / entertainment' SIC (90) is broad, covering performing arts and art (including facilities). SIC 90 picks up on high creative/culture concentration in Sheffield, which continues to grow. There's also SIC 90 growth in Barnsley and Doncaster, though LQ \< 1 (less concentrated than GB average). This broad sector doesn't vary hugely in concentration across either core cities or the four local authorities - it is fairly evenly spread across these places. But it's a sizeable chunk of jobs. However, more information is needed to know what's going on under the hood. Companies House firm level data could help with this.
+
+-   Two ICT sectors - computer programming (6201) and consultancy (6202) - have a similar story in all four SY places: not as concentrated as other core cities, but all growing in their job proportions (previous analysis shows ICT as one of South Yorkshire's strongest growth sectors, significantly ahead of other places in the UK). The issue is understanding what proportion of these sectors is CCI-connected.
+
+-   Architecture is both high-LQ and growing in Sheffield, and has a strong showing in Doncaster as well. In Sheffield, this sector is around 1 in 200 jobs.
+
+-   In Rotherham, there is also a small publishing cluster.
+
+-   Though job numbers are low, Sheffield and Birmingham both stand out as jewellery specialists, with no other core city having an LQ above 1. (It would be good to have similarly in-depth knowledge on its deeper city and region connections).
+
+-   For context, the plots for [jobs](#cci-jobs-as-a-percent-of-the-total-for-core-cities-and-south-yorkshire) and [GVA](#cci-gva-as-a-percent-of-the-total-for-core-cities-and-south-yorkshire) over time show that Sheffield's CCI concentration has been at or near the low end of core cities in recent years. Examining Arts Council spending, Sheffield is lowest by some way compared to other English core cities (see [plot here](https://danolner.github.io/ukcompare/plotly/artscouncil_totalspend_percentofEnglishAv.html)) - both causal and symptomatic, most likely.
+
 
 # Existing (or recently ended) UKRI CCI clusters
 
@@ -83,40 +123,11 @@ Funding period ended:
 
 The [UK Industrial Strategy](https://www.gov.uk/government/collections/the-uks-modern-industrial-strategy-2025) was released in 2025, with accompanying plans for 6 out of the 8 target "IS-8" sectors. It also has a [sector definition list](https://www.gov.uk/government/publications/industrial-strategy/industrial-strategy-sector-definitions-list) that provides SIC codes being targeted - top level sectors and 'frontier' subsectors (a few of which overlap; most do not). These range in specificity between 2 digit and 5 digit SIC codes.
 
-As that webpage says, most of these SIC codes cannot capture the full range of possible firms the strategy aims to cover, and it also contains entire sections that SIC codes can't cover at all - clean energy and certain digital sectors in particular. However, it does allow an analysis of which sectors are *definitely* within those industrial strategy categories. This section gathers job details for those specific sectors - a distinct range of types and breadth - and compares South Yorkshire to the rest of the UK where possible, to see which sectors align with the industrial strategy and other analysis above. This is done for both BRES and Companies House job counts, to pick up on different job types.
+As that webpage says, most of these SIC codes cannot capture the full range of possible firms the strategy aims to cover, and it also contains entire sections that SIC codes can't cover at all - clean energy and certain digital sectors in particular. However, it does allow an analysis of which sectors are *definitely* within those industrial strategy categories.
 
-The table below lists the IS-8 broad sector headings. In the IndStrat plots, the abbreviations for these IS-8 headings appear before the sector name. Clean energy - as mentioned above - has no SIC codes and so can't currently be matched.
+Here, the SIC codes from the 'creative industries' industrial strategy list are used, broken down into 'frontier' and 'other' sectors. Two of these sectors overlap - creative frontier sectors 591 (film/tv) and 592 (sound/music) are also covered more broadly by SIC 59
 
-```{r brad_indstrattable}
-
-indstrat <- tibble(
-  `IS8 sector` = c(
-    'Advanced Manufacturing',
-    'Clean Energy Industries',
-    'Creative Industries',
-    'Defence',
-    'Digital and Technologies', 
-    'Financial Services',
-    'Life Sciences', 
-    'Professional and Business Services'),
-  `Abbreviation` = c(
-    'ADV MANUF',
-    '--',
-    'CREATIVE',
-    'DEFENCE',
-    'DIGITAL',
-    'FIN',
-    'LIFESCI',
-    'PBS'
-    )
-)
-
-#escape = FALSE so that markdown in the cells (the links) is rendered correctly.
-knitr::kable(indstrat, escape = FALSE, caption = "Table: Industrial Strategy IS-8 names and abbreviations (dashes mean that sector doesn't appear for South Yorkshire)")
-
-```
-
-# History of CCI jobs and GVA in South Yorkshire
+# Data: history of CCI jobs and GVA in South Yorkshire
 
 The next two plots show Creative and Cultural Industries job counts and GVA as a proportion of the total, for the four South Yorkshire places and the UK's core cities (Great Britain's if BRES jobs data). These show structural change, not growth directly - how each place's economic composition has changed over time.
 
@@ -250,7 +261,47 @@ ggplot(sections.plot %>%
 
 ```
 
-# Location quotient plots
+# LQ plots for South Yorkshire's four places
+
+## Bullet points from the LQ plots below {#bullet-points-from-the-lq-plots-below}
+
+**Sheffield:**
+
+-   SIC 90 (a broad 'creative arts/entertainment' category) is quite concentrated (LQ \> 1) in Sheffield, and growing; interactives (62011) clearly growing but other core cities specialise more; both are 225 jobs in BRES / 0.5% of jobs. Companies House picks up on SIC 90 too, with about same jobs – meaning it’s very home grown. We can look at what firms those are.
+
+-   Sound recording and music publishing show up strongly in both BRES and CH - more jobs in CH than BRES, so 'home grown' factor looks high, though number itself is between 100 to 130 across both. But LQs for core cities in this sector show Sheffield being towards the high end - close to highest in CH. In BRES numbers were much higher pre-COVID (300 recorded) and then dropped before climbing again.
+
+-   Sheffield / Birmingham jewellery specialisms - those two cities far ahead of other core cities – but very small job counts.
+
+-   The ICT story we know: computer programming + consultancy (two SICs: 6201, 6202) are growing strongly, but not LQ \> 1. They're large sectors, though: between them, 3900 jobs. (But we don’t know how many of those are specifically CCI.) In Companies House, ICT job count is a half to a third of BRES – many HQ'd in Sheffield but also many not.
+
+-   Architecture is interesting, and comes up again in other places in South Yorkshire: in Sheffield, it's growing, LQ \> 1 and 1 in 200 jobs (875). Companies House has high job count here, again suggesting many home-grown / Sheffield based firms. Most other core cities have high LQs for this, meaning it’s lower in non-city places – this sector is concentrated in cities.
+
+**Barnsley:**
+
+-   The broad SIC 90 category is growing in concentration. Now at GB average and continuing. CH has more jobs here than BRES does – many firms based in Barnsley. Who?
+
+-   For advertising, CH picks up on a lot of jobs that BRES misses – approaching 250 jobs, nearly 1%.
+
+-   BRES has the two programming / consultancy SICs shrinking in concentration. CH shows same over the most recent year (though also indicates many HQ'd here).
+
+**Doncaster:**
+
+-   SIC 90 not large numbers but on a clear concentration growth path. CH job count \> BRES, high home-grown factor.
+
+-   Architectural – not large, but BRES does show Doncaster having a growing sector (160 jobs in latest 2024 BRES data).
+
+-   As with other SY LAs, the two SICs for computer prog / consultancy are LQ \< 1 but growing, with a recent pickup.
+
+**Rotherham:**
+
+-   Nothing very much picked up on for CCI frontier sectors here.
+
+-   Again, though the two SICs for computer programming/consultancy is interesting – a mix of growth and shrinkage (moving from LQ \> 1 to \< 1 for consultancy) but 1.5% of Rotherham jobs in latest BRES.
+
+-   There’s also a little publishing cluster showing in BRES that’s also growing.
+
+## LQ plot guide
 
 The outputs below are **location quotient plots** for each of South Yorkshire's local authorities, for "creative" industrial strategy SIC codes.
 
@@ -266,7 +317,8 @@ Here's a guide to reading them:
 -   Red circles have been decreasing in concentration over time (larger circles decreasing the most)
 -   Black horizontal lines show the min and max of concentration in the data’s history (from 2015 to 2023)
 -   Circles and lines can be read together - for example, if a green circle is at the right of this line, sector job concentration has been increasing on average and is continuing.
--   Per sector job counts and percent of the total local authority job count are shown on the right.
+-   Companies House plots are just comparing job counts when accounts are submitted to the 'last year's employees' figure from the same accounts - so they indicate how jobs have shifted since last accounts, but can't show longer-term change.
+-   Per sector job counts and percent of the total local authority job count are shown on the right. These are useful to check sector size versus LQ - for example, a sector like jewellery can have a high LQ (as it does in Sheffield and Birmingham) with very low job counts, because there aren't many jobs in this sector overall in Great Britain.
 -   Background squares are LQs for core cities. Core cities' first two letters are used. Here's a list of those, for reference:
 
 ```{r}
@@ -275,7 +327,7 @@ corecitytable <- tibble(
   `Core city` = c(
     "Belfast","Birmingham","Bristol","Cardiff","City of Edinburgh","Glasgow","Leeds","Liverpool","Manchester","Newcastle upon Tyne","Nottingham","Sheffield"),     
   `Abbreviation` = c(
-    "Be","Bi","Br","Ca","Ci","Gl","Le","Li","Ma","Ne","No","Sh"
+    "Be","Bi","Br","Ca","Ed","Gl","Le","Li","Ma","Ne","No","Sh"
     )
 )
 
@@ -283,6 +335,8 @@ corecitytable <- tibble(
 knitr::kable(corecitytable, escape = FALSE, caption = "Table: core city abbreviations")
 
 ```
+
+## LQs plots: frontier CCI vs other CCI sectors
 
 # SHEFFIELD
 
@@ -339,13 +393,14 @@ corecities_baselayer = yeartoplot.lqfiltered %>% filter(GEOGRAPHY_NAME %in% core
 # Add in placename abbreviations
 corecities_baselayer = corecities_baselayer %>% 
   mutate(
-    placename_short = str_sub(GEOGRAPHY_NAME,1,2)
+    placename_short = str_sub(GEOGRAPHY_NAME,1,2),
+    placename_short = ifelse(placename_short == 'Ci','Ed',placename_short)#Edinburgh
   )
 
 # debugonce(LQ_baseplot)
 p <- LQ_baseplot(df = corecities_baselayer %>% filter(is_frontier == 1), alpha = 0.8, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
 
-p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), plot_to_addto = p,maxLQvalmultiplier = 0.5,
+p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), plot_to_addto = p, maxLQvalmultiplier = 0.5,
                             placename = place, shapenumber = 16,
                             min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                             value_column = JOBCOUNT, sector_regional_proportion = sector_regional_proportion,
@@ -408,7 +463,8 @@ corecities_baselayer.ch = yeartoplot.lqfiltered.ch %>% filter(GEOGRAPHY_NAME %in
 
 corecities_baselayer.ch = corecities_baselayer.ch %>% 
   mutate(
-    placename_short = str_sub(GEOGRAPHY_NAME,1,2)
+    placename_short = str_sub(GEOGRAPHY_NAME,1,2),
+    placename_short = ifelse(placename_short == 'Ci','Ed',placename_short)#Edinburgh
   )
 
 p1 <- LQ_baseplot(df = corecities_baselayer.ch %>% filter(is_frontier == 1), alpha = 0.8, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
@@ -416,7 +472,7 @@ p1 <- LQ_baseplot(df = corecities_baselayer.ch %>% filter(is_frontier == 1), alp
 #                   LQ_column = LQ, change_over_time = slope)
 
 # debugonce(addplacename_to_LQplot)
-p1 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 1), plot_to_addto = p1, 
+p1 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 1), plot_to_addto = p1, maxLQvalmultiplier = 0.5,
                              placename = place, shapenumber = 16,
                              # min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                              value_column = JOBCOUNT, sector_regional_proportion = sector_regional_proportion,
@@ -444,7 +500,7 @@ p1
 
 p <- LQ_baseplot(df = corecities_baselayer %>% filter(is_frontier == 0), alpha = 0.8, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
 
-p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), plot_to_addto = p, 
+p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), plot_to_addto = p, maxLQvalmultiplier = 0.5,
                             placename = place, shapenumber = 16,
                             min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                             value_column = JOBCOUNT, sector_regional_proportion = sector_regional_proportion,
@@ -471,7 +527,7 @@ p2 <- LQ_baseplot(df = corecities_baselayer.ch %>% filter(is_frontier == 0), alp
 #                   LQ_column = LQ, change_over_time = slope)
 
 # debugonce(addplacename_to_LQplot)
-p2 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 0), plot_to_addto = p2, 
+p2 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 0), plot_to_addto = p2, maxLQvalmultiplier = 0.5,
                              placename = place, shapenumber = 16,
                              # min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                              value_column = JOBCOUNT, sector_regional_proportion = sector_regional_proportion,
@@ -536,7 +592,7 @@ corecities_baselayer = corecities_baselayer %>%
 # debugonce(LQ_baseplot)
 p <- LQ_baseplot(df = corecities_baselayer %>% filter(is_frontier == 1), alpha = 0.8, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
 
-p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), plot_to_addto = p, 
+p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), plot_to_addto = p, maxLQvalmultiplier = 0.5,
                             placename = place, shapenumber = 16,
                             min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                             value_column = JOBCOUNT, sector_regional_proportion = sector_regional_proportion,
@@ -590,7 +646,7 @@ p1 <- LQ_baseplot(df = corecities_baselayer.ch %>% filter(is_frontier == 1), alp
 #                   LQ_column = LQ, change_over_time = slope)
 
 # debugonce(addplacename_to_LQplot)
-p1 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 1), plot_to_addto = p1, 
+p1 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 1), plot_to_addto = p1, maxLQvalmultiplier = 0.5,
                              placename = place, shapenumber = 16,
                              # min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                              value_column = JOBCOUNT, sector_regional_proportion = sector_regional_proportion,
@@ -618,7 +674,7 @@ p1
 
 p <- LQ_baseplot(df = corecities_baselayer %>% filter(is_frontier == 0), alpha = 0.8, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
 
-p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), plot_to_addto = p, 
+p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), plot_to_addto = p, maxLQvalmultiplier = 0.5,
                             placename = place, shapenumber = 16,
                             min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                             value_column = JOBCOUNT, sector_regional_proportion = sector_regional_proportion,
@@ -645,7 +701,7 @@ p2 <- LQ_baseplot(df = corecities_baselayer.ch %>% filter(is_frontier == 0), alp
 #                   LQ_column = LQ, change_over_time = slope)
 
 # debugonce(addplacename_to_LQplot)
-p2 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 0), plot_to_addto = p2, 
+p2 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 0), plot_to_addto = p2, maxLQvalmultiplier = 0.5,
                              placename = place, shapenumber = 16,
                              # min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                              value_column = JOBCOUNT, sector_regional_proportion = sector_regional_proportion,
@@ -710,7 +766,7 @@ corecities_baselayer = corecities_baselayer %>%
 # debugonce(LQ_baseplot)
 p <- LQ_baseplot(df = corecities_baselayer %>% filter(is_frontier == 1), alpha = 0.8, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
 
-p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), plot_to_addto = p, 
+p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), plot_to_addto = p, maxLQvalmultiplier = 0.5,
                             placename = place, shapenumber = 16,
                             min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                             value_column = JOBCOUNT, sector_regional_proportion = sector_regional_proportion,
@@ -765,7 +821,7 @@ p1 <- LQ_baseplot(df = corecities_baselayer.ch %>% filter(is_frontier == 1, !is.
 
 # debugonce(addplacename_to_LQplot)
 p1 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 1, !is.na(sic_namefrom_indstrat_combo)), plot_to_addto = p1, 
-                             placename = place, shapenumber = 16,
+                             placename = place, shapenumber = 16, maxLQvalmultiplier = 0.5,
                              # min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                              value_column = JOBCOUNT, sector_regional_proportion = sector_regional_proportion,
                              region_name = GEOGRAPHY_NAME,
@@ -792,7 +848,7 @@ p1
 
 p <- LQ_baseplot(df = corecities_baselayer %>% filter(is_frontier == 0), alpha = 0.8, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
 
-p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), plot_to_addto = p, 
+p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), plot_to_addto = p, maxLQvalmultiplier = 0.5,
                             placename = place, shapenumber = 16,
                             min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                             value_column = JOBCOUNT, sector_regional_proportion = sector_regional_proportion,
@@ -820,7 +876,7 @@ p2 <- LQ_baseplot(df = corecities_baselayer.ch %>% filter(is_frontier == 0, !is.
 
 # debugonce(addplacename_to_LQplot)
 p2 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 0, !is.na(sic_namefrom_indstrat_combo)), plot_to_addto = p2, 
-                             placename = place, shapenumber = 16,
+                             placename = place, shapenumber = 16, maxLQvalmultiplier = 0.5,
                              # min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                              value_column = JOBCOUNT, sector_regional_proportion = sector_regional_proportion,
                              region_name = GEOGRAPHY_NAME,
@@ -884,7 +940,7 @@ corecities_baselayer = corecities_baselayer %>%
 # debugonce(LQ_baseplot)
 p <- LQ_baseplot(df = corecities_baselayer %>% filter(is_frontier == 1), alpha = 0.8, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
 
-p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), plot_to_addto = p, 
+p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), plot_to_addto = p, maxLQvalmultiplier = 0.5,
                             placename = place, shapenumber = 16,
                             min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                             value_column = JOBCOUNT, sector_regional_proportion = sector_regional_proportion,
@@ -939,7 +995,7 @@ p1 <- LQ_baseplot(df = corecities_baselayer.ch %>% filter(is_frontier == 1, !is.
 
 # debugonce(addplacename_to_LQplot)
 p1 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 1, !is.na(sic_namefrom_indstrat_combo)), plot_to_addto = p1, 
-                             placename = place, shapenumber = 16,
+                             placename = place, shapenumber = 16, maxLQvalmultiplier = 0.5,
                              # min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                              value_column = JOBCOUNT, sector_regional_proportion = sector_regional_proportion,
                              region_name = GEOGRAPHY_NAME,
@@ -966,8 +1022,8 @@ p1
 
 p <- LQ_baseplot(df = corecities_baselayer %>% filter(is_frontier == 0), alpha = 0.8, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
 
-p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), plot_to_addto = p, 
-                            placename = place, shapenumber = 16,
+p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 0), plot_to_addto = p, maxLQvalmultiplier = 0.5,
+                            placename = place, shapenumber = 16, 
                             min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                             value_column = JOBCOUNT, sector_regional_proportion = sector_regional_proportion,
                             region_name = GEOGRAPHY_NAME,
@@ -994,7 +1050,7 @@ p2 <- LQ_baseplot(df = corecities_baselayer.ch %>% filter(is_frontier == 0, !is.
 
 # debugonce(addplacename_to_LQplot)
 p2 <- addplacename_to_LQplot(df = yeartoplot.lqfiltered.ch %>% filter(is_frontier == 0, !is.na(sic_namefrom_indstrat_combo)), plot_to_addto = p2, 
-                             placename = place, shapenumber = 16,
+                             placename = place, shapenumber = 16, maxLQvalmultiplier = 0.5,
                              # min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                              value_column = JOBCOUNT, sector_regional_proportion = sector_regional_proportion,
                              region_name = GEOGRAPHY_NAME,

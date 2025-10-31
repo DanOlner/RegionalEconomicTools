@@ -563,28 +563,28 @@
   {
     "objectID": "quarto_docs/SY_creativeindustries_Oct2025.html",
     "href": "quarto_docs/SY_creativeindustries_Oct2025.html",
-    "title": "South Yorkshire creative industries",
+    "title": "South Yorkshire creative & cultural industries: data from BRES and Companies House (October 2025)",
     "section": "",
-    "text": "This doc shows job count location quotients for Sheffield, Barnsley, Doncaster and Rotherham for sectors that are part of the UK Industrial Strategy definition list (see below for more info on that).\n\nFor BRES, Barnsley, Doncaster and Rotherham are combined (BRES still uses ITL3 2021 zones where those three are in one zone).\nFor Companies House data (job counts extracted from accounts between June 2024 to end of June 2025), each of the four places have separate plots."
+    "text": "This web report examines data for Sheffield, Barnsley, Doncaster and Rotherham for sectors that are part of the UK Industrial Strategy definition of the creative and cultural industries (CCI). (See below for more info on the Industrial Strategy.)\nAs well as a short overview of the jobs and GVA history of South Yorkshire for CCI, each place is examined using location quotient (LQ) plots, placing them in the context of the UK’s core cities.\nFor the LQ analysis, two data sources with different strengths and weaknesses are used, to triangulate a fuller picture:\n\nBusiness Register and Employment Survey (BRES) from 2015 to 2024, job counts. (2024 data was released 28th October.) The survey captures larger firms and their related sites, as well as smaller firms, but sample sizes become small at granular levels, so it can miss the full picture and is volatile between years.\nCompanies House (CH) firm level data, scraped for accounts submitted between September 2024 and end of September 2025. CH data’s main weakness: it records only firms HQ’d in South Yorkshire. But it captures a sizeable proportion of economic activity, and can often indicate (comparing to BRES) which sectors are more ‘home grown’ (a high CH / BRES ratio) and sometimes pick up on jobs BRES misses, as it’s not sample based. Here, it can also only compare job counts from when accounts were submitted and a year previously.\n\nThese are the following sections (see also table of contents on the right):\n\nSome headlines from the analysis follow next.\nExisting UKRI CCI clusters are listed.\nAn overview of the UK Industrial Strategy.\nData on the history of CCI in South Yorkshire (compared to core cities).\nBullet points on the location quotient results for the four places.\nFull location quotient plot results."
   },
   {
     "objectID": "quarto_docs/SY_creativeindustries_Oct2025.html#frontier-sic-sectors",
     "href": "quarto_docs/SY_creativeindustries_Oct2025.html#frontier-sic-sectors",
-    "title": "South Yorkshire creative industries",
+    "title": "South Yorkshire creative & cultural industries: data from BRES and Companies House (October 2025)",
     "section": "“Frontier” SIC sectors",
     "text": "“Frontier” SIC sectors\n\nBRES frontier sectors\n\n\n\n\n\n\n\n\nFigure 3\n\n\n\n\n\n\n\nCompanies house frontier sectors\n\n\n\n\n\n\n\n\nFigure 4"
   },
   {
     "objectID": "quarto_docs/SY_creativeindustries_Oct2025.html#other-industrial-strategy-sic-sectors",
     "href": "quarto_docs/SY_creativeindustries_Oct2025.html#other-industrial-strategy-sic-sectors",
-    "title": "South Yorkshire creative industries",
+    "title": "South Yorkshire creative & cultural industries: data from BRES and Companies House (October 2025)",
     "section": "Other industrial strategy SIC sectors",
     "text": "Other industrial strategy SIC sectors\n\nBRES other sectors\n\n\n\n\n\n\n\n\nFigure 5\n\n\n\n\n\n\n\nCompanies House other sectors\n\n\n\n\n\n\n\n\nFigure 6"
   },
   {
     "objectID": "quarto_docs/SY_creativeindustries_Oct2025.html#frontier-sic-sectors-1",
     "href": "quarto_docs/SY_creativeindustries_Oct2025.html#frontier-sic-sectors-1",
-    "title": "South Yorkshire creative industries",
+    "title": "South Yorkshire creative & cultural industries: data from BRES and Companies House (October 2025)",
     "section": "“Frontier” SIC sectors",
     "text": "“Frontier” SIC sectors\n\nBRES frontier sectors\n\n\n\n\n\n\n\n\nFigure 7\n\n\n\n\n\n\n\nCompanies house frontier sectors\n\n\n\n\n\n\n\n\nFigure 8"
   },
@@ -1357,50 +1357,71 @@
   {
     "objectID": "quarto_docs/SY_creativeindustries_Oct2025.html#other-industrial-strategy-sic-sectors-1",
     "href": "quarto_docs/SY_creativeindustries_Oct2025.html#other-industrial-strategy-sic-sectors-1",
-    "title": "South Yorkshire creative industries",
+    "title": "South Yorkshire creative & cultural industries: data from BRES and Companies House (October 2025)",
     "section": "Other industrial strategy SIC sectors",
     "text": "Other industrial strategy SIC sectors\n\nBRES other sectors\n\n\n\n\n\n\n\n\nFigure 9\n\n\n\n\n\n\n\nCompanies House other sectors\n\n\n\n\n\n\n\n\nFigure 10"
   },
   {
     "objectID": "quarto_docs/SY_creativeindustries_Oct2025.html#frontier-sic-sectors-2",
     "href": "quarto_docs/SY_creativeindustries_Oct2025.html#frontier-sic-sectors-2",
-    "title": "South Yorkshire creative industries",
+    "title": "South Yorkshire creative & cultural industries: data from BRES and Companies House (October 2025)",
     "section": "“Frontier” SIC sectors",
     "text": "“Frontier” SIC sectors\n\nBRES frontier sectors\n\n\n\n\n\n\n\n\nFigure 11\n\n\n\n\n\n\n\nCompanies house frontier sectors\n\n\n\n\n\n\n\n\nFigure 12"
   },
   {
     "objectID": "quarto_docs/SY_creativeindustries_Oct2025.html#other-industrial-strategy-sic-sectors-2",
     "href": "quarto_docs/SY_creativeindustries_Oct2025.html#other-industrial-strategy-sic-sectors-2",
-    "title": "South Yorkshire creative industries",
+    "title": "South Yorkshire creative & cultural industries: data from BRES and Companies House (October 2025)",
     "section": "Other industrial strategy SIC sectors",
     "text": "Other industrial strategy SIC sectors\n\nBRES other sectors\n\n\n\n\n\n\n\n\nFigure 13\n\n\n\n\n\n\n\nCompanies House other sectors\n\n\n\n\n\n\n\n\nFigure 14"
   },
   {
     "objectID": "quarto_docs/SY_creativeindustries_Oct2025.html#frontier-sic-sectors-3",
     "href": "quarto_docs/SY_creativeindustries_Oct2025.html#frontier-sic-sectors-3",
-    "title": "South Yorkshire creative industries",
+    "title": "South Yorkshire creative & cultural industries: data from BRES and Companies House (October 2025)",
     "section": "“Frontier” SIC sectors",
     "text": "“Frontier” SIC sectors\n\nBRES frontier sectors\n\n\n\n\n\n\n\n\nFigure 15\n\n\n\n\n\n\n\nCompanies house frontier sectors\n\n\n\n\n\n\n\n\nFigure 16"
   },
   {
     "objectID": "quarto_docs/SY_creativeindustries_Oct2025.html#other-industrial-strategy-sic-sectors-3",
     "href": "quarto_docs/SY_creativeindustries_Oct2025.html#other-industrial-strategy-sic-sectors-3",
-    "title": "South Yorkshire creative industries",
+    "title": "South Yorkshire creative & cultural industries: data from BRES and Companies House (October 2025)",
     "section": "Other industrial strategy SIC sectors",
     "text": "Other industrial strategy SIC sectors\n\nBRES other sectors\n\n\n\n\n\n\n\n\nFigure 17\n\n\n\n\n\n\n\nCompanies House other sectors\n\n\n\n\n\n\n\n\nFigure 18"
   },
   {
     "objectID": "quarto_docs/SY_creativeindustries_Oct2025.html#cci-jobs-as-a-percent-of-the-total-for-core-cities-and-south-yorkshire",
     "href": "quarto_docs/SY_creativeindustries_Oct2025.html#cci-jobs-as-a-percent-of-the-total-for-core-cities-and-south-yorkshire",
-    "title": "South Yorkshire creative industries",
+    "title": "South Yorkshire creative & cultural industries: data from BRES and Companies House (October 2025)",
     "section": "CCI jobs as a percent of the total for core cities and South Yorkshire",
     "text": "CCI jobs as a percent of the total for core cities and South Yorkshire\nHere, job counts from BRES are summed for all industrial strategy creative SIC codes to find how the percent of South Yorkshire’s CCI jobs has changed over the data’s history, alongside Great Britain core cities for comparison.\nBRES has data from 2015 to 2024. A 3 year running average is used here to smooth its volatility, so the most recent data point is showing the 2022-24 average.\nSome things to note here:\n\nSheffield’s CCI job count is in a lower core city group with three others, percentage-wise: Birmingham, Liverpool and Nottingham.\nIn all core cities, CCI jobs as a proportion of each city’s total jobs has been climbing, including through COVID for most, though not all.\nBarnsley, Doncaster and Rotherham are here for comparison, but are not similar to other core cities and so not too much should be read into their position here (same for the GVA plot below).\n\n\n\n\n\n\n\n\n\nFigure 1"
   },
   {
     "objectID": "quarto_docs/SY_creativeindustries_Oct2025.html#cci-gva-as-a-percent-of-the-total-for-core-cities-and-south-yorkshire",
     "href": "quarto_docs/SY_creativeindustries_Oct2025.html#cci-gva-as-a-percent-of-the-total-for-core-cities-and-south-yorkshire",
-    "title": "South Yorkshire creative industries",
+    "title": "South Yorkshire creative & cultural industries: data from BRES and Companies House (October 2025)",
     "section": "CCI GVA as a percent of the total for core cities and South Yorkshire",
     "text": "CCI GVA as a percent of the total for core cities and South Yorkshire\nEconomic output for CCI sectors has to use a slightly different sector list, as the regional GVA data only has ‘58-60’ and ‘90-91’ SIC codes at ITL3 level (the level that most closely matches local authorities).\nBut it’s close enough to give an indication of how CCI output has changed over time. While this data goes back much further, to 1998, it is show here for the same time range as the BRES data, for direct comparison.\n\nOut of the core cities, Sheffield and Tyneside (the ITL3 zone) have historically had the lowest proportion of their economies made up by CCI sectors. Sheffield looks to have bounced back from the pandemic better than a lot of other core cities.\nThe deepest impact of the pandemic is visible in 2020, with differing paths after that point. For example, Barnsley’s CCI GVA steadily increases its proportion (though note, we don’t know from this plot what role other sectors shrinking may have had on this; in the above plot, job proportions seem to have stayed steady).\nRotherham’s story looks similar in both these plots: declining job and GVA proportion for CCI sectors since the pandemic.\n\n\n\n\n\n\n\n\n\nFigure 2"
+  },
+  {
+    "objectID": "quarto_docs/SY_creativeindustries_Oct2025.html#bullet-points-from-the-lq-plots-below",
+    "href": "quarto_docs/SY_creativeindustries_Oct2025.html#bullet-points-from-the-lq-plots-below",
+    "title": "South Yorkshire creative & cultural industries: data from BRES and Companies House (October 2025)",
+    "section": "Bullet points from the LQ plots below",
+    "text": "Bullet points from the LQ plots below\nSheffield:\n\nSIC 90 (a broad ‘creative arts/entertainment’ category) is quite concentrated (LQ &gt; 1) in Sheffield, and growing; interactives (62011) clearly growing but other core cities specialise more; both are 225 jobs in BRES / 0.5% of jobs. Companies House picks up on SIC 90 too, with about same jobs – meaning it’s very home grown. We can look at what firms those are.\nSound recording and music publishing show up strongly in both BRES and CH - more jobs in CH than BRES, so ‘home grown’ factor looks high, though number itself is between 100 to 130 across both. But LQs for core cities in this sector show Sheffield being towards the high end - close to highest in CH. In BRES numbers were much higher pre-COVID (300 recorded) and then dropped before climbing again.\nSheffield / Birmingham jewellery specialisms - those two cities far ahead of other core cities – but very small job counts.\nThe ICT story we know: computer programming + consultancy (two SICs: 6201, 6202) are growing strongly, but not LQ &gt; 1. They’re large sectors, though: between them, 3900 jobs. (But we don’t know how many of those are specifically CCI.) In Companies House, ICT job count is a half to a third of BRES – many HQ’d in Sheffield but also many not.\nArchitecture is interesting, and comes up again in other places in South Yorkshire: in Sheffield, it’s growing, LQ &gt; 1 and 1 in 200 jobs (875). Companies House has high job count here, again suggesting many home-grown / Sheffield based firms. Most other core cities have high LQs for this, meaning it’s lower in non-city places – this sector is concentrated in cities.\n\nBarnsley:\n\nThe broad SIC 90 category is growing in concentration. Now at GB average and continuing. CH has more jobs here than BRES does – many firms based in Barnsley. Who?\nFor advertising, CH picks up on a lot of jobs that BRES misses – approaching 250 jobs, nearly 1%.\nBRES has the two programming / consultancy SICs shrinking in concentration. CH shows same over the most recent year (though also indicates many HQ’d here).\n\nDoncaster:\n\nSIC 90 not large numbers but on a clear concentration growth path. CH job count &gt; BRES, high home-grown factor.\nArchitectural – not large, but BRES does show Doncaster having a growing sector (160 jobs in latest 2024 BRES data).\nAs with other SY LAs, the two SICs for computer prog / consultancy are LQ &lt; 1 but growing, with a recent pickup.\n\nRotherham:\n\nNothing very much picked up on for CCI frontier sectors here.\nAgain, though the two SICs for computer programming/consultancy is interesting – a mix of growth and shrinkage (moving from LQ &gt; 1 to &lt; 1 for consultancy) but 1.5% of Rotherham jobs in latest BRES.\nThere’s also a little publishing cluster showing in BRES that’s also growing."
+  },
+  {
+    "objectID": "quarto_docs/SY_creativeindustries_Oct2025.html#lq-plot-guide",
+    "href": "quarto_docs/SY_creativeindustries_Oct2025.html#lq-plot-guide",
+    "title": "South Yorkshire creative & cultural industries: data from BRES and Companies House (October 2025)",
+    "section": "LQ plot guide",
+    "text": "LQ plot guide\nThe outputs below are location quotient plots for each of South Yorkshire’s local authorities, for “creative” industrial strategy SIC codes.\nCore cities are again included for comparison.\n\nThey are separated into industrial strategy ‘frontier’ sectors and the rest. Some are repeated, as the IndStrat definitions have two overlapping, nested categories (591 and 62011 are frontier sectors, but their parent sectors, 59 and 6201, are listed in the broader creative sectors; both are used here).\n\nHere’s a guide to reading them:\n\nLocation quotients for sectoral job proportions are shown for SY local authorities\nSectors to the right of the centre line are more concentrated in this region when compared to the national average. (e.g. LQ = 10, it is 10x more concentrated)\nGreen circles have been increasing in concentration over time (larger circles increasing the most)\nRed circles have been decreasing in concentration over time (larger circles decreasing the most)\nBlack horizontal lines show the min and max of concentration in the data’s history (from 2015 to 2023)\nCircles and lines can be read together - for example, if a green circle is at the right of this line, sector job concentration has been increasing on average and is continuing.\nCompanies House plots are just comparing job counts when accounts are submitted to the ‘last year’s employees’ figure from the same accounts - so they indicate how jobs have shifted since last accounts, but can’t show longer-term change.\nPer sector job counts and percent of the total local authority job count are shown on the right. These are useful to check sector size versus LQ - for example, a sector like jewellery can have a high LQ (as it does in Sheffield and Birmingham) with very low job counts, because there aren’t many jobs in this sector overall in Great Britain.\nBackground squares are LQs for core cities. Core cities’ first two letters are used. Here’s a list of those, for reference:\n\n\n\n\nTable: core city abbreviations\n\n\nCore city\nAbbreviation\n\n\n\n\nBelfast\nBe\n\n\nBirmingham\nBi\n\n\nBristol\nBr\n\n\nCardiff\nCa\n\n\nCity of Edinburgh\nEd\n\n\nGlasgow\nGl\n\n\nLeeds\nLe\n\n\nLiverpool\nLi\n\n\nManchester\nMa\n\n\nNewcastle upon Tyne\nNe\n\n\nNottingham\nNo\n\n\nSheffield\nSh"
+  },
+  {
+    "objectID": "quarto_docs/SY_creativeindustries_Oct2025.html#lqs-plots-frontier-cci-vs-other-cci-sectors",
+    "href": "quarto_docs/SY_creativeindustries_Oct2025.html#lqs-plots-frontier-cci-vs-other-cci-sectors",
+    "title": "South Yorkshire creative & cultural industries: data from BRES and Companies House (October 2025)",
+    "section": "LQs plots: frontier CCI vs other CCI sectors",
+    "text": "LQs plots: frontier CCI vs other CCI sectors"
   }
 ]

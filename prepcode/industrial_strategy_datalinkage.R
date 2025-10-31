@@ -160,7 +160,6 @@ saveRDS(yeartoplots_for_indstrat,'local/yeartoplots_for_indstrat.rds')
 
 
 
-
 # PROCESS COMPANIES HOUSE FOR INDSTRAT WITH CORRECT METHOD USED IN BRES ABOVE----
 
 # See below for the original (incorrect) code. Redo.
@@ -235,8 +234,8 @@ lqs_for_indstrat = lqs %>%
   )
 
 # Check on our usual list of test sics
-lqs_for_indstrat %>% filter(sic == 60, DATE == 1, GEOGRAPHY_NAME == 'Sheffield') %>% View
-lqs_for_indstrat %>% filter(sic %in% c(58,5821,62011,6201), DATE == 1, GEOGRAPHY_NAME == 'Sheffield') %>% View
+# lqs_for_indstrat %>% filter(sic == 60, DATE == 1, GEOGRAPHY_NAME == 'Sheffield') %>% View
+# lqs_for_indstrat %>% filter(sic %in% c(58,5821,62011,6201), DATE == 1, GEOGRAPHY_NAME == 'Sheffield') %>% View
 
 # Repeat for yeartoplots
 yeartoplots_for_indstrat = yeartoplots %>% 
@@ -248,8 +247,8 @@ yeartoplots_for_indstrat = yeartoplots %>%
   )
 
 # Check on our usual list of test sics
-yeartoplots_for_indstrat %>% filter(sic == 60, DATE == 2, GEOGRAPHY_NAME == 'Sheffield') %>% View
-yeartoplots_for_indstrat %>% filter(sic %in% c(58,5821,62011,6201), DATE == 2, GEOGRAPHY_NAME == 'Sheffield') %>% View
+# yeartoplots_for_indstrat %>% filter(sic == 60, DATE == 2, GEOGRAPHY_NAME == 'Sheffield') %>% View
+# yeartoplots_for_indstrat %>% filter(sic %in% c(58,5821,62011,6201), DATE == 2, GEOGRAPHY_NAME == 'Sheffield') %>% View
 
 
 # Ticks all round
@@ -257,6 +256,15 @@ yeartoplots_for_indstrat %>% filter(sic %in% c(58,5821,62011,6201), DATE == 2, G
 saveRDS(lqs_for_indstrat,'local/CH_lqs_for_indstrat.rds')
 saveRDS(yeartoplots_for_indstrat,'local/CH_yeartoplots_for_indstrat.rds')
 
+
+
+# SOME CHECKS----
+
+lqs_for_indstrat = readRDS('local/lqs_for_indstrat.rds')
+lqs_for_indstrat %>% filter(GEOGRAPHY_NAME == 'Sheffield', qg('sound rec',sic_namefrom_indstrat_combo)) %>% View
+
+lqs_for_indstrat.ch = readRDS('local/CH_lqs_for_indstrat.rds')
+lqs_for_indstrat.ch %>% filter(GEOGRAPHY_NAME == 'Sheffield', qg('sound rec',sic_namefrom_indstrat_combo)) %>% View
 
 
 
@@ -354,11 +362,12 @@ cci = lqs_for_indstrat %>% filter(qg('creative', sic_namefrom_indstrat_combo))
 
 # Nested SICs to remove:
 # 591 is covered by 59
+# 592 is covered by 59
 # 62011 is covered by 6201
 unique(cci$sic)
 
 # Filter accordingly
-cci = cci %>% filter(!sic %in% c('591','62011'))
+cci = cci %>% filter(!sic %in% c('591','592','62011'))
 
 # Actually, we do have region total size here if we want to repeat
 # Or can just sum sector_regional_proportion...
@@ -690,6 +699,130 @@ ggplot(sections.plot %>% filter(year >= 2015),
   # scale_x_continuous(breaks = c(2013,2017,2019,2021,2023)) +
   theme(legend.title = element_blank())
 
+
+
+
+
+
+
+
+# COMPANIES HOUSE INDIV FIRMS / PERCENT CHANGE----
+
+# Taken from Bradford report
+firm.change <- ch %>% 
+  filter(localauthority_name %in% c('Sheffield','Barnsley','Doncaster','Rotherham'), 
+         Employees_thisyear >= 1 & Employees_lastyear >= 1) %>%
+  # filter(localauthority_name == 'Sheffield', Employees_thisyear >= 1 & Employees_lastyear >= 1) %>%
+  mutate(
+    employee_percentchange = percent_change(Employees_lastyear,Employees_thisyear)
+  )
+
+
+# unique(firm.change$localauthority_name)
+
+# Add in list of CCI sectors (keeping top level if nested SICs)
+# Get those from here:
+lqs_for_indstrat = readRDS('local/lqs_for_indstrat.rds')
+cci = lqs_for_indstrat %>% filter(qg('creative', sic_namefrom_indstrat_combo))
+# Nested SICs to remove:
+# 591 is covered by 59
+# 592 is covered by 59
+# 62011 is covered by 6201
+unique(cci$sic)
+# Filter accordingly
+cci.sics = cci %>% filter(!sic %in% c('591','592','62011')) %>% 
+  select(sic,sic_namefrom_indstrat_combo) %>% 
+  distinct() %>% 
+  mutate(
+    sic_namefrom_indstrat_combo = gsub('CREATIVE: ','',sic_namefrom_indstrat_combo)
+  )
+
+# Add in - fuzzy join, given variable SIC code lengths
+firm.change = firm.change %>%
+  fuzzyjoin::regex_left_join(
+    cci.sics %>% mutate(sicregex = paste0("^", sic)),
+    by = c("SIC_5DIGIT_CODE" = "sicregex")
+  ) %>% 
+  filter(!is.na(sic_namefrom_indstrat_combo))# And keep only CCI sectors
+
+
+firm.change <- firm.change %>% 
+  mutate(
+    sic_namefrom_indstrat_combo = fct_reorder(sic_namefrom_indstrat_combo, employee_percentchange),
+    `Firm: ` = paste0(CompanyName,', ',Employees_lastyear,' >> ',Employees_thisyear),
+    sizecategory = case_when(
+      between(Employees_thisyear,1,1) ~ "1",
+      between(Employees_thisyear,2,4) ~ "2-4",
+      between(Employees_thisyear,5,9) ~ "5-9",
+      between(Employees_thisyear,10,20) ~ "10-20",
+      between(Employees_thisyear,21,99999) ~ "21+"
+      # between(Employees_thisyear,51,999999) ~ "51+"
+    ),
+    sizecategory = factor(sizecategory, levels = rev(c('1','2-4','5-9','10-20','21+')))
+  ) %>% 
+  filter(!is.na(sic_namefrom_indstrat_combo))
+
+table(firm.change$sizecategory)
+
+#FACET doesn't work well with plotly - things overlap
+#Plot them separately.
+p <- ggplot(firm.change %>% filter(sizecategory == "5-9"),
+            aes(y = sic_namefrom_indstrat_combo, x = employee_percentchange, group = `Firm: `)) +
+  geom_jitter(height = 0.1, alpha = 0.3) +
+  geom_vline(xintercept = 0, alpha = 0.5, colour = 'green') +
+  ylab("") +
+  # theme(
+  #   # panel.grid.major = element_line(linetype = "dotted"),
+  #   # axis.title.x = element_text( size = 10, margin=margin(80,80,80,80)),
+  #   axis.title.y = element_text( size = 10, margin=margin(30,30,30,30))
+  # ) +
+  ggtitle("Firms with 10-20 employees")
+
+ggplotly(p, tooltip = 'Firm: ')
+
+
+# A better way might be by sector then size band
+p <- ggplot(firm.change %>% filter(qg('arts',sic_namefrom_indstrat_combo)),
+            aes(y = sizecategory, x = employee_percentchange, group = `Firm: `)) +
+  geom_jitter(height = 0.3, alpha = 0.3) +
+  geom_vline(xintercept = 0, alpha = 0.5, colour = 'green') +
+  ylab("") +
+  # theme(
+  #   # panel.grid.major = element_line(linetype = "dotted"),
+  #   # axis.title.x = element_text( size = 10, margin=margin(80,80,80,80)),
+  #   axis.title.y = element_text( size = 10, margin=margin(30,30,30,30))
+  # ) +
+  ggtitle("Firms with 10-20 employees")
+
+ggplotly(p, tooltip = 'Firm: ')
+
+
+# Try just counting for these
+firmcount <- firm.change %>%
+  st_set_geometry(NULL) %>% 
+  group_by(sic_namefrom_indstrat_combo) %>% 
+  mutate(
+    sizecategory = case_when(
+      Employees_thisyear == 1 ~ "1",
+      between(Employees_thisyear,2,4) ~ "2-4",
+      between(Employees_thisyear,5,9) ~ "5-9",
+      between(Employees_thisyear,10,20) ~ "10-20",
+      between(Employees_thisyear,21,50) ~ "21-50",
+      between(Employees_thisyear,51,999999) ~ "51+"
+    ),
+    sizecategory = factor(sizecategory, levels = c('1','2-4','5-9','10-20','21-50','51+'))
+  )
+
+subsector = firmcount %>% filter(qg('arts',sic_namefrom_indstrat_combo))
+
+#table from that to plot
+firmtable <- tibble(
+  `Firm size` = levels(subsector$sizecategory),
+  `Count` = table(subsector$sizecategory),
+  `Percent of firms` = paste0(round(table(subsector$sizecategory) %>% prop.table() * 100,2),"%")
+)
+
+knitr::kable(firmtable, escape = FALSE, caption = "Table: Bradford count/% of firms by employee band")
 
 
 
