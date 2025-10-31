@@ -50,14 +50,14 @@ corecities = readRDS('../data/corecitiesvector.rds')
 
 ```
 
-# INTRODUCTION
+# Introduction
 
 This doc shows **job count location quotients** for Sheffield, Barnsley, Doncaster and Rotherham for **sectors that are part of the UK Industrial Strategy definition list** (see below for more info on that).
 
 -   For BRES, Barnsley, Doncaster and Rotherham are combined (BRES still uses ITL3 2021 zones where those three are in one zone).
 -   For Companies House data (job counts extracted from accounts between June 2024 to end of June 2025), each of the four places have separate plots.
 
-# EXISTING (OR RECENTLY ENDED) UKRI CCI CLUSTERS
+# Existing (or recently ended) UKRI CCI clusters
 
 Original projects:
 
@@ -79,7 +79,7 @@ Funding period ended:
 -   [Clwstwr](https://clwstwr.org.uk/) in Cardiff (ended): “Creates platforms for independent companies, SMEs, micro-businesses and freelancers to compete with global media companies.” (Some Bath/Bristol overlap)
 -   [StoryFutures](https://www.storyfutures.com/) (Surrey, Royal Holloway University, ended): “placing innovative storytelling at the heart of the next generation of immersive technologies and experiences.”
 
-# UK INDUSTRIAL STRATEGY LINKAGE
+# UK Industrial Strategy Linkage
 
 The [UK Industrial Strategy](https://www.gov.uk/government/collections/the-uks-modern-industrial-strategy-2025) was released in 2025, with accompanying plans for 6 out of the 8 target "IS-8" sectors. It also has a [sector definition list](https://www.gov.uk/government/publications/industrial-strategy/industrial-strategy-sector-definitions-list) that provides SIC codes being targeted - top level sectors and 'frontier' subsectors (a few of which overlap; most do not). These range in specificity between 2 digit and 5 digit SIC codes.
 
@@ -118,11 +118,17 @@ knitr::kable(indstrat, escape = FALSE, caption = "Table: Industrial Strategy IS-
 
 # History of CCI jobs and GVA in South Yorkshire
 
+The next two plots show Creative and Cultural Industries job counts and GVA as a proportion of the total, for the four South Yorkshire places and the UK's core cities (Great Britain's if BRES jobs data). These show structural change, not growth directly - how each place's economic composition has changed over time.
+
+South Yorkshire's four places are indicated with thicker lines.
+
 ## CCI jobs as a percent of the total for core cities and South Yorkshire
 
-Here, job counts from BRES are summed for all industrial strategy creative SIC codes to find how the percent of South Yorkshire's CCI jobs has changed over the data's history, alongside Great Britain core cities for comparison. BRES has data from 2015 to 2024 - a 3 year running average is used here to smooth its volatility.
+Here, job counts from BRES are summed for all industrial strategy creative SIC codes to find how the percent of South Yorkshire's CCI jobs has changed over the data's history, alongside Great Britain core cities for comparison.
 
-A couple of things to note here:
+BRES has data from 2015 to 2024. A 3 year running average is used here to smooth its volatility, so the most recent data point is showing the 2022-24 average.
+
+Some things to note here:
 
 -   Sheffield's CCI job count is in a lower core city group with three others, percentage-wise: Birmingham, Liverpool and Nottingham.
 
@@ -192,7 +198,7 @@ ggplot(cciplot %>%
   # scale_x_continuous(breaks = c(2013,2017,2019,2021,2023)) +
   theme(legend.title = element_blank()) +
   guides(size = F) +
-  xlab('year') +
+  xlab('year (centre of moving av)') +
   ylab('CCI jobs: percent of total jobs') +
   ggtitle('CCI jobs: percent of total for core cities and SY\n3 year moving average')
 
@@ -203,9 +209,11 @@ ggplot(cciplot %>%
 
 Economic output for CCI sectors has to use a slightly different sector list, as the regional GVA data only has '58-60' and '90-91' SIC codes at ITL3 level (the level that most closely matches local authorities).
 
-But it's close enough to give an indication of how CCI output has changed over time. While this data goes back much further, to 1998, it is show here for the same time range as the BRES data, for direct comparison. Again, a 3 year smoothed average is used and core cities included for comparison.
+But it's close enough to give an indication of how CCI output has changed over time. While this data goes back much further, to 1998, it is show here for the same time range as the BRES data, for direct comparison.
 
--   Out of core cities, Sheffield and Tyneside (the ITL3 zone) have historically had the lowest proportion of their economies made up by CCI sectors.
+-   Out of the core cities, Sheffield and Tyneside (the ITL3 zone) have historically had the lowest proportion of their economies made up by CCI sectors. Sheffield looks to have bounced back from the pandemic better than a lot of other core cities.
+-   The deepest impact of the pandemic is visible in 2020, with differing paths after that point. For example, Barnsley's CCI GVA steadily increases its proportion (though note, we don't know from this plot what role other sectors shrinking may have had on this; in the above plot, job proportions seem to have stayed steady).
+-   Rotherham's story looks similar in both these plots: declining job and GVA proportion for CCI sectors since the pandemic.
 
 ```{r, fig-ccigva}
 #| fig-height: 6
@@ -215,11 +223,12 @@ But it's close enough to give an indication of how CCI output has changed over t
 
 # PLOOOOT
 ggplot(sections.plot %>%
-         filter(!is.na(sector_regional_percent_movingav), year >= 2016) %>% 
+         #filter(!is.na(sector_regional_percent_movingav), year >= 2015) %>% 
+         filter(year >= 2015) %>% 
          mutate(is_sy = qg('sheff|barnsl|doncast|rotherh',Region_name)),
        aes(x = year, 
-           y = sector_regional_percent_movingav,
-           # y = sector_regional_proportion,
+           #y = sector_regional_percent_movingav,
+           y = sector_regional_proportion * 100,
            colour = Region_name, size = is_sy
            )) +
   geom_line() +
@@ -231,7 +240,8 @@ ggplot(sections.plot %>%
   guides(size = F) +
   xlab('year') +
   ylab('CCI GVA: percent of total GVA') +
-  ggtitle('CCI GVA: percent of total GVA for core cities and SY\n3 year moving average')
+  ggtitle('CCI GVA: percent of total GVA for core cities and SY')
+  #ggtitle('CCI GVA: percent of total GVA for core cities and SY\n3 year moving average')
 
 
 
@@ -242,20 +252,37 @@ ggplot(sections.plot %>%
 
 # Location quotient plots
 
-The outputs below use **location quotient plots**. Here's a guide to reading them:
+The outputs below are **location quotient plots** for each of South Yorkshire's local authorities, for "creative" industrial strategy SIC codes.
 
--   Location quotients for sectoral GVA in the selected region
--   Sectors to the right of the blue line are more concentrated in this region when compared to the national average. (e.g. LQ = 10, it is 10x more concentrated)
+Core cities are again included for comparison.
+
+-   They are separated into industrial strategy 'frontier' sectors and the rest. Some are repeated, as the IndStrat definitions have two overlapping, nested categories (591 and 62011 are frontier sectors, but their parent sectors, 59 and 6201, are listed in the broader creative sectors; both are used here).
+
+Here's a guide to reading them:
+
+-   Location quotients for sectoral job proportions are shown for SY local authorities
+-   Sectors to the right of the centre line are more concentrated in this region when compared to the national average. (e.g. LQ = 10, it is 10x more concentrated)
 -   Green circles have been increasing in concentration over time (larger circles increasing the most)
 -   Red circles have been decreasing in concentration over time (larger circles decreasing the most)
--   Black horizontal lines show the min and max of concentration in the data’s history (from 2015 to 2023) (so, often, large green circles will be at the right of this line because sector concentration has been increasing and is continuing)
--   Per sector job counts and percent of the full IndStrat jobcount are shown on the right (not percent of entire regional jobs)
--   Fainter background squares are other place's LQs (ITL3 zones for BRES, local authorities for Companies House data)
+-   Black horizontal lines show the min and max of concentration in the data’s history (from 2015 to 2023)
+-   Circles and lines can be read together - for example, if a green circle is at the right of this line, sector job concentration has been increasing on average and is continuing.
+-   Per sector job counts and percent of the total local authority job count are shown on the right.
+-   Background squares are LQs for core cities. Core cities' first two letters are used. Here's a list of those, for reference:
 
-Also:
+```{r}
 
--   The LQ plots only shows IndStrat SIC sectors where South Yorkshire has 100+ employees (for 2021-23 average)
--   And breaks them down into 'frontier' sectors and the others (a few of which overlap) - see the definitions web link above for a full explanation of those.
+corecitytable <- tibble(
+  `Core city` = c(
+    "Belfast","Birmingham","Bristol","Cardiff","City of Edinburgh","Glasgow","Leeds","Liverpool","Manchester","Newcastle upon Tyne","Nottingham","Sheffield"),     
+  `Abbreviation` = c(
+    "Be","Bi","Br","Ca","Ci","Gl","Le","Li","Ma","Ne","No","Sh"
+    )
+)
+
+#escape = FALSE so that markdown in the cells (the links) is rendered correctly.
+knitr::kable(corecitytable, escape = FALSE, caption = "Table: core city abbreviations")
+
+```
 
 # SHEFFIELD
 
@@ -272,8 +299,9 @@ Also:
 # Maybe more correct ones
 # islq = readRDS('../local/lqs_for_indstrat.rds') 
 # yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds')
-islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(qg(greplsector,sic_namefrom_indstrat_combo))
-yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds') %>% filter(qg(greplsector,sic_namefrom_indstrat_combo))
+islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(qg(greplsector,sic_namefrom_indstrat_combo)) %>% mutate(sic_namefrom_indstrat_combo = gsub('CREATIVE: ','',sic_namefrom_indstrat_combo))
+
+yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds') %>% filter(qg(greplsector,sic_namefrom_indstrat_combo)) %>% mutate(sic_namefrom_indstrat_combo = gsub('CREATIVE: ','',sic_namefrom_indstrat_combo))
 
 # islq = readRDS('../local/lqs_for_indstrat.rds') %>% filter(toplevelindstrat %in% c(greplsector,'LIFESCI'))
 # yeartoplot = readRDS('../local/yeartoplots_for_indstrat.rds')%>% filter(toplevelindstrat %in% c(greplsector,'LIFESCI'))
@@ -317,7 +345,7 @@ corecities_baselayer = corecities_baselayer %>%
 # debugonce(LQ_baseplot)
 p <- LQ_baseplot(df = corecities_baselayer %>% filter(is_frontier == 1), alpha = 0.8, shape = 0, sector_name = sic_namefrom_indstrat_combo, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
 
-p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), plot_to_addto = p, 
+p <- addplacename_to_LQplot(df = yeartoplot.lqfiltered %>% filter(is_frontier == 1), plot_to_addto = p,maxLQvalmultiplier = 0.5,
                             placename = place, shapenumber = 16,
                             min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
                             value_column = JOBCOUNT, sector_regional_proportion = sector_regional_proportion,
@@ -345,13 +373,13 @@ ch_summary = readRDS('../local/CH_lqs_for_indstrat.rds') %>%
   filter(
     qg(greplsector,sic_namefrom_indstrat_combo),
     !is.na(sic_namefrom_indstrat_combo)
-    )
+    ) %>% mutate(sic_namefrom_indstrat_combo = gsub('CREATIVE: ','',sic_namefrom_indstrat_combo))
 
 yeartoplot.ch = readRDS('../local/CH_yeartoplots_for_indstrat.rds') %>%
   filter(
     qg(greplsector,sic_namefrom_indstrat_combo),
     !is.na(sic_namefrom_indstrat_combo)
-    )
+    ) %>% mutate(sic_namefrom_indstrat_combo = gsub('CREATIVE: ','',sic_namefrom_indstrat_combo))
 
 
 sectorLQorder <- ch_summary %>% filter(

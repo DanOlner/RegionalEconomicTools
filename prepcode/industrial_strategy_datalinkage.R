@@ -414,7 +414,8 @@ saveRDS(cciplot,'local/cciplot.rds')
 
 # PLOOOOT
 ggplot(cciplot %>% filter(!is.na(percent_indstrat_cci_movingav)),
-       aes(x = DATE, y = percent_indstrat_cci_movingav, 
+       aes(x = DATE, 
+           y = percent_indstrat_cci_movingav, 
                    colour = GEOGRAPHY_NAME
                    # colour = fct_reorder(GEOGRAPHY_NAME,-percent_indstrat_cci_movingav) 
            )) +
@@ -426,16 +427,16 @@ ggplot(cciplot %>% filter(!is.na(percent_indstrat_cci_movingav)),
 
 # Version with all data, non smoothed...
 # Doesn't pick up on any job drop
-# ggplot(cciplot,
-#        aes(x = DATE, y = percent_indstrat_cci, 
-#            colour = GEOGRAPHY_NAME
-#            # colour = fct_reorder(GEOGRAPHY_NAME,-percent_indstrat_cci_movingav) 
-#        )) +
-#   geom_line() +
-#   geom_point(size = 1) +
-#   scale_color_manual(values = randomcols) +
-#   # scale_x_continuous(breaks = c(2013,2017,2019,2021,2023)) +
-#   theme(legend.title = element_blank())
+ggplot(cciplot,
+       aes(x = DATE, y = percent_indstrat_cci,
+           colour = GEOGRAPHY_NAME
+           # colour = fct_reorder(GEOGRAPHY_NAME,-percent_indstrat_cci_movingav)
+       )) +
+  geom_line() +
+  geom_point(size = 1) +
+  scale_color_manual(values = randomcols) +
+  # scale_x_continuous(breaks = c(2013,2017,2019,2021,2023)) +
+  theme(legend.title = element_blank())
 
 
 
@@ -641,11 +642,18 @@ sections.plot = itl3.cci.cp %>%
 unique(sections.plot$Region_name)
 
 placeorder = sections.plot %>% 
-  filter(year == 2022) %>% #centre of 3 year smooth final point
-  arrange(-sector_regional_percent_movingav) %>% 
+  filter(year == 2023) %>% #centre of 3 year smooth final point
+  arrange(-sector_regional_proportion) %>% 
   select(Region_name) %>% 
   distinct() %>% 
   pull
+
+# placeorder = sections.plot %>% 
+#   filter(year == 2022) %>% #centre of 3 year smooth final point
+#   arrange(-sector_regional_percent_movingav) %>% 
+#   select(Region_name) %>% 
+#   distinct() %>% 
+#   pull
 
 sections.plot = sections.plot %>% 
   mutate(
@@ -670,10 +678,10 @@ randomcols <- col_vector[12:(12+(n-1))]
 
 
 # PLOOOOT
-ggplot(sections.plot,
+ggplot(sections.plot %>% filter(year >= 2015),
        aes(x = year, 
-           y = sector_regional_percent_movingav,
-           # y = sector_regional_proportion,
+           # y = sector_regional_percent_movingav,
+           y = sector_regional_proportion,
            colour = Region_name
            )) +
   geom_line() +
