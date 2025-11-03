@@ -31,11 +31,33 @@ strategy_df <- indsic %>% filter(!is.na(SIC_name)) %>%
       qg('life sci', sector_name) ~ "LIFESCI",
       qg('defence', sector_name) ~ "DEFENCE"
     ),
-    sic_namefrom_indstrat_short = removecommonSICnameelements(SIC_name, removemanuf = T, removeactivities = T),
-    sic_namefrom_indstrat_short = ifelse(qg('Motion picture video/television programme productio',sic_namefrom_indstrat_short),
-                                         "Film/TV prog production sound/music publishing",sic_namefrom_indstrat_short),
+    sic_namefrom_indstrat_short = removecommonSICnameelements(SIC_name, removemanuf = T, removeactivities = T)
+  )
+    
+  #   ,
+  #   sic_namefrom_indstrat_short = ifelse(qg('Motion picture video/television programme productio',sic_namefrom_indstrat_short),
+  #                                        "Film/TV prog production sound/music publishing",sic_namefrom_indstrat_short),
+  #   sic_namefrom_indstrat_combo = paste0(toplevelindstrat,": ",sic_namefrom_indstrat_short, " (",sic_code,")")
+  # )
+
+# Some extra tweaks
+strategy_df = strategy_df %>% 
+  mutate(
+    sic_namefrom_indstrat_short = case_when(
+      qg('ready-made interactive', sic_namefrom_indstrat_short) ~ "interactive entertainment software",
+      qg('other financial services', sic_namefrom_indstrat_short) ~ "other fin (not insur/pensions)",
+      qg('basic pharmaceutical products', sic_namefrom_indstrat_short) ~ "basic pharma / pharma prep",
+      qg('experimental development on natural', sic_namefrom_indstrat_short) ~ "research/experiment sciences/engineering",
+      qg('measuring testing navigation', sic_namefrom_indstrat_short) ~ "electronic insts / measure test navigation",
+      qg('insurance reinsurance', sic_namefrom_indstrat_short) ~ "insurance/pensions",
+      qg('Motion picture video/television programme productio',sic_namefrom_indstrat_short) ~
+      "Film/TV prog production sound/music publishing",
+      .default = sic_namefrom_indstrat_short
+    ),
     sic_namefrom_indstrat_combo = paste0(toplevelindstrat,": ",sic_namefrom_indstrat_short, " (",sic_code,")")
   )
+
+unique(strategy_df$sic_namefrom_indstrat_combo)
 
 # This one is esp. long, enshorten it! (Do above)
 # strategy_df %>% select(sic_namefrom_indstrat_short) %>% filter(qg('Motion picture video/television programme productio',sic_namefrom_indstrat_short)) %>% pull
