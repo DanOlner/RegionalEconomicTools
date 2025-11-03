@@ -2,6 +2,7 @@
 # To BRES and Companies House data
 # Used in e.g. SouthYorkshire_creativeindustries qml report
 library(tidyverse)
+library(plotly)
 library(nomisr)
 library(stringdist)
 library(sf)
@@ -487,6 +488,186 @@ ggplot(cciplot %>% filter(!is.na(percent_indstrat_cci_movingav)),
   # scale_x_continuous(breaks = c(2013,2017,2019,2021,2023)) +
   theme(legend.title = element_blank()) +
   scale_y_log10()
+
+
+
+## ALL INDSTRAT AS PROPORTION: CHANGE OVER TIME IN BRES----
+
+# Of relative concentration levels since % is easier to track
+lqs_for_indstrat = readRDS('local/lqs_for_indstrat.rds')
+
+# Job percents of economy will sum correctly here, they're each from the right overall count
+# But we just have to make sure to remove any nested or repeated SICs...
+# Get unique SICs
+# Check if any have higher code values
+# If duplicates, 
+# We'll need to manually check which indstrat grouping we want to keep
+uniquesics = unique(lqs_for_indstrat$sic)
+
+# Check with one we know... tick
+# ^ is regex for begins with...
+# uniquesics[which(qg(paste0('^',59),uniquesics))]
+
+checksic = function(sicname) {
+  
+  uniquesics[which(qg(paste0('^',sicname),uniquesics))]
+  
+  # if(x[[1]]!=sicname) print(x)
+}
+
+map(uniquesics, checksic)
+
+# Have to do this separately for frontier vs non-frontier
+# As well as a combo that includes both / excludes overlap / includes foundation sectors
+
+# To get correct %s for each
+# These check each subset against the full list of SICs set above
+# map(unique(lqs_for_indstrat$sic[lqs_for_indstrat$is_frontier == 0]), checksic)
+# map(unique(lqs_for_indstrat$sic[lqs_for_indstrat$is_frontier == 1]), checksic)
+# map(unique(lqs_for_indstrat$sic[lqs_for_indstrat$is_frontier == 2]), checksic)
+
+
+# What's a nice way to keep only e.g. 26 given we've got 261,262... 26701?
+# We could drop the first element of each list item then NOT keep the others?
+dropfirst = map(uniquesics, checksic)
+dropfirst = map(dropfirst, ~.x[-1])
+# Removing these will leave only ones we can sum to get total IndStrat jobs
+dropthese = unlist(dropfirst)
+
+
+
+# Filter accordingly
+uniqueindstrat = lqs_for_indstrat %>% filter(!sic %in% dropthese)
+
+# Test - should be no more nested SICs... tick
+uniquesics = unique(uniqueindstrat$sic)
+map(unique(uniqueindstrat$sic), checksic)
+
+
+# Add indstrat grouping for option to plot each separately
+# https://stackoverflow.com/questions/41321768/regex-to-match-a-string-after-colon
+uniqueindstrat$indstrat_code = gsub(pattern = ":(.*)", replacement = "", uniqueindstrat$sic_namefrom_indstrat_combo)
+
+
+# Actually, we do have region total size here if we want to repeat
+# Or can just sum sector_regional_proportion...
+# Having plotted, it does need smoothing...
+indstrat_sums = uniqueindstrat %>% 
+  group_by(DATE,GEOGRAPHY_NAME,indstrat_code) %>% 
+  summarise(
+    percent_all_indstrat = sum(sector_regional_proportion) * 100,
+    totaljobs = sum(JOBCOUNT)
+  ) %>% 
+  arrange(DATE) %>% 
+  group_by(GEOGRAPHY_NAME,indstrat_code) %>% 
+  mutate(
+    percent_all_indstrat_movingav = rollapply(percent_all_indstrat,3,mean,align='center',fill=NA),
+    totaljobs_movingav = rollapply(totaljobs,3,mean,align='center',fill=NA)
+  ) %>% 
+  ungroup()
+
+# May want to smooth, let's see. But...
+corecities = readRDS('data/corecitiesvector.rds')
+
+indstrat_plot = indstrat_sums %>% 
+  filter(GEOGRAPHY_NAME %in% c(corecities,c('Barnsley','Doncaster','Rotherham','Salford')))
+
+
+# Random pastel colours
+#https://stackoverflow.com/a/33144808/5023561
+#Make different pastel-ish colours
+n <- length(unique(indstrat_plot$GEOGRAPHY_NAME))
+set.seed(13)
+qual_col_pals = brewer.pal.info[brewer.pal.info$category == 'qual',]
+col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
+# pie(rep(1,n), col=sample(col_vector, n))
+
+# randomcols <- sample(col_vector, n)
+# n <- length(unique(itl3.sections.cv$SIC07_description))
+randomcols <- col_vector[10:(10+(n-1))]
+
+# Pick final smoothed year to order factor
+placeorder = indstrat_plot %>% 
+  filter(DATE == 2023) %>% #centre of 3 year smooth final point
+  arrange(-percent_all_indstrat_movingav) %>% 
+  select(GEOGRAPHY_NAME) %>% 
+  pull
+
+indstrat_plot = indstrat_plot %>% 
+  mutate(
+    GEOGRAPHY_NAME = factor(GEOGRAPHY_NAME, levels = placeorder)
+  )
+
+# Save for qml
+saveRDS(indstrat_plot,'local/allindstrat_plot.rds')
+
+# PLOOOOT
+p = ggplot(indstrat_plot %>% filter(!is.na(percent_all_indstrat_movingav)) %>% 
+             mutate(selectplace = GEOGRAPHY_NAME %in% c('Rotherham','Doncaster','Barnsley','Sheffield')),
+       aes(x = DATE, 
+           y = percent_all_indstrat_movingav, 
+           colour = GEOGRAPHY_NAME,
+           size = selectplace
+           # colour = fct_reorder(GEOGRAPHY_NAME,-percent_indstrat_cci_movingav) 
+       )) +
+  geom_line() +
+  geom_point() +
+  scale_size_manual(values = c(0.3,1)) +
+  scale_color_manual(values = randomcols) +
+  # scale_x_continuous(breaks = c(2013,2017,2019,2021,2023)) +
+  theme(legend.title = element_blank()) +
+  facet_wrap(~indstrat_code, scales = 'free_y', ncol = 2)
+
+gp = ggplotly(p, tooltip = 'GEOGRAPHY_NAME')
+
+htmlwidgets::saveWidget(gp, "docs/miscimages/indstrat_groups_BRESjobs.html", )
+
+# Version with all data, non smoothed...
+# Doesn't pick up on any job drop
+ggplot(indstrat_plot,
+       aes(x = DATE, y = percent_all_indstrat,
+           colour = GEOGRAPHY_NAME
+           # colour = fct_reorder(GEOGRAPHY_NAME,-percent_indstrat_cci_movingav)
+       )) +
+  geom_line() +
+  geom_point(size = 1) +
+  scale_color_manual(values = randomcols) +
+  # scale_x_continuous(breaks = c(2013,2017,2019,2021,2023)) +
+  theme(legend.title = element_blank())
+
+
+
+# Some batty things going on there
+# Quick look at all data for some places
+roth = uniqueindstrat %>% filter(GEOGRAPHY_NAME == 'Rotherham')
+# roth = uniqueindstrat %>% filter(GEOGRAPHY_NAME == 'Salford') 
+
+# Break into groups based on latest year's numbers
+roth.groups = roth %>% filter(DATE == 2024) %>% 
+  mutate(
+    jobsizegroups = as.numeric(cut_number(JOBCOUNT,3))
+  )
+
+roth = roth %>% 
+  left_join(
+    roth.groups %>% select(jobsizegroups,sic_namefrom_indstrat_combo),
+    by = 'sic_namefrom_indstrat_combo'
+  )
+
+
+
+
+# All indstrat sectors job counts
+p = ggplot(roth, aes(x = DATE, y = JOBCOUNT, colour = sic_namefrom_indstrat_combo)) +
+  geom_line() +
+  geom_point() +
+  facet_wrap(~jobsizegroups, scales = 'free_y')
+  # scale_y_log10()
+
+ggplotly(p, tooltip = 'sic_namefrom_indstrat_combo')
+
+
+
 
 
 

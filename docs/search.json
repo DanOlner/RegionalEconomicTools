@@ -1458,5 +1458,40 @@
     "title": "Salford: Industrial Strategy data linkage (November 2025)",
     "section": "Other industrial strategy SIC sectors",
     "text": "Other industrial strategy SIC sectors\n\nBRES other sectors\n\n\n\n\n\n\n\n\nFigure 3\n\n\n\n\n\n\n\nCompanies House other sectors\n\n\n\n\n\n\n\n\nFigure 4"
+  },
+  {
+    "objectID": "quarto_docs/Rotherham_IndStrat_Nov2025.html",
+    "href": "quarto_docs/Rotherham_IndStrat_Nov2025.html",
+    "title": "Rotherham: Industrial Strategy data linkage (November 2025)",
+    "section": "",
+    "text": "For the LQ analysis, two data sources with different strengths and weaknesses are used, to triangulate a fuller picture:\n\nBusiness Register and Employment Survey (BRES) from 2015 to 2024, job counts. (2024 data was released 28th October.) The survey captures larger firms and their related sites, as well as smaller firms, but sample sizes become small at granular levels, so it can miss the full picture and is volatile between years.\nCompanies House (CH) firm level data, scraped for accounts submitted between September 2024 and end of September 2025. CH data’s main weakness: it records only firms HQ’d in South Yorkshire. But it captures a sizeable proportion of economic activity, and can often indicate (comparing to BRES) which sectors are more ‘home grown’ (a high CH / BRES ratio) and sometimes pick up on jobs BRES misses, as it’s not sample based. Here, it can also only compare job counts from when accounts were submitted and a year previously."
+  },
+  {
+    "objectID": "quarto_docs/Rotherham_IndStrat_Nov2025.html#lq-plot-guide",
+    "href": "quarto_docs/Rotherham_IndStrat_Nov2025.html#lq-plot-guide",
+    "title": "Rotherham: Industrial Strategy data linkage (November 2025)",
+    "section": "LQ plot guide",
+    "text": "LQ plot guide\nThe outputs below are location quotient plots for each of South Yorkshire’s local authorities, for “creative” industrial strategy SIC codes.\nCore cities are again included for comparison.\n\nThey are separated into industrial strategy ‘frontier’ sectors and the rest. Some are repeated, as the IndStrat definitions have two overlapping, nested categories (591 and 62011 are frontier sectors, but their parent sectors, 59 and 6201, are listed in the broader creative sectors; both are used here).\n\nHere’s a guide to reading them:\n\nLocation quotients for sectoral job proportions are shown for Salford with core cities overlaid\nSectors to the right of the centre line are more concentrated in this region when compared to the national average. (e.g. LQ = 10, it is 10x more concentrated)\nGreen circles have been increasing in concentration over time (larger circles increasing the most)\nRed circles have been decreasing in concentration over time (larger circles decreasing the most)\nBlack horizontal lines show the min and max of concentration in the data’s history (from 2015 to 2023)\nCircles and lines can be read together - for example, if a green circle is at the right of this line, sector job concentration has been increasing on average and is continuing.\nCompanies House plots are just comparing job counts when accounts are submitted to the ‘last year’s employees’ figure from the same accounts - so they indicate how jobs have shifted since last accounts, but can’t show longer-term change.\nPer sector job counts and percent of the total local authority job count are shown on the right. These are useful to check sector size versus LQ - for example, a sector like jewellery can have a high LQ (as it does in Sheffield and Birmingham) with very low job counts, because there aren’t many jobs in this sector overall in Great Britain.\nBackground squares are LQs for core cities. Core cities’ first two letters are used. Here’s a list of those, for reference:\n\n\n\n\nTable: core city abbreviations\n\n\nCore city\nAbbreviation\n\n\n\n\nBelfast\nBe\n\n\nBirmingham\nBi\n\n\nBristol\nBr\n\n\nCardiff\nCa\n\n\nCity of Edinburgh\nEd\n\n\nGlasgow\nGl\n\n\nLeeds\nLe\n\n\nLiverpool\nLi\n\n\nManchester\nMa\n\n\nNewcastle upon Tyne\nNe\n\n\nNottingham\nNo\n\n\nSheffield\nSh"
+  },
+  {
+    "objectID": "quarto_docs/Rotherham_IndStrat_Nov2025.html#lqs-plots-frontier-vs-other-sectors",
+    "href": "quarto_docs/Rotherham_IndStrat_Nov2025.html#lqs-plots-frontier-vs-other-sectors",
+    "title": "Rotherham: Industrial Strategy data linkage (November 2025)",
+    "section": "LQs plots: frontier vs other sectors",
+    "text": "LQs plots: frontier vs other sectors"
+  },
+  {
+    "objectID": "quarto_docs/Rotherham_IndStrat_Nov2025.html#frontier-sic-sectors",
+    "href": "quarto_docs/Rotherham_IndStrat_Nov2025.html#frontier-sic-sectors",
+    "title": "Rotherham: Industrial Strategy data linkage (November 2025)",
+    "section": "“Frontier” SIC sectors",
+    "text": "“Frontier” SIC sectors\n\nBRES frontier sectors\n\n\n\n\n\n\n\n\nFigure 1\n\n\n\n\n\n\n\nCompanies house frontier sectors\n\n\n\n\n\n\n\n\nFigure 2"
+  },
+  {
+    "objectID": "quarto_docs/Rotherham_IndStrat_Nov2025.html#other-industrial-strategy-sic-sectors",
+    "href": "quarto_docs/Rotherham_IndStrat_Nov2025.html#other-industrial-strategy-sic-sectors",
+    "title": "Rotherham: Industrial Strategy data linkage (November 2025)",
+    "section": "Other industrial strategy SIC sectors",
+    "text": "Other industrial strategy SIC sectors\n\nBRES other sectors\n\n\n\n\n\n\n\n\nFigure 3\n\n\n\n\n\n\n\nCompanies House other sectors\n\n\n\n\n\n\n\n\nFigure 4"
   }
 ]
