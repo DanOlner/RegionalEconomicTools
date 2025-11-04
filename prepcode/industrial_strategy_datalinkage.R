@@ -386,13 +386,15 @@ lqs_for_indstrat = readRDS('local/lqs_for_indstrat.rds')
 cci = lqs_for_indstrat %>% filter(qg('creative', sic_namefrom_indstrat_combo))
 
 # Nested SICs to remove:
+# 5821 is covered by 58
 # 591 is covered by 59
 # 592 is covered by 59
+# 602 is covered by 60
 # 62011 is covered by 6201
 unique(cci$sic)
 
 # Filter accordingly
-cci = cci %>% filter(!sic %in% c('591','592','62011'))
+cci = cci %>% filter(!sic %in% c('5821','602','591','592','62011'))
 
 # Actually, we do have region total size here if we want to repeat
 # Or can just sum sector_regional_proportion...
@@ -602,8 +604,14 @@ indstratsums_perIS8 = function(is8name){
 
 }
 
-# Just check again with single IS8 we already know
-indstrat_sums = indstratsums_perIS8('CREATIVE')
+# Just check again with single IS8 we already know... tick
+# indstrat_sums = indstratsums_perIS8('CREATIVE')
+
+# Repeat for all
+indstrat_sums = bind_rows(
+  map(names(is8drops), indstratsums_perIS8)
+)
+
   
 # May want to smooth, let's see. But...
 corecities = readRDS('data/corecitiesvector.rds')
@@ -630,6 +638,7 @@ placeorder = indstrat_plot %>%
   filter(DATE == 2023) %>% #centre of 3 year smooth final point
   arrange(-percent_all_indstrat_movingav) %>% 
   select(GEOGRAPHY_NAME) %>% 
+  distinct() %>% 
   pull
 
 indstrat_plot = indstrat_plot %>% 
