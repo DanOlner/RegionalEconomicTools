@@ -192,9 +192,29 @@ getLQs_and_attachedstuff = function(bres_df){
   
 }
 
+# Check for and list any SICS that have other SICs nested inside them
+# So we can avoid double-counting total IS-8 percentages.
+checksic = function(sicname) {
+  
+  uniquesics[which(qg(paste0('^',sicname),uniquesics))]
+  
+  # if(x[[1]]!=sicname) print(x)
+}
 
 
-
+# For getting a list of SICs to drop to keep uniques within each IS8 grouping
+droplist_foreachIS8 = function(is8name) {
+  
+  uniquesics <<- unique(lqs_for_indstrat %>% filter(indstrat_code == is8name) %>% select(sic) %>% pull)
+  
+  dropfirst = map(uniquesics, checksic)
+  dropfirst = map(dropfirst, ~.x[-1])
+  # Removing these will leave only ones we can sum to get total IndStrat jobs
+  dropthese = unlist(dropfirst)
+  
+  return(list(is8 = is8name, dropthese = dropthese))
+  
+}
 
 
 

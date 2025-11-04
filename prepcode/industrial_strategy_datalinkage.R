@@ -8,7 +8,9 @@ library(stringdist)
 library(sf)
 library(zoo)
 library(stringr)
+library(RColorBrewer)
 source('functions/misc_functions.R')
+source('functions/adhoc_functions.R')
 source('functions/data_process_functions.R')
 
 options(scipen = 99)
@@ -508,13 +510,7 @@ uniquesics = unique(lqs_for_indstrat$sic)
 # ^ is regex for begins with...
 # uniquesics[which(qg(paste0('^',59),uniquesics))]
 
-checksic = function(sicname) {
-  
-  uniquesics[which(qg(paste0('^',sicname),uniquesics))]
-  
-  # if(x[[1]]!=sicname) print(x)
-}
-
+# Function moved to adhoc_functions
 map(uniquesics, checksic)
 
 # Have to do this separately for frontier vs non-frontier
@@ -535,42 +531,85 @@ dropfirst = map(dropfirst, ~.x[-1])
 dropthese = unlist(dropfirst)
 
 
+# ISSUE!
+# If we're grouping by IS-8 industrial strategy codes
+# Some SICs duplicated that I've removed when keeping just unique values
+# Should NOT be dropped, because they're unique to each IS-8 - can't get total without them
 
-# Filter accordingly
-uniqueindstrat = lqs_for_indstrat %>% filter(!sic %in% dropthese)
+# So how to keep unique sectors per IS-8?
+# Create a list of uniques for each, then combine
+# Then when we summarise below per IS-8, it should sum correctly
 
-# Test - should be no more nested SICs... tick
-uniquesics = unique(uniqueindstrat$sic)
-map(unique(uniqueindstrat$sic), checksic)
-
-
+# So let's add in the IS-8 code again...
 # Add indstrat grouping for option to plot each separately
 # https://stackoverflow.com/questions/41321768/regex-to-match-a-string-after-colon
-uniqueindstrat$indstrat_code = gsub(pattern = ":(.*)", replacement = "", uniqueindstrat$sic_namefrom_indstrat_combo)
+lqs_for_indstrat$indstrat_code = gsub(pattern = ":(.*)", replacement = "", lqs_for_indstrat$sic_namefrom_indstrat_combo)
 
+# Then redo the function so it gets unique SICs per IS-8
+# We can then keep uniques from that
+# Stuck into ad hoc functions to debug
 
-# Actually, we do have region total size here if we want to repeat
-# Or can just sum sector_regional_proportion...
-# Having plotted, it does need smoothing...
-indstrat_sums = uniqueindstrat %>% 
-  group_by(DATE,GEOGRAPHY_NAME,indstrat_code) %>% 
-  summarise(
-    percent_all_indstrat = sum(sector_regional_proportion) * 100,
-    totaljobs = sum(JOBCOUNT)
-  ) %>% 
-  arrange(DATE) %>% 
-  group_by(GEOGRAPHY_NAME,indstrat_code) %>% 
-  mutate(
-    percent_all_indstrat_movingav = rollapply(percent_all_indstrat,3,mean,align='center',fill=NA),
-    totaljobs_movingav = rollapply(totaljobs,3,mean,align='center',fill=NA)
-  ) %>% 
-  ungroup()
+# debugonce(droplist_foreachIS8)
+# Give top level the is8 names so we can access directly
+# Use purrr method...
+is8drops = unique(lqs_for_indstrat$indstrat_code) %>% set_names() %>% map(droplist_foreachIS8)
 
+# ... rather than this
+# names(is8drops) <- sapply(is8drops, `[[`, "is8")
+
+# Some checks 
+unique(lqs_for_indstrat$sic_namefrom_indstrat_combo)[qg('creative',unique(lqs_for_indstrat$sic_namefrom_indstrat_combo))]
+
+# Filter accordingly... just testing one IS-8 to start with
+# uniqueindstrat = lqs_for_indstrat %>% filter(!sic %in% dropthese)
+uniqueindstrat = lqs_for_indstrat %>% 
+  filter(
+    indstrat_code == is8drops[['CREATIVE']]$is8,
+    !sic %in% is8drops[['CREATIVE']]$dropthese
+  )
+
+# Test - should be no more nested SICs... tick
+# uniquesics = unique(uniqueindstrat$sic)
+# map(unique(uniqueindstrat$sic), checksic)
+
+# Look at what unique combos are left
+# unique(uniqueindstrat$sic_namefrom_indstrat_combo)
+
+ 
+# All looks OK (creative now matching previous version used in the CCI analysis)
+# To be sure we get the right sums, best to repeat for each IS-8 separately then recombine
+
+indstratsums_perIS8 = function(is8name){
+
+  lqs_for_indstrat %>% 
+    filter(
+      indstrat_code == is8name,
+      !sic %in% is8drops[[is8name]]$dropthese
+      ) %>% 
+    group_by(DATE,GEOGRAPHY_NAME) %>% 
+    summarise(
+      percent_all_indstrat = sum(sector_regional_proportion) * 100,
+      totaljobs = sum(JOBCOUNT)
+    ) %>% 
+    arrange(DATE) %>% 
+    group_by(GEOGRAPHY_NAME) %>% 
+    mutate(
+      percent_all_indstrat_movingav = rollapply(percent_all_indstrat,3,mean,align='center',fill=NA),
+      totaljobs_movingav = rollapply(totaljobs,3,mean,align='center',fill=NA)
+    ) %>% 
+    ungroup() %>% 
+    mutate(indstrat_code = is8name)
+
+}
+
+# Just check again with single IS8 we already know
+indstrat_sums = indstratsums_perIS8('CREATIVE')
+  
 # May want to smooth, let's see. But...
 corecities = readRDS('data/corecitiesvector.rds')
 
 indstrat_plot = indstrat_sums %>% 
-  filter(GEOGRAPHY_NAME %in% c(corecities,c('Barnsley','Doncaster','Rotherham','Salford')))
+  filter(GEOGRAPHY_NAME %in% c(corecities,c('Barnsley','Doncaster','Rotherham')))
 
 
 # Random pastel colours
@@ -584,7 +623,7 @@ col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_co
 
 # randomcols <- sample(col_vector, n)
 # n <- length(unique(itl3.sections.cv$SIC07_description))
-randomcols <- col_vector[10:(10+(n-1))]
+randomcols <- col_vector[14:(14+(n-1))]
 
 # Pick final smoothed year to order factor
 placeorder = indstrat_plot %>% 
@@ -599,7 +638,7 @@ indstrat_plot = indstrat_plot %>%
   )
 
 # Save for qml
-saveRDS(indstrat_plot,'local/allindstrat_plot.rds')
+# saveRDS(indstrat_plot,'local/allindstrat_plot.rds')
 
 # PLOOOOT
 p = ggplot(indstrat_plot %>% filter(!is.na(percent_all_indstrat_movingav)) %>% 
@@ -620,7 +659,7 @@ p = ggplot(indstrat_plot %>% filter(!is.na(percent_all_indstrat_movingav)) %>%
 
 gp = ggplotly(p, tooltip = 'GEOGRAPHY_NAME')
 
-htmlwidgets::saveWidget(gp, "docs/miscimages/indstrat_groups_BRESjobs.html", )
+htmlwidgets::saveWidget(gp, "docs/miscimages/indstrat_groups_BRESjobs.html")
 
 # Version with all data, non smoothed...
 # Doesn't pick up on any job drop
