@@ -1,0 +1,17 @@
+{
+  "hash": "4db15056c39b4af31d105666c3cf316e",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"South Yorkshire CCI just plots\"\nauthor:\n  - name: \"Dan Olner\"\nformat: \n  html:\n    output-file: \"SY_MSA_CCI_justplots\"\n    fig-width: 8\n    fig-height: 8\nexecute:\n  echo: false\n  message: false\n  warning: false\nfig-responsive: false\ncollapse: false\nnavbar: false\nsidebar: false\n---\n\n\n::: {.cell}\n\n:::\n\n\n\n# SOUTH YORKSHIRE AS A WHOLE COMPARED TO SELECTED STRATEGIC AUTHORITIES\n\n## \"Frontier\" SIC sectors\n\n### BRES frontier sectors\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](SouthYorkshire_creativeindustries_Oct2025_w_SouthYorkshireBits_files/figure-html/fig-bresindstrat_itl2-1.png){#fig-bresindstrat_itl2 width=768}\n:::\n:::\n\n\n### Companies house frontier sectors\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](SouthYorkshire_creativeindustries_Oct2025_w_SouthYorkshireBits_files/figure-html/fig-chindstrat_itl2-1.png){#fig-chindstrat_itl2 width=768}\n:::\n:::\n\n\n## Other industrial strategy SIC sectors\n\n### BRES other sectors\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](SouthYorkshire_creativeindustries_Oct2025_w_SouthYorkshireBits_files/figure-html/fig-bresindstrat2_itl2-1.png){#fig-bresindstrat2_itl2 width=768}\n:::\n:::\n\n\n### Companies House other sectors\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](SouthYorkshire_creativeindustries_Oct2025_w_SouthYorkshireBits_files/figure-html/fig-chindstrat2_itl2-1.png){#fig-chindstrat2_itl2 width=768}\n:::\n:::\n\n",
+    "supporting": [
+      "SouthYorkshire_creativeindustries_Oct2025_w_SouthYorkshireBits_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

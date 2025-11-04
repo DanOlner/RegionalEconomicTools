@@ -1039,7 +1039,7 @@ p
 
 ```
 
-### Companies House other sectors
+### Companies House other sectors 
 
 ```{r, fig-chindstrat2r}
 #| fig-height: 13
