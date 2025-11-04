@@ -718,6 +718,25 @@ ggplotly(p, tooltip = 'sic_namefrom_indstrat_combo')
 
 
 
+# Look at defence - lots of places without job count, right?
+indstrat_sums %>% filter(qg('defence',indstrat_code)) %>% View
+
+# Check same just for core cities / SY
+indstrat_sums %>% filter(qg('defence',indstrat_code), GEOGRAPHY_NAME %in% c(corecities,'Rotherham','Doncaster','Barnsley')) %>% View
+
+
+# Proportion of places with zero jobs in those SICs
+propwithzero = indstrat_sums %>% filter(qg('defence',indstrat_code)) %>% 
+  group_by(DATE) %>% 
+  summarise(
+    percent_with_zero = mean(totaljobs == 0) * 100,
+    percent_withmorethan100 = mean(totaljobs > 100) * 100
+    ) %>% 
+  ungroup()
+
+# So we can do a log plot to see who / where
+
+
 
 
 ## GVA for ARTS/ENT SECTION----
