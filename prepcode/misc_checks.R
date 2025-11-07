@@ -22,6 +22,8 @@ nomis_get_metadata(id = "NM_189_1", concept = "MEASURE")
 nomis_get_metadata(id = "NM_189_1", concept = "MEASURES")
 geogz = nomis_get_metadata(id = "NM_189_1", concept = "GEOGRAPHY", type = "type")
 
+print(geogz, n = 60)
+
 #Point of confusion here - 
 #Look at the full column range and how it's broken down:
 #(for some sample data)

@@ -1,0 +1,48 @@
+---
+title: "South Yorkshire creative & cultural industries: data from BRES and Companies House (October 2025)"
+author:
+  - name: "Dan Olner"
+format: 
+  html:
+    output-file: "Yorkshire_n_Humber_sectors_Nov2025"
+    fig-width: 8
+    fig-height: 8
+execute:
+  echo: false
+  message: false
+  warning: false
+fig-responsive: false
+collapse: false
+navbar: false
+sidebar: false
+---
+
+```{r setup}
+library(tidyverse)
+# library(spdep)
+library(sf)#for geo stuff
+# library(tmap)#for mapping 
+library(zoo)#for making smoothed moving averages
+library(patchwork)#combine ggplots easily
+library(plotly)#For interactive plots
+# # library(ggdist)
+# library(tidyr)
+# library(distributional)
+library(RColorBrewer)
+
+source('../functions/misc_functions.R')
+source('../functions/adhoc_functions.R')
+#source('functions/misc_functions.R')
+#source('functions/adhoc_functions.R')
+
+options(scipen = 999)
+
+#Set ggplot theme
+theme_set(theme_light())
+
+corecities = readRDS('../data/corecitiesvector.rds')
+
+```
+
+# Introduction
+

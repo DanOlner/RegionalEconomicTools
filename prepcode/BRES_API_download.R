@@ -92,6 +92,14 @@ runBRESdownloader.fortheseyears(years = yearstoget, geography = "TYPE423", EMPLO
 runBRESdownloader.fortheseyears(years = yearstoget, geography = "TYPE423", EMPLOYMENT_STATUS = 4)
 
 
+# Also do district / unitary...
+#debugonce(runBRESdownloader.fortheseyears)
+# FULL TIME
+runBRESdownloader.fortheseyears(years = yearstoget, geography = "TYPE432", EMPLOYMENT_STATUS = 2)
+#PART TIME
+runBRESdownloader.fortheseyears(years = yearstoget, geography = "TYPE432", EMPLOYMENT_STATUS = 3)
+#"EMPLOYEES"
+runBRESdownloader.fortheseyears(years = yearstoget, geography = "TYPE432", EMPLOYMENT_STATUS = 4)
 
 
 

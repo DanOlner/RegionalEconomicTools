@@ -603,6 +603,46 @@ twod_proportionplot <- function(df, regionvar, category_var, valuevar, timevar, 
 
 
 
+# Separately get proportions for generic region groupings
+# E.g. if lumping together rest of UK in one 'region' to put on separate axis to another
+# For use e.g. in generic time plots below
+get_tworegions_proportions = function(df,regionvar,category_var,valuevar,timevar,x_regionnames,y_regionnames){
+
+  regionvar <- enquo(regionvar)
+  category_var <- enquo(category_var)
+  valuevar <- enquo(valuevar)
+  timevar <- enquo(timevar)
+  
+  x_region_results <- df %>% 
+    filter(!!regionvar %in% x_regionnames) %>% 
+    group_split(!!timevar) %>% 
+    map(add_location_quotient_and_proportions, 
+        regionvar = !!regionvar,
+        lq_var = !!category_var,
+        valuevar = !!valuevar) %>% 
+    bind_rows() %>% 
+    group_by(!!category_var,!!timevar) %>% 
+    summarise(x_sector_total_proportion = min(sector_total_proportion))#just get unique values
+  
+  y_region_results <- df %>% 
+    filter(!!regionvar %in% y_regionnames) %>% 
+    group_split(!!timevar) %>% 
+    map(add_location_quotient_and_proportions, 
+        regionvar = !!regionvar,
+        lq_var = !!category_var,
+        valuevar = !!valuevar) %>% 
+    bind_rows() %>% 
+    group_by(!!category_var,!!timevar) %>% 
+    summarise(y_sector_total_proportion = min(sector_total_proportion))#just get unique values
+  
+  #Join both
+  both <- x_region_results %>% 
+    left_join(
+      y_region_results,
+      by = c(quo_name(category_var),quo_name(timevar))
+    ) %>% ungroup()
+
+}
 
 
 
@@ -861,7 +901,7 @@ twod_generictimeplot_multipletimepoints <- function(df, category_var, x_var, y_v
     segment.angle = 20,
     max.overlaps = 20
   ) +
-    scale_color_manual(values = setNames(c("red", "black",'#7fc97f','#beaed4','#fdc086','#1f78b4'),
+    scale_color_manual(values = setNames(c("black", "red",'#7fc97f','#beaed4','#fdc086','#1f78b4'),
                                          c(min(times), max(times),'NE','SE','NW','SW')))
   
   p
@@ -2529,6 +2569,56 @@ removecommonSICnameelements = function(returnnames, removemanuf = F, removeactiv
 
 
 
+#Function for intersecting two geographies, finding which has largest area overlap from first
+#And using that largest area one as the lookup label
+# Nabbed from https://github.com/DanOlner/utilities/blob/master/functions.R
+intersect_makelookup <- function(larger_zone, smaller_zone, vartogroupby_fromsmallerzone){
+  
+  vartogroupby_fromsmallerzone <- enquo(vartogroupby_fromsmallerzone)
+  
+  cat('Beginning intersect (timing)...\n')  
+  x <- Sys.time()
+  
+  intersect_result <- sf::st_intersection(larger_zone, smaller_zone)
+  
+  cat('Time: ',Sys.time() - x,'\n')
+  
+  #Add area to all zones
+  #Some smaller zones will be entire within larger zones
+  #Those will only have one row
+  #Others will have more - the largest area within that group of rows 
+  #will be the zone overlap that's the largest
+  #We'll keep this one (and report back on the scale of difference)
+  intersect_result <- intersect_result %>% 
+    mutate(
+      overlap_area_m2 = st_area(.) %>% as.numeric
+    ) %>% 
+    group_by(!!vartogroupby_fromsmallerzone) %>% 
+    mutate(
+      area_percent = (overlap_area_m2/sum(overlap_area_m2))*100,
+      group_count = n()
+    ) %>% 
+    ungroup() %>% 
+    arrange(-group_count)#to get a good view of most overlapping zones
+  
+  
+  #Keep only largest % from each group to larger overlap as label
+  keeps <- intersect_result %>% 
+    group_by(!!vartogroupby_fromsmallerzone) %>% 
+    filter(area_percent == max(area_percent)) %>% 
+    ungroup()
+  
+  #Can drop some smaller zones if not at all inside larger zones...
+  # smaller_zone %>% filter(!zone_code %in% keeps$zone_code) %>% View
+  
+  #Should now have unique zone codes
+  # length(unique(keeps$zone_code)) == nrow(keeps)
+  
+  cat('Lookup single zone picked - percent that are fully inside larger zones:',mean(keeps$area_percent == 100) * 100,'%\n')
+  
+  return(keeps)
+  
+}
 
 
 
