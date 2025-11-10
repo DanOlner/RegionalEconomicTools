@@ -53,7 +53,8 @@ LQplot_BRES_groupsof5digit <- function(df_singletwodigitgrouping){
 
 #Plot repeater for Bradford QML output
 #Here: https://github.com/DanOlner/RegionalEconomicTools/blob/f91ff96d13740e6efe43d2ccb6ae7239766b9326/quarto_docs/Bradford_sectorclusters.qmd#L235
-plotprod <- function(df,vartouse){
+# Can overwrite default names
+plotprod <- function(df,vartouse, placestoadd = c("Bradford","Calderdale and Kirklees","Leeds","Wakefield")){
   
   vartouse = enquo(vartouse) 
   
@@ -75,7 +76,7 @@ plotprod <- function(df,vartouse){
   maxfory <- maxfory * 1.5
     
   # placestoadd = unique(df$Region_name[qg('Leeds|Bradford',df$Region_name)])
-  placestoadd = unique(df$Region_name[qg('Leeds|Bradford|kirklees|wakef',df$Region_name)])
+  # placestoadd = unique(df$Region_name[qg('Leeds|Bradford|kirklees|wakef',df$Region_name)])
   
   ggplot() +
     geom_point(#Rest of UK first
@@ -101,6 +102,59 @@ plotprod <- function(df,vartouse){
     scale_colour_brewer(palette = 'Set1', direction = 1, name="") +
     geom_line(#Then Leeds and Bradford
       data =  df %>% filter(Region_name == 'Bradford'),
+      aes(x = DATE, y = !!vartouse, group = Region_name, colour = Region_name),
+      alpha = 0.5, size = 1) +
+    scale_colour_brewer(palette = 'Set1', direction = 1, name="") +
+    scale_shape_manual(values = c(17,16,16,16), name="") +
+    xlab('year') +
+    ylab('GVA/job (1000s)') +
+    # ylab('GVA/job PPM of UK economy') +
+    facet_wrap(~SIC07_description_shortened, nrow = 1, labeller = labeller(groupwrap = label_wrap_gen(10)))
+  
+}
+
+
+
+#Plot repeater for general GVA per job data
+# Can overwrite default names
+plotprod_generic <- function(df,vartouse, placestoadd){
+  
+  vartouse = enquo(vartouse) 
+  
+  # print(paste0('Grouping:',unique(df$sectorgrouping))) 
+  
+  #find max bradford value and use that to set y axis max 
+  #filter out any infs...
+  # df <- df %>% filter(!is.infinite(quo_name(vartouse))) 
+  df <- df %>% filter(!is.infinite(!!vartouse)) 
+  
+  # maxfory = max(df$!!vartouse[df$Region_name == 'Bradford'])
+  maxfory = df %>%
+    filter(Region_name %in% placestoadd) %>% 
+    select(!!vartouse) %>%
+    filter(!!vartouse == max(!!vartouse)) %>% 
+    pull
+  
+  #Multiplier for max y axis
+  # maxfory <- maxfory * 1.5
+    
+  # placestoadd = unique(df$Region_name[qg('Leeds|Bradford',df$Region_name)])
+  # placestoadd = unique(df$Region_name[qg('Leeds|Bradford|kirklees|wakef',df$Region_name)])
+  
+  ggplot() +
+    geom_point(#Rest of UK first
+      data =  df,
+      aes(x = DATE, y = !!vartouse, group = Region_name),
+      alpha = 0.15, size = 1) +
+    coord_cartesian(ylim = c(0,maxfory)) +
+    geom_point(
+      data =  df %>% filter(Region_name %in% placestoadd),
+      aes(x = DATE, y = !!vartouse, group = Region_name, colour = Region_name, shape = Region_name),
+      # aes(x = DATE, y = !!vartouse, group = Region_name, colour = Region_name),
+      alpha = 0.8, size = 2) +
+    scale_colour_brewer(palette = 'Set1', direction = 1, name="") +
+    geom_line(
+      data =  df %>% filter(Region_name %in% placestoadd),
       aes(x = DATE, y = !!vartouse, group = Region_name, colour = Region_name),
       alpha = 0.5, size = 1) +
     scale_colour_brewer(palette = 'Set1', direction = 1, name="") +

@@ -641,31 +641,281 @@ gva.gs.smoothed %>%
 # bres <- read_csv("local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE423_localauthoritiescountyunitaryasofApril2023_2_Fulltimeemployees_2015_2024_SIC_5DIGIT.csv")
 
 
-# district/unitary
+# district/unitary - should hopefully match ITL3 and LA borders below better
 bres <- read_csv("local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE432_localauthoritiesdistrictunitaryasofApril2021_2_Fulltimeemployees_2015_2024_SIC_2DIGIT.csv")
 
+# 2024 local authority geographies
+# la.2024 = st_read("~/Library/CloudStorage/Dropbox/MapPolygons/UK/2024/Local_Authority_Districts_May_2024_Boundaries_UK_BFC/LAD_MAY_2024_UK_BFC.shp")
+
+# 2021 local authority geographies
+la.2021 = st_read("~/Library/CloudStorage/Dropbox/MapPolygons/UK/2021/Local_Authority_Districts_December_2021_UK_BGC_2022_-6651079422179559093.geojson")
+
+# All but one doesn't match... and that's a spelling error
+# Rest are none GB
+# "Rhondda Cynon Taff" in BRES should be "Rhondda Cynon Taf"
+# Once that's fixed...
+bres = bres %>% 
+  mutate(
+    GEOGRAPHY_NAME = if_else(GEOGRAPHY_NAME == "Rhondda Cynon Taff", "Rhondda Cynon Taf", GEOGRAPHY_NAME)
+  )
+
+table(unique(bres$GEOGRAPHY_NAME) %in% la.2021$LAD21NM)
+unique(bres$GEOGRAPHY_NAME)[!unique(bres$GEOGRAPHY_NAME) %in% la.2021$LAD21NM]
+unique(la.2021$LAD21NM)[!unique(la.2021$LAD21NM) %in% bres$GEOGRAPHY_NAME]
 
 
 
-# Get the geographies
-la.2024 = st_read("~/Library/CloudStorage/Dropbox/MapPolygons/UK/2024/Local_Authority_Districts_May_2024_Boundaries_UK_BFC/LAD_MAY_2024_UK_BFC.shp")
+# The issue: ITL3 from 2021 – which BRES uses – doesn’t have e.g. SY 4 places. ITL3 2025 does, for GVA data. 
+# So to try and match ITL3 2025 GVA to BRES…? Let us try BRES LA data! (District / unitary, not county / unitary… Jesus.)
 
-table(unique(bres$GEOGRAPHY_NAME) %in% la.2024$LAD24NM)
-unique(bres$GEOGRAPHY_NAME)[!unique(bres$GEOGRAPHY_NAME) %in% la.2024$LAD24NM]
+# Get ITL3 2025 to check match against LAs from BRES
+itl3.2025 = st_read("~/Library/CloudStorage/Dropbox/MapPolygons/UK/2025/International_Territorial_Level_3_(January_2025)_Boundaries_UK_BGC_V2.geojson")
 
-
-
-unique(la.2024$LAD24NM)
-unique(bres$GEOGRAPHY_NAME)
-
-unique(la.2024$LAD24NM)[!unique(la.2024$LAD24NM) %in% unique(bres$GEOGRAPHY_NAME)]
-
-intersect_makelookup
+# Names may not match but geography might still be same...
+table(unique(itl3.2025$ITL325NM) %in% unique(bres$GEOGRAPHY_NAME))
 
 
+# From a quick QGIS stare at ITL3 2025 and LA 2021, looks like the latter nests into the former OK 
+# But let's check fully
+overlap = intersect_makelookup(larger_zone = itl3.2025, smaller_zone = la.2021, vartogroupby_fromsmallerzone = LAD21NM)
+
+# Ah there's a single one that isn't clearly nested - 
+overlap %>% filter(area_percent < 99) %>% pull(LAD21NM,area_percent)
+
+# Err where?
+plot(st_geometry(la.2021))
+plot(st_geometry(la.2021 %>% filter(qg('north ayr',LAD21NM))), colour = 'red', add = T)
+plot(st_geometry(la.2021 %>% filter(qg('north ayr',LAD21NM))))
+
+# Looking again in QGIS, it's Arran that's at issue:
+# Assigned to different geographies in ITL32025 and LA 2021
+
+# The rest of LA2021 can be nested into ITL3 2025 (and so summed up correctly)
+# Quick solution: drop the offending bits of Scotland.
+# Tricky to lose some rural comparisons for bits of YNY but...
+
+# It may well be there are other geographies we can piece it togethe from
+# But can come back to that
+
+# Which ones to drop from each?
+# Think it has to be the one LA 2021 zone and the two ITL3s it overlaps
+# LA zone: North Ayrshire S12000021
+# IT3 2025 two zones: 
+# TLM20 Highlands and Islands
+# TLM93 North Ayrshire and East Ayrshire
+
+# Then can aggregate job counts to match to rest of ITL3 2025 values
 
 
 
+## LINK BRES 2024 AND ITL3 2023----
+
+# Given the above. Two point five stages:
+# 1. Drop those troublesome zones, keep the ones we can work with
+# 2. Aggregrate BRES values to ITL3 2025 minus those zones
+# 3. Get ITL3 2025 SIC code lookup to aggregrate by SIC
+
+# JUST summarise BRES to the correct geogs and SICs
+# Can then separately link to either current prices or chained volume
+
+# All SIC 2 digit values
+
+# Work with these
+
+# Fix spelling error to match LAs (which we need to match LA / ITL3 lookup, see above)
+bres = read_csv("local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE432_localauthoritiesdistrictunitaryasofApril2021_2_Fulltimeemployees_2015_2024_SIC_2DIGIT.csv") %>% mutate(
+  GEOGRAPHY_NAME = if_else(GEOGRAPHY_NAME == "Rhondda Cynon Taff", "Rhondda Cynon Taf", GEOGRAPHY_NAME)
+)
+
+# Just want geogs and SICs, CV or CP is irrelevant at this point
+itl3 = read_csv("data/regionalGVA/regionalGVA_currentprices_ITL3_SIC_2DIGIT_LONG_2023.csv")
+
+# Drop one geog from BRES, 2 from ITL3
+bres = bres %>% filter(!qg('north ayr', GEOGRAPHY_NAME))
+
+itl3 = itl3 %>% 
+  filter(
+    !qg('TLM20|TLM93', ITL_code)
+  )
+
+
+# Attach lookup via intersect_makelookup above
+bres = bres %>% 
+  left_join(
+    overlap %>%
+      st_set_geometry(NULL) %>% 
+      select(ITL325CD,ITL325NM,GEOGRAPHY_CODE = LAD21CD),
+    by = 'GEOGRAPHY_CODE'
+  )
+
+# That should give us the ITL3 groups to count by...
+length(unique(bres$GEOGRAPHY_NAME))
+length(unique(bres$ITL325NM))
+length(unique(itl3$Region_name))#This is UK, BRES is GB. Confirming...
+unique(itl3$Region_name)[!unique(itl3$Region_name) %in% unique(bres$ITL325NM)]# Tick
+
+
+# Count up by ITL3 (and sector and date, to keep the same)
+bres = bres %>% 
+  group_by(DATE,SIC_2DIGIT_CODE,ITL325NM) %>% 
+  summarise(
+    JOBCOUNT = sum(JOBCOUNT),
+    ITL325CD = max(ITL325CD)#Will be unique code per group
+    )
+
+
+# Now to summarise by GVA-bespoke-SIC for ITL3 level
+# gvalookup_itl3 = read_csv('data/siclookup_forregionalGVAcategories_ITL3.csv')
+
+# Ah no not that. Code nabbed from combine_regGVA_and_BRES.R
+#Nice tidy function to create the correct lookup! 
+sics.forBRESjoin <- make.GVA.SICs.long(itl3)
+
+bres <- bres %>% 
+  mutate(
+    SIC_2DIGIT_CODE_numeric = as.numeric(SIC_2DIGIT_CODE)
+  ) %>% 
+  left_join(sics.forBRESjoin, by = c('SIC_2DIGIT_CODE_numeric' = 'SIC07_code_numeric')
+            )
+
+# Take a look at the link result... looking OK
+bres %>% 
+  ungroup() %>% 
+  select(SIC_2DIGIT_CODE,SIC_2DIGIT_CODE_numeric,SIC07_code_fromGVAdata,SIC07_description) %>% 
+  distinct() %>% 
+  View
+
+# Non matching code 99 is extraterr - not in BRES, no jobs
+table(unique(bres$SIC07_code_fromGVAdata) %in% unique(itl3$SIC07_code))
+unique(bres$SIC07_code_fromGVAdata)[!unique(bres$SIC07_code_fromGVAdata) %in% unique(itl3$SIC07_code)]
+
+
+# OK - we can now sum BRES by GVA 2025 SIC code for ITL3 level
+bres.at.itl3 = bres %>% 
+  group_by(DATE,ITL325NM,SIC07_code_fromGVAdata) %>%
+  summarise(
+    JOBCOUNT = sum(JOBCOUNT),
+    SIC07_description = max(SIC07_description),#unique value, keep
+    SIC_numeric = max(SIC_2DIGIT_CODE_numeric)#Keep to order by
+  ) %>% 
+  relocate(SIC07_description, .after = SIC07_code_fromGVAdata) %>% 
+  ungroup() %>% 
+  arrange(SIC_numeric) %>% 
+  select(-c(SIC_numeric)) %>% 
+  filter(!is.na(SIC07_code_fromGVAdata))
+  
+# Phew
+unique(bres.at.itl3$SIC07_code_fromGVAdata)
+
+# Saaave
+saveRDS(bres.at.itl3, 'local/data/BRES2024_linkedtoITL3_2025_GVAsiccodes.rds')
+
+
+
+## Add in GVA data, get GVA per FT and plot----
+
+# Use chained volume to get actual values - each 2 digit is separate, so is fine
+itl3 = read_csv("data/regionalGVA/regionalGVA_chainedvolume_ITL3_SIC_2DIGIT_LONG_2023.csv")
+
+# Bespoke for-GVA-SICs-ITL3 bres data from above
+bres = readRDS('local/data/BRES2024_linkedtoITL3_2025_GVAsiccodes.rds')
+
+# Check match... tick (not other way round, BRES is GB only)
+table(unique(bres$ITL325NM) %in% itl3$Region_name)
+# Double tick
+table(unique(bres$SIC07_code_fromGVAdata) %in% itl3$SIC07_code)
+
+
+# Link
+# Inner join so we only keep common years (2015 to 2023)
+bres.gva = bres %>% 
+  rename(SIC07_code = SIC07_code_fromGVAdata, year = DATE, Region_name = ITL325NM) %>% 
+  inner_join(
+    itl3 %>% select(-SIC07_description) %>% rename(gva = value),
+    by = c('year','Region_name','SIC07_code')
+  )
+
+# Check...
+# table(!is.na(bres.gva$JOBCOUNT))
+# table(!is.na(bres.gva$gva))
+
+# bres.gva %>% filter(is.na(gva)) %>% View
+
+# Huh. In the original sheet, agri in Southampton has [u], meaning 'too low for disclosure' I think
+# 'Too low', I can safely set to zero. Kind of odd, though, that's it's zeros elsewhere...
+bres.gva = bres.gva %>% mutate(gva = ifelse(is.na(gva), 0, gva))
+
+saveRDS(bres.gva,'local/data/BRES2024_linkedtoITL3_2025_GVAsiccodes_withgvaattached.rds')
+
+# Nabbing code from Bradford output
+# This should be same list...?
+shortsectornames = read_csv('data/shortsectornames_for_regionalGVA_2digitSICs.csv')
+
+bres.gva <- bres.gva %>% 
+  left_join(
+    shortsectornames, by = 'SIC07_description'
+  )%>% 
+  filter(!qg('households|membership', SIC07_description_shortened))
+
+# Add in values we need
+smoothband = 3
+
+bres.gva = bres.gva %>% 
+  mutate(
+    gvaperjob = gva/JOBCOUNT
+  ) %>% 
+  arrange(year) %>% 
+  group_by(Region_name,SIC07_description_shortened) %>%
+  mutate(
+    gvaperjob_movingav = rollapply(gvaperjob * 1000,smoothband,mean,align='center',fill=NA)
+  ) %>% ungroup()
+
+
+
+
+
+#CHAINED VOL
+#Break into n groups, using factor order created in previous line
+prod.data <- bres.gva %>% 
+  mutate(
+    year = year - 2000,#Make dates 2 digit, more readable on axis
+    SIC07_description_shortened = fct_reorder(SIC07_description_shortened, gvaperjob_movingav, .desc = T),
+    # highlow = ifelse(SIC07_description_shortened %in% levels(SIC07_description_shortened)[1:23],'high','low'),#Break into two plots to stack, split by total av productivity
+    sectorgrouping = cut_number(as.integer(SIC07_description_shortened), 8) %>% as.integer
+  ) %>% 
+  filter(!qg('hous',SIC07_description), !is.na(gvaperjob_movingav))
+
+#Test
+# debugonce(plotprod)
+# plotprod(prod.data %>% filter(sectorgrouping==6),job_PPM_ofUKtotal_movingav)#current prices
+# plotprod(prod.data %>% filter(sectorgrouping==6),gvaperjob_movingav)#chained vol
+
+# Some bits for retconning the function to work for Bradford and for this
+# placestoadd = unique(bres.gva$Region_name[qg('Leeds|Bradford|kirklees|wakef',bres.gva$Region_name)])
+
+# Via geog portal. We just want (at the moment) ITL1 <> 3
+itl2025lookup = read_csv("local/LAD_(April_2025)_to_LAU1_to_ITL3_to_ITL2_to_ITL1_(January_2025)_Lookup_in_the_UK.csv") %>% 
+  select(ITL125NM,ITL325CD,ITL325NM) %>% 
+  distinct()
+
+ynh_itl3s = itl2025lookup %>% filter(qg('yorkshire and', ITL125NM)) %>% 
+  mutate(ITL325NM = ifelse(qg('Kingston upon Hull', ITL325NM), 'Hull',ITL325NM))#shorten Hull
+
+# Hmmph, rename for ease of getting to work!
+plotz <- map(
+  prod.data %>% 
+    rename(DATE = year) %>%
+    mutate(Region_name = ifelse(qg('Kingston upon Hull', Region_name), 'Hull',Region_name)) %>% #shorten Hull
+    group_split(sectorgrouping),
+  plotprod_generic,
+  gvaperjob_movingav,
+  # placestoadd = unique(ynh_itl3s$ITL325NM)[1:3]
+  # placestoadd = unique(ynh_itl3s$ITL325NM)[c(1,4,6,11)]#Cities
+  # placestoadd = unique(ynh_itl3s$ITL325NM)[c(2,3,5)]#Rural
+  placestoadd = unique(ynh_itl3s$ITL325NM)[c(7,8,9)]#BDR
+  )
+
+patchwork::wrap_plots(plotz,ncol = 1)
 
 
 
