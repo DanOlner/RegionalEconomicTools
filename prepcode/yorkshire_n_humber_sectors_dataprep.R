@@ -920,28 +920,441 @@ patchwork::wrap_plots(plotz,ncol = 1)
 
 
 
+# WAYS OF SHOWING Y&H AS A WHOLE VERSUS VARIETY WITHIN----
+
+# Idea 1: LQ for Y&H and ITL1s sitting above LQ for ITL3s, for each SIC.
+# Which will need some SIC addition, but that’s OK.
+
+# Noting the argument for removing London to get a clearer picture...
+
+# Define year range we want to look at for all
+# This will be the SMOOTHED YEAR VALUES
+year_range = c(2016,2022)
+
+# Job 1: check SIC mismatch between ITL1 and ITL3
+# ITL1 processed in 1st section
+itl1 = gva.2digit
+
+itl3 = read_csv("data/regionalGVA/regionalGVA_currentprices_ITL3_SIC_2DIGIT_LONG_2023.csv")
+
+# ITL1 has a few more categories...
+table(unique(itl1$SIC07_code) %in% itl3$SIC07_code)
+
+# In ITL1 not in ITL3
+unique(itl1$SIC07_code)[!unique(itl1$SIC07_code) %in% itl3$SIC07_code]
+# In ITL3 not in ITL1
+unique(itl3$SIC07_code)[!unique(itl3$SIC07_code) %in% itl1$SIC07_code]
+
+# Full list in each
+unique(itl1$SIC07_code)
+unique(itl3$SIC07_code)
+
+# Prob easiest at this point just to label manually and group/add
+# So - label ITL1 SICs with their ITL3 heading
+# Only have to do the ones that differ
+# Leaving both 68 IMP and 68 in for now, will remove in a moment
+itl1 = itl1 %>% 
+  mutate(
+    SIC3_group = case_when(
+      SIC07_code %in% unique(itl1$SIC07_code)[1:5] ~ unique(itl3$SIC07_code)[1],  
+      SIC07_code %in% unique(itl1$SIC07_code)[6:7] ~ unique(itl3$SIC07_code)[2],  
+      SIC07_code %in% unique(itl1$SIC07_code)[8:10] ~ unique(itl3$SIC07_code)[3],  
+      SIC07_code %in% unique(itl1$SIC07_code)[11:13] ~ unique(itl3$SIC07_code)[4],  
+      SIC07_code %in% unique(itl1$SIC07_code)[14:17] ~ unique(itl3$SIC07_code)[5],  
+      SIC07_code %in% unique(itl1$SIC07_code)[18:19] ~ unique(itl3$SIC07_code)[6],  
+      SIC07_code %in% unique(itl1$SIC07_code)[20:21] ~ unique(itl3$SIC07_code)[7],  
+      SIC07_code %in% unique(itl1$SIC07_code)[22:24] ~ unique(itl3$SIC07_code)[8],  
+      SIC07_code %in% unique(itl1$SIC07_code)[25:26] ~ unique(itl3$SIC07_code)[9],  
+      SIC07_code %in% unique(itl1$SIC07_code)[28:32] ~ unique(itl3$SIC07_code)[11],  
+      SIC07_code %in% unique(itl1$SIC07_code)[39:41] ~ unique(itl3$SIC07_code)[18],  
+      SIC07_code %in% unique(itl1$SIC07_code)[46:48] ~ unique(itl3$SIC07_code)[23],  
+      SIC07_code %in% unique(itl1$SIC07_code)[49:51] ~ unique(itl3$SIC07_code)[24],  
+      SIC07_code %in% unique(itl1$SIC07_code)[52:54] ~ unique(itl3$SIC07_code)[25],  
+      SIC07_code %in% unique(itl1$SIC07_code)[46:48] ~ unique(itl3$SIC07_code)[23],  
+      SIC07_code %in% unique(itl1$SIC07_code)[60:61] ~ unique(itl3$SIC07_code)[31],  
+      SIC07_code %in% unique(itl1$SIC07_code)[62:63] ~ unique(itl3$SIC07_code)[32],  
+      SIC07_code %in% unique(itl1$SIC07_code)[65:67] ~ unique(itl3$SIC07_code)[34],  
+      SIC07_code %in% unique(itl1$SIC07_code)[75:76] ~ unique(itl3$SIC07_code)[42],  
+      SIC07_code %in% unique(itl1$SIC07_code)[77:78] ~ unique(itl3$SIC07_code)[43],  
+      .default = SIC07_code
+    )
+  )
+
+# Tick
+# itl1 %>% select(SIC07_code,SIC3_group) %>% distinct() %>% View
+
+# Sum ITL1 to ITL3 SIC categories and add in the SIC description from ITL3
+itl1.summedtoitl3SICs = itl1 %>% 
+  group_by(SIC3_group,year,Region_name) %>% 
+  summarise(
+    value = sum(value),
+    ITL_code = max(ITL_code)
+    ) %>% 
+  ungroup() %>% 
+  rename(SIC07_code = SIC3_group) %>% 
+  left_join(
+    itl3 %>% select(SIC07_code,SIC07_description) %>% distinct(),
+    by = 'SIC07_code'
+  ) %>% 
+  select(year,ITL_code,Region_name,SIC07_code,SIC07_description,value) %>% 
+  mutate(
+    placename_short = case_when(
+      qg('north east',Region_name) ~ 'NE',
+      qg('north west',Region_name) ~ 'NW',
+      qg('east mid',Region_name) ~ 'EM',
+      qg('west mid',Region_name) ~ 'WM',
+      qg('south east',Region_name) ~ 'SE',
+      qg('south west',Region_name) ~ 'SW',
+      qg('northern ire',Region_name) ~ 'NI',
+      .default = str_sub(Region_name,1,2)#Only London, Scotland, Wales 
+    ))
+
+
+# Filter out London prior to LQs being found
+itl1.summedtoitl3SICs = itl1.summedtoitl3SICs %>% 
+  filter(Region_name != 'London')
+
+# Tick
+unique(itl1.summedtoitl3SICs$SIC07_code) %in% unique(itl3$SIC07_code)
+unique(itl1.summedtoitl3SICs$SIC07_description) %in% unique(itl3$SIC07_description)
+
+
+
+# OK, now we find LQs for ITL1 and ITL3 and then combine, sorting by ITL1 overall
+# Probably removing London, but let's run for all for now...
+
+# Moving av first, to use for LQs
+smoothband = 3
+
+itl1.summedtoitl3SICs = itl1.summedtoitl3SICs %>% 
+  arrange(year) %>% 
+  group_by(Region_name,SIC07_description) %>% 
+  mutate(
+    gva_movingav = rollapply(value,smoothband,mean,align='center',fill=NA)
+  ) %>% 
+  ungroup() %>% 
+  filter(!is.na(gva_movingav)) %>% #Keep only smoothed data years
+  mutate(gva_movingav = round(gva_movingav,0))
+
+
+itl1.summedtoitl3SICs = itl1.summedtoitl3SICs %>% 
+  group_split(year) %>% 
+  map(add_location_quotient_and_proportions, 
+      regionvar = Region_name,
+      lq_var = SIC07_description,
+      valuevar = gva_movingav) %>% 
+  bind_rows()
+
+# Keep only these smoothed years to display
+itl1.summedtoitl3SICs = itl1.summedtoitl3SICs %>%
+  filter(year %in% year_range)
 
 
 
 
 
+# Repeat for ITL3... 
+
+# Add in moving av first, so can use that for LQ
+# get rid of the pesky -1
+itl3 = itl3 %>% 
+  mutate(value = ifelse(value == -1, 0, value)) %>% 
+  arrange(year) %>% 
+  group_by(Region_name,SIC07_description) %>% 
+  mutate(
+    gva_movingav = rollapply(value,smoothband,mean,align='center',fill=NA)
+  ) %>% 
+  ungroup() %>% 
+  filter(!is.na(gva_movingav)) %>% #Keep only smoothed data years
+  mutate(gva_movingav = round(gva_movingav,0))
+
+
+# Filter out London prior to LQs being found
+londonitl3s = itl2025lookup %>% 
+  filter(qg('London', ITL125NM)) %>% 
+  pull(ITL325NM)
+
+itl3 = itl3 %>% filter(!Region_name %in% londonitl3s)
+
+
+itl3 = itl3 %>% 
+  group_split(year) %>% 
+  map(add_location_quotient_and_proportions, 
+      regionvar = Region_name,
+      lq_var = SIC07_description,
+      valuevar = gva_movingav) %>% 
+  bind_rows()
+
+# Keep only these smoothed years to display
+itl3 = itl3 %>% filter(year %in% year_range)
 
 
 
+# Keep only Y&H
+itl3.ynh = itl3 %>% filter(Region_name %in% ynh_itl3s$ITL325NM)
+unique(itl3.ynh$Region_name)
+
+# Now shortern those names
+itl3.ynh = itl3.ynh %>% 
+  mutate(
+    placename_shorter = case_when(
+      qg('east rid',Region_name) ~ 'East Riding',
+      qg('north and north',Region_name) ~ "N/NE L'shire",
+      qg('north york',Region_name) ~ 'N Yorks',
+      qg('Sheffield',Region_name) ~ 'Sheffield',
+      qg('Calderdale and K',Region_name) ~ "C'dale/K'lees",
+      .default = Region_name# e.g. york stays the same
+  ),
+    placename_shortest = case_when(
+      Region_name == 'York' ~ 'Yk',
+      qg('east rid',Region_name) ~ 'ER',
+      qg('north and north',Region_name) ~ 'NL',
+      qg('north york',Region_name) ~ 'NY',
+      qg('Sheffield',Region_name) ~ 'Sh',
+      qg('Barnsley',Region_name) ~ 'Ba',
+      qg('Rother',Region_name) ~ 'Ro',
+      qg('Doncast',Region_name) ~ 'Do',
+      qg('Bradford',Region_name) ~ 'Br',
+      qg('Leeds',Region_name) ~ 'Le',
+      qg('Calderdale and K',Region_name) ~ 'CK',
+      qg('Wakefield',Region_name) ~ 'Wa' 
+  )
+  )
+
+unique(itl3.ynh$placename_shorter)  
+unique(itl3.ynh$placename_shortest)  
 
 
 
+# Actually, just realising what I'm after is a bit different, probably:
+# We want, for Sector A:
+# ITL1 sector A LQ, single line (with other ITLs in background)
+# ITL3 sector A LQs, so with each Y&H place ordered in one plot
+
+# Which is ONE sector per ITL3 plot
+# Now, can we jimmy the existing code to this just by wrapping variables...?
+# Yep, tick
 
 
+# Get ITL1 LQ for that sector - just going to be a single row 
 
+# Test sector
+# sector = unique(itl3$SIC07_description)[qg('petrol',unique(itl3$SIC07_description))]
+sectorlist = unique(itl3$SIC07_description)[!qg('households|personal service|membership',unique(itl3$SIC07_description))]
 
+for(sector in sectorlist){
 
+  # Get ITL1 for Y&H with other ITL1s in background
+  # Will just be a single row, don't need to order (yet)
+  # Will order for final output by LQ in Y&H...
+  LQ_slopes <- compute_slope_or_zero(
+    data = itl1.summedtoitl3SICs, 
+    Region_name, SIC07_description,#slopes will be found within whatever grouping vars are added here
+    y = LQ_log, x = year)
+  
+  
+  #Filter down to a single year... we may want to smooth years, let's see
+  yeartoplot <- itl1.summedtoitl3SICs %>% filter(year == max(year))#use latest year
+  
+  #Add slopes into data to get LQ plots
+  yeartoplot <- yeartoplot %>% 
+    left_join(
+      LQ_slopes,
+      by = c('Region_name', 'SIC07_description')
+    )
+  
+  #Get min/max values for LQ over time as well, for each sector and place, to add as bars so range of sector is easy to see
+  minmaxes <- itl1.summedtoitl3SICs %>% 
+    group_by(Region_name, SIC07_description) %>% 
+    summarise(
+      min_LQ_all_time = min(LQ, na.rm = T),
+      max_LQ_all_time = max(LQ, na.rm = T)
+    ) %>% 
+    mutate(
+      min_LQ_all_time = ifelse(is.infinite(min_LQ_all_time),NA,min_LQ_all_time),
+      max_LQ_all_time = ifelse(is.infinite(max_LQ_all_time),NA,max_LQ_all_time)
+    )
+  
+  # table(is.infinite(minmaxes$min_LQ_all_time))
+  # table(is.infinite(minmaxes$max_LQ_all_time))
+  
+  #Join min and max
+  yeartoplot <- yeartoplot %>% 
+    left_join(
+      minmaxes,
+      by = c('Region_name', 'SIC07_description')
+    )
+  
+  # Then just plot for that single sector
+  place = 'Yorkshire and The Humber'
+  
+  # Get LQ range to display
+  # Here, range will be LQs for places for this sector 
+  # not the range bars, most likely, though we may need to get whichever is highest/lowest
+  # lqmin = yeartoplot %>% filter(SIC07_description == sector) %>% 
+  #   filter(LQ == min(LQ)) %>% 
+  #   pull(LQ)
+  lq_range = range(yeartoplot$LQ[yeartoplot$SIC07_description == sector])
+  
+  # Display money value and regional prop on x axis
+  yaxisdisplay = paste0(
+    "£",
+    round(yeartoplot %>% filter(SIC07_description == sector, Region_name == place) %>% pull(gva_movingav),0),
+    "M, ",
+    round(yeartoplot %>% filter(SIC07_description == sector, Region_name == place) %>% select(sector_regional_proportion) * 100,2),
+    "%"
+  )
+    
+  
+  p <- LQ_baseplot(df = yeartoplot %>% filter(SIC07_description == sector), alpha = 0.8, shape = 0, sector_name = SIC07_description, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
+  
+  p <- addplacename_to_LQplot(df = yeartoplot %>% filter(SIC07_description == sector), plot_to_addto = p, maxLQvalmultiplier = 0.2,
+                              placename = place, shapenumber = 16,
+                              min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
+                              value_column = gva_movingav, sector_regional_proportion = sector_regional_proportion,
+                              region_name = Region_name,
+                              sector_name = SIC07_description, change_over_time = slope, LQ_column = LQ,
+                              text = 7, value_col_ismoney = T)
+  
+  p <- p + 
+    # coord_cartesian(xlim = c(0.1,7)) +
+    theme(
+      # axis.title.y=element_blank(),
+      axis.text.y=element_blank(),
+      axis.ticks.y=element_blank()
+      ) +
+    ylab(yaxisdisplay) +
+    ggtitle(sector) +
+    coord_cartesian(xlim = lq_range)
+  
+  
+  
+  
+  # Get ITL3 plot made for the places in Y&H
+  LQ_slopes <- compute_slope_or_zero(
+    data = itl3.ynh, 
+    Region_name, SIC07_description,#slopes will be found within whatever grouping vars are added here
+    y = LQ_log, x = year)
+  
+  
+  #Filter down to a single year... we may want to smooth years, let's see
+  yeartoplot <- itl3.ynh %>% filter(year == max(year))#use latest year
+  
+  #Add slopes into data to get LQ plots
+  yeartoplot <- yeartoplot %>% 
+    left_join(
+      LQ_slopes,
+      by = c('Region_name', 'SIC07_description')
+    )
+  
+  #Get min/max values for LQ over time as well, for each sector and place, to add as bars so range of sector is easy to see
+  minmaxes <- itl3.ynh %>% 
+    group_by(Region_name, SIC07_description) %>% 
+    summarise(
+      min_LQ_all_time = min(LQ, na.rm = T),
+      max_LQ_all_time = max(LQ, na.rm = T)
+    ) %>% 
+    mutate(
+      min_LQ_all_time = ifelse(is.infinite(min_LQ_all_time),NA,min_LQ_all_time),
+      max_LQ_all_time = ifelse(is.infinite(max_LQ_all_time),NA,max_LQ_all_time)
+    )
+  
+  # table(is.infinite(minmaxes$min_LQ_all_time))
+  # table(is.infinite(minmaxes$max_LQ_all_time))
+  
+  #Join min and max
+  yeartoplot <- yeartoplot %>% 
+    left_join(
+      minmaxes,
+      by = c('Region_name', 'SIC07_description')
+    )
+  
+  # Join other SIC levels to it so we can break down into production / other
+  # I think I have a lookup for that, though that will need a tweak due to one extra sector in ITL1
+  
+  # Have just updated regionalGVA_siccode_lookupmaker.R for ITL1 as well...
+  # (Forgot I had that!)
+  # gvalookup_itl3 = read_csv('data/siclookup_forregionalGVAcategories_ITL3.csv')
+  
+  # Confirm... tick
+  # table(unique(gvalookup_itl1$SIC07_code) %in% unique(islq$SIC07_code))
+  # yeartoplot <- yeartoplot %>%
+  #   left_join(
+  #     gvalookup_itl3 %>% select(-SIC07_description),
+  #     by = 'SIC07_code'
+  #   )
+  
+  
+  # Make a column with the amount and % in to display as part of labels
+  yeartoplot = yeartoplot %>% 
+    mutate(
+      displayregions = paste0(
+        placename_shorter,
+        ": £",
+        gva_movingav,
+        "M, ",
+        round(sector_regional_proportion * 100,2),
+        "%"
+        )
+    )
+  
+  
+  # Filter down just to the sector we're displaying
+  # so we can get order correct
+  yeartoplot = yeartoplot %>% filter(SIC07_description == sector)
+  
+  # placeLQorder <- yeartoplot %>% 
+  #   arrange(-LQ) %>% 
+  #   pull(displayregions) 
+  
+  #Turn the sector column into a factor and order by LQs
+  # yeartoplot$displayregions <- factor(yeartoplot$displayregions, levels = placeLQorder, ordered = T)
+  yeartoplot = yeartoplot %>% 
+    mutate(
+      displayregions = fct_reorder(displayregions,LQ_log,.desc = T)
+    )
+  
+  # factor(yeartoplot$displayregions, levels = placeLQorder, ordered = T)
+  
+  
+  # Get range to display on x axis
+  # Use min and max of minmaxes here
+  plot_range = minmaxes %>% filter(SIC07_description == sector) %>% 
+    select(min_LQ_all_time:max_LQ_all_time) %>% 
+    pivot_longer(min_LQ_all_time:max_LQ_all_time, names_to = 'cols', values_to = 'vals') %>% 
+    ungroup() %>% 
+    reframe(range = range(vals)) %>% 
+    pull(range) 
+  
+  if(plot_range[1]==0) plot_range[1] = 0.1# Avoid log infs
+  
+  # debugonce(LQ_baseplot)
+  p2 <- LQ_baseplot(df = yeartoplot, alpha = 1, sector_name = displayregions, 
+                   LQ_column = LQ, change_over_time = slope)
+  
+  # debugonce(addplacename_to_LQplot)
+  p2 <- addplacename_to_LQplot(df = yeartoplot, plot_to_addto = p2, maxLQvalmultiplier = 20,#Hide it!
+                              placename = sector, shapenumber = 16,
+                              min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
+                              value_column = gva_movingav, sector_regional_proportion = sector_regional_proportion,
+                              region_name = SIC07_description,
+                              sector_name = displayregions, change_over_time = slope, LQ_column = LQ,
+                              text = 7, value_col_ismoney = T)
+  
+  p2 <- p2 +
+    coord_cartesian(xlim = plot_range) +
+    ggtitle("")
+  
+  plottosave = p / p2 +  patchwork::plot_layout(heights = c(2, 10))
 
+    # Hmm, if we're doing this by sector, I can stick a map of Y&H at the bottom of this can't I?
+  # Would that be useful or too much?
+  
+    
+  # Remove punctuation and spaces from filename
+  ggsave(paste0('local/outputs/ynh_sectorLQplots/',gsub('[[:punct:]]| ','',sector),'.png'), plot = plottosave, width = 7, height = 8)
 
-
-
-
-
+}#end for sector
 
 
 

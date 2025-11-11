@@ -239,6 +239,9 @@ LQ_baseplot <- function(df, alpha = 0.1, shape = 16, sector_name, LQ_column, cha
   change_over_time <- enquo(change_over_time)
   labelcolumn <- enquo(labelcolumn)
   
+  # Enforce levels on y axis
+  lvls <- levels(df %>% pull(!!sector_name))
+  
   p <- ggplot() +
   geom_point(
     data = df %>% filter(!!change_over_time > 0), 
@@ -256,6 +259,7 @@ LQ_baseplot <- function(df, alpha = 0.1, shape = 16, sector_name, LQ_column, cha
   )  +
   scale_size_continuous(range = c(1,17)) +
   scale_x_continuous(trans = 'log10') +
+  scale_y_discrete(limits = lvls, drop = FALSE) +#Enforce levels on y axis
   geom_vline(xintercept = 1, colour = 'blue') +
   guides(size = F) +
   ylab("")
@@ -1632,6 +1636,11 @@ plotSlopeCounts <- function(df,placename,startdate,enddate,date_colname,region_c
   return(list(plot = p, data = allslopecounts))
   
 }
+
+
+
+
+
 
 
 
