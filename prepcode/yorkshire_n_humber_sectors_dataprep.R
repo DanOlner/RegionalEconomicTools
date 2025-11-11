@@ -4,6 +4,7 @@ library(tidyverse)
 library(plotly)
 library(nomisr)
 library(sf)
+library(tmap)
 library(zoo)
 library(stringr)
 library(RColorBrewer)
@@ -1355,6 +1356,154 @@ for(sector in sectorlist){
   ggsave(paste0('local/outputs/ynh_sectorLQplots/',gsub('[[:punct:]]| ','',sector),'.png'), plot = plottosave, width = 7, height = 8)
 
 }#end for sector
+
+
+
+# TEST MAKING 2-DIGIT SECTOR MAP FROM CH DATA----
+
+# The idea here: add a hex map of CH data for the ITL3-level SIC sectors used above.
+# To show (a) where it's actually densest and 
+# (b) maybe with bivariate, where it's growing
+
+# For which, we don't need too much CH data, only Y&H itself. 
+# Let's get that, subset, then drop the orig
+# ch = readRDS('../companieshouseopen/local/PROCESSED_accountextracts_n_livelist_geocoded_combined_Oct2025.rds')
+# 
+# # Get ITL2 to 1 lookup for 2021 (the ones we've got here)
+# itl2to1lookup = read_csv("local/Local_Authority_District_(April_2021)_to_LAU1_to_ITL3_to_ITL2_to_ITL1_(January_2021)_Lookup_in_United_Kingdom.csv") %>% 
+#   select(ITL121NM,ITL221CD,ITL221NM) %>% 
+#   distinct()
+# 
+# # Same as 2025, turns out...
+# ch.ynh = ch %>% 
+#   filter(
+#     ITL221CD %in% (itl2to1lookup %>% filter(qg('humber',ITL121NM)) %>% pull(ITL221CD))
+#   )
+# 
+# saveRDS(ch.ynh, 'local/data/ch_yorkshire_n_humber_October2025.rds')
+
+ch = readRDS('local/data/ch_yorkshire_n_humber_October2025.rds')
+
+# Add in ITL3 level 2 digit bespoke SICs
+# Code nabbed from above...
+# We already have this, which should work...
+# sics.forBRESjoin <- make.GVA.SICs.long(itl3)
+ch = ch %>% 
+  left_join(sics.forBRESjoin %>% select(-SIC07_code) %>% rename(SIC07_description_from_ITL3=SIC07_description,SIC07code_from_ITL3 =SIC07_code_fromGVAdata), by = c('SIC_2DIGIT_CODE_NUMERIC' = 'SIC07_code_numeric')
+  )
+
+# Very nearly the same, good enough
+# table(is.na(ch$SIC07_code_fromGVAdata))
+# table(is.na(ch$SIC_2DIGIT_CODE_NUMERIC))
+
+# Now let's find a useful hexmap size and summarise...
+
+# From AI economy work / sector_linkages.R
+sq = st_make_grid(ch, cellsize = 3000, square = F)
+
+#Turn into sf object so gridsquares can have IDs to group by
+sq <- sq %>% st_sf() %>% mutate(id = 1:nrow(.))
+
+overlay <- st_intersection(ch,sq)
+
+#Save for output
+# saveRDS(overlay,'local/data/AIE4measures_hexoverlay.rds')
+# saveRDS(sq,'local/data/sq_forhexoverlay.rds')
+
+#This no longer needs to be geo, which will speed up
+#Can link back to grids once done
+
+#Let's find an average AIIE weighted by employee number in each grid square
+hexsummary <- overlay %>% 
+  st_set_geometry(NULL) %>% 
+  filter(Employees_thisyear > 0, Employees_lastyear > 0, !is.na(SIC07_description_from_ITL3)) %>% #Only firms with employees recorded in latest year
+  # filter(between(Employees_thisyear,1,3)) %>% #Microfirms
+  # filter(between(Employees_thisyear,4,9)) %>% #Microfirms
+  # filter(Employees_thisyear > 9) %>%
+  group_by(id,SIC07_description_from_ITL3) %>% 
+  summarise(
+    totalemployees_thisyear = sum(Employees_thisyear),
+    totalemployees_lastyear = sum(Employees_lastyear),
+    totalfirms = n()
+  ) %>%
+  ungroup()
+  # group_by(id) %>%
+  # filter(sum(totalemployees) >= 10) %>% #keep only gridsquares where total employee count is more than / equal to 100
+
+# Do the total employee filter when we're down to sectors...
+# Test one now!
+# sector = unique(itl3$SIC07_description)[qg('informat',unique(itl3$SIC07_description))]
+sector = unique(itl3$SIC07_description)[qg('fabricated',unique(itl3$SIC07_description))]
+# sector = unique(itl3$SIC07_description)[qg('agri',unique(itl3$SIC07_description))]
+
+hexsummary.sector = hexsummary %>% filter(SIC07_description_from_ITL3 == sector)
+
+
+#Link that back into the grid squares...
+#Use right join to drop empties
+sq.ch <- sq %>% 
+  right_join(
+    hexsummary.sector,
+    by = 'id'
+  ) %>% 
+  filter(totalemployees_thisyear >= 10) %>% 
+  mutate(
+    emp_percentchange = percent_change(totalemployees_thisyear,totalemployees_lastyear)
+  )
+
+sq.ch <- sq.ch %>% 
+  mutate(hovertext = paste0("Firm count: ",totalfirms, ", id: ",id))
+
+# tmap_mode('view')
+tmap_mode('plot')
+
+tm_shape(itl3.2025 %>% filter(ITL325CD %in% itl2025lookup$ITL325CD[itl2025lookup$ITL125NM == 'Yorkshire and The Humber'])) +
+  tm_polygons(fill = '#a6baa8') +
+tm_shape(sq.ch %>% filter(emp_percentchange < 100)) +
+  tm_polygons(
+    fill = tm_vars(c("totalemployees_thisyear", "emp_percentchange"),
+                   multivariate = TRUE), id="hovertext",
+    fill.scale = 
+      tm_scale_bivariate(
+        scale1 = tm_scale_intervals(style = "kmeans", n = 3, labels = c("L", "M", "H")),
+        scale2 = tm_scale_intervals(style = "kmeans", n = 3, labels = c("L", "M", "H")),
+        # values = "stevens.bluered")) +
+        values = "bu_br_bivs")) 
+  # tm_view(set.view = c(7, 51, 4)) +
+  # tm_shape(itl3.2025) +
+  # tm_polygons( = 'black', lwd = 1, fill_alpha = 0.3) 
+  # tm_shape(itl2) +
+  # tm_borders(col = 'black', lwd = 4) 
+  # tm_view(set_view = c(-2.2,53.49326048352635,11))#centred on GM
+# tm_view(set_view = c(-1.598452,52.740283,8))
+# tm_view(bbox = "England")
+
+
+# OK, maybe not bivariate!
+tm_shape(itl3.2025 %>% filter(ITL325CD %in% itl2025lookup$ITL325CD[itl2025lookup$ITL125NM == 'Yorkshire and The Humber'])) +
+  # tm_polygons(fill = '#a6baa8') +
+  tm_polygons(fill = 'darkgrey') +
+  # tm_shape(sq.ch %>% filter(emp_percentchange < 100)) +
+  # tm_shape(sq.ch %>% filter(totalemployees_thisyear > 50)) +
+  tm_shape(sq.ch) +
+  tm_polygons(
+    # fill = "emp_percentchange", id="hovertext",
+    fill = "totalemployees_thisyear", id="hovertext",
+    fill.scale = tm_scale_intervals(style = "kmeans", n = 9, values = "matplotlib.rd_yl_bu"),
+    col_alpha = 0
+    ) 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
