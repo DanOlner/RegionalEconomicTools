@@ -277,17 +277,17 @@ persector_jobsgva_percentchangeplot_ynh = function(sector){
   
     placestokeep <- bres.gva.2d %>% 
       filter(year == max(year), SIC07_description == sector) %>% 
-      filter(sector_regional_propfrom_CP * 100 > 1) %>%#Keep only places where this sector makes up 1%+ of reg econ
-      select(placename_shorter) %>% 
-      distinct() %>% 
+      filter(sector_regional_propfrom_CP * 100 > 1.5) %>%#Keep only places where this sector makes up 1%+ of reg econ
+      select(placename_shortest) %>% 
+      distinct() %>%
       pull
     
     # Check we've got some places and some ynh places
     if(length(placestokeep) > 0 & mean(ynhshortnames %in% placestokeep) > 0){
       
       p <- twod_percentplot(
-        df = bres.gva.2d %>% filter(SIC07_description == sector, placename_shorter %in% placestokeep),
-        category_var = placename_shorter,
+        df = bres.gva.2d %>% filter(SIC07_description == sector, placename_shortest %in% placestokeep),
+        category_var = placename_shortest,
         x_var = gva_movingav,
         y_var = jobcount_movingav,#
         # y_var = JOBS_sector_regional_percent_movingav,#this shows structural change better - jobs have grown nominally in most sectors (but breaks GVA/job diagonal)
@@ -298,11 +298,13 @@ persector_jobsgva_percentchangeplot_ynh = function(sector){
         start_time = 2016,
         end_time = 2022,
         returndata = T,
-        backgroundvectoralpha = 0.2
+        backgroundvectoralpha = 0.2,
+        # useboxoverlayforlabels = T,
+        overlay_arrowsize = 1
       )
       
       # Get range if percents just for any ynh itl3s present
-      ynh_data = p[[2]] %>% filter(placename_shorter %in% ynhshortnames)
+      ynh_data = p[[2]] %>% filter(placename_shortest %in% ynhshortnames)
       
       xminmax = range(ynh_data$x_pct_change)
       yminmax = range(ynh_data$y_pct_change)

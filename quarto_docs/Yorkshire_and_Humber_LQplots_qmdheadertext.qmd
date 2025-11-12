@@ -38,7 +38,7 @@ itl3.ynh = readRDS('../local/data/itl3ynh.rds')
 itl1.summedtoitl3SICs = readRDS('../local/data/itl1summedtoitl3SICs.rds')
 bres.gva.2d = readRDS('../local/data/bresgva2d.rds')
 
-ynhshortnames = readRDS('../local/data/ynhshortnames.rds')
+ynhshortnames = readRDS('../local/data/ynhshortestnames.rds')
 
 # For mapping
 mask = readRDS('../local/ynhmask.rds')

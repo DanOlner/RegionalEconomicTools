@@ -969,7 +969,7 @@ ynhshortnames = bres.gva.2d %>%
   unique
 
 saveRDS(ynhshortnames, 'local/data/ynhshortestnames.rds')
-saveRDS(ynhshortnames, 'local/data/ynhshortnames.rds')
+# saveRDS(ynhshortnames, 'local/data/ynhshortnames.rds')
 
 # Add in sector regional prop of jobs
 # No, don't do this, gva here is chained volume, can't sum!
