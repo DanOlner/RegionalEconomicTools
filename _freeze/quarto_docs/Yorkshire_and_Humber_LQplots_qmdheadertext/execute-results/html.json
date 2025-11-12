@@ -1,0 +1,15 @@
+{
+  "hash": "6360057edd682d775a25fe30a9615f41",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Yorkshire and The Humber: sector plot dictionary (November 2025)\"\nauthor:\n  - name: \"Dan Olner\"\nformat: \n  html:\n    output-file: \"Yorkshire_n_Humber_sector_dictionary_November2025\"\n    fig-width: 8\n    fig-height: 8\nexecute:\n  echo: false\n  message: false\n  warning: false\nfig-responsive: false\ncollapse: false\nnavbar: false\nsidebar: false\n---\n\n\n::: {.cell}\n\n:::\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

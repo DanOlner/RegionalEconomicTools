@@ -1064,7 +1064,7 @@ percent_change <- function(x,y) ((y - x) / x) * 100
 # Y_var, values e.g. job count
 # Category_Var = either e.g. places or sectors
 #Label var, from the two time points, to display
-twod_generictimeplot_normalisetozero <- function(df, category_var, x_var, y_var, timevar, label_var, start_time, end_time, compasspoints_to_display = c('NE','NW','SE','SW'), category_var_value_to_highlight="NULL"){
+twod_generictimeplot_normalisetozero <- function(df, category_var, x_var, y_var, timevar, label_var, start_time, end_time, compasspoints_to_display = c('NE','NW','SE','SW'), backgroundvectoralpha = 0.5, category_var_value_to_highlight="NULL", label_only_highlightedplaces = FALSE){
   
   category_var <- enquo(category_var)   
   x_var <- enquo(x_var)
@@ -1116,7 +1116,7 @@ twod_generictimeplot_normalisetozero <- function(df, category_var, x_var, y_var,
     mutate(
       x_pct_change = percent_change(x_start, x_end),
       y_pct_change = percent_change(y_start, y_end),
-      category_var_val_to_highlight = ifelse(!!category_var == category_var_value_to_highlight, T,F)
+      category_var_val_to_highlight = ifelse(!!category_var %in% category_var_value_to_highlight, T,F)
     )
   
   #Vectors all centred on zero, percent change for all shown
@@ -1129,7 +1129,7 @@ twod_generictimeplot_normalisetozero <- function(df, category_var, x_var, y_var,
     geom_segment(data = twoy.wide, aes(x = 0, y = 0 ,xend = x_pct_change, yend = y_pct_change), 
                  # colour = category_var_val_to_highlight),
                  arrow = arrow(length = unit(0.5, "cm")),
-                 size = 1, alpha = 0.5
+                 size = 1, alpha = backgroundvectoralpha
     ) +
     # scale_color_manual(values=c("red","blue")) +
     guides(colour=guide_legend(title=" ")) +
@@ -1149,34 +1149,66 @@ twod_generictimeplot_normalisetozero <- function(df, category_var, x_var, y_var,
                         size = 2, colour = '#3333ff'
   )
   
+  #Label only selected places and force all labels to appear
+  if(label_only_highlightedplaces){
+    
+    # #Reduce to latest year and merge in values for labels
+    label_df <- twoy %>% 
+      filter(
+        !!timevar==max(!!timevar), 
+        compass %in% compasspoints_to_display,
+        !!category_var %in% category_var_value_to_highlight
+        ) %>%
+      left_join(
+        twoy.wide %>% select(!!category_var,label_start,label_end,x_pct_change,y_pct_change,category_var_val_to_highlight)
+      ) %>% 
+      mutate(category_var_val_to_highlight = ifelse(category_var_val_to_highlight, 'bold','plain'))
+    
+    p <- p + geom_text_repel(
+      data = label_df,
+      aes(x = x_pct_change, y = y_pct_change,fontface = category_var_val_to_highlight,
+          label = paste0(!!category_var, "\n(",quo_name(label_var),": ",round(label_start,2),ifelse(label_start < label_end," >> "," << "),round(label_end,2),")"),
+          colour = compass),
+      alpha=1,
+      nudge_x = .05,
+      box.padding = 1,
+      nudge_y = 0.05,
+      segment.curvature = -0.1,
+      segment.ncp = 0.3,
+      segment.angle = 20,
+      max.overlaps = 99999
+    ) +
+      scale_color_manual(values = setNames(c("red", "black",'#7fc97f','#beaed4','#fdc086','#1f78b4'),
+                                           c(start_time, end_time,'NE','SE','NW','SW')))
   
-  # #Reduce to latest year and merge in values for labels
-  label_df <- twoy %>% filter(!!timevar==max(!!timevar), compass %in% compasspoints_to_display) %>%
-    left_join(
-      twoy.wide %>% select(!!category_var,label_start,label_end,x_pct_change,y_pct_change,category_var_val_to_highlight)
-    ) %>% 
-    mutate(category_var_val_to_highlight = ifelse(category_var_val_to_highlight, 'bold','plain'))
-  
-  p <- p + geom_text_repel(
-    data = label_df,
-    # data = twoy %>% filter(!!timevar==max(!!timevar), compass %in% compasspoints_to_display),
-    aes(x = x_pct_change, y = y_pct_change,fontface = category_var_val_to_highlight,
-        label = paste0(!!category_var, "\n(",quo_name(label_var),": ",round(label_start,2),ifelse(label_start < label_end," >> "," << "),round(label_end,2),")"),
-        # label = paste0(!!category_var, "\n(",quo_name(x_var),": ",round(!!x_var,2),", ",quo_name(y_var),": ",round(!!y_var,2),")"),
-        # label = paste0(!!category_var, "\n(",quo_name(x_var),": ",round(!!x_var,2),", ",quo_name(y_var),": ",round(!!y_var,2),")"),
-        # label = paste0(!!category_var, "\n(x:",round(x_var,2),"%,y:",round(y_var,2),"%)"),
-        colour = compass),
-    alpha=1,
-    nudge_x = .05,
-    box.padding = 1,
-    nudge_y = 0.05,
-    segment.curvature = -0.1,
-    segment.ncp = 0.3,
-    segment.angle = 20,
-    max.overlaps = 21
-  ) +
-    scale_color_manual(values = setNames(c("red", "black",'#7fc97f','#beaed4','#fdc086','#1f78b4'),
-                                         c(start_time, end_time,'NE','SE','NW','SW')))
+    
+  } else {
+    
+    # #Reduce to latest year and merge in values for labels
+    label_df <- twoy %>% filter(!!timevar==max(!!timevar), compass %in% compasspoints_to_display) %>%
+      left_join(
+        twoy.wide %>% select(!!category_var,label_start,label_end,x_pct_change,y_pct_change,category_var_val_to_highlight)
+      ) %>% 
+      mutate(category_var_val_to_highlight = ifelse(category_var_val_to_highlight, 'bold','plain'))
+    
+    p <- p + geom_text_repel(
+      data = label_df,
+      aes(x = x_pct_change, y = y_pct_change,fontface = category_var_val_to_highlight,
+          label = paste0(!!category_var, "\n(",quo_name(label_var),": ",round(label_start,2),ifelse(label_start < label_end," >> "," << "),round(label_end,2),")"),
+          colour = compass),
+      alpha=1,
+      nudge_x = .05,
+      box.padding = 1,
+      nudge_y = 0.05,
+      segment.curvature = -0.1,
+      segment.ncp = 0.3,
+      segment.angle = 20,
+      max.overlaps = 21
+    ) +
+      scale_color_manual(values = setNames(c("red", "black",'#7fc97f','#beaed4','#fdc086','#1f78b4'),
+                                           c(start_time, end_time,'NE','SE','NW','SW')))
+    
+  }
   
   return(list(plot = p, twoyeardata = twoy.wide))
   
@@ -1187,14 +1219,15 @@ twod_generictimeplot_normalisetozero <- function(df, category_var, x_var, y_var,
 
 
 #Wrapper for 2D generic timeplot above that hides some common post-processing
-twod_percentplot <- function(...){
+# twod_percentplot <- function(returndata = F, ...){
+twod_percentplot <- function(..., returndata = F){
   
   p <- twod_generictimeplot_normalisetozero(...)
   
   xrange_adjust = diff(range(p[[2]]$x_pct_change)) * 0.1
   yrange_adjust = diff(range(p[[2]]$y_pct_change)) * 0.1
   
-  p[[1]] + coord_fixed(
+  p[[1]] = p[[1]] + coord_fixed(
     xlim = c(
       min(p[[2]]$x_pct_change) - xrange_adjust,
       ifelse(max(p[[2]]$x_pct_change) > 0,max(p[[2]]$x_pct_change) + xrange_adjust,0)
@@ -1203,6 +1236,16 @@ twod_percentplot <- function(...){
       min(p[[2]]$y_pct_change) - yrange_adjust,max(p[[2]]$y_pct_change) + yrange_adjust 
     )
   ) 
+  
+  if(returndata){
+
+    return(p)
+
+  } else {
+
+    return(p[[1]])
+
+  }
   
 }
 

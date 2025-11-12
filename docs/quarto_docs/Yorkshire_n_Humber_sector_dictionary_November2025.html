@@ -1,0 +1,1774 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dan Olner">
+
+<title>Yorkshire and The Humber: sector plot dictionary (November 2025) – UK regional economics tools and analysis in R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-2757cfadcc89ddbfb9e61569f8c3689f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#manufacture-of-furniture-other-manufacturing" id="toc-manufacture-of-furniture-other-manufacturing" class="nav-link active" data-scroll-target="#manufacture-of-furniture-other-manufacturing">Manufacture of furniture; other manufacturing</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots" id="toc-lq-gvajob-plots" class="nav-link" data-scroll-target="#lq-gvajob-plots">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425" id="toc-employee-change-map-202425" class="nav-link" data-scroll-target="#employee-change-map-202425">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#manufacture-of-textiles-wearing-apparel-and-leather" id="toc-manufacture-of-textiles-wearing-apparel-and-leather" class="nav-link" data-scroll-target="#manufacture-of-textiles-wearing-apparel-and-leather">Manufacture of textiles, wearing apparel and leather</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-1" id="toc-lq-gvajob-plots-1" class="nav-link" data-scroll-target="#lq-gvajob-plots-1">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-1" id="toc-employee-change-map-202425-1" class="nav-link" data-scroll-target="#employee-change-map-202425-1">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#manufacture-of-basic-and-fabricated-metal-products" id="toc-manufacture-of-basic-and-fabricated-metal-products" class="nav-link" data-scroll-target="#manufacture-of-basic-and-fabricated-metal-products">Manufacture of basic and fabricated metal products</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-2" id="toc-lq-gvajob-plots-2" class="nav-link" data-scroll-target="#lq-gvajob-plots-2">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-2" id="toc-employee-change-map-202425-2" class="nav-link" data-scroll-target="#employee-change-map-202425-2">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#manufacture-of-wood-and-paper-products-and-printing" id="toc-manufacture-of-wood-and-paper-products-and-printing" class="nav-link" data-scroll-target="#manufacture-of-wood-and-paper-products-and-printing">Manufacture of wood and paper products and printing</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-3" id="toc-lq-gvajob-plots-3" class="nav-link" data-scroll-target="#lq-gvajob-plots-3">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-3" id="toc-employee-change-map-202425-3" class="nav-link" data-scroll-target="#employee-change-map-202425-3">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#manufacture-of-petroleum-chemicals-and-other-minerals" id="toc-manufacture-of-petroleum-chemicals-and-other-minerals" class="nav-link" data-scroll-target="#manufacture-of-petroleum-chemicals-and-other-minerals">Manufacture of petroleum, chemicals and other minerals</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-4" id="toc-lq-gvajob-plots-4" class="nav-link" data-scroll-target="#lq-gvajob-plots-4">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-4" id="toc-employee-change-map-202425-4" class="nav-link" data-scroll-target="#employee-change-map-202425-4">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#manufacture-of-food-beverages-and-tobacco" id="toc-manufacture-of-food-beverages-and-tobacco" class="nav-link" data-scroll-target="#manufacture-of-food-beverages-and-tobacco">Manufacture of food, beverages and tobacco</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-5" id="toc-lq-gvajob-plots-5" class="nav-link" data-scroll-target="#lq-gvajob-plots-5">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-5" id="toc-employee-change-map-202425-5" class="nav-link" data-scroll-target="#employee-change-map-202425-5">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#social-work-activities" id="toc-social-work-activities" class="nav-link" data-scroll-target="#social-work-activities">Social work activities</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-6" id="toc-lq-gvajob-plots-6" class="nav-link" data-scroll-target="#lq-gvajob-plots-6">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-6" id="toc-employee-change-map-202425-6" class="nav-link" data-scroll-target="#employee-change-map-202425-6">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#employment-activities-tourism-and-security-services" id="toc-employment-activities-tourism-and-security-services" class="nav-link" data-scroll-target="#employment-activities-tourism-and-security-services">Employment activities; tourism and security services</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-7" id="toc-lq-gvajob-plots-7" class="nav-link" data-scroll-target="#lq-gvajob-plots-7">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-7" id="toc-employee-change-map-202425-7" class="nav-link" data-scroll-target="#employee-change-map-202425-7">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#warehousing-and-transport-support-activities" id="toc-warehousing-and-transport-support-activities" class="nav-link" data-scroll-target="#warehousing-and-transport-support-activities">Warehousing and transport support activities</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-8" id="toc-lq-gvajob-plots-8" class="nav-link" data-scroll-target="#lq-gvajob-plots-8">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-8" id="toc-employee-change-map-202425-8" class="nav-link" data-scroll-target="#employee-change-map-202425-8">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#financial-and-insurance-activities" id="toc-financial-and-insurance-activities" class="nav-link" data-scroll-target="#financial-and-insurance-activities">Financial and insurance activities</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-9" id="toc-lq-gvajob-plots-9" class="nav-link" data-scroll-target="#lq-gvajob-plots-9">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-9" id="toc-employee-change-map-202425-9" class="nav-link" data-scroll-target="#employee-change-map-202425-9">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#electricity-gas-water-sewerage-and-waste-management" id="toc-electricity-gas-water-sewerage-and-waste-management" class="nav-link" data-scroll-target="#electricity-gas-water-sewerage-and-waste-management">Electricity, gas, water; sewerage and waste management</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-10" id="toc-lq-gvajob-plots-10" class="nav-link" data-scroll-target="#lq-gvajob-plots-10">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-10" id="toc-employee-change-map-202425-10" class="nav-link" data-scroll-target="#employee-change-map-202425-10">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#food-and-beverage-service-activities" id="toc-food-and-beverage-service-activities" class="nav-link" data-scroll-target="#food-and-beverage-service-activities">Food and beverage service activities</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-11" id="toc-lq-gvajob-plots-11" class="nav-link" data-scroll-target="#lq-gvajob-plots-11">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-11" id="toc-employee-change-map-202425-11" class="nav-link" data-scroll-target="#employee-change-map-202425-11">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#education" id="toc-education" class="nav-link" data-scroll-target="#education">Education</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-12" id="toc-lq-gvajob-plots-12" class="nav-link" data-scroll-target="#lq-gvajob-plots-12">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-12" id="toc-employee-change-map-202425-12" class="nav-link" data-scroll-target="#employee-change-map-202425-12">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#office-administration-and-business-support-activities" id="toc-office-administration-and-business-support-activities" class="nav-link" data-scroll-target="#office-administration-and-business-support-activities">Office administration and business support activities</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-13" id="toc-lq-gvajob-plots-13" class="nav-link" data-scroll-target="#lq-gvajob-plots-13">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-13" id="toc-employee-change-map-202425-13" class="nav-link" data-scroll-target="#employee-change-map-202425-13">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#land-water-and-air-transport" id="toc-land-water-and-air-transport" class="nav-link" data-scroll-target="#land-water-and-air-transport">Land, water and air transport</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-14" id="toc-lq-gvajob-plots-14" class="nav-link" data-scroll-target="#lq-gvajob-plots-14">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-14" id="toc-employee-change-map-202425-14" class="nav-link" data-scroll-target="#employee-change-map-202425-14">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#residential-care-activities" id="toc-residential-care-activities" class="nav-link" data-scroll-target="#residential-care-activities">Residential care activities</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-15" id="toc-lq-gvajob-plots-15" class="nav-link" data-scroll-target="#lq-gvajob-plots-15">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-15" id="toc-employee-change-map-202425-15" class="nav-link" data-scroll-target="#employee-change-map-202425-15">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#real-estate-activities-excluding-imputed-rental" id="toc-real-estate-activities-excluding-imputed-rental" class="nav-link" data-scroll-target="#real-estate-activities-excluding-imputed-rental">Real estate activities, excluding imputed rental</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-16" id="toc-lq-gvajob-plots-16" class="nav-link" data-scroll-target="#lq-gvajob-plots-16">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-16" id="toc-employee-change-map-202425-16" class="nav-link" data-scroll-target="#employee-change-map-202425-16">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#human-health-activities" id="toc-human-health-activities" class="nav-link" data-scroll-target="#human-health-activities">Human health activities</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-17" id="toc-lq-gvajob-plots-17" class="nav-link" data-scroll-target="#lq-gvajob-plots-17">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-17" id="toc-employee-change-map-202425-17" class="nav-link" data-scroll-target="#employee-change-map-202425-17">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#wholesale-trade" id="toc-wholesale-trade" class="nav-link" data-scroll-target="#wholesale-trade">Wholesale trade</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-18" id="toc-lq-gvajob-plots-18" class="nav-link" data-scroll-target="#lq-gvajob-plots-18">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-18" id="toc-employee-change-map-202425-18" class="nav-link" data-scroll-target="#employee-change-map-202425-18">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#construction-of-buildings" id="toc-construction-of-buildings" class="nav-link" data-scroll-target="#construction-of-buildings">Construction of buildings</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-19" id="toc-lq-gvajob-plots-19" class="nav-link" data-scroll-target="#lq-gvajob-plots-19">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-19" id="toc-employee-change-map-202425-19" class="nav-link" data-scroll-target="#employee-change-map-202425-19">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#motor-trades" id="toc-motor-trades" class="nav-link" data-scroll-target="#motor-trades">Motor trades</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-20" id="toc-lq-gvajob-plots-20" class="nav-link" data-scroll-target="#lq-gvajob-plots-20">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-20" id="toc-employee-change-map-202425-20" class="nav-link" data-scroll-target="#employee-change-map-202425-20">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#retail-trade" id="toc-retail-trade" class="nav-link" data-scroll-target="#retail-trade">Retail trade</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-21" id="toc-lq-gvajob-plots-21" class="nav-link" data-scroll-target="#lq-gvajob-plots-21">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-21" id="toc-employee-change-map-202425-21" class="nav-link" data-scroll-target="#employee-change-map-202425-21">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#legal-and-accounting-activities" id="toc-legal-and-accounting-activities" class="nav-link" data-scroll-target="#legal-and-accounting-activities">Legal and accounting activities</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-22" id="toc-lq-gvajob-plots-22" class="nav-link" data-scroll-target="#lq-gvajob-plots-22">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-22" id="toc-employee-change-map-202425-22" class="nav-link" data-scroll-target="#employee-change-map-202425-22">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#gambling-and-betting-sports-and-recreation-activities" id="toc-gambling-and-betting-sports-and-recreation-activities" class="nav-link" data-scroll-target="#gambling-and-betting-sports-and-recreation-activities">Gambling and betting; sports and recreation activities</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-23" id="toc-lq-gvajob-plots-23" class="nav-link" data-scroll-target="#lq-gvajob-plots-23">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-23" id="toc-employee-change-map-202425-23" class="nav-link" data-scroll-target="#employee-change-map-202425-23">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#specialised-construction-activities" id="toc-specialised-construction-activities" class="nav-link" data-scroll-target="#specialised-construction-activities">Specialised construction activities</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-24" id="toc-lq-gvajob-plots-24" class="nav-link" data-scroll-target="#lq-gvajob-plots-24">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-24" id="toc-employee-change-map-202425-24" class="nav-link" data-scroll-target="#employee-change-map-202425-24">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#public-administration-and-defence" id="toc-public-administration-and-defence" class="nav-link" data-scroll-target="#public-administration-and-defence">Public administration and defence</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-25" id="toc-lq-gvajob-plots-25" class="nav-link" data-scroll-target="#lq-gvajob-plots-25">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-25" id="toc-employee-change-map-202425-25" class="nav-link" data-scroll-target="#employee-change-map-202425-25">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#other-professional-scientific-and-technical-activities" id="toc-other-professional-scientific-and-technical-activities" class="nav-link" data-scroll-target="#other-professional-scientific-and-technical-activities">Other professional, scientific and technical activities</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-26" id="toc-lq-gvajob-plots-26" class="nav-link" data-scroll-target="#lq-gvajob-plots-26">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-26" id="toc-employee-change-map-202425-26" class="nav-link" data-scroll-target="#employee-change-map-202425-26">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#head-offices-and-management-consultancy" id="toc-head-offices-and-management-consultancy" class="nav-link" data-scroll-target="#head-offices-and-management-consultancy">Head offices and management consultancy</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-27" id="toc-lq-gvajob-plots-27" class="nav-link" data-scroll-target="#lq-gvajob-plots-27">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-27" id="toc-employee-change-map-202425-27" class="nav-link" data-scroll-target="#employee-change-map-202425-27">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#postal-and-courier-activities" id="toc-postal-and-courier-activities" class="nav-link" data-scroll-target="#postal-and-courier-activities">Postal and courier activities</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-28" id="toc-lq-gvajob-plots-28" class="nav-link" data-scroll-target="#lq-gvajob-plots-28">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-28" id="toc-employee-change-map-202425-28" class="nav-link" data-scroll-target="#employee-change-map-202425-28">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#rental-and-leasing-activities" id="toc-rental-and-leasing-activities" class="nav-link" data-scroll-target="#rental-and-leasing-activities">Rental and leasing activities</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-29" id="toc-lq-gvajob-plots-29" class="nav-link" data-scroll-target="#lq-gvajob-plots-29">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-29" id="toc-employee-change-map-202425-29" class="nav-link" data-scroll-target="#employee-change-map-202425-29">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#repair-and-installation-of-machinery-and-equipment" id="toc-repair-and-installation-of-machinery-and-equipment" class="nav-link" data-scroll-target="#repair-and-installation-of-machinery-and-equipment">Repair and installation of machinery and equipment</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-30" id="toc-lq-gvajob-plots-30" class="nav-link" data-scroll-target="#lq-gvajob-plots-30">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-30" id="toc-employee-change-map-202425-30" class="nav-link" data-scroll-target="#employee-change-map-202425-30">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#telecommunications-information-technology" id="toc-telecommunications-information-technology" class="nav-link" data-scroll-target="#telecommunications-information-technology">Telecommunications; information technology</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-31" id="toc-lq-gvajob-plots-31" class="nav-link" data-scroll-target="#lq-gvajob-plots-31">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-31" id="toc-employee-change-map-202425-31" class="nav-link" data-scroll-target="#employee-change-map-202425-31">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#civil-engineering" id="toc-civil-engineering" class="nav-link" data-scroll-target="#civil-engineering">Civil engineering</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-32" id="toc-lq-gvajob-plots-32" class="nav-link" data-scroll-target="#lq-gvajob-plots-32">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-32" id="toc-employee-change-map-202425-32" class="nav-link" data-scroll-target="#employee-change-map-202425-32">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#agriculture-forestry-and-fishing-mining-and-quarrying" id="toc-agriculture-forestry-and-fishing-mining-and-quarrying" class="nav-link" data-scroll-target="#agriculture-forestry-and-fishing-mining-and-quarrying">Agriculture, forestry and fishing; mining and quarrying</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-33" id="toc-lq-gvajob-plots-33" class="nav-link" data-scroll-target="#lq-gvajob-plots-33">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-33" id="toc-employee-change-map-202425-33" class="nav-link" data-scroll-target="#employee-change-map-202425-33">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#services-to-buildings-and-landscape-activities" id="toc-services-to-buildings-and-landscape-activities" class="nav-link" data-scroll-target="#services-to-buildings-and-landscape-activities">Services to buildings and landscape activities</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-34" id="toc-lq-gvajob-plots-34" class="nav-link" data-scroll-target="#lq-gvajob-plots-34">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-34" id="toc-employee-change-map-202425-34" class="nav-link" data-scroll-target="#employee-change-map-202425-34">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#architectural-and-engineering-activities" id="toc-architectural-and-engineering-activities" class="nav-link" data-scroll-target="#architectural-and-engineering-activities">Architectural and engineering activities</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-35" id="toc-lq-gvajob-plots-35" class="nav-link" data-scroll-target="#lq-gvajob-plots-35">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-35" id="toc-employee-change-map-202425-35" class="nav-link" data-scroll-target="#employee-change-map-202425-35">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#accommodation" id="toc-accommodation" class="nav-link" data-scroll-target="#accommodation">Accommodation</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-36" id="toc-lq-gvajob-plots-36" class="nav-link" data-scroll-target="#lq-gvajob-plots-36">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-36" id="toc-employee-change-map-202425-36" class="nav-link" data-scroll-target="#employee-change-map-202425-36">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#research-and-development-advertising-and-market-research" id="toc-research-and-development-advertising-and-market-research" class="nav-link" data-scroll-target="#research-and-development-advertising-and-market-research">Research and development; advertising and market research</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-37" id="toc-lq-gvajob-plots-37" class="nav-link" data-scroll-target="#lq-gvajob-plots-37">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-37" id="toc-employee-change-map-202425-37" class="nav-link" data-scroll-target="#employee-change-map-202425-37">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#publishing-film-and-tv-production-and-broadcasting" id="toc-publishing-film-and-tv-production-and-broadcasting" class="nav-link" data-scroll-target="#publishing-film-and-tv-production-and-broadcasting">Publishing; film and TV production and broadcasting</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-38" id="toc-lq-gvajob-plots-38" class="nav-link" data-scroll-target="#lq-gvajob-plots-38">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-38" id="toc-employee-change-map-202425-38" class="nav-link" data-scroll-target="#employee-change-map-202425-38">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#manufacture-of-machinery-and-transport-equipment" id="toc-manufacture-of-machinery-and-transport-equipment" class="nav-link" data-scroll-target="#manufacture-of-machinery-and-transport-equipment">Manufacture of machinery and transport equipment</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-39" id="toc-lq-gvajob-plots-39" class="nav-link" data-scroll-target="#lq-gvajob-plots-39">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-39" id="toc-employee-change-map-202425-39" class="nav-link" data-scroll-target="#employee-change-map-202425-39">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#creative-arts-entertainment-and-cultural-activities" id="toc-creative-arts-entertainment-and-cultural-activities" class="nav-link" data-scroll-target="#creative-arts-entertainment-and-cultural-activities">Creative, arts, entertainment and cultural activities</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-40" id="toc-lq-gvajob-plots-40" class="nav-link" data-scroll-target="#lq-gvajob-plots-40">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-40" id="toc-employee-change-map-202425-40" class="nav-link" data-scroll-target="#employee-change-map-202425-40">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#repair-of-computers-personal-and-household-goods" id="toc-repair-of-computers-personal-and-household-goods" class="nav-link" data-scroll-target="#repair-of-computers-personal-and-household-goods">Repair of computers, personal and household goods</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-41" id="toc-lq-gvajob-plots-41" class="nav-link" data-scroll-target="#lq-gvajob-plots-41">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-41" id="toc-employee-change-map-202425-41" class="nav-link" data-scroll-target="#employee-change-map-202425-41">Employee % change map 2024/25</a></li>
+  </ul></li>
+  <li><a href="#manufacture-of-electronic-optical-and-electrical-products" id="toc-manufacture-of-electronic-optical-and-electrical-products" class="nav-link" data-scroll-target="#manufacture-of-electronic-optical-and-electrical-products">Manufacture of electronic, optical and electrical products</a>
+  <ul class="collapse">
+  <li><a href="#lq-gvajob-plots-42" id="toc-lq-gvajob-plots-42" class="nav-link" data-scroll-target="#lq-gvajob-plots-42">LQ gva/job plots</a></li>
+  <li><a href="#employee-change-map-202425-42" id="toc-employee-change-map-202425-42" class="nav-link" data-scroll-target="#employee-change-map-202425-42">Employee % change map 2024/25</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Yorkshire and The Humber: sector plot dictionary (November 2025)</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dan Olner </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="manufacture-of-furniture-other-manufacturing" class="level2">
+<h2 class="anchored" data-anchor-id="manufacture-of-furniture-other-manufacturing">Manufacture of furniture; other manufacturing</h2>
+<section id="lq-gvajob-plots" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Manufactureoffurnitureothermanufacturing" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Manufactureoffurnitureothermanufacturing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Manufactureoffurnitureothermanufacturing-1.png" id="fig-Manufactureoffurnitureothermanufacturing" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Manufactureoffurnitureothermanufacturing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Manufactureoffurnitureothermanufacturing.jpeg" width="700"></p>
+</section>
+</section>
+<section id="manufacture-of-textiles-wearing-apparel-and-leather" class="level2">
+<h2 class="anchored" data-anchor-id="manufacture-of-textiles-wearing-apparel-and-leather">Manufacture of textiles, wearing apparel and leather</h2>
+<section id="lq-gvajob-plots-1" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-1">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Manufactureoftextileswearingapparelandleather" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Manufactureoftextileswearingapparelandleather-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Manufactureoftextileswearingapparelandleather-1.png" id="fig-Manufactureoftextileswearingapparelandleather" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Manufactureoftextileswearingapparelandleather-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-1" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-1">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Manufactureoftextileswearingapparelandleather.jpeg" width="700"></p>
+</section>
+</section>
+<section id="manufacture-of-basic-and-fabricated-metal-products" class="level2">
+<h2 class="anchored" data-anchor-id="manufacture-of-basic-and-fabricated-metal-products">Manufacture of basic and fabricated metal products</h2>
+<section id="lq-gvajob-plots-2" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-2">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Manufactureofbasicandfabricatedmetalproducts" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Manufactureofbasicandfabricatedmetalproducts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Manufactureofbasicandfabricatedmetalproducts-1.png" id="fig-Manufactureofbasicandfabricatedmetalproducts" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Manufactureofbasicandfabricatedmetalproducts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-2" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-2">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Manufactureofbasicandfabricatedmetalproducts.jpeg" width="700"></p>
+</section>
+</section>
+<section id="manufacture-of-wood-and-paper-products-and-printing" class="level2">
+<h2 class="anchored" data-anchor-id="manufacture-of-wood-and-paper-products-and-printing">Manufacture of wood and paper products and printing</h2>
+<section id="lq-gvajob-plots-3" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-3">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Manufactureofwoodandpaperproductsandprinting" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Manufactureofwoodandpaperproductsandprinting-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Manufactureofwoodandpaperproductsandprinting-1.png" id="fig-Manufactureofwoodandpaperproductsandprinting" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Manufactureofwoodandpaperproductsandprinting-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-3" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-3">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Manufactureofwoodandpaperproductsandprinting.jpeg" width="700"></p>
+</section>
+</section>
+<section id="manufacture-of-petroleum-chemicals-and-other-minerals" class="level2">
+<h2 class="anchored" data-anchor-id="manufacture-of-petroleum-chemicals-and-other-minerals">Manufacture of petroleum, chemicals and other minerals</h2>
+<section id="lq-gvajob-plots-4" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-4">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Manufactureofpetroleumchemicalsandotherminerals" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Manufactureofpetroleumchemicalsandotherminerals-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Manufactureofpetroleumchemicalsandotherminerals-1.png" id="fig-Manufactureofpetroleumchemicalsandotherminerals" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Manufactureofpetroleumchemicalsandotherminerals-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-4" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-4">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Manufactureofpetroleumchemicalsandotherminerals.jpeg" width="700"></p>
+</section>
+</section>
+<section id="manufacture-of-food-beverages-and-tobacco" class="level2">
+<h2 class="anchored" data-anchor-id="manufacture-of-food-beverages-and-tobacco">Manufacture of food, beverages and tobacco</h2>
+<section id="lq-gvajob-plots-5" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-5">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Manufactureoffoodbeveragesandtobacco" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Manufactureoffoodbeveragesandtobacco-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Manufactureoffoodbeveragesandtobacco-1.png" id="fig-Manufactureoffoodbeveragesandtobacco" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Manufactureoffoodbeveragesandtobacco-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-5" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-5">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Manufactureoffoodbeveragesandtobacco.jpeg" width="700"></p>
+</section>
+</section>
+<section id="social-work-activities" class="level2">
+<h2 class="anchored" data-anchor-id="social-work-activities">Social work activities</h2>
+<section id="lq-gvajob-plots-6" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-6">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Socialworkactivities" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Socialworkactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Socialworkactivities-1.png" id="fig-Socialworkactivities" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Socialworkactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-6" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-6">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Socialworkactivities.jpeg" width="700"></p>
+</section>
+</section>
+<section id="employment-activities-tourism-and-security-services" class="level2">
+<h2 class="anchored" data-anchor-id="employment-activities-tourism-and-security-services">Employment activities; tourism and security services</h2>
+<section id="lq-gvajob-plots-7" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-7">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Employmentactivitiestourismandsecurityservices" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Employmentactivitiestourismandsecurityservices-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Employmentactivitiestourismandsecurityservices-1.png" id="fig-Employmentactivitiestourismandsecurityservices" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Employmentactivitiestourismandsecurityservices-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-7" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-7">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Employmentactivitiestourismandsecurityservices.jpeg" width="700"></p>
+</section>
+</section>
+<section id="warehousing-and-transport-support-activities" class="level2">
+<h2 class="anchored" data-anchor-id="warehousing-and-transport-support-activities">Warehousing and transport support activities</h2>
+<section id="lq-gvajob-plots-8" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-8">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Warehousingandtransportsupportactivities" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Warehousingandtransportsupportactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Warehousingandtransportsupportactivities-1.png" id="fig-Warehousingandtransportsupportactivities" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Warehousingandtransportsupportactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-8" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-8">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Warehousingandtransportsupportactivities.jpeg" width="700"></p>
+</section>
+</section>
+<section id="financial-and-insurance-activities" class="level2">
+<h2 class="anchored" data-anchor-id="financial-and-insurance-activities">Financial and insurance activities</h2>
+<section id="lq-gvajob-plots-9" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-9">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Financialandinsuranceactivities" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Financialandinsuranceactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Financialandinsuranceactivities-1.png" id="fig-Financialandinsuranceactivities" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Financialandinsuranceactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-9" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-9">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Financialandinsuranceactivities.jpeg" width="700"></p>
+</section>
+</section>
+<section id="electricity-gas-water-sewerage-and-waste-management" class="level2">
+<h2 class="anchored" data-anchor-id="electricity-gas-water-sewerage-and-waste-management">Electricity, gas, water; sewerage and waste management</h2>
+<section id="lq-gvajob-plots-10" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-10">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Electricitygaswatersewerageandwastemanagement" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Electricitygaswatersewerageandwastemanagement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Electricitygaswatersewerageandwastemanagement-1.png" id="fig-Electricitygaswatersewerageandwastemanagement" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Electricitygaswatersewerageandwastemanagement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-10" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-10">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Electricitygaswatersewerageandwastemanagement.jpeg" width="700"></p>
+</section>
+</section>
+<section id="food-and-beverage-service-activities" class="level2">
+<h2 class="anchored" data-anchor-id="food-and-beverage-service-activities">Food and beverage service activities</h2>
+<section id="lq-gvajob-plots-11" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-11">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Foodandbeverageserviceactivities" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Foodandbeverageserviceactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Foodandbeverageserviceactivities-1.png" id="fig-Foodandbeverageserviceactivities" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Foodandbeverageserviceactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-11" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-11">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Foodandbeverageserviceactivities.jpeg" width="700"></p>
+</section>
+</section>
+<section id="education" class="level2">
+<h2 class="anchored" data-anchor-id="education">Education</h2>
+<section id="lq-gvajob-plots-12" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-12">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Education" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Education-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Education-1.png" id="fig-Education" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Education-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-12" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-12">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Education.jpeg" width="700"></p>
+</section>
+</section>
+<section id="office-administration-and-business-support-activities" class="level2">
+<h2 class="anchored" data-anchor-id="office-administration-and-business-support-activities">Office administration and business support activities</h2>
+<section id="lq-gvajob-plots-13" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-13">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Officeadministrationandbusinesssupportactivities" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Officeadministrationandbusinesssupportactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Officeadministrationandbusinesssupportactivities-1.png" id="fig-Officeadministrationandbusinesssupportactivities" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Officeadministrationandbusinesssupportactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-13" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-13">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Officeadministrationandbusinesssupportactivities.jpeg" width="700"></p>
+</section>
+</section>
+<section id="land-water-and-air-transport" class="level2">
+<h2 class="anchored" data-anchor-id="land-water-and-air-transport">Land, water and air transport</h2>
+<section id="lq-gvajob-plots-14" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-14">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Landwaterandairtransport" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Landwaterandairtransport-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Landwaterandairtransport-1.png" id="fig-Landwaterandairtransport" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Landwaterandairtransport-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;15
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-14" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-14">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Landwaterandairtransport.jpeg" width="700"></p>
+</section>
+</section>
+<section id="residential-care-activities" class="level2">
+<h2 class="anchored" data-anchor-id="residential-care-activities">Residential care activities</h2>
+<section id="lq-gvajob-plots-15" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-15">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Residentialcareactivities" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Residentialcareactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Residentialcareactivities-1.png" id="fig-Residentialcareactivities" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Residentialcareactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-15" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-15">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Residentialcareactivities.jpeg" width="700"></p>
+</section>
+</section>
+<section id="real-estate-activities-excluding-imputed-rental" class="level2">
+<h2 class="anchored" data-anchor-id="real-estate-activities-excluding-imputed-rental">Real estate activities, excluding imputed rental</h2>
+<section id="lq-gvajob-plots-16" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-16">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Realestateactivitiesexcludingimputedrental" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Realestateactivitiesexcludingimputedrental-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Realestateactivitiesexcludingimputedrental-1.png" id="fig-Realestateactivitiesexcludingimputedrental" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Realestateactivitiesexcludingimputedrental-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;17
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-16" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-16">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Realestateactivitiesexcludingimputedrental.jpeg" width="700"></p>
+</section>
+</section>
+<section id="human-health-activities" class="level2">
+<h2 class="anchored" data-anchor-id="human-health-activities">Human health activities</h2>
+<section id="lq-gvajob-plots-17" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-17">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Humanhealthactivities" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Humanhealthactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Humanhealthactivities-1.png" id="fig-Humanhealthactivities" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Humanhealthactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;18
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-17" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-17">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Humanhealthactivities.jpeg" width="700"></p>
+</section>
+</section>
+<section id="wholesale-trade" class="level2">
+<h2 class="anchored" data-anchor-id="wholesale-trade">Wholesale trade</h2>
+<section id="lq-gvajob-plots-18" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-18">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Wholesaletrade" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Wholesaletrade-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Wholesaletrade-1.png" id="fig-Wholesaletrade" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Wholesaletrade-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;19
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-18" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-18">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Wholesaletrade.jpeg" width="700"></p>
+</section>
+</section>
+<section id="construction-of-buildings" class="level2">
+<h2 class="anchored" data-anchor-id="construction-of-buildings">Construction of buildings</h2>
+<section id="lq-gvajob-plots-19" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-19">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Constructionofbuildings" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Constructionofbuildings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Constructionofbuildings-1.png" id="fig-Constructionofbuildings" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Constructionofbuildings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;20
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-19" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-19">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Constructionofbuildings.jpeg" width="700"></p>
+</section>
+</section>
+<section id="motor-trades" class="level2">
+<h2 class="anchored" data-anchor-id="motor-trades">Motor trades</h2>
+<section id="lq-gvajob-plots-20" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-20">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Motortrades" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Motortrades-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Motortrades-1.png" id="fig-Motortrades" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Motortrades-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;21
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-20" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-20">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Motortrades.jpeg" width="700"></p>
+</section>
+</section>
+<section id="retail-trade" class="level2">
+<h2 class="anchored" data-anchor-id="retail-trade">Retail trade</h2>
+<section id="lq-gvajob-plots-21" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-21">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Retailtrade" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Retailtrade-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Retailtrade-1.png" id="fig-Retailtrade" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Retailtrade-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;22
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-21" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-21">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Retailtrade.jpeg" width="700"></p>
+</section>
+</section>
+<section id="legal-and-accounting-activities" class="level2">
+<h2 class="anchored" data-anchor-id="legal-and-accounting-activities">Legal and accounting activities</h2>
+<section id="lq-gvajob-plots-22" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-22">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Legalandaccountingactivities" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Legalandaccountingactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Legalandaccountingactivities-1.png" id="fig-Legalandaccountingactivities" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Legalandaccountingactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;23
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-22" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-22">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Legalandaccountingactivities.jpeg" width="700"></p>
+</section>
+</section>
+<section id="gambling-and-betting-sports-and-recreation-activities" class="level2">
+<h2 class="anchored" data-anchor-id="gambling-and-betting-sports-and-recreation-activities">Gambling and betting; sports and recreation activities</h2>
+<section id="lq-gvajob-plots-23" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-23">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Gamblingandbettingsportsandrecreationactivities" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Gamblingandbettingsportsandrecreationactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Gamblingandbettingsportsandrecreationactivities-1.png" id="fig-Gamblingandbettingsportsandrecreationactivities" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Gamblingandbettingsportsandrecreationactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;24
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-23" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-23">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Gamblingandbettingsportsandrecreationactivities.jpeg" width="700"></p>
+</section>
+</section>
+<section id="specialised-construction-activities" class="level2">
+<h2 class="anchored" data-anchor-id="specialised-construction-activities">Specialised construction activities</h2>
+<section id="lq-gvajob-plots-24" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-24">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Specialisedconstructionactivities" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Specialisedconstructionactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Specialisedconstructionactivities-1.png" id="fig-Specialisedconstructionactivities" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Specialisedconstructionactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;25
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-24" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-24">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Specialisedconstructionactivities.jpeg" width="700"></p>
+</section>
+</section>
+<section id="public-administration-and-defence" class="level2">
+<h2 class="anchored" data-anchor-id="public-administration-and-defence">Public administration and defence</h2>
+<section id="lq-gvajob-plots-25" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-25">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Publicadministrationanddefence" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Publicadministrationanddefence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Publicadministrationanddefence-1.png" id="fig-Publicadministrationanddefence" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Publicadministrationanddefence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;26
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-25" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-25">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Publicadministrationanddefence.jpeg" width="700"></p>
+</section>
+</section>
+<section id="other-professional-scientific-and-technical-activities" class="level2">
+<h2 class="anchored" data-anchor-id="other-professional-scientific-and-technical-activities">Other professional, scientific and technical activities</h2>
+<section id="lq-gvajob-plots-26" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-26">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Otherprofessionalscientificandtechnicalactivities" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Otherprofessionalscientificandtechnicalactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Otherprofessionalscientificandtechnicalactivities-1.png" id="fig-Otherprofessionalscientificandtechnicalactivities" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Otherprofessionalscientificandtechnicalactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;27
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-26" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-26">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Otherprofessionalscientificandtechnicalactivities.jpeg" width="700"></p>
+</section>
+</section>
+<section id="head-offices-and-management-consultancy" class="level2">
+<h2 class="anchored" data-anchor-id="head-offices-and-management-consultancy">Head offices and management consultancy</h2>
+<section id="lq-gvajob-plots-27" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-27">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Headofficesandmanagementconsultancy" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Headofficesandmanagementconsultancy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Headofficesandmanagementconsultancy-1.png" id="fig-Headofficesandmanagementconsultancy" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Headofficesandmanagementconsultancy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;28
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-27" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-27">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Headofficesandmanagementconsultancy.jpeg" width="700"></p>
+</section>
+</section>
+<section id="postal-and-courier-activities" class="level2">
+<h2 class="anchored" data-anchor-id="postal-and-courier-activities">Postal and courier activities</h2>
+<section id="lq-gvajob-plots-28" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-28">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Postalandcourieractivities" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Postalandcourieractivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Postalandcourieractivities-1.png" id="fig-Postalandcourieractivities" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Postalandcourieractivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;29
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-28" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-28">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Postalandcourieractivities.jpeg" width="700"></p>
+</section>
+</section>
+<section id="rental-and-leasing-activities" class="level2">
+<h2 class="anchored" data-anchor-id="rental-and-leasing-activities">Rental and leasing activities</h2>
+<section id="lq-gvajob-plots-29" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-29">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Rentalandleasingactivities" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Rentalandleasingactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Rentalandleasingactivities-1.png" id="fig-Rentalandleasingactivities" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Rentalandleasingactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;30
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-29" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-29">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Rentalandleasingactivities.jpeg" width="700"></p>
+</section>
+</section>
+<section id="repair-and-installation-of-machinery-and-equipment" class="level2">
+<h2 class="anchored" data-anchor-id="repair-and-installation-of-machinery-and-equipment">Repair and installation of machinery and equipment</h2>
+<section id="lq-gvajob-plots-30" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-30">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Repairandinstallationofmachineryandequipment" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Repairandinstallationofmachineryandequipment-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Repairandinstallationofmachineryandequipment-1.png" id="fig-Repairandinstallationofmachineryandequipment" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Repairandinstallationofmachineryandequipment-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;31
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-30" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-30">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Repairandinstallationofmachineryandequipment.jpeg" width="700"></p>
+</section>
+</section>
+<section id="telecommunications-information-technology" class="level2">
+<h2 class="anchored" data-anchor-id="telecommunications-information-technology">Telecommunications; information technology</h2>
+<section id="lq-gvajob-plots-31" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-31">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Telecommunicationsinformationtechnology" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Telecommunicationsinformationtechnology-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Telecommunicationsinformationtechnology-1.png" id="fig-Telecommunicationsinformationtechnology" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Telecommunicationsinformationtechnology-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-31" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-31">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Telecommunicationsinformationtechnology.jpeg" width="700"></p>
+</section>
+</section>
+<section id="civil-engineering" class="level2">
+<h2 class="anchored" data-anchor-id="civil-engineering">Civil engineering</h2>
+<section id="lq-gvajob-plots-32" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-32">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Civilengineering" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Civilengineering-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Civilengineering-1.png" id="fig-Civilengineering" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Civilengineering-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-32" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-32">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Civilengineering.jpeg" width="700"></p>
+</section>
+</section>
+<section id="agriculture-forestry-and-fishing-mining-and-quarrying" class="level2">
+<h2 class="anchored" data-anchor-id="agriculture-forestry-and-fishing-mining-and-quarrying">Agriculture, forestry and fishing; mining and quarrying</h2>
+<section id="lq-gvajob-plots-33" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-33">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Agricultureforestryandfishingminingandquarrying" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Agricultureforestryandfishingminingandquarrying-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Agricultureforestryandfishingminingandquarrying-1.png" id="fig-Agricultureforestryandfishingminingandquarrying" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Agricultureforestryandfishingminingandquarrying-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;34
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-33" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-33">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Agricultureforestryandfishingminingandquarrying.jpeg" width="700"></p>
+</section>
+</section>
+<section id="services-to-buildings-and-landscape-activities" class="level2">
+<h2 class="anchored" data-anchor-id="services-to-buildings-and-landscape-activities">Services to buildings and landscape activities</h2>
+<section id="lq-gvajob-plots-34" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-34">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Servicestobuildingsandlandscapeactivities" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Servicestobuildingsandlandscapeactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Servicestobuildingsandlandscapeactivities-1.png" id="fig-Servicestobuildingsandlandscapeactivities" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Servicestobuildingsandlandscapeactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;35
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-34" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-34">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Servicestobuildingsandlandscapeactivities.jpeg" width="700"></p>
+</section>
+</section>
+<section id="architectural-and-engineering-activities" class="level2">
+<h2 class="anchored" data-anchor-id="architectural-and-engineering-activities">Architectural and engineering activities</h2>
+<section id="lq-gvajob-plots-35" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-35">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Architecturalandengineeringactivities" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Architecturalandengineeringactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Architecturalandengineeringactivities-1.png" id="fig-Architecturalandengineeringactivities" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Architecturalandengineeringactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;36
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-35" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-35">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Architecturalandengineeringactivities.jpeg" width="700"></p>
+</section>
+</section>
+<section id="accommodation" class="level2">
+<h2 class="anchored" data-anchor-id="accommodation">Accommodation</h2>
+<section id="lq-gvajob-plots-36" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-36">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Accommodation" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Accommodation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Accommodation-1.png" id="fig-Accommodation" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Accommodation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;37
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-36" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-36">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Accommodation.jpeg" width="700"></p>
+</section>
+</section>
+<section id="research-and-development-advertising-and-market-research" class="level2">
+<h2 class="anchored" data-anchor-id="research-and-development-advertising-and-market-research">Research and development; advertising and market research</h2>
+<section id="lq-gvajob-plots-37" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-37">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Researchanddevelopmentadvertisingandmarketresearch" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Researchanddevelopmentadvertisingandmarketresearch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Researchanddevelopmentadvertisingandmarketresearch-1.png" id="fig-Researchanddevelopmentadvertisingandmarketresearch" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Researchanddevelopmentadvertisingandmarketresearch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;38
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-37" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-37">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Researchanddevelopmentadvertisingandmarketresearch.jpeg" width="700"></p>
+</section>
+</section>
+<section id="publishing-film-and-tv-production-and-broadcasting" class="level2">
+<h2 class="anchored" data-anchor-id="publishing-film-and-tv-production-and-broadcasting">Publishing; film and TV production and broadcasting</h2>
+<section id="lq-gvajob-plots-38" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-38">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-PublishingfilmandTVproductionandbroadcasting" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-PublishingfilmandTVproductionandbroadcasting-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-PublishingfilmandTVproductionandbroadcasting-1.png" id="fig-PublishingfilmandTVproductionandbroadcasting" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-PublishingfilmandTVproductionandbroadcasting-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;39
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-38" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-38">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/PublishingfilmandTVproductionandbroadcasting.jpeg" width="700"></p>
+</section>
+</section>
+<section id="manufacture-of-machinery-and-transport-equipment" class="level2">
+<h2 class="anchored" data-anchor-id="manufacture-of-machinery-and-transport-equipment">Manufacture of machinery and transport equipment</h2>
+<section id="lq-gvajob-plots-39" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-39">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Manufactureofmachineryandtransportequipment" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Manufactureofmachineryandtransportequipment-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Manufactureofmachineryandtransportequipment-1.png" id="fig-Manufactureofmachineryandtransportequipment" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Manufactureofmachineryandtransportequipment-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;40
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-39" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-39">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Manufactureofmachineryandtransportequipment.jpeg" width="700"></p>
+</section>
+</section>
+<section id="creative-arts-entertainment-and-cultural-activities" class="level2">
+<h2 class="anchored" data-anchor-id="creative-arts-entertainment-and-cultural-activities">Creative, arts, entertainment and cultural activities</h2>
+<section id="lq-gvajob-plots-40" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-40">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Creativeartsentertainmentandculturalactivities" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Creativeartsentertainmentandculturalactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Creativeartsentertainmentandculturalactivities-1.png" id="fig-Creativeartsentertainmentandculturalactivities" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Creativeartsentertainmentandculturalactivities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;41
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-40" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-40">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Creativeartsentertainmentandculturalactivities.jpeg" width="700"></p>
+</section>
+</section>
+<section id="repair-of-computers-personal-and-household-goods" class="level2">
+<h2 class="anchored" data-anchor-id="repair-of-computers-personal-and-household-goods">Repair of computers, personal and household goods</h2>
+<section id="lq-gvajob-plots-41" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-41">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Repairofcomputerspersonalandhouseholdgoods" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Repairofcomputerspersonalandhouseholdgoods-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Repairofcomputerspersonalandhouseholdgoods-1.png" id="fig-Repairofcomputerspersonalandhouseholdgoods" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Repairofcomputerspersonalandhouseholdgoods-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;42
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-41" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-41">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Repairofcomputerspersonalandhouseholdgoods.jpeg" width="700"></p>
+</section>
+</section>
+<section id="manufacture-of-electronic-optical-and-electrical-products" class="level2">
+<h2 class="anchored" data-anchor-id="manufacture-of-electronic-optical-and-electrical-products">Manufacture of electronic, optical and electrical products</h2>
+<section id="lq-gvajob-plots-42" class="level3">
+<h3 class="anchored" data-anchor-id="lq-gvajob-plots-42">LQ gva/job plots</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-Manufactureofelectronicopticalandelectricalproducts" class="quarto-float quarto-figure quarto-figure-center anchored" width="768">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Manufactureofelectronicopticalandelectricalproducts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="yorkshire_n_humber_LQplotcollections_autogenerated_files/figure-html/fig-Manufactureofelectronicopticalandelectricalproducts-1.png" id="fig-Manufactureofelectronicopticalandelectricalproducts" width="768" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Manufactureofelectronicopticalandelectricalproducts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;43
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="employee-change-map-202425-42" class="level3">
+<h3 class="anchored" data-anchor-id="employee-change-map-202425-42">Employee % change map 2024/25</h3>
+<p><img src="../local/outputs/ch_hexmaps_fordictionary/Manufactureofelectronicopticalandelectricalproducts.jpeg" width="700"></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

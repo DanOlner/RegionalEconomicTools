@@ -1,0 +1,1729 @@
+---
+title: "Yorkshire and The Humber: sector plot dictionary (November 2025)"
+author:
+  - name: "Dan Olner"
+format: 
+  html:
+    output-file: "Yorkshire_n_Humber_sector_dictionary_November2025"
+    fig-width: 8
+    fig-height: 8
+execute:
+  echo: false
+  message: false
+  warning: false
+fig-responsive: false
+collapse: false
+navbar: false
+sidebar: false
+---
+
+```{r setup}
+library(tidyverse)
+library(sf)#for geo stuff
+library(tmap)#for mapping
+library(zoo)#for making smoothed moving averages
+library(patchwork)#combine ggplots easily
+library(plotly)#For interactive plots
+library(RColorBrewer)
+
+source('../functions/misc_functions.R')
+source('../functions/adhoc_functions.R')
+#source('functions/misc_functions.R')
+#source('functions/adhoc_functions.R')
+
+options(scipen = 999)
+
+# Data for this side of reality
+itl3.ynh = readRDS('../local/data/itl3ynh.rds')
+itl1.summedtoitl3SICs = readRDS('../local/data/itl1summedtoitl3SICs.rds')
+bres.gva.2d = readRDS('../local/data/bresgva2d.rds')
+
+ynhshortnames = readRDS('../local/data/ynhshortnames.rds')
+
+# For mapping
+mask = readRDS('../local/ynhmask.rds')
+itl3.ynh.zones = readRDS('../local/itl3ynh.rds')
+
+sq = readRDS('../local/data/sq.rds')
+hexsummary = readRDS('../local/hexsummary_for_dictionary.rds')
+
+tmap_mode('plot')
+
+```
+
+
+
+## Manufacture of furniture; other manufacturing
+
+### LQ gva/job plots
+
+
+```{r, fig-Manufactureoffurnitureothermanufacturing}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Manufacture of furniture; other manufacturing")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Manufactureoffurnitureothermanufacturing.jpeg){width="700px"}
+
+
+
+
+## Manufacture of textiles, wearing apparel and leather
+
+### LQ gva/job plots
+
+
+```{r, fig-Manufactureoftextileswearingapparelandleather}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Manufacture of textiles, wearing apparel and leather")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Manufactureoftextileswearingapparelandleather.jpeg){width="700px"}
+
+
+
+
+## Manufacture of basic and fabricated metal products
+
+### LQ gva/job plots
+
+
+```{r, fig-Manufactureofbasicandfabricatedmetalproducts}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Manufacture of basic and fabricated metal products")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Manufactureofbasicandfabricatedmetalproducts.jpeg){width="700px"}
+
+
+
+
+## Manufacture of wood and paper products and printing
+
+### LQ gva/job plots
+
+
+```{r, fig-Manufactureofwoodandpaperproductsandprinting}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Manufacture of wood and paper products and printing")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Manufactureofwoodandpaperproductsandprinting.jpeg){width="700px"}
+
+
+
+
+## Manufacture of petroleum, chemicals and other minerals
+
+### LQ gva/job plots
+
+
+```{r, fig-Manufactureofpetroleumchemicalsandotherminerals}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Manufacture of petroleum, chemicals and other minerals")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Manufactureofpetroleumchemicalsandotherminerals.jpeg){width="700px"}
+
+
+
+
+## Manufacture of food, beverages and tobacco
+
+### LQ gva/job plots
+
+
+```{r, fig-Manufactureoffoodbeveragesandtobacco}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Manufacture of food, beverages and tobacco")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Manufactureoffoodbeveragesandtobacco.jpeg){width="700px"}
+
+
+
+
+## Social work activities
+
+### LQ gva/job plots
+
+
+```{r, fig-Socialworkactivities}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Social work activities")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Socialworkactivities.jpeg){width="700px"}
+
+
+
+
+## Employment activities; tourism and security services
+
+### LQ gva/job plots
+
+
+```{r, fig-Employmentactivitiestourismandsecurityservices}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Employment activities; tourism and security services")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Employmentactivitiestourismandsecurityservices.jpeg){width="700px"}
+
+
+
+
+## Warehousing and transport support activities
+
+### LQ gva/job plots
+
+
+```{r, fig-Warehousingandtransportsupportactivities}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Warehousing and transport support activities")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Warehousingandtransportsupportactivities.jpeg){width="700px"}
+
+
+
+
+## Financial and insurance activities
+
+### LQ gva/job plots
+
+
+```{r, fig-Financialandinsuranceactivities}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Financial and insurance activities")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Financialandinsuranceactivities.jpeg){width="700px"}
+
+
+
+
+## Electricity, gas, water; sewerage and waste management
+
+### LQ gva/job plots
+
+
+```{r, fig-Electricitygaswatersewerageandwastemanagement}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Electricity, gas, water; sewerage and waste management")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Electricitygaswatersewerageandwastemanagement.jpeg){width="700px"}
+
+
+
+
+## Food and beverage service activities
+
+### LQ gva/job plots
+
+
+```{r, fig-Foodandbeverageserviceactivities}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Food and beverage service activities")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Foodandbeverageserviceactivities.jpeg){width="700px"}
+
+
+
+
+## Education
+
+### LQ gva/job plots
+
+
+```{r, fig-Education}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Education")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Education.jpeg){width="700px"}
+
+
+
+
+## Office administration and business support activities
+
+### LQ gva/job plots
+
+
+```{r, fig-Officeadministrationandbusinesssupportactivities}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Office administration and business support activities")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Officeadministrationandbusinesssupportactivities.jpeg){width="700px"}
+
+
+
+
+## Land, water and air transport
+
+### LQ gva/job plots
+
+
+```{r, fig-Landwaterandairtransport}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Land, water and air transport")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Landwaterandairtransport.jpeg){width="700px"}
+
+
+
+
+## Residential care activities
+
+### LQ gva/job plots
+
+
+```{r, fig-Residentialcareactivities}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Residential care activities")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Residentialcareactivities.jpeg){width="700px"}
+
+
+
+
+## Real estate activities, excluding imputed rental
+
+### LQ gva/job plots
+
+
+```{r, fig-Realestateactivitiesexcludingimputedrental}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Real estate activities, excluding imputed rental")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Realestateactivitiesexcludingimputedrental.jpeg){width="700px"}
+
+
+
+
+## Human health activities
+
+### LQ gva/job plots
+
+
+```{r, fig-Humanhealthactivities}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Human health activities")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Humanhealthactivities.jpeg){width="700px"}
+
+
+
+
+## Wholesale trade
+
+### LQ gva/job plots
+
+
+```{r, fig-Wholesaletrade}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Wholesale trade")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Wholesaletrade.jpeg){width="700px"}
+
+
+
+
+## Construction of buildings
+
+### LQ gva/job plots
+
+
+```{r, fig-Constructionofbuildings}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Construction of buildings")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Constructionofbuildings.jpeg){width="700px"}
+
+
+
+
+## Motor trades
+
+### LQ gva/job plots
+
+
+```{r, fig-Motortrades}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Motor trades")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Motortrades.jpeg){width="700px"}
+
+
+
+
+## Retail trade
+
+### LQ gva/job plots
+
+
+```{r, fig-Retailtrade}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Retail trade")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Retailtrade.jpeg){width="700px"}
+
+
+
+
+## Legal and accounting activities
+
+### LQ gva/job plots
+
+
+```{r, fig-Legalandaccountingactivities}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Legal and accounting activities")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Legalandaccountingactivities.jpeg){width="700px"}
+
+
+
+
+## Gambling and betting; sports and recreation activities
+
+### LQ gva/job plots
+
+
+```{r, fig-Gamblingandbettingsportsandrecreationactivities}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Gambling and betting; sports and recreation activities")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Gamblingandbettingsportsandrecreationactivities.jpeg){width="700px"}
+
+
+
+
+## Specialised construction activities
+
+### LQ gva/job plots
+
+
+```{r, fig-Specialisedconstructionactivities}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Specialised construction activities")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Specialisedconstructionactivities.jpeg){width="700px"}
+
+
+
+
+## Public administration and defence
+
+### LQ gva/job plots
+
+
+```{r, fig-Publicadministrationanddefence}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Public administration and defence")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Publicadministrationanddefence.jpeg){width="700px"}
+
+
+
+
+## Other professional, scientific and technical activities
+
+### LQ gva/job plots
+
+
+```{r, fig-Otherprofessionalscientificandtechnicalactivities}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Other professional, scientific and technical activities")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Otherprofessionalscientificandtechnicalactivities.jpeg){width="700px"}
+
+
+
+
+## Head offices and management consultancy
+
+### LQ gva/job plots
+
+
+```{r, fig-Headofficesandmanagementconsultancy}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Head offices and management consultancy")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Headofficesandmanagementconsultancy.jpeg){width="700px"}
+
+
+
+
+## Postal and courier activities
+
+### LQ gva/job plots
+
+
+```{r, fig-Postalandcourieractivities}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Postal and courier activities")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Postalandcourieractivities.jpeg){width="700px"}
+
+
+
+
+## Rental and leasing activities
+
+### LQ gva/job plots
+
+
+```{r, fig-Rentalandleasingactivities}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Rental and leasing activities")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Rentalandleasingactivities.jpeg){width="700px"}
+
+
+
+
+## Repair and installation of machinery and equipment
+
+### LQ gva/job plots
+
+
+```{r, fig-Repairandinstallationofmachineryandequipment}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Repair and installation of machinery and equipment")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Repairandinstallationofmachineryandequipment.jpeg){width="700px"}
+
+
+
+
+## Telecommunications; information technology
+
+### LQ gva/job plots
+
+
+```{r, fig-Telecommunicationsinformationtechnology}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Telecommunications; information technology")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Telecommunicationsinformationtechnology.jpeg){width="700px"}
+
+
+
+
+## Civil engineering
+
+### LQ gva/job plots
+
+
+```{r, fig-Civilengineering}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Civil engineering")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Civilengineering.jpeg){width="700px"}
+
+
+
+
+## Agriculture, forestry and fishing; mining and quarrying
+
+### LQ gva/job plots
+
+
+```{r, fig-Agricultureforestryandfishingminingandquarrying}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Agriculture, forestry and fishing; mining and quarrying")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Agricultureforestryandfishingminingandquarrying.jpeg){width="700px"}
+
+
+
+
+## Services to buildings and landscape activities
+
+### LQ gva/job plots
+
+
+```{r, fig-Servicestobuildingsandlandscapeactivities}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Services to buildings and landscape activities")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Servicestobuildingsandlandscapeactivities.jpeg){width="700px"}
+
+
+
+
+## Architectural and engineering activities
+
+### LQ gva/job plots
+
+
+```{r, fig-Architecturalandengineeringactivities}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Architectural and engineering activities")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Architecturalandengineeringactivities.jpeg){width="700px"}
+
+
+
+
+## Accommodation
+
+### LQ gva/job plots
+
+
+```{r, fig-Accommodation}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Accommodation")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Accommodation.jpeg){width="700px"}
+
+
+
+
+## Research and development; advertising and market research
+
+### LQ gva/job plots
+
+
+```{r, fig-Researchanddevelopmentadvertisingandmarketresearch}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Research and development; advertising and market research")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Researchanddevelopmentadvertisingandmarketresearch.jpeg){width="700px"}
+
+
+
+
+## Publishing; film and TV production and broadcasting
+
+### LQ gva/job plots
+
+
+```{r, fig-PublishingfilmandTVproductionandbroadcasting}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Publishing; film and TV production and broadcasting")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/PublishingfilmandTVproductionandbroadcasting.jpeg){width="700px"}
+
+
+
+
+## Manufacture of machinery and transport equipment
+
+### LQ gva/job plots
+
+
+```{r, fig-Manufactureofmachineryandtransportequipment}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Manufacture of machinery and transport equipment")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Manufactureofmachineryandtransportequipment.jpeg){width="700px"}
+
+
+
+
+## Creative, arts, entertainment and cultural activities
+
+### LQ gva/job plots
+
+
+```{r, fig-Creativeartsentertainmentandculturalactivities}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Creative, arts, entertainment and cultural activities")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Creativeartsentertainmentandculturalactivities.jpeg){width="700px"}
+
+
+
+
+## Repair of computers, personal and household goods
+
+### LQ gva/job plots
+
+
+```{r, fig-Repairofcomputerspersonalandhouseholdgoods}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Repair of computers, personal and household goods")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Repairofcomputerspersonalandhouseholdgoods.jpeg){width="700px"}
+
+
+
+
+## Manufacture of electronic, optical and electrical products
+
+### LQ gva/job plots
+
+
+```{r, fig-Manufactureofelectronicopticalandelectricalproducts}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Manufacture of electronic, optical and electrical products")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+### Employee % change map 2024/25
+
+
+![](../local/outputs/ch_hexmaps_fordictionary/Manufactureofelectronicopticalandelectricalproducts.jpeg){width="700px"}
+

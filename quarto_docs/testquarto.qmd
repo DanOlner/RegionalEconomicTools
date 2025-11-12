@@ -1,0 +1,142 @@
+---
+title: "Yorkshire and The Humber: sector plot dictionary (November 2025)"
+author:
+  - name: "Dan Olner"
+format: 
+  html:
+    output-file: "Yorkshire_n_Humber_sector_dictionary_Nov2025"
+    fig-width: 8
+    fig-height: 8
+execute:
+  echo: false
+  message: false
+  warning: false
+fig-responsive: false
+collapse: false
+navbar: false
+sidebar: false
+---
+
+```{r setup}
+library(tidyverse)
+library(sf)#for geo stuff
+# library(tmap)#for mapping 
+library(zoo)#for making smoothed moving averages
+library(patchwork)#combine ggplots easily
+library(plotly)#For interactive plots
+library(RColorBrewer)
+
+source('../functions/misc_functions.R')
+source('../functions/adhoc_functions.R')
+#source('functions/misc_functions.R')
+#source('functions/adhoc_functions.R')
+
+options(scipen = 999)
+
+# Data for this side of reality
+itl3.ynh = readRDS('../local/data/itl3ynh.rds')
+itl1.summedtoitl3SICs = readRDS('../local/data/itl1summedtoitl3SICs.rds')
+bres.gva.2d = readRDS('../local/data/bresgva2d.rds')
+
+ynhshortnames = readRDS('../local/data/ynhshortnames.rds')
+
+# Order sector list by the LQs for Y&H as a whole
+sectororder = itl1.summedtoitl3SICs %>% 
+  filter(qg('humber',Region_name), year == max(year)) %>% 
+  arrange(-LQ) %>% 
+  pull(SIC07_description)
+
+sectorlist = unique(itl3.ynh$SIC07_description)[!qg('households|personal service|membership',unique(itl3.ynh$SIC07_description))]
+
+sectorlist = factor(sectorlist, levels = sectororder, ordered = T)
+
+
+```
+
+
+
+## Manufacture of furniture; other manufacturing
+
+
+```{r, fig-Manufactureoffurnitureothermanufacturing}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Manufacture of furniture; other manufacturing")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+## Manufacture of textiles, wearing apparel and leather
+
+
+```{r, fig-Manufactureoftextileswearingapparelandleather}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Manufacture of textiles, wearing apparel and leather")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```
+
+
+## Manufacture of basic and fabricated metal products
+
+
+```{r, fig-Manufactureofbasicandfabricatedmetalproducts}
+#| fig-width: 8
+#| fig-height: 15
+
+p = ynh_autoplots("Manufacture of basic and fabricated metal products")
+
+
+# Text for adding to qgm document to plot the three combined plots
+if(!is.null(p[[3]])){
+  
+  plottosave = p[[1]] / p[[2]] / p[[3]] + patchwork::plot_layout(heights = c(3, 12, 12))
+  
+} else {
+  
+  plottosave = p[[1]] / p[[2]] + patchwork::plot_layout(heights = c(3, 12))
+  
+}
+
+plottosave
+
+
+
+
+```

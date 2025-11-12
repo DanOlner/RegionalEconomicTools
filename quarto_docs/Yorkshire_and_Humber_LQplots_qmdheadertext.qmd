@@ -1,0 +1,52 @@
+---
+title: "Yorkshire and The Humber: sector plot dictionary (November 2025)"
+author:
+  - name: "Dan Olner"
+format: 
+  html:
+    output-file: "Yorkshire_n_Humber_sector_dictionary_November2025"
+    fig-width: 8
+    fig-height: 8
+execute:
+  echo: false
+  message: false
+  warning: false
+fig-responsive: false
+collapse: false
+navbar: false
+sidebar: false
+---
+
+```{r setup}
+library(tidyverse)
+library(sf)#for geo stuff
+library(tmap)#for mapping
+library(zoo)#for making smoothed moving averages
+library(patchwork)#combine ggplots easily
+library(plotly)#For interactive plots
+library(RColorBrewer)
+
+source('../functions/misc_functions.R')
+source('../functions/adhoc_functions.R')
+#source('functions/misc_functions.R')
+#source('functions/adhoc_functions.R')
+
+options(scipen = 999)
+
+# Data for this side of reality
+itl3.ynh = readRDS('../local/data/itl3ynh.rds')
+itl1.summedtoitl3SICs = readRDS('../local/data/itl1summedtoitl3SICs.rds')
+bres.gva.2d = readRDS('../local/data/bresgva2d.rds')
+
+ynhshortnames = readRDS('../local/data/ynhshortnames.rds')
+
+# For mapping
+mask = readRDS('../local/ynhmask.rds')
+itl3.ynh.zones = readRDS('../local/itl3ynh.rds')
+
+sq = readRDS('../local/data/sq.rds')
+hexsummary = readRDS('../local/hexsummary_for_dictionary.rds')
+
+tmap_mode('plot')
+
+```

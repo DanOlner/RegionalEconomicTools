@@ -1,0 +1,17 @@
+{
+  "hash": "cd8664332825e030b99373f332760ea2",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Yorkshire and The Humber: sector plot dictionary (November 2025)\"\nauthor:\n  - name: \"Dan Olner\"\nformat: \n  html:\n    output-file: \"Yorkshire_n_Humber_sector_dictionary_Nov2025\"\n    fig-width: 8\n    fig-height: 8\nexecute:\n  echo: false\n  message: false\n  warning: false\nfig-responsive: false\ncollapse: false\nnavbar: false\nsidebar: false\n---\n\n\n::: {.cell}\n\n:::\n\n\n\n\n## Manufacture of furniture; other manufacturing\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](testquarto_files/figure-html/fig-Manufactureoffurnitureothermanufacturing-1.png){#fig-Manufactureoffurnitureothermanufacturing width=768}\n:::\n:::\n\n\n\n## Manufacture of textiles, wearing apparel and leather\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](testquarto_files/figure-html/fig-Manufactureoftextileswearingapparelandleather-1.png){#fig-Manufactureoftextileswearingapparelandleather width=768}\n:::\n:::\n\n\n\n## Manufacture of basic and fabricated metal products\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](testquarto_files/figure-html/fig-Manufactureofbasicandfabricatedmetalproducts-1.png){#fig-Manufactureofbasicandfabricatedmetalproducts width=768}\n:::\n:::\n",
+    "supporting": [
+      "testquarto_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

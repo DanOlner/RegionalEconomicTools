@@ -221,7 +221,7 @@ ggplot(london.chk, aes(x =year, y = london_percent)) +
 
 
 
-
+# plotz = ynh_autoplots("Manufacture of furniture; other manufacturing")
 
 
 
@@ -921,7 +921,160 @@ patchwork::wrap_plots(plotz,ncol = 1)
 
 
 
-# WAYS OF SHOWING Y&H AS A WHOLE VERSUS VARIETY WITHIN----
+## 2D GVA V JOB PLOTS FOR Y&H ITL3s----
+
+# Sticking them all on together, let's see if that works.
+# Percent changes done in the function
+  
+bres.gva.2d = bres.gva %>% 
+  arrange(year) %>% 
+  group_by(Region_name,SIC07_description) %>%
+  mutate(
+    gva_movingav = rollapply(gva,smoothband,mean,align='center',fill=NA),
+    jobcount_movingav = rollapply(JOBCOUNT,smoothband,mean,align='center',fill=NA),
+    `gva/job` = (gva_movingav / jobcount_movingav) * 1000,
+    placename_shorter = case_when(
+      qg('east rid',Region_name) ~ 'East Riding',
+      qg('north and north',Region_name) ~ "N/NE L'shire",
+      qg('north york',Region_name) ~ 'N Yorks',
+      qg('Calderdale and K',Region_name) ~ "C'dale/K'lees",
+      .default = Region_name)# e.g. york stays the same
+  ) %>% ungroup() %>% 
+  filter(!is.na(jobcount_movingav))#keep only smoothed years
+  
+# Get list of shorter place names for Y&H
+ynhshortnames = bres.gva.2d %>%
+  filter(Region_name %in% ynh_itl3s$ITL325NM) %>% 
+  pull(placename_shorter) %>% 
+  unique
+
+saveRDS(ynhshortnames, 'local/data/ynhshortnames.rds')
+
+# Add in sector regional prop of jobs
+# No, don't do this, gva here is chained volume, can't sum!
+# bres.gva.2d = bres.gva.2d %>% 
+#   group_split(year) %>% 
+#   map(add_location_quotient_and_proportions, 
+#       regionvar = Region_name,
+#       lq_var = SIC07_description,
+#       valuevar = gva_movingav) %>% 
+#       # valuevar = jobcount_movingav) %>% 
+#   bind_rows()
+
+# Use GVA proportion from current prices instead to get a value to filter on
+itl3.for2d = read_csv("data/regionalGVA/regionalGVA_currentprices_itl3_SIC_2DIGIT_LONG_2023.csv")
+# 
+itl3.for2d = itl3.for2d %>%
+  mutate(value = ifelse(value == -1, 0, value)) %>%
+  arrange(year) %>%
+  group_by(Region_name,SIC07_description) %>%
+  mutate(
+    gva_movingav = rollapply(value,smoothband,mean,align='center',fill=NA)
+  ) %>%
+  ungroup() %>%
+  filter(!is.na(gva_movingav)) #Keep only smoothed data years
+# mutate(gva_movingav = round(gva_movingav,0))
+ 
+itl3.for2d = itl3.for2d %>%
+  group_split(year) %>%
+  map(add_location_quotient_and_proportions,
+      regionvar = Region_name,
+      lq_var = SIC07_description,
+      valuevar = gva_movingav) %>%
+  bind_rows() %>% 
+  filter(!is.na(gva_movingav)) #Keep only smoothed data years
+
+
+ #Add in the sector proportions to filter by
+bres.gva.2d = bres.gva.2d %>% 
+  left_join(
+    itl3.for2d %>% select(ITL_code,year,SIC07_code,sector_regional_propfrom_CP = sector_regional_proportion),
+    by = c('ITL_code','year','SIC07_code')
+  )
+
+# Tick
+# table(!is.na(chk$sector_regional_propfrom_CP))
+
+# Save for retroactivity sticking in multiplot above
+saveRDS(bres.gva.2d, 'local/data/bresgva2d.rds')
+
+
+sector <- bres.gva %>%
+  # filter(qg('information',SIC07_description)) %>%
+  filter(qg('fabricated',SIC07_description)) %>%
+  pull(SIC07_description) %>%
+  unique()
+
+for(sector in unique(bres.gva$SIC07_description)){
+
+  placestokeep <- bres.gva.2d %>% 
+    filter(year == max(year), SIC07_description == sector) %>% 
+    filter(sector_regional_propfrom_CP * 100 > 1.5) %>%#Keep only places where this sector makes up 1%+ of reg econ
+    select(placename_shorter) %>% 
+    distinct() %>% 
+    pull
+  
+  # Check we've got some places and some ynh places
+  if(length(placestokeep) > 0 & mean(ynhshortnames %in% placestokeep) > 0){
+  
+    p <- twod_percentplot(
+      df = bres.gva.2d %>% filter(SIC07_description == sector, placename_shorter %in% placestokeep),
+      category_var = placename_shorter,
+      x_var = gva_movingav,
+      y_var = jobcount_movingav,#
+      # y_var = JOBS_sector_regional_percent_movingav,#this shows structural change better - jobs have grown nominally in most sectors (but breaks GVA/job diagonal)
+      timevar = year,
+      label_var = `gva/job`,
+      category_var_value_to_highlight = ynhshortnames,
+      label_only_highlightedplaces = T,
+      start_time = 2016,
+      end_time = 2022,
+      returndata = T,
+      backgroundvectoralpha = 0.2
+    )
+    
+    # Get range if percents just for any ynh itl3s present
+    ynh_data = p[[2]] %>% filter(placename_shorter %in% ynhshortnames)
+    
+    xminmax = range(ynh_data$x_pct_change)
+    yminmax = range(ynh_data$y_pct_change)
+    
+    # If no neg values, adjust
+    # # if(xminmax[1] > 0) xminmax[1] = -20
+    # if(yminmax[1] > 0) yminmax[1] = -20
+    
+    # Test values for within padding range
+    # xminmax = c(-10,10)
+    
+    # Make sure each axis has at least a bit of padding
+    padding = 20
+    # xminmax = ifelse(abs(xminmax) < 20, 20 * (xminmax / abs(xminmax)), xminmax)
+  
+    xminmax <- pmax(pmin(xminmax, c(-padding, Inf)), c(-Inf, padding))
+    yminmax <- pmax(pmin(yminmax, c(-padding, Inf)), c(-Inf, padding))
+    
+    # Zoom in on ynh places
+    # p[[1]] = p[[1]] + coord_fixed()
+    p[[1]] = p[[1]] + coord_fixed(xlim = xminmax * 1.2, ylim = yminmax * 1.2)
+    
+    p[[1]] <- p[[1]] + 
+      # ggtitle(paste0(sector,': ', round(bradjobs/1000,1), 'K jobs in Bradford, ',bradpercentjobs,'% of tot')) +
+      xlab("GVA % change 2015/17 av to 2021/23 av") +
+      ylab("JOB COUNT % change 2015/17 av to 2021/23 av") +
+      ggtitle(sector)
+    # coord_cartesian(xlim = c(-50,130), ylim = c(-30,100))
+    
+    # Remove punct and spaces from sector name for filename
+    ggsave(paste0('local/outputs/ynh_2djobgvapercentchangeplots/',gsub('[[:punct:]]| ','',sector),'.png'), plot = p[[1]], width = 10, height = 10)
+    
+  }#End if length placestokeep
+
+}
+
+
+
+
+# Y&H AS A WHOLE VERSUS VARIETY WITHIN----
 
 # Idea 1: LQ for Y&H and ITL1s sitting above LQ for ITL3s, for each SIC.
 # Which will need some SIC addition, but that’s OK.
@@ -1034,8 +1187,8 @@ itl1.summedtoitl3SICs = itl1.summedtoitl3SICs %>%
     gva_movingav = rollapply(value,smoothband,mean,align='center',fill=NA)
   ) %>% 
   ungroup() %>% 
-  filter(!is.na(gva_movingav)) %>% #Keep only smoothed data years
-  mutate(gva_movingav = round(gva_movingav,0))
+  filter(!is.na(gva_movingav)) #Keep only smoothed data years
+  # mutate(gva_movingav = round(gva_movingav,0))
 
 
 itl1.summedtoitl3SICs = itl1.summedtoitl3SICs %>% 
@@ -1050,7 +1203,8 @@ itl1.summedtoitl3SICs = itl1.summedtoitl3SICs %>%
 itl1.summedtoitl3SICs = itl1.summedtoitl3SICs %>%
   filter(year %in% year_range)
 
-
+# Save for use elsewhere
+saveRDS(itl1.summedtoitl3SICs, 'local/data/itl1summedtoitl3SICs.rds')
 
 
 
@@ -1066,8 +1220,8 @@ itl3 = itl3 %>%
     gva_movingav = rollapply(value,smoothband,mean,align='center',fill=NA)
   ) %>% 
   ungroup() %>% 
-  filter(!is.na(gva_movingav)) %>% #Keep only smoothed data years
-  mutate(gva_movingav = round(gva_movingav,0))
+  filter(!is.na(gva_movingav)) #Keep only smoothed data years
+  # mutate(gva_movingav = round(gva_movingav,0))
 
 
 # Filter out London prior to LQs being found
@@ -1125,6 +1279,9 @@ itl3.ynh = itl3.ynh %>%
 unique(itl3.ynh$placename_shorter)  
 unique(itl3.ynh$placename_shortest)  
 
+# Save for use elsewhere
+saveRDS(itl3.ynh, 'local/data/itl3ynh.rds')
+
 
 
 # Actually, just realising what I'm after is a bit different, probably:
@@ -1142,6 +1299,8 @@ unique(itl3.ynh$placename_shortest)
 # Test sector
 # sector = unique(itl3$SIC07_description)[qg('petrol',unique(itl3$SIC07_description))]
 sectorlist = unique(itl3$SIC07_description)[!qg('households|personal service|membership',unique(itl3$SIC07_description))]
+
+bres.gva.2d = readRDS('local/data/bresgva2d.rds')
 
 for(sector in sectorlist){
 
@@ -1222,7 +1381,8 @@ for(sector in sectorlist){
     theme(
       # axis.title.y=element_blank(),
       axis.text.y=element_blank(),
-      axis.ticks.y=element_blank()
+      axis.ticks.y=element_blank(),
+      plot.title = element_text(hjust = 0.5,face = "bold", size = 14)
       ) +
     ylab(yaxisdisplay) +
     ggtitle(sector) +
@@ -1273,7 +1433,7 @@ for(sector in sectorlist){
   # Join other SIC levels to it so we can break down into production / other
   # I think I have a lookup for that, though that will need a tweak due to one extra sector in ITL1
   
-  # Have just updated regionalGVA_siccode_lookupmaker.R for ITL1 as well...
+  # Have just upyeard regionalGVA_siccode_lookupmaker.R for ITL1 as well...
   # (Forgot I had that!)
   # gvalookup_itl3 = read_csv('data/siclookup_forregionalGVAcategories_ITL3.csv')
   
@@ -1292,7 +1452,7 @@ for(sector in sectorlist){
       displayregions = paste0(
         placename_shorter,
         ": £",
-        gva_movingav,
+        round(gva_movingav,0),
         "M, ",
         round(sector_regional_proportion * 100,2),
         "%"
@@ -1346,16 +1506,153 @@ for(sector in sectorlist){
     coord_cartesian(xlim = plot_range) +
     ggtitle("")
   
-  plottosave = p / p2 +  patchwork::plot_layout(heights = c(2, 10))
-
-    # Hmm, if we're doing this by sector, I can stick a map of Y&H at the bottom of this can't I?
-  # Would that be useful or too much?
   
+  # ALSO GET JOBS/GVA 2D PLOT (worked out below)
+  p3 = persector_jobsgva_percentchangeplot_ynh(sector)
+  
+  # If we have a 2D plot (i.e. at least one ynh place has 2%+ jobs in this sector)
+  if(!is.null(p3)){
     
-  # Remove punctuation and spaces from filename
-  ggsave(paste0('local/outputs/ynh_sectorLQplots/',gsub('[[:punct:]]| ','',sector),'.png'), plot = plottosave, width = 7, height = 8)
+    plottosave = p / p2 / p3 + patchwork::plot_layout(heights = c(2, 10, 10))
+    
+    # Remove punctuation and spaces from filename
+    ggsave(paste0('local/outputs/ynh_sectorLQplots/',gsub('[[:punct:]]| ','',sector),'.png'), plot = plottosave, width = 9, height = 17)
+    
+  } else {
+    
+    plottosave = p / p2 + patchwork::plot_layout(heights = c(2, 10))
+    
+    # Remove punctuation and spaces from filename
+    ggsave(paste0('local/outputs/ynh_sectorLQplots/',gsub('[[:punct:]]| ','',sector),'.png'), plot = plottosave, width = 9, height = 11)
+    
+  }
+  
 
 }#end for sector
+
+
+# Some checks
+# itl3.ynh and bres.gva.2d should have the same 21-23 sector regional props
+# But they're not showing up like that
+# How come?
+
+# Hah - 2022 is the reference year for CV isn't it? 
+# GVA values won't match in other years...? Tick
+# So yes - BRES + GVA is using chained volume, ITL3 is using current prices...
+# itl3.ynh %>% filter(year == 2016, placename_shorter %in% ynhshortnames, qg('petrol', SIC07_description)) %>% View('itl3')
+# bres.gva.2d %>% filter(year == 2016, placename_shorter %in% ynhshortnames,qg('petrol', SIC07_description)) %>% View('bres2d')
+
+
+
+
+## Check moving average discrepancy----
+
+# Oooooh. Scratch that. Realised before looking - 
+# itl3 is current prices, BRES + GVA is using chained volume values
+# I can filter, but it'll need to be by the CP source - DO NOT find LQs from CV!
+
+
+# Between bres.gva and itl3 above
+# LQ will be different if London not excluded BUT
+# That shouldn't affect GVA moving avs or per-region sector proportions
+# And they're different. Why?
+
+# ITL1s here have been binned into the ITL3 less-granular SICs
+# But again that shouldn't it as will share same SICs
+
+# So, let's just redo each from source
+
+# ITL3 raw first
+# itl3 = read_csv("data/regionalGVA/regionalGVA_currentprices_ITL3_SIC_2DIGIT_LONG_2023.csv")
+# 
+# itl3 = itl3 %>% 
+#   mutate(value = ifelse(value == -1, 0, value)) %>% 
+#   arrange(year) %>% 
+#   group_by(Region_name,SIC07_description) %>% 
+#   mutate(
+#     gva_movingav = rollapply(value,smoothband,mean,align='center',fill=NA)
+#   ) %>% 
+#   ungroup() %>% 
+#   filter(!is.na(gva_movingav)) #Keep only smoothed data years
+# # mutate(gva_movingav = round(gva_movingav,0))
+# 
+# 
+# # Then BRES + GVA
+# bres.gva.2d = bres.gva %>% 
+#   arrange(year) %>% 
+#   group_by(Region_name,SIC07_description) %>%
+#   mutate(
+#     gva_movingav = rollapply(gva,smoothband,mean,align='center',fill=NA),
+#     jobcount_movingav = rollapply(JOBCOUNT,smoothband,mean,align='center',fill=NA),
+#     `gva/job` = (gva_movingav / jobcount_movingav) * 1000,
+#     placename_shorter = case_when(
+#       qg('east rid',Region_name) ~ 'East Riding',
+#       qg('north and north',Region_name) ~ "N/NE L'shire",
+#       qg('north york',Region_name) ~ 'N Yorks',
+#       qg('Calderdale and K',Region_name) ~ "C'dale/K'lees",
+#       .default = Region_name)# e.g. york stays the same
+#   ) %>% ungroup() %>% 
+#   filter(!is.na(jobcount_movingav))#keep only smoothed years
+# 
+# 
+# 
+# 
+# # Filter out London prior to LQs being found
+# londonitl3s = itl2025lookup %>% 
+#   filter(qg('London', ITL125NM)) %>% 
+#   pull(ITL325NM)
+# 
+# itl3 = itl3 %>% filter(!Region_name %in% londonitl3s)
+# 
+# 
+# itl3 = itl3 %>% 
+#   group_split(year) %>% 
+#   map(add_location_quotient_and_proportions, 
+#       regionvar = Region_name,
+#       lq_var = SIC07_description,
+#       valuevar = gva_movingav) %>% 
+#   bind_rows()
+# 
+# # Keep only these smoothed years to display
+# itl3 = itl3 %>% filter(year %in% year_range)
+# 
+# 
+# # Then BRES + GVA
+# bres.gva.2d = bres.gva %>% 
+#   arrange(year) %>% 
+#   group_by(Region_name,SIC07_description) %>%
+#   mutate(
+#     gva_movingav = rollapply(gva,smoothband,mean,align='center',fill=NA),
+#     jobcount_movingav = rollapply(JOBCOUNT,smoothband,mean,align='center',fill=NA),
+#     `gva/job` = (gva_movingav / jobcount_movingav) * 1000,
+#     placename_shorter = case_when(
+#       qg('east rid',Region_name) ~ 'East Riding',
+#       qg('north and north',Region_name) ~ "N/NE L'shire",
+#       qg('north york',Region_name) ~ 'N Yorks',
+#       qg('Calderdale and K',Region_name) ~ "C'dale/K'lees",
+#       .default = Region_name)# e.g. york stays the same
+#   ) %>% ungroup() %>% 
+#   filter(!is.na(jobcount_movingav))#keep only smoothed years
+# 
+# # Get list of shorter place names for Y&H
+# ynhshortnames = bres.gva.2d %>%
+#   filter(Region_name %in% ynh_itl3s$ITL325NM) %>% 
+#   pull(placename_shorter) %>% 
+#   unique
+# 
+# # Add in sector regional prop of jobs
+# bres.gva.2d = bres.gva.2d %>% 
+#   group_split(year) %>% 
+#   map(add_location_quotient_and_proportions, 
+#       regionvar = Region_name,
+#       lq_var = SIC07_description,
+#       valuevar = gva_movingav) %>% 
+#   # valuevar = jobcount_movingav) %>% 
+#   bind_rows()
+# 
+
+
+
 
 
 
@@ -1399,10 +1696,13 @@ ch = ch %>%
 # Now let's find a useful hexmap size and summarise...
 
 # From AI economy work / sector_linkages.R
-sq = st_make_grid(ch, cellsize = 3000, square = F)
+sq = st_make_grid(ch, cellsize = 4000, square = F)
 
 #Turn into sf object so gridsquares can have IDs to group by
 sq <- sq %>% st_sf() %>% mutate(id = 1:nrow(.))
+
+# Save for automated maps
+saveRDS(sq,'local/data/sq.rds')
 
 overlay <- st_intersection(ch,sq)
 
@@ -1430,10 +1730,17 @@ hexsummary <- overlay %>%
   # group_by(id) %>%
   # filter(sum(totalemployees) >= 10) %>% #keep only gridsquares where total employee count is more than / equal to 100
 
+# Save that for use elsewhere
+saveRDS(hexsummary,'local/hexsummary_for_dictionary.rds')
+
+
+
 # Do the total employee filter when we're down to sectors...
 # Test one now!
 # sector = unique(itl3$SIC07_description)[qg('informat',unique(itl3$SIC07_description))]
-sector = unique(itl3$SIC07_description)[qg('fabricated',unique(itl3$SIC07_description))]
+# sector = unique(itl3$SIC07_description)[qg('fabricated',unique(itl3$SIC07_description))]
+sector = unique(itl3$SIC07_description)[qg('textiles',unique(itl3$SIC07_description))]
+# sector = unique(itl3$SIC07_description)[qg('furniture',unique(itl3$SIC07_description))]
 # sector = unique(itl3$SIC07_description)[qg('agri',unique(itl3$SIC07_description))]
 
 hexsummary.sector = hexsummary %>% filter(SIC07_description_from_ITL3 == sector)
@@ -1457,18 +1764,18 @@ sq.ch <- sq.ch %>%
 # tmap_mode('view')
 tmap_mode('plot')
 
-tm_shape(itl3.2025 %>% filter(ITL325CD %in% itl2025lookup$ITL325CD[itl2025lookup$ITL125NM == 'Yorkshire and The Humber'])) +
-  tm_polygons(fill = '#a6baa8') +
-tm_shape(sq.ch %>% filter(emp_percentchange < 100)) +
-  tm_polygons(
-    fill = tm_vars(c("totalemployees_thisyear", "emp_percentchange"),
-                   multivariate = TRUE), id="hovertext",
-    fill.scale = 
-      tm_scale_bivariate(
-        scale1 = tm_scale_intervals(style = "kmeans", n = 3, labels = c("L", "M", "H")),
-        scale2 = tm_scale_intervals(style = "kmeans", n = 3, labels = c("L", "M", "H")),
-        # values = "stevens.bluered")) +
-        values = "bu_br_bivs")) 
+# tm_shape(itl3.2025 %>% filter(ITL325CD %in% itl2025lookup$ITL325CD[itl2025lookup$ITL125NM == 'Yorkshire and The Humber'])) +
+#   tm_polygons(fill = '#a6baa8') +
+# tm_shape(sq.ch %>% filter(emp_percentchange < 100)) +
+#   tm_polygons(
+#     fill = tm_vars(c("totalemployees_thisyear", "emp_percentchange"),
+#                    multivariate = TRUE), id="hovertext",
+#     fill.scale = 
+#       tm_scale_bivariate(
+#         scale1 = tm_scale_intervals(style = "kmeans", n = 3, labels = c("L", "M", "H")),
+#         scale2 = tm_scale_intervals(style = "kmeans", n = 3, labels = c("L", "M", "H")),
+#         # values = "stevens.bluered")) +
+#         values = "bu_br_bivs")) 
   # tm_view(set.view = c(7, 51, 4)) +
   # tm_shape(itl3.2025) +
   # tm_polygons( = 'black', lwd = 1, fill_alpha = 0.3) 
@@ -1479,24 +1786,87 @@ tm_shape(sq.ch %>% filter(emp_percentchange < 100)) +
 # tm_view(bbox = "England")
 
 
+# Make a masking layer
+mask = st_bbox(itl3.2025 %>% filter(ITL325CD %in% itl2025lookup$ITL325CD[itl2025lookup$ITL125NM == 'Yorkshire and The Humber'])) %>% st_as_sfc()
+
+mask = st_buffer(mask, dist = 10000, endCapStyle = "SQUARE")
+
+ynhshp = st_union(itl3.2025 %>% filter(ITL325CD %in% itl2025lookup$ITL325CD[itl2025lookup$ITL125NM == 'Yorkshire and The Humber']))
+
+# Leave a hole for Y&H to show through
+mask = st_difference(mask, ynhshp)
+
+# Save mask for use elsewhere
+saveRDS(mask,'local/ynhmask.rds')
+
+# Pre-filter Y&H ITL3s, again for ease of re-use
+itl3.ynh = itl3.2025 %>% filter(ITL325CD %in% itl2025lookup$ITL325CD[itl2025lookup$ITL125NM == 'Yorkshire and The Humber'])
+
+saveRDS(itl3.ynh,'local/itl3ynh.rds')
+
 # OK, maybe not bivariate!
-tm_shape(itl3.2025 %>% filter(ITL325CD %in% itl2025lookup$ITL325CD[itl2025lookup$ITL125NM == 'Yorkshire and The Humber'])) +
+tm_basemap("OpenStreetMap") +
+  tm_shape(mask) +#add in masking layer for rest of basemap
+  tm_polygons(col = 'white', fill = 'white') +
+tm_shape(itl3.2025 %>% filter(ITL325CD %in% itl2025lookup$ITL325CD[itl2025lookup$ITL125NM == 'Yorkshire and The Humber']), is.main = TRUE) +
   # tm_polygons(fill = '#a6baa8') +
-  tm_polygons(fill = 'darkgrey') +
+  tm_polygons(fill = 'white', fill_alpha = 0.6) +
   # tm_shape(sq.ch %>% filter(emp_percentchange < 100)) +
+  tm_shape(sq.ch %>% mutate(emp_percentchange = ifelse(emp_percentchange > 100, 100, emp_percentchange))) +#Cap at 100 for display purposes; those can be "100%+ increase"
   # tm_shape(sq.ch %>% filter(totalemployees_thisyear > 50)) +
-  tm_shape(sq.ch) +
+  # tm_shape(sq.ch) +
   tm_polygons(
-    # fill = "emp_percentchange", id="hovertext",
-    fill = "totalemployees_thisyear", id="hovertext",
-    fill.scale = tm_scale_intervals(style = "kmeans", n = 9, values = "matplotlib.rd_yl_bu"),
-    col_alpha = 0
-    ) 
+    fill = "emp_percentchange", id="hovertext",
+    # fill = "totalemployees_thisyear", id="hovertext",
+    fill.scale = tm_scale_intervals(style = "pretty", n = 3, values = "matplotlib.rd_yl_bu"),
+    # fill.scale = tm_scale_intervals(style = "kmeans", n = 4, values = "matplotlib.rd_yl_bu"),
+    col_alpha = 0.5
+    ) +
+  tm_shape(itl3.2025 %>% filter(ITL325CD %in% itl2025lookup$ITL325CD[itl2025lookup$ITL125NM == 'Yorkshire and The Humber'])) +
+  tm_borders(col_alpha = 0.3)
 
 
 
+## SAVE MAPS FOR RE-USE----
 
+# Openstreetmap doesn't work in quarto, it seems.
+# Save as images and use those instead.
+for(sector in unique(itl3$SIC07_description)[!qg("households|personal service|membership|occupiers' imputed",unique(itl3$SIC07_description))]){
 
+  hexsummary.sector = hexsummary %>% filter(SIC07_description_from_ITL3 == sector)
+  
+  #Link that back into the grid squares...
+  #Use right join to drop empties
+  sq.ch <- sq %>% 
+    right_join(
+      hexsummary.sector,
+      by = 'id'
+    ) %>% 
+    filter(totalemployees_thisyear >= 10) %>% 
+    mutate(
+      emp_percentchange = percent_change(totalemployees_thisyear,totalemployees_lastyear)
+    )
+  
+  sq.ch <- sq.ch %>% 
+    mutate(hovertext = paste0("Firm count: ",totalfirms, ", id: ",id))
+  
+  # OK, maybe not bivariate!
+  p =  tm_basemap("OpenStreetMap") +
+    tm_shape(mask) +#add in masking layer for rest of basemap
+    tm_polygons(col = 'white', fill = 'white') +
+    tm_shape(itl3.2025 %>% filter(ITL325CD %in% itl2025lookup$ITL325CD[itl2025lookup$ITL125NM == 'Yorkshire and The Humber']), is.main = TRUE) +
+    tm_polygons(fill = 'white', fill_alpha = 0.6) +
+    tm_shape(sq.ch %>% mutate(emp_percentchange = ifelse(emp_percentchange > 100, 100, emp_percentchange))) + tm_polygons(
+      fill = "emp_percentchange", id="hovertext",
+      fill.scale = tm_scale_intervals(style = "pretty", n = 3, values = "matplotlib.rd_yl_bu"),
+      col_alpha = 0.5
+    ) +
+    tm_shape(itl3.2025 %>% filter(ITL325CD %in% itl2025lookup$ITL325CD[itl2025lookup$ITL125NM == 'Yorkshire and The Humber'])) +
+    tm_borders(col_alpha = 0.3)
+
+  tmap_save(p, paste0('local/outputs/ch_hexmaps_fordictionary/',gsub('[[:punct:]]| ','',sector),'.jpeg'), width = 7, height = 7)  
+
+}
 
 
 
