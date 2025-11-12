@@ -531,7 +531,9 @@ gva.gs.smoothed = gva.2digit %>%
 
 
 # Get proportion and LQ
+# Test version without London
 gva.gs.smoothed = gva.gs.smoothed %>% 
+  # filter(!qg('london', Region_name)) %>% 
   group_split(year) %>%
   map(add_location_quotient_and_proportions,
       regionvar = Region_name,
@@ -581,7 +583,7 @@ ggplot(
   scale_color_brewer(palette = 'Paired', direction = 1) +
   theme(legend.title = element_blank()) +
   guides(size = F) +
-  ylab('Percent service sectors') +
+  ylab('Location quotient') +
   scale_y_log10() +
   geom_hline(yintercept = 1) +
   facet_wrap(~goodsservices, scales = 'free_y')
@@ -603,6 +605,9 @@ gva.gs.smoothed %>%
     aes(x = year, y = lqsd, colour = goodsservices)
   ) + geom_line()
 
+# That's interesting... would like to see that for sections and 2 digit too at some point
+# A measure of changing specialisation / concentration over time
+# Which SD has gone up / dropped the most?
 
 # Let's wigglyplot this up
 # debugonce(twod_generictimeplot_multipletimepoints)
@@ -938,16 +943,32 @@ bres.gva.2d = bres.gva %>%
       qg('north and north',Region_name) ~ "N/NE L'shire",
       qg('north york',Region_name) ~ 'N Yorks',
       qg('Calderdale and K',Region_name) ~ "C'dale/K'lees",
-      .default = Region_name)# e.g. york stays the same
+      .default = Region_name),# e.g. york stays the same
+    placename_shortest = case_when(
+      Region_name == 'York' ~ 'Yk',
+      qg('east rid',Region_name) ~ 'ER',
+      qg('north and north',Region_name) ~ 'NL',
+      qg('north york',Region_name) ~ 'NY',
+      qg('Sheffield',Region_name) ~ 'Sh',
+      qg('Barnsley',Region_name) ~ 'Ba',
+      qg('Rother',Region_name) ~ 'Ro',
+      qg('Doncast',Region_name) ~ 'Do',
+      qg('Bradford',Region_name) ~ 'Br',
+      qg('Leeds',Region_name) ~ 'Le',
+      qg('Calderdale and K',Region_name) ~ 'CK',
+      qg('Wakefield',Region_name) ~ 'Wa',
+      .default = Region_name
+    )
   ) %>% ungroup() %>% 
   filter(!is.na(jobcount_movingav))#keep only smoothed years
   
 # Get list of shorter place names for Y&H
 ynhshortnames = bres.gva.2d %>%
   filter(Region_name %in% ynh_itl3s$ITL325NM) %>% 
-  pull(placename_shorter) %>% 
+  pull(placename_shortest) %>% 
   unique
 
+saveRDS(ynhshortnames, 'local/data/ynhshortestnames.rds')
 saveRDS(ynhshortnames, 'local/data/ynhshortnames.rds')
 
 # Add in sector regional prop of jobs
@@ -1010,7 +1031,7 @@ for(sector in unique(bres.gva$SIC07_description)){
   placestokeep <- bres.gva.2d %>% 
     filter(year == max(year), SIC07_description == sector) %>% 
     filter(sector_regional_propfrom_CP * 100 > 1.5) %>%#Keep only places where this sector makes up 1%+ of reg econ
-    select(placename_shorter) %>% 
+    select(placename_shortest) %>% 
     distinct() %>% 
     pull
   
@@ -1018,8 +1039,8 @@ for(sector in unique(bres.gva$SIC07_description)){
   if(length(placestokeep) > 0 & mean(ynhshortnames %in% placestokeep) > 0){
   
     p <- twod_percentplot(
-      df = bres.gva.2d %>% filter(SIC07_description == sector, placename_shorter %in% placestokeep),
-      category_var = placename_shorter,
+      df = bres.gva.2d %>% filter(SIC07_description == sector, placename_shortest %in% placestokeep),
+      category_var = placename_shortest,
       x_var = gva_movingav,
       y_var = jobcount_movingav,#
       # y_var = JOBS_sector_regional_percent_movingav,#this shows structural change better - jobs have grown nominally in most sectors (but breaks GVA/job diagonal)
@@ -1030,11 +1051,13 @@ for(sector in unique(bres.gva$SIC07_description)){
       start_time = 2016,
       end_time = 2022,
       returndata = T,
-      backgroundvectoralpha = 0.2
+      backgroundvectoralpha = 0.2,
+      # useboxoverlayforlabels = T,
+      overlay_arrowsize = 1
     )
     
     # Get range if percents just for any ynh itl3s present
-    ynh_data = p[[2]] %>% filter(placename_shorter %in% ynhshortnames)
+    ynh_data = p[[2]] %>% filter(placename_shortest %in% ynhshortnames)
     
     xminmax = range(ynh_data$x_pct_change)
     yminmax = range(ynh_data$y_pct_change)

@@ -4,7 +4,6 @@
 # The header is its own qmd - everything above the first output, and any loaded code
 # We then loop HERE over each relevant sector
 # And from that, add to the header text to produce the full qmd file.
-
 library(tidyverse)
 
 # Get the header text

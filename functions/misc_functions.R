@@ -1064,7 +1064,7 @@ percent_change <- function(x,y) ((y - x) / x) * 100
 # Y_var, values e.g. job count
 # Category_Var = either e.g. places or sectors
 #Label var, from the two time points, to display
-twod_generictimeplot_normalisetozero <- function(df, category_var, x_var, y_var, timevar, label_var, start_time, end_time, compasspoints_to_display = c('NE','NW','SE','SW'), backgroundvectoralpha = 0.5, category_var_value_to_highlight="NULL", label_only_highlightedplaces = FALSE){
+twod_generictimeplot_normalisetozero <- function(df, category_var, x_var, y_var, timevar, label_var, start_time, end_time, compasspoints_to_display = c('NE','NW','SE','SW'), backgroundvectoralpha = 0.5, category_var_value_to_highlight="NULL", overlay_arrowsize = 2, label_only_highlightedplaces = FALSE, useboxoverlayforlabels = FALSE){
   
   category_var <- enquo(category_var)   
   x_var <- enquo(x_var)
@@ -1146,67 +1146,77 @@ twod_generictimeplot_normalisetozero <- function(df, category_var, x_var, y_var,
                         aes(x = 0, y = 0 ,
                             xend = x_pct_change, yend = y_pct_change), 
                         arrow = arrow(length = unit(0.5, "cm")),
-                        size = 2, colour = '#3333ff'
+                        size = overlay_arrowsize, colour = '#3333ff'
   )
   
   #Label only selected places and force all labels to appear
-  if(label_only_highlightedplaces){
-    
-    # #Reduce to latest year and merge in values for labels
-    label_df <- twoy %>% 
-      filter(
-        !!timevar==max(!!timevar), 
-        compass %in% compasspoints_to_display,
-        !!category_var %in% category_var_value_to_highlight
-        ) %>%
-      left_join(
-        twoy.wide %>% select(!!category_var,label_start,label_end,x_pct_change,y_pct_change,category_var_val_to_highlight)
-      ) %>% 
-      mutate(category_var_val_to_highlight = ifelse(category_var_val_to_highlight, 'bold','plain'))
-    
-    p <- p + geom_text_repel(
-      data = label_df,
-      aes(x = x_pct_change, y = y_pct_change,fontface = category_var_val_to_highlight,
-          label = paste0(!!category_var, "\n(",quo_name(label_var),": ",round(label_start,2),ifelse(label_start < label_end," >> "," << "),round(label_end,2),")"),
-          colour = compass),
-      alpha=1,
-      nudge_x = .05,
-      box.padding = 1,
-      nudge_y = 0.05,
-      segment.curvature = -0.1,
-      segment.ncp = 0.3,
-      segment.angle = 20,
-      max.overlaps = 99999
-    ) +
-      scale_color_manual(values = setNames(c("red", "black",'#7fc97f','#beaed4','#fdc086','#1f78b4'),
-                                           c(start_time, end_time,'NE','SE','NW','SW')))
+  if(!useboxoverlayforlabels){
   
+    if(label_only_highlightedplaces){
+      
+      # #Reduce to latest year and merge in values for labels
+      label_df <- twoy %>% 
+        filter(
+          !!timevar==max(!!timevar), 
+          compass %in% compasspoints_to_display,
+          !!category_var %in% category_var_value_to_highlight
+          ) %>%
+        left_join(
+          twoy.wide %>% select(!!category_var,label_start,label_end,x_pct_change,y_pct_change,category_var_val_to_highlight)
+        ) %>% 
+        mutate(category_var_val_to_highlight = ifelse(category_var_val_to_highlight, 'bold','plain'))
+      
+      p <- p + geom_label_repel(
+        data = label_df,
+        aes(x = x_pct_change, y = y_pct_change,fontface = category_var_val_to_highlight,
+            label = paste0(!!category_var),
+        # aes(x = x_pct_change, y = y_pct_change,fontface = category_var_val_to_highlight,
+        #     label = paste0(!!category_var, "\n(",quo_name(label_var),": ",round(label_start,2),ifelse(label_start < label_end," >> "," << "),round(label_end,2),")"),
+            colour = compass),
+        alpha=1,
+        nudge_x = .05,
+        box.padding = 1,
+        nudge_y = 0.05,
+        segment.curvature = -0.1,
+        segment.ncp = 0.3,
+        segment.angle = 20,
+        max.overlaps = 99999
+      ) +
+        scale_color_manual(values = setNames(c("red", "black",'#7fc97f','#beaed4','#fdc086','#1f78b4'),
+                                             c(start_time, end_time,'NE','SE','NW','SW')))
+    
+      
+    } else {
+      
+      # #Reduce to latest year and merge in values for labels
+      label_df <- twoy %>% filter(!!timevar==max(!!timevar), compass %in% compasspoints_to_display) %>%
+        left_join(
+          twoy.wide %>% select(!!category_var,label_start,label_end,x_pct_change,y_pct_change,category_var_val_to_highlight)
+        ) %>% 
+        mutate(category_var_val_to_highlight = ifelse(category_var_val_to_highlight, 'bold','plain'))
+      
+      p <- p + geom_text_repel(
+        data = label_df,
+        aes(x = x_pct_change, y = y_pct_change,fontface = category_var_val_to_highlight,
+            label = paste0(!!category_var, "\n(",quo_name(label_var),": ",round(label_start,2),ifelse(label_start < label_end," >> "," << "),round(label_end,2),")"),
+            colour = compass),
+        alpha=1,
+        nudge_x = .05,
+        box.padding = 1,
+        nudge_y = 0.05,
+        segment.curvature = -0.1,
+        segment.ncp = 0.3,
+        segment.angle = 20,
+        max.overlaps = 21
+      ) +
+        scale_color_manual(values = setNames(c("red", "black",'#7fc97f','#beaed4','#fdc086','#1f78b4'),
+                                             c(start_time, end_time,'NE','SE','NW','SW')))
+      
+  }
     
   } else {
     
-    # #Reduce to latest year and merge in values for labels
-    label_df <- twoy %>% filter(!!timevar==max(!!timevar), compass %in% compasspoints_to_display) %>%
-      left_join(
-        twoy.wide %>% select(!!category_var,label_start,label_end,x_pct_change,y_pct_change,category_var_val_to_highlight)
-      ) %>% 
-      mutate(category_var_val_to_highlight = ifelse(category_var_val_to_highlight, 'bold','plain'))
-    
-    p <- p + geom_text_repel(
-      data = label_df,
-      aes(x = x_pct_change, y = y_pct_change,fontface = category_var_val_to_highlight,
-          label = paste0(!!category_var, "\n(",quo_name(label_var),": ",round(label_start,2),ifelse(label_start < label_end," >> "," << "),round(label_end,2),")"),
-          colour = compass),
-      alpha=1,
-      nudge_x = .05,
-      box.padding = 1,
-      nudge_y = 0.05,
-      segment.curvature = -0.1,
-      segment.ncp = 0.3,
-      segment.angle = 20,
-      max.overlaps = 21
-    ) +
-      scale_color_manual(values = setNames(c("red", "black",'#7fc97f','#beaed4','#fdc086','#1f78b4'),
-                                           c(start_time, end_time,'NE','SE','NW','SW')))
+    # p = p + 
     
   }
   
@@ -1214,6 +1224,7 @@ twod_generictimeplot_normalisetozero <- function(df, category_var, x_var, y_var,
   
   
 }
+
 
 
 
