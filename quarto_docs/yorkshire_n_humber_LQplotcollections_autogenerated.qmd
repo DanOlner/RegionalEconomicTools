@@ -1,10 +1,10 @@
 ---
-title: "Yorkshire and The Humber: sector plot dictionary (November 2025)"
+title: "Yorkshire and The Humber: sector plot catalogue (November 2025)"
 author:
   - name: "Dan Olner"
 format: 
   html:
-    output-file: "Yorkshire_n_Humber_sector_dictionary_November2025"
+    output-file: "Yorkshire_n_Humber_sector_catalogue_November2025"
     fig-width: 8
     fig-height: 8
 execute:
@@ -84,7 +84,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Manufactureoffurnitureothermanufacturing.jpeg){width="700px"}
@@ -123,7 +123,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Manufactureoftextileswearingapparelandleather.jpeg){width="700px"}
@@ -162,7 +162,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Manufactureofbasicandfabricatedmetalproducts.jpeg){width="700px"}
@@ -201,7 +201,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Manufactureofwoodandpaperproductsandprinting.jpeg){width="700px"}
@@ -240,7 +240,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Manufactureofpetroleumchemicalsandotherminerals.jpeg){width="700px"}
@@ -279,7 +279,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Manufactureoffoodbeveragesandtobacco.jpeg){width="700px"}
@@ -318,7 +318,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Socialworkactivities.jpeg){width="700px"}
@@ -357,7 +357,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Employmentactivitiestourismandsecurityservices.jpeg){width="700px"}
@@ -396,7 +396,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Warehousingandtransportsupportactivities.jpeg){width="700px"}
@@ -435,7 +435,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Financialandinsuranceactivities.jpeg){width="700px"}
@@ -474,7 +474,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Electricitygaswatersewerageandwastemanagement.jpeg){width="700px"}
@@ -513,7 +513,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Foodandbeverageserviceactivities.jpeg){width="700px"}
@@ -552,7 +552,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Education.jpeg){width="700px"}
@@ -591,7 +591,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Officeadministrationandbusinesssupportactivities.jpeg){width="700px"}
@@ -630,7 +630,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Landwaterandairtransport.jpeg){width="700px"}
@@ -669,7 +669,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Residentialcareactivities.jpeg){width="700px"}
@@ -708,7 +708,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Realestateactivitiesexcludingimputedrental.jpeg){width="700px"}
@@ -747,7 +747,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Humanhealthactivities.jpeg){width="700px"}
@@ -786,7 +786,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Wholesaletrade.jpeg){width="700px"}
@@ -825,7 +825,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Constructionofbuildings.jpeg){width="700px"}
@@ -864,7 +864,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Motortrades.jpeg){width="700px"}
@@ -903,7 +903,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Retailtrade.jpeg){width="700px"}
@@ -942,7 +942,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Legalandaccountingactivities.jpeg){width="700px"}
@@ -981,7 +981,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Gamblingandbettingsportsandrecreationactivities.jpeg){width="700px"}
@@ -1020,7 +1020,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Specialisedconstructionactivities.jpeg){width="700px"}
@@ -1059,7 +1059,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Publicadministrationanddefence.jpeg){width="700px"}
@@ -1098,7 +1098,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Otherprofessionalscientificandtechnicalactivities.jpeg){width="700px"}
@@ -1137,7 +1137,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Headofficesandmanagementconsultancy.jpeg){width="700px"}
@@ -1176,7 +1176,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Postalandcourieractivities.jpeg){width="700px"}
@@ -1215,7 +1215,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Rentalandleasingactivities.jpeg){width="700px"}
@@ -1254,7 +1254,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Repairandinstallationofmachineryandequipment.jpeg){width="700px"}
@@ -1293,7 +1293,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Telecommunicationsinformationtechnology.jpeg){width="700px"}
@@ -1332,7 +1332,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Civilengineering.jpeg){width="700px"}
@@ -1371,7 +1371,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Agricultureforestryandfishingminingandquarrying.jpeg){width="700px"}
@@ -1410,7 +1410,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Servicestobuildingsandlandscapeactivities.jpeg){width="700px"}
@@ -1449,7 +1449,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Architecturalandengineeringactivities.jpeg){width="700px"}
@@ -1488,7 +1488,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Accommodation.jpeg){width="700px"}
@@ -1527,7 +1527,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Researchanddevelopmentadvertisingandmarketresearch.jpeg){width="700px"}
@@ -1566,7 +1566,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/PublishingfilmandTVproductionandbroadcasting.jpeg){width="700px"}
@@ -1605,7 +1605,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Manufactureofmachineryandtransportequipment.jpeg){width="700px"}
@@ -1644,7 +1644,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Creativeartsentertainmentandculturalactivities.jpeg){width="700px"}
@@ -1683,7 +1683,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Repairofcomputerspersonalandhouseholdgoods.jpeg){width="700px"}
@@ -1722,7 +1722,7 @@ plottosave
 ```
 
 
-### Employee % change map 2024/25
+### Map: within-Y&H micro-LQ for 2024/25
 
 
 ![](../local/outputs/ch_hexmaps_fordictionary/Manufactureofelectronicopticalandelectricalproducts.jpeg){width="700px"}

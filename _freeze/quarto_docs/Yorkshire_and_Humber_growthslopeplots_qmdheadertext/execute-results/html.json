@@ -1,0 +1,17 @@
+{
+  "hash": "c5b8f99d553499d6bab0d4c0c98eae71",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Yorkshire and The Humber: growth slope plots for ITL3s (November 2025)\"\nauthor:\n  - name: \"Dan Olner\"\nformat: \n  html:\n    output-file: \"Yorkshire_n_Humber_growthslope_catalogue_November2025\"\n    fig-width: 8\n    fig-height: 8\nexecute:\n  echo: false\n  message: false\n  warning: false\nfig-responsive: false\ncollapse: false\nnavbar: false\nsidebar: false\n---\n\n\n::: {.cell}\n\n:::\n\n\n\n",
+    "supporting": [
+      "Yorkshire_and_Humber_growthslopeplots_qmdheadertext_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

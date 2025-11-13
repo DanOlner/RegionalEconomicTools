@@ -1,10 +1,10 @@
 ---
-title: "Yorkshire and The Humber: sector plot dictionary (November 2025)"
+title: "Yorkshire and The Humber: sector plot catalogue (November 2025)"
 author:
   - name: "Dan Olner"
 format: 
   html:
-    output-file: "Yorkshire_n_Humber_sector_dictionary_November2025"
+    output-file: "Yorkshire_n_Humber_sector_catalogue_November2025"
     fig-width: 8
     fig-height: 8
 execute:

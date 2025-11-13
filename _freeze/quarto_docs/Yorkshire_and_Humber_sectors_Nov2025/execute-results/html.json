@@ -1,8 +1,8 @@
 {
-  "hash": "45d58341cf18ef5346d084b6baa62ddc",
+  "hash": "b8977b2f51d5f75bbc0ffd753041adbf",
   "result": {
     "engine": "knitr",
-    "markdown": "---\ntitle: \"Yorkshire and The Humber sector analysis (November 2025)\"\nauthor:\n  - name: \"Dan Olner\"\nformat: \n  html:\n    output-file: \"Yorkshire_n_Humber_sectors_Nov2025\"\n    fig-width: 8\n    fig-height: 8\nexecute:\n  echo: false\n  message: false\n  warning: false\nfig-responsive: false\ncollapse: false\nnavbar: false\nsidebar: false\n---\n\n\n::: {.cell}\n\n:::\n\n\n# Introduction\n\n\n# GROWTH TRENDS IN GVA, JOBS AND GVA PER JOB\n\n\n## Full data range: 2015 to 2023\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](Yorkshire_and_Humber_sectors_Nov2025_files/figure-html/fig-growthdata_cv_andperFT-1.png){#fig-growthdata_cv_andperFT width=912}\n:::\n:::\n\n\n ",
+    "markdown": "---\ntitle: \"Yorkshire and The Humber sector analysis (November 2025)\"\nauthor:\n  - name: \"Dan Olner\"\nformat: \n  html:\n    output-file: \"Yorkshire_n_Humber_sectors_Nov2025\"\n    fig-width: 8\n    fig-height: 8\nexecute:\n  echo: false\n  message: false\n  warning: false\nfig-responsive: false\ncollapse: false\nnavbar: false\nsidebar: false\n---\n\n\n::: {.cell}\n\n:::\n\n\n# Introduction\n\n# GROWTH TRENDS IN GVA, JOBS AND GVA PER JOB\n\n## Full data range: 2015 to 2023\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](Yorkshire_and_Humber_sectors_Nov2025_files/figure-html/fig-growthdata_cv_andperFT-1.png){#fig-growthdata_cv_andperFT width=912}\n:::\n:::\n\n\n",
     "supporting": [
       "Yorkshire_and_Humber_sectors_Nov2025_files"
     ],

@@ -1,0 +1,95 @@
+---
+title: "Yorkshire and The Humber: growth slope plots for ITL3s (November 2025)"
+author:
+  - name: "Dan Olner"
+format: 
+  html:
+    output-file: "Yorkshire_n_Humber_growthslope_catalogue_November2025"
+    fig-width: 8
+    fig-height: 8
+execute:
+  echo: false
+  message: false
+  warning: false
+fig-responsive: false
+collapse: false
+navbar: false
+sidebar: false
+---
+
+```{r setup}
+library(tidyverse)
+library(sf)#for geo stuff
+library(tmap)#for mapping
+library(zoo)#for making smoothed moving averages
+library(patchwork)#combine ggplots easily
+library(plotly)#For interactive plots
+library(RColorBrewer)
+
+source('../functions/misc_functions.R')
+source('../functions/adhoc_functions.R')
+#source('functions/misc_functions.R')
+#source('functions/adhoc_functions.R')
+
+options(scipen = 999)
+
+#Counting sigs. Statisticians having kittens. Let's do it.
+itl3.2digit.cv <- read_csv('../data/regionalGVA/regionalGVA_chainedvolume_ITL3_SIC_2DIGIT_LONG_2023.csv') %>% filter(!qg('agri|Owner-occupiers|membership|activities of households',SIC07_description))
+
+#Add in shorter regional GVA SIC text
+shortsectornames <- read_csv('../data/shortsectornames_for_regionalGVA_2digitSICs.csv')
+
+#check match, tick
+# table(unique(itl3.2digit.cv$SIC07_description) %in% shortsectornames$SIC07_description)
+itl3.2digit.cv <- itl3.2digit.cv %>% 
+  left_join(
+    shortsectornames, by = 'SIC07_description'
+  )
+
+
+#And for GVA per job
+bres.gva.2digit.2023 <- readRDS('../local/data/BRES2024_linkedtoITL3_2025_GVAsiccodes_withgvaattached.rds') %>% 
+  filter(JOBCOUNT > 0, !qg('membership|activities of households|agri', SIC07_description)) %>% 
+  mutate(gvaperjob = gva / JOBCOUNT)
+
+#check match, tick
+# table(unique(bres.gva.2digit.2023$SIC07_description) %in% shortsectornames$SIC07_description)
+bres.gva.2digit.2023 <- bres.gva.2digit.2023 %>% 
+  left_join(
+    shortsectornames, by = 'SIC07_description'
+  )
+
+# Do some name tweaking
+itl3.2digit.cv = itl3.2digit.cv %>% 
+  mutate(
+    SIC07_description_shortened = case_when(
+      qg('repair personal',SIC07_description_shortened) ~ 'Pers repair',
+      qg('machinery repair',SIC07_description_shortened) ~ 'Mach install',
+      qg('transp manuf',SIC07_description_shortened) ~ 'Mach/transp',
+      qg('head office',SIC07_description_shortened) ~ 'HO/consult',
+      qg('cleaning',SIC07_description_shortened) ~ 'Clean/land',
+      qg('accomm',SIC07_description_shortened) ~ 'Accom',
+      .default = SIC07_description_shortened
+    )
+  )
+
+# Do some name tweaking
+bres.gva.2digit.2023 = bres.gva.2digit.2023 %>% 
+  mutate(
+    SIC07_description_shortened = case_when(
+      qg('repair personal',SIC07_description_shortened) ~ 'Pers repair',
+      qg('machinery repair',SIC07_description_shortened) ~ 'Mach install',
+      qg('transp manuf',SIC07_description_shortened) ~ 'Mach/transp',
+      qg('head office',SIC07_description_shortened) ~ 'HO/consult',
+      qg('cleaning',SIC07_description_shortened) ~ 'Clean/land',
+      qg('accomm',SIC07_description_shortened) ~ 'Accom',
+      .default = SIC07_description_shortened
+    )
+  )
+
+#Set ggplot theme
+theme_set(theme_light())
+
+```
+
+

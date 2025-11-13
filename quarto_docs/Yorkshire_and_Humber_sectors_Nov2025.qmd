@@ -46,12 +46,9 @@ corecities = readRDS('../data/corecitiesvector.rds')
 
 # Introduction
 
-
 # GROWTH TRENDS IN GVA, JOBS AND GVA PER JOB
 
-
 ## Full data range: 2015 to 2023
-
 
 ```{r, fig-growthdata_cv_andperFT}
 #| fig-height: 12 
@@ -148,4 +145,3 @@ ynh.2dig$plot + ynh.gvaperjob.2dig$plot
 
 ```
 
- 

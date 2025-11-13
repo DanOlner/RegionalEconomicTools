@@ -1716,6 +1716,15 @@ ch = ch %>%
     !ITL221CD %in% (itl2to1lookup %>% filter(qg('london',ITL121NM)) %>% pull(ITL221CD))
   )
 
+# Test version where we're finding the LQs relative JUST
+# To Y&H i.e. is this bit more or less conc than Y&H average?
+# To see where clusters are regionally?
+ch = ch %>% 
+  filter(
+    ITL221CD %in% (itl2to1lookup %>% filter(qg('humber',ITL121NM)) %>% pull(ITL221CD))
+  )
+
+
 # OK, can now find LQs...
 # Actually, if we just use the existing function and ITL2s
 # We'll get the national numbers and can use those
@@ -1758,7 +1767,8 @@ ch.gb.nationalprops.sums = ch.gb.nationalprops.sums %>%
 
 
 
-
+# Y&H level only - can get per-hex LQs from here
+# Overwrites GB ch above but we don't need now
 ch = readRDS('local/data/ch_yorkshire_n_humber_October2025.rds')
 
 # Add in ITL3 level 2 digit bespoke SICs
@@ -1784,7 +1794,7 @@ sq = st_make_grid(ch, cellsize = 4000, square = F)
 sq <- sq %>% st_sf() %>% mutate(id = 1:nrow(.))
 
 # Save for automated maps
-saveRDS(sq,'local/data/sq.rds')
+# saveRDS(sq,'local/data/sq.rds')
 
 overlay <- st_intersection(ch,sq)
 
@@ -1813,16 +1823,49 @@ hexsummary <- overlay %>%
   # filter(sum(totalemployees) >= 10) %>% #keep only gridsquares where total employee count is more than / equal to 100
 
 # Save that for use elsewhere
-saveRDS(hexsummary,'local/hexsummary_for_dictionary.rds')
+# saveRDS(hexsummary,'local/hexsummary_for_dictionary.rds')
 
+# Add in average emp value over both timepoints
+hexsummary$total_meanemployees = 
+  rowMeans(cbind(
+    hexsummary$totalemployees_thisyear,
+    hexsummary$totalemployees_lastyear
+  ))
+
+
+# Get hex-level proportions
+hexsummary = hexsummary %>% 
+  add_location_quotient_and_proportions(
+    regionvar = id,
+    lq_var = SIC07_description_from_ITL3,
+    valuevar = total_meanemployees
+  ) 
+
+# Keep only relevant bits, merge in GB-minus-London props
+# Make final LQ
+hexsummary = hexsummary %>% 
+  select(
+    -c(totalemployees_thisyear,totalemployees_lastyear,region_totalsize,total_sectorsize:LQ_log)
+    ) %>% 
+  left_join(
+    ch.gb.nationalprops.sums %>% 
+      select(SIC07_description_from_ITL3,sector_total_proportion) %>% 
+      distinct(),
+    by = 'SIC07_description_from_ITL3'
+  ) %>% 
+  mutate(
+    LQ = sector_regional_proportion / sector_total_proportion,
+    LQ_log = log(LQ)#Option for symmetric either side of LQ = 1
+    )
+  
 
 
 # Do the total employee filter when we're down to sectors...
 # Test one now!
 # sector = unique(itl3$SIC07_description)[qg('informat',unique(itl3$SIC07_description))]
 # sector = unique(itl3$SIC07_description)[qg('fabricated',unique(itl3$SIC07_description))]
-sector = unique(itl3$SIC07_description)[qg('textiles',unique(itl3$SIC07_description))]
-# sector = unique(itl3$SIC07_description)[qg('furniture',unique(itl3$SIC07_description))]
+# sector = unique(itl3$SIC07_description)[qg('textiles',unique(itl3$SIC07_description))]
+sector = unique(itl3$SIC07_description)[qg('furniture',unique(itl3$SIC07_description))]
 # sector = unique(itl3$SIC07_description)[qg('agri',unique(itl3$SIC07_description))]
 
 hexsummary.sector = hexsummary %>% filter(SIC07_description_from_ITL3 == sector)
@@ -1835,10 +1878,12 @@ sq.ch <- sq %>%
     hexsummary.sector,
     by = 'id'
   ) %>% 
-  filter(totalemployees_thisyear >= 10) %>% 
-  mutate(
-    emp_percentchange = percent_change(totalemployees_thisyear,totalemployees_lastyear)
-  )
+  filter(total_meanemployees >= 25) 
+# %>% 
+  # filter(totalemployees_thisyear >= 25) %>% 
+  # mutate(
+  #   emp_percentchange = percent_change(totalemployees_thisyear,totalemployees_lastyear)
+  # )
 
 sq.ch <- sq.ch %>% 
   mutate(hovertext = paste0("Firm count: ",totalfirms, ", id: ",id))
@@ -1893,14 +1938,17 @@ tm_basemap("OpenStreetMap") +
 tm_shape(itl3.2025 %>% filter(ITL325CD %in% itl2025lookup$ITL325CD[itl2025lookup$ITL125NM == 'Yorkshire and The Humber']), is.main = TRUE) +
   # tm_polygons(fill = '#a6baa8') +
   tm_polygons(fill = 'white', fill_alpha = 0.6) +
-  # tm_shape(sq.ch %>% filter(emp_percentchange < 100)) +
-  tm_shape(sq.ch %>% mutate(emp_percentchange = ifelse(emp_percentchange > 100, 100, emp_percentchange))) +#Cap at 100 for display purposes; those can be "100%+ increase"
+  tm_shape(sq.ch) +
+  # tm_shape(sq.ch %>% mutate(emp_percentchange = ifelse(emp_percentchange > 100, 100, emp_percentchange))) +#Cap at 100 for display purposes; those can be "100%+ increase"
   # tm_shape(sq.ch %>% filter(totalemployees_thisyear > 50)) +
   # tm_shape(sq.ch) +
   tm_polygons(
-    fill = "emp_percentchange", id="hovertext",
+    fill = "LQ_log", id="hovertext",
     # fill = "totalemployees_thisyear", id="hovertext",
-    fill.scale = tm_scale_intervals(style = "pretty", n = 3, values = "matplotlib.rd_yl_bu"),
+    # fill.scale = tm_scale_continuous_log(midpoint = 1, values = "-matplotlib.rd_bu"),
+    # fill.scale = tm_scale_continuous_log(midpoint = 1, values = "matplotlib.rd_yl_bu"),
+    fill.scale = tm_scale_intervals(style = "pretty", n = 5, values = "-matplotlib.rd_bu"),
+    fill.legend = tm_legend(position = tm_pos_out("right", "center")),
     # fill.scale = tm_scale_intervals(style = "kmeans", n = 4, values = "matplotlib.rd_yl_bu"),
     col_alpha = 0.5
     ) +
@@ -1924,29 +1972,28 @@ for(sector in unique(itl3$SIC07_description)[!qg("households|personal service|me
       hexsummary.sector,
       by = 'id'
     ) %>% 
-    filter(totalemployees_thisyear >= 10) %>% 
-    mutate(
-      emp_percentchange = percent_change(totalemployees_thisyear,totalemployees_lastyear)
-    )
+    filter(total_meanemployees >= 10) 
   
   sq.ch <- sq.ch %>% 
     mutate(hovertext = paste0("Firm count: ",totalfirms, ", id: ",id))
   
-  # OK, maybe not bivariate!
-  p =  tm_basemap("OpenStreetMap") +
+  p = tm_basemap("OpenStreetMap") +
     tm_shape(mask) +#add in masking layer for rest of basemap
     tm_polygons(col = 'white', fill = 'white') +
     tm_shape(itl3.2025 %>% filter(ITL325CD %in% itl2025lookup$ITL325CD[itl2025lookup$ITL125NM == 'Yorkshire and The Humber']), is.main = TRUE) +
     tm_polygons(fill = 'white', fill_alpha = 0.6) +
-    tm_shape(sq.ch %>% mutate(emp_percentchange = ifelse(emp_percentchange > 100, 100, emp_percentchange))) + tm_polygons(
-      fill = "emp_percentchange", id="hovertext",
-      fill.scale = tm_scale_intervals(style = "pretty", n = 3, values = "matplotlib.rd_yl_bu"),
+    tm_shape(sq.ch) +
+    tm_polygons(
+      fill = "LQ_log", id="hovertext",
+      # fill.scale = tm_scale_continuous_log(midpoint = 1, values = "-matplotlib.rd_bu"),
+      fill.scale = tm_scale_intervals(style = "pretty", n = 5, values = "-matplotlib.rd_bu"),
+      fill.legend = tm_legend(position = tm_pos_out("right", "center")),
       col_alpha = 0.5
     ) +
     tm_shape(itl3.2025 %>% filter(ITL325CD %in% itl2025lookup$ITL325CD[itl2025lookup$ITL125NM == 'Yorkshire and The Humber'])) +
     tm_borders(col_alpha = 0.3)
-
-  tmap_save(p, paste0('local/outputs/ch_hexmaps_fordictionary/',gsub('[[:punct:]]| ','',sector),'.jpeg'), width = 7, height = 7)  
+  
+  tmap_save(p, paste0('local/outputs/ch_hexmaps_fordictionary/',gsub('[[:punct:]]| ','',sector),'.jpeg'), width = 7, height = 5.5)  
 
 }
 
