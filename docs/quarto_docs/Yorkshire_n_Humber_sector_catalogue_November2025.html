@@ -85,7 +85,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#manufacture-of-furniture-other-manufacturing" id="toc-manufacture-of-furniture-other-manufacturing" class="nav-link active" data-scroll-target="#manufacture-of-furniture-other-manufacturing">Manufacture of furniture; other manufacturing</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">INTRODUCTION</a>
+  <ul class="collapse">
+  <li><a href="#location-quotient-plot-guide" id="toc-location-quotient-plot-guide" class="nav-link" data-scroll-target="#location-quotient-plot-guide">Location quotient plot guide</a></li>
+  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a></li>
+  <li><a href="#sector-catalogue" id="toc-sector-catalogue" class="nav-link" data-scroll-target="#sector-catalogue">SECTOR CATALOGUE—</a></li>
+  <li><a href="#manufacture-of-furniture-other-manufacturing" id="toc-manufacture-of-furniture-other-manufacturing" class="nav-link" data-scroll-target="#manufacture-of-furniture-other-manufacturing">Manufacture of furniture; other manufacturing</a>
   <ul class="collapse">
   <li><a href="#lq-gvajob-plots" id="toc-lq-gvajob-plots" class="nav-link" data-scroll-target="#lq-gvajob-plots">LQ gva/job plots</a></li>
   <li><a href="#map-within-yh-micro-lq-for-202425" id="toc-map-within-yh-micro-lq-for-202425" class="nav-link" data-scroll-target="#map-within-yh-micro-lq-for-202425">Map: within-Y&amp;H micro-LQ for 2024/25</a></li>
@@ -300,6 +305,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#lq-gvajob-plots-42" id="toc-lq-gvajob-plots-42" class="nav-link" data-scroll-target="#lq-gvajob-plots-42">LQ gva/job plots</a></li>
   <li><a href="#map-within-yh-micro-lq-for-202425-42" id="toc-map-within-yh-micro-lq-for-202425-42" class="nav-link" data-scroll-target="#map-within-yh-micro-lq-for-202425-42">Map: within-Y&amp;H micro-LQ for 2024/25</a></li>
   </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -331,6 +337,47 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="introduction" class="level1">
+<h1>INTRODUCTION</h1>
+<p>This Document presents visualisations of economic data for the 43 sector categories avaiable in the ONS GVA by industry data for ITL1-level geographies like Yorkshire and The Humber.</p>
+<p>Each sector category has its own section - these are on the right hand side of the page and can be used for navigation.</p>
+<p>See below for a guide on reading the location quotient plots.</p>
+<p>For each of those sections, there are four plots:</p>
+<ol type="1">
+<li>The top plot shows the GVA location quotient for Yorkshire and The Humber as a whole for that sector, with other UK regions shown in squares. <strong>All sections are ordered by this LQ value, with the highest first - i.e.&nbsp;the sector that is on average most concentrated in Y&amp;H</strong>.</li>
+<li>The plot below this shows LQ’s for each of Y&amp;H’s ITL3 zones, showing the diversity of sector concentration within the region. Many sectors will not have high average LQs at the Y&amp;H level, but some sub-regions here do (and vice-versa). The ITL3 with the highest LQ within the region is at the bottom of the plot.</li>
+<li>These are productivity plots: they puts percent change in GVA on the X axis against full-time job percent change on the Y axis, with the start end points being the three-year average of 2015/17 to 2021/23. Y&amp;H ITL3s are overlaid in blue (with a two letter label) if this sector makes up 1.5% or more of its economy. Several things can be read here:</li>
+</ol>
+<ul>
+<li>Any arrow with an endpoint within the <strong>lighter grey diagonal area</strong> has increased its productivity (in terms of GVA per full-time job). Conversely, if the arrow lands in the darker great diagonal, GVA per full-time worker has dropped between those two timepoints.</li>
+<li>Increases in productivity can come about in three different ways: an arrow pointing Northeast in the lighter diagonal area has seen <em>both</em> GVA and job count go up; and arrow pointing Southeast has seen productivity increase through a combination of GVA going up and job count going down; an arrow pointing Southwest (in the light diagonal area) I seen GVA drop proportionally less than jobs, thus still increasing productivity (by this measure).</li>
+</ul>
+<ol start="4" type="1">
+<li>The last plots are hexmaps for each sector across Y&amp;H based on employee accounts from the latest Companies House data (covering the year from September 2024 to October 2025). Each hex shows LQ sector concentration <strong>relative to the rest of Yorkshire and Humber</strong> - bluer zones are less concentrated than the regional average, red zones more concentrated. A hex is included only if it has 10 or more employees for that sector. (The log of LQ values is used for these maps as it is symmetrical between more or less concentrated. For log LQ, zero is the ‘concentration is the same as regional average’ value, not 1.)</li>
+</ol>
+<section id="location-quotient-plot-guide" class="level2">
+<h2 class="anchored" data-anchor-id="location-quotient-plot-guide">Location quotient plot guide</h2>
+<p>The first two outputs for each section are <strong>location quotient plots</strong>. Here’s a guide to reading them:</p>
+<ul>
+<li>Location quotients show the ratio of a sector’s size within a place compared to a larger geography’s average - here, Y&amp;H and its sub-regions are compared to the rest of the UK (minus London, see below).</li>
+<li>Sectors to the right of the centre line are more concentrated in this region when compared to the national average. (e.g.&nbsp;LQ = 10, it is 10x more concentrated).</li>
+<li>Green circles have been increasing in concentration over time (larger circles increasing the most)</li>
+<li>Red circles have been decreasing in concentration over time (larger circles decreasing the most)</li>
+<li>Black horizontal lines show the min and max of concentration in the data’s history (from 2015 to 2023)</li>
+<li>Circles and lines can be read together - for example, if a green circle is at the right of this line, sector job concentration has been increasing on average and is continuing.</li>
+<li>Per ITL3 GVA values and percent of the total zone economy are shown with the place name. These are useful to check sector size versus LQ - for example, a sector like jewellery can have a high LQ (as it does in Sheffield and Birmingham) with very low job counts, because there aren’t many jobs in this sector overall in Great Britain.</li>
+</ul>
+</section>
+<section id="notes" class="level2">
+<h2 class="anchored" data-anchor-id="notes">Notes</h2>
+<ul>
+<li>All plots except the maps analyse data between 2015 and 2023, using a three-year moving average.</li>
+<li>For the main LQ plots, the ITL1 zone for London has been excluded. This is because the size of London’s economy warps location quotients for the rest of the UK. For example, if London is included, LQ values for creative sectors are all below one for everywhere except London.</li>
+</ul>
+</section>
+<section id="sector-catalogue" class="level2">
+<h2 class="anchored" data-anchor-id="sector-catalogue">SECTOR CATALOGUE—</h2>
+</section>
 <section id="manufacture-of-furniture-other-manufacturing" class="level2">
 <h2 class="anchored" data-anchor-id="manufacture-of-furniture-other-manufacturing">Manufacture of furniture; other manufacturing</h2>
 <section id="lq-gvajob-plots" class="level3">
@@ -1363,6 +1410,7 @@ Figure&nbsp;43
 <p><img src="images/ynh_lq_maps/Manufactureofelectronicopticalandelectricalproducts.jpeg" width="700"></p>
 
 
+</section>
 </section>
 </section>
 

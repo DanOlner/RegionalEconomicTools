@@ -1,57 +1,4 @@
----
-title: "Yorkshire and The Humber: sector plot catalogue (November 2025)"
-author:
-  - name: "Dan Olner"
-format: 
-  html:
-    output-file: "Yorkshire_n_Humber_sector_catalogue_November2025"
-    fig-width: 8
-    fig-height: 8
-execute:
-  echo: false
-  message: false
-  warning: false
-fig-responsive: false
-collapse: false
-navbar: false
-sidebar: false
----
-
-```{r setup}
-library(tidyverse)
-library(sf)#for geo stuff
-library(tmap)#for mapping
-library(zoo)#for making smoothed moving averages
-library(patchwork)#combine ggplots easily
-library(plotly)#For interactive plots
-library(RColorBrewer)
-
-source('../functions/misc_functions.R')
-source('../functions/adhoc_functions.R')
-#source('functions/misc_functions.R')
-#source('functions/adhoc_functions.R')
-
-options(scipen = 999)
-
-# Data for this side of reality
-itl3.ynh = readRDS('../local/data/itl3ynh.rds')
-itl1.summedtoitl3SICs = readRDS('../local/data/itl1summedtoitl3SICs.rds')
-bres.gva.2d = readRDS('../local/data/bresgva2d.rds')
-
-ynhshortnames = readRDS('../local/data/ynhshortestnames.rds')
-
-# For mapping
-mask = readRDS('../local/ynhmask.rds')
-itl3.ynh.zones = readRDS('../local/itl3ynh.rds')
-
-sq = readRDS('../local/data/sq.rds')
-hexsummary = readRDS('../local/hexsummary_for_dictionary.rds')
-
-tmap_mode('plot')
-
-```
-
-# INTRODUCTION
+## Explanation
 
 This Document presents visualisations of economic data for the 43 sector categories avaiable in the ONS GVA by industry data for ITL1-level geographies like Yorkshire and The Humber.
 
@@ -61,8 +8,8 @@ See below for a guide on reading the location quotient plots.
 
 For each of those sections, there are four plots:
 
-1. The top plot shows the GVA location quotient for Yorkshire and The Humber as a whole for that sector, with other UK regions shown in squares. **All sections are ordered by this LQ value, with the highest first - i.e. the sector that is on average most concentrated in Y&H**.
-2. The plot below this shows LQ's for each of Y&H's ITL3 zones, showing the diversity of sector concentration within the region. Many sectors will not have high average LQs at the Y&H level, but some sub-regions here do (and vice-versa). The ITL3 with the highest LQ within the region is at the bottom of the plot. 
+1. The top plot shows the GVA location quotient for Yorkshire and The Humber as a whole for that sector, with other UK regions shown in squares. All sections are ordered by this LQ value, with the highest first.
+2. The plot below this shows LQ's for each of Y&H's ITL3 zones, showing the diversity of sector concentration within the region. The ITL3 with the highest LQ within the region is at the bottom of the plot. 
 3. These are productivity plots: they puts percent change in GVA on the X axis against full-time job percent change on the Y axis, with the start end points being the three-year average of 2015/17 to 2021/23. Y&H ITL3s are overlaid in blue (with a two letter label) if this sector makes up 1.5% or more of its economy. Several things can be read here:
 -   Any arrow with an endpoint within the **lighter grey diagonal area** has increased its productivity (in terms of GVA per full-time job). Conversely, if the arrow lands in the darker great diagonal, GVA per full-time worker has dropped between those two timepoints.
 -   Increases in productivity can come about in three different ways: an arrow pointing Northeast in the lighter diagonal area has seen *both* GVA and job count go up; and arrow pointing Southeast has seen productivity increase through a combination of GVA going up and job count going down; an arrow pointing Southwest (in the light diagonal area) I seen GVA drop proportionally less than jobs, thus still increasing productivity (by this measure). 
@@ -85,7 +32,3 @@ The first two outputs for each section are **location quotient plots**. Here's a
 
 * All plots except the maps analyse data between 2015 and 2023, using a three-year moving average. 
 * For the main LQ plots, the ITL1 zone for London has been excluded. This is because the size of London's economy warps location quotients for the rest of the UK. For example, if London is included, LQ values for creative sectors are all below one for everywhere except London.
-
-## SECTOR CATALOGUE---
-
-

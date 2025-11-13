@@ -2549,7 +2549,7 @@
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
     "section": "",
-    "text": "Figure 1"
+    "text": "This Document presents visualisations of economic data for the 43 sector categories avaiable in the ONS GVA by industry data for ITL1-level geographies like Yorkshire and The Humber.\nEach sector category has its own section - these are on the right hand side of the page and can be used for navigation.\nSee below for a guide on reading the location quotient plots.\nFor each of those sections, there are four plots:\n\nThe top plot shows the GVA location quotient for Yorkshire and The Humber as a whole for that sector, with other UK regions shown in squares. All sections are ordered by this LQ value, with the highest first - i.e. the sector that is on average most concentrated in Y&H.\nThe plot below this shows LQ’s for each of Y&H’s ITL3 zones, showing the diversity of sector concentration within the region. Many sectors will not have high average LQs at the Y&H level, but some sub-regions here do (and vice-versa). The ITL3 with the highest LQ within the region is at the bottom of the plot.\nThese are productivity plots: they puts percent change in GVA on the X axis against full-time job percent change on the Y axis, with the start end points being the three-year average of 2015/17 to 2021/23. Y&H ITL3s are overlaid in blue (with a two letter label) if this sector makes up 1.5% or more of its economy. Several things can be read here:\n\n\nAny arrow with an endpoint within the lighter grey diagonal area has increased its productivity (in terms of GVA per full-time job). Conversely, if the arrow lands in the darker great diagonal, GVA per full-time worker has dropped between those two timepoints.\nIncreases in productivity can come about in three different ways: an arrow pointing Northeast in the lighter diagonal area has seen both GVA and job count go up; and arrow pointing Southeast has seen productivity increase through a combination of GVA going up and job count going down; an arrow pointing Southwest (in the light diagonal area) I seen GVA drop proportionally less than jobs, thus still increasing productivity (by this measure).\n\n\nThe last plots are hexmaps for each sector across Y&H based on employee accounts from the latest Companies House data (covering the year from September 2024 to October 2025). Each hex shows LQ sector concentration relative to the rest of Yorkshire and Humber - bluer zones are less concentrated than the regional average, red zones more concentrated. A hex is included only if it has 10 or more employees for that sector. (The log of LQ values is used for these maps as it is symmetrical between more or less concentrated. For log LQ, zero is the ‘concentration is the same as regional average’ value, not 1.)\n\n\n\nThe first two outputs for each section are location quotient plots. Here’s a guide to reading them:\n\nLocation quotients show the ratio of a sector’s size within a place compared to a larger geography’s average - here, Y&H and its sub-regions are compared to the rest of the UK (minus London, see below).\nSectors to the right of the centre line are more concentrated in this region when compared to the national average. (e.g. LQ = 10, it is 10x more concentrated).\nGreen circles have been increasing in concentration over time (larger circles increasing the most)\nRed circles have been decreasing in concentration over time (larger circles decreasing the most)\nBlack horizontal lines show the min and max of concentration in the data’s history (from 2015 to 2023)\nCircles and lines can be read together - for example, if a green circle is at the right of this line, sector job concentration has been increasing on average and is continuing.\nPer ITL3 GVA values and percent of the total zone economy are shown with the place name. These are useful to check sector size versus LQ - for example, a sector like jewellery can have a high LQ (as it does in Sheffield and Birmingham) with very low job counts, because there aren’t many jobs in this sector overall in Great Britain.\n\n\n\n\n\nAll plots except the maps analyse data between 2015 and 2023, using a three-year moving average.\nFor the main LQ plots, the ITL1 zone for London has been excluded. This is because the size of London’s economy warps location quotients for the rest of the UK. For example, if London is included, LQ values for creative sectors are all below one for everywhere except London.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 4\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 5\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 6\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 7\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 8\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 9\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 10\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 11\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 12\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 13\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 14\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 15\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 16\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 17\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 18\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 19\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 20\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 21\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 22\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 23\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 24\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 25\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 26\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 27\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 28\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 29\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 30\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 31\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 32\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 33\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 34\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 35\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 36\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 37\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 38\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 39\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 40\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 41\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 42\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 43"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#manufacture-of-furniture-other-manufacturing",
@@ -2562,295 +2562,295 @@
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#manufacture-of-textiles-wearing-apparel-and-leather",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#manufacture-of-textiles-wearing-apparel-and-leather",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Manufacture of textiles, wearing apparel and leather",
-    "text": "Manufacture of textiles, wearing apparel and leather\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 2\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 2"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#manufacture-of-basic-and-fabricated-metal-products",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#manufacture-of-basic-and-fabricated-metal-products",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Manufacture of basic and fabricated metal products",
-    "text": "Manufacture of basic and fabricated metal products\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 3\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 3"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#manufacture-of-wood-and-paper-products-and-printing",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#manufacture-of-wood-and-paper-products-and-printing",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Manufacture of wood and paper products and printing",
-    "text": "Manufacture of wood and paper products and printing\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 4\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 4"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#manufacture-of-petroleum-chemicals-and-other-minerals",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#manufacture-of-petroleum-chemicals-and-other-minerals",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Manufacture of petroleum, chemicals and other minerals",
-    "text": "Manufacture of petroleum, chemicals and other minerals\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 5\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 5"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#manufacture-of-food-beverages-and-tobacco",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#manufacture-of-food-beverages-and-tobacco",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Manufacture of food, beverages and tobacco",
-    "text": "Manufacture of food, beverages and tobacco\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 6\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 6"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#social-work-activities",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#social-work-activities",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Social work activities",
-    "text": "Social work activities\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 7\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 7"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#employment-activities-tourism-and-security-services",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#employment-activities-tourism-and-security-services",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Employment activities; tourism and security services",
-    "text": "Employment activities; tourism and security services\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 8\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 8"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#warehousing-and-transport-support-activities",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#warehousing-and-transport-support-activities",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Warehousing and transport support activities",
-    "text": "Warehousing and transport support activities\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 9\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 9"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#financial-and-insurance-activities",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#financial-and-insurance-activities",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Financial and insurance activities",
-    "text": "Financial and insurance activities\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 10\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 10"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#electricity-gas-water-sewerage-and-waste-management",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#electricity-gas-water-sewerage-and-waste-management",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Electricity, gas, water; sewerage and waste management",
-    "text": "Electricity, gas, water; sewerage and waste management\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 11\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 11"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#food-and-beverage-service-activities",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#food-and-beverage-service-activities",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Food and beverage service activities",
-    "text": "Food and beverage service activities\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 12\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 12"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#education",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#education",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Education",
-    "text": "Education\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 13\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 13"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#office-administration-and-business-support-activities",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#office-administration-and-business-support-activities",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Office administration and business support activities",
-    "text": "Office administration and business support activities\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 14\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 14"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#land-water-and-air-transport",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#land-water-and-air-transport",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Land, water and air transport",
-    "text": "Land, water and air transport\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 15\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 15"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#residential-care-activities",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#residential-care-activities",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Residential care activities",
-    "text": "Residential care activities\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 16\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 16"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#real-estate-activities-excluding-imputed-rental",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#real-estate-activities-excluding-imputed-rental",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Real estate activities, excluding imputed rental",
-    "text": "Real estate activities, excluding imputed rental\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 17\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 17"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#human-health-activities",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#human-health-activities",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Human health activities",
-    "text": "Human health activities\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 18\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 18"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#wholesale-trade",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#wholesale-trade",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Wholesale trade",
-    "text": "Wholesale trade\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 19\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 19"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#construction-of-buildings",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#construction-of-buildings",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Construction of buildings",
-    "text": "Construction of buildings\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 20\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 20"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#motor-trades",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#motor-trades",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Motor trades",
-    "text": "Motor trades\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 21\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 21"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#retail-trade",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#retail-trade",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Retail trade",
-    "text": "Retail trade\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 22\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 22"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#legal-and-accounting-activities",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#legal-and-accounting-activities",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Legal and accounting activities",
-    "text": "Legal and accounting activities\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 23\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 23"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#gambling-and-betting-sports-and-recreation-activities",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#gambling-and-betting-sports-and-recreation-activities",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Gambling and betting; sports and recreation activities",
-    "text": "Gambling and betting; sports and recreation activities\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 24\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 24"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#specialised-construction-activities",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#specialised-construction-activities",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Specialised construction activities",
-    "text": "Specialised construction activities\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 25\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 25"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#public-administration-and-defence",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#public-administration-and-defence",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Public administration and defence",
-    "text": "Public administration and defence\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 26\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 26"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#other-professional-scientific-and-technical-activities",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#other-professional-scientific-and-technical-activities",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Other professional, scientific and technical activities",
-    "text": "Other professional, scientific and technical activities\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 27\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 27"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#head-offices-and-management-consultancy",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#head-offices-and-management-consultancy",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Head offices and management consultancy",
-    "text": "Head offices and management consultancy\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 28\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 28"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#postal-and-courier-activities",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#postal-and-courier-activities",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Postal and courier activities",
-    "text": "Postal and courier activities\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 29\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 29"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#rental-and-leasing-activities",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#rental-and-leasing-activities",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Rental and leasing activities",
-    "text": "Rental and leasing activities\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 30\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 30"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#repair-and-installation-of-machinery-and-equipment",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#repair-and-installation-of-machinery-and-equipment",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Repair and installation of machinery and equipment",
-    "text": "Repair and installation of machinery and equipment\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 31\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 31"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#telecommunications-information-technology",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#telecommunications-information-technology",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Telecommunications; information technology",
-    "text": "Telecommunications; information technology\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 32\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 32"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#civil-engineering",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#civil-engineering",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Civil engineering",
-    "text": "Civil engineering\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 33\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 33"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#agriculture-forestry-and-fishing-mining-and-quarrying",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#agriculture-forestry-and-fishing-mining-and-quarrying",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Agriculture, forestry and fishing; mining and quarrying",
-    "text": "Agriculture, forestry and fishing; mining and quarrying\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 34\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 34"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#services-to-buildings-and-landscape-activities",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#services-to-buildings-and-landscape-activities",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Services to buildings and landscape activities",
-    "text": "Services to buildings and landscape activities\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 35\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 35"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#architectural-and-engineering-activities",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#architectural-and-engineering-activities",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Architectural and engineering activities",
-    "text": "Architectural and engineering activities\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 36\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 36"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#accommodation",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#accommodation",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Accommodation",
-    "text": "Accommodation\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 37\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 37"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#research-and-development-advertising-and-market-research",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#research-and-development-advertising-and-market-research",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Research and development; advertising and market research",
-    "text": "Research and development; advertising and market research\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 38\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 38"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#publishing-film-and-tv-production-and-broadcasting",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#publishing-film-and-tv-production-and-broadcasting",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Publishing; film and TV production and broadcasting",
-    "text": "Publishing; film and TV production and broadcasting\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 39\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 39"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#manufacture-of-machinery-and-transport-equipment",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#manufacture-of-machinery-and-transport-equipment",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Manufacture of machinery and transport equipment",
-    "text": "Manufacture of machinery and transport equipment\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 40\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 40"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#creative-arts-entertainment-and-cultural-activities",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#creative-arts-entertainment-and-cultural-activities",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Creative, arts, entertainment and cultural activities",
-    "text": "Creative, arts, entertainment and cultural activities\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 41\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 41"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#repair-of-computers-personal-and-household-goods",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#repair-of-computers-personal-and-household-goods",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Repair of computers, personal and household goods",
-    "text": "Repair of computers, personal and household goods\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 42\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 42"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#manufacture-of-electronic-optical-and-electrical-products",
     "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#manufacture-of-electronic-optical-and-electrical-products",
     "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
-    "section": "Manufacture of electronic, optical and electrical products",
-    "text": "Manufacture of electronic, optical and electrical products\n\nLQ gva/job plots\n\n\n\n\n\n\n\n\nFigure 43\n\n\n\n\n\n\n\nMap: within-Y&H micro-LQ for 2024/25"
+    "section": "",
+    "text": "Figure 43"
   },
   {
     "objectID": "quarto_docs/Yorkshire_n_Humber_growthslope_catalogue_November2025.html",
@@ -3026,5 +3026,19 @@
     "title": "Yorkshire and The Humber sector analysis (November 2025)",
     "section": "Industrial Strategy: LQs per IndStrat category, ordered by Y&H place LQ",
     "text": "Industrial Strategy: LQs per IndStrat category, ordered by Y&H place LQ\n\n\n\n\n\n\n\n\nFigure 6"
+  },
+  {
+    "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#location-quotient-plot-guide",
+    "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#location-quotient-plot-guide",
+    "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
+    "section": "",
+    "text": "The first two outputs for each section are location quotient plots. Here’s a guide to reading them:\n\nLocation quotients show the ratio of a sector’s size within a place compared to a larger geography’s average - here, Y&H and its sub-regions are compared to the rest of the UK (minus London, see below).\nSectors to the right of the centre line are more concentrated in this region when compared to the national average. (e.g. LQ = 10, it is 10x more concentrated).\nGreen circles have been increasing in concentration over time (larger circles increasing the most)\nRed circles have been decreasing in concentration over time (larger circles decreasing the most)\nBlack horizontal lines show the min and max of concentration in the data’s history (from 2015 to 2023)\nCircles and lines can be read together - for example, if a green circle is at the right of this line, sector job concentration has been increasing on average and is continuing.\nPer ITL3 GVA values and percent of the total zone economy are shown with the place name. These are useful to check sector size versus LQ - for example, a sector like jewellery can have a high LQ (as it does in Sheffield and Birmingham) with very low job counts, because there aren’t many jobs in this sector overall in Great Britain."
+  },
+  {
+    "objectID": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#notes",
+    "href": "quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#notes",
+    "title": "Yorkshire and The Humber: sector plot catalogue (November 2025)",
+    "section": "",
+    "text": "All plots except the maps analyse data between 2015 and 2023, using a three-year moving average.\nFor the main LQ plots, the ITL1 zone for London has been excluded. This is because the size of London’s economy warps location quotients for the rest of the UK. For example, if London is included, LQ values for creative sectors are all below one for everywhere except London."
   }
 ]
