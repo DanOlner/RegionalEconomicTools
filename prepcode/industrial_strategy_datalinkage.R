@@ -838,7 +838,10 @@ indstrat_sums = bind_rows(
   map(names(is8drops), indstratsums_perIS8)
 )
 
-  
+# Save that for use elsewhere
+saveRDS(indstrat_sums,'local/indstrat_sums.rds')
+
+
 # May want to smooth, let's see. But...
 corecities = readRDS('data/corecitiesvector.rds')
 

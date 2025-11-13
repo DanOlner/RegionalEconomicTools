@@ -38,110 +38,423 @@ source('../functions/adhoc_functions.R')
 options(scipen = 999)
 
 #Set ggplot theme
-theme_set(theme_light())
+# theme_set(theme_light())
 
 corecities = readRDS('../data/corecitiesvector.rds')
+
+# ynh itl3 names
+itl3.ynh = readRDS('../local/data/itl3ynh.rds')
+ynhitl3names = unique(itl3.ynh$Region_name)
+
 
 ```
 
 # Introduction
 
-# GROWTH TRENDS IN GVA, JOBS AND GVA PER JOB
+# History
 
-## Full data range: 2015 to 2023
-
-```{r, fig-growthdata_cv_andperFT}
-#| fig-height: 12 
-#| fig-width: 9.5
-
-#Counting sigs. Statisticians having kittens. Let's do it.
-itl3.2digit.cv <- read_csv('../data/regionalGVA/regionalGVA_chainedvolume_ITL3_SIC_2DIGIT_LONG_2023.csv') %>% filter(!qg('agri|Owner-occupiers|membership|activities of households',SIC07_description))
-
-#Add in shorter regional GVA SIC text
-shortsectornames <- read_csv('../data/shortsectornames_for_regionalGVA_2digitSICs.csv')
-
-#check match, tick
-# table(unique(itl3.2digit.cv$SIC07_description) %in% shortsectornames$SIC07_description)
-itl3.2digit.cv <- itl3.2digit.cv %>% 
-  left_join(
-    shortsectornames, by = 'SIC07_description'
-  )
-
-#CV first. No NeweyWest
-ynh.2dig <- plotSlopeCounts(
-  df = itl3.2digit.cv,
-  placename = 'Sheffield',
-  startdate = 2014,
-  enddate = 2023,
-  date_colname = year,
-  region_colname = Region_name,
-  sector_colname = SIC07_description_shortened,
-  value_colname = value,
-  conf_interval = 95
-)
+## Production v services
 
 
 
+```{r, fig-prodvservices}
+#| fig-height: 5
 
-#And for GVA per job
-bres.gva.2digit.2023 <- readRDS('../local/data/BRES2024_linkedtoITL3_2025_GVAsiccodes_withgvaattached.rds') %>% 
-  filter(JOBCOUNT > 0, !qg('membership|activities of households|agri', SIC07_description)) %>% 
-  mutate(gvaperjob = gva / JOBCOUNT)
+gva.gs.smoothed = readRDS('../local/gvagssmoothed.rds')
 
-#check match, tick
-# table(unique(bres.gva.2digit.2023$SIC07_description) %in% shortsectornames$SIC07_description)
-bres.gva.2digit.2023 <- bres.gva.2digit.2023 %>% 
-  left_join(
-    shortsectornames, by = 'SIC07_description'
-  )
-
-
-
-
-
-#CHeck this has same list of sectors as the CV data above... tick
-#(With imputed rent removed from CV)
-# table(unique(bres.gva.2digit.2023$SIC07_description) %in% itl3.2digit.cv$SIC07_description)
-# unique(bres.gva.2digit.2023$SIC07_description)[!unique(bres.gva.2digit.2023$SIC07_description) %in% itl3.2digit.cv$SIC07_description]
-ynh.gvaperjob.2dig <- plotSlopeCounts(
-  df = bres.gva.2digit.2023,
-  placename = 'Sheffield',
-  startdate = 2015,
-  enddate = 2023,
-  date_colname = year,
-  region_colname = Region_name,
-  sector_colname = SIC07_description_shortened,
-  value_colname = gvaperjob,#Note, this gets log'd in the function, don't do it here
-  conf_interval = 95,
-  includesectorname_on_axis = T
-)
-
-#Check sector match before alterations
-# ynh.2dig$plot + ynh.gvaperjob.2dig$plot
+# Plot change over time - 
+# Pick one of the two
+ggplot(
+  gva.gs.smoothed %>% 
+    filter(qg('services',goodsservices)) %>% 
+    mutate(is_ynh = Region_name == 'Yorkshire and The Humber'), 
+  aes(x = year, y = sector_regional_percent, colour = Region_name, size = is_ynh)) +
+  scale_size_manual(values = c(0.5,2)) +
+  geom_line() +
+  geom_point() +
+  scale_color_brewer(palette = 'Paired', direction = 1) +
+  theme(legend.title = element_blank()) +
+  guides(size = F) +
+  ylab('Percent service sectors') 
 
 
-#Axes match - remove from RHS
-ynh.gvaperjob.2dig$plot <- ynh.gvaperjob.2dig$plot +
-  theme(axis.title.y=element_blank(),
-        # axis.text.y=element_blank(),
-        axis.ticks.y=element_blank(), 
-        axis.title.x=element_blank(),
-        legend.position = "bottom"
-        ) +
-        # axis.text.x=element_blank(),
-        # axis.ticks.x=element_blank()) +
-  guides(fill = F) +
-  ggtitle("GVA/FT") 
-
-#And only need the one legend!
-ynh.2dig$plot <- ynh.2dig$plot +
-  ggtitle("GVA") +
-  theme(
-    legend.position = "bottom",
-    axis.title.y=element_blank()#add this explanation in figure text
-  )
-
-ynh.2dig$plot + ynh.gvaperjob.2dig$plot
 
 ```
+
+
+
+## Prop plots of broad sectors
+
+
+```{r, fig-hist1}
+#| fig-height: 5
+
+gva.sections = readRDS('../local/gvasections.rds')
+
+place = 'Yorkshire and The Humber'
+
+# Run wiggly plot (below) data collection code here to get sector percents for filtering
+regionvals = get_tworegions_proportions(
+  df = gva.sections %>% filter(!is.na(gva_movingav)),
+  # df = gva.sections %>% filter(!is.na(gva_movingav), !qg('london',Region_name)),#Version with London removed
+  regionvar = Region_name,
+  category_var = SIC07_description,
+  valuevar = gva_movingav,
+  timevar = year,
+  x_regionnames = place,
+  y_regionnames = unique(gva.sections$Region_name[gva.sections$Region_name != place])
+) %>% 
+  mutate(
+    x_sector_total_percent = x_sector_total_proportion * 100,
+    y_sector_total_percent = y_sector_total_proportion * 100,
+    `Y&H%` = x_sector_total_percent
+  )
+
+# Find sectors with average regional percent below a certain value
+# And remove those sectors entirely from the df so they don't display
+dropthesesectors = regionvals %>% 
+  group_by(SIC07_description) %>% 
+  summarise(meanpercent = mean(x_sector_total_percent)) %>% 
+  filter(meanpercent  < 6) %>% 
+  # filter(meanpercent >= 6) %>% 
+  pull(SIC07_description)
+
+p <- twod_proportionplot(
+  # df = gva.sections %>% filter(!qg('london',Region_name)),# Version with London removed
+  df = gva.sections %>% filter(!SIC07_description %in% dropthesesectors),
+  x_regionnames = place, 
+  y_regionnames = unique(gva.sections$Region_name[gva.sections$Region_name != place]),
+  regionvar = Region_name,
+  category_var = SIC07_description, 
+  valuevar = gva_movingav, 
+  timevar = year, 
+  # start_time = 2007, end_time = 2022,
+  # start_time = 1999, end_time = 2007,
+  start_time = 1999, end_time = 2022
+  # compasspoints_to_display = c('SW','NW')
+  # compasspoints_to_display = c('SE','NE')
+)
+
+#add some extras
+p <- p + 
+  xlab(paste0(place, ' GVA proportion')) +
+  ylab(paste0('UK GVA proportion (MINUS ',place,')')) +
+  coord_fixed()
+  # coord_fixed(xlim = c(0.1,12), ylim = c(0.1,12)) +  # good for log scale
+  # scale_y_log10() +
+  # scale_x_log10()
+
+p
+
+```
+
+```{r, fig-hist2}
+
+place = 'Yorkshire and The Humber'
+
+# Run wiggly plot (below) data collection code here to get sector percents for filtering
+regionvals = get_tworegions_proportions(
+  df = gva.sections %>% filter(!is.na(gva_movingav)),
+  # df = gva.sections %>% filter(!is.na(gva_movingav), !qg('london',Region_name)),#Version with London removed
+  regionvar = Region_name,
+  category_var = SIC07_description,
+  valuevar = gva_movingav,
+  timevar = year,
+  x_regionnames = place,
+  y_regionnames = unique(gva.sections$Region_name[gva.sections$Region_name != place])
+) %>% 
+  mutate(
+    x_sector_total_percent = x_sector_total_proportion * 100,
+    y_sector_total_percent = y_sector_total_proportion * 100,
+    `Y&H%` = x_sector_total_percent
+  )
+
+# Find sectors with average regional percent below a certain value
+# And remove those sectors entirely from the df so they don't display
+dropthesesectors = regionvals %>% 
+  group_by(SIC07_description) %>% 
+  summarise(meanpercent = mean(x_sector_total_percent)) %>% 
+  # filter(meanpercent  < 6) %>% 
+  filter(meanpercent >= 6) %>%
+  pull(SIC07_description)
+
+p <- twod_proportionplot(
+  # df = gva.sections %>% filter(!qg('london',Region_name)),# Version with London removed
+  df = gva.sections %>% filter(!SIC07_description %in% dropthesesectors),
+  x_regionnames = place, 
+  y_regionnames = unique(gva.sections$Region_name[gva.sections$Region_name != place]),
+  regionvar = Region_name,
+  category_var = SIC07_description, 
+  valuevar = gva_movingav, 
+  timevar = year, 
+  # start_time = 2007, end_time = 2022,
+  # start_time = 1999, end_time = 2007,
+  start_time = 1999, end_time = 2022
+  # compasspoints_to_display = c('SW','NW')
+  # compasspoints_to_display = c('SE','NE')
+)
+
+#add some extras
+p <- p + 
+  xlab(paste0(place, ' GVA proportion')) +
+  ylab(paste0('UK GVA proportion (MINUS ',place,')')) +
+  coord_fixed()
+  # coord_fixed(xlim = c(0.1,12), ylim = c(0.1,12)) +  # good for log scale
+  # scale_y_log10() +
+  # scale_x_log10()
+
+p
+
+```
+
+
+
+
+# Y&H's industrial strategy sectors
+
+## The Industrial Strategy data
+
+The [UK Industrial Strategy](https://www.gov.uk/government/collections/the-uks-modern-industrial-strategy-2025) was released in 2025, with accompanying plans for 6 out of the 8 target "IS-8" sectors. It also has a [sector definition list](https://www.gov.uk/government/publications/industrial-strategy/industrial-strategy-sector-definitions-list) that provides SIC codes being targeted - top level sectors and 'frontier' subsectors (a few of which overlap; most do not). These range in specificity between 2 digit and 5 digit SIC codes.
+
+As that webpage says, most of these SIC codes cannot capture the full range of possible firms the strategy aims to cover, and it also contains entire sections that SIC codes can't cover at all - clean energy and certain digital sectors in particular. However, it does allow an analysis of which sectors are *definitely* within those industrial strategy categories. The plots below gather job details for those specific sectors - a distinct range of types and breadth - and examines Yorkshire and Humber to see how its industrial strategy-aligned sectors compare.
+
+The table below lists the IS-8 broad sector headings. In the IndStrat plots, the abbreviations for these IS-8 headings appear before the sector name. Clean energy - as mentioned above - has no SIC codes and so can't currently be matched. 
+
+```{r brad_indstrattable}
+
+indstrat <- tibble(
+  `IS8 sector` = c(
+    'Advanced Manufacturing',
+    'Clean Energy Industries',
+    'Creative Industries',
+    'Defence',
+    'Digital and Technologies', 
+    'Financial Services',
+    'Life Sciences', 
+    'Professional and Business Services'),
+  `Abbreviation` = c(
+    'ADV MANUF',
+    '--',
+    'CREATIVE',
+    'DEFENCE',
+    'DIGITAL',
+    'FIN',
+    'LIFESCI',
+    'PBS'
+    )
+)
+
+#escape = FALSE so that markdown in the cells (the links) is rendered correctly.
+knitr::kable(indstrat, escape = FALSE, caption = "Table: Industrial Strategy IS-8 names and abbreviations (dashes mean that sector doesn't appear for South Yorkshire)")
+
+```
+
+## IndStrat: job percents (compared to whole economy) in each category, change over time
+
+This plot is repeated for two groups of Y&H authorities
+
+```{r, fig-indstratsums1}
+#| fig-height: 14
+
+indstrat_sums = readRDS('../local/indstrat_sums.rds')
+
+# Keep Y&H ITL3s
+# South and West first
+indstrat_plot = indstrat_sums %>% 
+  filter(GEOGRAPHY_NAME %in% c(ynhitl3names[c(5,6,7,8,9,10,12)],'Calderdale','Kirklees'))
+
+# Random pastel colours
+#https://stackoverflow.com/a/33144808/5023561
+#Make different pastel-ish colours
+# n <- length(unique(indstrat_plot$GEOGRAPHY_NAME))
+# set.seed(13)
+# qual_col_pals = brewer.pal.info[brewer.pal.info$category == 'qual',]
+# col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
+# # pie(rep(1,n), col=sample(col_vector, n))
+# 
+# # randomcols <- sample(col_vector, n)
+# # n <- length(unique(itl3.sections.cv$SIC07_description))
+# randomcols <- col_vector[14:(14+(n-1))]
+
+# Pick final smoothed year to order factor
+placeorder = indstrat_plot %>% 
+  filter(DATE == 2023) %>% #centre of 3 year smooth final point
+  arrange(-percent_all_indstrat_movingav) %>% 
+  select(GEOGRAPHY_NAME) %>% 
+  distinct() %>% 
+  pull
+
+indstrat_plot = indstrat_plot %>% 
+  mutate(
+    GEOGRAPHY_NAME = factor(GEOGRAPHY_NAME, levels = placeorder)
+  )
+
+# Save for qml
+# saveRDS(indstrat_plot,'local/allindstrat_plot.rds')
+
+# PLOOOOT
+ggplot(indstrat_plot %>% filter(!is.na(percent_all_indstrat_movingav)),
+       aes(x = DATE, 
+           y = percent_all_indstrat_movingav, 
+           colour = GEOGRAPHY_NAME
+       )) +
+  geom_line() +
+  geom_point() +
+  # scale_size_manual(values = c(0.3,1)) +
+  # scale_color_manual(values = randomcols) +
+  scale_color_brewer(palette = 'Paired') + 
+  # scale_x_continuous(breaks = c(2013,2017,2019,2021,2023)) +
+  theme(legend.title = element_blank()) +
+  facet_wrap(~indstrat_code, scales = 'free_y', ncol = 2) +
+  xlab('') +
+  ylab('Percent of total jobs')
+
+
+```
+
+
+
+```{r, fig-indstratsums2}
+#| fig-height: 14
+
+# Keep Y&H ITL3s
+# North and East next
+indstrat_plot = indstrat_sums %>% 
+  filter(GEOGRAPHY_NAME %in% c(ynhitl3names[c(1,2,3,4)],'Lincolnshire','North Lincolnshire'))
+
+# Shorten some of those names
+indstrat_plot = indstrat_plot %>% 
+  mutate(GEOGRAPHY_NAME = case_when(
+    qg('North linc',GEOGRAPHY_NAME) ~ 'N L\'shire',
+    qg('North york',GEOGRAPHY_NAME) ~ 'N Yorks',
+    qg('East riding',GEOGRAPHY_NAME) ~ 'East Riding',
+    .default = GEOGRAPHY_NAME
+  ))
+
+# Random pastel colours
+#https://stackoverflow.com/a/33144808/5023561
+#Make different pastel-ish colours
+# n <- length(unique(indstrat_plot$GEOGRAPHY_NAME))
+# set.seed(13)
+# qual_col_pals = brewer.pal.info[brewer.pal.info$category == 'qual',]
+# col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
+# # pie(rep(1,n), col=sample(col_vector, n))
+# 
+# # randomcols <- sample(col_vector, n)
+# # n <- length(unique(itl3.sections.cv$SIC07_description))
+# randomcols <- col_vector[14:(14+(n-1))]
+
+# Pick final smoothed year to order factor
+placeorder = indstrat_plot %>% 
+  filter(DATE == 2023) %>% #centre of 3 year smooth final point
+  arrange(-percent_all_indstrat_movingav) %>% 
+  select(GEOGRAPHY_NAME) %>% 
+  distinct() %>% 
+  pull
+
+indstrat_plot = indstrat_plot %>% 
+  mutate(
+    GEOGRAPHY_NAME = factor(GEOGRAPHY_NAME, levels = placeorder)
+  )
+
+# Save for qml
+# saveRDS(indstrat_plot,'local/allindstrat_plot.rds')
+
+# PLOOOOT
+ggplot(indstrat_plot %>% filter(!is.na(percent_all_indstrat_movingav)),
+       aes(x = DATE, 
+           y = percent_all_indstrat_movingav, 
+           colour = GEOGRAPHY_NAME
+       )) +
+  geom_line() +
+  geom_point() +
+  # scale_size_manual(values = c(0.3,1)) +
+  # scale_color_manual(values = randomcols) +
+  scale_color_brewer(palette = 'Paired') + 
+  # scale_x_continuous(breaks = c(2013,2017,2019,2021,2023)) +
+  theme(legend.title = element_blank()) +
+  facet_wrap(~indstrat_code, scales = 'free_y', ncol = 2) +
+  xlab('') +
+  ylab('Percent of total jobs')
+
+
+```
+
+
+## Industrial Strategy: LQs per IndStrat category, ordered by Y&H place LQ
+
+```{r, fig-allindstratLQs}
+#| fig-height: 25
+
+# plotz = readRDS('../local/data/indstrat_lqplots_ynh.rds')
+
+# plotz
+
+# That won't run from RDS... fine, re-run the whole thing from here?
+yeartoplot = readRDS('../local/data/ynh_indstrat_lqplotdata.rds')
+
+minmaxes = readRDS('../local/data/ynh_indstrat_minmaxes.rds')
+
+# Function up to get repeat plots
+make_indstrat_ynhlqplots = function(indstrat_name){
+
+  # Filter down just to the sector we're displaying
+  # so we can get order correct
+  yeartoplot.sub = yeartoplot %>% filter(indstrat_code == indstrat_name)
+  
+  # placeLQorder <- yeartoplot %>% 
+  #   arrange(-LQ) %>% 
+  #   pull(displayregions) 
+  
+  #Turn the sector column into a factor and order by LQs
+  # yeartoplot$displayregions <- factor(yeartoplot$displayregions, levels = placeLQorder, ordered = T)
+  yeartoplot.sub = yeartoplot.sub %>% 
+    mutate(
+      displayregions = fct_reorder(displayregions,LQ_log,.desc = T)
+    )
+  
+  # factor(yeartoplot.sub$displayregions, levels = placeLQorder, ordered = T)
+  
+  
+  # Get range to display on x axis
+  # Use min and max of minmaxes here
+  plot_range = minmaxes %>% filter(indstrat_code == indstrat_name) %>% 
+    select(min_LQ_all_time:max_LQ_all_time) %>% 
+    pivot_longer(min_LQ_all_time:max_LQ_all_time, names_to = 'cols', values_to = 'vals') %>% 
+    ungroup() %>% 
+    reframe(range = range(vals)) %>% 
+    pull(range) 
+  
+  if(plot_range[1]==0) plot_range[1] = 0.1# Avoid log infs
+  
+  # debugonce(LQ_baseplot)
+  p2 <- LQ_baseplot(df = yeartoplot.sub, alpha = 1, sector_name = displayregions, 
+                    LQ_column = LQ, change_over_time = slope)
+  
+  # debugonce(addplacename_to_LQplot)
+  p2 <- addplacename_to_LQplot(df = yeartoplot.sub, plot_to_addto = p2, maxLQvalmultiplier = 20,#Hide it!
+                               placename = unique(yeartoplot.sub$indstrat_code), shapenumber = 16,
+                               min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
+                               value_column = totaljobs_movingav, sector_regional_proportion = sector_regional_proportion,
+                               region_name = indstrat_code,
+                               sector_name = displayregions, change_over_time = slope, LQ_column = LQ,
+                               text = 7, value_col_ismoney = T)
+  
+  p2 +
+    coord_cartesian(xlim = plot_range) +
+    ggtitle(unique(yeartoplot.sub$indstrat_code))
+
+}
+
+
+# make_indstrat_ynhlqplots(unique(indstrat_sums$indstrat_code)[2])
+plotz_gg = map(unique(indstrat_sums$indstrat_code), make_indstrat_ynhlqplots)
+
+patchwork::wrap_plots(plotz_gg, ncol = 2)
+
+
+```
+
+
+
 

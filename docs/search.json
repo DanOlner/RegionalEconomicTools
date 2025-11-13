@@ -2970,5 +2970,61 @@
     "title": "Yorkshire and The Humber: growth slope plots for ITL3s (November 2025)",
     "section": "York",
     "text": "York\n\n\n\n\n\n\n\n\nFigure 12"
+  },
+  {
+    "objectID": "quarto_docs/Yorkshire_n_Humber_sectors_Nov2025.html",
+    "href": "quarto_docs/Yorkshire_n_Humber_sectors_Nov2025.html",
+    "title": "Yorkshire and The Humber sector analysis (November 2025)",
+    "section": "",
+    "text": "Figure 1\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 2"
+  },
+  {
+    "objectID": "quarto_docs/Yorkshire_n_Humber_sectors_Nov2025.html#history",
+    "href": "quarto_docs/Yorkshire_n_Humber_sectors_Nov2025.html#history",
+    "title": "Yorkshire and The Humber sector analysis (November 2025)",
+    "section": "",
+    "text": "Figure 1\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 2"
+  },
+  {
+    "objectID": "quarto_docs/Yorkshire_n_Humber_sectors_Nov2025.html#production-v-services",
+    "href": "quarto_docs/Yorkshire_n_Humber_sectors_Nov2025.html#production-v-services",
+    "title": "Yorkshire and The Humber sector analysis (November 2025)",
+    "section": "Production v services",
+    "text": "Production v services\n\n\n\n\n\n\n\n\nFigure 1"
+  },
+  {
+    "objectID": "quarto_docs/Yorkshire_n_Humber_sectors_Nov2025.html#prop-plots-of-broad-sectors",
+    "href": "quarto_docs/Yorkshire_n_Humber_sectors_Nov2025.html#prop-plots-of-broad-sectors",
+    "title": "Yorkshire and The Humber sector analysis (November 2025)",
+    "section": "Prop plots of broad sectors",
+    "text": "Prop plots of broad sectors\n\n\n\n\n\n\n\n\nFigure 2\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3"
+  },
+  {
+    "objectID": "quarto_docs/Yorkshire_n_Humber_sectors_Nov2025.html#ind-strat-lqs",
+    "href": "quarto_docs/Yorkshire_n_Humber_sectors_Nov2025.html#ind-strat-lqs",
+    "title": "Yorkshire and The Humber sector analysis (November 2025)",
+    "section": "Ind Strat LQs",
+    "text": "Ind Strat LQs\n\n\n\n\n\n\n\n\nFigure 6"
+  },
+  {
+    "objectID": "quarto_docs/Yorkshire_n_Humber_sectors_Nov2025.html#the-industrial-strategy-data",
+    "href": "quarto_docs/Yorkshire_n_Humber_sectors_Nov2025.html#the-industrial-strategy-data",
+    "title": "Yorkshire and The Humber sector analysis (November 2025)",
+    "section": "The Industrial Strategy data",
+    "text": "The Industrial Strategy data\nThe UK Industrial Strategy was released in 2025, with accompanying plans for 6 out of the 8 target “IS-8” sectors. It also has a sector definition list that provides SIC codes being targeted - top level sectors and ‘frontier’ subsectors (a few of which overlap; most do not). These range in specificity between 2 digit and 5 digit SIC codes.\nAs that webpage says, most of these SIC codes cannot capture the full range of possible firms the strategy aims to cover, and it also contains entire sections that SIC codes can’t cover at all - clean energy and certain digital sectors in particular. However, it does allow an analysis of which sectors are definitely within those industrial strategy categories. The plots below gather job details for those specific sectors - a distinct range of types and breadth - and examines Yorkshire and Humber to see how its industrial strategy-aligned sectors compare.\nThe table below lists the IS-8 broad sector headings. In the IndStrat plots, the abbreviations for these IS-8 headings appear before the sector name. Clean energy - as mentioned above - has no SIC codes and so can’t currently be matched.\n\n\n\nTable: Industrial Strategy IS-8 names and abbreviations (dashes mean that sector doesn’t appear for South Yorkshire)\n\n\nIS8 sector\nAbbreviation\n\n\n\n\nAdvanced Manufacturing\nADV MANUF\n\n\nClean Energy Industries\n–\n\n\nCreative Industries\nCREATIVE\n\n\nDefence\nDEFENCE\n\n\nDigital and Technologies\nDIGITAL\n\n\nFinancial Services\nFIN\n\n\nLife Sciences\nLIFESCI\n\n\nProfessional and Business Services\nPBS"
+  },
+  {
+    "objectID": "quarto_docs/Yorkshire_n_Humber_sectors_Nov2025.html#indstrat-job-percents-compared-to-whole-economy-in-each-category-change-over-time",
+    "href": "quarto_docs/Yorkshire_n_Humber_sectors_Nov2025.html#indstrat-job-percents-compared-to-whole-economy-in-each-category-change-over-time",
+    "title": "Yorkshire and The Humber sector analysis (November 2025)",
+    "section": "IndStrat: job percents (compared to whole economy) in each category, change over time",
+    "text": "IndStrat: job percents (compared to whole economy) in each category, change over time\nThis plot is repeated for two groups of Y&H authorities\n\n\n\n\n\n\n\n\nFigure 4\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 5"
+  },
+  {
+    "objectID": "quarto_docs/Yorkshire_n_Humber_sectors_Nov2025.html#industrial-strategy-lqs-per-indstrat-category-ordered-by-yh-place-lq",
+    "href": "quarto_docs/Yorkshire_n_Humber_sectors_Nov2025.html#industrial-strategy-lqs-per-indstrat-category-ordered-by-yh-place-lq",
+    "title": "Yorkshire and The Humber sector analysis (November 2025)",
+    "section": "Industrial Strategy: LQs per IndStrat category, ordered by Y&H place LQ",
+    "text": "Industrial Strategy: LQs per IndStrat category, ordered by Y&H place LQ\n\n\n\n\n\n\n\n\nFigure 6"
   }
 ]

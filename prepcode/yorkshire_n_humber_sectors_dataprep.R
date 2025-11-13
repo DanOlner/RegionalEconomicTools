@@ -200,6 +200,8 @@ gva.sections = gva.sections %>%
   ) %>% 
   ungroup()
 
+# Save
+saveRDS(gva.sections,'local/gvasections.rds')
 
 ## Some checks----
 
@@ -231,9 +233,34 @@ ggplot(london.chk, aes(x =year, y = london_percent)) +
 # Well done past me!
 place = 'Yorkshire and The Humber'
 
+# Run wiggly plot (below) data collection code here to get sector percents for filtering
+regionvals = get_tworegions_proportions(
+  df = gva.sections %>% filter(!is.na(gva_movingav)),
+  # df = gva.sections %>% filter(!is.na(gva_movingav), !qg('london',Region_name)),#Version with London removed
+  regionvar = Region_name,
+  category_var = SIC07_description,
+  valuevar = gva_movingav,
+  timevar = year,
+  x_regionnames = place,
+  y_regionnames = unique(gva.sections$Region_name[gva.sections$Region_name != place])
+) %>% 
+  mutate(
+    x_sector_total_percent = x_sector_total_proportion * 100,
+    y_sector_total_percent = y_sector_total_proportion * 100,
+    `Y&H%` = x_sector_total_percent
+  )
+
+# Find sectors with average regional percent below a certain value
+# And remove those sectors entirely from the df so they don't display
+dropthesesectors = regionvals %>% 
+  group_by(SIC07_description) %>% 
+  summarise(meanpercent = mean(x_sector_total_percent)) %>% 
+  filter(meanpercent >= 6) %>% 
+  pull(SIC07_description)
+
 p <- twod_proportionplot(
   # df = gva.sections %>% filter(!qg('london',Region_name)),# Version with London removed
-  df = gva.sections,
+  df = gva.sections %>% filter(!SIC07_description %in% dropthesesectors),
   x_regionnames = place, 
   y_regionnames = unique(gva.sections$Region_name[gva.sections$Region_name != place]),
   regionvar = Region_name,
@@ -285,7 +312,7 @@ regionvals = get_tworegions_proportions(
 dropthesesectors = regionvals %>% 
   group_by(SIC07_description) %>% 
   summarise(meanpercent = mean(x_sector_total_percent)) %>% 
-  filter(meanpercent < 3) %>% 
+  filter(meanpercent < 6) %>% 
   pull(SIC07_description)
 
 
@@ -553,6 +580,7 @@ place_order <- gva.gs.smoothed %>% filter(
 
 gva.gs.smoothed$Region_name <- factor(gva.gs.smoothed$Region_name, levels = place_order, ordered = T)
 
+saveRDS(gva.gs.smoothed,'local/gvagssmoothed.rds')
 
 # Plot change over time - 
 # Pick one of the two
@@ -1568,7 +1596,7 @@ for(sector in sectorlist){
 
 
 
-## Check moving average discrepancy----
+## Check moving average discrepancy
 
 # Oooooh. Scratch that. Realised before looking - 
 # itl3 is current prices, BRES + GVA is using chained volume values
@@ -1677,6 +1705,200 @@ for(sector in sectorlist){
 
 
 
+# QUICK INDSTRAT V Y&H PLACES LQS?-----
+
+# Can we use the code above that puts places on y axis and do this relatively quickly?
+indstrat_sums = readRDS('local/indstrat_sums.rds')
+
+# These already are smoothed...
+# Have not filtered London out here, probably should?
+indstrat_sums = indstrat_sums %>% 
+  filter(!is.na(totaljobs_movingav)) %>% 
+  rename(year = DATE, Region_name = GEOGRAPHY_NAME) %>% 
+  group_split(year) %>% 
+    map(
+      add_location_quotient_and_proportions,
+      regionvar = Region_name,
+      lq_var = indstrat_code,
+      valuevar = totaljobs_movingav
+    ) %>% 
+    bind_rows()
+
+# Hmm I think we've got unitary and county in the indstrat data
+# lad_lookup = read_csv("local/LAD_(April_2025)_to_LAU1_to_ITL3_to_ITL2_to_ITL1_(January_2025)_Lookup_in_the_UK.csv")
+# lad_lookup = read_csv("local/Local_Authority_District_(April_2021)_to_LAU1_to_ITL3_to_ITL2_to_ITL1_(January_2021)_Lookup_in_United_Kingdom.csv")
+# 
+# table(unique(lad_lookup$LAD21NM) %in% indstrat_sums$Region_name)
+
+# Pick manually to get just Y&H places
+# ynh itl3 names gets us most of the way
+itl3.ynh = readRDS('local/data/itl3ynh.rds')
+ynhnames = unique(itl3.ynh$Region_name)
+
+ynhnames = c(ynhnames[-c(2,11)], 'Calderdale','Kirklees','Lincolnshire','North Lincolnshire')
+# ynhnames = c(ynhnames[c(2,13,14,15,16)], 'Calderdale','Kirklees','Lincolnshire','North Lincolnshire')
+
+table(ynhnames %in% indstrat_sums$Region_name)
+
+# Keep only those
+indstrat_sums = indstrat_sums %>% 
+  filter(
+    Region_name %in% ynhnames
+  )
+
+
+# Enshortenemateifyadoodoo
+# ynhshortnames - not that short? And also won't match LAs here
+unique(indstrat_sums$Region_name)
+
+indstrat_sums = indstrat_sums %>%
+  mutate(
+    Region_name = case_when(
+      Region_name == 'Lincolnshire' ~ 'L\'shire',
+      qg('North linc',Region_name) ~ 'N L\'shire',
+      qg('North york',Region_name) ~ 'N Yorks',
+      qg('East riding',Region_name) ~ 'East Riding',
+      .default = Region_name
+    )
+  )
+
+
+  
+
+
+# Get ITL3 plot made for the places in Y&H
+LQ_slopes <- compute_slope_or_zero(
+  data = indstrat_sums, 
+  Region_name, indstrat_code,#slopes will be found within whatever grouping vars are added here
+  y = LQ_log, x = year)
+
+
+#Filter down to a single year... we may want to smooth years, let's see
+yeartoplot <- indstrat_sums %>% filter(year == max(year))#use latest year
+
+#Add slopes into data to get LQ plots
+yeartoplot <- yeartoplot %>% 
+  left_join(
+    LQ_slopes,
+    by = c('Region_name', 'indstrat_code')
+  )
+
+#Get min/max values for LQ over time as well, for each sector and place, to add as bars so range of sector is easy to see
+minmaxes <- indstrat_sums %>% 
+  group_by(Region_name, indstrat_code) %>% 
+  summarise(
+    min_LQ_all_time = min(LQ, na.rm = T),
+    max_LQ_all_time = max(LQ, na.rm = T)
+  ) %>% 
+  mutate(
+    min_LQ_all_time = ifelse(is.infinite(min_LQ_all_time),NA,min_LQ_all_time),
+    max_LQ_all_time = ifelse(is.infinite(max_LQ_all_time),NA,max_LQ_all_time)
+  )
+
+saveRDS(minmaxes,'local/data/ynh_indstrat_minmaxes.rds')
+
+
+# table(is.infinite(minmaxes$min_LQ_all_time))
+# table(is.infinite(minmaxes$max_LQ_all_time))
+
+#Join min and max
+yeartoplot <- yeartoplot %>% 
+  left_join(
+    minmaxes,
+    by = c('Region_name', 'indstrat_code')
+  )
+
+# Join other SIC levels to it so we can break down into production / other
+# I think I have a lookup for that, though that will need a tweak due to one extra sector in ITL1
+
+# Have just upyeard regionalGVA_siccode_lookupmaker.R for ITL1 as well...
+# (Forgot I had that!)
+# gvalookup_itl3 = read_csv('data/siclookup_forregionalGVAcategories_ITL3.csv')
+
+# Confirm... tick
+# table(unique(gvalookup_itl1$SIC07_code) %in% unique(islq$SIC07_code))
+# yeartoplot <- yeartoplot %>%
+#   left_join(
+#     gvalookup_itl3 %>% select(-indstrat_code),
+#     by = 'SIC07_code'
+#   )
+
+
+# Make a column with the amount and % in to display as part of labels
+yeartoplot = yeartoplot %>% 
+  mutate(
+    displayregions = paste0(
+      Region_name,
+      ": ",
+      round(totaljobs_movingav/1000,1),
+      "K, ",
+      round(sector_regional_proportion * 100,2),
+      "%"
+    )
+  )
+
+saveRDS(yeartoplot,'local/data/ynh_indstrat_lqplotdata.rds')
+
+
+# Function up to get repeat plots
+make_indstrat_ynhlqplots = function(indstrat_name){
+
+  # Filter down just to the sector we're displaying
+  # so we can get order correct
+  yeartoplot.sub = yeartoplot %>% filter(indstrat_code == indstrat_name)
+  
+  # placeLQorder <- yeartoplot %>% 
+  #   arrange(-LQ) %>% 
+  #   pull(displayregions) 
+  
+  #Turn the sector column into a factor and order by LQs
+  # yeartoplot$displayregions <- factor(yeartoplot$displayregions, levels = placeLQorder, ordered = T)
+  yeartoplot.sub = yeartoplot.sub %>% 
+    mutate(
+      displayregions = fct_reorder(displayregions,LQ_log,.desc = T)
+    )
+  
+  # factor(yeartoplot.sub$displayregions, levels = placeLQorder, ordered = T)
+  
+  
+  # Get range to display on x axis
+  # Use min and max of minmaxes here
+  plot_range = minmaxes %>% filter(indstrat_code == indstrat_name) %>% 
+    select(min_LQ_all_time:max_LQ_all_time) %>% 
+    pivot_longer(min_LQ_all_time:max_LQ_all_time, names_to = 'cols', values_to = 'vals') %>% 
+    ungroup() %>% 
+    reframe(range = range(vals)) %>% 
+    pull(range) 
+  
+  if(plot_range[1]==0) plot_range[1] = 0.1# Avoid log infs
+  
+  # debugonce(LQ_baseplot)
+  p2 <- LQ_baseplot(df = yeartoplot.sub, alpha = 1, sector_name = displayregions, 
+                    LQ_column = LQ, change_over_time = slope)
+  
+  # debugonce(addplacename_to_LQplot)
+  p2 <- addplacename_to_LQplot(df = yeartoplot.sub, plot_to_addto = p2, maxLQvalmultiplier = 20,#Hide it!
+                               placename = unique(yeartoplot.sub$indstrat_code), shapenumber = 16,
+                               min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
+                               value_column = totaljobs_movingav, sector_regional_proportion = sector_regional_proportion,
+                               region_name = indstrat_code,
+                               sector_name = displayregions, change_over_time = slope, LQ_column = LQ,
+                               text = 7, value_col_ismoney = T)
+  
+  p2 +
+    coord_cartesian(xlim = plot_range) +
+    ggtitle(unique(yeartoplot.sub$indstrat_code))
+
+}
+
+
+# make_indstrat_ynhlqplots(unique(indstrat_sums$indstrat_code)[2])
+plotz_gg = map(unique(indstrat_sums$indstrat_code), make_indstrat_ynhlqplots)
+
+plotz = patchwork::wrap_plots(plotz_gg, ncol = 2)
+
+# Save those plots as is for QMD
+saveRDS(plotz,'local/data/indstrat_lqplots_ynh.rds')
 
 
 # TEST MAKING 2-DIGIT SECTOR MAP FROM CH DATA----
