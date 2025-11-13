@@ -88,7 +88,7 @@ for(sector in levels(sectorlist)){
   # Change of plan - load pre-generated map image
   document = paste0(
     document,
-    "![](../local/outputs/ch_hexmaps_fordictionary/",
+    "![](images/ynh_lq_maps/",
     gsub('[[:punct:]]| ','',sector),
     ".jpeg){width=\"700px\"}\n\n"
   )

@@ -2215,7 +2215,8 @@ for(sector in unique(itl3$SIC07_description)[!qg("households|personal service|me
     tm_shape(itl3.2025 %>% filter(ITL325CD %in% itl2025lookup$ITL325CD[itl2025lookup$ITL125NM == 'Yorkshire and The Humber'])) +
     tm_borders(col_alpha = 0.3)
   
-  tmap_save(p, paste0('local/outputs/ch_hexmaps_fordictionary/',gsub('[[:punct:]]| ','',sector),'.jpeg'), width = 7, height = 5.5)  
+  # tmap_save(p, paste0('local/outputs/ch_hexmaps_fordictionary/',gsub('[[:punct:]]| ','',sector),'.jpeg'), width = 3, height = 2)  
+  tmap_save(p, paste0('quarto_docs/images/ynh_lq_maps/',gsub('[[:punct:]]| ','',sector),'.jpeg'), width = 5, height = 4)
 
 }
 
