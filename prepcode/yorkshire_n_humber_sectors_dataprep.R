@@ -1687,20 +1687,77 @@ for(sector in sectorlist){
 
 # For which, we don't need too much CH data, only Y&H itself. 
 # Let's get that, subset, then drop the orig
-# ch = readRDS('../companieshouseopen/local/PROCESSED_accountextracts_n_livelist_geocoded_combined_Oct2025.rds')
+ch = readRDS('../companieshouseopen/local/PROCESSED_accountextracts_n_livelist_geocoded_combined_Oct2025.rds')
 # 
 # # Get ITL2 to 1 lookup for 2021 (the ones we've got here)
-# itl2to1lookup = read_csv("local/Local_Authority_District_(April_2021)_to_LAU1_to_ITL3_to_ITL2_to_ITL1_(January_2021)_Lookup_in_United_Kingdom.csv") %>% 
-#   select(ITL121NM,ITL221CD,ITL221NM) %>% 
-#   distinct()
+itl2to1lookup = read_csv("local/Local_Authority_District_(April_2021)_to_LAU1_to_ITL3_to_ITL2_to_ITL1_(January_2021)_Lookup_in_United_Kingdom.csv") %>%
+  select(ITL121NM,ITL221CD,ITL221NM) %>%
+  distinct()
 # 
 # # Same as 2025, turns out...
-# ch.ynh = ch %>% 
-#   filter(
-#     ITL221CD %in% (itl2to1lookup %>% filter(qg('humber',ITL121NM)) %>% pull(ITL221CD))
-#   )
+ch.ynh = ch %>%
+  filter(
+    ITL221CD %in% (itl2to1lookup %>% filter(qg('humber',ITL121NM)) %>% pull(ITL221CD))
+  )
 # 
-# saveRDS(ch.ynh, 'local/data/ch_yorkshire_n_humber_October2025.rds')
+saveRDS(ch.ynh, 'local/data/ch_yorkshire_n_humber_October2025.rds')
+
+# While we have the GB data:
+# Going to try a micro-hex LQ measure
+# Rather than try and use the function
+# (Which would be findind it for all hexes)
+# Let's do the calc manually.
+
+# Again, I'm going to exclude London
+# There are five London ITL2s...
+# Blimey, dropping London is such a big drop in firm number!
+ch = ch %>% 
+  filter(
+    !ITL221CD %in% (itl2to1lookup %>% filter(qg('london',ITL121NM)) %>% pull(ITL221CD))
+  )
+
+# OK, can now find LQs...
+# Actually, if we just use the existing function and ITL2s
+# We'll get the national numbers and can use those
+# Let's also use average employee number across both available years
+ch.gb.nationalprops = ch %>% 
+  st_set_geometry(NULL) %>% 
+  filter(Employees_thisyear > 0, Employees_lastyear > 0) 
+
+
+# Just remembering rowwise means is massively faster when vectored outside dplyr
+ch.gb.nationalprops$mean_employeecount = 
+  rowMeans(cbind(
+    ch.gb.nationalprops$Employees_thisyear,
+    ch.gb.nationalprops$Employees_lastyear
+    ))
+
+# Add in the SIC desription level from ITL3 for grouping to match rest
+# We don't want any firms with no SICs at this point either
+ch.gb.nationalprops = ch.gb.nationalprops %>% 
+  left_join(sics.forBRESjoin %>% select(-SIC07_code) %>% rename(SIC07_description_from_ITL3=SIC07_description,SIC07code_from_ITL3 =SIC07_code_fromGVAdata), by = c('SIC_2DIGIT_CODE_NUMERIC' = 'SIC07_code_numeric')
+  ) %>% filter(
+    !is.na(SIC07_description_from_ITL3)
+  )
+
+
+# Group by ITl2, just for arbitrary subgrouping at this point
+ch.gb.nationalprops.sums = ch.gb.nationalprops %>% 
+  group_by(ITL221NM,SIC07_description_from_ITL3) %>% 
+  summarise(total_meanemployees = sum(mean_employeecount))
+
+# Now can find LQs but we're only after the GB-minus-London sector proportions
+# Only doing once, don't need to map separate years
+ch.gb.nationalprops.sums = ch.gb.nationalprops.sums %>% 
+  add_location_quotient_and_proportions(
+    regionvar = ITL221NM,
+    lq_var = SIC07_description_from_ITL3,
+    valuevar = total_meanemployees
+  ) 
+
+
+
+
 
 ch = readRDS('local/data/ch_yorkshire_n_humber_October2025.rds')
 
@@ -1715,6 +1772,8 @@ ch = ch %>%
 # Very nearly the same, good enough
 # table(is.na(ch$SIC07_code_fromGVAdata))
 # table(is.na(ch$SIC_2DIGIT_CODE_NUMERIC))
+
+
 
 # Now let's find a useful hexmap size and summarise...
 
