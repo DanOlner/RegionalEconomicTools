@@ -85,7 +85,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#barnsley" id="toc-barnsley" class="nav-link active" data-scroll-target="#barnsley">Barnsley</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">INTRODUCTION</a>
+  <ul class="collapse">
+  <li><a href="#barnsley" id="toc-barnsley" class="nav-link" data-scroll-target="#barnsley">Barnsley</a></li>
   <li><a href="#bradford" id="toc-bradford" class="nav-link" data-scroll-target="#bradford">Bradford</a></li>
   <li><a href="#calderdale-and-kirklees" id="toc-calderdale-and-kirklees" class="nav-link" data-scroll-target="#calderdale-and-kirklees">Calderdale and Kirklees</a></li>
   <li><a href="#doncaster" id="toc-doncaster" class="nav-link" data-scroll-target="#doncaster">Doncaster</a></li>
@@ -97,6 +99,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#sheffield" id="toc-sheffield" class="nav-link" data-scroll-target="#sheffield">Sheffield</a></li>
   <li><a href="#wakefield" id="toc-wakefield" class="nav-link" data-scroll-target="#wakefield">Wakefield</a></li>
   <li><a href="#york" id="toc-york" class="nav-link" data-scroll-target="#york">York</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -128,6 +131,27 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="introduction" class="level1">
+<h1>INTRODUCTION</h1>
+<p>This page has <strong>growth trend plots for each ITL3 in Yorkshire and Humber</strong> for <strong>GVA and GVA per full time job (a productivity measure)</strong> (both using the 46 sector categories available in the GVA data). These are done for <strong>the full range of data - 2015 to 2023</strong>.</p>
+<p>Here’s an explanation of what’s in the plots below.</p>
+<ul>
+<li>Linear slopes are found for each sector in each place, and each is compared to (a) all other sectors in that place (“… internal”, light blue) and (b) the same sector in all other ITL3s zones in the data (“… to other places”, dark blue).</li>
+<li>For example - looking at one stand-out sector in the first plot for Barnsley: <strong>utilities</strong>. Its GVA has grown significantly more than around 75% of other sectors in Barnsley, and significantly more than around 75% of that sector in other ITL3 zones. Its productivity (measured in GVA per full time job) has grown equally significantly (higher than around 47% of other ITL3s).</li>
+<li>The x axis gives the <strong>percent of slopes that are significantly different to others</strong> (i.e.&nbsp;95% confidence intervals don’t overlap).</li>
+<li>The vertical axis lists all sectors in alphabetical order. These labels given information about the <strong>absolute growth trends</strong> for sectors in each place - i.e.&nbsp;whether they have on average been sloping up or down over the whole time period, irrespective of whether significantly higher or lower than other places:
+<ul>
+<li>Green text: slope rises over time - growth is on average going up</li>
+<li>Red: slope drops over time - growth is on average going down</li>
+<li>Bold green and red: the up or down slope is significantly different from zero (faded red and green can’t be statitically separated from no change over time).</li>
+<li>Text after the sector name is <strong>percent change per year on average</strong> with 95% confidence intervals.</li>
+</ul></li>
+</ul>
+<p>So:</p>
+<ul>
+<li>To see <strong>whether a sector has been growing or shrinking overall</strong>, use the sector text (green for growth, red for shrinkage, values given for average % change per year)</li>
+<li>To <strong>compare that sector’s trend with other sectors in each place or the same sector in other places</strong>, use the bars in the plot. Note - <strong>these are relative</strong>: a slope could be <em>relatively</em> more positive than another, but the sector overall could still be shrinking. For example, ICT has been growing strongly in most places in the UK - but is growth in one place significantly stronger than others? That’s what the place and sector slope comparisons try to answer.</li>
+</ul>
 <section id="barnsley" class="level2">
 <h2 class="anchored" data-anchor-id="barnsley">Barnsley</h2>
 <div class="cell">
@@ -333,6 +357,7 @@ Figure&nbsp;12
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
