@@ -60,7 +60,7 @@ This top-level report is **one of three** examining the economy of Yorkshire and
 
 **There are two connected documents:**
 
-1.  A [Yorkshire and Humber sector catalogue](https://danolner.github.io/RegionalEconomicTools/quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#sector-by-sector-highlights){target="_blank"} that includes detailed analysis of sector strengths across the region. **This document contains the most granular detail**, and has a full guide and explanation on how to use it.
+1.  A [Yorkshire and Humber sector catalogue](https://danolner.github.io/RegionalEconomicTools/quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html){target="_blank"} that includes detailed analysis of sector strengths across the region. **This sector catalogue document contains the most granular detail**, has a full guide and explanation on how to use it and a write-up of stand-outs from the data analysis, by sector.
 2.  A [catalogue of growth trends](https://danolner.github.io/RegionalEconomicTools/quarto_docs/Yorkshire_n_Humber_growthslope_catalogue_Nov2025.html){target="_blank"} for sectors in each Y&H sub region that shows in detail where GVA and productivity growth has been significantly higher or lower than the rest of the UK. The page contains a guide to reading the plots - every place has distinct sectors that stand out, confirming findings from the sector catalogue. The only really striking thing to note is how many sectors have been significantly growing in Wakefield. (Wakefield gets many mentions in the sector analysis document.)
 
 # Structural history of Y&H
@@ -235,15 +235,11 @@ p + ggtitle("Proportion plot: sectors below 6% of economies on average")
 
 This section uses BRES job count data to examine how Y&H connects to the 'IS-8' priority groups from the UK Industrial Strategy. It takes the strategy's sector definition list (see below) and counts jobs in each list. These sometimes overlap across different IS-8 categories and so appear more than once.
 
-The plots below do this:
-
--   The first set of sector percent plots compare **Y&H places to each other** in each IS-8.
-
--   The second set, looking at IS-8 location quotients, show where Y&H places have a **higher concentration than the UK average for each IS-8.**
+The sector percent plots compare **Y&H places to each other** in each IS-8.
 
 Here are some points that jump out from cross-referencing this set of plots:
 
--   Many places have a very high concentration of advanced manufacturing, compared to the rest of the UK. Whilst several places have been stable or seen the percent drop over time, Kirklee's job proportion has been growing. The IS-8 advanced manufacturing sectors are concentrated in quite desperate places across Y&H: Calderdale, Kirklees and Bradford on closest together, but East Riding, Rotherham and Lincolnshire also have a higher than UK average concentration.
+-   Many places have a very high concentration of advanced manufacturing, compared to the rest of the UK. Whilst several places have been stable or seen the percent drop over time, Kirklee's job proportion has been growing. The IS-8 advanced manufacturing sectors are concentrated in quite desperate places across Y&H: Calderdale, Kirklees and Bradford on closest together, but East Riding, Rotherham and Lincolnshire are also high.
 
 -   Digital sectors do not have a higher than average LQ anywhere in Y&H, but the sector grouping has been growing in a few places, especially in Leeds in Sheffield, and the grouping is also strong in York and North Yorkshire.
 
@@ -254,6 +250,8 @@ Here are some points that jump out from cross-referencing this set of plots:
 -   For the finance IS-8, Calderdale has remained steadily at the top, jobs percent wise, consistently around 10% of its total full-time employment, with Leeds and Sheffield a little way behind, as too are Bradford and York, two places where job proportions have been steadily dropping. Cross referencing with the sector analysis ([see here](https://danolner.github.io/RegionalEconomicTools/quarto_docs/Yorkshire_n_Humber_sector_catalogue_November2025.html#financial-and-insurance-activities){target="_blank"}) while Doncaster has not seen strong jobs growth in these sectors, it is still a stand out in productivity increases.
 
 -   The professional and business services IS-8 picks up on a great deal of rapid change in the region. A high proportion of both York and North Yorkshire jobs are in these sectors, and they have been increasing since COVID. Leeds still has the highest proportion - around a fifth of its jobs - and that percentage has hardly moved. However, both Calderdale and Rotherham have experienced some rapid drops, suggesting the loss of some major firms.
+
+-   The life-sciences main IS-8 SICs are small in proportion overall - but Sheffield and Kirklees both have more than average job counts for these sectors (rising towards 1% of total jobs) and that proportion has been steadily growing.
 
 ## The Industrial Strategy data
 
@@ -421,10 +419,10 @@ ggplot(indstrat_plot %>% filter(!is.na(percent_all_indstrat_movingav)),
 
 ```
 
-## Industrial Strategy: job LQs per IndStrat category, ordered by Y&H place LQ
-
-```{r, fig-allindstratLQs}
+```{r eval=F, fig-allindstratLQs}
 #| fig-height: 25
+
+## Industrial Strategy: job LQs per IndStrat category, ordered by Y&H place LQ
 
 # plotz = readRDS('../local/data/indstrat_lqplots_ynh.rds')
 
