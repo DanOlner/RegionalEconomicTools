@@ -368,7 +368,7 @@ islq <- gva.2digit %>%
   mutate(gva_movingav = round(gva_movingav,0))
 
 # Some checks
-# islq %>% filter(qg('creative',SIC07_description),year == 2022) %>% View
+# islq %>% filter(qg('basic metal',SIC07_description),year == 2022) %>% View
 
 
 LQ_slopes <- compute_slope_or_zero(
