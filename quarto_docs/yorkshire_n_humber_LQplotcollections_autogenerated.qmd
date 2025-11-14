@@ -86,6 +86,8 @@ The first two outputs for each section are **location quotient plots**. Here's a
 
 -   GVA data is from the [latest ONS GVA by industry](https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry) collection - 2023 is the most recent year. The number of sector categories is slightly different for different geographical scales – to compare ITL1 and ITL3 geographies, ITL1 GVA has been binned into the fewer number of ITL3 SICs. BRES job count data and Companies House data have both been binned into the same SIC categories.
 
+-   LQ plots use 'current price' data, which can be summed to find regional GVA proportions. The percent change job vs percent change GVA plots, on the other hand, use 'chained volume' GVA measures that reflect 'real' economic growth - the GVA percent changes here represent real, not just nominal, economic growth.
+
 -   For the main LQ plots, the ITL1 zone for London has been excluded. This is because the size of London's economy warps location quotients for the rest of the UK. For example, if London is included, LQ values for creative sectors are all below one for everywhere except London.
 
 -   All plots except the maps analyse data between 2015 and 2023, using a three-year moving average.

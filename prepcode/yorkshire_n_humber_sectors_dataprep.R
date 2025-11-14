@@ -2221,7 +2221,20 @@ for(sector in unique(itl3$SIC07_description)[!qg("households|personal service|me
 }
 
 
+## SOME MORE CHECKS----
 
+# What's the split of GVA in 'furniture/other' that's combined at ITL3
+# But separate at ITL1?
+itl1 %>% 
+  filter(
+    year == max(year),
+    SIC07_code %in% c('31','32')
+    ) %>% 
+  group_by(Region_name) %>% 
+  mutate(
+    percent = (value / sum(value)) * 100
+  ) %>% View
+  
 
 
 

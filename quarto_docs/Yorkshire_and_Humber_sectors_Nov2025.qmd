@@ -381,7 +381,7 @@ ggplot(indstrat_plot %>% filter(!is.na(percent_all_indstrat_movingav)),
 ```
 
 
-## Industrial Strategy: LQs per IndStrat category, ordered by Y&H place LQ
+## Industrial Strategy: job LQs per IndStrat category, ordered by Y&H place LQ
 
 ```{r, fig-allindstratLQs}
 #| fig-height: 25
