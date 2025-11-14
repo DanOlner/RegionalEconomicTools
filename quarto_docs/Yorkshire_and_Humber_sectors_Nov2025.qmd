@@ -51,12 +51,12 @@ ynhitl3names = unique(itl3.ynh$Region_name)
 
 # Introduction
 
-This top-level report is **one of three** examining the economy of Yorkshire and the Humber.
+This short overview report is **one of three** examining the economy of Yorkshire and the Humber.
 
 **The document you are reading now does two things:**
 
 1.  Gives a quick overview of the historical structural change of YNH's economy since 1998 (when the ONS regional GVA data begins).
-2.  Connects the Yorkshire Humber economy to the UK industrial strategy, looking at economic strengths in terms of job proportions and LQs.
+2.  Connects the Y&H economy to the UK industrial strategy, looking at economic strengths in terms of job proportions and LQs.
 
 **There are two connected documents:**
 
