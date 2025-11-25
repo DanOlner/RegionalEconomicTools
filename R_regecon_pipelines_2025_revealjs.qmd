@@ -1,0 +1,158 @@
+---
+title: "R Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)"
+sidebar: false
+code-overflow: wrap
+execute:
+  echo: true
+  warning: false
+  error: false
+format:
+  revealjs:
+    slide-number: true
+    code-line-numbers: false
+    code-overflow: wrap
+    css: styles.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.height = 8, fig.width = 10, echo = TRUE, warning = F, error = F, message = F, comment=NA)
+
+```
+
+## Before we start...
+
+-   You've got two ways to engage with this session:
+
+1.  Just watch the screencast, let it wash over you and then come back to the materials in your own time. (These slides as well as ONS recording.)
+2.  Run the R code yourself as we go. **If you're trying #2 - you'll need a copy of these slides open.** You'll have got the link via email - it's also in the chat, or just type `bit.ly/rtasterslides` into your browser address bar.
+
+-   If the slide link isn't working for any reason, you'll also have been sent a Word doc with the same material in
+
+## Not got R yet?
+
+-   If you want to do some coding but didn't have a chance to run through the little R setup guide, **you've got some time now while I do all the pre-amble.**
+-   The slide below takes you through **how to get RStudio working in the browser using (free) posit.cloud.**
+-   We'll use the **free version of posit.cloud** - it's only got 1GB RAM, so we can't do some of the heavier stuff, but is perfect for an intro.
+-   (The paid tier isn't too expensive and is powerful enough for most work.)
+
+------------------------------------------------------------------------
+
+-   I've also stuck an **image of the 'set up posit.cloud' slide in the chat**, if useful.
+-   Sorry - if posit.cloud doesn't work for any reason, **we won't have time during this session to troubleshoot via chat** - but we'll work out ways to offer support after, if that's useful.
+-   ( Link to your own slide copy in the browser again, just in case: `bit.ly/rtasterslides` )
+
+# Getting R running and set up for the session
+
+Some stuff here about starting.
+
+------------------------------------------------------------------------
+
+:::: {.callout-tip icon="false"}
+## Get up and running with RStudio in the cloud
+
+-   [Use this link](https://login.posit.cloud/login){target="_blank"} (or type `bit.ly/positlogin` into the address bar) to create an account at posit.cloud, using the 'sign up' box. **It'll ask you to check your email for a verification link** so do that before proceeding.
+-   Once verified, go back to the posit.cloud tab and log in. You should see a message: "You are logged into Posit. Please select your destination". Choose 'Posit Cloud' (not Posit Connect Cloud). **That'll take you to your online workspace.**
+-   Click the **new project** button, top right
+-   Select '**new project from template**' (as in the pic below) and then "Data Analysis in R with the tidyverse" (if not already selected). Select then click OK down at the bottom. **This will open your RStudio project where we'll do the coding.**
+
+::: center
+![](https://danolner.github.io/posts/setting_up_w_r_online/newproject.png){width="200px"}
+:::
+::::
+
+------------------------------------------------------------------------
+
+:::: {.callout-tip icon="false"}
+## Open a new Quarto document
+
+-   Opening a new Quarto document
+
+::: center
+![](quarto_docs/images/openquarto.png){width="400px"}
+:::
+::::
+
+## Introduction
+
+-   We'll be doing a **whistlestop tour** of using R for digging into UK regional economies.
+-   For this session, we're using **just one ONS source - [regional GVA broken down by industry](https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry){target="_blank"}**. At the end I'll list a bunch of other sources and ideas, and code for using them.
+-   We'll also be asking which of these would be most useful to you for future sessions, and what other data or tools might interest you.
+
+------------------------------------------------------------------------
+
+-   These are methods I've been developing working with [SYMCA](https://www.southyorkshire-ca.gov.uk/){target="_blank"} as a [Y-PERN](https://y-pern.org.uk/){target="_blank"} policy fellow, seconded from Sheffield University. I've been compiling that work with all the open code [here](https://danolner.github.io/posts/outputs_livelist/){target="_blank"}.
+-   We're now starting to use them to support other local authorities, and want to grow and improve these tools with collaboration/feedback from others.
+
+## Goals for the session
+
+-   Actually **get you started using R and RStudio** if you haven't used them before.
+-   Give you a sense of how R can be used for UK regional data analysis and output.
+-   Signpost to next steps if you want to do more. For anyone who does want to continue, **I'm keen to grow our networks to collaborate on our capacity building.**
+
+------------------------------------------------------------------------
+
+-   I'll also be banging on about **how great R is for open, collaborative working.** It's build for openness and reproducibility, and this makes them **great for collaborative learning.**
+-   I'll talk about **how to make reproducible pipelines all the way from data source to outputs**.
+-   **The slides you're looking at are an example:** code available [here](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/R_regecon_taster_2025_revealjs.qmd).
+
+## Because this is just a taster session...
+
+-   This is **not a full training workshop**. Whenever we're learning new coding methods, **things always go wrong, guaranteed**. It's all part of the fun.
+-   If in a workshop, we can take time to fix those problems. **Sorry, we won't have capacity for that today**.
+
+------------------------------------------------------------------------
+
+-   Your options when things don't work:
+    -   The slides are designed to be step-by-step, and the session is being recorded by ONS - so you can work back through that in your own time.
+    -   If you think fuller training where we **can** work through snags would be good, **let's work out how to make that happen.** Get in touch.
+
+------------------------------------------------------------------------
+
+-   We'll **take time at the start getting set up with RStudio** so you have a foundation to work from.
+-   But after that, we'll be running some chunky code blocks - especially if you're new to R **don't worry about these making sense!** Again - a workshop's required to get into the detail.
+-   The aim is just to **run them in RStudio** so you can get an idea of how it works.
+-   I will highlight a few key principles along the way, though.
+
+## The plan
+
+-   I've got **two tabs open I'll move between**. 1: These slides with the code and links in. 2: RStudio, open in posit.cloud.
+-   We'll **work through these slides together**, sometimes typing or copying code from the slides into RStudio.
+-   Navigate the slides with the up/down or left/right keyboard arrows.
+-   You can move between those two tabs, and also come back to Teams to see how I'm doing stuff.
+-   Each slide is numbered - I'll say where we're at as we progress.
+
+------------------------------------------------------------------------
+
+-   If you **don't fancy constantly flitting between slides and RStudio** I've also made a single copy of the whole script we'll work through that includes the slide text - **I'll show how to get that below at the point we'd stick it into RStudio.**
+
+## One last thing...
+
+-   Once you have your own copy of the slides open, note the **three-bar button, bottom left**.
+-   That lets you see the table of contents
+
+Also last chance to open own slide copy! Get them at `bit.ly/rtasterslides`.
+
+# CODING TIME!
+
+## Making a new R script in RStudio
+
+**RStudio is where you'll be doing all the R loveliness**.
+
+Before looking at RStudio, let's **make a new R script, where we'll do the coding**.
+
+:::: {.callout-note icon="false"}
+## Task: Open a new R script in RStudio
+
+-   In the **file** menu in RStudio
+-   Use **new file** and **R script** (note: it tells you the keyboard shortcut for this)
+
+::: center
+![](miscimages/Screenshot%20from%202025-06-12%2011-48-14.png){width="200px"}
+:::
+::::
+
+------------------------------------------------------------------------
+
+After that new file's been made, RStudio should look something like the pic below.
+
+![](https://danolner.github.io/posts/setting_up_w_r_online/rstudio_online.png)
