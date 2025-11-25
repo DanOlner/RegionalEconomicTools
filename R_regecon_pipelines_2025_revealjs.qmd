@@ -53,16 +53,95 @@ Some stuff here about starting.
 -   [Use this link](https://login.posit.cloud/login){target="_blank"} (or type `bit.ly/positlogin` into the address bar) to create an account at posit.cloud, using the 'sign up' box. **It'll ask you to check your email for a verification link** so do that before proceeding.
 -   Once verified, go back to the posit.cloud tab and log in. You should see a message: "You are logged into Posit. Please select your destination". Choose 'Posit Cloud' (not Posit Connect Cloud). **That'll take you to your online workspace.**
 -   Click the **new project** button, top right
--   Select '**new project from template**' (as in the pic below) and then "Data Analysis in R with the tidyverse" (if not already selected). Select then click OK down at the bottom. **This will open your RStudio project where we'll do the coding.**
+-   Select '**New RStudio project**' (as in the pic below). This will get us the **latest available R version.**
 
 ::: center
-![](https://danolner.github.io/posts/setting_up_w_r_online/newproject.png){width="200px"}
+![](quarto_docs/images/newproject_rstudio.png){width="300px"}
 :::
 ::::
 
 ------------------------------------------------------------------------
 
 :::: {.callout-tip icon="false"}
+## Get up and running with RStudio in the cloud
+
+-   It should take less than a minute to open an RStudio project for you.
+-   The R version running will be visible top-right and should be R 4.5.2.
+
+::: center
+![](quarto_docs/images/checkrversion.png){width="200px"}
+:::
+::::
+
+------------------------------------------------------------------------
+
+**You should now see RStudio open, looking something like the pic below.**
+
+::: center
+![](quarto_docs/images/freshrstudio_open.png){width="700px"}
+:::
+
+------------------------------------------------------------------------
+
+::: callout-tip
+## Copying code from these slides into RStudio
+
+All code blocks here **have a little clipboard symbol if you hover over them** to quickly copy so you can paste it all into RStudio. This will come in especially handy with larger code blocks later...
+
+```{r}
+
+2+2
+
+sqrt(64)
+
+```
+:::
+
+------------------------------------------------------------------------
+
+::: {.callout-note icon="false"}
+## Task: copy and paste this code into the RStudio console and run it with ENTER
+
+The first time this runs, it will **install a couple of libraries/packages we need**. It should take **a bit less than two minutes** to finish (it'll tell you how long it took).
+
+You can follow that link (or just [go here](https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/functions/onslocal_pipeline_setup.R){target="_blank"}) if you want to see what the code's doing. We're getting the tidyverse and NOMISR packages installed, and a couple of helper functions.
+
+
+
+```{r eval=F}
+#Load some functions and install some packages
+source('https://bit.ly/pipelinesetup')
+
+```
+:::
+
+------------------------------------------------------------------------
+
+:::: {.callout-note icon="false"}
+## Pasting into the console...
+
+... should look something like this. Press enter to run, and then we wait for nearly two minutes.
+
+**(You'll get some warning messages - don't worry about those. If R breaks, it says ERROR not warning.)**
+
+::: center
+![](quarto_docs/images/console_highlight.png){width="400px"}
+:::
+::::
+
+
+
+
+
+
+# While that's running, let's talk through the plan
+
+
+----
+
+
+
+:::: {.callout-note icon="false"}
 ## Open a new Quarto document
 
 -   Opening a new Quarto document
@@ -72,9 +151,9 @@ Some stuff here about starting.
 :::
 ::::
 
-----
+------------------------------------------------------------------------
 
-:::: {.callout-tip icon="false"}
+:::: {.callout-note icon="false"}
 ## Open a new Quarto document
 
 -   Opening a new Quarto document
@@ -83,10 +162,6 @@ Some stuff here about starting.
 ![](quarto_docs/images/openquarto2.png){width="400px"}
 :::
 ::::
-
-
-
-
 
 ## Introduction
 
@@ -166,9 +241,3 @@ Before looking at RStudio, let's **make a new R script, where we'll do the codin
 ![](miscimages/Screenshot%20from%202025-06-12%2011-48-14.png){width="200px"}
 :::
 ::::
-
-------------------------------------------------------------------------
-
-After that new file's been made, RStudio should look something like the pic below.
-
-![](https://danolner.github.io/posts/setting_up_w_r_online/rstudio_online.png)
