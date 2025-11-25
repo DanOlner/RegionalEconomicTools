@@ -17,8 +17,11 @@ if(!require(devtools)){
 # Then we can get NOMSIR
 devtools::install_github("ropensci/nomisr")
 
-cat('Packages installed. Time taken: ', Sys.time() - x)
+cat('Packages installed. Time taken:\n')
 
+print(Sys.time() - x)
+
+cat('\n')
 
 #HELPER FUNCTIONS
 #reduce need to type glimpse every time...
