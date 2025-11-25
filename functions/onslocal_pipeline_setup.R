@@ -1,18 +1,13 @@
 # Packages for the ONS Local pipelines session
 # 
-library(tidyverse)
 
 cat('Checking on missing packages, installing if we need to. Starting timer...\n')
 
 x = Sys.time()
 
 # Some NOMIS prerequisites not right versions installed...
-if(!require(cli)){
-  install.packages("cli")
-}
-
-if(!require(vctrs)){
-  install.packages('vctrs')
+if(!require(tidyverse)){
+  install.packages("tidyverse")
 }
 
 if(!require(devtools)){

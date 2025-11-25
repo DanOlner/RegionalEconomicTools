@@ -72,6 +72,22 @@ Some stuff here about starting.
 :::
 ::::
 
+----
+
+:::: {.callout-tip icon="false"}
+## Open a new Quarto document
+
+-   Opening a new Quarto document
+
+::: center
+![](quarto_docs/images/openquarto2.png){width="400px"}
+:::
+::::
+
+
+
+
+
 ## Introduction
 
 -   We'll be doing a **whistlestop tour** of using R for digging into UK regional economies.
