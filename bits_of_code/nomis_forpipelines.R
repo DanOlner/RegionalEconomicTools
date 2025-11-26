@@ -7,17 +7,21 @@
 #Load some functions (and install some packages if not present)
 source('https://bit.ly/pipelinesetup')
 
+# Load libraries (if running for first time)
 library(tidyverse)
 library(nomisr)
 
-# Get info on all available datasets
+# STEP 1: Get info on all available datasets
 nomisinfo = nomis_data_info() %>% 
   select(id, description.value, name.value)
 
-# Get metadata for the BRES data, having found the code
+# If we look inside that downloaded dataframe, we can search for the dataset code we want to use
+# Let's search for 'employment' in RStudio...
+
+# Now we can get metadata for the BRES data, having found the code
 a <- nomis_get_metadata(id = "NM_189_1")
 
-#Pick on some of those (some of which don't seem to be working.)
+#Pick on some of those for a closer look
 #Note, MEASURE in the actual downloaded data is "MEASURE_NAME" column...
 nomis_get_metadata(id = "NM_189_1", concept = "MEASURE")
 nomis_get_metadata(id = "NM_189_1", concept = "MEASURES")
@@ -26,6 +30,14 @@ geogz = nomis_get_metadata(id = "NM_189_1", concept = "GEOGRAPHY", type = "type"
 
 print(geogz, n = 60)
 
+
+# From the metadata, we're going to pull out the geography codes 
+# for JUST the core cities again
+# Slightly different names / shapes in BRES, but mostly the same
+# Again, here's one I made earlier...
+corecities.bres = readRDS(gzcon(url('data/corecities_bres.rds')))
+
+
 # USE LOCAL AUTHORITIES AND GET ALL TIMEPOINTS
 # ITL3 2021 zones in the BRES data only have 2022-2024
 # "TYPE424 local authorities: district / unitary (as of April 2023)"
@@ -33,8 +45,9 @@ print(geogz, n = 60)
 placeid <- nomis_get_metadata(id = "NM_189_1", concept = "geography", type = "TYPE424") %>% 
   filter(label.en %in% c(corecities,'Cardiff','Newcastle upon Tyne')) %>% select(id) %>% pull
 
-# GET THE DATA!
-# Check timings
+# NOW WE GET THE ACTUAL DATA
+# Using many of the codes we just looked at
+# Check how long it takes too...
 x = Sys.time()
 
 bres <- nomis_get_data(id = "NM_189_1",  geography = placeid,

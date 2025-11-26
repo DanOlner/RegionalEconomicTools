@@ -3158,7 +3158,7 @@
     "href": "R_regecon_pipelines_2025_revealjs.html#not-got-r-yet",
     "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
     "section": "Not got R yet?",
-    "text": "Not got R yet?\n\nIf you want to do some coding but didn’t have a chance to run through the little R setup guide, you’ve got some time now while I do all the pre-amble.\nThe slide below takes you through how to get RStudio working in the browser using (free) posit.cloud.\nWe’ll use the free version of posit.cloud - it’s only got 1GB RAM, so we can’t do some of the heavier stuff, but is perfect for an intro.\n(The paid tier isn’t too expensive and is powerful enough for most work.)"
+    "text": "Not got R yet?\n\nIf you want to do some coding but didn’t have a chance to run through the little R setup guide, you’ve got some time now while I do all the pre-amble.\nThe next slide takes you through how to get RStudio working in the browser using (free) posit.cloud.\nI’ve also stuck an image of the ‘set up posit.cloud’ slide in the chat, if useful."
   },
   {
     "objectID": "R_regecon_pipelines_2025_revealjs.html#introduction",
@@ -3179,14 +3179,14 @@
     "href": "R_regecon_pipelines_2025_revealjs.html#because-this-is-just-a-taster-session",
     "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
     "section": "Because this is just a taster session…",
-    "text": "Because this is just a taster session…\n\nThis is not a full training workshop. Whenever we’re learning new coding methods, things always go wrong, guaranteed. It’s all part of the fun.\nIf in a workshop, we can take time to fix those problems. Sorry, we won’t have capacity for that today."
+    "text": "Because this is just a taster session…\n\nThis is not a full training workshop. Whenever we’re learning new coding methods, things always go wrong, guaranteed. It’s all part of the fun.\nIf in a workshop, we can take time to fix those problems. Sorry, we won’t have capacity for that today.\nThe slides are designed to be step-by-step, and the session is being recorded by ONS - so you can work back through that in your own time.\nBut if you an actual supported workshop appeals, let me know: d.olner@sheffield.ac.uk"
   },
   {
     "objectID": "R_regecon_pipelines_2025_revealjs.html#the-plan",
     "href": "R_regecon_pipelines_2025_revealjs.html#the-plan",
     "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
     "section": "The plan",
-    "text": "The plan\n\nI’ve got two tabs open I’ll move between. 1: These slides with the code and links in. 2: RStudio, open in posit.cloud.\nWe’ll work through these slides together, sometimes typing or copying code from the slides into RStudio.\nNavigate the slides with the up/down or left/right keyboard arrows.\nYou can move between those two tabs, and also come back to Teams to see how I’m doing stuff.\nEach slide is numbered - I’ll say where we’re at as we progress."
+    "text": "The plan\n\nWe’ll be building a simple pipeline: running through three examples of getting data from the web, processing it, visualising it and outputting it into a little Word report.\nThe system used for output is called Quarto: it can also make PDFs, online reports, websites, blogs, and slides like the ones you’re looking at. Follow that link to find out more.\nWe’re not doing any web-hosted output here: we could do a future session on integrating github into your workflow, but that’s a bit much for today."
   },
   {
     "objectID": "R_regecon_pipelines_2025_revealjs.html#one-last-thing",
@@ -3201,5 +3201,82 @@
     "title": "R Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
     "section": "Making a new R script in RStudio",
     "text": "Making a new R script in RStudio\nRStudio is where you’ll be doing all the R loveliness.\nBefore looking at RStudio, let’s make a new R script, where we’ll do the coding.\n\n\n\nTask: Open a new R script in RStudio\n\n\n\nIn the file menu in RStudio\nUse new file and R script (note: it tells you the keyboard shortcut for this)"
+  },
+  {
+    "objectID": "R_regecon_pipelines_2025_revealjs.html#to-give-you-a-chance-to-get-that-set-up",
+    "href": "R_regecon_pipelines_2025_revealjs.html#to-give-you-a-chance-to-get-that-set-up",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "section": "To give you a chance to get that set up…",
+    "text": "To give you a chance to get that set up…\nLet me talk through some other bits:\n\nWe’ll use the free version of posit.cloud - it’s only got 1GB RAM, so we can’t do some of the heavier stuff, but is perfect for an intro. The paid tier isn’t too expensive and is powerful enough for most work.\nApologies - if posit.cloud doesn’t work for any reason, we won’t have time during this session to troubleshoot via chat - but we can work out ways to offer support after, if that’s useful."
+  },
+  {
+    "objectID": "R_regecon_pipelines_2025_revealjs.html#the-plan-1",
+    "href": "R_regecon_pipelines_2025_revealjs.html#the-plan-1",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "section": "The plan",
+    "text": "The plan\n\nWe’ll be doing a whistlestop tour of using R for digging into UK regional economies.\nFor this session, we’re using just one ONS source - regional GVA broken down by industry. At the end I’ll list a bunch of other sources and ideas, and code for using them.\nWe’ll also be asking which of these would be most useful to you for future sessions, and what other data or tools might interest you."
+  },
+  {
+    "objectID": "R_regecon_pipelines_2025_revealjs.html#the-plan-2",
+    "href": "R_regecon_pipelines_2025_revealjs.html#the-plan-2",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "section": "The plan",
+    "text": "The plan\n\nI’ve got two tabs open I’ll move between. 1: These slides with the code and links in. 2: RStudio, open in posit.cloud.\nWe’ll work through these slides together, sometimes typing or copying code from the slides into RStudio.\nNavigate the slides with the up/down or left/right keyboard arrows.\nYou can move between those two tabs, and also come back to Teams to see how I’m doing stuff.\nEach slide is numbered - I’ll say where we’re at as we progress."
+  },
+  {
+    "objectID": "R_regecon_pipelines_2025_revealjs.html#how-well-look-at-stuff",
+    "href": "R_regecon_pipelines_2025_revealjs.html#how-well-look-at-stuff",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "section": "How we’ll look at stuff",
+    "text": "How we’ll look at stuff\n\nI’ve got two tabs open I’ll move between. 1: These slides with the code and links in. 2: RStudio, open in posit.cloud.\nWe’ll work through these slides together, sometimes typing or copying code from the slides into RStudio."
+  },
+  {
+    "objectID": "R_regecon_pipelines_2025_revealjs.html#yes-we-can",
+    "href": "R_regecon_pipelines_2025_revealjs.html#yes-we-can",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "section": "Yes we can…",
+    "text": "Yes we can…\n\nFirst job: we’re going to open the document that we’ll use to draft our output.\nThis is a ‘quarto’ text file with the extension ‘qmd’"
+  },
+  {
+    "objectID": "R_regecon_pipelines_2025_revealjs.html#yep",
+    "href": "R_regecon_pipelines_2025_revealjs.html#yep",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "section": "Yep!",
+    "text": "Yep!\nAssuming the setup code has now completed happily…\n\nFirst job: we’re going to open the document that we’ll use to draft our output.\nThis is a ‘quarto’ text file with the extension ‘qmd’"
+  },
+  {
+    "objectID": "R_regecon_pipelines_2025_revealjs.html#the-rendered-document-should-now-be-in-your-rstudio-projects-files",
+    "href": "R_regecon_pipelines_2025_revealjs.html#the-rendered-document-should-now-be-in-your-rstudio-projects-files",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "section": "The rendered document should now be in your RStudio project’s files",
+    "text": "The rendered document should now be in your RStudio project’s files\n\nYou can download that docx file by selecting its box and then choosing ‘export’ by clicking the little cog, top right (see pic)."
+  },
+  {
+    "objectID": "R_regecon_pipelines_2025_revealjs.html#once-thats-done-we-can-just-write-some-headings-and-text",
+    "href": "R_regecon_pipelines_2025_revealjs.html#once-thats-done-we-can-just-write-some-headings-and-text",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "section": "Once that’s done, we can just write some headings and text",
+    "text": "Once that’s done, we can just write some headings and text\n\nQuarto has both a visual and source mode, for editing in different ways\n‘Source’ shows the text file - we can add headings with hashes, or do in ‘Visual mode’ and use the formatting options\n\nLet’s also add a heading in for our first web data import (something like ‘Extracting from an Excel file’)"
+  },
+  {
+    "objectID": "R_regecon_pipelines_2025_revealjs.html#that-link-to-the-excel-sheet-has-been-copied-directly-from-the-ons-subregional-productivity-webpage-here",
+    "href": "R_regecon_pipelines_2025_revealjs.html#that-link-to-the-excel-sheet-has-been-copied-directly-from-the-ons-subregional-productivity-webpage-here",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "section": "That link to the Excel sheet has been copied directly from the ONS subregional productivity webpage here",
+    "text": "That link to the Excel sheet has been copied directly from the ONS subregional productivity webpage here"
+  },
+  {
+    "objectID": "R_regecon_pipelines_2025_revealjs.html#lets-move-to-rstudio-to-run-through-the-first-example",
+    "href": "R_regecon_pipelines_2025_revealjs.html#lets-move-to-rstudio-to-run-through-the-first-example",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "section": "Let’s move to RStudio to run through the first example",
+    "text": "Let’s move to RStudio to run through the first example\nWe can run each bit of the code inside the quarto doc (to make sure everything works as we want and see the outputs) as well as run the whole thing to compile the final doc."
+  },
+  {
+    "objectID": "R_regecon_pipelines_2025_revealjs.html#were-going-to-do-something-slightly-different-for-this-one",
+    "href": "R_regecon_pipelines_2025_revealjs.html#were-going-to-do-something-slightly-different-for-this-one",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "section": "We’re going to do something slightly different for this one",
+    "text": "We’re going to do something slightly different for this one\n\nOften, getting the data wrangled can be time-consuming (due to either download or processing times)\nWe don’t want to have to go through that every single time the Quarto doc compiles.\nOne way to solve this: do the processing in a separate script, save it, then let the Quarto doc re-load the finished product."
   }
 ]

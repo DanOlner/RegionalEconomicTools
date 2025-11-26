@@ -212,27 +212,18 @@
 <li>If the slide link isn’t working for any reason, you’ll also have been sent a Word doc with the same material in</li>
 </ul>
 </section>
+<section>
+<section id="getting-set-up-using-r-online-if-you-havent-got-r-yet-and-want-to" class="title-slide slide level1 center">
+<h1>Getting set up using R online (if you haven’t got R yet and want to)</h1>
+
+</section>
 <section id="not-got-r-yet" class="slide level2">
 <h2>Not got R yet?</h2>
 <ul>
 <li>If you want to do some coding but didn’t have a chance to run through the little R setup guide, <strong>you’ve got some time now while I do all the pre-amble.</strong></li>
-<li>The slide below takes you through <strong>how to get RStudio working in the browser using (free) posit.cloud.</strong></li>
-<li>We’ll use the <strong>free version of posit.cloud</strong> - it’s only got 1GB RAM, so we can’t do some of the heavier stuff, but is perfect for an intro.</li>
-<li>(The paid tier isn’t too expensive and is powerful enough for most work.)</li>
-</ul>
-</section>
-<section class="slide level2">
-
-<ul>
+<li>The next slide takes you through <strong>how to get RStudio working in the browser using (free) posit.cloud.</strong></li>
 <li>I’ve also stuck an <strong>image of the ‘set up posit.cloud’ slide in the chat</strong>, if useful.</li>
-<li>Sorry - if posit.cloud doesn’t work for any reason, <strong>we won’t have time during this session to troubleshoot via chat</strong> - but we’ll work out ways to offer support after, if that’s useful.</li>
-<li>( Link to your own slide copy in the browser again, just in case: <code>bit.ly/rpipelines</code> )</li>
 </ul>
-</section>
-<section>
-<section id="getting-r-running-and-set-up-for-the-session" class="title-slide slide level1 center">
-<h1>Getting R running and set up for the session</h1>
-<p>Some stuff here about starting.</p>
 </section>
 <section class="slide level2">
 
@@ -243,7 +234,7 @@
 </div>
 <div class="callout-content">
 <ul>
-<li><a href="https://login.posit.cloud/login" target="_blank">Use this link</a> (or type <code>bit.ly/positlogin</code> into the address bar) to create an account at posit.cloud, using the ‘sign up’ box. <strong>It’ll ask you to check your email for a verification link</strong> so do that before proceeding.</li>
+<li><a href="https://login.posit.cloud/login" target="_blank">Use this link</a> (or type <code>bit.ly/positlogin</code> into the address bar) to create an account at posit.cloud, using the ‘don’t have an account? Sign up’ box. <strong>It’ll ask you to check your email for a verification link</strong> so do that before proceeding.</li>
 <li>Once verified, go back to the posit.cloud tab and log in. You should see a message: “You are logged into Posit. Please select your destination”. Choose ‘Posit Cloud’ (not Posit Connect Cloud). <strong>That’ll take you to your online workspace.</strong></li>
 <li>Click the <strong>new project</strong> button, top right</li>
 <li>Select ‘<strong>New RStudio project</strong>’ (as in the pic below). This will get us the <strong>latest available R version.</strong></li>
@@ -255,6 +246,22 @@
 </div>
 </div>
 </section>
+<section id="to-give-you-a-chance-to-get-that-set-up" class="slide level2">
+<h2>To give you a chance to get that set up…</h2>
+<p>Let me talk through some other bits:</p>
+<ul>
+<li>We’ll use the <strong>free version of posit.cloud</strong> - it’s only got 1GB RAM, so we can’t do some of the heavier stuff, but is perfect for an intro. The paid tier isn’t too expensive and is powerful enough for most work.</li>
+<li>Apologies - if posit.cloud doesn’t work for any reason, <strong>we won’t have time during this session to troubleshoot via chat</strong> - but we can work out ways to offer support after, if that’s useful.</li>
+</ul>
+</section>
+<section id="the-plan" class="slide level2">
+<h2>The plan</h2>
+<ul>
+<li>We’ll be building a <strong>simple pipeline</strong>: running through <strong>three examples</strong> of getting data from the web, processing it, visualising it and outputting it into a little Word report.</li>
+<li>The system used for output is called <a href="https://quarto.org">Quarto</a>: it can also make PDFs, online reports, websites, blogs, and slides like the ones you’re looking at. Follow that link to find out more.</li>
+<li>We’re <strong>not</strong> doing any web-hosted output here: we could do a future session on integrating github into your workflow, but that’s a bit much for today.</li>
+</ul>
+</section>
 <section class="slide level2">
 
 <div class="callout callout-tip no-icon callout-titled callout-style-default">
@@ -265,7 +272,8 @@
 <div class="callout-content">
 <ul>
 <li>It should take less than a minute to open an RStudio project for you.</li>
-<li>The R version running will be visible top-right and should be R 4.5.2.</li>
+<li>The R version running will be visible top-right and should be <strong>R 4.5.2</strong>.</li>
+<li>If if isn’t for any reason, you can just select that dropdown and change to R 4.5.2 now.</li>
 </ul>
 <div class="center">
 <p><img data-src="quarto_docs/images/checkrversion.png" width="200"></p>
@@ -312,7 +320,7 @@
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Task: copy and paste this code into the RStudio console and run it with ENTER</strong></p>
+<p><strong>Task: run the setup code - copy and paste this line into the RStudio console and run it with ENTER</strong></p>
 </div>
 <div class="callout-content">
 <p>The first time this runs, it will <strong>install a couple of libraries/packages we need</strong>. It should take <strong>a bit less than two minutes</strong> to finish (it’ll tell you how long it took).</p>
@@ -343,20 +351,88 @@
 </div>
 </section></section>
 <section>
-<section id="while-thats-running-lets-talk-through-the-plan" class="title-slide slide level1 center">
-<h1>While that’s running, let’s talk through the plan</h1>
+<section id="that-gives-us-another-two-minutes-for-me-to-waffle-on" class="title-slide slide level1 center">
+<h1>That gives us another two minutes for me to waffle on…</h1>
 
+</section>
+<section class="slide level2">
+
+<ul>
+<li>These are methods I’ve been developing working with <a href="https://www.southyorkshire-ca.gov.uk/" target="_blank">SYMCA</a>, <a href="https://yorkshireuniversities.ac.uk" target="_blank">Yorkshire Universities</a> and others as a <a href="https://y-pern.org.uk/" target="_blank">Y-PERN</a> policy fellow, seconded from Sheffield University. I’ve been compiling that work with all the open code <a href="https://danolner.github.io/posts/outputs_livelist/" target="_blank">here</a>.</li>
+<li>We’re now starting to use them to support other local authorities, and want to grow and improve these tools with collaboration/feedback from others</li>
+<li>I’ve written a <a href="https://y-pern.org.uk/blog/prototyping-open-econ-tools/" target="_blank">blog post</a> on the rough plan, if of interest.</li>
+</ul>
+</section>
+<section id="because-this-is-just-a-taster-session" class="slide level2">
+<h2>Because this is just a taster session…</h2>
+<ul>
+<li>This is <strong>not a full training workshop</strong>. Whenever we’re learning new coding methods, <strong>things always go wrong, guaranteed</strong>. It’s all part of the fun.</li>
+<li>If in a workshop, we can take time to fix those problems. <strong>Sorry, we won’t have capacity for that today</strong>.</li>
+<li>The slides are designed to be step-by-step, and the session is being recorded by ONS - so you can work back through that in your own time.</li>
+<li>But if you an actual supported workshop appeals, let me know: <strong>d.olner@sheffield.ac.uk</strong></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>We’ll be running some chunky code blocks - especially if you’re new to R <strong>don’t worry about these making sense!</strong> Again - a workshop would be required to get into the detail.</li>
+<li>The aim is just to <strong>run them in RStudio</strong> so you can get an idea of how this all works.</li>
+<li>I will highlight a few key principles along the way, though.</li>
+</ul>
+</section>
+<section id="how-well-look-at-stuff" class="slide level2">
+<h2>How we’ll look at stuff</h2>
+<ul>
+<li>I’ve got <strong>two tabs open I’ll move between</strong>. 1: These slides with the code and links in. 2: RStudio, open in posit.cloud.</li>
+<li>We’ll <strong>work through these slides together</strong>, sometimes typing or copying code from the slides into RStudio.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Given you’ll also have your <strong>own</strong> RStudio instance open, I’m aware this could be tricky!</li>
+<li>So I’ll <strong>try to keep flitting about to a minimum</strong>: we’ll work in RStudio in big blocks, talking through the code using <strong>#codecomments</strong> to guide us.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>Navigate the slides with the up/down or left/right keyboard arrows.</li>
+<li>You can move between those two tabs, and also come back to Teams to see how I’m doing stuff.</li>
+<li>Each slide is numbered - I’ll say where we’re at as we progress.</li>
+</ul>
+</section>
+<section id="one-last-thing" class="slide level2">
+<h2>One last thing…</h2>
+<ul>
+<li>Once you have your own copy of the slides open, note the <strong>three-bar button, bottom left</strong>.</li>
+<li>That lets you see the table of contents</li>
+</ul>
+<p>Also last chance to open own slide copy! Get them at <code>bit.ly/rpipelines</code>.</p>
+</section></section>
+<section>
+<section id="finally-some-coding" class="title-slide slide level1 center">
+<h1>Finally some coding?</h1>
+
+</section>
+<section id="yep" class="slide level2">
+<h2>Yep!</h2>
+<p>Assuming the setup code has now completed happily…</p>
+<ul>
+<li>First job: we’re going to <strong>open the document that we’ll use to draft our output</strong>.</li>
+<li>This is a ‘quarto’ text file with the extension ‘qmd’</li>
+</ul>
 </section>
 <section class="slide level2">
 
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Open a new Quarto document</strong></p>
+<p><strong>Task: open a new Quarto document</strong></p>
 </div>
 <div class="callout-content">
 <ul>
-<li>Opening a new Quarto document</li>
+<li>Use the file menu / new file and quarto document…</li>
 </ul>
 <div class="center">
 <p><img data-src="quarto_docs/images/openquarto.png" width="400"></p>
@@ -370,11 +446,11 @@
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Open a new Quarto document</strong></p>
+<p><strong>Task: open a new Quarto document</strong></p>
 </div>
 <div class="callout-content">
 <ul>
-<li>Opening a new Quarto document</li>
+<li>Add in a title, and choose the ‘Word’ option (noting the other options we’ve got here)</li>
 </ul>
 <div class="center">
 <p><img data-src="quarto_docs/images/openquarto2.png" width="400"></p>
@@ -383,86 +459,279 @@
 </div>
 </div>
 </section>
-<section id="introduction" class="slide level2">
-<h2>Introduction</h2>
+<section class="slide level2">
+
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Task: try compiling the document</strong></p>
+</div>
+<div class="callout-content">
 <ul>
-<li>We’ll be doing a <strong>whistlestop tour</strong> of using R for digging into UK regional economies.</li>
-<li>For this session, we’re using <strong>just one ONS source - <a href="https://www.ons.gov.uk/economy/grossvalueaddedgva/datasets/nominalandrealregionalgrossvalueaddedbalancedbyindustry" target="_blank">regional GVA broken down by industry</a></strong>. At the end I’ll list a bunch of other sources and ideas, and code for using them.</li>
-<li>We’ll also be asking which of these would be most useful to you for future sessions, and what other data or tools might interest you.</li>
+<li>You’ll see RStudio has opened a quarto doc with some examples in.</li>
+<li>Let’s just try compiling this, so you can see what happens. We’ll do exactly the same for our pipeline, just with more code in.</li>
+<li>So: <strong>click on the Render button above the script</strong>.</li>
+<li>You may see a warning, just cancel that.</li>
+</ul>
+<div class="center">
+<p><img data-src="quarto_docs/images/renderbutton.png" width="300"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-rendered-document-should-now-be-in-your-rstudio-projects-files" class="slide level2">
+<h2>The rendered document should now be in your RStudio project’s files</h2>
+<ul>
+<li>You can download that docx file by selecting its box and then choosing ‘export’ by clicking the little cog, top right (see pic).</li>
+</ul>
+<div class="center">
+<p><img data-src="quarto_docs/images/exportbutton.png" width="300"></p>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Task: copy this code and paste it just below ‘editor: visual’ in the quarto doc</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>This sets up some figure output choices and stops the doc from outputting all the R code and messages.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>execute<span class="sc">:</span></span>
+<span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>  echo<span class="sc">:</span> false</span>
+<span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>  message<span class="sc">:</span> false</span>
+<span id="cb6-4"><a aria-hidden="true" tabindex="-1"></a>  warning<span class="sc">:</span> false</span>
+<span id="cb6-5"><a aria-hidden="true" tabindex="-1"></a>fig<span class="sc">-</span>dpi<span class="sc">:</span> <span class="dv">300</span></span>
+<span id="cb6-6"><a aria-hidden="true" tabindex="-1"></a>fig<span class="sc">-</span>width<span class="sc">:</span> <span class="dv">8</span></span>
+<span id="cb6-7"><a aria-hidden="true" tabindex="-1"></a>fig<span class="sc">-</span>height<span class="sc">:</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Task: delete all the boilerplate code so we can start fresh</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Just all the headings and code in the main part of the doc. We’ll be writing our own.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Task: then we add in our own <strong>setup code</strong></strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>To do this, let’s (1) <strong>make a new R code block</strong> (with code/insert chunk, see below - or use the shortcut)</li>
+<li>Then (2) <strong>give it a name</strong> and (3) <strong>paste in the code below.</strong></li>
+<li>Don’t worry about the setup code: it won’t run for 2 minutes again. We just need it for some functions.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Load some functions and install some packages</span></span>
+<span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'https://bit.ly/pipelinesetup'</span>)</span>
+<span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb7-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nomisr)</span>
+<span id="cb7-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xml2)</span>
+<span id="cb7-7"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Set ggplot theme</span></span>
+<span id="cb7-9"><a aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_light</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="center">
+<p><img data-src="quarto_docs/images/insertchunk.png" width="300"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="once-thats-done-we-can-just-write-some-headings-and-text" class="slide level2">
+<h2>Once that’s done, we can just write some headings and text</h2>
+<ul>
+<li>Quarto has both a visual and source mode, for editing in different ways</li>
+<li><strong>‘Source’</strong> shows the text file - we can add headings with hashes, or do in <strong>‘Visual mode’</strong> and use the formatting options</li>
+</ul>
+<p>Let’s also add a heading in for our <strong>first web data import</strong> (something like ‘Extracting from an Excel file’)</p>
+</section></section>
+<section>
+<section id="example-one-extracting-from-an-online-excel-file" class="title-slide slide level1 center">
+<h1>Example one: extracting from an online Excel file</h1>
+
+</section>
+<section class="slide level2">
+
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Task: now <strong>make another code block</strong> as we did before</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>This will be our first pipeline section. <strong>Once we’ve made it, we’ll add in the code below.</strong></li>
+<li>(Don’t worry about the code running off the slide below - it’ll still copy with the clipboard symbol.)</li>
+</ul>
+<p>Here’s the code to copy into our new R code block:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Extracting from an Excel file on a website: productivity data example</span></span>
+<span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Copy the URL for the Excel sheet from the ONS website</span></span>
+<span id="cb8-4"><a aria-hidden="true" tabindex="-1"></a><span class="co"># This is just setting a string named 'url'</span></span>
+<span id="cb8-5"><a aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">'https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions/current/labourproductivityitls1.xlsx'</span></span>
+<span id="cb8-6"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a aria-hidden="true" tabindex="-1"></a><span class="co"># We then create a TEMPORARY FILE...</span></span>
+<span id="cb8-8"><a aria-hidden="true" tabindex="-1"></a>temp_path <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext=</span><span class="st">".xlsx"</span>)</span>
+<span id="cb8-9"><a aria-hidden="true" tabindex="-1"></a><span class="co"># And use that file path to DOWNLOAD A TEMP COPY OF THE EXCEL TO USE</span></span>
+<span id="cb8-10"><a aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(url, temp_path, <span class="at">mode=</span><span class="st">"wb"</span>)</span>
+<span id="cb8-11"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Or if you want to keep a local, month-dated version in case it changes later...</span></span>
+<span id="cb8-13"><a aria-hidden="true" tabindex="-1"></a><span class="co"># download.file(</span></span>
+<span id="cb8-14"><a aria-hidden="true" tabindex="-1"></a><span class="co">#   url,</span></span>
+<span id="cb8-15"><a aria-hidden="true" tabindex="-1"></a><span class="co">#   paste0('ONS_outputperhourdata-',format(Sys.Date(),'%b-%Y'),'.xlsx'),</span></span>
+<span id="cb8-16"><a aria-hidden="true" tabindex="-1"></a><span class="co">#   mode="wb")</span></span>
+<span id="cb8-17"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a aria-hidden="true" tabindex="-1"></a><span class="co"># READ FROM THE EXCEL SHEET</span></span>
+<span id="cb8-19"><a aria-hidden="true" tabindex="-1"></a><span class="co"># This goes straight into a dataframe</span></span>
+<span id="cb8-20"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Read directly from a specific sheet and range of cells from the downloaded file</span></span>
+<span id="cb8-21"><a aria-hidden="true" tabindex="-1"></a><span class="co"># "Table A1: Current Price (smoothed) GVA (B) per hour worked indices; ITL2 and ITL3 subregions, 2004 - 2023"</span></span>
+<span id="cb8-22"><a aria-hidden="true" tabindex="-1"></a>cp.indices <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="at">path =</span> temp_path,<span class="at">range =</span> <span class="st">"A1!A5:W247"</span>)</span>
+<span id="cb8-23"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-24"><a aria-hidden="true" tabindex="-1"></a><span class="co"># TAKE A LOOK AT THAT DATA (CLICK ON ITS NAME IN THE ENVIRONMENT PANEL)</span></span>
+<span id="cb8-25"><a aria-hidden="true" tabindex="-1"></a><span class="co"># It's got each year IN ITS OWN COLUMN. Not what we want.</span></span>
+<span id="cb8-26"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-27"><a aria-hidden="true" tabindex="-1"></a><span class="co"># So we RESHAPE</span></span>
+<span id="cb8-28"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Get just ITL3 level and pivot years into their own column</span></span>
+<span id="cb8-29"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-30"><a aria-hidden="true" tabindex="-1"></a><span class="co"># An aside: </span></span>
+<span id="cb8-31"><a aria-hidden="true" tabindex="-1"></a><span class="co"># This symbol - %&gt;% </span></span>
+<span id="cb8-32"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Is a PIPING OPERATOR</span></span>
+<span id="cb8-33"><a aria-hidden="true" tabindex="-1"></a><span class="co"># It lets us pipe one operation to the next</span></span>
+<span id="cb8-34"><a aria-hidden="true" tabindex="-1"></a><span class="co"># So we can clearly see each step taken</span></span>
+<span id="cb8-35"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Let's number those steps here</span></span>
+<span id="cb8-36"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-37"><a aria-hidden="true" tabindex="-1"></a><span class="co">#1. Pipe the data into a filter</span></span>
+<span id="cb8-38"><a aria-hidden="true" tabindex="-1"></a><span class="co">#2. filter down to just ITL3 zones</span></span>
+<span id="cb8-39"><a aria-hidden="true" tabindex="-1"></a><span class="co">#3. pivot long so years are in their own column</span></span>
+<span id="cb8-40"><a aria-hidden="true" tabindex="-1"></a><span class="co">#4. Convert year to a sensible format</span></span>
+<span id="cb8-41"><a aria-hidden="true" tabindex="-1"></a><span class="co">#5. Remove the ITL column, we don't need that now</span></span>
+<span id="cb8-42"><a aria-hidden="true" tabindex="-1"></a><span class="co"># And back on the first line, overwrite the original dataframe</span></span>
+<span id="cb8-43"><a aria-hidden="true" tabindex="-1"></a>cp.indices <span class="ot">=</span> cp.indices <span class="sc">%&gt;%</span> </span>
+<span id="cb8-44"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ITL_level <span class="sc">==</span> <span class="st">'ITL3'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-45"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(Index_2004<span class="sc">:</span>Index_2023, <span class="at">names_to =</span> <span class="st">'year'</span>, <span class="at">values_to =</span> <span class="st">'index_value'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-46"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb8-47"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">year =</span> <span class="fu">substr</span>(year,<span class="dv">7</span>,<span class="dv">10</span>),</span>
+<span id="cb8-48"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">year =</span> <span class="fu">as.numeric</span>(year)</span>
+<span id="cb8-49"><a aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-50"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>ITL_level)</span>
+<span id="cb8-51"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-52"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-53"><a aria-hidden="true" tabindex="-1"></a><span class="co"># We're going to plot JUST THE UK CORE CITIES</span></span>
+<span id="cb8-54"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Here's a list of those I made earlier...</span></span>
+<span id="cb8-55"><a aria-hidden="true" tabindex="-1"></a>corecities <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="fu">gzcon</span>(<span class="fu">url</span>(<span class="st">'https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/data/corecitiesvector_itl3_2025.rds'</span>)))</span>
+<span id="cb8-56"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-57"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Check match...</span></span>
+<span id="cb8-58"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Note, this is commented out (so it doesn't output in our final doc)</span></span>
+<span id="cb8-59"><a aria-hidden="true" tabindex="-1"></a><span class="co"># BUT we can still run it to check by highlighting the code</span></span>
+<span id="cb8-60"><a aria-hidden="true" tabindex="-1"></a><span class="co"># table(corecities %in% cp.indices$Region_name)</span></span>
+<span id="cb8-61"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-62"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Plot!</span></span>
+<span id="cb8-63"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Filter down to the core cities</span></span>
+<span id="cb8-64"><a aria-hidden="true" tabindex="-1"></a><span class="co"># And reorder the places by which has the highest average index over all years</span></span>
+<span id="cb8-65"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb8-66"><a aria-hidden="true" tabindex="-1"></a>    cp.indices <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Region_name <span class="sc">%in%</span> corecities),</span>
+<span id="cb8-67"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> index_value, <span class="at">colour =</span> <span class="fu">fct_reorder</span>(Region_name,index_value,<span class="at">.desc =</span> T))</span>
+<span id="cb8-68"><a aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb8-69"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb8-70"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">100</span>) <span class="sc">+</span></span>
+<span id="cb8-71"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">'Paired'</span>) <span class="sc">+</span></span>
+<span id="cb8-72"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title=</span><span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb8-73"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">'Output per hour: 100 = UK av'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>That link to the Excel sheet in the code has been copied directly from the ONS subregional productivity webpage <a href="https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions" target="_blank">here</a>…</p>
+<div class="center">
+<p><img data-src="quarto_docs/images/copylink.png" width="300"></p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>But you do need to do into the Excel file itself to <strong>look</strong> at what sheet and cell range you need. That only needs doing once though.</p>
+<p>We’re going to use the <strong>very first sheet</strong>: A1, current prices smoothed.</p>
+<div class="center">
+<p><img data-src="quarto_docs/images/excelA1.png" width="200"></p>
+</div>
+</section>
+<section id="lets-move-to-rstudio-to-run-through-the-first-example" class="slide level2">
+<h2>Let’s move to RStudio to run through the first example</h2>
+<p>We can run each bit of the code <strong>inside the quarto doc</strong> (to make sure everything works as we want and see the outputs) as well as run the whole thing to compile the final doc.</p>
+</section></section>
+<section>
+<section id="example-two-using-the-nomisr-package-to-get-data-from-nomis" class="title-slide slide level1 center">
+<h1>Example two: using the NOMISR package to get data from NOMIS</h1>
+
+</section>
+<section id="were-going-to-do-something-slightly-different-for-this-one" class="slide level2">
+<h2>We’re going to do something slightly different for this one</h2>
+<ul>
+<li>Often, getting the data wrangled can be time-consuming (due to either download or processing times)</li>
+<li>We don’t want to have to go through that every single time the Quarto doc compiles.</li>
+<li>One way to solve this: <strong>do the processing in a <em>separate script</em>, save it, then let the Quarto doc re-load the finished product</strong>.</li>
 </ul>
 </section>
 <section class="slide level2">
 
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Task: so let’s open a new R script in RStudio and do the NOMISR work there</strong></p>
+</div>
+<div class="callout-content">
 <ul>
-<li>These are methods I’ve been developing working with <a href="https://www.southyorkshire-ca.gov.uk/" target="_blank">SYMCA</a> as a <a href="https://y-pern.org.uk/" target="_blank">Y-PERN</a> policy fellow, seconded from Sheffield University. I’ve been compiling that work with all the open code <a href="https://danolner.github.io/posts/outputs_livelist/" target="_blank">here</a>.</li>
-<li>We’re now starting to use them to support other local authorities, and want to grow and improve these tools with collaboration/feedback from others.</li>
+<li>In the <strong>file</strong> menu in RStudio</li>
+<li>Use <strong>new file</strong> and <strong>R script</strong> (note: it tells you the keyboard shortcut for this)</li>
 </ul>
-</section>
-<section id="goals-for-the-session" class="slide level2">
-<h2>Goals for the session</h2>
-<ul>
-<li>Actually <strong>get you started using R and RStudio</strong> if you haven’t used them before.</li>
-<li>Give you a sense of how R can be used for UK regional data analysis and output.</li>
-<li>Signpost to next steps if you want to do more. For anyone who does want to continue, <strong>I’m keen to grow our networks to collaborate on our capacity building.</strong></li>
-</ul>
-</section>
-<section class="slide level2">
-
-<ul>
-<li>I’ll also be banging on about <strong>how great R is for open, collaborative working.</strong> It’s build for openness and reproducibility, and this makes them <strong>great for collaborative learning.</strong></li>
-<li>I’ll talk about <strong>how to make reproducible pipelines all the way from data source to outputs</strong>.</li>
-<li><strong>The slides you’re looking at are an example:</strong> code available <a href="https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/R_regecon_taster_2025_revealjs.qmd">here</a>.</li>
-</ul>
-</section>
-<section id="because-this-is-just-a-taster-session" class="slide level2">
-<h2>Because this is just a taster session…</h2>
-<ul>
-<li>This is <strong>not a full training workshop</strong>. Whenever we’re learning new coding methods, <strong>things always go wrong, guaranteed</strong>. It’s all part of the fun.</li>
-<li>If in a workshop, we can take time to fix those problems. <strong>Sorry, we won’t have capacity for that today</strong>.</li>
-</ul>
+<div class="center">
+<p><img data-src="miscimages/Screenshot from 2025-06-12 11-48-14.png" width="200"></p>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section class="slide level2">
 
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Task: then we paste the NOMISR code below into our new script</strong></p>
+</div>
+<div class="callout-content">
 <ul>
-<li>Your options when things don’t work:
-<ul>
-<li>The slides are designed to be step-by-step, and the session is being recorded by ONS - so you can work back through that in your own time.</li>
-<li>If you think fuller training where we <strong>can</strong> work through snags would be good, <strong>let’s work out how to make that happen.</strong> Get in touch.</li>
-</ul></li>
+<li>And we’ll go through it in RStudio again</li>
 </ul>
+</div>
+</div>
+</div>
 </section>
 <section class="slide level2">
 
-<ul>
-<li>We’ll <strong>take time at the start getting set up with RStudio</strong> so you have a foundation to work from.</li>
-<li>But after that, we’ll be running some chunky code blocks - especially if you’re new to R <strong>don’t worry about these making sense!</strong> Again - a workshop’s required to get into the detail.</li>
-<li>The aim is just to <strong>run them in RStudio</strong> so you can get an idea of how it works.</li>
-<li>I will highlight a few key principles along the way, though.</li>
-</ul>
-</section>
-<section id="the-plan" class="slide level2">
-<h2>The plan</h2>
-<ul>
-<li>I’ve got <strong>two tabs open I’ll move between</strong>. 1: These slides with the code and links in. 2: RStudio, open in posit.cloud.</li>
-<li>We’ll <strong>work through these slides together</strong>, sometimes typing or copying code from the slides into RStudio.</li>
-<li>Navigate the slides with the up/down or left/right keyboard arrows.</li>
-<li>You can move between those two tabs, and also come back to Teams to see how I’m doing stuff.</li>
-<li>Each slide is numbered - I’ll say where we’re at as we progress.</li>
-</ul>
-</section>
-<section class="slide level2">
-
-<ul>
-<li>If you <strong>don’t fancy constantly flitting between slides and RStudio</strong> I’ve also made a single copy of the whole script we’ll work through that includes the slide text - <strong>I’ll show how to get that below at the point we’d stick it into RStudio.</strong></li>
-</ul>
-</section>
-<section id="one-last-thing" class="slide level2">
-<h2>One last thing…</h2>
-<ul>
-<li>Once you have your own copy of the slides open, note the <strong>three-bar button, bottom left</strong>.</li>
-<li>That lets you see the table of contents</li>
-</ul>
-<p>Also last chance to open own slide copy! Get them at <code>bit.ly/rpipelines</code>.</p>
 </section>
 <section class="slide level2">
 

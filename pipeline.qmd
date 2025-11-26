@@ -36,28 +36,51 @@ We'll look at 3 examples of piping data through from web to this output. Startin
 We can copy the URL for the Excel sheet from the web page...
 
 ```{r excel}
+# 1. Extracting from an Excel file on a website: productivity data example
 
 # Copy the URL for the Excel sheet from the ONS website
+# This is just setting a string named 'url'
 url <- 'https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions/current/labourproductivityitls1.xlsx'
 
+# We then create a TEMPORARY FILE...
 temp_path <- tempfile(fileext=".xlsx")
+# And use that file path to DOWNLOAD A TEMP COPY OF THE EXCEL TO USE
 download.file(url, temp_path, mode="wb")
 
-# Or keep a local version in case it changes later...
+# Or if you want to keep a local, month-dated version in case it changes later...
 # download.file(
 #   url,
-#   paste0('data_downloads/ONS_outputperhourdata-',format(Sys.Date(),'%b-%Y'),'.xlsx'),
+#   paste0('ONS_outputperhourdata-',format(Sys.Date(),'%b-%Y'),'.xlsx'),
 #   mode="wb")
 
+# READ FROM THE EXCEL SHEET
+# This goes straight into a dataframe
 # Read directly from a specific sheet and range of cells from the downloaded file
 # "Table A1: Current Price (smoothed) GVA (B) per hour worked indices; ITL2 and ITL3 subregions, 2004 - 2023"
 cp.indices <- readxl::read_excel(path = temp_path,range = "A1!A5:W247")
 
-# RESHAPE
+# TAKE A LOOK AT THAT DATA (CLICK ON ITS NAME IN THE ENVIRONMENT PANEL)
+# It's got each year IN ITS OWN COLUMN. Not what we want.
+
+# So we RESHAPE
 # Get just ITL3 level and pivot years into their own column
-cp.indices = cp.indices %>%
+
+# An aside: 
+# This symbol - %>% 
+# Is a PIPING OPERATOR
+# It lets us pipe one operation to the next
+# So we can clearly see each step taken
+# Let's number those steps here
+
+#1. Pipe the data into a filter
+#2. filter down to just ITL3 zones
+#3. pivot long so years are in their own column
+#4. Convert year to a sensible format
+#5. Remove the ITL column, we don't need that now
+# And back on the first line, overwrite the original dataframe
+cp.indices = cp.indices %>% 
   filter(ITL_level == 'ITL3') %>% 
-  pivot_longer(Index_2004:Index_2023, names_to = 'year', values_to = 'index_value') %>% #get most recent year
+  pivot_longer(Index_2004:Index_2023, names_to = 'year', values_to = 'index_value') %>% 
   mutate(
     year = substr(year,7,10),
     year = as.numeric(year)
@@ -65,12 +88,18 @@ cp.indices = cp.indices %>%
   select(-ITL_level)
 
 
+# We're going to plot JUST THE UK CORE CITIES
+# Here's a list of those I made earlier...
 corecities = readRDS(gzcon(url('https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/data/corecitiesvector_itl3_2025.rds')))
 
 # Check match...
+# Note, this is commented out (so it doesn't output in our final doc)
+# BUT we can still run it to check by highlighting the code
 # table(corecities %in% cp.indices$Region_name)
 
 # Plot!
+# Filter down to the core cities
+# And reorder the places by which has the highest average index over all years
 ggplot(
     cp.indices %>% filter(Region_name %in% corecities),
     aes(x = year, y = index_value, colour = fct_reorder(Region_name,index_value,.desc = T))
@@ -80,8 +109,6 @@ ggplot(
   scale_color_brewer(palette = 'Paired') +
   theme(legend.title=element_blank()) +
   ylab('Output per hour: 100 = UK av')
-
-
 ```
 
 

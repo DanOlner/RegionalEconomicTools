@@ -219,6 +219,11 @@ placeid <- nomis_get_metadata(id = "NM_189_1", concept = "geography", type = "TY
 # placeid <- nomis_get_metadata(id = "NM_189_1", concept = "geography", type = "TYPE428") %>% 
 #   filter(label.en == 'City of Edinburgh') %>% select(id) %>% pull
 
+# Let's just save a specific core cities vector for BRES
+corecities.bres = c(corecities,'Cardiff','Newcastle upon Tyne')
+corecities.bres = corecities.bres[!corecities.bres %in% c('Cardiff and Vale of Glamorgan','Tyneside')]
+
+saveRDS(corecities.bres,'data/corecities_bres.rds')
 
 # USE LOCAL AUTHORITIES TO GET ALL TIMEPOINTS
 # "TYPE424 local authorities: district / unitary (as of April 2023)"
