@@ -24,7 +24,7 @@ knitr::opts_chunk$set(fig.height = 8, fig.width = 10, echo = TRUE, warning = F, 
 -   You've got two ways to engage with this session:
 
 1.  Just watch the screencast, let it wash over you and then come back to the materials in your own time. (These slides as well as ONS recording.)
-2.  Run the R code yourself as we go. **If you're trying #2 - you'll need a copy of these slides open.** You'll have got the link via email - it's also in the chat, or just type `bit.ly/rtasterslides` into your browser address bar.
+2.  Run the R code yourself as we go. **If you're trying #2 - you'll need a copy of these slides open.** You'll have got the link via email - it's also in the chat, or just type `bit.ly/rpipelines` into your browser address bar.
 
 -   If the slide link isn't working for any reason, you'll also have been sent a Word doc with the same material in
 
@@ -39,7 +39,7 @@ knitr::opts_chunk$set(fig.height = 8, fig.width = 10, echo = TRUE, warning = F, 
 
 -   I've also stuck an **image of the 'set up posit.cloud' slide in the chat**, if useful.
 -   Sorry - if posit.cloud doesn't work for any reason, **we won't have time during this session to troubleshoot via chat** - but we'll work out ways to offer support after, if that's useful.
--   ( Link to your own slide copy in the browser again, just in case: `bit.ly/rtasterslides` )
+-   ( Link to your own slide copy in the browser again, just in case: `bit.ly/rpipelines` )
 
 # Getting R running and set up for the session
 
@@ -221,7 +221,7 @@ source('https://bit.ly/pipelinesetup')
 -   Once you have your own copy of the slides open, note the **three-bar button, bottom left**.
 -   That lets you see the table of contents
 
-Also last chance to open own slide copy! Get them at `bit.ly/rtasterslides`.
+Also last chance to open own slide copy! Get them at `bit.ly/rpipelines`.
 
 
 

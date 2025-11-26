@@ -3151,7 +3151,7 @@
     "href": "R_regecon_pipelines_2025_revealjs.html#before-we-start",
     "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
     "section": "Before we start…",
-    "text": "Before we start…\n\nYou’ve got two ways to engage with this session:\n\n\nJust watch the screencast, let it wash over you and then come back to the materials in your own time. (These slides as well as ONS recording.)\nRun the R code yourself as we go. If you’re trying #2 - you’ll need a copy of these slides open. You’ll have got the link via email - it’s also in the chat, or just type bit.ly/rtasterslides into your browser address bar.\n\n\nIf the slide link isn’t working for any reason, you’ll also have been sent a Word doc with the same material in"
+    "text": "Before we start…\n\nYou’ve got two ways to engage with this session:\n\n\nJust watch the screencast, let it wash over you and then come back to the materials in your own time. (These slides as well as ONS recording.)\nRun the R code yourself as we go. If you’re trying #2 - you’ll need a copy of these slides open. You’ll have got the link via email - it’s also in the chat, or just type bit.ly/rpipelines into your browser address bar.\n\n\nIf the slide link isn’t working for any reason, you’ll also have been sent a Word doc with the same material in"
   },
   {
     "objectID": "R_regecon_pipelines_2025_revealjs.html#not-got-r-yet",
@@ -3193,7 +3193,7 @@
     "href": "R_regecon_pipelines_2025_revealjs.html#one-last-thing",
     "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
     "section": "One last thing…",
-    "text": "One last thing…\n\nOnce you have your own copy of the slides open, note the three-bar button, bottom left.\nThat lets you see the table of contents\n\nAlso last chance to open own slide copy! Get them at bit.ly/rtasterslides."
+    "text": "One last thing…\n\nOnce you have your own copy of the slides open, note the three-bar button, bottom left.\nThat lets you see the table of contents\n\nAlso last chance to open own slide copy! Get them at bit.ly/rpipelines."
   },
   {
     "objectID": "R_regecon_pipelines_2025_revealjs.html#making-a-new-r-script-in-rstudio",
