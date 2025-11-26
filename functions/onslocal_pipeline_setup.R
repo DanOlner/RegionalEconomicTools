@@ -33,11 +33,13 @@ if(!require(snakecase)){
 # devtools::install_github("ropensci/nomisr")
 
 # Instead, use a copy of the latest tar
-install.packages(
-  "https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/resources/nomisr-0.4.7.tar",
-  repos = NULL,
-  type = "source"
-)
+if(!require(nomisr)){
+  install.packages(
+    "https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/resources/nomisr-0.4.7.tar",
+    repos = NULL,
+    type = "source"
+  )
+}
 
 message('Packages installed. Time taken:')
 
