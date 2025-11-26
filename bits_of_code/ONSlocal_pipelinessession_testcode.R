@@ -26,15 +26,15 @@ zip_links = xml_attr(
 #ten hours per file covers all eventualities!
 options(timeout = 36000)
 
-url1 = paste0(website_basename,zip_links[1])
-p1f = tempfile(fileext=".zip")
-download.file(url1, p1f, mode="wb")
+url = paste0(website_basename,zip_links[1])
+temp_path = tempfile(fileext=".zip")
+download.file(url, temp_path, mode="wb")
 
 # List what's in that but don't unzip
-filenames = unzip(p1f, list = TRUE)
+filenames = unzip(temp_path, list = TRUE)
 
 #Stick into dataframe
-census2021data = read_csv(unzip(p1f, files = getdistinct('utla',filenames$Name)))
+census2021data = read_csv(unzip(temp_path, files = getdistinct('utla',filenames$Name)))
 
 
 
@@ -43,15 +43,26 @@ census2021data = read_csv(unzip(p1f, files = getdistinct('utla',filenames$Name))
 
 # PRODUCTIVITY: CURRENT PRICE INDEX (PPT DIFF TO UK AVERAGE)----
 
-url1 <- 'https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions/current/labourproductivityitls1.xlsx'
-p1f <- tempfile(fileext=".xlsx")
-download.file(url1, p1f, mode="wb")
+url <- 'https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions/current/labourproductivityitls1.xlsx'
+temp_path <- tempfile(fileext=".xlsx")
+download.file(url, temp_path, mode="wb")
 
 # "Table A2: Current Price (unsmoothed) GVA (B) per hour worked indices; ITL2 and ITL3 subregions, 2004 - 2023"
-# cp.indices <- readxl::read_excel(path = p1f,range = "A2!A5:W247")
+# cp.indices <- readxl::read_excel(path = temp_path,range = "A2!A5:W247")
+
+# Or keep a local version in case it changes later...
+# Might not use this here, don't want to be syncing all these other versions?
+# download.file(
+#   url, 
+#   # paste0('data_downloads/ONS_outputperhourdata-',format(Sys.Date(),'%b-%d-%Y'),'.xlsx'), 
+#   paste0('data_downloads/ONS_outputperhourdata-',format(Sys.Date(),'%b-%Y'),'.xlsx'),
+#   mode="wb") 
+
+
+
 
 # "Table A1: Current Price (smoothed) GVA (B) per hour worked indices; ITL2 and ITL3 subregions, 2004 - 2023"
-cp.indices <- readxl::read_excel(path = p1f,range = "A1!A5:W247")
+cp.indices <- readxl::read_excel(path = temp_path,range = "A1!A5:W247")
 
 # RESHAPE
 # Get just ITL3 level and pivot years into their own column
@@ -282,6 +293,44 @@ ggplot(
 
 
 
+# TEST ZIP SCRAPING AND LOADING----
+
+# From NOMIS webpage bulk Census download
+website_basename = "https://www.nomisweb.co.uk"
+
+doc = read_html(paste0(website_basename,"/sources/census_2021_bulk"))
+
+# Extract all <a> tags with hrefs containing "census2021*.zip"
+zip_links = xml_attr(
+  xml_find_all(doc, "//a[contains(@href, 'census2021') and contains(@href, '.zip')]"),
+  "href"
+)
+
+#Set global timeout to very bigly indeed
+#ten hours per file covers all eventualities!
+options(timeout = 36000)
+
+url = paste0(website_basename,zip_links[qg('TS063', zip_links)][1])
+temp_path = tempfile(fileext=".zip")
+download.file(url, temp_path, mode="wb")
+
+# LOOK INSIDE ZIP FOLDER - We can see separate files for different geographical scales
+# With list = TRUE, this DOES NOT unzip - it just lists the zip folder's contents
+filenames = unzip(temp_path, list = TRUE)
+
+# Take a look
+filenames
+
+#Stick into dataframe
+# census2021data = read_csv(unzip(temp_path, files = getdistinct('utla',filenames$Name)))
+
+# Pick the index we want
+occ = read_csv(unzip(temp_path, files = filenames$Name[5]))
+
+colnames(occ)               
+               
+
+
 
 
 
@@ -300,12 +349,12 @@ ggplot(
 #GVA in the region by industry sheet
 
 #hours worked first
-url1 <- 'https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions/current/labourproductivityitls1.xlsx'
-p1f <- tempfile(fileext=".xlsx")
-download.file(url1, p1f, mode="wb")
+url <- 'https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions/current/labourproductivityitls1.xlsx'
+temp_path <- tempfile(fileext=".xlsx")
+download.file(url, temp_path, mode="wb")
 
 #"Productivity Hours Worked per Week; ITL2 and ITL3 subregions (constrained to ITL1), 2004 - 2023"
-hoursworked <- readxl::read_excel(path = p1f,range = "Productivity Hours!A5:W247")
+hoursworked <- readxl::read_excel(path = temp_path,range = "Productivity Hours!A5:W247")
 
 names(hoursworked) <- gsub(x = names(hoursworked), pattern = ' ', replacement = '_')
 

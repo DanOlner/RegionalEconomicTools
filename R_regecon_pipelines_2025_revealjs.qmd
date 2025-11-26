@@ -223,21 +223,31 @@ source('https://bit.ly/pipelinesetup')
 
 Also last chance to open own slide copy! Get them at `bit.ly/rtasterslides`.
 
-# CODING TIME!
 
-## Making a new R script in RStudio
 
-**RStudio is where you'll be doing all the R loveliness**.
+----
 
-Before looking at RStudio, let's **make a new R script, where we'll do the coding**.
+NOMIS [bulk Census 2021 download page](https://www.nomisweb.co.uk/sources/census_2021_bulk)
 
-:::: {.callout-note icon="false"}
-## Task: Open a new R script in RStudio
-
--   In the **file** menu in RStudio
--   Use **new file** and **R script** (note: it tells you the keyboard shortcut for this)
 
 ::: center
 ![](miscimages/Screenshot%20from%202025-06-12%2011-48-14.png){width="200px"}
 :::
-::::
+
+
+
+----
+
+
+----
+
+UTLAs LTLAs
+
+Census 2021 [geography definitions](https://www.ons.gov.uk/census/census2021dictionary/areatypedefinitions) upper vs lower tier local authorities
+
+
+----
+
+
+
+
