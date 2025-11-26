@@ -358,10 +358,10 @@ Here's the code to copy into our new R code block:
 # That's here:
 # https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions
 # This is just setting a string named 'url'
-url <- 'https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions/current/labourproductivityitls1.xlsx'
+url = 'https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions/current/labourproductivityitls1.xlsx'
 
 # We then create a TEMPORARY FILE...
-temp_path <- tempfile(fileext=".xlsx")
+temp_path = tempfile(fileext=".xlsx")
 # And use that file path to DOWNLOAD A TEMP COPY OF THE EXCEL TO USE
 download.file(url, temp_path, mode="wb")
 
@@ -375,7 +375,7 @@ download.file(url, temp_path, mode="wb")
 # This goes straight into a dataframe
 # Read directly from a specific sheet and range of cells from the downloaded file
 # "Table A1: Current Price (smoothed) GVA (B) per hour worked indices; ITL2 and ITL3 subregions, 2004 - 2023"
-cp.indices <- readxl::read_excel(path = temp_path,range = "A1!A5:W247")
+cp.indices = readxl::read_excel(path = temp_path,range = "A1!A5:W247")
 
 # TAKE A LOOK AT THAT DATA (CLICK ON ITS NAME IN THE ENVIRONMENT PANEL)
 # It's got each year IN ITS OWN COLUMN. Not what we want.
@@ -523,7 +523,7 @@ nomisinfo = readRDS(gzcon(url('https://github.com/DanOlner/RegionalEconomicTools
 # Let's search for 'employment' in RStudio...
 
 # Now we can get metadata for the BRES data, having found the code
-a <- nomis_get_metadata(id = "NM_189_1")
+a = nomis_get_metadata(id = "NM_189_1")
 
 #Pick on some of those for a closer look
 #Note, MEASURE in the actual downloaded data is "MEASURE_NAME" column...
@@ -554,7 +554,7 @@ corecities.bres = readRDS(gzcon(url('https://github.com/DanOlner/RegionalEconomi
 # ITL3 2021 zones in the BRES data only have 2022-2024
 # "TYPE424 local authorities: district / unitary (as of April 2023)"
 # Belfast won't be there cos BRES is GB but otherwise good
-placeid <- nomis_get_metadata(id = "NM_189_1", concept = "geography", type = "TYPE424") %>% 
+placeid = nomis_get_metadata(id = "NM_189_1", concept = "geography", type = "TYPE424") %>% 
   filter(label.en %in% corecities.bres) %>% select(id) %>% pull
 
 # NOW WE GET THE ACTUAL DATA
@@ -572,7 +572,7 @@ x = Sys.time()
 # We pass in the various values we got from above
 # Note also the option to set the year - we don't do that, so we get all of them
 # We also select only some columns, which does save a bit of download time
-bres <- nomis_get_data(id = "NM_189_1",  geography = placeid,
+bres = nomis_get_data(id = "NM_189_1",  geography = placeid,
                        # time = "latest",#Can use to get specific timepoint. If left out, we'll get em all
                        # MEASURE = 1,#Count of jobs
                        MEASURE = 2,#'Industry percentage'

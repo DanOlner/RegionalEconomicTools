@@ -587,10 +587,10 @@
 <span id="cb8-4"><a aria-hidden="true" tabindex="-1"></a><span class="co"># That's here:</span></span>
 <span id="cb8-5"><a aria-hidden="true" tabindex="-1"></a><span class="co"># https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions</span></span>
 <span id="cb8-6"><a aria-hidden="true" tabindex="-1"></a><span class="co"># This is just setting a string named 'url'</span></span>
-<span id="cb8-7"><a aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">'https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions/current/labourproductivityitls1.xlsx'</span></span>
+<span id="cb8-7"><a aria-hidden="true" tabindex="-1"></a>url <span class="ot">=</span> <span class="st">'https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions/current/labourproductivityitls1.xlsx'</span></span>
 <span id="cb8-8"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-9"><a aria-hidden="true" tabindex="-1"></a><span class="co"># We then create a TEMPORARY FILE...</span></span>
-<span id="cb8-10"><a aria-hidden="true" tabindex="-1"></a>temp_path <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext=</span><span class="st">".xlsx"</span>)</span>
+<span id="cb8-10"><a aria-hidden="true" tabindex="-1"></a>temp_path <span class="ot">=</span> <span class="fu">tempfile</span>(<span class="at">fileext=</span><span class="st">".xlsx"</span>)</span>
 <span id="cb8-11"><a aria-hidden="true" tabindex="-1"></a><span class="co"># And use that file path to DOWNLOAD A TEMP COPY OF THE EXCEL TO USE</span></span>
 <span id="cb8-12"><a aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(url, temp_path, <span class="at">mode=</span><span class="st">"wb"</span>)</span>
 <span id="cb8-13"><a aria-hidden="true" tabindex="-1"></a></span>
@@ -604,7 +604,7 @@
 <span id="cb8-21"><a aria-hidden="true" tabindex="-1"></a><span class="co"># This goes straight into a dataframe</span></span>
 <span id="cb8-22"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Read directly from a specific sheet and range of cells from the downloaded file</span></span>
 <span id="cb8-23"><a aria-hidden="true" tabindex="-1"></a><span class="co"># "Table A1: Current Price (smoothed) GVA (B) per hour worked indices; ITL2 and ITL3 subregions, 2004 - 2023"</span></span>
-<span id="cb8-24"><a aria-hidden="true" tabindex="-1"></a>cp.indices <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="at">path =</span> temp_path,<span class="at">range =</span> <span class="st">"A1!A5:W247"</span>)</span>
+<span id="cb8-24"><a aria-hidden="true" tabindex="-1"></a>cp.indices <span class="ot">=</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="at">path =</span> temp_path,<span class="at">range =</span> <span class="st">"A1!A5:W247"</span>)</span>
 <span id="cb8-25"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-26"><a aria-hidden="true" tabindex="-1"></a><span class="co"># TAKE A LOOK AT THAT DATA (CLICK ON ITS NAME IN THE ENVIRONMENT PANEL)</span></span>
 <span id="cb8-27"><a aria-hidden="true" tabindex="-1"></a><span class="co"># It's got each year IN ITS OWN COLUMN. Not what we want.</span></span>
@@ -756,7 +756,7 @@
 <span id="cb9-30"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Let's search for 'employment' in RStudio...</span></span>
 <span id="cb9-31"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-32"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Now we can get metadata for the BRES data, having found the code</span></span>
-<span id="cb9-33"><a aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">nomis_get_metadata</span>(<span class="at">id =</span> <span class="st">"NM_189_1"</span>)</span>
+<span id="cb9-33"><a aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="fu">nomis_get_metadata</span>(<span class="at">id =</span> <span class="st">"NM_189_1"</span>)</span>
 <span id="cb9-34"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-35"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Pick on some of those for a closer look</span></span>
 <span id="cb9-36"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Note, MEASURE in the actual downloaded data is "MEASURE_NAME" column...</span></span>
@@ -787,7 +787,7 @@
 <span id="cb9-61"><a aria-hidden="true" tabindex="-1"></a><span class="co"># ITL3 2021 zones in the BRES data only have 2022-2024</span></span>
 <span id="cb9-62"><a aria-hidden="true" tabindex="-1"></a><span class="co"># "TYPE424 local authorities: district / unitary (as of April 2023)"</span></span>
 <span id="cb9-63"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Belfast won't be there cos BRES is GB but otherwise good</span></span>
-<span id="cb9-64"><a aria-hidden="true" tabindex="-1"></a>placeid <span class="ot">&lt;-</span> <span class="fu">nomis_get_metadata</span>(<span class="at">id =</span> <span class="st">"NM_189_1"</span>, <span class="at">concept =</span> <span class="st">"geography"</span>, <span class="at">type =</span> <span class="st">"TYPE424"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-64"><a aria-hidden="true" tabindex="-1"></a>placeid <span class="ot">=</span> <span class="fu">nomis_get_metadata</span>(<span class="at">id =</span> <span class="st">"NM_189_1"</span>, <span class="at">concept =</span> <span class="st">"geography"</span>, <span class="at">type =</span> <span class="st">"TYPE424"</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb9-65"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(label.en <span class="sc">%in%</span> corecities.bres) <span class="sc">%&gt;%</span> <span class="fu">select</span>(id) <span class="sc">%&gt;%</span> pull</span>
 <span id="cb9-66"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-67"><a aria-hidden="true" tabindex="-1"></a><span class="co"># NOW WE GET THE ACTUAL DATA</span></span>
@@ -805,7 +805,7 @@
 <span id="cb9-79"><a aria-hidden="true" tabindex="-1"></a><span class="co"># We pass in the various values we got from above</span></span>
 <span id="cb9-80"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Note also the option to set the year - we don't do that, so we get all of them</span></span>
 <span id="cb9-81"><a aria-hidden="true" tabindex="-1"></a><span class="co"># We also select only some columns, which does save a bit of download time</span></span>
-<span id="cb9-82"><a aria-hidden="true" tabindex="-1"></a>bres <span class="ot">&lt;-</span> <span class="fu">nomis_get_data</span>(<span class="at">id =</span> <span class="st">"NM_189_1"</span>,  <span class="at">geography =</span> placeid,</span>
+<span id="cb9-82"><a aria-hidden="true" tabindex="-1"></a>bres <span class="ot">=</span> <span class="fu">nomis_get_data</span>(<span class="at">id =</span> <span class="st">"NM_189_1"</span>,  <span class="at">geography =</span> placeid,</span>
 <span id="cb9-83"><a aria-hidden="true" tabindex="-1"></a>                       <span class="co"># time = "latest",#Can use to get specific timepoint. If left out, we'll get em all</span></span>
 <span id="cb9-84"><a aria-hidden="true" tabindex="-1"></a>                       <span class="co"># MEASURE = 1,#Count of jobs</span></span>
 <span id="cb9-85"><a aria-hidden="true" tabindex="-1"></a>                       <span class="at">MEASURE =</span> <span class="dv">2</span>,<span class="co">#'Industry percentage'</span></span>
