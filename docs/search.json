@@ -3299,5 +3299,19 @@
     "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
     "section": "OK, now we can get that NOMIS data into our output",
     "text": "OK, now we can get that NOMIS data into our output\n\nNow it’s saved, that’s very straightforward - we reload the data we just saved.\n\n\n\n\n\n\n\nWhy does it need reloading into the Quarto script?\n\n\n\nBecause every time a Quarto doc is compiled, it starts with an empty environment, so no other data or libraries are visible to it.\nThis is a good thing: it means they have to be self-contained."
+  },
+  {
+    "objectID": "R_regecon_pipelines_2025_revealjs.html#in-the-last-example-well-look-at-how-to-grab-all-links-from-a-site-and-download-zips-from-it",
+    "href": "R_regecon_pipelines_2025_revealjs.html#in-the-last-example-well-look-at-how-to-grab-all-links-from-a-site-and-download-zips-from-it",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "section": "In the last example, we’ll look at how to grab all links from a site and download zips from it",
+    "text": "In the last example, we’ll look at how to grab all links from a site and download zips from it\n\nYes, it’s the NOMIS website - bulk Census 2021 data - but it works for any site.\nI use this approach to download and process Companies House data, for example.\nHere, we’re going to look at occupation data for core cities in England and Wales."
+  },
+  {
+    "objectID": "R_regecon_pipelines_2025_revealjs.html#heres-the-nomis-webpage-were-using",
+    "href": "R_regecon_pipelines_2025_revealjs.html#heres-the-nomis-webpage-were-using",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "section": "Here’s the NOMIS webpage we’re using",
+    "text": "Here’s the NOMIS webpage we’re using\n\nIt’s the NOMIS bulk Census 2021 download page - if you open that, it’s got a range of zip files for different variables.\nLooking on that site, we can see under ‘work and travel’ that occupation data has the code TS063…\nLet’s grab the code and paste it into its own section…"
   }
 ]

@@ -867,12 +867,326 @@
 </section>
 <section class="slide level2">
 
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Task: make a new heading and code block in the Quarto doc and copy/paste this code in</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>We’ll then go through the code again.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Get the BRES data we extracted in the separate script</span></span>
+<span id="cb10-2"><a aria-hidden="true" tabindex="-1"></a>bres <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="st">'bres_nomisdatasave.rds'</span>)</span>
+<span id="cb10-3"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Or load a 'here's one I made earlier' version if NOMISR wasn't playing for any reason</span></span>
+<span id="cb10-5"><a aria-hidden="true" tabindex="-1"></a><span class="co"># bres = readRDS(gzcon(url('https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/bres_nomisdatasave.rds'))</span></span>
+<span id="cb10-6"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Check its size in memory</span></span>
+<span id="cb10-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#pryr::object_size(bres)</span></span>
+<span id="cb10-9"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Quick look at the data structure, filtered down to just 2 digit SICs</span></span>
+<span id="cb10-11"><a aria-hidden="true" tabindex="-1"></a><span class="co"># bres %&gt;% filter(INDUSTRY_TYPE == 'SIC 2007 division (2 digit)') %&gt;% View</span></span>
+<span id="cb10-12"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a aria-hidden="true" tabindex="-1"></a><span class="co"># WE CAN DO DATA CHECKS IN A QUARTO DOC</span></span>
+<span id="cb10-14"><a aria-hidden="true" tabindex="-1"></a><span class="co"># I TEND TO COMMENT THEM OUT SO THEY DON'T OUTPUT BUT IT CAN BE USEFUL TO KEEP IT ALL TOGETHER.</span></span>
+<span id="cb10-15"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a aria-hidden="true" tabindex="-1"></a><span class="co"># For instance:</span></span>
+<span id="cb10-17"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Check industry percentages sum to 100 per ITL3 zone</span></span>
+<span id="cb10-18"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Mostly - some roundings-down build up to not quite 100%</span></span>
+<span id="cb10-19"><a aria-hidden="true" tabindex="-1"></a><span class="co"># bres %&gt;%</span></span>
+<span id="cb10-20"><a aria-hidden="true" tabindex="-1"></a><span class="co">#   filter(INDUSTRY_TYPE == 'SIC 2007 division (2 digit)') %&gt;%</span></span>
+<span id="cb10-21"><a aria-hidden="true" tabindex="-1"></a><span class="co">#   group_by(GEOGRAPHY_NAME,DATE) %&gt;%</span></span>
+<span id="cb10-22"><a aria-hidden="true" tabindex="-1"></a><span class="co">#   summarise(totalpercent = sum(OBS_VALUE))</span></span>
+<span id="cb10-23"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-24"><a aria-hidden="true" tabindex="-1"></a><span class="co"># WE'LL PICK OUT JUST FINANCE SECTORS TO LOOK AT HOW JOB PROPORTIONS HAVE CHANGED OVER TIME</span></span>
+<span id="cb10-25"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Remember, we already filtered down to core cities to lessen the download</span></span>
+<span id="cb10-26"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-27"><a aria-hidden="true" tabindex="-1"></a><span class="co"># OK, let's look at the three finance 2-digit sectors</span></span>
+<span id="cb10-28"><a aria-hidden="true" tabindex="-1"></a><span class="co"># 2 digit SICS are 64,65 and 66: sum those</span></span>
+<span id="cb10-29"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Pick out just 2 digit first as well</span></span>
+<span id="cb10-30"><a aria-hidden="true" tabindex="-1"></a>finance.percent <span class="ot">=</span> bres <span class="sc">%&gt;%</span> </span>
+<span id="cb10-31"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb10-32"><a aria-hidden="true" tabindex="-1"></a>    INDUSTRY_TYPE <span class="sc">==</span> <span class="st">'SIC 2007 division (2 digit)'</span>,</span>
+<span id="cb10-33"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">qg</span>(<span class="st">'64|65|66'</span>, INDUSTRY_NAME)</span>
+<span id="cb10-34"><a aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-35"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(GEOGRAPHY_NAME,DATE) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-36"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb10-37"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">percent =</span> <span class="fu">sum</span>(OBS_VALUE)</span>
+<span id="cb10-38"><a aria-hidden="true" tabindex="-1"></a>  ) </span>
+<span id="cb10-39"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-40"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Plot. May need to smooth</span></span>
+<span id="cb10-41"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb10-42"><a aria-hidden="true" tabindex="-1"></a>  finance.percent, </span>
+<span id="cb10-43"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> DATE, <span class="at">y =</span> percent, <span class="at">colour =</span> <span class="fu">fct_reorder</span>(GEOGRAPHY_NAME,percent,<span class="at">.desc =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb10-44"><a aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-45"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb10-46"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">'Paired'</span>) <span class="sc">+</span></span>
+<span id="cb10-47"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title=</span><span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb10-48"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">unique</span>(finance.percent<span class="sc">$</span>DATE)) <span class="sc">+</span></span>
+<span id="cb10-49"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">'Percent'</span>) <span class="sc">+</span></span>
+<span id="cb10-50"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">'Percent jobs in finance sectors, GB core cities'</span>)</span>
+<span id="cb10-51"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-52"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-53"><a aria-hidden="true" tabindex="-1"></a><span class="co"># While we're here, extract a single value from the data to use inline</span></span>
+<span id="cb10-54"><a aria-hidden="true" tabindex="-1"></a>edinburgh_latestpercent <span class="ot">=</span> finance.percent <span class="sc">%&gt;%</span> </span>
+<span id="cb10-55"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb10-56"><a aria-hidden="true" tabindex="-1"></a>    DATE <span class="sc">==</span> <span class="fu">max</span>(DATE),</span>
+<span id="cb10-57"><a aria-hidden="true" tabindex="-1"></a>    GEOGRAPHY_NAME <span class="sc">==</span> <span class="st">'City of Edinburgh'</span></span>
+<span id="cb10-58"><a aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-59"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(percent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section class="slide level2">
 
-<p>NOMIS <a href="https://www.nomisweb.co.uk/sources/census_2021_bulk">bulk Census 2021 download page</a></p>
-<div class="center">
-<p><img data-src="quarto_docs/images/.png" width="200"></p>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Task: we can also add R code directly into the text - for instance, so we can add values from the data</strong></p>
+</div>
+<div class="callout-content">
+<p>Paste the following chunk in as text after the code block. Pasting into visual moded should work fine.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a>You can run code <span class="cf">in</span> the text too, to include dynamic values from the data, rather than handwriting those in. For instance, we can say that <span class="sc">**</span>the percent of Edinburgh<span class="st">'s finance jobs in `r max(bres$DATE)` was `r edinburgh_latestpercent`%.**</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Task: data can go straight into tables too</strong></p>
+</div>
+<div class="callout-content">
+<p>Paste the following into a new R code chunk - it’ll use the data to populate a table.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb12-2"><a aria-hidden="true" tabindex="-1"></a>  finance.percent <span class="sc">%&gt;%</span> </span>
+<span id="cb12-3"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(DATE <span class="sc">==</span> <span class="fu">max</span>(DATE)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="at">City =</span> GEOGRAPHY_NAME, percent) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(percent)), </span>
+<span id="cb12-6"><a aria-hidden="true" tabindex="-1"></a>             <span class="co"># escape = FALSE, </span></span>
+<span id="cb12-7"><a aria-hidden="true" tabindex="-1"></a>             <span class="at">caption =</span> <span class="fu">paste0</span>(<span class="st">"Table: core cities' percent of finance jobs in "</span>,<span class="fu">max</span>(finance.percent<span class="sc">$</span>DATE),<span class="st">" (SICs 64-66)"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="scraping-links-from-a-website-and-downloading-zips" class="title-slide slide level1 center">
+<h1>3. Scraping links from a website and downloading zips</h1>
+
+</section>
+<section id="in-the-last-example-well-look-at-how-to-grab-all-links-from-a-site-and-download-zips-from-it" class="slide level2">
+<h2>In the last example, we’ll look at how to grab all links from a site and download zips from it</h2>
+<ul>
+<li>Yes, it’s the NOMIS website - bulk Census 2021 data - but it works for any site.</li>
+<li>I use this approach to <strong>download and process Companies House data</strong>, for example.</li>
+<li>Here, we’re going to look at <strong>occupation data</strong> for core cities in England and Wales.</li>
+</ul>
+</section>
+<section id="heres-the-nomis-webpage-were-using" class="slide level2">
+<h2>Here’s the NOMIS webpage we’re using</h2>
+<ul>
+<li>It’s the NOMIS <a href="https://www.nomisweb.co.uk/sources/census_2021_bulk" target="_blank">bulk Census 2021 download page</a> - if you open that, it’s got a range of zip files for different variables.</li>
+<li>Looking on that site, we can see under ‘work and travel’ that occupation data <strong>has the code TS063</strong>…</li>
+<li><strong>Let’s grab the code and paste it into its own section…</strong></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Task: in the Quarto doc, start a new section, make a new code block and paste this in</strong></p>
+</div>
+<div class="callout-content">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># From NOMIS webpage bulk Census download</span></span>
+<span id="cb13-2"><a aria-hidden="true" tabindex="-1"></a>website_basename <span class="ot">=</span> <span class="st">"https://www.nomisweb.co.uk"</span></span>
+<span id="cb13-3"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a aria-hidden="true" tabindex="-1"></a><span class="co"># We use the xml2 library to read the page</span></span>
+<span id="cb13-5"><a aria-hidden="true" tabindex="-1"></a>doc <span class="ot">=</span> <span class="fu">read_html</span>(<span class="fu">paste0</span>(website_basename,<span class="st">"/sources/census_2021_bulk"</span>))</span>
+<span id="cb13-6"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Extract all &lt;a&gt; tags with hrefs containing "census2021*.zip"</span></span>
+<span id="cb13-8"><a aria-hidden="true" tabindex="-1"></a>zip_links <span class="ot">=</span> <span class="fu">xml_attr</span>(</span>
+<span id="cb13-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">xml_find_all</span>(doc, <span class="st">"//a[contains(@href, 'census2021') and contains(@href, '.zip')]"</span>),</span>
+<span id="cb13-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="st">"href"</span></span>
+<span id="cb13-11"><a aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-12"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Set global timeout to very bigly indeed for parsing and downloading</span></span>
+<span id="cb13-14"><a aria-hidden="true" tabindex="-1"></a><span class="co">#ten hours per file covers all eventualities!</span></span>
+<span id="cb13-15"><a aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">timeout =</span> <span class="dv">36000</span>)</span>
+<span id="cb13-16"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-17"><a aria-hidden="true" tabindex="-1"></a><span class="co"># AS WE'VE DONE BEFORE, WE DOWNLOAD A ZIP TO A TEMPORARY LOCATION</span></span>
+<span id="cb13-18"><a aria-hidden="true" tabindex="-1"></a>url <span class="ot">=</span> <span class="fu">paste0</span>(website_basename,zip_links[<span class="fu">qg</span>(<span class="st">'TS063'</span>, zip_links)][<span class="dv">1</span>])</span>
+<span id="cb13-19"><a aria-hidden="true" tabindex="-1"></a>temp_path <span class="ot">=</span> <span class="fu">tempfile</span>(<span class="at">fileext=</span><span class="st">".zip"</span>)</span>
+<span id="cb13-20"><a aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(url, temp_path, <span class="at">mode=</span><span class="st">"wb"</span>)</span>
+<span id="cb13-21"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-22"><a aria-hidden="true" tabindex="-1"></a><span class="co"># LOOK INSIDE ZIP FOLDER - We can see separate files for different geographical scales</span></span>
+<span id="cb13-23"><a aria-hidden="true" tabindex="-1"></a><span class="co"># With list = TRUE, this DOES NOT unzip - it just lists the zip folder's contents</span></span>
+<span id="cb13-24"><a aria-hidden="true" tabindex="-1"></a>filenames <span class="ot">=</span> <span class="fu">unzip</span>(temp_path, <span class="at">list =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb13-25"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-26"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Take a look...</span></span>
+<span id="cb13-27"><a aria-hidden="true" tabindex="-1"></a><span class="co"># filenames</span></span>
+<span id="cb13-28"><a aria-hidden="true" tabindex="-1"></a><span class="co"># IT CONTAINS SEPARATE CSVS FOR DIFFERNT GEOGRAPHICAL SCALES</span></span>
+<span id="cb13-29"><a aria-hidden="true" tabindex="-1"></a><span class="co"># We want lower tier local authorities</span></span>
+<span id="cb13-30"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Here's an explanation for Census geographies...</span></span>
+<span id="cb13-31"><a aria-hidden="true" tabindex="-1"></a><span class="co"># https://www.ons.gov.uk/census/census2021dictionary/areatypedefinitions</span></span>
+<span id="cb13-32"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-33"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Pick the geographical scale we want</span></span>
+<span id="cb13-34"><a aria-hidden="true" tabindex="-1"></a><span class="co"># HERE, UNZIP IS EXTRACTING A SPECIFIC FILE FROM INSIDE IT</span></span>
+<span id="cb13-35"><a aria-hidden="true" tabindex="-1"></a><span class="co"># WITHOUT UNZIPPING THE WHOLE THING</span></span>
+<span id="cb13-36"><a aria-hidden="true" tabindex="-1"></a>occ <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="fu">unzip</span>(temp_path, <span class="at">files =</span> filenames<span class="sc">$</span>Name[<span class="fu">qg</span>(<span class="st">'ltla'</span>,filenames<span class="sc">$</span>Name)]))</span>
+<span id="cb13-37"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-38"><a aria-hidden="true" tabindex="-1"></a><span class="co"># TAKE A LOOK AT THE COLUMN NAMES FOR THAT DATA</span></span>
+<span id="cb13-39"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Again, we've got columns that we want to pivot</span></span>
+<span id="cb13-40"><a aria-hidden="true" tabindex="-1"></a><span class="co"># colnames(occ)               </span></span>
+<span id="cb13-41"><a aria-hidden="true" tabindex="-1"></a>occ <span class="ot">=</span> occ <span class="sc">%&gt;%</span> </span>
+<span id="cb13-42"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb13-43"><a aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span><span class="sc">:</span><span class="dv">13</span>, <span class="at">names_to =</span> <span class="st">'occupation'</span>, <span class="at">values_to =</span> <span class="st">'count'</span></span>
+<span id="cb13-44"><a aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-45"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-46"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-47"><a aria-hidden="true" tabindex="-1"></a><span class="co"># We then keep just the subgroup occupations</span></span>
+<span id="cb13-48"><a aria-hidden="true" tabindex="-1"></a><span class="co"># And find our own percentages for each place</span></span>
+<span id="cb13-49"><a aria-hidden="true" tabindex="-1"></a>occ <span class="ot">=</span> occ <span class="sc">%&gt;%</span> </span>
+<span id="cb13-50"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb13-51"><a aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">qg</span>(<span class="st">'all usual'</span>,occupation)</span>
+<span id="cb13-52"><a aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb13-53"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(geography) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-54"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-55"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">percent_occ =</span> (count <span class="sc">/</span> <span class="fu">sum</span>(count)) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb13-56"><a aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-57"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb13-58"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-59"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Confirm sums to 100% per place... tick</span></span>
+<span id="cb13-60"><a aria-hidden="true" tabindex="-1"></a><span class="co"># occ %&gt;% group_by(geography) %&gt;% </span></span>
+<span id="cb13-61"><a aria-hidden="true" tabindex="-1"></a><span class="co">#   summarise(percentsum = sum(percent_occ))</span></span>
+<span id="cb13-62"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-63"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Nicer occupation names</span></span>
+<span id="cb13-64"><a aria-hidden="true" tabindex="-1"></a>occ <span class="ot">=</span> occ <span class="sc">%&gt;%</span> </span>
+<span id="cb13-65"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-66"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">occupation =</span> <span class="fu">case_when</span>(</span>
+<span id="cb13-67"><a aria-hidden="true" tabindex="-1"></a>      <span class="fu">qg</span>(<span class="st">'Managers'</span>, occupation) <span class="sc">~</span> <span class="st">'Managers, directors &amp; senior officials'</span>,</span>
+<span id="cb13-68"><a aria-hidden="true" tabindex="-1"></a>      <span class="fu">qg</span>(<span class="st">'Professional occ'</span>, occupation) <span class="sc">~</span> <span class="st">'Professionals'</span>,</span>
+<span id="cb13-69"><a aria-hidden="true" tabindex="-1"></a>      <span class="fu">qg</span>(<span class="st">'Associate'</span>, occupation) <span class="sc">~</span> <span class="st">'Associate professional &amp; technical'</span>,</span>
+<span id="cb13-70"><a aria-hidden="true" tabindex="-1"></a>      <span class="fu">qg</span>(<span class="st">'secretar'</span>, occupation) <span class="sc">~</span> <span class="st">'Admin &amp; secretarial'</span>,</span>
+<span id="cb13-71"><a aria-hidden="true" tabindex="-1"></a>      <span class="fu">qg</span>(<span class="st">'trades'</span>, occupation) <span class="sc">~</span> <span class="st">'Skilled trades'</span>,</span>
+<span id="cb13-72"><a aria-hidden="true" tabindex="-1"></a>      <span class="fu">qg</span>(<span class="st">'caring'</span>, occupation) <span class="sc">~</span> <span class="st">'Caring, leisure &amp; other service'</span>,</span>
+<span id="cb13-73"><a aria-hidden="true" tabindex="-1"></a>      <span class="fu">qg</span>(<span class="st">'sales'</span>, occupation) <span class="sc">~</span> <span class="st">'Sales &amp; customer service'</span>,</span>
+<span id="cb13-74"><a aria-hidden="true" tabindex="-1"></a>      <span class="fu">qg</span>(<span class="st">'process'</span>, occupation) <span class="sc">~</span> <span class="st">'Process, plant &amp; machine operatives'</span>,</span>
+<span id="cb13-75"><a aria-hidden="true" tabindex="-1"></a>      <span class="fu">qg</span>(<span class="st">'elementary'</span>, occupation) <span class="sc">~</span> <span class="st">'Elementary'</span></span>
+<span id="cb13-76"><a aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-77"><a aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-78"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-79"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Filter to core cities</span></span>
+<span id="cb13-80"><a aria-hidden="true" tabindex="-1"></a><span class="co"># table(corecities %in% occ$geography)</span></span>
+<span id="cb13-81"><a aria-hidden="true" tabindex="-1"></a><span class="co"># table(c(corecities,'Cardiff','Newcastle upon Tyne') %in% occ$geography)</span></span>
+<span id="cb13-82"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-83"><a aria-hidden="true" tabindex="-1"></a><span class="co"># core city names from BRES will work for us here</span></span>
+<span id="cb13-84"><a aria-hidden="true" tabindex="-1"></a><span class="co"># We lose Glasgow, Edinburgh and Belfast as it's England and Wales Census data</span></span>
+<span id="cb13-85"><a aria-hidden="true" tabindex="-1"></a>corecities.bres <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="fu">gzcon</span>(<span class="fu">url</span>(<span class="st">'https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/data/corecities_bres.rds'</span>)))</span>
+<span id="cb13-86"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-87"><a aria-hidden="true" tabindex="-1"></a>occ.core <span class="ot">=</span> occ <span class="sc">%&gt;%</span> </span>
+<span id="cb13-88"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb13-89"><a aria-hidden="true" tabindex="-1"></a>    geography <span class="sc">%in%</span> corecities.bres</span>
+<span id="cb13-90"><a aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-91"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-92"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-93"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Might a filled bar is the way forward? Hmm.</span></span>
+<span id="cb13-94"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb13-95"><a aria-hidden="true" tabindex="-1"></a>  occ.core,</span>
+<span id="cb13-96"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> geography, <span class="at">x =</span> percent_occ, <span class="at">fill =</span> occupation)</span>
+<span id="cb13-97"><a aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb13-98"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">"fill"</span>, <span class="at">stat=</span><span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb13-99"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">'Paired'</span>) <span class="sc">+</span></span>
+<span id="cb13-100"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Task: that’s OK, but what about how those places compare to average?</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Finishing up with using the same downloaded zip to get England and Wales data as a whole, to make a ‘how do core cities differ from average?’ plot</li>
+<li>Grab the code… if we have time…</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Get occupation values for England outside London</span></span>
+<span id="cb14-2"><a aria-hidden="true" tabindex="-1"></a><span class="co"># To compare differences</span></span>
+<span id="cb14-3"><a aria-hidden="true" tabindex="-1"></a>occ.all <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="fu">unzip</span>(temp_path, <span class="at">files =</span> filenames<span class="sc">$</span>Name[<span class="dv">6</span>])) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(geography <span class="sc">!=</span> <span class="st">'London'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb14-6"><a aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span><span class="sc">:</span><span class="dv">13</span>, <span class="at">names_to =</span> <span class="st">'occupation'</span>, <span class="at">values_to =</span> <span class="st">'count'</span></span>
+<span id="cb14-7"><a aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-8"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Sum for rest of England/Wales outside London</span></span>
+<span id="cb14-10"><a aria-hidden="true" tabindex="-1"></a><span class="co"># By occupation</span></span>
+<span id="cb14-11"><a aria-hidden="true" tabindex="-1"></a>occ.all <span class="ot">=</span> occ.all <span class="sc">%&gt;%</span> </span>
+<span id="cb14-12"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(occupation) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-13"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">sum</span>(count)) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-14"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">qg</span>(<span class="st">'usual'</span>,occupation)) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-15"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent_occ =</span> (count<span class="sc">/</span><span class="fu">sum</span>(count)) <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb14-16"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-17"><a aria-hidden="true" tabindex="-1"></a>occ.all <span class="ot">=</span> occ.all <span class="sc">%&gt;%</span> </span>
+<span id="cb14-18"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb14-19"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">occupation =</span> <span class="fu">case_when</span>(</span>
+<span id="cb14-20"><a aria-hidden="true" tabindex="-1"></a>      <span class="fu">qg</span>(<span class="st">'Managers'</span>, occupation) <span class="sc">~</span> <span class="st">'Managers, directors &amp; senior officials'</span>,</span>
+<span id="cb14-21"><a aria-hidden="true" tabindex="-1"></a>      <span class="fu">qg</span>(<span class="st">'Professional occ'</span>, occupation) <span class="sc">~</span> <span class="st">'Professionals'</span>,</span>
+<span id="cb14-22"><a aria-hidden="true" tabindex="-1"></a>      <span class="fu">qg</span>(<span class="st">'Associate'</span>, occupation) <span class="sc">~</span> <span class="st">'Associate professional &amp; technical'</span>,</span>
+<span id="cb14-23"><a aria-hidden="true" tabindex="-1"></a>      <span class="fu">qg</span>(<span class="st">'secretar'</span>, occupation) <span class="sc">~</span> <span class="st">'Admin &amp; secretarial'</span>,</span>
+<span id="cb14-24"><a aria-hidden="true" tabindex="-1"></a>      <span class="fu">qg</span>(<span class="st">'trades'</span>, occupation) <span class="sc">~</span> <span class="st">'Skilled trades'</span>,</span>
+<span id="cb14-25"><a aria-hidden="true" tabindex="-1"></a>      <span class="fu">qg</span>(<span class="st">'caring'</span>, occupation) <span class="sc">~</span> <span class="st">'Caring, leisure &amp; other service'</span>,</span>
+<span id="cb14-26"><a aria-hidden="true" tabindex="-1"></a>      <span class="fu">qg</span>(<span class="st">'sales'</span>, occupation) <span class="sc">~</span> <span class="st">'Sales &amp; customer service'</span>,</span>
+<span id="cb14-27"><a aria-hidden="true" tabindex="-1"></a>      <span class="fu">qg</span>(<span class="st">'process'</span>, occupation) <span class="sc">~</span> <span class="st">'Process, plant &amp; machine operatives'</span>,</span>
+<span id="cb14-28"><a aria-hidden="true" tabindex="-1"></a>      <span class="fu">qg</span>(<span class="st">'elementary'</span>, occupation) <span class="sc">~</span> <span class="st">'Elementary'</span></span>
+<span id="cb14-29"><a aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-30"><a aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-31"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-32"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Stick them all togeher into one dataframe</span></span>
+<span id="cb14-33"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Rows can go on the end, as long as we make sure structure is the same</span></span>
+<span id="cb14-34"><a aria-hidden="true" tabindex="-1"></a>occ.compare <span class="ot">=</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb14-35"><a aria-hidden="true" tabindex="-1"></a>  occ.core <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>date,<span class="sc">-</span><span class="st">`</span><span class="at">geography code</span><span class="st">`</span>),</span>
+<span id="cb14-36"><a aria-hidden="true" tabindex="-1"></a>  occ.all <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">geography =</span> <span class="st">'E+W minus London'</span>)</span>
+<span id="cb14-37"><a aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-38"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-39"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-40"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Can now see how core cities differ from average (outside London)</span></span>
+<span id="cb14-41"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb14-42"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb14-43"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> occ.compare <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">qg</span>(<span class="st">'e</span><span class="sc">\\</span><span class="st">+w'</span>, geography)), </span>
+<span id="cb14-44"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> percent_occ, <span class="at">y =</span> occupation, <span class="at">colour =</span> geography),</span>
+<span id="cb14-45"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb14-46"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">shape =</span> <span class="dv">17</span></span>
+<span id="cb14-47"><a aria-hidden="true" tabindex="-1"></a>    <span class="co"># height = 0.1</span></span>
+<span id="cb14-48"><a aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb14-49"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">'Paired'</span>) <span class="sc">+</span></span>
+<span id="cb14-50"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb14-51"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> occ.compare <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">qg</span>(<span class="st">'e</span><span class="sc">\\</span><span class="st">+w'</span>, geography)), </span>
+<span id="cb14-52"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> percent_occ, <span class="at">y =</span> <span class="fu">fct_reorder</span>(occupation,percent_occ)),</span>
+<span id="cb14-53"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">7</span>, <span class="at">shape =</span> <span class="dv">3</span>, <span class="at">colour =</span> <span class="st">'black'</span></span>
+<span id="cb14-54"><a aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-55"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">'Occupation % of all employed (18+)'</span>) <span class="sc">+</span></span>
+<span id="cb14-56"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb14-57"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">'Census 2021: core cities % occupations</span><span class="sc">\n</span><span class="st">Eng/Wales minus London % overlaid (cross)'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section class="slide level2">

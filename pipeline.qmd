@@ -189,11 +189,13 @@ knitr::kable(
 
 ## 3. Scraping websites for links, downloading one and extracting from a zip
 
-```{r scraping_census}
+First we look at occupation percents in England/Wales core cities.
 
+```{r scraping_census}
 # From NOMIS webpage bulk Census download
 website_basename = "https://www.nomisweb.co.uk"
 
+# We use the xml2 library to read the page
 doc = read_html(paste0(website_basename,"/sources/census_2021_bulk"))
 
 # Extract all <a> tags with hrefs containing "census2021*.zip"
@@ -206,6 +208,7 @@ zip_links = xml_attr(
 #ten hours per file covers all eventualities!
 options(timeout = 36000)
 
+# AS WE'VE DONE BEFORE, WE DOWNLOAD A ZIP TO A TEMPORARY LOCATION
 url = paste0(website_basename,zip_links[qg('TS063', zip_links)][1])
 temp_path = tempfile(fileext=".zip")
 download.file(url, temp_path, mode="wb")
@@ -214,22 +217,27 @@ download.file(url, temp_path, mode="wb")
 # With list = TRUE, this DOES NOT unzip - it just lists the zip folder's contents
 filenames = unzip(temp_path, list = TRUE)
 
-# Take a look
+# Take a look...
 # filenames
+# IT CONTAINS SEPARATE CSVS FOR DIFFERNT GEOGRAPHICAL SCALES
+# We want lower tier local authorities
+# Here's an explanation for Census geographies...
+# https://www.ons.gov.uk/census/census2021dictionary/areatypedefinitions
 
-# Pick the index we want
-occ = read_csv(unzip(temp_path, files = filenames$Name[3]))
+# Pick the geographical scale we want
+occ = read_csv(unzip(temp_path, files = filenames$Name[qg('ltla',filenames$Name)]))
 
+# TAKE A LOOK AT THE COLUMN NAMES FOR THAT DATA
+# Again, we've got columns that we want to pivot
 # colnames(occ)               
-               
-
 occ = occ %>% 
   pivot_longer(
     4:13, names_to = 'occupation', values_to = 'count'
   )
 
 
-# Don't need all of that - can just do sums per group given we've confirmed matches
+# We then keep just the subgroup occupations
+# And find our own percentages for each place
 occ = occ %>% 
   filter(
     !qg('all usual',occupation)
@@ -243,8 +251,6 @@ occ = occ %>%
 # Confirm sums to 100% per place... tick
 # occ %>% group_by(geography) %>% 
 #   summarise(percentsum = sum(percent_occ))
-
-
 
 # Nicer occupation names
 occ = occ %>% 
@@ -266,13 +272,17 @@ occ = occ %>%
 # table(corecities %in% occ$geography)
 # table(c(corecities,'Cardiff','Newcastle upon Tyne') %in% occ$geography)
 
+# core city names from BRES will work for us here
+# We lose Glasgow, Edinburgh and Belfast as it's England and Wales Census data
+corecities.bres = readRDS(gzcon(url('https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/data/corecities_bres.rds')))
+
 occ.core = occ %>% 
   filter(
-    geography %in% c(corecities,'Cardiff','Newcastle upon Tyne')
+    geography %in% corecities.bres
   )
 
 
-# Might be that a filled bar is the way forward? 
+# Might a filled bar is the way forward? Hmm.
 ggplot(
   occ.core,
   aes(y = geography, x = percent_occ, fill = occupation)
@@ -284,7 +294,7 @@ ggplot(
 
 ```
 
-
+But how do those compare to average?
 
 
 ```{r census2}

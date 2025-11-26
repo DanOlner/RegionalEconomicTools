@@ -635,22 +635,324 @@ saveRDS(bres,'bres_nomisdatasave.rds')
 
 ----
 
+:::: {.callout-note icon="false"}
+## Task: make a new heading and code block in the Quarto doc and copy/paste this code in
 
+-   We'll then go through the code again.
+
+```{r eval=F}
+# Get the BRES data we extracted in the separate script
+bres = readRDS('bres_nomisdatasave.rds')
+
+# Or load a 'here's one I made earlier' version if NOMISR wasn't playing for any reason
+# bres = readRDS(gzcon(url('https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/bres_nomisdatasave.rds'))
+
+# Check its size in memory
+#pryr::object_size(bres)
+
+# Quick look at the data structure, filtered down to just 2 digit SICs
+# bres %>% filter(INDUSTRY_TYPE == 'SIC 2007 division (2 digit)') %>% View
+
+# WE CAN DO DATA CHECKS IN A QUARTO DOC
+# I TEND TO COMMENT THEM OUT SO THEY DON'T OUTPUT BUT IT CAN BE USEFUL TO KEEP IT ALL TOGETHER.
+
+# For instance:
+# Check industry percentages sum to 100 per ITL3 zone
+# Mostly - some roundings-down build up to not quite 100%
+# bres %>%
+#   filter(INDUSTRY_TYPE == 'SIC 2007 division (2 digit)') %>%
+#   group_by(GEOGRAPHY_NAME,DATE) %>%
+#   summarise(totalpercent = sum(OBS_VALUE))
+
+# WE'LL PICK OUT JUST FINANCE SECTORS TO LOOK AT HOW JOB PROPORTIONS HAVE CHANGED OVER TIME
+# Remember, we already filtered down to core cities to lessen the download
+
+# OK, let's look at the three finance 2-digit sectors
+# 2 digit SICS are 64,65 and 66: sum those
+# Pick out just 2 digit first as well
+finance.percent = bres %>% 
+  filter(
+    INDUSTRY_TYPE == 'SIC 2007 division (2 digit)',
+    qg('64|65|66', INDUSTRY_NAME)
+  ) %>% 
+  group_by(GEOGRAPHY_NAME,DATE) %>% 
+  summarise(
+    percent = sum(OBS_VALUE)
+  ) 
+
+# Plot. May need to smooth
+ggplot(
+  finance.percent, 
+  aes(x = DATE, y = percent, colour = fct_reorder(GEOGRAPHY_NAME,percent,.desc = TRUE))
+  ) +
+  geom_line() +
+  scale_color_brewer(palette = 'Paired') +
+  theme(legend.title=element_blank()) +
+  scale_x_continuous(breaks = unique(finance.percent$DATE)) +
+  ylab('Percent') +
+  ggtitle('Percent jobs in finance sectors, GB core cities')
+
+
+# While we're here, extract a single value from the data to use inline
+edinburgh_latestpercent = finance.percent %>% 
+  filter(
+    DATE == max(DATE),
+    GEOGRAPHY_NAME == 'City of Edinburgh'
+    ) %>% 
+  pull(percent)
+
+
+```
+
+::::
+
+----
+
+:::: {.callout-note icon="false"}
+## Task: we can also add R code directly into the text - for instance, so we can add values from the data
+
+Paste the following chunk in as text after the code block. Pasting into visual moded should work fine.
+
+```{r eval=F}
+You can run code in the text too, to include dynamic values from the data, rather than handwriting those in. For instance, we can say that **the percent of Edinburgh's finance jobs in `r max(bres$DATE)` was `r edinburgh_latestpercent`%.**
+
+```
+
+::::
+
+
+----
+
+:::: {.callout-note icon="false"}
+## Task: data can go straight into tables too
+
+Paste the following into a new R code chunk - it'll use the data to populate a table.
+
+```{r eval=F}
+knitr::kable(
+  finance.percent %>% 
+    filter(DATE == max(DATE)) %>% 
+    select(City = GEOGRAPHY_NAME, percent) %>% 
+    arrange(desc(percent)), 
+             # escape = FALSE, 
+             caption = paste0("Table: core cities' percent of finance jobs in ",max(finance.percent$DATE)," (SICs 64-66)"))
+
+```
+
+::::
+
+
+
+
+# 3. Scraping links from a website and downloading zips
+
+----
+
+## In the last example, we'll look at how to grab all links from a site and download zips from it
+
+-   Yes, it's the NOMIS website - bulk Census 2021 data - but it works for any site.
+-   I use this approach to **download and process Companies House data**, for example.
+-   Here, we're going to look at **occupation data** for core cities in England and Wales.
+
+----
+
+## Here's the NOMIS webpage we're using
+
+-   It's the NOMIS [bulk Census 2021 download page](https://www.nomisweb.co.uk/sources/census_2021_bulk){target="_blank"} - if you open that, it's got a range of zip files for different variables. 
+-   Looking on that site, we can see under 'work and travel' that occupation data **has the code TS063**...
+-   **Let's grab the code and paste it into its own section...**
 
 
 
 ----
 
+:::: {.callout-note icon="false"}
+## Task: in the Quarto doc, start a new section, make a new code block and paste this in
+
+
+```{r eval=F}
+# From NOMIS webpage bulk Census download
+website_basename = "https://www.nomisweb.co.uk"
+
+# We use the xml2 library to read the page
+doc = read_html(paste0(website_basename,"/sources/census_2021_bulk"))
+
+# Extract all <a> tags with hrefs containing "census2021*.zip"
+zip_links = xml_attr(
+  xml_find_all(doc, "//a[contains(@href, 'census2021') and contains(@href, '.zip')]"),
+  "href"
+)
+
+#Set global timeout to very bigly indeed for parsing and downloading
+#ten hours per file covers all eventualities!
+options(timeout = 36000)
+
+# AS WE'VE DONE BEFORE, WE DOWNLOAD A ZIP TO A TEMPORARY LOCATION
+url = paste0(website_basename,zip_links[qg('TS063', zip_links)][1])
+temp_path = tempfile(fileext=".zip")
+download.file(url, temp_path, mode="wb")
+
+# LOOK INSIDE ZIP FOLDER - We can see separate files for different geographical scales
+# With list = TRUE, this DOES NOT unzip - it just lists the zip folder's contents
+filenames = unzip(temp_path, list = TRUE)
+
+# Take a look...
+# filenames
+# IT CONTAINS SEPARATE CSVS FOR DIFFERNT GEOGRAPHICAL SCALES
+# We want lower tier local authorities
+# Here's an explanation for Census geographies...
+# https://www.ons.gov.uk/census/census2021dictionary/areatypedefinitions
+
+# Pick the geographical scale we want
+# HERE, UNZIP IS EXTRACTING A SPECIFIC FILE FROM INSIDE IT
+# WITHOUT UNZIPPING THE WHOLE THING
+occ = read_csv(unzip(temp_path, files = filenames$Name[qg('ltla',filenames$Name)]))
+
+# TAKE A LOOK AT THE COLUMN NAMES FOR THAT DATA
+# Again, we've got columns that we want to pivot
+# colnames(occ)               
+occ = occ %>% 
+  pivot_longer(
+    4:13, names_to = 'occupation', values_to = 'count'
+  )
+
+
+# We then keep just the subgroup occupations
+# And find our own percentages for each place
+occ = occ %>% 
+  filter(
+    !qg('all usual',occupation)
+    ) %>%
+  group_by(geography) %>% 
+  mutate(
+    percent_occ = (count / sum(count)) * 100
+    ) %>% 
+  ungroup()
+
+# Confirm sums to 100% per place... tick
+# occ %>% group_by(geography) %>% 
+#   summarise(percentsum = sum(percent_occ))
+
+# Nicer occupation names
+occ = occ %>% 
+  mutate(
+    occupation = case_when(
+      qg('Managers', occupation) ~ 'Managers, directors & senior officials',
+      qg('Professional occ', occupation) ~ 'Professionals',
+      qg('Associate', occupation) ~ 'Associate professional & technical',
+      qg('secretar', occupation) ~ 'Admin & secretarial',
+      qg('trades', occupation) ~ 'Skilled trades',
+      qg('caring', occupation) ~ 'Caring, leisure & other service',
+      qg('sales', occupation) ~ 'Sales & customer service',
+      qg('process', occupation) ~ 'Process, plant & machine operatives',
+      qg('elementary', occupation) ~ 'Elementary'
+    )
+  )
+
+# Filter to core cities
+# table(corecities %in% occ$geography)
+# table(c(corecities,'Cardiff','Newcastle upon Tyne') %in% occ$geography)
+
+# core city names from BRES will work for us here
+# We lose Glasgow, Edinburgh and Belfast as it's England and Wales Census data
+corecities.bres = readRDS(gzcon(url('https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/data/corecities_bres.rds')))
+
+occ.core = occ %>% 
+  filter(
+    geography %in% corecities.bres
+  )
+
+
+# Might a filled bar is the way forward? Hmm.
+ggplot(
+  occ.core,
+  aes(y = geography, x = percent_occ, fill = occupation)
+) +
+  geom_bar(position="fill", stat="identity") +
+  scale_fill_brewer(palette = 'Paired') +
+  ylab("")
 
 
 
+```
 
-NOMIS [bulk Census 2021 download page](https://www.nomisweb.co.uk/sources/census_2021_bulk)
+::::
 
 
-::: center
-![](quarto_docs/images/){width="200px"}
-:::
+----
+
+
+:::: {.callout-note icon="false"}
+## Task: that's OK, but what about how those places compare to average?
+
+-   Finishing up with using the same downloaded zip to get England and Wales data as a whole, to make a 'how do core cities differ from average?' plot
+-   Grab the code... if we have time...
+
+```{r eval=F}
+# Get occupation values for England outside London
+# To compare differences
+occ.all = read_csv(unzip(temp_path, files = filenames$Name[6])) %>% 
+  filter(geography != 'London') %>% 
+  pivot_longer(
+    4:13, names_to = 'occupation', values_to = 'count'
+  )
+
+# Sum for rest of England/Wales outside London
+# By occupation
+occ.all = occ.all %>% 
+  group_by(occupation) %>% 
+  summarise(count = sum(count)) %>% 
+  filter(!qg('usual',occupation)) %>% 
+  mutate(percent_occ = (count/sum(count)) * 100)
+
+occ.all = occ.all %>% 
+  mutate(
+    occupation = case_when(
+      qg('Managers', occupation) ~ 'Managers, directors & senior officials',
+      qg('Professional occ', occupation) ~ 'Professionals',
+      qg('Associate', occupation) ~ 'Associate professional & technical',
+      qg('secretar', occupation) ~ 'Admin & secretarial',
+      qg('trades', occupation) ~ 'Skilled trades',
+      qg('caring', occupation) ~ 'Caring, leisure & other service',
+      qg('sales', occupation) ~ 'Sales & customer service',
+      qg('process', occupation) ~ 'Process, plant & machine operatives',
+      qg('elementary', occupation) ~ 'Elementary'
+    )
+  )
+
+# Stick them all togeher into one dataframe
+# Rows can go on the end, as long as we make sure structure is the same
+occ.compare = bind_rows(
+  occ.core %>% select(-date,-`geography code`),
+  occ.all %>% mutate(geography = 'E+W minus London')
+)
+
+
+# Can now see how core cities differ from average (outside London)
+ggplot() +
+  geom_point(
+    data = occ.compare %>% filter(!qg('e\\+w', geography)), 
+    aes(x = percent_occ, y = occupation, colour = geography),
+    size = 3,
+    shape = 17
+    # height = 0.1
+    ) +
+  scale_color_brewer(palette = 'Paired') +
+  geom_point(
+    data = occ.compare %>% filter(qg('e\\+w', geography)), 
+    aes(x = percent_occ, y = fct_reorder(occupation,percent_occ)),
+    size = 7, shape = 3, colour = 'black'
+  ) +
+  xlab('Occupation % of all employed (18+)') +
+  ylab("") +
+  ggtitle('Census 2021: core cities % occupations\nEng/Wales minus London % overlaid (cross)')
+
+
+```
+
+
+::::
+
 
 
 
