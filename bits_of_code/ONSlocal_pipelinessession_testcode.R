@@ -2,6 +2,7 @@
 #PIPELINE ESSENTIALS
 library(tidyverse)
 library(xml2)
+library(nomisr)
 source('functions/misc_functions.R')
 
 #Set ggplot theme
@@ -95,6 +96,14 @@ corecities = readRDS('data/corecitiesvector_itl3_2025.rds')
 
 table(corecities %in% cp.indices$Region_name)
 
+# Actually, let's do that from scratch, so people can see how to add their own places
+# cp.indices %>% 
+#   filter(
+#     qg('',Region_name)
+#   )
+
+# Hmm - if we add in one more, there won't be enough colours will there? Great
+
 ggplot(
     cp.indices %>% filter(Region_name %in% corecities),
     aes(x = year, y = index_value, colour = fct_reorder(Region_name,index_value,.desc = T))
@@ -102,7 +111,8 @@ ggplot(
   geom_line() +
   geom_hline(yintercept = 100) +
   scale_color_brewer(palette = 'Paired') +
-  theme(legend.title=element_blank())
+  theme(legend.title=element_blank()) +
+  ylab('Output per hour: 100 = UK av')
 
 
 # Simple way without finding slopes to get most extreme changes
@@ -156,7 +166,123 @@ ggplot(
   geom_line() +
   geom_hline(yintercept = 100) +
   scale_color_brewer(palette = 'Paired') +
-  theme(legend.title=element_blank())
+  theme(legend.title=element_blank()) +
+  ylab('Output per hour: 100 = UK average')
+
+
+
+# NOMISR----
+
+# Need to show how to find this number
+
+#BRES code, get "concepts" we can use to specify download 
+a <- nomis_get_metadata(id = "NM_189_1")
+
+#Pick on some of those (some of which don't seem to be working.)
+#Note, MEASURE in the actual downloaded data is "MEASURE_NAME" column...
+nomis_get_metadata(id = "NM_189_1", concept = "MEASURE")
+nomis_get_metadata(id = "NM_189_1", concept = "MEASURES")
+nomis_get_metadata(id = "NM_189_1", concept = "EMPLOYMENT_STATUS")
+geogz = nomis_get_metadata(id = "NM_189_1", concept = "GEOGRAPHY", type = "type")
+
+print(geogz, n = 60)
+
+#Point of confusion here - 
+#Look at the full column range and how it's broken down:
+#(for some sample data)
+# placeid <- nomis_get_metadata(id = "NM_189_1", concept = "geography", type = "TYPE428") %>% 
+#   filter(qg('sheffield',.$label.en)) %>% select(id) %>% pull
+
+# Core city / ITL3 2021 match?
+# Tick - Belfast won't be there cos BRES is GB but otherwise good
+placeid <- nomis_get_metadata(id = "NM_189_1", concept = "geography", type = "TYPE428") %>% 
+  filter(label.en %in% corecities) %>% select(id) %>% pull
+
+# For the exercise here, let's just check on Edinburgh
+# placeid <- nomis_get_metadata(id = "NM_189_1", concept = "geography", type = "TYPE428") %>% 
+#   filter(label.en == 'City of Edinburgh') %>% select(id) %>% pull
+
+
+# USE LOCAL AUTHORITIES TO GET ALL TIMEPOINTS
+# "TYPE424 local authorities: district / unitary (as of April 2023)"
+placeid <- nomis_get_metadata(id = "NM_189_1", concept = "geography", type = "TYPE424") %>% 
+  filter(label.en %in% c(corecities,'Cardiff','Newcastle upon Tyne')) %>% select(id) %>% pull
+
+
+
+bres <- nomis_get_data(id = "NM_189_1",  time = "latest", geography = placeid,
+                    # MEASURE = 1,#Count of jobs
+                    MEASURE = 2,#'Industry percentage'
+                    MEASURES = 20100,#Just gives value (of percent) - redundant but lowers data download
+                    EMPLOYMENT_STATUS = 2,#Full time jobs
+                    select = c('DATE','GEOGRAPHY_NAME','INDUSTRY_NAME','INDUSTRY_TYPE','OBS_VALUE')
+)
+
+# Out of interest, how long to get all timepoints? Can we do in one here?
+# Aaah - all time requires using different geography, local authorities
+# ITL3 2021 none prior to 2022?
+bres <- nomis_get_data(id = "NM_189_1",  geography = placeid,
+                    # MEASURE = 1,#Count of jobs
+                    MEASURE = 2,#'Industry percentage'
+                    MEASURES = 20100,#Just gives value (of percent) - redundant but lowers data download
+                    EMPLOYMENT_STATUS = 2,#Full time jobs
+                    select = c('DATE','GEOGRAPHY_NAME','INDUSTRY_NAME','INDUSTRY_TYPE','OBS_VALUE')
+)
+
+# That'd fit in the 1GB easy enough
+# (But I'll provide a blue peter version too!)
+pryr::object_size(bres)
+
+
+# Save this just in case NOMIS falls over when everyone trying to use
+saveRDS(bres,'data/bresLAdownload.rds')
+
+# Save as CSV for ease of loading
+write_csv(bres,'data/bresLAdownload.csv')
+
+
+
+unique(z$INDUSTRY_TYPE)
+
+# Quick looksee
+bres %>% filter(INDUSTRY_TYPE == 'SIC 2007 division (2 digit)') %>% View
+
+# Check industry percentages sum to 100 per ITL3 zone
+# Mostly - some roundings-down build up to not quite 100%
+bres %>% 
+  filter(INDUSTRY_TYPE == 'SIC 2007 division (2 digit)') %>% 
+  group_by(GEOGRAPHY_NAME,DATE) %>% 
+  summarise(totalpercent = sum(OBS_VALUE))
+
+
+# OK, let's do a combined chart? Or do by sector. Start with finannce jobs.
+# 2 digit SICS are 64,65 and 66: sum those
+# Pick out just 2 digit first as well
+finance.percent = bres %>% 
+  filter(
+    INDUSTRY_TYPE == 'SIC 2007 division (2 digit)',
+    qg('64|65|66', INDUSTRY_NAME)
+  ) %>% 
+  group_by(GEOGRAPHY_NAME,DATE) %>% 
+  summarise(
+    percent = sum(OBS_VALUE)
+  ) 
+
+# Plot. May need to smooth
+ggplot(
+  finance.percent, 
+  aes(x = DATE, y = percent, colour = fct_reorder(GEOGRAPHY_NAME,percent,.desc = TRUE))
+  ) +
+  geom_line() +
+  scale_color_brewer(palette = 'Paired') +
+  theme(legend.title=element_blank()) +
+  scale_x_continuous(breaks = unique(finance.percent$DATE)) +
+  ylab('Percent') +
+  ggtitle('Percent jobs in finance sectors, GB core cities')
+
+
+
+
 
 
 
