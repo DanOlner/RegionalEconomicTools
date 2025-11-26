@@ -3149,49 +3149,49 @@
   {
     "objectID": "R_regecon_pipelines_2025_revealjs.html#before-we-start",
     "href": "R_regecon_pipelines_2025_revealjs.html#before-we-start",
-    "title": "R Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
     "section": "Before we start…",
     "text": "Before we start…\n\nYou’ve got two ways to engage with this session:\n\n\nJust watch the screencast, let it wash over you and then come back to the materials in your own time. (These slides as well as ONS recording.)\nRun the R code yourself as we go. If you’re trying #2 - you’ll need a copy of these slides open. You’ll have got the link via email - it’s also in the chat, or just type bit.ly/rtasterslides into your browser address bar.\n\n\nIf the slide link isn’t working for any reason, you’ll also have been sent a Word doc with the same material in"
   },
   {
     "objectID": "R_regecon_pipelines_2025_revealjs.html#not-got-r-yet",
     "href": "R_regecon_pipelines_2025_revealjs.html#not-got-r-yet",
-    "title": "R Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
     "section": "Not got R yet?",
     "text": "Not got R yet?\n\nIf you want to do some coding but didn’t have a chance to run through the little R setup guide, you’ve got some time now while I do all the pre-amble.\nThe slide below takes you through how to get RStudio working in the browser using (free) posit.cloud.\nWe’ll use the free version of posit.cloud - it’s only got 1GB RAM, so we can’t do some of the heavier stuff, but is perfect for an intro.\n(The paid tier isn’t too expensive and is powerful enough for most work.)"
   },
   {
     "objectID": "R_regecon_pipelines_2025_revealjs.html#introduction",
     "href": "R_regecon_pipelines_2025_revealjs.html#introduction",
-    "title": "R Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
     "section": "Introduction",
     "text": "Introduction\n\nWe’ll be doing a whistlestop tour of using R for digging into UK regional economies.\nFor this session, we’re using just one ONS source - regional GVA broken down by industry. At the end I’ll list a bunch of other sources and ideas, and code for using them.\nWe’ll also be asking which of these would be most useful to you for future sessions, and what other data or tools might interest you."
   },
   {
     "objectID": "R_regecon_pipelines_2025_revealjs.html#goals-for-the-session",
     "href": "R_regecon_pipelines_2025_revealjs.html#goals-for-the-session",
-    "title": "R Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
     "section": "Goals for the session",
     "text": "Goals for the session\n\nActually get you started using R and RStudio if you haven’t used them before.\nGive you a sense of how R can be used for UK regional data analysis and output.\nSignpost to next steps if you want to do more. For anyone who does want to continue, I’m keen to grow our networks to collaborate on our capacity building."
   },
   {
     "objectID": "R_regecon_pipelines_2025_revealjs.html#because-this-is-just-a-taster-session",
     "href": "R_regecon_pipelines_2025_revealjs.html#because-this-is-just-a-taster-session",
-    "title": "R Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
     "section": "Because this is just a taster session…",
     "text": "Because this is just a taster session…\n\nThis is not a full training workshop. Whenever we’re learning new coding methods, things always go wrong, guaranteed. It’s all part of the fun.\nIf in a workshop, we can take time to fix those problems. Sorry, we won’t have capacity for that today."
   },
   {
     "objectID": "R_regecon_pipelines_2025_revealjs.html#the-plan",
     "href": "R_regecon_pipelines_2025_revealjs.html#the-plan",
-    "title": "R Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
     "section": "The plan",
     "text": "The plan\n\nI’ve got two tabs open I’ll move between. 1: These slides with the code and links in. 2: RStudio, open in posit.cloud.\nWe’ll work through these slides together, sometimes typing or copying code from the slides into RStudio.\nNavigate the slides with the up/down or left/right keyboard arrows.\nYou can move between those two tabs, and also come back to Teams to see how I’m doing stuff.\nEach slide is numbered - I’ll say where we’re at as we progress."
   },
   {
     "objectID": "R_regecon_pipelines_2025_revealjs.html#one-last-thing",
     "href": "R_regecon_pipelines_2025_revealjs.html#one-last-thing",
-    "title": "R Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
     "section": "One last thing…",
     "text": "One last thing…\n\nOnce you have your own copy of the slides open, note the three-bar button, bottom left.\nThat lets you see the table of contents\n\nAlso last chance to open own slide copy! Get them at bit.ly/rtasterslides."
   },

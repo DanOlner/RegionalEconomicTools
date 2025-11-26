@@ -1,5 +1,5 @@
 ---
-title: "R Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)"
+title: "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)"
 sidebar: false
 code-overflow: wrap
 execute:
