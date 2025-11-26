@@ -105,6 +105,9 @@ cp.indices = cp.indices %>%
 
 corecities = readRDS('data/corecitiesvector_itl3_2025.rds')
 
+
+
+
 table(corecities %in% cp.indices$Region_name)
 
 # Actually, let's do that from scratch, so people can see how to add their own places
@@ -325,17 +328,202 @@ filenames
 # census2021data = read_csv(unzip(temp_path, files = getdistinct('utla',filenames$Name)))
 
 # Pick the index we want
-occ = read_csv(unzip(temp_path, files = filenames$Name[5]))
+occ = read_csv(unzip(temp_path, files = filenames$Name[3]))
 
 colnames(occ)               
                
-# Get lookup to add geog names in there
-utla_lookup = read_csv('data/Ward_to_PCON_to_LAD_to_UTLA_December_2023_Lookup_in_the_UK.csv') %>% 
-  select(UTLA23CD,UTLA23NM) %>% 
-  distinct()
+# # Get lookup to add geog names in there
+# utla_lookup = read_csv('data/WD21_PCON21_LAD21_UTLA21_UK_LU.csv') %>% 
+#   select(contains('UTLA')) %>% 
+#   distinct()
+# 
+# table(occ$`geography code` %in% utla_lookup$UTLA21CD)
+# 
+# # Census data is only England and wales...
+# # Non matches are Scot/NI?
+# utla_lookup %>% filter(!UTLA21CD %in% occ$`geography code`) %>% View
 
-table(occ$`geography code` %in% utla_lookup$UTLA23CD)
+# Don't need name lookup - the names *are* in the LTLAs (not in UTLAs)
+# Which is what we want if we're after core cities
 
+occ = occ %>% 
+  pivot_longer(
+    4:13, names_to = 'occupation', values_to = 'count'
+  )
+
+# Split: get 'all usual 18+ residents in employment
+# totals = occ %>% 
+#   filter(qg('all usual',occupation))
+# 
+# # Keep just separate occupations and merge in the totals to get percentages
+# occ = occ %>% 
+#   filter(
+#     !qg('all usual',occupation)
+#   ) %>%
+#   left_join(
+#     totals %>% select(`geography code`, all_in_employment = count),
+#     by = 'geography code'
+#   ) %>% 
+#   mutate(
+#     percent_occ = (count / all_in_employment) * 100
+#   )
+#   
+# # Just confirming the totals do match
+# occ %>% 
+#   group_by(geography) %>% 
+#   summarise(
+#     chksum = sum(count),
+#     all_in_employment = max(all_in_employment)
+#   ) %>% 
+#   mutate(
+#     chksum == all_in_employment
+#   ) %>% 
+#   summarise(mean(chksum))
+
+# Don't need all of that - can just do sums per group given we've confirmed matches
+occ = occ %>% 
+  filter(
+    !qg('all usual',occupation)
+    ) %>%
+  group_by(geography) %>% 
+  mutate(
+    percent_occ = (count / sum(count)) * 100
+    ) %>% 
+  ungroup()
+
+# Confirm sums to 100% per place... tick
+occ %>% group_by(geography) %>% 
+  summarise(percentsum = sum(percent_occ))
+
+
+
+# Nicer occupation names
+occ = occ %>% 
+  mutate(
+    occupation = case_when(
+      qg('Managers', occupation) ~ 'Managers, directors & senior officials',
+      qg('Professional occ', occupation) ~ 'Professionals',
+      qg('Associate', occupation) ~ 'Associate professional & technical',
+      qg('secretar', occupation) ~ 'Admin & secretarial',
+      qg('trades', occupation) ~ 'Skilled trades',
+      qg('caring', occupation) ~ 'Caring, leisure & other service',
+      qg('sales', occupation) ~ 'Sales & customer service',
+      qg('process', occupation) ~ 'Process, plant & machine operatives',
+      qg('elementary', occupation) ~ 'Elementary'
+    )
+  )
+
+# Filter to core cities
+table(corecities %in% occ$geography)
+table(c(corecities,'Cardiff','Newcastle upon Tyne') %in% occ$geography)
+
+# Aaaand plot!
+occ.core = occ %>% 
+  filter(
+    geography %in% c(corecities,'Cardiff','Newcastle upon Tyne')
+  )
+
+# English and Welsh core cities
+unique(occ.core$geography)
+unique(occ.core$geography)[!unique(occ.core$geography) %in% corecities]
+
+
+
+
+# Might be that a filled bar is the way forward? Might not have needed percentages but let's see.
+# Could potentially also illustrate ggplotly for hovering for %s
+ggplot(
+  occ.core,
+  aes(y = geography, x = percent_occ, fill = occupation)
+) +
+  geom_bar(position="fill", stat="identity") +
+  scale_fill_brewer(palette = 'Paired')
+
+
+
+# Get occupation values for England outside London
+# To compare differences
+occ.all = read_csv(unzip(temp_path, files = filenames$Name[6])) %>% 
+  filter(geography != 'London') %>% 
+  pivot_longer(
+    4:13, names_to = 'occupation', values_to = 'count'
+  )
+
+# Sum for rest of England/Wales outside London
+# By occupation
+occ.all = occ.all %>% 
+  group_by(occupation) %>% 
+  summarise(count = sum(count)) %>% 
+  filter(!qg('usual',occupation)) %>% 
+  mutate(percent_occ = (count/sum(count)) * 100)
+
+occ.all = occ.all %>% 
+  mutate(
+    occupation = case_when(
+      qg('Managers', occupation) ~ 'Managers, directors & senior officials',
+      qg('Professional occ', occupation) ~ 'Professionals',
+      qg('Associate', occupation) ~ 'Associate professional & technical',
+      qg('secretar', occupation) ~ 'Admin & secretarial',
+      qg('trades', occupation) ~ 'Skilled trades',
+      qg('caring', occupation) ~ 'Caring, leisure & other service',
+      qg('sales', occupation) ~ 'Sales & customer service',
+      qg('process', occupation) ~ 'Process, plant & machine operatives',
+      qg('elementary', occupation) ~ 'Elementary'
+    )
+  )
+
+
+# Merge those in to get difference to other regions minus London
+# occ = occ %>% 
+#   left_join(
+#     occ.all %>% select(-count,percent_occ_engwalesnolondon = percent_occ),
+#     by = 'occupation'
+#   ) 
+
+# Add in percentage point (PPT) difference
+
+# Actually, let's just try plotting this together
+# Which would be a slightly different structure...
+
+occ.compare = bind_rows(
+  occ.core %>% select(-date,-`geography code`),
+  occ.all %>% mutate(geography = 'E+W minus London')
+)
+
+# Order factor by E + W minus London amount
+factororder = occ.all %>% 
+  arrange(-percent_occ) %>% 
+  pull(occupation)
+
+occ.compare = occ.compare %>% 
+  mutate(
+    geography = factor(geography, levels = )
+  )
+  
+
+# Can now see both. Facetting per sector might show better but let's see
+ggplot() +
+  geom_jitter(
+    data = occ.compare %>% filter(!qg('e\\+w', geography)), 
+    aes(x = percent_occ, y = occupation, colour = geography),
+    size = 3,
+    shape = 17,
+    height = 0.1
+    ) +
+  scale_color_brewer(palette = 'Paired') +
+  geom_point(
+    data = occ.compare %>% filter(qg('e\\+w', geography)), 
+    aes(x = percent_occ, y = fct_reorder(occupation,percent_occ)),
+    size = 7, shape = 3, colour = 'black'
+  ) +
+  xlab('Occupation % of all employed (18+)')
+
+
+  # scale_size_manual(values = c(rep(1,9),3)) +
+  # scale_shape_manual(values = c(rep(1,9),3)) +
+
+# Possibly add Edinburgh back in, if not too much faff
+# Actuall probably is, if we want UK averages...
 
 
 
