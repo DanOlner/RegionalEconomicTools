@@ -1,0 +1,127 @@
+---
+title: "Pipeline"
+format: docx
+editor: visual
+execute:
+  echo: false
+  message: false
+  warning: false
+---
+
+```{r setup}
+#Load some functions and install some packages
+source('https://bit.ly/pipelinesetup')
+
+library(tidyverse)
+library(nomisr)
+
+```
+
+## Introduction
+
+We'll look at 3 examples of piping data through from web to this output. Starting with...
+
+## 1. Extracting from an Excel file on a website: productivity data example
+
+We can copy the URL for the Excel sheet from the web page...
+
+```{r excel}
+
+# Copy the URL for the Excel sheet from the ONS website
+url <- 'https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions/current/labourproductivityitls1.xlsx'
+
+temp_path <- tempfile(fileext=".xlsx")
+download.file(url, temp_path, mode="wb")
+
+# Or keep a local version in case it changes later...
+# download.file(
+#   url,
+#   paste0('data_downloads/ONS_outputperhourdata-',format(Sys.Date(),'%b-%Y'),'.xlsx'),
+#   mode="wb")
+
+# Read directly from a specific sheet and range of cells from the downloaded file
+# "Table A1: Current Price (smoothed) GVA (B) per hour worked indices; ITL2 and ITL3 subregions, 2004 - 2023"
+cp.indices <- readxl::read_excel(path = temp_path,range = "A1!A5:W247")
+
+# RESHAPE
+# Get just ITL3 level and pivot years into their own column
+cp.indices = cp.indices %>%
+  filter(ITL_level == 'ITL3') %>% 
+  pivot_longer(Index_2004:Index_2023, names_to = 'year', values_to = 'index_value') %>% #get most recent year
+  mutate(
+    year = substr(year,7,10),
+    year = as.numeric(year)
+  ) %>% 
+  select(-ITL_level)
+
+
+corecities = readRDS(gzcon(url('https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/data/corecitiesvector_itl3_2025.rds')))
+
+# Check match...
+# table(corecities %in% cp.indices$Region_name)
+
+# Plot!
+ggplot(
+    cp.indices %>% filter(Region_name %in% corecities),
+    aes(x = year, y = index_value, colour = fct_reorder(Region_name,index_value,.desc = T))
+    ) +
+  geom_line() +
+  geom_hline(yintercept = 100) +
+  scale_color_brewer(palette = 'Paired') +
+  theme(legend.title=element_blank()) +
+  ylab('Output per hour: 100 = UK av')
+
+
+```
+
+
+
+
+## 2. Using the NOMISR package to extract data through the NOMIS API
+
+```{r nomis}
+
+# Get the BRES data we extracted in the separate script
+bres = readRDS('bres_nomisdatasave.rds')
+
+# Check its size in memory
+#pryr::object_size(bres)
+
+# Quick looksee
+# bres %>% filter(INDUSTRY_TYPE == 'SIC 2007 division (2 digit)') %>% View
+
+# Check industry percentages sum to 100 per ITL3 zone
+# Mostly - some roundings-down build up to not quite 100%
+# bres %>% 
+#   filter(INDUSTRY_TYPE == 'SIC 2007 division (2 digit)') %>% 
+#   group_by(GEOGRAPHY_NAME,DATE) %>% 
+#   summarise(totalpercent = sum(OBS_VALUE))
+
+# OK, let's look at the three finance 2-digit sectors
+# 2 digit SICS are 64,65 and 66: sum those
+# Pick out just 2 digit first as well
+finance.percent = bres %>% 
+  filter(
+    INDUSTRY_TYPE == 'SIC 2007 division (2 digit)',
+    qg('64|65|66', INDUSTRY_NAME)
+  ) %>% 
+  group_by(GEOGRAPHY_NAME,DATE) %>% 
+  summarise(
+    percent = sum(OBS_VALUE)
+  ) 
+
+# Plot. May need to smooth
+ggplot(
+  finance.percent, 
+  aes(x = DATE, y = percent, colour = fct_reorder(GEOGRAPHY_NAME,percent,.desc = TRUE))
+  ) +
+  geom_line() +
+  scale_color_brewer(palette = 'Paired') +
+  theme(legend.title=element_blank()) +
+  scale_x_continuous(breaks = unique(finance.percent$DATE)) +
+  ylab('Percent') +
+  ggtitle('Percent jobs in finance sectors, GB core cities')
+
+
+
+```

@@ -1,6 +1,6 @@
 # Packages/helpers for the ONS Local pipelines session
 # 27th Nov 2025
-cat('Checking on missing packages, installing if we need to. Starting timer...\n')
+message('Checking on missing packages, installing if we need to. Starting timer...')
 
 x = Sys.time()
 
@@ -20,11 +20,9 @@ if(!require(devtools)){
 # Then we can get NOMISR
 devtools::install_github("ropensci/nomisr")
 
-cat('Packages installed. Time taken:\n')
+message('Packages installed. Time taken:')
 
-print(Sys.time() - x)
-
-cat('\n')
+message(Sys.time() - x)
 
 #HELPER FUNCTIONS
 #reduce need to type glimpse every time...

@@ -105,9 +105,6 @@ cp.indices = cp.indices %>%
 
 corecities = readRDS('data/corecitiesvector_itl3_2025.rds')
 
-
-
-
 table(corecities %in% cp.indices$Region_name)
 
 # Actually, let's do that from scratch, so people can see how to add their own places
@@ -187,9 +184,15 @@ ggplot(
 
 # NOMISR----
 
-# Need to show how to find this number
+# See https://docs.evanodell.com/nomisr/articles/introduction.html
+# For essentials
 
-#BRES code, get "concepts" we can use to specify download 
+nomisinfo = nomis_data_info()
+
+nomisinfo = nomisinfo %>% 
+  select(id, description.value, name.value)
+
+# Get metadata for the BRES data, having found the code
 a <- nomis_get_metadata(id = "NM_189_1")
 
 #Pick on some of those (some of which don't seem to be working.)
@@ -223,6 +226,8 @@ placeid <- nomis_get_metadata(id = "NM_189_1", concept = "geography", type = "TY
   filter(label.en %in% c(corecities,'Cardiff','Newcastle upon Tyne')) %>% select(id) %>% pull
 
 
+# Check timings
+x = Sys.time()
 
 bres <- nomis_get_data(id = "NM_189_1",  time = "latest", geography = placeid,
                     # MEASURE = 1,#Count of jobs
@@ -231,6 +236,8 @@ bres <- nomis_get_data(id = "NM_189_1",  time = "latest", geography = placeid,
                     EMPLOYMENT_STATUS = 2,#Full time jobs
                     select = c('DATE','GEOGRAPHY_NAME','INDUSTRY_NAME','INDUSTRY_TYPE','OBS_VALUE')
 )
+
+Sys.time() - x
 
 # Out of interest, how long to get all timepoints? Can we do in one here?
 # Aaah - all time requires using different geography, local authorities
@@ -491,24 +498,24 @@ occ.compare = bind_rows(
 )
 
 # Order factor by E + W minus London amount
-factororder = occ.all %>% 
-  arrange(-percent_occ) %>% 
-  pull(occupation)
-
-occ.compare = occ.compare %>% 
-  mutate(
-    geography = factor(geography, levels = )
-  )
+# factororder = occ.all %>% 
+#   arrange(-percent_occ) %>% 
+#   pull(occupation)
+# 
+# occ.compare = occ.compare %>% 
+#   mutate(
+#     geography = factor(geography, levels = )
+#   )
   
 
 # Can now see both. Facetting per sector might show better but let's see
 ggplot() +
-  geom_jitter(
+  geom_point(
     data = occ.compare %>% filter(!qg('e\\+w', geography)), 
     aes(x = percent_occ, y = occupation, colour = geography),
     size = 3,
-    shape = 17,
-    height = 0.1
+    shape = 17
+    # height = 0.1
     ) +
   scale_color_brewer(palette = 'Paired') +
   geom_point(
@@ -516,7 +523,8 @@ ggplot() +
     aes(x = percent_occ, y = fct_reorder(occupation,percent_occ)),
     size = 7, shape = 3, colour = 'black'
   ) +
-  xlab('Occupation % of all employed (18+)')
+  xlab('Occupation % of all employed (18+)') +
+  ggtitle('Census 2021: core cities % occupations\nEng/Wales minus London % overlaid (cross)')
 
 
   # scale_size_manual(values = c(rep(1,9),3)) +

@@ -225,13 +225,29 @@ Also last chance to open own slide copy! Get them at `bit.ly/rtasterslides`.
 
 
 
+
+----
+
+::: center
+![](quarto_docs/images/bres_find.png){width="200px"}
+:::
+
+----
+
+::: center
+![](quarto_docs/images/bres_timetaken.png){width="200px"}
+:::
+
+
+
+
 ----
 
 NOMIS [bulk Census 2021 download page](https://www.nomisweb.co.uk/sources/census_2021_bulk)
 
 
 ::: center
-![](miscimages/Screenshot%20from%202025-06-12%2011-48-14.png){width="200px"}
+![](quarto_docs/images/){width="200px"}
 :::
 
 

@@ -1,0 +1,17 @@
+{
+  "hash": "83d7ff007bfdfb93c941408643851791",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Pipeline\"\nformat: docx\neditor: visual\n---\n\n\n::: {.cell}\n\n:::\n\n\n## Introduction\n\nWe'll look at 3 examples of piping data through from web to this output. Starting with...\n\n## Extracting from an Excel file on a website: productivity data example\n\nWe can copy the URL for the Excel sheet from the web page...\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# Copy the URL for the Excel sheet from the ONS website\nurl <- 'https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions/current/labourproductivityitls1.xlsx'\n\ntemp_path <- tempfile(fileext=\".xlsx\")\ndownload.file(url, temp_path, mode=\"wb\")\n\n# Or keep a local version in case it changes later...\n# download.file(\n#   url,\n#   paste0('data_downloads/ONS_outputperhourdata-',format(Sys.Date(),'%b-%Y'),'.xlsx'),\n#   mode=\"wb\")\n\n# Read directly from a specific sheet and range of cells from the downloaded file\n# \"Table A1: Current Price (smoothed) GVA (B) per hour worked indices; ITL2 and ITL3 subregions, 2004 - 2023\"\ncp.indices <- readxl::read_excel(path = temp_path,range = \"A1!A5:W247\")\n\n# RESHAPE\n# Get just ITL3 level and pivot years into their own column\ncp.indices = cp.indices %>%\n  filter(ITL_level == 'ITL3') %>% \n  pivot_longer(Index_2004:Index_2023, names_to = 'year', values_to = 'index_value') %>% #get most recent year\n  mutate(\n    year = substr(year,7,10),\n    year = as.numeric(year)\n  ) %>% \n  select(-ITL_level)\n\n\ncorecities = readRDS(gzcon(url('https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/data/corecitiesvector_itl3_2025.rds')))\n\n# Check match...\n# table(corecities %in% cp.indices$Region_name)\n\n# Plot!\nggplot(\n    cp.indices %>% filter(Region_name %in% corecities),\n    aes(x = year, y = index_value, colour = fct_reorder(Region_name,index_value,.desc = T))\n    ) +\n  geom_line() +\n  geom_hline(yintercept = 100) +\n  scale_color_brewer(palette = 'Paired') +\n  theme(legend.title=element_blank()) +\n  ylab('Output per hour: 100 = UK av')\n```\n\n::: {.cell-output-display}\n![](pipeline_files/figure-docx/excel-1.png)\n:::\n:::\n\n",
+    "supporting": [
+      "pipeline_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": null,
+    "postProcess": false
+  }
+}

@@ -1,0 +1,57 @@
+# Script to get NOMIS data via NOMISR package
+# And then save for use in Quarto
+
+# See https://docs.evanodell.com/nomisr/articles/introduction.html
+# For NOMISR essentials
+
+#Load some functions (and install some packages if not present)
+source('https://bit.ly/pipelinesetup')
+
+library(tidyverse)
+library(nomisr)
+
+# Get info on all available datasets
+nomisinfo = nomis_data_info() %>% 
+  select(id, description.value, name.value)
+
+# Get metadata for the BRES data, having found the code
+a <- nomis_get_metadata(id = "NM_189_1")
+
+#Pick on some of those (some of which don't seem to be working.)
+#Note, MEASURE in the actual downloaded data is "MEASURE_NAME" column...
+nomis_get_metadata(id = "NM_189_1", concept = "MEASURE")
+nomis_get_metadata(id = "NM_189_1", concept = "MEASURES")
+nomis_get_metadata(id = "NM_189_1", concept = "EMPLOYMENT_STATUS")
+geogz = nomis_get_metadata(id = "NM_189_1", concept = "GEOGRAPHY", type = "type")
+
+print(geogz, n = 60)
+
+# USE LOCAL AUTHORITIES AND GET ALL TIMEPOINTS
+# ITL3 2021 zones in the BRES data only have 2022-2024
+# "TYPE424 local authorities: district / unitary (as of April 2023)"
+# Belfast won't be there cos BRES is GB but otherwise good
+placeid <- nomis_get_metadata(id = "NM_189_1", concept = "geography", type = "TYPE424") %>% 
+  filter(label.en %in% c(corecities,'Cardiff','Newcastle upon Tyne')) %>% select(id) %>% pull
+
+# GET THE DATA!
+# Check timings
+x = Sys.time()
+
+bres <- nomis_get_data(id = "NM_189_1",  geography = placeid,
+                       # time = "latest",#Can use to get specific timepoint. If left out, we'll get em all
+                       # MEASURE = 1,#Count of jobs
+                       MEASURE = 2,#'Industry percentage'
+                       MEASURES = 20100,#Just gives value (of percent) - redundant but lowers data download
+                       EMPLOYMENT_STATUS = 2,#Full time jobs
+                       select = c('DATE','GEOGRAPHY_NAME','INDUSTRY_NAME','INDUSTRY_TYPE','OBS_VALUE')
+)
+
+Sys.time() - x
+
+# That takes 25-30 seconds in posit's R
+# No fun if you're trying to check changes - don't want to run that every time
+# Get the data in a different script and store somewhere the quarto doc can reload easily
+
+# Save for use in quarto
+# The RDS format is quick and compact
+saveRDS(bres,'bres_nomisdatasave.rds')
