@@ -329,9 +329,12 @@ occ = read_csv(unzip(temp_path, files = filenames$Name[5]))
 
 colnames(occ)               
                
+# Get lookup to add geog names in there
+utla_lookup = read_csv('data/Ward_to_PCON_to_LAD_to_UTLA_December_2023_Lookup_in_the_UK.csv') %>% 
+  select(UTLA23CD,UTLA23NM) %>% 
+  distinct()
 
-
-
+table(occ$`geography code` %in% utla_lookup$UTLA23CD)
 
 
 
