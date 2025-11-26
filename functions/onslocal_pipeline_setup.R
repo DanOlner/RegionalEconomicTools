@@ -13,12 +13,31 @@ if(!require(pryr)){
   install.packages("pryr")
 }
 
-if(!require(devtools)){
-  install.packages('devtools')
+# if(!require(devtools)){
+#   install.packages('devtools')
+# }
+
+# These next two are prerequisites for NOMISR installing from tar file
+# (along with tidyverse)
+if(!require(rsdmx)){
+  install.packages('rsdmx')
 }
 
+if(!require(snakecase)){
+  install.packages('snakecase')
+}
+
+
 # Then we can get NOMISR
-devtools::install_github("ropensci/nomisr")
+# NOT using devtools - can git github API limits
+# devtools::install_github("ropensci/nomisr")
+
+# Instead, use a copy of the latest tar
+install.packages(
+  "https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/resources/nomisr-0.4.7.tar",
+  repos = NULL,
+  type = "source"
+)
 
 message('Packages installed. Time taken:')
 
