@@ -9,6 +9,10 @@ if(!require(tidyverse)){
   install.packages("tidyverse")
 }
 
+if(!require(pryr)){
+  install.packages("pryr")
+}
+
 if(!require(devtools)){
   install.packages('devtools')
 }
