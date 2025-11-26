@@ -208,9 +208,15 @@
 <li>Just watch the screencast, let it wash over you and then come back to the materials in your own time. (These slides as well as ONS recording.)</li>
 <li>Run the R code yourself as we go. <strong>If you’re trying #2 - you’ll need a copy of these slides open.</strong> You’ll have got the link via email - it’s also in the chat, or just type <code>bit.ly/rpipelines</code> into your browser address bar.</li>
 </ol>
+</section>
+<section class="slide level2">
+
 <ul>
-<li>If the slide link isn’t working for any reason, you’ll also have been sent a Word doc with the same material in</li>
+<li>Navigate the slides with the up/down or left/right keyboard arrows.</li>
+<li>Each slide is numbered - I’ll say where we’re at as we progress.</li>
+<li>Note the <strong>three-bar button, bottom left</strong> - that lets you see the <strong>table of contents</strong></li>
 </ul>
+<p>One more chance to open your own slide copy! Get them at <code>bit.ly/rpipelines</code>.</p>
 </section>
 <section>
 <section id="getting-set-up-using-r-online-if-you-havent-got-r-yet-and-want-to" class="title-slide slide level1 center">
@@ -258,7 +264,7 @@
 <h2>The plan</h2>
 <ul>
 <li>We’ll be building a <strong>simple pipeline</strong>: running through <strong>three examples</strong> of getting data from the web, processing it, visualising it and outputting it into a little Word report.</li>
-<li>The system used for output is called <a href="https://quarto.org">Quarto</a>: it can also make PDFs, online reports, websites, blogs, and slides like the ones you’re looking at. Follow that link to find out more.</li>
+<li><strong>The system we’ll use for output is called <a href="https://quarto.org">Quarto</a></strong>: it can also make PDFs, online reports, websites, blogs, and slides like <a href="https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/R_regecon_pipelines_2025_revealjs.qmd" target="_blank">the ones you’re looking at</a>. The Quarto link has loads of info.</li>
 <li>We’re <strong>not</strong> doing any web-hosted output here: we could do a future session on integrating github into your workflow, but that’s a bit much for today.</li>
 </ul>
 </section>
@@ -363,8 +369,8 @@
 <li>I’ve written a <a href="https://y-pern.org.uk/blog/prototyping-open-econ-tools/" target="_blank">blog post</a> on the rough plan, if of interest.</li>
 </ul>
 </section>
-<section id="because-this-is-just-a-taster-session" class="slide level2">
-<h2>Because this is just a taster session…</h2>
+<section id="sorry-if-things-go-wrong" class="slide level2">
+<h2>Sorry if things go wrong!</h2>
 <ul>
 <li>This is <strong>not a full training workshop</strong>. Whenever we’re learning new coding methods, <strong>things always go wrong, guaranteed</strong>. It’s all part of the fun.</li>
 <li>If in a workshop, we can take time to fix those problems. <strong>Sorry, we won’t have capacity for that today</strong>.</li>
@@ -393,22 +399,6 @@
 <li>Given you’ll also have your <strong>own</strong> RStudio instance open, I’m aware this could be tricky!</li>
 <li>So I’ll <strong>try to keep flitting about to a minimum</strong>: we’ll work in RStudio in big blocks, talking through the code using <strong>#codecomments</strong> to guide us.</li>
 </ul>
-</section>
-<section class="slide level2">
-
-<ul>
-<li>Navigate the slides with the up/down or left/right keyboard arrows.</li>
-<li>You can move between those two tabs, and also come back to Teams to see how I’m doing stuff.</li>
-<li>Each slide is numbered - I’ll say where we’re at as we progress.</li>
-</ul>
-</section>
-<section id="one-last-thing" class="slide level2">
-<h2>One last thing…</h2>
-<ul>
-<li>Once you have your own copy of the slides open, note the <strong>three-bar button, bottom left</strong>.</li>
-<li>That lets you see the table of contents</li>
-</ul>
-<p>Also last chance to open own slide copy! Get them at <code>bit.ly/rpipelines</code>.</p>
 </section></section>
 <section>
 <section id="finally-some-coding" class="title-slide slide level1 center">
@@ -420,7 +410,7 @@
 <p>Assuming the setup code has now completed happily…</p>
 <ul>
 <li>First job: we’re going to <strong>open the document that we’ll use to draft our output</strong>.</li>
-<li>This is a ‘quarto’ text file with the extension ‘qmd’</li>
+<li>This is a ‘<strong>Quarto</strong>’ text file with the extension ‘qmd’</li>
 </ul>
 </section>
 <section class="slide level2">
@@ -488,6 +478,11 @@
 <div class="center">
 <p><img data-src="quarto_docs/images/exportbutton.png" width="300"></p>
 </div>
+</section></section>
+<section>
+<section id="lets-start-populating-the-quarto-doc" class="title-slide slide level1 center">
+<h1>Let’s start populating the Quarto doc</h1>
+
 </section>
 <section class="slide level2">
 
@@ -588,77 +583,79 @@
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Extracting from an Excel file on a website: productivity data example</span></span>
 <span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Copy the URL for the Excel sheet from the ONS website</span></span>
-<span id="cb8-4"><a aria-hidden="true" tabindex="-1"></a><span class="co"># This is just setting a string named 'url'</span></span>
-<span id="cb8-5"><a aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">'https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions/current/labourproductivityitls1.xlsx'</span></span>
-<span id="cb8-6"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a aria-hidden="true" tabindex="-1"></a><span class="co"># We then create a TEMPORARY FILE...</span></span>
-<span id="cb8-8"><a aria-hidden="true" tabindex="-1"></a>temp_path <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext=</span><span class="st">".xlsx"</span>)</span>
-<span id="cb8-9"><a aria-hidden="true" tabindex="-1"></a><span class="co"># And use that file path to DOWNLOAD A TEMP COPY OF THE EXCEL TO USE</span></span>
-<span id="cb8-10"><a aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(url, temp_path, <span class="at">mode=</span><span class="st">"wb"</span>)</span>
-<span id="cb8-11"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-12"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Or if you want to keep a local, month-dated version in case it changes later...</span></span>
-<span id="cb8-13"><a aria-hidden="true" tabindex="-1"></a><span class="co"># download.file(</span></span>
-<span id="cb8-14"><a aria-hidden="true" tabindex="-1"></a><span class="co">#   url,</span></span>
-<span id="cb8-15"><a aria-hidden="true" tabindex="-1"></a><span class="co">#   paste0('ONS_outputperhourdata-',format(Sys.Date(),'%b-%Y'),'.xlsx'),</span></span>
-<span id="cb8-16"><a aria-hidden="true" tabindex="-1"></a><span class="co">#   mode="wb")</span></span>
-<span id="cb8-17"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-18"><a aria-hidden="true" tabindex="-1"></a><span class="co"># READ FROM THE EXCEL SHEET</span></span>
-<span id="cb8-19"><a aria-hidden="true" tabindex="-1"></a><span class="co"># This goes straight into a dataframe</span></span>
-<span id="cb8-20"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Read directly from a specific sheet and range of cells from the downloaded file</span></span>
-<span id="cb8-21"><a aria-hidden="true" tabindex="-1"></a><span class="co"># "Table A1: Current Price (smoothed) GVA (B) per hour worked indices; ITL2 and ITL3 subregions, 2004 - 2023"</span></span>
-<span id="cb8-22"><a aria-hidden="true" tabindex="-1"></a>cp.indices <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="at">path =</span> temp_path,<span class="at">range =</span> <span class="st">"A1!A5:W247"</span>)</span>
-<span id="cb8-23"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-24"><a aria-hidden="true" tabindex="-1"></a><span class="co"># TAKE A LOOK AT THAT DATA (CLICK ON ITS NAME IN THE ENVIRONMENT PANEL)</span></span>
-<span id="cb8-25"><a aria-hidden="true" tabindex="-1"></a><span class="co"># It's got each year IN ITS OWN COLUMN. Not what we want.</span></span>
-<span id="cb8-26"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-27"><a aria-hidden="true" tabindex="-1"></a><span class="co"># So we RESHAPE</span></span>
-<span id="cb8-28"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Get just ITL3 level and pivot years into their own column</span></span>
-<span id="cb8-29"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-30"><a aria-hidden="true" tabindex="-1"></a><span class="co"># An aside: </span></span>
-<span id="cb8-31"><a aria-hidden="true" tabindex="-1"></a><span class="co"># This symbol - %&gt;% </span></span>
-<span id="cb8-32"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Is a PIPING OPERATOR</span></span>
-<span id="cb8-33"><a aria-hidden="true" tabindex="-1"></a><span class="co"># It lets us pipe one operation to the next</span></span>
-<span id="cb8-34"><a aria-hidden="true" tabindex="-1"></a><span class="co"># So we can clearly see each step taken</span></span>
-<span id="cb8-35"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Let's number those steps here</span></span>
-<span id="cb8-36"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-37"><a aria-hidden="true" tabindex="-1"></a><span class="co">#1. Pipe the data into a filter</span></span>
-<span id="cb8-38"><a aria-hidden="true" tabindex="-1"></a><span class="co">#2. filter down to just ITL3 zones</span></span>
-<span id="cb8-39"><a aria-hidden="true" tabindex="-1"></a><span class="co">#3. pivot long so years are in their own column</span></span>
-<span id="cb8-40"><a aria-hidden="true" tabindex="-1"></a><span class="co">#4. Convert year to a sensible format</span></span>
-<span id="cb8-41"><a aria-hidden="true" tabindex="-1"></a><span class="co">#5. Remove the ITL column, we don't need that now</span></span>
-<span id="cb8-42"><a aria-hidden="true" tabindex="-1"></a><span class="co"># And back on the first line, overwrite the original dataframe</span></span>
-<span id="cb8-43"><a aria-hidden="true" tabindex="-1"></a>cp.indices <span class="ot">=</span> cp.indices <span class="sc">%&gt;%</span> </span>
-<span id="cb8-44"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ITL_level <span class="sc">==</span> <span class="st">'ITL3'</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb8-45"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(Index_2004<span class="sc">:</span>Index_2023, <span class="at">names_to =</span> <span class="st">'year'</span>, <span class="at">values_to =</span> <span class="st">'index_value'</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb8-46"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb8-47"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">year =</span> <span class="fu">substr</span>(year,<span class="dv">7</span>,<span class="dv">10</span>),</span>
-<span id="cb8-48"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">year =</span> <span class="fu">as.numeric</span>(year)</span>
-<span id="cb8-49"><a aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb8-50"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>ITL_level)</span>
-<span id="cb8-51"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-52"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-53"><a aria-hidden="true" tabindex="-1"></a><span class="co"># We're going to plot JUST THE UK CORE CITIES</span></span>
-<span id="cb8-54"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Here's a list of those I made earlier...</span></span>
-<span id="cb8-55"><a aria-hidden="true" tabindex="-1"></a>corecities <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="fu">gzcon</span>(<span class="fu">url</span>(<span class="st">'https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/data/corecitiesvector_itl3_2025.rds'</span>)))</span>
-<span id="cb8-56"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-57"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Check match...</span></span>
-<span id="cb8-58"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Note, this is commented out (so it doesn't output in our final doc)</span></span>
-<span id="cb8-59"><a aria-hidden="true" tabindex="-1"></a><span class="co"># BUT we can still run it to check by highlighting the code</span></span>
-<span id="cb8-60"><a aria-hidden="true" tabindex="-1"></a><span class="co"># table(corecities %in% cp.indices$Region_name)</span></span>
-<span id="cb8-61"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-62"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Plot!</span></span>
-<span id="cb8-63"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Filter down to the core cities</span></span>
-<span id="cb8-64"><a aria-hidden="true" tabindex="-1"></a><span class="co"># And reorder the places by which has the highest average index over all years</span></span>
-<span id="cb8-65"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
-<span id="cb8-66"><a aria-hidden="true" tabindex="-1"></a>    cp.indices <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Region_name <span class="sc">%in%</span> corecities),</span>
-<span id="cb8-67"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> index_value, <span class="at">colour =</span> <span class="fu">fct_reorder</span>(Region_name,index_value,<span class="at">.desc =</span> T))</span>
-<span id="cb8-68"><a aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb8-69"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb8-70"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">100</span>) <span class="sc">+</span></span>
-<span id="cb8-71"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">'Paired'</span>) <span class="sc">+</span></span>
-<span id="cb8-72"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title=</span><span class="fu">element_blank</span>()) <span class="sc">+</span></span>
-<span id="cb8-73"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">'Output per hour: 100 = UK av'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-3"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Copy the URL for the Excel sheet from the ONS website for subregional productivity data</span></span>
+<span id="cb8-4"><a aria-hidden="true" tabindex="-1"></a><span class="co"># That's here:</span></span>
+<span id="cb8-5"><a aria-hidden="true" tabindex="-1"></a><span class="co"># https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions</span></span>
+<span id="cb8-6"><a aria-hidden="true" tabindex="-1"></a><span class="co"># This is just setting a string named 'url'</span></span>
+<span id="cb8-7"><a aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">'https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions/current/labourproductivityitls1.xlsx'</span></span>
+<span id="cb8-8"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a aria-hidden="true" tabindex="-1"></a><span class="co"># We then create a TEMPORARY FILE...</span></span>
+<span id="cb8-10"><a aria-hidden="true" tabindex="-1"></a>temp_path <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext=</span><span class="st">".xlsx"</span>)</span>
+<span id="cb8-11"><a aria-hidden="true" tabindex="-1"></a><span class="co"># And use that file path to DOWNLOAD A TEMP COPY OF THE EXCEL TO USE</span></span>
+<span id="cb8-12"><a aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(url, temp_path, <span class="at">mode=</span><span class="st">"wb"</span>)</span>
+<span id="cb8-13"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Or if you want to keep a local, month-dated version in case it changes later...</span></span>
+<span id="cb8-15"><a aria-hidden="true" tabindex="-1"></a><span class="co"># download.file(</span></span>
+<span id="cb8-16"><a aria-hidden="true" tabindex="-1"></a><span class="co">#   url,</span></span>
+<span id="cb8-17"><a aria-hidden="true" tabindex="-1"></a><span class="co">#   paste0('ONS_outputperhourdata-',format(Sys.Date(),'%b-%Y'),'.xlsx'),</span></span>
+<span id="cb8-18"><a aria-hidden="true" tabindex="-1"></a><span class="co">#   mode="wb")</span></span>
+<span id="cb8-19"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a aria-hidden="true" tabindex="-1"></a><span class="co"># READ FROM THE EXCEL SHEET</span></span>
+<span id="cb8-21"><a aria-hidden="true" tabindex="-1"></a><span class="co"># This goes straight into a dataframe</span></span>
+<span id="cb8-22"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Read directly from a specific sheet and range of cells from the downloaded file</span></span>
+<span id="cb8-23"><a aria-hidden="true" tabindex="-1"></a><span class="co"># "Table A1: Current Price (smoothed) GVA (B) per hour worked indices; ITL2 and ITL3 subregions, 2004 - 2023"</span></span>
+<span id="cb8-24"><a aria-hidden="true" tabindex="-1"></a>cp.indices <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="at">path =</span> temp_path,<span class="at">range =</span> <span class="st">"A1!A5:W247"</span>)</span>
+<span id="cb8-25"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-26"><a aria-hidden="true" tabindex="-1"></a><span class="co"># TAKE A LOOK AT THAT DATA (CLICK ON ITS NAME IN THE ENVIRONMENT PANEL)</span></span>
+<span id="cb8-27"><a aria-hidden="true" tabindex="-1"></a><span class="co"># It's got each year IN ITS OWN COLUMN. Not what we want.</span></span>
+<span id="cb8-28"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-29"><a aria-hidden="true" tabindex="-1"></a><span class="co"># So we RESHAPE</span></span>
+<span id="cb8-30"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Get just ITL3 level and pivot years into their own column</span></span>
+<span id="cb8-31"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-32"><a aria-hidden="true" tabindex="-1"></a><span class="co"># An aside: </span></span>
+<span id="cb8-33"><a aria-hidden="true" tabindex="-1"></a><span class="co"># This symbol - %&gt;% </span></span>
+<span id="cb8-34"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Is a PIPING OPERATOR</span></span>
+<span id="cb8-35"><a aria-hidden="true" tabindex="-1"></a><span class="co"># It lets us pipe one operation to the next</span></span>
+<span id="cb8-36"><a aria-hidden="true" tabindex="-1"></a><span class="co"># So we can clearly see each step taken</span></span>
+<span id="cb8-37"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Let's number those steps here</span></span>
+<span id="cb8-38"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-39"><a aria-hidden="true" tabindex="-1"></a><span class="co">#1. Pipe the data into a filter</span></span>
+<span id="cb8-40"><a aria-hidden="true" tabindex="-1"></a><span class="co">#2. filter down to just ITL3 zones</span></span>
+<span id="cb8-41"><a aria-hidden="true" tabindex="-1"></a><span class="co">#3. pivot long so years are in their own column</span></span>
+<span id="cb8-42"><a aria-hidden="true" tabindex="-1"></a><span class="co">#4. Convert year to a sensible format</span></span>
+<span id="cb8-43"><a aria-hidden="true" tabindex="-1"></a><span class="co">#5. Remove the ITL column, we don't need that now</span></span>
+<span id="cb8-44"><a aria-hidden="true" tabindex="-1"></a><span class="co"># And back on the first line, overwrite the original dataframe</span></span>
+<span id="cb8-45"><a aria-hidden="true" tabindex="-1"></a>cp.indices <span class="ot">=</span> cp.indices <span class="sc">%&gt;%</span> </span>
+<span id="cb8-46"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ITL_level <span class="sc">==</span> <span class="st">'ITL3'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-47"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(Index_2004<span class="sc">:</span>Index_2023, <span class="at">names_to =</span> <span class="st">'year'</span>, <span class="at">values_to =</span> <span class="st">'index_value'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-48"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb8-49"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">year =</span> <span class="fu">substr</span>(year,<span class="dv">7</span>,<span class="dv">10</span>),</span>
+<span id="cb8-50"><a aria-hidden="true" tabindex="-1"></a>    <span class="at">year =</span> <span class="fu">as.numeric</span>(year)</span>
+<span id="cb8-51"><a aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-52"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>ITL_level)</span>
+<span id="cb8-53"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-54"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-55"><a aria-hidden="true" tabindex="-1"></a><span class="co"># We're going to plot JUST THE UK CORE CITIES</span></span>
+<span id="cb8-56"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Here's a list of those I made earlier...</span></span>
+<span id="cb8-57"><a aria-hidden="true" tabindex="-1"></a>corecities <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="fu">gzcon</span>(<span class="fu">url</span>(<span class="st">'https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/data/corecitiesvector_itl3_2025.rds'</span>)))</span>
+<span id="cb8-58"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-59"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Check match...</span></span>
+<span id="cb8-60"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Note, this is commented out (so it doesn't output in our final doc)</span></span>
+<span id="cb8-61"><a aria-hidden="true" tabindex="-1"></a><span class="co"># BUT we can still run it to check by highlighting the code</span></span>
+<span id="cb8-62"><a aria-hidden="true" tabindex="-1"></a><span class="co"># table(corecities %in% cp.indices$Region_name)</span></span>
+<span id="cb8-63"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-64"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Plot!</span></span>
+<span id="cb8-65"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Filter down to the core cities</span></span>
+<span id="cb8-66"><a aria-hidden="true" tabindex="-1"></a><span class="co"># And reorder the places by which has the highest average index over all years</span></span>
+<span id="cb8-67"><a aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb8-68"><a aria-hidden="true" tabindex="-1"></a>    cp.indices <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Region_name <span class="sc">%in%</span> corecities),</span>
+<span id="cb8-69"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> index_value, <span class="at">colour =</span> <span class="fu">fct_reorder</span>(Region_name,index_value,<span class="at">.desc =</span> T))</span>
+<span id="cb8-70"><a aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb8-71"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb8-72"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">100</span>) <span class="sc">+</span></span>
+<span id="cb8-73"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">'Paired'</span>) <span class="sc">+</span></span>
+<span id="cb8-74"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title=</span><span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb8-75"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">'Output per hour: 100 = UK av'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1188,17 +1185,19 @@
 </div>
 </div>
 </div>
-</section>
-<section class="slide level2">
+</section></section>
+<section>
+<section id="ok-were-done" class="title-slide slide level1 center">
+<h1>OK, we’re done</h1>
 
 </section>
-<section class="slide level2">
-
-<p>UTLAs LTLAs</p>
-<p>Census 2021 <a href="https://www.ons.gov.uk/census/census2021dictionary/areatypedefinitions">geography definitions</a> upper vs lower tier local authorities</p>
-</section>
-<section class="slide level2">
-
+<section id="hopefully-some-of-that-worked-or-made-sense" class="slide level2">
+<h2>Hopefully some of that worked or made sense</h2>
+<ul>
+<li>If the final output didn’t work, for some reason, there’s a <a href="https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/resources/pipeline_quarto_output.docx">version to download here</a> to have a look at what it <em>should in theory</em> have done!</li>
+<li>Would a workshop on any of this stuff might be of interest?</li>
+<li>The next logical step is something on using github as the repository for open output…</li>
+</ul>
 
 
 </section></section>

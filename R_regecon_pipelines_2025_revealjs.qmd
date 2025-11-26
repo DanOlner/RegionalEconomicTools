@@ -26,7 +26,14 @@ knitr::opts_chunk$set(fig.height = 8, fig.width = 10, echo = TRUE, warning = F, 
 1.  Just watch the screencast, let it wash over you and then come back to the materials in your own time. (These slides as well as ONS recording.)
 2.  Run the R code yourself as we go. **If you're trying #2 - you'll need a copy of these slides open.** You'll have got the link via email - it's also in the chat, or just type `bit.ly/rpipelines` into your browser address bar.
 
--   If the slide link isn't working for any reason, you'll also have been sent a Word doc with the same material in
+----
+
+-   Navigate the slides with the up/down or left/right keyboard arrows.
+-   Each slide is numbered - I'll say where we're at as we progress.
+-   Note the **three-bar button, bottom left** - that lets you see the **table of contents**
+
+One more chance to open your own slide copy! Get them at `bit.ly/rpipelines`.
+
 
 
 
@@ -71,7 +78,7 @@ Let me talk through some other bits:
 ## The plan
 
 -   We'll be building a **simple pipeline**: running through **three examples** of getting data from the web, processing it, visualising it and outputting it into a little Word report.
--   The system used for output is called [Quarto](https://quarto.org): it can also make PDFs, online reports, websites, blogs, and slides like the ones you're looking at. Follow that link to find out more.
+-   **The system we'll use for output is called [Quarto](https://quarto.org)**: it can also make PDFs, online reports, websites, blogs, and slides like [the ones you're looking at](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/R_regecon_pipelines_2025_revealjs.qmd){target="_blank"}. The Quarto link has loads of info.
 -   We're **not** doing any web-hosted output here: we could do a future session on integrating github into your workflow, but that's a bit much for today.
 
 
@@ -165,7 +172,7 @@ source('https://bit.ly/pipelinesetup')
 
 ------------------------------------------------------------------------
 
-## Because this is just a taster session...
+## Sorry if things go wrong!
 
 -   This is **not a full training workshop**. Whenever we're learning new coding methods, **things always go wrong, guaranteed**. It's all part of the fun.
 -   If in a workshop, we can take time to fix those problems. **Sorry, we won't have capacity for that today**.
@@ -188,20 +195,6 @@ source('https://bit.ly/pipelinesetup')
 -   Given you'll also have your **own** RStudio instance open, I'm aware this could be tricky! 
 -   So I'll **try to keep flitting about to a minimum**: we'll work in RStudio in big blocks, talking through the code using **#codecomments** to guide us.
 
-----
-
--   Navigate the slides with the up/down or left/right keyboard arrows.
--   You can move between those two tabs, and also come back to Teams to see how I'm doing stuff.
--   Each slide is numbered - I'll say where we're at as we progress.
-
-------------------------------------------------------------------------
-
-## One last thing...
-
--   Once you have your own copy of the slides open, note the **three-bar button, bottom left**.
--   That lets you see the table of contents
-
-Also last chance to open own slide copy! Get them at `bit.ly/rpipelines`.
 
 
 
@@ -216,7 +209,7 @@ Also last chance to open own slide copy! Get them at `bit.ly/rpipelines`.
 Assuming the setup code has now completed happily...
 
 -   First job: we're going to **open the document that we'll use to draft our output**.
--   This is a 'quarto' text file with the extension 'qmd'
+-   This is a '**Quarto**' text file with the extension 'qmd'
 
 
 ------------------------------------------------------------------------
@@ -269,6 +262,8 @@ Assuming the setup code has now completed happily...
 ![](quarto_docs/images/exportbutton.png){width="300px"}
 :::
 
+
+# Let's start populating the Quarto doc
 
 ----
 
@@ -359,7 +354,9 @@ Here's the code to copy into our new R code block:
 ```{r eval=F}
 # 1. Extracting from an Excel file on a website: productivity data example
 
-# Copy the URL for the Excel sheet from the ONS website
+# Copy the URL for the Excel sheet from the ONS website for subregional productivity data
+# That's here:
+# https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions
 # This is just setting a string named 'url'
 url <- 'https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions/current/labourproductivityitls1.xlsx'
 
@@ -954,20 +951,14 @@ ggplot() +
 ::::
 
 
-
-
-----
-
+# OK, we're done
 
 ----
 
-UTLAs LTLAs
+## Hopefully some of that worked or made sense
 
-Census 2021 [geography definitions](https://www.ons.gov.uk/census/census2021dictionary/areatypedefinitions) upper vs lower tier local authorities
-
-
-----
-
-
+-   If the final output didn't work, for some reason, there's a [version to download here](https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/resources/pipeline_quarto_output.docx) to have a look at what it *should in theory* have done!
+-   Would a workshop on any of this stuff might be of interest?
+-   The next logical step is something on using github as the repository for open output...
 
 

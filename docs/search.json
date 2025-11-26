@@ -3151,7 +3151,7 @@
     "href": "R_regecon_pipelines_2025_revealjs.html#before-we-start",
     "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
     "section": "Before we start…",
-    "text": "Before we start…\n\nYou’ve got two ways to engage with this session:\n\n\nJust watch the screencast, let it wash over you and then come back to the materials in your own time. (These slides as well as ONS recording.)\nRun the R code yourself as we go. If you’re trying #2 - you’ll need a copy of these slides open. You’ll have got the link via email - it’s also in the chat, or just type bit.ly/rpipelines into your browser address bar.\n\n\nIf the slide link isn’t working for any reason, you’ll also have been sent a Word doc with the same material in"
+    "text": "Before we start…\n\nYou’ve got two ways to engage with this session:\n\n\nJust watch the screencast, let it wash over you and then come back to the materials in your own time. (These slides as well as ONS recording.)\nRun the R code yourself as we go. If you’re trying #2 - you’ll need a copy of these slides open. You’ll have got the link via email - it’s also in the chat, or just type bit.ly/rpipelines into your browser address bar."
   },
   {
     "objectID": "R_regecon_pipelines_2025_revealjs.html#not-got-r-yet",
@@ -3186,7 +3186,7 @@
     "href": "R_regecon_pipelines_2025_revealjs.html#the-plan",
     "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
     "section": "The plan",
-    "text": "The plan\n\nWe’ll be building a simple pipeline: running through three examples of getting data from the web, processing it, visualising it and outputting it into a little Word report.\nThe system used for output is called Quarto: it can also make PDFs, online reports, websites, blogs, and slides like the ones you’re looking at. Follow that link to find out more.\nWe’re not doing any web-hosted output here: we could do a future session on integrating github into your workflow, but that’s a bit much for today."
+    "text": "The plan\n\nWe’ll be building a simple pipeline: running through three examples of getting data from the web, processing it, visualising it and outputting it into a little Word report.\nThe system we’ll use for output is called Quarto: it can also make PDFs, online reports, websites, blogs, and slides like the ones you’re looking at. The Quarto link has loads of info.\nWe’re not doing any web-hosted output here: we could do a future session on integrating github into your workflow, but that’s a bit much for today."
   },
   {
     "objectID": "R_regecon_pipelines_2025_revealjs.html#one-last-thing",
@@ -3242,7 +3242,7 @@
     "href": "R_regecon_pipelines_2025_revealjs.html#yep",
     "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
     "section": "Yep!",
-    "text": "Yep!\nAssuming the setup code has now completed happily…\n\nFirst job: we’re going to open the document that we’ll use to draft our output.\nThis is a ‘quarto’ text file with the extension ‘qmd’"
+    "text": "Yep!\nAssuming the setup code has now completed happily…\n\nFirst job: we’re going to open the document that we’ll use to draft our output.\nThis is a ‘Quarto’ text file with the extension ‘qmd’"
   },
   {
     "objectID": "R_regecon_pipelines_2025_revealjs.html#the-rendered-document-should-now-be-in-your-rstudio-projects-files",
@@ -3313,5 +3313,33 @@
     "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
     "section": "Here’s the NOMIS webpage we’re using",
     "text": "Here’s the NOMIS webpage we’re using\n\nIt’s the NOMIS bulk Census 2021 download page - if you open that, it’s got a range of zip files for different variables.\nLooking on that site, we can see under ‘work and travel’ that occupation data has the code TS063…\nLet’s grab the code and paste it into its own section…"
+  },
+  {
+    "objectID": "R_regecon_pipelines_2025_revealjs.html#hopefully-some-of-that-worked-or-made-sense",
+    "href": "R_regecon_pipelines_2025_revealjs.html#hopefully-some-of-that-worked-or-made-sense",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "section": "Hopefully some of that worked or made sense",
+    "text": "Hopefully some of that worked or made sense\n\nIf the final output didn’t work, for some reason, there’s a version to download here to have a look at what it should in theory have done!\nWould a workshop on any of this stuff might be of interest?\nThe next logical step is something on using github as the repository for open output…"
+  },
+  {
+    "objectID": "R_regecon_pipelines_2025_revealjs.html#sorry-we-cant-support-during-this-session",
+    "href": "R_regecon_pipelines_2025_revealjs.html#sorry-we-cant-support-during-this-session",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "section": "Sorry we can’t support during this session",
+    "text": "Sorry we can’t support during this session\n\nThis is not a full training workshop. Whenever we’re learning new coding methods, things always go wrong, guaranteed. It’s all part of the fun.\nIf in a workshop, we can take time to fix those problems. Sorry, we won’t have capacity for that today.\nThe slides are designed to be step-by-step, and the session is being recorded by ONS - so you can work back through that in your own time.\nBut if you an actual supported workshop appeals, let me know: d.olner@sheffield.ac.uk"
+  },
+  {
+    "objectID": "R_regecon_pipelines_2025_revealjs.html#sorry-we-cant-support-with-coding-errors-during-this-session",
+    "href": "R_regecon_pipelines_2025_revealjs.html#sorry-we-cant-support-with-coding-errors-during-this-session",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "section": "Sorry we can’t support with coding errors during this session",
+    "text": "Sorry we can’t support with coding errors during this session\n\nThis is not a full training workshop. Whenever we’re learning new coding methods, things always go wrong, guaranteed. It’s all part of the fun.\nIf in a workshop, we can take time to fix those problems. Sorry, we won’t have capacity for that today.\nThe slides are designed to be step-by-step, and the session is being recorded by ONS - so you can work back through that in your own time.\nBut if you an actual supported workshop appeals, let me know: d.olner@sheffield.ac.uk"
+  },
+  {
+    "objectID": "R_regecon_pipelines_2025_revealjs.html#sorry-if-things-go-wrong",
+    "href": "R_regecon_pipelines_2025_revealjs.html#sorry-if-things-go-wrong",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "section": "Sorry if things go wrong!",
+    "text": "Sorry if things go wrong!\n\nThis is not a full training workshop. Whenever we’re learning new coding methods, things always go wrong, guaranteed. It’s all part of the fun.\nIf in a workshop, we can take time to fix those problems. Sorry, we won’t have capacity for that today.\nThe slides are designed to be step-by-step, and the session is being recorded by ONS - so you can work back through that in your own time.\nBut if you an actual supported workshop appeals, let me know: d.olner@sheffield.ac.uk"
   }
 ]
