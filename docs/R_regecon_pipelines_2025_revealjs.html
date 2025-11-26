@@ -740,82 +740,92 @@
 <span id="cb9-11"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb9-12"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nomisr)</span>
 <span id="cb9-13"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-14"><a aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 1: Get info on all available datasets</span></span>
-<span id="cb9-15"><a aria-hidden="true" tabindex="-1"></a>nomisinfo <span class="ot">=</span> <span class="fu">nomis_data_info</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb9-16"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, description.value, name.value)</span>
-<span id="cb9-17"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-18"><a aria-hidden="true" tabindex="-1"></a><span class="co"># LET'S LOOK INSIDE THAT DATASET</span></span>
-<span id="cb9-19"><a aria-hidden="true" tabindex="-1"></a><span class="co"># If we do that, we can search for the dataset code we want to use</span></span>
-<span id="cb9-20"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Let's search for 'employment' in RStudio...</span></span>
+<span id="cb9-14"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 1: Get info on all available datasets</span></span>
+<span id="cb9-16"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Check how long... 14 seconds on my last attempt</span></span>
+<span id="cb9-17"><a aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb9-18"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a aria-hidden="true" tabindex="-1"></a>nomisinfo <span class="ot">=</span> <span class="fu">nomis_data_info</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb9-20"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, description.value, name.value)</span>
 <span id="cb9-21"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-22"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Now we can get metadata for the BRES data, having found the code</span></span>
-<span id="cb9-23"><a aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">nomis_get_metadata</span>(<span class="at">id =</span> <span class="st">"NM_189_1"</span>)</span>
-<span id="cb9-24"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-25"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Pick on some of those for a closer look</span></span>
-<span id="cb9-26"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Note, MEASURE in the actual downloaded data is "MEASURE_NAME" column...</span></span>
+<span id="cb9-22"><a aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> x</span>
+<span id="cb9-23"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a aria-hidden="true" tabindex="-1"></a><span class="co"># If that's being a pain or too slow</span></span>
+<span id="cb9-25"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Press the red STOP!! button and load this Blue Peter version</span></span>
+<span id="cb9-26"><a aria-hidden="true" tabindex="-1"></a>nomisinfo <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="fu">gzcon</span>(<span class="fu">url</span>(<span class="st">'https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/bres_nomisdatasave.rds'</span>)))</span>
 <span id="cb9-27"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-28"><a aria-hidden="true" tabindex="-1"></a><span class="co"># We're going to use INDUSTRY PERCENTAGE</span></span>
-<span id="cb9-29"><a aria-hidden="true" tabindex="-1"></a><span class="co"># to look at what percent of resident workers are in different sectors</span></span>
-<span id="cb9-30"><a aria-hidden="true" tabindex="-1"></a><span class="co"># We'll use the code on the left</span></span>
-<span id="cb9-31"><a aria-hidden="true" tabindex="-1"></a><span class="fu">nomis_get_metadata</span>(<span class="at">id =</span> <span class="st">"NM_189_1"</span>, <span class="at">concept =</span> <span class="st">"MEASURE"</span>)</span>
-<span id="cb9-32"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-33"><a aria-hidden="true" tabindex="-1"></a><span class="co"># This one lists the employment type options we've got</span></span>
-<span id="cb9-34"><a aria-hidden="true" tabindex="-1"></a><span class="fu">nomis_get_metadata</span>(<span class="at">id =</span> <span class="st">"NM_189_1"</span>, <span class="at">concept =</span> <span class="st">"EMPLOYMENT_STATUS"</span>)</span>
-<span id="cb9-35"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-36"><a aria-hidden="true" tabindex="-1"></a><span class="co"># This one's especially useful - we need it to get the right geography code</span></span>
-<span id="cb9-37"><a aria-hidden="true" tabindex="-1"></a>geogz <span class="ot">=</span> <span class="fu">nomis_get_metadata</span>(<span class="at">id =</span> <span class="st">"NM_189_1"</span>, <span class="at">concept =</span> <span class="st">"GEOGRAPHY"</span>, <span class="at">type =</span> <span class="st">"type"</span>)</span>
-<span id="cb9-38"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-39"><a aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(geogz, <span class="at">n =</span> <span class="dv">60</span>)</span>
-<span id="cb9-40"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-41"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-42"><a aria-hidden="true" tabindex="-1"></a><span class="co"># From the metadata, we're going to pull out the geography codes</span></span>
-<span id="cb9-43"><a aria-hidden="true" tabindex="-1"></a><span class="co"># That we need to put into NOMISR</span></span>
-<span id="cb9-44"><a aria-hidden="true" tabindex="-1"></a><span class="co"># for JUST the core cities again</span></span>
-<span id="cb9-45"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Slightly different names / shapes in BRES, but mostly the same</span></span>
-<span id="cb9-46"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Again, here's one I made earlier...</span></span>
-<span id="cb9-47"><a aria-hidden="true" tabindex="-1"></a>corecities.bres <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="fu">gzcon</span>(<span class="fu">url</span>(<span class="st">'https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/data/corecities_bres.rds'</span>)))</span>
+<span id="cb9-28"><a aria-hidden="true" tabindex="-1"></a><span class="co"># LET'S LOOK INSIDE THAT DATASET</span></span>
+<span id="cb9-29"><a aria-hidden="true" tabindex="-1"></a><span class="co"># If we do that, we can search for the dataset code we want to use</span></span>
+<span id="cb9-30"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Let's search for 'employment' in RStudio...</span></span>
+<span id="cb9-31"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-32"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Now we can get metadata for the BRES data, having found the code</span></span>
+<span id="cb9-33"><a aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">nomis_get_metadata</span>(<span class="at">id =</span> <span class="st">"NM_189_1"</span>)</span>
+<span id="cb9-34"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-35"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Pick on some of those for a closer look</span></span>
+<span id="cb9-36"><a aria-hidden="true" tabindex="-1"></a><span class="co">#Note, MEASURE in the actual downloaded data is "MEASURE_NAME" column...</span></span>
+<span id="cb9-37"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-38"><a aria-hidden="true" tabindex="-1"></a><span class="co"># We're going to use INDUSTRY PERCENTAGE</span></span>
+<span id="cb9-39"><a aria-hidden="true" tabindex="-1"></a><span class="co"># to look at what percent of resident workers are in different sectors</span></span>
+<span id="cb9-40"><a aria-hidden="true" tabindex="-1"></a><span class="co"># We'll use the code on the left</span></span>
+<span id="cb9-41"><a aria-hidden="true" tabindex="-1"></a><span class="fu">nomis_get_metadata</span>(<span class="at">id =</span> <span class="st">"NM_189_1"</span>, <span class="at">concept =</span> <span class="st">"MEASURE"</span>)</span>
+<span id="cb9-42"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-43"><a aria-hidden="true" tabindex="-1"></a><span class="co"># This one lists the employment type options we've got</span></span>
+<span id="cb9-44"><a aria-hidden="true" tabindex="-1"></a><span class="fu">nomis_get_metadata</span>(<span class="at">id =</span> <span class="st">"NM_189_1"</span>, <span class="at">concept =</span> <span class="st">"EMPLOYMENT_STATUS"</span>)</span>
+<span id="cb9-45"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-46"><a aria-hidden="true" tabindex="-1"></a><span class="co"># This one's especially useful - we need it to get the right geography code</span></span>
+<span id="cb9-47"><a aria-hidden="true" tabindex="-1"></a>geogz <span class="ot">=</span> <span class="fu">nomis_get_metadata</span>(<span class="at">id =</span> <span class="st">"NM_189_1"</span>, <span class="at">concept =</span> <span class="st">"GEOGRAPHY"</span>, <span class="at">type =</span> <span class="st">"type"</span>)</span>
 <span id="cb9-48"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-49"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-50"><a aria-hidden="true" tabindex="-1"></a><span class="co"># USE LOCAL AUTHORITIES TO GET ALL TIMEPOINTS</span></span>
-<span id="cb9-51"><a aria-hidden="true" tabindex="-1"></a><span class="co"># ITL3 2021 zones in the BRES data only have 2022-2024</span></span>
-<span id="cb9-52"><a aria-hidden="true" tabindex="-1"></a><span class="co"># "TYPE424 local authorities: district / unitary (as of April 2023)"</span></span>
-<span id="cb9-53"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Belfast won't be there cos BRES is GB but otherwise good</span></span>
-<span id="cb9-54"><a aria-hidden="true" tabindex="-1"></a>placeid <span class="ot">&lt;-</span> <span class="fu">nomis_get_metadata</span>(<span class="at">id =</span> <span class="st">"NM_189_1"</span>, <span class="at">concept =</span> <span class="st">"geography"</span>, <span class="at">type =</span> <span class="st">"TYPE424"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb9-55"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(label.en <span class="sc">%in%</span> corecities.bres) <span class="sc">%&gt;%</span> <span class="fu">select</span>(id) <span class="sc">%&gt;%</span> pull</span>
-<span id="cb9-56"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-57"><a aria-hidden="true" tabindex="-1"></a><span class="co"># NOW WE GET THE ACTUAL DATA</span></span>
-<span id="cb9-58"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Using many of the codes we just looked at</span></span>
-<span id="cb9-59"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Check how long it takes too...</span></span>
-<span id="cb9-60"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-61"><a aria-hidden="true" tabindex="-1"></a><span class="co"># p.s. if you want to save time, I've also Blue Petered this data</span></span>
-<span id="cb9-62"><a aria-hidden="true" tabindex="-1"></a><span class="co"># You'll have the option to use that in the Quarto doc rather than run NOMISR</span></span>
-<span id="cb9-63"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-64"><a aria-hidden="true" tabindex="-1"></a><span class="co"># I'm also not sure if the NOMIS API will be made sad by us all trying to download at the same time...</span></span>
-<span id="cb9-65"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-66"><a aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb9-67"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-68"><a aria-hidden="true" tabindex="-1"></a><span class="co"># So the actual GET DATA function</span></span>
-<span id="cb9-69"><a aria-hidden="true" tabindex="-1"></a><span class="co"># We pass in the various values we got from above</span></span>
-<span id="cb9-70"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Note also the option to set the year - we don't do that, so we get all of them</span></span>
-<span id="cb9-71"><a aria-hidden="true" tabindex="-1"></a><span class="co"># We also select only some columns, which does save a bit of download time</span></span>
-<span id="cb9-72"><a aria-hidden="true" tabindex="-1"></a>bres <span class="ot">&lt;-</span> <span class="fu">nomis_get_data</span>(<span class="at">id =</span> <span class="st">"NM_189_1"</span>,  <span class="at">geography =</span> placeid,</span>
-<span id="cb9-73"><a aria-hidden="true" tabindex="-1"></a>                       <span class="co"># time = "latest",#Can use to get specific timepoint. If left out, we'll get em all</span></span>
-<span id="cb9-74"><a aria-hidden="true" tabindex="-1"></a>                       <span class="co"># MEASURE = 1,#Count of jobs</span></span>
-<span id="cb9-75"><a aria-hidden="true" tabindex="-1"></a>                       <span class="at">MEASURE =</span> <span class="dv">2</span>,<span class="co">#'Industry percentage'</span></span>
-<span id="cb9-76"><a aria-hidden="true" tabindex="-1"></a>                       <span class="at">MEASURES =</span> <span class="dv">20100</span>,<span class="co">#Just gives value (of percent) - redundant but lowers data download</span></span>
-<span id="cb9-77"><a aria-hidden="true" tabindex="-1"></a>                       <span class="at">EMPLOYMENT_STATUS =</span> <span class="dv">2</span>,<span class="co">#Full time jobs</span></span>
-<span id="cb9-78"><a aria-hidden="true" tabindex="-1"></a>                       <span class="at">select =</span> <span class="fu">c</span>(<span class="st">'DATE'</span>,<span class="st">'GEOGRAPHY_NAME'</span>,<span class="st">'INDUSTRY_NAME'</span>,<span class="st">'INDUSTRY_TYPE'</span>,<span class="st">'OBS_VALUE'</span>)</span>
-<span id="cb9-79"><a aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-80"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-81"><a aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> x</span>
-<span id="cb9-82"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-83"><a aria-hidden="true" tabindex="-1"></a><span class="co"># That takes 25-30 seconds in posit's R</span></span>
-<span id="cb9-84"><a aria-hidden="true" tabindex="-1"></a><span class="co"># No fun if you're trying to check changes - don't want to run that every time</span></span>
-<span id="cb9-85"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Get the data in a different script and store somewhere the quarto doc can reload easily</span></span>
-<span id="cb9-86"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-87"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Save for use in quarto</span></span>
-<span id="cb9-88"><a aria-hidden="true" tabindex="-1"></a><span class="co"># The RDS format is quick and compact</span></span>
-<span id="cb9-89"><a aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(bres,<span class="st">'bres_nomisdatasave.rds'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-49"><a aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(geogz, <span class="at">n =</span> <span class="dv">60</span>)</span>
+<span id="cb9-50"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-51"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-52"><a aria-hidden="true" tabindex="-1"></a><span class="co"># From the metadata, we're going to pull out the geography codes</span></span>
+<span id="cb9-53"><a aria-hidden="true" tabindex="-1"></a><span class="co"># That we need to put into NOMISR</span></span>
+<span id="cb9-54"><a aria-hidden="true" tabindex="-1"></a><span class="co"># for JUST the core cities again</span></span>
+<span id="cb9-55"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Slightly different names / shapes in BRES, but mostly the same</span></span>
+<span id="cb9-56"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Again, here's one I made earlier...</span></span>
+<span id="cb9-57"><a aria-hidden="true" tabindex="-1"></a>corecities.bres <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="fu">gzcon</span>(<span class="fu">url</span>(<span class="st">'https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/data/corecities_bres.rds'</span>)))</span>
+<span id="cb9-58"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-59"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-60"><a aria-hidden="true" tabindex="-1"></a><span class="co"># USE LOCAL AUTHORITIES TO GET ALL TIMEPOINTS</span></span>
+<span id="cb9-61"><a aria-hidden="true" tabindex="-1"></a><span class="co"># ITL3 2021 zones in the BRES data only have 2022-2024</span></span>
+<span id="cb9-62"><a aria-hidden="true" tabindex="-1"></a><span class="co"># "TYPE424 local authorities: district / unitary (as of April 2023)"</span></span>
+<span id="cb9-63"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Belfast won't be there cos BRES is GB but otherwise good</span></span>
+<span id="cb9-64"><a aria-hidden="true" tabindex="-1"></a>placeid <span class="ot">&lt;-</span> <span class="fu">nomis_get_metadata</span>(<span class="at">id =</span> <span class="st">"NM_189_1"</span>, <span class="at">concept =</span> <span class="st">"geography"</span>, <span class="at">type =</span> <span class="st">"TYPE424"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-65"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(label.en <span class="sc">%in%</span> corecities.bres) <span class="sc">%&gt;%</span> <span class="fu">select</span>(id) <span class="sc">%&gt;%</span> pull</span>
+<span id="cb9-66"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-67"><a aria-hidden="true" tabindex="-1"></a><span class="co"># NOW WE GET THE ACTUAL DATA</span></span>
+<span id="cb9-68"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Using many of the codes we just looked at</span></span>
+<span id="cb9-69"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Check how long it takes too...</span></span>
+<span id="cb9-70"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-71"><a aria-hidden="true" tabindex="-1"></a><span class="co"># p.s. if you want to save time, I've also Blue Petered this data</span></span>
+<span id="cb9-72"><a aria-hidden="true" tabindex="-1"></a><span class="co"># You'll have the option to use that in the Quarto doc rather than run NOMISR</span></span>
+<span id="cb9-73"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-74"><a aria-hidden="true" tabindex="-1"></a><span class="co"># I'm also not sure if the NOMIS API will be made sad by us all trying to download at the same time...</span></span>
+<span id="cb9-75"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-76"><a aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb9-77"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-78"><a aria-hidden="true" tabindex="-1"></a><span class="co"># So the actual GET DATA function</span></span>
+<span id="cb9-79"><a aria-hidden="true" tabindex="-1"></a><span class="co"># We pass in the various values we got from above</span></span>
+<span id="cb9-80"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Note also the option to set the year - we don't do that, so we get all of them</span></span>
+<span id="cb9-81"><a aria-hidden="true" tabindex="-1"></a><span class="co"># We also select only some columns, which does save a bit of download time</span></span>
+<span id="cb9-82"><a aria-hidden="true" tabindex="-1"></a>bres <span class="ot">&lt;-</span> <span class="fu">nomis_get_data</span>(<span class="at">id =</span> <span class="st">"NM_189_1"</span>,  <span class="at">geography =</span> placeid,</span>
+<span id="cb9-83"><a aria-hidden="true" tabindex="-1"></a>                       <span class="co"># time = "latest",#Can use to get specific timepoint. If left out, we'll get em all</span></span>
+<span id="cb9-84"><a aria-hidden="true" tabindex="-1"></a>                       <span class="co"># MEASURE = 1,#Count of jobs</span></span>
+<span id="cb9-85"><a aria-hidden="true" tabindex="-1"></a>                       <span class="at">MEASURE =</span> <span class="dv">2</span>,<span class="co">#'Industry percentage'</span></span>
+<span id="cb9-86"><a aria-hidden="true" tabindex="-1"></a>                       <span class="at">MEASURES =</span> <span class="dv">20100</span>,<span class="co">#Just gives value (of percent) - redundant but lowers data download</span></span>
+<span id="cb9-87"><a aria-hidden="true" tabindex="-1"></a>                       <span class="at">EMPLOYMENT_STATUS =</span> <span class="dv">2</span>,<span class="co">#Full time jobs</span></span>
+<span id="cb9-88"><a aria-hidden="true" tabindex="-1"></a>                       <span class="at">select =</span> <span class="fu">c</span>(<span class="st">'DATE'</span>,<span class="st">'GEOGRAPHY_NAME'</span>,<span class="st">'INDUSTRY_NAME'</span>,<span class="st">'INDUSTRY_TYPE'</span>,<span class="st">'OBS_VALUE'</span>)</span>
+<span id="cb9-89"><a aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-90"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-91"><a aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> x</span>
+<span id="cb9-92"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-93"><a aria-hidden="true" tabindex="-1"></a><span class="co"># That takes 25-30 seconds in posit's R</span></span>
+<span id="cb9-94"><a aria-hidden="true" tabindex="-1"></a><span class="co"># No fun if you're trying to check changes - don't want to run that every time</span></span>
+<span id="cb9-95"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Get the data in a different script and store somewhere the quarto doc can reload easily</span></span>
+<span id="cb9-96"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-97"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Save for use in quarto</span></span>
+<span id="cb9-98"><a aria-hidden="true" tabindex="-1"></a><span class="co"># The RDS format is quick and compact</span></span>
+<span id="cb9-99"><a aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(bres,<span class="st">'bres_nomisdatasave.rds'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>

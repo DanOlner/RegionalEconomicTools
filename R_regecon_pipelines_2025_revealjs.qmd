@@ -517,6 +517,10 @@ nomisinfo = nomis_data_info() %>%
 
 Sys.time() - x
 
+# If that's being a pain or too slow
+# Press the red STOP!! button and load this Blue Peter version
+nomisinfo = readRDS(gzcon(url('https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/bres_nomisdatasave.rds')))
+
 # LET'S LOOK INSIDE THAT DATASET
 # If we do that, we can search for the dataset code we want to use
 # Let's search for 'employment' in RStudio...
