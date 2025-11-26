@@ -26,30 +26,43 @@ a <- nomis_get_metadata(id = "NM_189_1")
 nomis_get_metadata(id = "NM_189_1", concept = "MEASURE")
 nomis_get_metadata(id = "NM_189_1", concept = "MEASURES")
 nomis_get_metadata(id = "NM_189_1", concept = "EMPLOYMENT_STATUS")
+
+# This one's especially useful - we need it to get the right geography code
 geogz = nomis_get_metadata(id = "NM_189_1", concept = "GEOGRAPHY", type = "type")
 
 print(geogz, n = 60)
 
 
-# From the metadata, we're going to pull out the geography codes 
+# From the metadata, we're going to pull out the geography codes
+# That we need to put into NOMISR
 # for JUST the core cities again
 # Slightly different names / shapes in BRES, but mostly the same
 # Again, here's one I made earlier...
-corecities.bres = readRDS(gzcon(url('data/corecities_bres.rds')))
+corecities.bres = readRDS(gzcon(url('https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/data/corecities_bres.rds')))
 
 
-# USE LOCAL AUTHORITIES AND GET ALL TIMEPOINTS
+# USE LOCAL AUTHORITIES TO GET ALL TIMEPOINTS
 # ITL3 2021 zones in the BRES data only have 2022-2024
 # "TYPE424 local authorities: district / unitary (as of April 2023)"
 # Belfast won't be there cos BRES is GB but otherwise good
 placeid <- nomis_get_metadata(id = "NM_189_1", concept = "geography", type = "TYPE424") %>% 
-  filter(label.en %in% c(corecities,'Cardiff','Newcastle upon Tyne')) %>% select(id) %>% pull
+  filter(label.en %in% corecities.bres) %>% select(id) %>% pull
 
 # NOW WE GET THE ACTUAL DATA
 # Using many of the codes we just looked at
 # Check how long it takes too...
+
+# p.s. if you want to save time, I've also Blue Petered this data
+# You'll have the option to use that in the Quarto doc rather than run NOMISR
+
+# I'm also not sure if the NOMIS API will be made sad by us all trying to download at the same time...
+
 x = Sys.time()
 
+# So the actual GET DATA function
+# We pass in the various values we got from above
+# Note also the option to set the year - we don't do that, so we get all of them
+# We also select only some columns, which does save a bit of download time
 bres <- nomis_get_data(id = "NM_189_1",  geography = placeid,
                        # time = "latest",#Can use to get specific timepoint. If left out, we'll get em all
                        # MEASURE = 1,#Count of jobs

@@ -3278,5 +3278,26 @@
     "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
     "section": "We’re going to do something slightly different for this one",
     "text": "We’re going to do something slightly different for this one\n\nOften, getting the data wrangled can be time-consuming (due to either download or processing times)\nWe don’t want to have to go through that every single time the Quarto doc compiles.\nOne way to solve this: do the processing in a separate script, save it, then let the Quarto doc re-load the finished product."
+  },
+  {
+    "objectID": "R_regecon_pipelines_2025_revealjs.html#looking-for-our-dataset-code-in-the-nomisr-downloaded-catalogue",
+    "href": "R_regecon_pipelines_2025_revealjs.html#looking-for-our-dataset-code-in-the-nomisr-downloaded-catalogue",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "section": "Looking for our dataset code in the NOMISR-downloaded catalogue",
+    "text": "Looking for our dataset code in the NOMISR-downloaded catalogue"
+  },
+  {
+    "objectID": "R_regecon_pipelines_2025_revealjs.html#what-it-should-look-like-how-long-itll-take-downloading-this-data",
+    "href": "R_regecon_pipelines_2025_revealjs.html#what-it-should-look-like-how-long-itll-take-downloading-this-data",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "section": "What it should look like / how long it’ll take downloading this data",
+    "text": "What it should look like / how long it’ll take downloading this data"
+  },
+  {
+    "objectID": "R_regecon_pipelines_2025_revealjs.html#ok-now-we-can-get-that-nomis-data-into-our-output",
+    "href": "R_regecon_pipelines_2025_revealjs.html#ok-now-we-can-get-that-nomis-data-into-our-output",
+    "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
+    "section": "OK, now we can get that NOMIS data into our output",
+    "text": "OK, now we can get that NOMIS data into our output\n\nNow it’s saved, that’s very straightforward - we reload the data we just saved.\n\n\n\n\n\n\n\nWhy does it need reloading into the Quarto script?\n\n\n\nBecause every time a Quarto doc is compiled, it starts with an empty environment, so no other data or libraries are visible to it.\nThis is a good thing: it means they have to be self-contained."
   }
 ]
