@@ -399,6 +399,10 @@
 <li>Given you’ll also have your <strong>own</strong> RStudio instance open, I’m aware this could be tricky!</li>
 <li>So I’ll <strong>try to keep flitting about to a minimum</strong>: we’ll work in RStudio in big blocks, talking through the code using <strong>#codecomments</strong> to guide us.</li>
 </ul>
+</section>
+<section class="slide level2">
+
+<p><strong>One last thing</strong> - all the code for the Quarto output file is <a href="https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/pipeline.qmd" target="_blank">also online here</a>, if you want to just get the whole thing rather than piece it together as we go.</p>
 </section></section>
 <section>
 <section id="finally-some-coding" class="title-slide slide level1 center">
@@ -878,7 +882,7 @@
 <span id="cb10-2"><a aria-hidden="true" tabindex="-1"></a>bres <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="st">'bres_nomisdatasave.rds'</span>)</span>
 <span id="cb10-3"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-4"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Or load a 'here's one I made earlier' version if NOMISR wasn't playing for any reason</span></span>
-<span id="cb10-5"><a aria-hidden="true" tabindex="-1"></a><span class="co"># bres = readRDS(gzcon(url('https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/bres_nomisdatasave.rds'))</span></span>
+<span id="cb10-5"><a aria-hidden="true" tabindex="-1"></a><span class="co"># bres = readRDS(gzcon(url('https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/bres_nomisdatasave.rds')))</span></span>
 <span id="cb10-6"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-7"><a aria-hidden="true" tabindex="-1"></a><span class="co"># Check its size in memory</span></span>
 <span id="cb10-8"><a aria-hidden="true" tabindex="-1"></a><span class="co">#pryr::object_size(bres)</span></span>

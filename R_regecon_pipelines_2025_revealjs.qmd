@@ -195,7 +195,9 @@ source('https://bit.ly/pipelinesetup')
 -   Given you'll also have your **own** RStudio instance open, I'm aware this could be tricky! 
 -   So I'll **try to keep flitting about to a minimum**: we'll work in RStudio in big blocks, talking through the code using **#codecomments** to guide us.
 
+----
 
+**One last thing** - all the code for the Quarto output file is [also online here](https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/pipeline.qmd){target="_blank"}, if you want to just get the whole thing rather than piece it together as we go.
 
 
 
