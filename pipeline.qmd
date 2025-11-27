@@ -38,12 +38,14 @@ We can copy the URL for the Excel sheet from the web page...
 ```{r excel}
 # 1. Extracting from an Excel file on a website: productivity data example
 
-# Copy the URL for the Excel sheet from the ONS website
+# Copy the URL for the Excel sheet from the ONS website for subregional productivity data
+# That's here:
+# https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions
 # This is just setting a string named 'url'
-url <- 'https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions/current/labourproductivityitls1.xlsx'
+url = 'https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/subregionalproductivitylabourproductivitygvaperhourworkedandgvaperfilledjobindicesbyuknuts2andnuts3subregions/current/labourproductivityitls1.xlsx'
 
 # We then create a TEMPORARY FILE...
-temp_path <- tempfile(fileext=".xlsx")
+temp_path = tempfile(fileext=".xlsx")
 # And use that file path to DOWNLOAD A TEMP COPY OF THE EXCEL TO USE
 download.file(url, temp_path, mode="wb")
 
@@ -57,7 +59,7 @@ download.file(url, temp_path, mode="wb")
 # This goes straight into a dataframe
 # Read directly from a specific sheet and range of cells from the downloaded file
 # "Table A1: Current Price (smoothed) GVA (B) per hour worked indices; ITL2 and ITL3 subregions, 2004 - 2023"
-cp.indices <- readxl::read_excel(path = temp_path,range = "A1!A5:W247")
+cp.indices = readxl::read_excel(path = temp_path,range = "A1!A5:W247")
 
 # TAKE A LOOK AT THAT DATA (CLICK ON ITS NAME IN THE ENVIRONMENT PANEL)
 # It's got each year IN ITS OWN COLUMN. Not what we want.
@@ -109,6 +111,7 @@ ggplot(
   scale_color_brewer(palette = 'Paired') +
   theme(legend.title=element_blank()) +
   ylab('Output per hour: 100 = UK av')
+
 ```
 
 
@@ -119,20 +122,30 @@ ggplot(
 ```{r nomis}
 
 # Get the BRES data we extracted in the separate script
-bres = readRDS('bres_nomisdatasave.rds')
+# bres = readRDS('bres_nomisdatasave.rds')
+
+# Or load a 'here's one I made earlier' version if NOMISR wasn't playing for any reason
+bres = readRDS(gzcon(url('https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/bres_nomisdatasave.rds')))
 
 # Check its size in memory
 #pryr::object_size(bres)
 
-# Quick looksee
+# Quick look at the data structure, filtered down to just 2 digit SICs
 # bres %>% filter(INDUSTRY_TYPE == 'SIC 2007 division (2 digit)') %>% View
 
+# WE CAN DO DATA CHECKS IN A QUARTO DOC
+# I TEND TO COMMENT THEM OUT SO THEY DON'T OUTPUT BUT IT CAN BE USEFUL TO KEEP IT ALL TOGETHER.
+
+# For instance:
 # Check industry percentages sum to 100 per ITL3 zone
 # Mostly - some roundings-down build up to not quite 100%
-# bres %>% 
-#   filter(INDUSTRY_TYPE == 'SIC 2007 division (2 digit)') %>% 
-#   group_by(GEOGRAPHY_NAME,DATE) %>% 
+# bres %>%
+#   filter(INDUSTRY_TYPE == 'SIC 2007 division (2 digit)') %>%
+#   group_by(GEOGRAPHY_NAME,DATE) %>%
 #   summarise(totalpercent = sum(OBS_VALUE))
+
+# WE'LL PICK OUT JUST FINANCE SECTORS TO LOOK AT HOW JOB PROPORTIONS HAVE CHANGED OVER TIME
+# Remember, we already filtered down to core cities to lessen the download
 
 # OK, let's look at the three finance 2-digit sectors
 # 2 digit SICS are 64,65 and 66: sum those
@@ -172,10 +185,9 @@ edinburgh_latestpercent = finance.percent %>%
 
 You can run code in the text too, to include dynamic values from the data, rather than handwriting those in. For instance, we can say that **the percent of Edinburgh's finance jobs in `r max(bres$DATE)` was `r edinburgh_latestpercent`%.**
 
-We can also add tables in from the data:
+Also - table of percentages in order:
 
-```{r tableexample}
-
+```{r}
 knitr::kable(
   finance.percent %>% 
     filter(DATE == max(DATE)) %>% 
@@ -183,7 +195,6 @@ knitr::kable(
     arrange(desc(percent)), 
              # escape = FALSE, 
              caption = paste0("Table: core cities' percent of finance jobs in ",max(finance.percent$DATE)," (SICs 64-66)"))
-
 ```
 
 
@@ -225,6 +236,8 @@ filenames = unzip(temp_path, list = TRUE)
 # https://www.ons.gov.uk/census/census2021dictionary/areatypedefinitions
 
 # Pick the geographical scale we want
+# HERE, UNZIP IS EXTRACTING A SPECIFIC FILE FROM INSIDE IT
+# WITHOUT UNZIPPING THE WHOLE THING
 occ = read_csv(unzip(temp_path, files = filenames$Name[qg('ltla',filenames$Name)]))
 
 # TAKE A LOOK AT THE COLUMN NAMES FOR THAT DATA
@@ -290,7 +303,6 @@ ggplot(
   geom_bar(position="fill", stat="identity") +
   scale_fill_brewer(palette = 'Paired') +
   ylab("")
-
 
 ```
 

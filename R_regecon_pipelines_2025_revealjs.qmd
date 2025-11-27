@@ -459,6 +459,9 @@ We can run each bit of the code **inside the quarto doc** (to make sure everythi
 
 
 
+
+
+
 # Example two: using the NOMISR package to get data from NOMIS
 
 ----
@@ -642,7 +645,7 @@ saveRDS(bres,'bres_nomisdatasave.rds')
 bres = readRDS('bres_nomisdatasave.rds')
 
 # Or load a 'here's one I made earlier' version if NOMISR wasn't playing for any reason
-# bres = readRDS(gzcon(url('https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/bres_nomisdatasave.rds'))
+# bres = readRDS(gzcon(url('https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/bres_nomisdatasave.rds')))
 
 # Check its size in memory
 #pryr::object_size(bres)
