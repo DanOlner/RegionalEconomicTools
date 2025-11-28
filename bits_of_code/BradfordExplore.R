@@ -6,7 +6,7 @@ library(tmap)#for mapping
 library(zoo)#for making smoothed moving averages
 library(patchwork)#combine ggplots easily
 library(plotly)#For interactive plots
-library(plotme)#For sunburst output
+# library(plotme)#For sunburst output
 # library(ggdist)
 # library(tidyr)
 # library(distributional)
@@ -689,10 +689,16 @@ ggplot(plot.df) +
 
 
 
+corecities = readRDS('data/corecitiesvector_itl3_2025.rds')
+
+table(corecities %in% gvabres$Region_name)
+
 #Multiple places?
 place <- gvabres %>% 
-  # filter(qg('sheffield|barnsley',Region_name), DATE == max(DATE))
-  filter(qg('bradford|kirkees|calderdale|wakefield|leeds',Region_name), DATE == max(DATE))
+  # filter(qg('sheffield|barnsley|doncaster|rotherham',Region_name), DATE == max(DATE)) %>% 
+  # filter(Region_name %in% corecities, DATE == max(DATE)) %>% 
+  filter(qg('bradford|kirkees|calderdale|wakefield|leeds',Region_name), DATE == max(DATE)) %>%
+  filter(!qg('personal',SIC07_description_shortened))
   # filter(qg("Bolton|Bury|Manchester|Oldham|Rochdale|Salford|Stockport|Tameside|Trafford|Wigan",Region_name), DATE == max(DATE))#Nope, not in ILT3 of course!
   # filter(qg('manchester',Region_name), DATE == max(DATE))#This gets all 5 GM ITL3s
   # filter(qg('Belfast|Birmingham|Bristol|Cardiff|Glasgow|Leeds|Liverpool|Manchester|Tyne|Sheffield|Nottingham',Region_name) & !qg('greater|shire', Region_name), DATE == max(DATE))#core cities
@@ -712,29 +718,52 @@ plot.df <- place %>%
          ymax = JOBCOUNT) %>% 
   ungroup()
 
-# plot.df <- place %>%
-#   # filter(productionsector == 'production') %>% 
-#   # group_by(Region_name,productionsector) %>% 
-#   group_by(Region_name) %>% 
-#   arrange(-GVA) %>% 
-#   # arrange(-JOBCOUNT) %>% 
-#   mutate(xmin = cumsum(lag(JOBCOUNT, default = 0)),
-#          xmax = xmin + JOBCOUNT,
-#          ymin = 0,
-#          ymax = GVA) %>% 
-#   ungroup()
+
+plot.df <- place %>%
+  # filter(productionsector == 'production') %>%
+  # group_by(Region_name,productionsector) %>%
+  group_by(Region_name) %>%
+  arrange(-GVA) %>%
+  # arrange(-JOBCOUNT) %>%
+  mutate(xmin = cumsum(lag(JOBCOUNT, default = 0)),
+         xmax = xmin + JOBCOUNT,
+         ymin = 0,
+         ymax = GVA) %>%
+  ungroup()
+
+
+
+# Feel like it would have to be GVA per job on x axis for the area thing to make sense
+# So that multiplying the area would be total GVA
+place = place %>% 
+  mutate(
+    gvaperjob1000s = (GVA/JOBCOUNT) * 1000
+  )
+
+plot.df <- place %>%
+  # filter(productionsector == 'production') %>%
+  # group_by(Region_name,productionsector) %>%
+  group_by(Region_name) %>%
+  arrange(-gvaperjob1000s) %>%
+  # arrange(-JOBCOUNT) %>%
+  mutate(xmin = cumsum(lag(JOBCOUNT, default = 0)),
+         xmax = xmin + JOBCOUNT,
+         ymin = 0,
+         ymax = gvaperjob1000s) %>%
+  ungroup()
 
 ggplot(plot.df) +
   geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, fill = SIC07_description_shortened), color = "black", size =0.25) +
   geom_text(aes(x = (xmin + xmax) / 2, y = (ymin + ymax) / 2, label = SIC07_description_shortened)) +
   # labs(y = "GVA", x = "Job count", title = "Sectors by GVA and Jobs (Area = GVA × Jobs)") +
-  labs(x = "GVA", y = "Job count", title = "Sectors by GVA and Jobs (Area = GVA × Jobs)") +
+  labs(y = "GVA per job (1000s)", x = "Job count", title = "Sectors by GVA-per-job and Jobs (Area = total GVA)") +
+  # labs(x = "GVA", y = "Job count", title = "Sectors by GVA and Jobs (Area = GVA × Jobs)") +
   # theme_minimal() +
   scale_fill_manual(values = setNames(randomcols,unique(gvabres$SIC07_description_shortened))) +
   guides(fill = F) +
-  coord_flip() +
+  coord_flip(ylim = c(0,300)) +
   # facet_wrap(~Region_name+productionsector, scales = 'free', ncol = 2)
-  facet_wrap(~Region_name, scales = 'free', ncol = 5)
+  facet_wrap(~Region_name, scales = 'free_y', ncol = 5)
   # facet_wrap(~Region_name, ncol = 2)
 
 #So close but not quite. Could just use for upper labels?
