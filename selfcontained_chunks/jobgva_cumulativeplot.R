@@ -20,10 +20,10 @@ bres.gva.2d <- bres.gva.2d %>%
   )
 
 place = bres.gva.2d %>% 
-  filter(qg('sheffield|barnsley|doncaster|rotherham',Region_name), year == max(year))
+  # filter(qg('sheffield|barnsley|doncaster|rotherham',Region_name), year == max(year))
 # filter(qg("Bolton|Bury|Manchester|Oldham|Rochdale|Salford|Stockport|Tameside|Trafford|Wigan",Region_name), year == max(year))
   # filter(Region_name %in% corecities, DATE == max(DATE)) %>% 
-  # filter(qg('bradford|kirkees|calderdale|wakefield|leeds',Region_name), year == max(year))
+  filter(qg('bradford|kirkees|calderdale|wakefield|leeds',Region_name), year == max(year))
 
 # Supply a way to select ITL3s from within a specific ITL2
 
@@ -53,19 +53,19 @@ col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_co
 randomcols <- col_vector[1:(1+(n-1))]
 
 # Labels - will have to restrict ggrepel ones to those under a certain height.
-
-ggplot(plot.df) +
-  geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, fill = SIC07_description_shortened), color = "black", size =0.25) +
-  geom_text(aes(x = (xmin + xmax) / 2, y = (ymin + ymax) / 2, label = SIC07_description_shortened), size = 3) +
-  # labs(y = "GVA", x = "Job count", title = "Sectors by GVA and Jobs (Area = GVA × Jobs)") +
-  labs(y = "GVA per job (1000s)", x = "Job count", title = "Sectors by GVA-per-job and Jobs (Area = total GVA)") +
-  # labs(x = "GVA", y = "Job count", title = "Sectors by GVA and Jobs (Area = GVA × Jobs)") +
-  # theme_minimal() +
-  scale_fill_manual(values = setNames(randomcols,unique(bres.gva.2d$SIC07_description_shortened))) +
-  guides(fill = F) +
-  coord_flip(ylim = c(0,300)) +
-  # facet_wrap(~Region_name+productionsector, scales = 'free', ncol = 2)
-  facet_wrap(~Region_name, scales = 'free_y', ncol = 5)
+# 
+# ggplot(plot.df) +
+#   geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, fill = SIC07_description_shortened), color = "black", size =0.25) +
+#   geom_text(aes(x = (xmin + xmax) / 2, y = (ymin + ymax) / 2, label = SIC07_description_shortened), size = 3) +
+#   # labs(y = "GVA", x = "Job count", title = "Sectors by GVA and Jobs (Area = GVA × Jobs)") +
+#   labs(y = "GVA per job (1000s)", x = "Job count", title = "Sectors by GVA-per-job and Jobs (Area = total GVA)") +
+#   # labs(x = "GVA", y = "Job count", title = "Sectors by GVA and Jobs (Area = GVA × Jobs)") +
+#   # theme_minimal() +
+#   scale_fill_manual(values = setNames(randomcols,unique(bres.gva.2d$SIC07_description_shortened))) +
+#   guides(fill = F) +
+#   coord_flip(ylim = c(0,300)) +
+#   # facet_wrap(~Region_name+productionsector, scales = 'free', ncol = 2)
+#   facet_wrap(~Region_name, scales = 'free_y', ncol = 5)
 
 #So close but not quite. Could just use for upper labels?
 # p + geom_text_repel(
@@ -85,7 +85,7 @@ ggplot(plot.df) +
 
 
 # Let's try and make a version with split label types based on size
-textcutoffsize = 2000
+textcutoffsize = 1300
 
 p = ggplot() +
   geom_rect(data = plot.df, aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, fill = SIC07_description_shortened), color = "black", size =0.25) +
@@ -102,12 +102,14 @@ p = p + geom_text(
 p = p + geom_text_repel(
   data = plot.df %>% filter(jobcount_movingav <= textcutoffsize),
   aes(x = (xmin + xmax)/2, y = (ymin + ymax)/2, label = SIC07_description_shortened),
-  alpha=1,
+  alpha=0.6,
   size = 3,
   # nudge_x = .05,
   box.padding = 0.5,
   # min.segment.length = 2,
   ylim = c(175,NA),
+  # direction    = "x",
+  # vjust        = 0,
   # nudge_y = 0.05,
   # segment.curvature = -0.1,
   # segment.ncp = 0.3,
