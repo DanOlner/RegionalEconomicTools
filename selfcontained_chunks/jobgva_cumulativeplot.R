@@ -24,6 +24,17 @@ if(!require(ggrepel)){
 bres.gva.2d = readRDS(gzcon(url('https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/data/bresgva2d_2023.rds')))
 
 
+
+# Get some consistent sector colours so each sector is the same
+# A larger number than the standard brewer palettes need so let's get our own
+# Nabbed from https://stackoverflow.com/questions/15282580/how-to-generate-a-number-of-most-distinctive-colors-in-r
+n <- length(unique(bres.gva.2d$SIC07_description_shortened))
+qual_col_pals = brewer.pal.info[brewer.pal.info$category == 'qual',]
+col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
+colourstouse <- col_vector[1:(1+(n-1))]
+
+
+
 # Use a lookup to get ITL3 names from within a specific ITL2
 itl.lookup = read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/LAD_(December_2024)_to_LAU1_to_ITL3_to_ITL2_to_ITL1_(January_2025)_Lookup_in_the_UK.csv')
 
@@ -46,10 +57,10 @@ listofplaces = itl.lookup %>%
 
 # Example for some other places
 # Uncomment as appropriate
-listofplaces = itl.lookup %>%
+# listofplaces = itl.lookup %>%
   # filter(grepl('south yorks',ITL225NM, ignore.case = T)) %>%
-  filter(grepl('north yorks',ITL225NM, ignore.case = T)) %>%
-  pull(ITL325NM)
+  # filter(grepl('north yorks',ITL225NM, ignore.case = T)) %>%
+  # pull(ITL325NM)
 
 
 
@@ -72,14 +83,6 @@ plot.df = places %>%
          ymax = `gva/job`) %>%
   ungroup()
 
-
-# Get some consistent sector colours so each sector is the same
-# A larger number than the standard brewer palettes need so let's get our own
-# Nabbed from https://stackoverflow.com/questions/15282580/how-to-generate-a-number-of-most-distinctive-colors-in-r
-n <- length(unique(bres.gva.2d$SIC07_description_shortened))
-qual_col_pals = brewer.pal.info[brewer.pal.info$category == 'qual',]
-col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
-colourstouse <- col_vector[1:(1+(n-1))]
 
 
 # Split label types based on size of job count
