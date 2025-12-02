@@ -192,7 +192,7 @@ When you've put that in, **the script title will go red**, showing it can now be
 
 Let's do #1: **Run the code line by line**.
 
--   **To test this, we'll load the tidyverse library with the code we just pasted in** (which is just one line of code at the moment!) Put the cursor at the end of the `libary(tidyverse)` line in the script (if it's not there already), either with the mouse or keyboard. (Keyboard navigation is mostly the same as any other text editor like Word, but [here's a full shortcut list](https://support.posit.co/hc/en-us/articles/200711853-Keyboard-Shortcuts-in-the-RStudio-IDE) if useful.)
+-   **To test this, we'll load the tidyverse library with the code we just pasted in** (which is just one line of code at the moment!) Put the cursor anywhere on the `libary(tidyverse)` line in the script (if it's not there already), either with the mouse or keyboard. (Keyboard navigation is mostly the same as any other text editor like Word, but [here's a full shortcut list](https://support.posit.co/hc/en-us/articles/200711853-Keyboard-Shortcuts-in-the-RStudio-IDE) if useful.)
 -   Once there, either use the 'run' button, top right of the script window, or (much easier if you're doing this repeatedly) **press CTRL+ENTER to run it.**
 :::
 
@@ -226,8 +226,8 @@ Let's do #1: **Run the code line by line**.
 
 * Go to [this github page](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/selfcontained_rscripts/jobgva_cumulativeplot.R){target="_blank"} to find the code. (that link will open in a new tab).
 * Look for the 'raw' options, top right. You've got a couple of choices here:
-1. The **middle 'copy raw file' button**: click this and github will stick the whole script onto the clipboard, ready for pasting into an R script, as we did above.
-2. The **right-hand 'download raw file' button**: download a copy, and then use the **upload button** at the top of the **files tab** in RStudio to import it.
+1. The **middle 'copy raw file' button**: click this and github will stick the whole script onto the clipboard, ready for pasting into an R script - just as we did above with the single line of code.
+2. The **right-hand 'download raw file' button**: download a copy, and then use the **upload button** at the top of the **files tab** in RStudio to import it. It'll then be in the file list - click on it to open.
 
 ::: center
 ![](quarto_docs/images/copyrawfile_github.png){width="300px"}
@@ -235,6 +235,19 @@ Let's do #1: **Run the code line by line**.
 
 :::
 
+----
+
+* Once that code is into an R script, we can **run it chunk by chunk from top to bottom**, as described in [this slide earlier](setupRonline_n_getstarted_revealjs.html#/5/6). 
+* Comments in the script talk through what each chunk is doing.
+* You can also select all text with CTRL or CMD + A - and then CTRL/CMD + ENTER will run the whole thing in one go.
+
+----
+
+* You may need to click on the 'Plots' panel to see the output.
+* Use the 'Zoom' option to pop out a resizeable view of the plot.
+* The final ggsave command in the script saves a copy as a png into the project's folder. You can view and download it from there - use 'Export'.
+
+----
 
 ## That's all folks
 
