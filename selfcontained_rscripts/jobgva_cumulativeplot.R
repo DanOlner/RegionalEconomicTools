@@ -1,4 +1,4 @@
-# This example will run as-is in posit.cloud
+# This example will run as-is in posit.cloud (free version)
 # using the tidyverse template.
 
 # Jobs and GVA per job cumulative plot
