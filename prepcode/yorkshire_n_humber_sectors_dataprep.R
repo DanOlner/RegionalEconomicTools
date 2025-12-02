@@ -1915,8 +1915,8 @@ ch = readRDS('../companieshouseopen/local/PROCESSED_accountextracts_n_livelist_g
 itl2to1lookup = read_csv("local/Local_Authority_District_(April_2021)_to_LAU1_to_ITL3_to_ITL2_to_ITL1_(January_2021)_Lookup_in_United_Kingdom.csv") %>%
   select(ITL121NM,ITL221CD,ITL221NM) %>%
   distinct()
-# 
-# # Same as 2025, turns out...
+ 
+# Same as 2025, turns out...
 ch.ynh = ch %>%
   filter(
     ITL221CD %in% (itl2to1lookup %>% filter(qg('humber',ITL121NM)) %>% pull(ITL221CD))

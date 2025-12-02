@@ -1,130 +1,124 @@
+# This example will run as-is in posit.cloud
+# using the tidyverse template.
+
 # Jobs and GVA per job cumulative plot
 # So area (job x gvaperjob) = total GVA for that sector
 # Which is a little bit circular as we just divide gva by jobs to get one of the axes
-# But as with the other productivity plots that proves visually quite useful
+# But as with the other productivity plots, that proves visually quite useful
 library(tidyverse)
 library(RColorBrewer)
-library(ggrepel)
-# source('functions/misc_functions.R')
-# theme_set(theme_grey())
 
+# If not present, install the ggrepel library 
+# Then load it
+# Will use for better labelling
+if(!require(ggrepel)){
+  install.packages("ggrepel")
+  library(ggrepel)
+}
 
+# GET THE DATA
+# Here's some I made earlier (Blue Peter style)
 # Current BRES latest is 2024 though GVA is still on 2023
-# Here we'll use the moving avs for a bit more consistency over time
-bres.gva.2d = readRDS('local/data/bresgva2d.rds') %>% 
-  filter(!qg('households|agri|membership', SIC07_description))
+# Here we'll use a 3 year moving average for a bit more consistency over time
+# Already has shortened sector names included for a neater plot
+bres.gva.2d = readRDS(gzcon(url('https://github.com/DanOlner/RegionalEconomicTools/raw/refs/heads/gh-pages/data/bresgva2d_2023.rds')))
 
-# Write that data for online use
-saveRDS(bres.gva.2d,'data/bresgva2d_2023.rds')
 
-shortsectornames <- read_csv('data/shortsectornames_for_regionalGVA_2digitSICs.csv')
+# Use a lookup to get ITL3 names from within a specific ITL2
+itl.lookup = read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/LAD_(December_2024)_to_LAU1_to_ITL3_to_ITL2_to_ITL1_(January_2025)_Lookup_in_the_UK.csv')
 
-bres.gva.2d <- bres.gva.2d %>% 
-  left_join(
-    shortsectornames, by = 'SIC07_description'
+# Check match between BRES data ITL3 codes and this lookup
+table(unique(bres.gva.2d$ITL_code) %in% unique(itl.lookup$ITL325CD))
+
+# Note, some falses the other way round because the lookup is UK-wide
+# But BRES data is GB-only
+# table(unique(itl.lookup$ITL325CD) %in% unique(bres.gva.2d$ITL_code))
+
+# Open up the itl.lookup to search for place names
+# Either with this code or click on its name in the environment panel top right
+itl.lookup %>% View
+
+# We can use that to list lists of ITL3s for specific ITL2s or ITL1s even
+listofplaces = itl.lookup %>% 
+  filter(ITL225NM == 'West Yorkshire') %>% #Either look for direct match
+  # filter(grepl('west yorks',ITL225NM, ignore.case = T)) %>% #Or search for string
+  pull(ITL325NM)
+
+# Example for some other places
+# Uncomment as appropriate
+listofplaces = itl.lookup %>%
+  # filter(grepl('south yorks',ITL225NM, ignore.case = T)) %>%
+  filter(grepl('north yorks',ITL225NM, ignore.case = T)) %>%
+  pull(ITL325NM)
+
+
+
+# Keep just those places and pick out the latest available year
+# Which is smoothed average of 2021 to 2023 (appears as 2022 in data)
+places = bres.gva.2d %>% 
+  filter(
+    Region_name %in% listofplaces, 
+    year == max(year)
   )
 
-place = bres.gva.2d %>% 
-  # filter(qg('sheffield|barnsley|doncaster|rotherham',Region_name), year == max(year))
-# filter(qg("Bolton|Bury|Manchester|Oldham|Rochdale|Salford|Stockport|Tameside|Trafford|Wigan",Region_name), year == max(year))
-  # filter(Region_name %in% corecities, DATE == max(DATE)) %>% 
-  filter(qg('bradford|kirkees|calderdale|wakefield|leeds',Region_name), year == max(year))
 
-# Supply a way to select ITL3s from within a specific ITL2
-
-
-plot.df = place %>%
-  # filter(productionsector == 'production') %>%
-  # group_by(Region_name,productionsector) %>%
+# Create data for plotting cumulative job blocks
+plot.df = places %>%
   group_by(Region_name) %>%
   arrange(-`gva/job`) %>%
-  # arrange(-JOBCOUNT) %>%
   mutate(xmin = cumsum(lag(jobcount_movingav, default = 0)),
          xmax = xmin + jobcount_movingav,
          ymin = 0,
          ymax = `gva/job`) %>%
   ungroup()
 
-#OK, apply to actual sector data
-#Get some consistent sector colours first
+
+# Get some consistent sector colours so each sector is the same
+# A larger number than the standard brewer palettes need so let's get our own
+# Nabbed from https://stackoverflow.com/questions/15282580/how-to-generate-a-number-of-most-distinctive-colors-in-r
 n <- length(unique(bres.gva.2d$SIC07_description_shortened))
-set.seed(12)
 qual_col_pals = brewer.pal.info[brewer.pal.info$category == 'qual',]
 col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
-# pie(rep(1,n), col=sample(col_vector, n))
-
-# randomcols <- sample(col_vector, n)
-# n <- length(unique(itl3.sections.cv$SIC07_description))
-randomcols <- col_vector[1:(1+(n-1))]
-
-# Labels - will have to restrict ggrepel ones to those under a certain height.
-# 
-# ggplot(plot.df) +
-#   geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, fill = SIC07_description_shortened), color = "black", size =0.25) +
-#   geom_text(aes(x = (xmin + xmax) / 2, y = (ymin + ymax) / 2, label = SIC07_description_shortened), size = 3) +
-#   # labs(y = "GVA", x = "Job count", title = "Sectors by GVA and Jobs (Area = GVA × Jobs)") +
-#   labs(y = "GVA per job (1000s)", x = "Job count", title = "Sectors by GVA-per-job and Jobs (Area = total GVA)") +
-#   # labs(x = "GVA", y = "Job count", title = "Sectors by GVA and Jobs (Area = GVA × Jobs)") +
-#   # theme_minimal() +
-#   scale_fill_manual(values = setNames(randomcols,unique(bres.gva.2d$SIC07_description_shortened))) +
-#   guides(fill = F) +
-#   coord_flip(ylim = c(0,300)) +
-#   # facet_wrap(~Region_name+productionsector, scales = 'free', ncol = 2)
-#   facet_wrap(~Region_name, scales = 'free_y', ncol = 5)
-
-#So close but not quite. Could just use for upper labels?
-# p + geom_text_repel(
-#   aes(x = (xmin + xmax)/2.05, y = (ymin + ymax)/2, label = SIC07_description_shortened),
-#   alpha=1,
-#   size = 3,
-#   nudge_x = .05,
-#   box.padding = 1,
-#   nudge_y = 0.05,
-#   segment.curvature = -0.1,
-#   segment.ncp = 0.3,
-#   segment.angle = 20,
-#   max.overlaps = 9999
-# )
+colourstouse <- col_vector[1:(1+(n-1))]
 
 
-
-
-# Let's try and make a version with split label types based on size
+# Split label types based on size of job count
+# So we can use two label types
+# Neither does the job well - both together work alright when split
 textcutoffsize = 1300
 
+# Start plot - add extra plotting elements to p before finally plotting
 p = ggplot() +
   geom_rect(data = plot.df, aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, fill = SIC07_description_shortened), color = "black", size =0.25) +
-  labs(y = "GVA per job (1000s)", x = "Job count", title = "Sectors by GVA-per-job and Jobs (Area = total GVA)") +
-  scale_fill_manual(values = setNames(randomcols,unique(bres.gva.2d$SIC07_description_shortened))) +
+  labs(
+    y = "GVA per FT job (1000s)", 
+    x = "Job count", 
+    title = "GVA-per-FT-job x job count for SIC sectors (Area = total GVA)"
+  ) +
+  scale_fill_manual(values = setNames(colourstouse,unique(bres.gva.2d$SIC07_description_shortened))) +
   guides(fill = F) +
   coord_flip(ylim = c(0,300)) +
   facet_wrap(~Region_name, scales = 'free_y', ncol = 5)
 
+# Add basic text labels if block big enough
 p = p + geom_text(
   data = plot.df %>% filter(jobcount_movingav > textcutoffsize), 
   aes(x = (xmin + xmax) / 2, y = (ymin + ymax) / 2, label = SIC07_description_shortened), size = 3) 
 
+# Use ggrepel if too small
 p = p + geom_text_repel(
   data = plot.df %>% filter(jobcount_movingav <= textcutoffsize),
   aes(x = (xmin + xmax)/2, y = (ymin + ymax)/2, label = SIC07_description_shortened),
   alpha=0.6,
   size = 3,
-  # nudge_x = .05,
   box.padding = 0.5,
-  # min.segment.length = 2,
   ylim = c(175,NA),
-  # direction    = "x",
-  # vjust        = 0,
-  # nudge_y = 0.05,
-  # segment.curvature = -0.1,
-  # segment.ncp = 0.3,
-  # segment.angle = 20,
   max.overlaps = 9999
 )
 
+# Plot!
+# Use the zoom button in the Plots panel to get a resizeable pop-out version
 p
 
-
-
-
-
+# Save! Download in the files tab on the right.
+ggsave('gvajobsblocks.png', width = 14, height = 12)
