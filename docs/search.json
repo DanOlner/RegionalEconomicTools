@@ -3403,7 +3403,7 @@
     "href": "setupRonline_n_getstarted_revealjs.html#getting-code-from-elsewhere-into-posit.cloud",
     "title": "Get set up using R online, make a script in RStudio and run code from github",
     "section": "Getting code from elsewhere into posit.cloud",
-    "text": "Getting code from elsewhere into posit.cloud\n\nHere’s an example of an R script that will run entirely self-contained in posit.cloud (if you’ve used the tidyverse template). It loads some GVA and jobs data and a geography lookup. On first run, it’ll install the ggrepel package for some better labels.\nWe’ll go to github and either download the code and import it into posit.cloud, or just copy-paste directly into an R script."
+    "text": "Getting code from elsewhere into posit.cloud\n\nWe’ll look at an example of an R script that will run entirely self-contained in posit.cloud (if you’ve used the tidyverse template). It loads some GVA and jobs data and a geography lookup. On first run, it’ll install the ggrepel package for some better labels.\nWe’ll go to github and either download the code and import it into posit.cloud, or just copy-paste directly into an R script."
   },
   {
     "objectID": "setupRonline_n_getstarted_revealjs.html#thats-all-folks",

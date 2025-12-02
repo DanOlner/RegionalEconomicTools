@@ -210,7 +210,7 @@ Let's do #1: **Run the code line by line**.
 
 ## Getting code from elsewhere into posit.cloud
 
--   Here's an example of an R script that will run **entirely self-contained** in posit.cloud (if you've used the tidyverse template). It loads some GVA and jobs data and a geography lookup. On first run, it'll install the [ggrepel](https://ggrepel.slowkow.com) package for some better labels.
+-   We'll look at an example of an R script that will run **entirely self-contained** in posit.cloud (if you've used the tidyverse template). It loads some GVA and jobs data and a geography lookup. On first run, it'll install the [ggrepel](https://ggrepel.slowkow.com) package for some better labels.
 -   We'll go to github and either **download the code and import it** into posit.cloud, or just **copy-paste directly** into an R script.
 
 ----
@@ -224,9 +224,9 @@ Let's do #1: **Run the code line by line**.
 ::: {.callout-note icon="false"}
 ## Task: Go to the github page where the code lives
 
-* Go to [this github page](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/selfcontained_rscripts/jobgva_cumulativeplot.R){target="_blank"} to find the code. (that link will open in a new tab).
+* Go to [this github page](https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/selfcontained_rscripts/jobgva_cumulativeplot.R){target="_blank"} to find the code. (That link will open in a new tab).
 * Look for the 'raw' options, top right. You've got a couple of choices here:
-1. The **middle 'copy raw file' button**: click this and github will stick the whole script onto the clipboard, ready for pasting into an R script - just as we did above with the single line of code.
+1. The **middle 'copy raw file' button**: click this and github will stick the whole text onto the clipboard, ready for pasting into an R script - just as we did above with the single line of code.
 2. The **right-hand 'download raw file' button**: download a copy, and then use the **upload button** at the top of the **files tab** in RStudio to import it. It'll then be in the file list - click on it to open.
 
 ::: center
