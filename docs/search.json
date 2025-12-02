@@ -3341,5 +3341,54 @@
     "title": "Using R to wrangle data from web to output: ONS Local taster session (27th Nov 2025)",
     "section": "Sorry if things go wrong!",
     "text": "Sorry if things go wrong!\n\nThis is not a full training workshop. Whenever we’re learning new coding methods, things always go wrong, guaranteed. It’s all part of the fun.\nIf in a workshop, we can take time to fix those problems. Sorry, we won’t have capacity for that today.\nThe slides are designed to be step-by-step, and the session is being recorded by ONS - so you can work back through that in your own time.\nBut if you an actual supported workshop appeals, let me know: d.olner@sheffield.ac.uk"
+  },
+  {
+    "objectID": "setupRonline_n_getstarted_revealjs.html#making-a-new-r-script-in-rstudio",
+    "href": "setupRonline_n_getstarted_revealjs.html#making-a-new-r-script-in-rstudio",
+    "title": "Get set up using R online and make a script in RStudio",
+    "section": "Making a new R script in RStudio",
+    "text": "Making a new R script in RStudio\nRStudio is where you’ll be doing all the R loveliness.\nBefore looking at RStudio in more detail, let’s make a new R script, where you’ll do most of your coding.\n\n\n\nTask: Open a new R script in RStudio\n\n\n\nIn the file menu in RStudio\nUse new file and R script (note: it tells you the keyboard shortcut for this)"
+  },
+  {
+    "objectID": "setupRonline_n_getstarted_revealjs.html#the-console",
+    "href": "setupRonline_n_getstarted_revealjs.html#the-console",
+    "title": "Get set up using R online and make a script in RStudio",
+    "section": "1. The console",
+    "text": "1. The console\nThe console is bottom left: all R commands end up being run here. You either run code directly in the console or send code from your R script.\n\n\n\nTask: enter some commands directly into the console\n\n\nClick in the console area so the cursor is on the command line. Type some random sums (or copy, see next slide) - press enter and you’ll see the results directly in the console.\nNote that second one: sqrt is a function and arguments go into the brackets. More on that in a mo.\n\n2+2\n\n[1] 4\n\nsqrt(64)\n\n[1] 8"
+  },
+  {
+    "objectID": "setupRonline_n_getstarted_revealjs.html#giving-things-names",
+    "href": "setupRonline_n_getstarted_revealjs.html#giving-things-names",
+    "title": "Get set up using R online and make a script in RStudio",
+    "section": "2. Giving things names",
+    "text": "2. Giving things names\nWe can assign all manner of things a name to then use them elsewhere: values, strings, lists - and, crucially, data objects like all the UK’s regional GVA. But these all use the same method.\n\n\n\nTask: Still in the console, assign a value to a name\n\n\n\nx = 64\n\nYou’ll see that assignment appear top right in RStudio. It can be retrieved just with:\n\nx\n\n[1] 64"
+  },
+  {
+    "objectID": "setupRonline_n_getstarted_revealjs.html#using-an-r-script",
+    "href": "setupRonline_n_getstarted_revealjs.html#using-an-r-script",
+    "title": "Get set up using R online and make a script in RStudio",
+    "section": "3. Using an R script",
+    "text": "3. Using an R script\nWe’ll now stick some code into that newly created R script we made earlier in the top left of RStudio.\nAll code will run in the console - what we do with scripts is just send our written/saved code to the console.\nLet’s test this by adding code to load the tidyverse library.\n\n\n\n\n\n\nWhat’s the tidyverse?\n\n\nIt’s a basket of tools that have become part of the R language - they all fit together to make consistent workflows much easier.\nThe online book R for Data Science is a great source to learn it, by the person who started it."
+  },
+  {
+    "objectID": "setupRonline_n_getstarted_revealjs.html#these-slides-run-through-two-things",
+    "href": "setupRonline_n_getstarted_revealjs.html#these-slides-run-through-two-things",
+    "title": "Get set up using R online and make a script in RStudio",
+    "section": "These slides run through two things:",
+    "text": "These slides run through two things:\n\nGetting set up using R and RStudio in posit.cloud through the browser. (See here if you want a run-through of setting up R on your own machine.)\nGetting started using RStudio - making a new script, entering some commands and loading a library."
+  },
+  {
+    "objectID": "setupRonline_n_getstarted_revealjs.html#you-should-now-have-rstudio-open-in-your-posit.cloud-account",
+    "href": "setupRonline_n_getstarted_revealjs.html#you-should-now-have-rstudio-open-in-your-posit.cloud-account",
+    "title": "Get set up using R online and make a script in RStudio",
+    "section": "You should now have RStudio open in your posit.cloud account…",
+    "text": "You should now have RStudio open in your posit.cloud account…\nIt should look something like the pic below."
+  },
+  {
+    "objectID": "setupRonline_n_getstarted_revealjs.html#thats-it",
+    "href": "setupRonline_n_getstarted_revealjs.html#thats-it",
+    "title": "Get set up using R online and make a script in RStudio",
+    "section": "That’s it",
+    "text": "That’s it\nOnto more R goodness!\nLet me know if anything doesn’t work or doesn’t make sense - d dot olner at sheffield dot ac dot uk"
   }
 ]

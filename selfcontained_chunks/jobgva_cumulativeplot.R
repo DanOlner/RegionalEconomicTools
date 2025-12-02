@@ -3,7 +3,9 @@
 # Which is a little bit circular as we just divide gva by jobs to get one of the axes
 # But as with the other productivity plots that proves visually quite useful
 library(tidyverse)
-source('functions/misc_functions.R')
+library(RColorBrewer)
+library(ggrepel)
+# source('functions/misc_functions.R')
 # theme_set(theme_grey())
 
 
@@ -11,6 +13,9 @@ source('functions/misc_functions.R')
 # Here we'll use the moving avs for a bit more consistency over time
 bres.gva.2d = readRDS('local/data/bresgva2d.rds') %>% 
   filter(!qg('households|agri|membership', SIC07_description))
+
+# Write that data for online use
+saveRDS(bres.gva.2d,'data/bresgva2d_2023.rds')
 
 shortsectornames <- read_csv('data/shortsectornames_for_regionalGVA_2digitSICs.csv')
 
