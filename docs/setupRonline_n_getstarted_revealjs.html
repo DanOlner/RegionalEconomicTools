@@ -9,7 +9,7 @@
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.7.32">
 
-  <title>UK regional economics tools and analysis in R – Get set up using R online and make a script in RStudio</title>
+  <title>UK regional economics tools and analysis in R – Get set up using R online, make a script in RStudio and run code from github</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -193,23 +193,25 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Get set up using R online and make a script in RStudio</h1>
+  <h1 class="title">Get set up using R online, make a script in RStudio and run code from github</h1>
 
 <div class="quarto-title-authors">
 </div>
 
 </section>
-<section id="these-slides-run-through-two-things" class="slide level2">
-<h2>These slides run through two things:</h2>
+<section id="these-slides-run-through-3-things" class="slide level2">
+<h2>These slides run through 3 things:</h2>
 <ol type="1">
 <li>Getting set up using R and RStudio in <a href="http://posit.cloud" target="_blank">posit.cloud</a> through the browser. (<a href="https://danolner.github.io/posts/setting_up_w_r_online/" target="_blank">See here</a> if you want a run-through of setting up R on your own machine.)</li>
+<li>Getting started using RStudio - making a new script, entering some commands and loading a library.</li>
+<li>An example of <strong>grabbing code from github</strong> to run in RStudio online. The script you’ll grab is self-contained: all code and packages are included, and the #codecomments run you through its use. (In this example, we’ll make a GVA * jobs ‘block’ plot. See comments for details…)</li>
 </ol>
+</section>
+<section class="slide level2">
+
 <ul>
 <li>RStudio in posit.cloud is <strong>free for the most basic version</strong> (1GB memory, 25 projects). That’s plenty for a lot of stuff. There are paid tiers too, if you want to do heavier things (and avoid all installing-R-on-work-machine pain).</li>
 </ul>
-<ol start="2" type="1">
-<li>Getting started using RStudio - making a new script, entering some commands and loading a library.</li>
-</ol>
 </section>
 <section>
 <section id="get-rrstudio-running-in-your-browser-with-posit.cloud" class="title-slide slide level1 center">
@@ -237,6 +239,11 @@
 </div>
 </div>
 </div>
+</section></section>
+<section>
+<section id="using-rstudio" class="title-slide slide level1 center">
+<h1>2. Using RStudio</h1>
+
 </section>
 <section id="you-should-now-have-rstudio-open-in-your-posit.cloud-account" class="slide level2">
 <h2>You should now have RStudio open in your posit.cloud account…</h2>
@@ -424,9 +431,52 @@
 <div class="center">
 <p><img data-src="miscimages/tidyverseloaded.png"></p>
 </div>
+</section></section>
+<section>
+<section id="grabbing-some-code-from-github-a-gva-x-jobs-blocks-example" class="title-slide slide level1 center">
+<h1>3. Grabbing some code from github: a “GVA x Jobs blocks” example</h1>
+
 </section>
-<section id="thats-it" class="slide level2">
-<h2>That’s it</h2>
+<section id="getting-code-from-elsewhere-into-posit.cloud" class="slide level2">
+<h2>Getting code from elsewhere into posit.cloud</h2>
+<ul>
+<li>Here’s an example of an R script that will run <strong>entirely self-contained</strong> in posit.cloud (if you’ve used the tidyverse template). It loads some GVA and jobs data and a geography lookup. On first run, it’ll install the <a href="https://ggrepel.slowkow.com">ggrepel</a> package for some better labels.</li>
+<li>We’ll go to github and either <strong>download the code and import it</strong> into posit.cloud, or just <strong>copy-paste directly</strong> into an R script.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>The code will plot GVA vs GVA-per-fulltime-job in sector blocks, stacked in order of productivity (gva per full time job). We get to see some interesting things.</li>
+<li>It’s done at ITL3 level, and we can select ITL3s within a particular ITL2 (e.g.&nbsp;West Yorkshire, South Yorkshire…)</li>
+<li><a href="">Here’s a blog post</a> talking through the data and resulting questions in a bit more detail.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Task: Go to the github page where the code lives</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Go to <a href="https://github.com/DanOlner/RegionalEconomicTools/blob/gh-pages/selfcontained_rscripts/jobgva_cumulativeplot.R" target="_blank">this github page</a> to find the code. (that link will open in a new tab).</li>
+<li>Look for the ‘raw’ options, top right. You’ve got a couple of choices here:</li>
+</ul>
+<ol type="1">
+<li>The <strong>middle ‘copy raw file’ button</strong>: click this and github will stick the whole script onto the clipboard, ready for pasting into an R script, as we did above.</li>
+<li>The <strong>right-hand ‘download raw file’ button</strong>: download a copy, and then use the <strong>upload button</strong> at the top of the <strong>files tab</strong> in RStudio to import it.</li>
+</ol>
+<div class="center">
+<p><img data-src="quarto_docs/images/copyrawfile_github.png" width="300"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="thats-all-folks" class="slide level2">
+<h2>That’s all folks</h2>
 <p>Onto <a href="https://danolner.github.io" target="_blank">more R goodness</a>!</p>
 <p>Let me know if anything doesn’t work or doesn’t make sense - d dot olner at sheffield dot ac dot uk</p>
 

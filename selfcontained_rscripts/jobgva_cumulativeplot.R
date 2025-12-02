@@ -47,7 +47,7 @@ table(unique(bres.gva.2d$ITL_code) %in% unique(itl.lookup$ITL325CD))
 
 # Open up the itl.lookup to search for place names
 # Either with this code or click on its name in the environment panel top right
-itl.lookup %>% View
+# itl.lookup %>% View
 
 # We can use that to list lists of ITL3s for specific ITL2s or ITL1s even
 listofplaces = itl.lookup %>% 
