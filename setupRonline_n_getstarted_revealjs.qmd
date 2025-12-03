@@ -23,7 +23,7 @@ knitr::opts_chunk$set(fig.height = 8, fig.width = 10, echo = TRUE, warning = F, 
 
 1.  **Getting set up using R and RStudio in [posit.cloud](http://posit.cloud){target="_blank"} through the browser**. ([See here](https://danolner.github.io/posts/setting_up_w_r_online/){target="_blank"} if you want a run-through of setting up R on your own machine.)
 2.  **Getting started using RStudio** - making a new script, entering some commands and loading a library.
-3.  An example of **grabbing code from github** to run in RStudio online. The script you'll grab is self-contained: all code and packages are included, and the #codecomments run you through its use. (In this example, we'll make a GVA \* jobs 'block' plot. See comments for details...)
+3.  An example of **grabbing code from github** to run in RStudio online ([jump here](setupRonline_n_getstarted_revealjs.html#/grabbing-some-code-from-github-a-gva-x-jobs-blocks-example) to skip R intro). The script you'll grab is self-contained: all code and packages are included, and the #codecomments run you through its use. (In this example, we'll make a GVA \* jobs 'block' plot. See comments for details...)
 
 ------------------------------------------------------------------------
 

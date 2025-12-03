@@ -3396,7 +3396,7 @@
     "href": "setupRonline_n_getstarted_revealjs.html#these-slides-run-through-3-things",
     "title": "Get set up using R online, make a script in RStudio and run code from github",
     "section": "These slides run through 3 things:",
-    "text": "These slides run through 3 things:\n\nGetting set up using R and RStudio in posit.cloud through the browser. (See here if you want a run-through of setting up R on your own machine.)\nGetting started using RStudio - making a new script, entering some commands and loading a library.\nAn example of grabbing code from github to run in RStudio online. The script you’ll grab is self-contained: all code and packages are included, and the #codecomments run you through its use. (In this example, we’ll make a GVA * jobs ‘block’ plot. See comments for details…)"
+    "text": "These slides run through 3 things:\n\nGetting set up using R and RStudio in posit.cloud through the browser. (See here if you want a run-through of setting up R on your own machine.)\nGetting started using RStudio - making a new script, entering some commands and loading a library.\nAn example of grabbing code from github to run in RStudio online (jump here to skip R intro). The script you’ll grab is self-contained: all code and packages are included, and the #codecomments run you through its use. (In this example, we’ll make a GVA * jobs ‘block’ plot. See comments for details…)"
   },
   {
     "objectID": "setupRonline_n_getstarted_revealjs.html#getting-code-from-elsewhere-into-posit.cloud",
