@@ -211,6 +211,8 @@
 
 <ul>
 <li>RStudio in posit.cloud is <strong>free for the most basic version</strong> (1GB memory, 25 projects). That’s plenty for a lot of stuff. There are paid tiers too, if you want to do heavier things (and avoid all installing-R-on-work-machine pain).</li>
+<li>With the free version, you get 25 ‘compute hours’ a month (which is calculated in a <a href="https://support.posit.co/hc/en-us/articles/4422648539031-Compute-Hours-and-the-Background-Execution-Limit-in-Posit-Cloud#:~:text=The%20article%20will%20explain%20how,allows%20the%20project%20to%20complete.">mildly confusing way</a> but should be fine for occasional use).</li>
+<li>Pricing for more compute power and time is <a href="https://posit.cloud/plans">pretty reasonable</a>, if you end up wanting more.</li>
 </ul>
 </section>
 <section>
@@ -245,8 +247,9 @@
 <h1>2. Using RStudio</h1>
 
 </section>
-<section id="you-should-now-have-rstudio-open-in-your-posit.cloud-account" class="slide level2">
-<h2>You should now have RStudio open in your posit.cloud account…</h2>
+<section class="slide level2">
+
+<p><strong>You should now have RStudio open in your posit.cloud account…</strong></p>
 <p>It should look something like the pic below.</p>
 <div class="center">
 <p><img data-src="quarto_docs/images/emptyrstudio.png"></p>
@@ -447,7 +450,7 @@
 <section class="slide level2">
 
 <ul>
-<li>The code will plot GVA vs GVA-per-fulltime-job in sector blocks, stacked in order of productivity (gva per full time job). We get to see some interesting things.</li>
+<li>The code will <strong>plot GVA vs GVA-per-fulltime-job in sector blocks, stacked in order of productivity</strong> (gva per full time job). It can be a revealing way to look at productivity.</li>
 <li>It’s done at ITL3 level, and we can select ITL3s within a particular ITL2 (e.g.&nbsp;West Yorkshire, South Yorkshire…)</li>
 <li><a href="">Here’s a blog post</a> talking through the data and resulting questions in a bit more detail.</li>
 </ul>
@@ -475,16 +478,67 @@
 </div>
 </div>
 </section>
+<section id="if-youre-pasting-code-from-the-clipboard" class="slide level2">
+<h2>If you’re pasting code from the clipboard…</h2>
+<ul>
+<li>Either make a new script again, as we did in <a href="setupRonline_n_getstarted_revealjs.html#/making-a-new-r-script-in-rstudio">this slide</a>. It’ll open in a new tab.</li>
+<li>Or just delete the code from your existing R script and paste into that.</li>
+</ul>
+</section>
 <section class="slide level2">
 
 <ul>
-<li>Once that code is into an R script, we can <strong>run it chunk by chunk from top to bottom</strong>, as described in <a href="setupRonline_n_getstarted_revealjs.html#/5/6">this slide earlier</a>.</li>
-<li>Comments in the script talk through what each chunk is doing.</li>
+<li>Once that code is into an R script, we can <strong>run it chunk by chunk from top to bottom</strong>, as described in <a href="setupRonline_n_getstarted_revealjs.html#/5/6">this slide earlier</a> - <strong>run each code chunk by placing the cursor there and either using CMD/CTRL + ENTER or using the ‘run’ button.</strong></li>
+<li>Comments in the script talk through what each chunk is doing - <strong>the next couple of slides explain one or two key things.</strong></li>
 <li>You can also select all text with CTRL or CMD + A - and then CTRL/CMD + ENTER will run the whole thing in one go.</li>
 </ul>
 </section>
 <section class="slide level2">
 
+<ul>
+<li>So: run all the first lines loading libraries (and installing ggrepel)</li>
+<li>Then load the combined GVA and BRES jobs data (see pic)</li>
+</ul>
+<div class="center">
+<p><img data-src="quarto_docs/images/bresdataload.png" width="600"></p>
+</div>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>You’ll know that’s run OK if <em>bres.gva.2d</em> has appeared in the environment panel - <strong>click anywhere on its name in that panel to view the data.</strong></li>
+</ul>
+<div class="center">
+<p><img data-src="quarto_docs/images/bresinpanel.png" width="450"></p>
+</div>
+</section>
+<section id="if-you-want-different-geographies" class="slide level2">
+<h2>If you want different geographies</h2>
+<ul>
+<li>Then you’ll want to tweak the code the sets the <em>listofplaces</em> (from line 40). There are a couple of options.</li>
+<li><strong>Use the geog lookup that’s loaded in.</strong> You can get all ITL3 zones within e.g.&nbsp;the West Yorkshire ITL2 (this is the default). See pic - either set the name directly or use the grepl line to search for a partial match.</li>
+</ul>
+<div class="center">
+<p><img data-src="quarto_docs/images/setitl2.png" width="450"></p>
+</div>
+</section>
+<section class="slide level2">
+
+<ul>
+<li>You’ve also got the option of setting the ITL3 name directly, either by a regex search or in a string - see the next few lines in the script for examples.</li>
+<li>Then <strong>run the rest of the code to make the plot</strong>. It should look something like the example on the next slide. Picking out a couple of things to note:</li>
+<li><strong>Finance</strong> is fewer-jobs but large output (the area of the plot is total GVA) and large in all but one ITL3 here.</li>
+<li>Note <strong>warehousing</strong> in Wakefield: many jobs, but average output per job is low.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<div class="center">
+<p><img data-src="quarto_docs/images/gvabyjobsplot.png"></p>
+</div>
+</section>
+<section id="view-and-save-the-plot" class="slide level2">
+<h2>View and save the plot</h2>
 <ul>
 <li>You may need to click on the ‘Plots’ panel to see the output.</li>
 <li>Use the ‘Zoom’ option to pop out a resizeable view of the plot.</li>

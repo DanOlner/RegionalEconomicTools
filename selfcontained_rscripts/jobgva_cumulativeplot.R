@@ -25,6 +25,8 @@ bres.gva.2d = readRDS(gzcon(url('https://github.com/DanOlner/RegionalEconomicToo
 
 
 
+# GET SOME BESPOKE SECTOR-SPECIFIC COLOURS
+
 # Get some consistent sector colours so each sector is the same
 # A larger number than the standard brewer palettes need so let's get our own
 # Nabbed from https://stackoverflow.com/questions/15282580/how-to-generate-a-number-of-most-distinctive-colors-in-r
@@ -34,6 +36,8 @@ col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_co
 colourstouse <- col_vector[1:(1+(n-1))]
 
 
+
+# GET THE ITL3 ZONES TO INCLUDE IN THE PLOT
 
 # Use a lookup to get ITL3 names from within a specific ITL2
 itl.lookup = read_csv('https://raw.githubusercontent.com/DanOlner/RegionalEconomicTools/refs/heads/gh-pages/data/LAD_(December_2024)_to_LAU1_to_ITL3_to_ITL2_to_ITL1_(January_2025)_Lookup_in_the_UK.csv')
@@ -49,7 +53,9 @@ table(unique(bres.gva.2d$ITL_code) %in% unique(itl.lookup$ITL325CD))
 # Either with this code or click on its name in the environment panel top right
 # itl.lookup %>% View
 
-# We can use that to list lists of ITL3s for specific ITL2s or ITL1s even
+
+
+# We can use the lookup to get a list of ITL3s for specific ITL2s or ITL1s even
 listofplaces = itl.lookup %>% 
   filter(ITL225NM == 'West Yorkshire') %>% #Either look for direct match
   # filter(grepl('west yorks',ITL225NM, ignore.case = T)) %>% #Or search for string
@@ -62,7 +68,24 @@ listofplaces = itl.lookup %>%
   # filter(grepl('north yorks',ITL225NM, ignore.case = T)) %>%
   # pull(ITL325NM)
 
+# Or if we want, we can set ITL3 names directly from the main dataset with a part-string match
+# For example, this pulls out some specific cities
+# In grepl, we're separating places with an OR symbol - |
+# Also includes a second grepl line to say 'but not places with 'greater' in the name
+# In this case, that exclues the various greater Manchester ITL3s picked up in the 1st grepl
+# And a couple of 'nottinghamshires'
+# listofplaces = bres.gva.2d %>%
+#   select(Region_name) %>% 
+#   distinct() %>% 
+#   filter(
+#     grepl('Leeds|Manch|Sheff|Nottingh|Bristol|glasgow',Region_name, ignore.case = T),
+#     !grepl("greater|shire", Region_name, ignore.case = TRUE)
+#     ) %>% 
+#   pull() 
 
+# And you can of course set that string directly if you want to use the exact names
+# Which you could get, for instance, by Viewing the data and searching in it
+# listofplaces = c("Bristol, City of","Leeds","Manchester","Nottingham","Sheffield","Glasgow City")
 
 # Keep just those places and pick out the latest available year
 # Which is smoothed average of 2021 to 2023 (appears as 2022 in data)
@@ -72,6 +95,9 @@ places = bres.gva.2d %>%
     year == max(year)
   )
 
+
+
+# MAKE THE DATA FOR THE PLOT AND PLOT IT! 
 
 # Create data for plotting cumulative job blocks
 plot.df = places %>%
@@ -83,14 +109,13 @@ plot.df = places %>%
          ymax = `gva/job`) %>%
   ungroup()
 
-
-
 # Split label types based on size of job count
 # So we can use two label types
 # Neither does the job well - both together work alright when split
 textcutoffsize = 1300
 
 # Start plot - add extra plotting elements to p before finally plotting
+# Note: control the layout in facet_wrap with ncol and nrow
 p = ggplot() +
   geom_rect(data = plot.df, aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, fill = SIC07_description_shortened), color = "black", size =0.25) +
   labs(
@@ -120,8 +145,11 @@ p = p + geom_text_repel(
 )
 
 # Plot!
+# You may need to click on the 'Plot' pane to see it.
 # Use the zoom button in the Plots panel to get a resizeable pop-out version
 p
 
-# Save! Download in the files tab on the right.
+# SAVE!
+# The save will be visible in the files tab.
+# Download in the files tab on the right.
 ggsave('gvajobsblocks.png', width = 14, height = 12)

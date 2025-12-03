@@ -3411,5 +3411,33 @@
     "title": "Get set up using R online, make a script in RStudio and run code from github",
     "section": "That’s all folks",
     "text": "That’s all folks\nOnto more R goodness!\nLet me know if anything doesn’t work or doesn’t make sense - d dot olner at sheffield dot ac dot uk"
+  },
+  {
+    "objectID": "setupRonline_n_getstarted_revealjs.html#if-you-want-to-pick-a-different-geography-to-look-at",
+    "href": "setupRonline_n_getstarted_revealjs.html#if-you-want-to-pick-a-different-geography-to-look-at",
+    "title": "Get set up using R online, make a script in RStudio and run code from github",
+    "section": "If you want to pick a different geography to look at…",
+    "text": "If you want to pick a different geography to look at…\n\nThen you’ll want to tweak the code the sets the listofplaces (from line 40). There are a couple of options.\nUse the ITL3 to ITL2/1 lookup that’s loaded in. Here, you can - for example - get all ITL3 zones within the West Yorkshire ITL2 (this is the one the script uses by default). See pic - either set the name directly or use the grepl line to search for a partial match."
+  },
+  {
+    "objectID": "setupRonline_n_getstarted_revealjs.html#if-you-want-different-geographies",
+    "href": "setupRonline_n_getstarted_revealjs.html#if-you-want-different-geographies",
+    "title": "Get set up using R online, make a script in RStudio and run code from github",
+    "section": "If you want different geographies",
+    "text": "If you want different geographies\n\nThen you’ll want to tweak the code the sets the listofplaces (from line 40). There are a couple of options.\nUse the geog lookup that’s loaded in. You can get all ITL3 zones within e.g. the West Yorkshire ITL2 (this is the default). See pic - either set the name directly or use the grepl line to search for a partial match."
+  },
+  {
+    "objectID": "setupRonline_n_getstarted_revealjs.html#view-and-save-the-plot",
+    "href": "setupRonline_n_getstarted_revealjs.html#view-and-save-the-plot",
+    "title": "Get set up using R online, make a script in RStudio and run code from github",
+    "section": "View and save the plot",
+    "text": "View and save the plot\n\nYou may need to click on the ‘Plots’ panel to see the output.\nUse the ‘Zoom’ option to pop out a resizeable view of the plot.\nThe final ggsave command in the script saves a copy as a png into the project’s folder. You can view and download it from there - use ‘Export’."
+  },
+  {
+    "objectID": "setupRonline_n_getstarted_revealjs.html#if-youre-pasting-code-from-the-clipboard",
+    "href": "setupRonline_n_getstarted_revealjs.html#if-youre-pasting-code-from-the-clipboard",
+    "title": "Get set up using R online, make a script in RStudio and run code from github",
+    "section": "If you’re pasting code from the clipboard…",
+    "text": "If you’re pasting code from the clipboard…\n\nEither make a new script again, as we did in this slide. It’ll open in a new tab.\nOr just delete the code from your existing R script and paste into that."
   }
 ]

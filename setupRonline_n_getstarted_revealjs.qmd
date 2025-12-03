@@ -28,6 +28,10 @@ knitr::opts_chunk$set(fig.height = 8, fig.width = 10, echo = TRUE, warning = F, 
 ------------------------------------------------------------------------
 
 -   RStudio in posit.cloud is **free for the most basic version** (1GB memory, 25 projects). That's plenty for a lot of stuff. There are paid tiers too, if you want to do heavier things (and avoid all installing-R-on-work-machine pain).
+-   With the free version, you get 25 'compute hours' a month (which is calculated in a [mildly confusing way](https://support.posit.co/hc/en-us/articles/4422648539031-Compute-Hours-and-the-Background-Execution-Limit-in-Posit-Cloud#:~:text=The%20article%20will%20explain%20how,allows%20the%20project%20to%20complete.) but should be fine for occasional use).
+-   Pricing for more compute power and time is [pretty reasonable](https://posit.cloud/plans), if you end up wanting more.
+
+
 
 # 1. Get R/RStudio running in your browser with posit.cloud
 
@@ -51,7 +55,7 @@ knitr::opts_chunk$set(fig.height = 8, fig.width = 10, echo = TRUE, warning = F, 
 
 ------------------------------------------------------------------------
 
-## You should now have RStudio open in your posit.cloud account...
+**You should now have RStudio open in your posit.cloud account...**
 
 It should look something like the pic below.
 
@@ -215,7 +219,7 @@ Let's do #1: **Run the code line by line**.
 
 ----
 
--   The code will plot GVA vs GVA-per-fulltime-job in sector blocks, stacked in order of productivity (gva per full time job). We get to see some interesting things.
+-   The code will **plot GVA vs GVA-per-fulltime-job in sector blocks, stacked in order of productivity** (gva per full time job). It can be a revealing way to look at productivity.
 -   It's done at ITL3 level, and we can select ITL3s within a particular ITL2 (e.g. West Yorkshire, South Yorkshire...)
 -   [Here's a blog post]() talking through the data and resulting questions in a bit more detail.
 
@@ -237,11 +241,66 @@ Let's do #1: **Run the code line by line**.
 
 ----
 
-* Once that code is into an R script, we can **run it chunk by chunk from top to bottom**, as described in [this slide earlier](setupRonline_n_getstarted_revealjs.html#/5/6). 
-* Comments in the script talk through what each chunk is doing.
+## If you're pasting code from the clipboard...
+
+-   Either make a new script again, as we did in [this slide](setupRonline_n_getstarted_revealjs.html#/making-a-new-r-script-in-rstudio). It'll open in a new tab.
+-   Or just delete the code from your existing R script and paste into that.
+
+
+----
+
+* Once that code is into an R script, we can **run it chunk by chunk from top to bottom**, as described in [this slide earlier](setupRonline_n_getstarted_revealjs.html#/5/6) - **run each code chunk by placing the cursor there and either using CMD/CTRL + ENTER or using the 'run' button.**
+* Comments in the script talk through what each chunk is doing - **the next couple of slides explain one or two key things.**
 * You can also select all text with CTRL or CMD + A - and then CTRL/CMD + ENTER will run the whole thing in one go.
 
 ----
+
+* So: run all the first lines loading libraries (and installing ggrepel)
+* Then load the combined GVA and BRES jobs data (see pic)
+
+::: center
+![](quarto_docs/images/bresdataload.png){width="600px"}
+:::
+
+----
+
+* You'll know that's run OK if *bres.gva.2d* has appeared in the environment panel - **click anywhere on its name in that panel to view the data.**
+
+
+::: center
+![](quarto_docs/images/bresinpanel.png){width="450px"}
+:::
+
+
+
+----
+
+## If you want different geographies
+
+* Then you'll want to tweak the code the sets the *listofplaces* (from line 40). There are a couple of options.
+* **Use the geog lookup that's loaded in.** You can get all ITL3 zones within e.g. the West Yorkshire ITL2 (this is the default). See pic - either set the name directly or use the grepl line to search for a partial match. 
+
+::: center
+![](quarto_docs/images/setitl2.png){width="450px"}
+:::
+
+----
+
+* You've also got the option of setting the ITL3 name directly, either by a regex search or in a string - see the next few lines in the script for examples.
+* Then **run the rest of the code to make the plot**. It should look something like the example on the next slide. Picking out a couple of things to note:
+* **Finance** is fewer-jobs but large output (the area of the plot is total GVA) and large in all but one ITL3 here.
+* Note **warehousing** in Wakefield: many jobs, but average output per job is low.
+
+----
+
+::: center
+![](quarto_docs/images/gvabyjobsplot.png)
+:::
+
+
+----
+
+## View and save the plot
 
 * You may need to click on the 'Plots' panel to see the output.
 * Use the 'Zoom' option to pop out a resizeable view of the plot.
