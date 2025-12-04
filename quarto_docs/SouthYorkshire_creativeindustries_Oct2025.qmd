@@ -84,7 +84,11 @@ There's a [section below with bullet points](#bullet-points-from-the-lq-plots-be
 
 -   Sound recording and music publishing (SIC 592) show up strongly in both BRES and Companies House data in Sheffield. Though not a large proportion of jobs (BRES had 300 pre-COVID; CH has 130 as of September 2025), Sheffield is high compared to the LQ positions for the other core cities, suggesting a strong cluster underneath. Companies House picks up on more SIC 592 jobs than BRES does - the 'home grown' factor may be high. As [Neil McSweeney's in-depth report](https://docs.google.com/document/d/18VY8wIikzF2FpNmF3BJlzEvV2YO7JV_g9fySctIVWis/edit?tab=t.0#heading=h.hnkgpo7t962h) shows, it is important to understand where the strands of economic connection go. He finds the music sector in Sheffield connects to "40 different SIC codes across 11 economic categories", looking at Companies House firms. The relatively high LQ concentration found in Sheffield is likely a reflection of that integration.
 
--   The 'creative arts / entertainment' SIC (90) is broad, covering performing arts and art (including facilities). SIC 90 picks up on high creative/culture concentration in Sheffield, which continues to grow. There's also SIC 90 growth in Barnsley and Doncaster, though LQ \< 1 (less concentrated than GB average). This broad sector doesn't vary hugely in concentration across either core cities or the four local authorities - it is fairly evenly spread across these places. But it's a sizeable chunk of jobs. However, more information is needed to know what's going on under the hood. Companies House firm level data could help with this.
+-   The 'creative arts / entertainment' SIC (90) is broad, covering performing arts and art (including facilities). SIC 90 picks up on high creative/culture concentration in Sheffield, which continues to grow. There's also SIC 90 growth in Barnsley and Doncaster, though LQ \< 1 (less concentrated than GB average). This broad sector doesn't vary hugely in concentration across either core cities or the four local authorities - it is fairly evenly spread across these places. But it's a sizeable chunk of jobs.
+
+    -   Given SIC 90 is so broad, [this section below](#closer-look-at-sic-90-artsentertainmentrecreation) unpacks details for the four 5-digit SIC subsectors underneath that SIC code, including an interactive plot of firms within South Yorkshire from Companies House. In the BRES jobs data, Sheffield shows up more clearly as relatively strong and growing compared to other core cities in everything here except arts facilities. The Companies House data picks up on performing arts support firms in Barnsley (topping that LQ list, 89 total employees in the most recent year).
+
+    -   [This SIC 90 subsector interactive plot](http://localhost:6359/quarto_docs/SY_creativeindustries_Oct2025.html#companies-house-interactive-plot-of-individual-firms-for-sic-90-subsectors-in-south-yorkshire), using Companies House data, shows some of the demographics of firms in these sectors (for those HQ'd in the region). It gives details of individual firms if you hover over points. Sheffield and Barnsley here have the larger, more established firms. Rotherham appears to have fewer older organisations. Most are micro-firms, as is true of all Companies House data.
 
 -   Two ICT sectors - computer programming (6201) and consultancy (6202) - have a similar story in all four SY places: not as concentrated as other core cities, but all growing in their job proportions (previous analysis shows ICT as one of South Yorkshire's strongest growth sectors, significantly ahead of other places in the UK). The issue is understanding what proportion of these sectors is CCI-connected.
 
@@ -95,7 +99,6 @@ There's a [section below with bullet points](#bullet-points-from-the-lq-plots-be
 -   Though job numbers are low, Sheffield and Birmingham both stand out as jewellery specialists, with no other core city having an LQ above 1. (It would be good to have similarly in-depth knowledge on its deeper city and region connections).
 
 -   For context, the plots for [jobs](#cci-jobs-as-a-percent-of-the-total-for-core-cities-and-south-yorkshire) and [GVA](#cci-gva-as-a-percent-of-the-total-for-core-cities-and-south-yorkshire) over time show that Sheffield's CCI concentration has been at or near the low end of core cities in recent years. Examining Arts Council spending, Sheffield is lowest by some way compared to other English core cities (see [plot here](https://danolner.github.io/ukcompare/plotly/artscouncil_totalspend_percentofEnglishAv.html)) - both causal and symptomatic, most likely.
-
 
 # Existing (or recently ended) UKRI CCI clusters
 
@@ -133,7 +136,7 @@ The next two plots show Creative and Cultural Industries job counts and GVA as a
 
 South Yorkshire's four places are indicated with thicker lines.
 
-## CCI jobs as a percent of the total for core cities and South Yorkshire
+## CCI jobs as a percent of the total for core cities and South Yorkshire {#cci-jobs-as-a-percent-of-the-total-for-core-cities-and-south-yorkshire}
 
 Here, job counts from BRES are summed for all industrial strategy creative SIC codes to find how the percent of South Yorkshire's CCI jobs has changed over the data's history, alongside Great Britain core cities for comparison.
 
@@ -216,7 +219,7 @@ ggplot(cciplot %>%
 
 ```
 
-## CCI GVA as a percent of the total for core cities and South Yorkshire
+## CCI GVA as a percent of the total for core cities and South Yorkshire {#cci-gva-as-a-percent-of-the-total-for-core-cities-and-south-yorkshire}
 
 Economic output for CCI sectors has to use a slightly different sector list, as the regional GVA data only has '58-60' and '90-91' SIC codes at ITL3 level (the level that most closely matches local authorities).
 
@@ -1039,7 +1042,7 @@ p
 
 ```
 
-### Companies House other sectors 
+### Companies House other sectors
 
 ```{r, fig-chindstrat2r}
 #| fig-height: 13
@@ -1064,6 +1067,88 @@ p2 <- p2 +
 
 p2
 
+
+
+```
+
+## Closer look at SIC 90 (Arts/Entertainment/Recreation) {#closer-look-at-sic-90-artsentertainmentrecreation}
+
+This section unpacks SIC 90 a little bit more. This 2-digit sector has only four 5 digit SIC codes nested beneath it. Those are:
+
+-   Class 90.01: Performing arts
+-   Class 90.02: Support activities to performing arts
+-   Class 90.03: Artistic creation
+-   Class 90.04: Operation of arts facilities
+
+Below, each of South Yorkshire's four places (in **upper-case**) are placed alongside core cities. Each plot looks at **one of those four SIC 90 subsectors**. Again, there are plots for BRES and Companies House jobs data separately - though the numbers in these don't vary hugely, so Companies House data isn't picking up on anything BRES has entirely missed (as it does in some other sectors).
+
+After that, there is a section that provides and **interactive plot of firms** in these four subsectors, showing their age in years, and broken down by the four places. **Hover for the firm name and its number of employees**. Sheffield and Barnsley appear to have more established SY-HQd firms in these subsectors, compared to Doncaster and Rotherham.
+
+### BRES: four SIC 90 subsectors
+
+```{r sic90bres}
+#| fig-height: 30
+
+sic90lqs = readRDS('../local/sic90lqs_bres.rds')
+
+# Make SY place names uppercase to see
+sic90lqs = sic90lqs %>% 
+  mutate(
+    Region_name = ifelse(Region_name %in% c('Barnsley','Doncaster','Rotherham','Sheffield'), toupper(Region_name), Region_name)
+  )
+
+bresplots = map(unique(sic90lqs$SIC07_description), ~sic90subsector_lqs(sic90lqs,.x))
+
+wrap_plots(bresplots, ncol = 1)
+
+```
+
+### Companies house: four SIC 90 subsectors
+
+```{r sic90companieshouse}
+#| fig-height: 30
+ 
+sic90lqs.ch = readRDS('../local/sic90lqs_companieshouse.rds')
+
+sic90lqs.ch = sic90lqs.ch %>% 
+  mutate(
+    Region_name = ifelse(Region_name %in% c('Barnsley','Doncaster','Rotherham','Sheffield'), toupper(Region_name), Region_name)
+  )
+
+chplots = map(unique(sic90lqs.ch$SIC07_description), ~sic90subsector_lqs(sic90lqs.ch,.x))
+
+wrap_plots(chplots, ncol = 1)
+
+```
+
+### Companies House: interactive plot of individual firms for SIC 90 subsectors in South Yorkshire
+
+-   Hover for firm name and number of workers.
+-   Size of point reflects employee count.
+
+```{r firmagech}
+#| fig-height: 10
+
+ch.sy90 = readRDS('../local/data/chsy90.rds')
+
+set.seed(10)
+
+p = ggplot(
+  ch.sy90, 
+  aes(x = age_of_firm_years, y = localauthority_name, colour = SIC07_description, size = Employees_thisyear, shape = SIC07_description, label = labelname)
+  # aes(x = age_of_firm_years, y = SIC07_description, colour = localauthority_name, size = Employees_thisyear, shape = localauthority_name, label = labelname)
+) + 
+  geom_jitter(height = 0.3, alpha = 0.7) +
+  scale_color_brewer(palette = 'Dark2', direction = 1) +
+  scale_shape_manual(values = c(15,16,17,18)) +
+  scale_size_continuous(range = c(2,8)) +
+  ylab("") +
+  xlab("Firm age") +
+  theme(legend.title = element_blank())#This doesn't work in ggplotly
+
+
+ggplotly(p, tooltip = 'labelname') %>% 
+  layout(legend = list(title = list(text = "")))
 
 
 ```

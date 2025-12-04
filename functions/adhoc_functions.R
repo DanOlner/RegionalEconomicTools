@@ -583,7 +583,139 @@ ynh_autoplots = function(sector){
 
 
 
-
+# Ad hoc for getting 5 digit subsectors in SIC90 visualised
+# For SY LAs vs core cities
+# From both BRES and companies house job counts
+sic90subsector_lqs = function(data,sector){
+  
+  # This is year in BRES data but for companies house is just difference between two timepoints
+  # slopetimevar = enquo(slopetimevar)
+  # Nope! Is called 'year' in CH data and will function the same
+  
+  # Get ITL3 plot made for the places in Y&H
+  LQ_slopes <- compute_slope_or_zero(
+    data = data, 
+    Region_name, SIC07_description,#slopes will be found within whatever grouping vars are added here
+    y = LQ_log, x = year)
+  
+  
+  #Filter down to a single year... we may want to smooth years, let's see
+  yeartoplot <- data %>% filter(year == max(year))#use latest year
+  
+  
+  # Filter down just to the sector we're displaying
+  # so we can get order correct
+  yeartoplot = yeartoplot %>% filter(SIC07_description == sector)
+  
+  
+  # Filter to just yorkshire and core cities
+  # corecities = readRDS('data/corecitiesvector.rds')
+  
+  # check... false will be Belfast
+  table(corecities %in% c(yeartoplot$Region_name))
+  
+  # FILTER PLACE
+  yeartoplot = yeartoplot %>% 
+    filter(
+      Region_name %in% c(corecities,toupper(c('Barnsley','Doncaster','Rotherham','Sheffield')))
+      # Region_name %in% c(corecities,c('Barnsley','Doncaster','Rotherham','Sheffield'))
+    )
+  
+  # Tick, I think
+  unique(yeartoplot$Region_name)
+  
+  
+  #Add slopes into data to get LQ plots
+  yeartoplot <- yeartoplot %>% 
+    left_join(
+      LQ_slopes,
+      by = c('Region_name', 'SIC07_description')
+    )
+  
+  #Get min/max values for LQ over time as well, for each sector and place, to add as bars so range of sector is easy to see
+  minmaxes <- data %>% 
+    group_by(Region_name, SIC07_description) %>% 
+    summarise(
+      min_LQ_all_time = min(LQ, na.rm = T),
+      max_LQ_all_time = max(LQ, na.rm = T)
+    ) %>% 
+    mutate(
+      min_LQ_all_time = ifelse(is.infinite(min_LQ_all_time),NA,min_LQ_all_time),
+      max_LQ_all_time = ifelse(is.infinite(max_LQ_all_time),NA,max_LQ_all_time)
+    )
+  
+  # table(is.infinite(minmaxes$min_LQ_all_time))
+  # table(is.infinite(minmaxes$max_LQ_all_time))
+  
+  #Join min and max
+  yeartoplot <- yeartoplot %>% 
+    left_join(
+      minmaxes,
+      by = c('Region_name', 'SIC07_description')
+    )
+  
+  
+  # Make a column with the amount and % in to display as part of labels
+  yeartoplot = yeartoplot %>% 
+    mutate(
+      displayregions = paste0(
+        Region_name,
+        ": ",
+        # round(JOBCOUNT/1000,2),
+        JOBCOUNT,
+        ", ",
+        round(sector_regional_proportion * 100,2),
+        "%"
+      )
+    )
+  
+  # placeLQorder <- yeartoplot %>% 
+  #   arrange(-LQ) %>% 
+  #   pull(displayregions) 
+  
+  #Turn the sector column into a factor and order by LQs
+  # yeartoplot$displayregions <- factor(yeartoplot$displayregions, levels = placeLQorder, ordered = T)
+  yeartoplot = yeartoplot %>% 
+    mutate(
+      displayregions = fct_reorder(displayregions,LQ_log,.desc = T)
+    )
+  
+  # factor(yeartoplot$displayregions, levels = placeLQorder, ordered = T)
+  
+  
+  # Get range to display on x axis
+  # Use min and max of minmaxes here
+  plot_range = minmaxes %>% filter(SIC07_description == sector) %>% 
+    select(min_LQ_all_time:max_LQ_all_time) %>% 
+    pivot_longer(min_LQ_all_time:max_LQ_all_time, names_to = 'cols', values_to = 'vals') %>% 
+    ungroup() %>% 
+    reframe(range = range(vals)) %>% 
+    pull(range) 
+  
+  if(plot_range[1]==0) plot_range[1] = 0.1# Avoid log infs
+  
+  # debugonce(LQ_baseplot)
+  p2 <- LQ_baseplot(df = yeartoplot, alpha = 1, sector_name = displayregions, 
+                    LQ_column = LQ, change_over_time = slope)
+  
+  # debugonce(addplacename_to_LQplot)
+  p2 <- addplacename_to_LQplot(df = yeartoplot, plot_to_addto = p2, maxLQvalmultiplier = 20,#Hide it!
+                               placename = sector, shapenumber = 16,
+                               min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
+                               value_column = JOBCOUNT, sector_regional_proportion = sector_regional_proportion,
+                               region_name = SIC07_description,
+                               sector_name = displayregions, change_over_time = slope, LQ_column = LQ,
+                               text = 7, value_col_ismoney = T)
+  
+  p2 <- p2 +
+    coord_cartesian(xlim = plot_range) +
+    ggtitle(sector)
+  
+  p2
+  
+  
+  
+}
 
 
 

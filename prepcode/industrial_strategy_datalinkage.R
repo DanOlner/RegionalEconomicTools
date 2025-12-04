@@ -1332,10 +1332,102 @@ knitr::kable(firmtable, escape = FALSE, caption = "Table: Bradford count/% of fi
 # They'd like to know more. Right-ee-ho. Nabbing these sources from above:
 
 # BRES based
-saveRDS(lqs_for_indstrat,'local/lqs_for_indstrat.rds')
-saveRDS(yeartoplots_for_indstrat,'local/yeartoplots_for_indstrat.rds')
+# saveRDS(lqs_for_indstrat,'local/lqs_for_indstrat.rds')
+# saveRDS(yeartoplots_for_indstrat,'local/yeartoplots_for_indstrat.rds')
 
 # Companies house based
+# saveRDS(lqs_for_indstrat,'local/CH_lqs_for_indstrat.rds')
+# saveRDS(yeartoplots_for_indstrat,'local/CH_yeartoplots_for_indstrat.rds')
+
+
+# These will already be at the too-low SIC level right? Need to go back and dig further
+# And don't need to do that in indstrat framework, we just want SIC 90 etc...
+
+# Obvious approach here - break down 90 by broad SIC order. I've done that somewhere else, where was it? 
+# YEP: section -- BRES 2024 LOCAL AUTHORITY LEVEL IndStrat
+# Where we get all LQ levels, so we can look at those
+# I've run that above and we've got both
+# lq_results for BRES
+# And from that, all the LQs combined into one in lqs
+
+# There are only four 5 digit codes below SIC 90, so let's see what we can see from those
+
+sic90lqs = lqs %>% filter(
+  siclevel == 'sic5',
+  str_sub(sic,1,2) == '90'
+) %>% 
+  mutate(
+    SIC07_description = case_when(
+      sic == '90010' ~ 'Performing arts',
+      sic == '90020' ~ 'Support for performing arts',
+      sic == '90030' ~ 'Artistic creation',
+      sic == '90040' ~ 'Arts facilities'
+    )
+  ) %>% 
+  rename(Region_name = GEOGRAPHY_NAME, year = DATE)
+
+# Unique codes are... yep, just those four.
+unique(sic90lqs$sic)
+
+# We can jump fairly quickly to LQs plots for these?
+# yeartoplots = map(lq_results[1:4], ~ .x$yeartoplot %>% 
+#                      mutate(siclevel = names(.)[3], LQ = ifelse(is.nan(LQ),0,LQ)) %>% 
+#                      rename(sic = names(.)[3])) %>% bind_rows
+# 
+# sic90yeartoplots = yeartoplots %>% filter(
+#   siclevel == 'sic5',
+#   str_sub(sic,1,2) == '90'
+# )
+# 
+# # Tick
+# unique(sic90yeartoplots$sic)
+
+
+# And can jump to plotting LQs for them?
+# Actually... we prob want to do each of those four sectors as their own
+# LQs ordered by SY LQ... sigh... 
+# And then the four places? Rather than each place separately?
+
+# For which we have some code...
+# This is from the ynh_autoplots function in adhoc_functions
+# Used for the Y&H autoqmd
+
+# Ad hoc functioned up...
+sic90subsector_lqs(sic90lqs, 'Performing arts')
+
+
+
+# REPEAT FOR COMPANIES HOUSE
+# I just ran the CH code above through to lq_results creation
+lqs.ch <- map(lq_results[1:4], ~ .x$lqs %>% 
+             mutate(siclevel = names(.)[3], LQ = ifelse(is.nan(LQ),0,LQ)) %>% 
+             rename(sic = names(.)[3])) %>% bind_rows
+
+# Now in theory is it all just the same?
+sic90lqs.ch = lqs.ch %>% filter(
+  siclevel == 'sic5',
+  str_sub(sic,1,2) == '90'
+) %>% 
+  mutate(
+    SIC07_description = case_when(
+      sic == '90010' ~ 'Performing arts',
+      sic == '90020' ~ 'Support for performing arts',
+      sic == '90030' ~ 'Artistic creation',
+      sic == '90040' ~ 'Arts facilities'
+    )
+  ) %>% 
+  rename(Region_name = GEOGRAPHY_NAME, year = DATE)
+
+# Unique codes are... yep, just those four.
+unique(sic90lqs.ch$sic)
+
+# In theory, should now be able to throw into ad hoc function... huzzah! *smash*
+sic90subsector_lqs(sic90lqs.ch, 'Performing arts')
+
+
+# SAVE BOTH FOR THE CCI QMD OMG
+saveRDS(sic90lqs,'local/sic90lqs_bres.rds')
+saveRDS(sic90lqs.ch,'local/sic90lqs_companieshouse.rds')
 
 
 
@@ -1343,14 +1435,83 @@ saveRDS(yeartoplots_for_indstrat,'local/yeartoplots_for_indstrat.rds')
 
 
 
+# COMPARE BRES + CH numbers
+# Since we've got both - is there anywhere / any subsector that CH is getting more of?
+# Looking just at sy
+sic90sy = sic90lqs %>% 
+  filter(
+    year == max(year),
+    Region_name %in% c('Barnsley','Doncaster','Rotherham','Sheffield')
+    ) %>%
+  rename(jobs_bres = JOBCOUNT) %>%
+  select(Region_name,jobs_bres,SIC07_description,sic) %>% 
+  left_join(
+    sic90lqs.ch %>% filter(
+      year == max(year),
+      Region_name %in% c('Barnsley','Doncaster','Rotherham','Sheffield')
+    ) %>% rename(jobs_ch = JOBCOUNT) %>% 
+      select(Region_name,jobs_ch,sic),
+    by = c('Region_name','sic')
+  ) %>% 
+  relocate(jobs_bres, .before = jobs_ch) %>% 
+  mutate(
+    percentdiff = percent_change(jobs_bres,jobs_ch)
+  ) %>% 
+  arrange(-percentdiff)
 
 
 
 
+# SOME SIC 90 COMPANIES HOUSE MAPS----
+
+# We have the point data! Just getting SIC 90 for SY
+ch.sy90 = ch %>% 
+  filter(
+    localauthority_name %in% c('Barnsley','Doncaster','Rotherham','Sheffield'),
+    str_sub(SIC_5DIGIT_CODE,1,2) == '90'
+  )  %>% st_set_geometry(NULL) %>% filter(Employees_thisyear > 0) %>% 
+  mutate(
+    SIC07_description = case_when(
+      SIC_5DIGIT_CODE == '90010' ~ 'Performing arts',
+      SIC_5DIGIT_CODE == '90020' ~ 'Support for performing arts',
+      SIC_5DIGIT_CODE == '90030' ~ 'Artistic creation',
+      SIC_5DIGIT_CODE == '90040' ~ 'Arts facilities'
+    )
+  )
+
+# Quick breakdown of ages
+# Make firm name for hover
+ch.sy90 = ch.sy90 %>% 
+  mutate(
+    labelname = paste0(CompanyName,": ", Employees_thisyear, " employees")
+  )
+
+# Save for qmd
+saveRDS(ch.sy90, 'local/data/chsy90.rds')
+
+set.seed(10)
+
+p = ggplot(
+  ch.sy90, 
+  aes(x = age_of_firm_years, y = localauthority_name, colour = SIC07_description, size = Employees_thisyear, shape = SIC07_description, label = labelname)
+  # aes(x = age_of_firm_years, y = SIC07_description, colour = localauthority_name, size = Employees_thisyear, shape = localauthority_name, label = labelname)
+) + 
+  geom_jitter(height = 0.2, alpha = 0.7) +
+  scale_color_brewer(palette = 'Dark2', direction = 1) +
+  scale_shape_manual(values = c(15,16,17,18)) +
+  scale_size_continuous(range = c(2,8)) +
+  ylab("") +
+  xlab("Firm age") +
+  theme(legend.title = element_blank())#This doesn't work in ggplotly
 
 
+ggplotly(p, tooltip = 'labelname') %>% 
+  layout(legend = list(title = list(text = "")))
+  
 
 
+  
+  
 
 
 
