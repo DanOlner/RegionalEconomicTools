@@ -1483,7 +1483,7 @@ ch.sy90 = ch %>%
 # Make firm name for hover
 ch.sy90 = ch.sy90 %>% 
   mutate(
-    labelname = paste0(CompanyName,": ", Employees_thisyear, " employees")
+    firm = paste0(CompanyName,", ", Employees_thisyear, " employees")
   )
 
 # Save for qmd
@@ -1493,8 +1493,8 @@ set.seed(10)
 
 p = ggplot(
   ch.sy90, 
-  aes(x = age_of_firm_years, y = localauthority_name, colour = SIC07_description, size = Employees_thisyear, shape = SIC07_description, label = labelname)
-  # aes(x = age_of_firm_years, y = SIC07_description, colour = localauthority_name, size = Employees_thisyear, shape = localauthority_name, label = labelname)
+  aes(x = age_of_firm_years, y = localauthority_name, colour = SIC07_description, size = Employees_thisyear, shape = SIC07_description, label = firm)
+  # aes(x = age_of_firm_years, y = SIC07_description, colour = localauthority_name, size = Employees_thisyear, shape = localauthority_name, label = firm)
 ) + 
   geom_jitter(height = 0.2, alpha = 0.7) +
   scale_color_brewer(palette = 'Dark2', direction = 1) +
@@ -1505,7 +1505,7 @@ p = ggplot(
   theme(legend.title = element_blank())#This doesn't work in ggplotly
 
 
-ggplotly(p, tooltip = 'labelname') %>% 
+ggplotly(p, tooltip = 'firm') %>% 
   layout(legend = list(title = list(text = "")))
   
 

@@ -273,11 +273,11 @@ droplist_foreachIS8 = function(is8name) {
 
 
 # Return 2D percent change plot, specifically for ynh plotting
-persector_jobsgva_percentchangeplot_ynh = function(sector){
+persector_jobsgva_percentchangeplot_ynh = function(sector, sectorpercentcutoff = 1.5){
   
     placestokeep <- bres.gva.2d %>% 
       filter(year == max(year), SIC07_description == sector) %>% 
-      filter(sector_regional_propfrom_CP * 100 > 1.5) %>%#Keep only places where this sector makes up 1%+ of reg econ
+      filter(sector_regional_propfrom_CP * 100 > sectorpercentcutoff) %>%#Keep only places where this sector makes up 1%+ of reg econ
       select(placename_shortest) %>% 
       distinct() %>%
       pull
@@ -695,8 +695,10 @@ sic90subsector_lqs = function(data,sector){
   if(plot_range[1]==0) plot_range[1] = 0.1# Avoid log infs
   
   # debugonce(LQ_baseplot)
+  # Horrible hack because I added a sector order line that breaks the older version
+  # But is needed for this one... le sigh
   p2 <- LQ_baseplot(df = yeartoplot, alpha = 1, sector_name = displayregions, 
-                    LQ_column = LQ, change_over_time = slope)
+                    LQ_column = LQ, change_over_time = slope, horriblehack = TRUE)
   
   # debugonce(addplacename_to_LQplot)
   p2 <- addplacename_to_LQplot(df = yeartoplot, plot_to_addto = p2, maxLQvalmultiplier = 20,#Hide it!

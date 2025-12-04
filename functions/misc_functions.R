@@ -232,7 +232,7 @@ add_location_quotient_and_proportions <- function(df, regionvar, lq_var, valueva
 
 
 #Make base plot for LQ plot, with option of setting alpha to zero if we don't want to see all other places
-LQ_baseplot <- function(df, alpha = 0.1, shape = 16, sector_name, LQ_column, change_over_time, labelcolumn){
+LQ_baseplot <- function(df, alpha = 0.1, shape = 16, sector_name, LQ_column, change_over_time, labelcolumn, horriblehack = F){
   
   sector_name <- enquo(sector_name)
   LQ_column <- enquo(LQ_column)
@@ -259,10 +259,12 @@ LQ_baseplot <- function(df, alpha = 0.1, shape = 16, sector_name, LQ_column, cha
   )  +
   scale_size_continuous(range = c(1,17)) +
   scale_x_continuous(trans = 'log10') +
-  scale_y_discrete(limits = lvls, drop = FALSE) +#Enforce levels on y axis
   geom_vline(xintercept = 1, colour = 'blue') +
   guides(size = F) +
   ylab("")
+  
+  # HORRIBLE HACK to deal with level enforce working only for one plot type
+  if(horriblehack) p = p + scale_y_discrete(limits = lvls, drop = FALSE) +#Enforce levels on y axis
   
   if(!rlang::quo_is_missing(labelcolumn)){
    

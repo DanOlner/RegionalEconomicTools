@@ -1714,6 +1714,10 @@ plottosave
 
 p = ynh_autoplots("Creative, arts, entertainment and cultural activities")
 
+# Force getting jobs x gva plot to check...
+# ps = persector_jobsgva_percentchangeplot_ynh(
+#   "Creative, arts, entertainment and cultural activities",
+#   sectorpercentcutoff = 0.1)
 
 # Text for adding to qgm document to plot the three combined plots
 if(!is.null(p[[3]])){
