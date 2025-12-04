@@ -1327,6 +1327,17 @@ knitr::kable(firmtable, escape = FALSE, caption = "Table: Bradford count/% of fi
 
 
 
+# CCI SIC90 AND OTHERS: DIGGING DEEPER----
+
+# They'd like to know more. Right-ee-ho. Nabbing these sources from above:
+
+# BRES based
+saveRDS(lqs_for_indstrat,'local/lqs_for_indstrat.rds')
+saveRDS(yeartoplots_for_indstrat,'local/yeartoplots_for_indstrat.rds')
+
+# Companies house based
+
+
 
 
 
