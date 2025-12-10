@@ -85,6 +85,23 @@ listofplaces = itl.lookup %>%
 #     ) %>% 
 #   pull() 
 
+# Pick four random
+listofplaces = sample(unique(bres.gva.2d$Region_name),4)
+# Add in any extras
+
+
+listofplaces = c(listofplaces,
+                 bres.gva.2d %>%
+                   select(Region_name) %>%
+                   distinct() %>%
+                   filter(
+                     grepl('Blackpool|talbot',Region_name, ignore.case = T),
+                     # grepl('Leeds|Manch|Sheff|Nottingh|Bristol|glasgow',Region_name, ignore.case = T),
+                     # !grepl("greater|shire", Region_name, ignore.case = TRUE)
+                     ) %>%
+                   pull()
+                 )
+
 # And you can of course set that string directly if you want to use the exact names
 # Which you could get, for instance, by Viewing the data and searching in it
 # listofplaces = c("Bristol, City of","Leeds","Manchester","Nottingham","Sheffield","Glasgow City")
@@ -154,4 +171,4 @@ p
 # SAVE!
 # The save will be visible in the files tab.
 # Download in the files tab on the right.
-ggsave('gvajobsblocks.png', width = 14, height = 12)
+# ggsave('gvajobsblocks.png', width = 14, height = 12)
