@@ -169,7 +169,8 @@ ggplot(
   aes(y = fct_reorder(Description,GVA), x = GVA)
 ) +
   geom_point() +
-  geom_errorbar(aes(xmin = gva_min95, xmax = gva_max95), width = 0.3)
+  geom_errorbar(aes(xmin = gva_min95, xmax = gva_max95), width = 0.3) +
+  ylab('')
 
 
 
