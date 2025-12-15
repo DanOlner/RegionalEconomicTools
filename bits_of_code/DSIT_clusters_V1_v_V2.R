@@ -93,6 +93,12 @@ v1 %>%
 # Where does SY come in other measures?
 v1 %>% filter(DataSource == 'RTIC', Sector_Name == 'CleanTech') %>% View
 
+# Save an orderer version of that for others
+write_csv(
+  v1 %>% filter(DataSource == 'RTIC', Sector_Name == 'CleanTech') %>% arrange(desc(Pct_share_of_cluster)),
+  'data/misc/RTIC_cleantechclusterdata_v1_ordered.csv'
+  )
+
 # South Yorkshire estimated employees 22K???
 # Est turnover £19Billion... which is 5 billion more than the leading cluster in V2
 
@@ -128,6 +134,13 @@ v2 = v2 %>%
 v2.rtic = v2 %>% filter(Sector_Type == 'RTIC')
 
 v2.rtic %>% filter(Sector == 'Cleantech') %>% View
+
+# Write that for use elsewhere
+write_csv(
+  v2.rtic %>% filter(Sector == 'Cleantech') %>% arrange(desc(Site_Count)),
+  'data/misc/RTIC_cleantechclusterdata_v2_ordered.csv'
+)
+
 
 
 # Will need to actually look at map to work out relative scales, no names given
