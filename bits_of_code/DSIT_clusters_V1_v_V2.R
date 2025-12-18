@@ -6,6 +6,7 @@ library(sf)
 library(tmap)
 source('functions/misc_functions.R')
 
+options(scipen = 999)
 
 # VERSION 1----
 
@@ -132,8 +133,17 @@ v2 = v2 %>%
 
 # Let's look just at RTIC again (noting the geography won't be the same as the boundaries have changed...)
 v2.rtic = v2 %>% filter(Sector_Type == 'RTIC')
+unique(v2.rtic$Sector)
+
+# Let's look at the other types too, just to check
+unique(v2$Sector_Type)
+
+unique(v2$Sector[v2$Sector_Type == unique(v2$Sector_Type)[3]])
 
 v2.rtic %>% filter(Sector == 'Cleantech') %>% View
+
+# View all sectors in the different types
+walk(unique(v2$Sector_Type), \(x) v2 %>% filter(Sector_Type == x) %>% select(Sector) %>% distinct %>% print(n = 100))
 
 # Write that for use elsewhere
 write_csv(
@@ -144,17 +154,63 @@ write_csv(
 
 
 # Will need to actually look at map to work out relative scales, no names given
-v2.geo = v2.rtic %>% st_as_sf(wkt = 'Geometry')
+v2.rtic.geo = v2.rtic %>% st_as_sf(wkt = 'Geometry') %>%  st_set_crs("EPSG:4326")
 
 # Tick
-plot(st_geometry(v2.geo %>% filter(Sector == 'Cleantech')))
+plot(st_geometry(v2.rtic.geo %>% filter(Sector == 'Cleantech')))
 
 # Plot cluster numbers
-# plot(v2.geo %>% filter(Sector == 'Cleantech') %>% select(Cluster) %>% mutate(Cluster = as.character(Cluster)))
-qtm(v2.geo %>% filter(Sector == 'Cleantech') %>% select(Cluster), text = 'Cluster')
+# plot(v2.rtic.geo %>% filter(Sector == 'Cleantech') %>% select(Cluster) %>% mutate(Cluster = as.character(Cluster)))
+qtm(v2.rtic.geo %>% filter(Sector == 'Cleantech') %>% select(Cluster), text = 'Cluster')
 
 # The South Yorkshire cluster overlaps Sheffield, Rotherham and Chesterfield
 # It's cluster 4.
+
+
+# PULL OUT ALL CLUSTERS THAT OVERLAP WITH SOUTH YORKSHIRE----
+
+# Make geo for all sector types
+v2.geo = v2 %>% st_as_sf(wkt = 'Geometry') %>%  st_set_crs("EPSG:4326")
+
+# Get SY ITL2 zone for overlap check
+sy = st_read('data/ITL_geographies/International_Territorial_Level_2_January_2021_UK_BFE_V2_2022_-4735199360818908762/ITL2_JAN_2021_UK_BFE_V2.shp') %>% filter(ITL221NM == 'South Yorkshire') %>% select(ITL221NM)
+
+
+# Get info on all overlaps
+# Keep ones with at least 2% overlap
+interset_w_sy = intersect_makelookup(sy, st_transform(v2.geo, 'EPSG:27700'), vartogroupby_fromsmallerzone = Sector, keepall = T) %>% 
+  filter(area_percent >= 2)
+
+# Plot all those...
+plot(st_geometry(interset_w_sy))
+
+# Let's pull those clusters out of the original data so we have the whole geometry
+# Do via inner join to keep just matches
+sy_v2 = v2 %>%
+  inner_join(
+    interset_w_sy %>% select(Sector,Cluster),
+    by = c('Sector','Cluster')
+  )
+
+# Re-sf!
+sy_v2 = sy_v2 %>% st_as_sf(wkt = 'Geometry') %>%  st_set_crs("EPSG:4326") %>% st_transform('EPSG:27700')
+
+plot(sy)
+# plot(sy, xlim = st_bbox(sy_v2)[c(1, 3)], ylim = st_bbox(sy_v2)[c(2, 4)])
+plot(st_geometry(sy_v2), , add = T)
+# plot(st_geometry(st_transform(sy_v2,'EPSG:27700')), , add = T)
+
+sy_v2 %>% arrange(Sector_Type,Cluster) %>% relocate(Sector_Type, .before = Sector) %>% View
+
+# Save that version as CSV including the geogs
+write_csv(
+  sy_v2 %>% arrange(Sector_Type,Cluster),
+  'data/misc/RTIC_DSIT_clusters_v2_southyorkshire_2percentormoreoverlap.csv'
+)
+
+
+
+
 
 
 

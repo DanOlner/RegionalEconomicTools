@@ -2636,8 +2636,9 @@ removecommonSICnameelements = function(returnnames, removemanuf = F, removeactiv
 
 #Function for intersecting two geographies, finding which has largest area overlap from first
 #And using that largest area one as the lookup label
+# If keepall, keep every overlap, however small, and return those
 # Nabbed from https://github.com/DanOlner/utilities/blob/master/functions.R
-intersect_makelookup <- function(larger_zone, smaller_zone, vartogroupby_fromsmallerzone){
+intersect_makelookup <- function(larger_zone, smaller_zone, vartogroupby_fromsmallerzone, keepall = FALSE){
   
   vartogroupby_fromsmallerzone <- enquo(vartogroupby_fromsmallerzone)
   
@@ -2668,20 +2669,28 @@ intersect_makelookup <- function(larger_zone, smaller_zone, vartogroupby_fromsma
   
   
   #Keep only largest % from each group to larger overlap as label
-  keeps <- intersect_result %>% 
-    group_by(!!vartogroupby_fromsmallerzone) %>% 
-    filter(area_percent == max(area_percent)) %>% 
-    ungroup()
-  
-  #Can drop some smaller zones if not at all inside larger zones...
-  # smaller_zone %>% filter(!zone_code %in% keeps$zone_code) %>% View
-  
-  #Should now have unique zone codes
-  # length(unique(keeps$zone_code)) == nrow(keeps)
-  
-  cat('Lookup single zone picked - percent that are fully inside larger zones:',mean(keeps$area_percent == 100) * 100,'%\n')
-  
-  return(keeps)
+  if(!keepall){
+    
+    keeps <- intersect_result %>% 
+      group_by(!!vartogroupby_fromsmallerzone) %>% 
+      filter(area_percent == max(area_percent)) %>% 
+      ungroup()
+    
+    #Can drop some smaller zones if not at all inside larger zones...
+    # smaller_zone %>% filter(!zone_code %in% keeps$zone_code) %>% View
+    
+    #Should now have unique zone codes
+    # length(unique(keeps$zone_code)) == nrow(keeps)
+    
+    cat('Lookup single zone picked - percent that are fully inside larger zones:',mean(keeps$area_percent == 100) * 100,'%\n')
+    
+    return(keeps)
+    
+  } else {
+    
+    return(intersect_result)
+    
+  }
   
 }
 
