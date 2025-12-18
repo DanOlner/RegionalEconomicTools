@@ -184,6 +184,10 @@ interset_w_sy = intersect_makelookup(sy, st_transform(v2.geo, 'EPSG:27700'), var
 # Plot all those...
 plot(st_geometry(interset_w_sy))
 
+
+
+
+
 # Let's pull those clusters out of the original data so we have the whole geometry
 # Do via inner join to keep just matches
 sy_v2 = v2 %>%
@@ -207,16 +211,60 @@ write_csv(
   sy_v2 %>% 
     arrange(Sector_Type,Cluster) %>% 
     st_set_geometry(NULL) %>% 
-    select(-geometry) %>% 
-    relocate(Sector_Type, .before = Sector) %>% 
-    relocate(percent_cluster_in_SY, .after = Sector)
+    select(-geometry,-percent_cluster_in_SY) %>% 
+    relocate(Sector_Type, .before = Sector) 
+    # relocate(percent_cluster_in_SY, .after = Sector)
   ,
   'data/misc/DSIT_clusters_v2_southyorkshire_2percentormoreoverlap.csv'
 )
 
 
+
+
 # Make a version merged into the full thing?
 
+
+# May need to overlap with all to get correct percent cluster overlaps...
+# itl2 = st_read('data/ITL_geographies/International_Territorial_Level_2_January_2021_UK_BFE_V2_2022_-4735199360818908762/ITL2_JAN_2021_UK_BFE_V2.shp') %>% select(ITL221NM)
+# 
+# 
+# # Get info on all overlaps
+# # Keep ones with at least 2% overlap
+# intersect_itl2 = intersect_makelookup(itl2, st_transform(v2.geo, 'EPSG:27700'), vartogroupby_fromsmallerzone = Sector, keepall = T) 
+# 
+# intersect_itl2.sy = intersect_itl2 %>% filter(ITL221NM == 'South Yorkshire')
+# 
+# # Again pull those clusters out of the original data so we have the whole geometry
+# # Do via inner join to keep just matches
+# sy_v2 = v2 %>%
+#   inner_join(
+#     intersect_itl2.sy %>% select(Sector,Cluster, percent_cluster_in_SY = area_percent),
+#     by = c('Sector','Cluster')
+#   )
+# 
+# # Re-sf!
+# sy_v2 = sy_v2 %>% st_as_sf(wkt = 'Geometry') %>%  st_set_crs("EPSG:4326") %>% st_transform('EPSG:27700')
+# 
+# plot(sy)
+# # plot(sy, xlim = st_bbox(sy_v2)[c(1, 3)], ylim = st_bbox(sy_v2)[c(2, 4)])
+# plot(st_geometry(sy_v2), , add = T)
+# 
+# 
+# # Looksee
+# forsave = sy_v2 %>% 
+#   arrange(Sector_Type,Cluster) %>% 
+#   st_set_geometry(NULL) %>% 
+#   select(-geometry) %>% 
+#   relocate(Sector_Type, .before = Sector) %>% 
+#   relocate(percent_cluster_in_SY, .after = Sector)
+# 
+# 
+# write_csv(
+#   forsave,
+#   'data/misc/DSIT_clusters_v2_southyorkshire.csv'
+# )
+# 
+# 
 
 
 
