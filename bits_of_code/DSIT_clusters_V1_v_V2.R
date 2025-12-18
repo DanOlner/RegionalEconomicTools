@@ -207,21 +207,29 @@ plot(st_geometry(sy_v2), , add = T)
 # sy_v2 %>% arrange(Sector_Type,Cluster) %>% relocate(Sector_Type, .before = Sector) %>% View
 
 # Save that version as CSV including the geogs
+forsave = sy_v2 %>% 
+  arrange(Sector_Type,Sector) %>% 
+  st_set_geometry(NULL) %>% 
+  select(-geometry,-percent_cluster_in_SY) %>%
+  # select(-geometry) %>% 
+  relocate(Sector_Type, .before = Sector)  
+  # relocate(percent_cluster_in_SY, .after = Sector)
+
 write_csv(
-  sy_v2 %>% 
-    arrange(Sector_Type,Cluster) %>% 
-    st_set_geometry(NULL) %>% 
-    select(-geometry,-percent_cluster_in_SY) %>% 
-    relocate(Sector_Type, .before = Sector) 
-    # relocate(percent_cluster_in_SY, .after = Sector)
-  ,
+  forsave,
   'data/misc/DSIT_clusters_v2_southyorkshire_2percentormoreoverlap.csv'
 )
 
 
+# Check on some geogs
+plot(sy)
+plot(st_geometry(sy_v2 %>% filter(Sector == 'Engineering Biology Supply Chain')), , add = T)
+
+plot(sy)
+plot(st_geometry(sy_v2 %>% filter(Sector == 'Advanced Connectivity', Cluster == '3')), , add = T)
 
 
-# Make a version merged into the full thing?
+
 
 
 # May need to overlap with all to get correct percent cluster overlaps...
