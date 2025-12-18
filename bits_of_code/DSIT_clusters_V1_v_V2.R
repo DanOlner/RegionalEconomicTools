@@ -188,7 +188,7 @@ plot(st_geometry(interset_w_sy))
 # Do via inner join to keep just matches
 sy_v2 = v2 %>%
   inner_join(
-    interset_w_sy %>% select(Sector,Cluster),
+    interset_w_sy %>% select(Sector,Cluster, percent_cluster_in_SY = area_percent),
     by = c('Sector','Cluster')
   )
 
@@ -200,13 +200,22 @@ plot(sy)
 plot(st_geometry(sy_v2), , add = T)
 # plot(st_geometry(st_transform(sy_v2,'EPSG:27700')), , add = T)
 
-sy_v2 %>% arrange(Sector_Type,Cluster) %>% relocate(Sector_Type, .before = Sector) %>% View
+# sy_v2 %>% arrange(Sector_Type,Cluster) %>% relocate(Sector_Type, .before = Sector) %>% View
 
 # Save that version as CSV including the geogs
 write_csv(
-  sy_v2 %>% arrange(Sector_Type,Cluster),
-  'data/misc/RTIC_DSIT_clusters_v2_southyorkshire_2percentormoreoverlap.csv'
+  sy_v2 %>% 
+    arrange(Sector_Type,Cluster) %>% 
+    st_set_geometry(NULL) %>% 
+    select(-geometry) %>% 
+    relocate(Sector_Type, .before = Sector) %>% 
+    relocate(percent_cluster_in_SY, .after = Sector)
+  ,
+  'data/misc/DSIT_clusters_v2_southyorkshire_2percentormoreoverlap.csv'
 )
+
+
+# Make a version merged into the full thing?
 
 
 
