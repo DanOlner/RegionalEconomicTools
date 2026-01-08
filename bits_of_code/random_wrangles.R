@@ -415,6 +415,9 @@ table(unique(bres.itl3.2digit.ft$GEOGRAPHY_CODE) %in% unique(bres.itl3.5digit.ft
 
 
 
+# Office for life sciences SIC explore----
+
+ofs = read_csv('https://assets.publishing.service.gov.uk/media/656f42020f12ef070e3e0292/BaHTSS_site_level_dataset_machine_readable_2021-22.csv')
 
 
 

@@ -86,21 +86,21 @@ listofplaces = itl.lookup %>%
 #   pull() 
 
 # Pick four random
-listofplaces = sample(unique(bres.gva.2d$Region_name),4)
+listofplaces = sample(unique(bres.gva.2d$Region_name),12)
 # Add in any extras
 
 
-listofplaces = c(listofplaces,
-                 bres.gva.2d %>%
-                   select(Region_name) %>%
-                   distinct() %>%
-                   filter(
-                     grepl('Blackpool|talbot',Region_name, ignore.case = T),
-                     # grepl('Leeds|Manch|Sheff|Nottingh|Bristol|glasgow',Region_name, ignore.case = T),
-                     # !grepl("greater|shire", Region_name, ignore.case = TRUE)
-                     ) %>%
-                   pull()
-                 )
+# listofplaces = c(listofplaces,
+#                  bres.gva.2d %>%
+#                    select(Region_name) %>%
+#                    distinct() %>%
+#                    filter(
+#                      grepl('Blackpool|talbot',Region_name, ignore.case = T),
+#                      # grepl('Leeds|Manch|Sheff|Nottingh|Bristol|glasgow',Region_name, ignore.case = T),
+#                      # !grepl("greater|shire", Region_name, ignore.case = TRUE)
+#                      ) %>%
+#                    pull()
+#                  )
 
 # And you can of course set that string directly if you want to use the exact names
 # Which you could get, for instance, by Viewing the data and searching in it
@@ -145,7 +145,7 @@ p = ggplot() +
   scale_fill_manual(values = setNames(colourstouse,unique(bres.gva.2d$SIC07_description_shortened))) +
   guides(fill = F) +
   coord_flip(ylim = c(0,300)) +
-  facet_wrap(~Region_name, scales = 'free_y', ncol = 5)
+  facet_wrap(~Region_name, scales = 'free_y', ncol = 6)
 
 # Add basic text labels if block big enough
 p = p + geom_text(
