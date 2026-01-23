@@ -7,3 +7,5 @@
 *.pptx
 /.quarto/
 local/
+
+**/*.quarto_ipynb

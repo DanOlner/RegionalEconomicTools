@@ -4,6 +4,7 @@
 # But but how do we make sense of this difference, actually?
 # If we're thinking about where value is coming from for people and their jobs, for example?
 library(tidyverse)
+library(patchwork)
 library(zoo)
 source('functions/misc_functions.R')
 
@@ -105,7 +106,7 @@ gva.2digit = gva.2digit %>%
   )
 
 # How have 61-3 percents changed over time? No smoothing at national level should be fine?
-ggplot(
+p = ggplot(
   gva.2digit %>% filter(SIC07_code %in% c('61','62','63')),
   aes(x = year, y = sector_percent, colour = fct_reorder(SIC07_description,sector_percent,.desc = T))
 ) +
@@ -114,7 +115,7 @@ ggplot(
   theme(legend.title=element_blank()) +
   ylab('telecoms, programming, info services: percent of UK economy over time')
 
-
+p
 
 
 # Repeat for chained volume version----
@@ -188,7 +189,7 @@ gva.2dig.cv <- gva.2dig.cv %>%
 
 
 # How have 61-3 percents changed over time? No smoothing at national level should be fine?
-ggplot(
+p2 = ggplot(
   gva.2dig.cv %>% filter(SIC07_code %in% c('61','62','63')),
   aes(x = year, y = value, colour = fct_reorder(SIC07_description,value,.desc = T))
 ) +
@@ -197,6 +198,11 @@ ggplot(
   theme(legend.title=element_blank()) +
   ylab('telecoms, programming, info services: real growth index, 2022 = 100')
 
+p2
+
+p + p2
+
+
 
 # Index values quite helpful - 
 # Can see which has lowest in 1998, that immediately tells us which has grown in real terms the most
@@ -204,13 +210,48 @@ ggplot(
 # Telecoms has a 106/0.7 = 150* value increase. Err.
 gva.2dig.cv %>% filter(year == 1998) %>% arrange(value) %>% View
 
+# Let's find % change between start and end
+gva.cv.change = bind_cols(
+  gva.2dig.cv %>% filter(year == 1998),
+  gva.2dig.cv %>% filter(year == max(year)) %>% select(valuelatest = value)
+) %>% 
+  mutate(multipleofvalue = valuelatest/value)
+
+
+# Do same for percent of econ
+gva.cp.change = bind_cols(
+  gva.2digit %>% ungroup() %>% filter(year == 1998),
+  gva.2digit %>% ungroup() %>% filter(year == max(year)) %>% select(percentlatest = sector_percent)
+) %>% 
+  mutate(multipleofpercent = percentlatest/sector_percent)
 
 
 
 
+# Let's stick those into the same data for ease of plotting
+ict.both = bind_rows(
+  gva.2digit %>% 
+    filter(SIC07_code %in% c('61','62','63')) %>% 
+    mutate(
+      type = 'current prices (UK percent of economy)',
+      valuetoplot = sector_percent
+      ),
+  gva.2dig.cv %>% filter(SIC07_code %in% c('61','62','63')) %>% 
+    mutate(
+      type = 'chained volume (2022=100)',
+      valuetoplot = value
+      )
+)
 
-
-
+ggplot(
+  ict.both,
+  aes(x = year, y = valuetoplot, colour = fct_reorder(SIC07_description,valuetoplot,.desc = T))
+) +
+  geom_line() +
+  scale_color_brewer(palette = 'Paired') +
+  theme(legend.title=element_blank()) +
+  facet_wrap(~type, scales = 'free_y')
+  
 
 
 

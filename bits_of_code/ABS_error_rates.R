@@ -110,16 +110,16 @@ abs_gva = allregions %>%
   left_join(
     qual %>% select(-contains(c('turnover','goods_','employment','_CoV','Description','Country_and_Region'))),
     by = c('SIC','Country_Code','Year')
-  )
-  
-# Quite a lot of missing values - but let's see for a specific year
-abs_gva2023 = abs_gva %>% 
-  filter(Year == max(Year)) %>% 
+  ) %>% 
   mutate(
     gva_min95 = GVA - (GVA_SE * 1.96),
     gva_max95 = GVA + (GVA_SE * 1.96)
   )
 
+  
+# Quite a lot of missing values - but let's see for a specific year
+abs_gva2023 = abs_gva %>% 
+  filter(Year == max(Year)) 
 
 # Check sector diffs across regions
 dodgewidth = 1
@@ -135,6 +135,28 @@ ggplot(
   ) +
   geom_point() +
   geom_errorbar(aes(xmin = gva_min95, xmax = gva_max95), width = 0.3)
+
+
+# And how about how it's changed over time in a few places?
+setwidth = 1
+
+ggplot(
+  abs_gva %>% filter(qg('fabricated',Description)),
+  aes(y = factor(Year), x = GVA)
+) +
+  geom_point() +
+  geom_errorbar(aes(xmin = gva_min95, xmax = gva_max95), width = 0.3) +
+  scale_color_brewer(palette = 'Paired') +
+  facet_wrap(~Country_and_Region, ncol=1)
+  
+# ggplot(
+#   abs_gva %>% filter(qg('fabricated',Description)),
+#   aes(y = fct_reorder(Country_and_Region,GVA), x = GVA, colour = factor(Year))
+# ) +
+#   geom_point(position = position_dodge(width = setwidth)) +
+#   geom_errorbar(aes(xmin = gva_min95, xmax = gva_max95), width = 0.3, position = position_dodge(width = setwidth)) +
+#   scale_color_brewer(palette = 'Paired')
+
 
 
 # We want proportions really.

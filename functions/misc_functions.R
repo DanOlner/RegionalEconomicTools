@@ -47,7 +47,7 @@ getdistinct <- function(...) grep(..., ignore.case = T, value = T) %>% unique
 #The rest...
 
 #Compute series of slopes within groups safely, returning 0 if can't calculate
-compute_slope_or_zero <- function(data, ..., y, x) {
+compute_slope_or_zero <- function(data, ..., y, x, includepercentchange = F) {
   
   groups <- quos(...) 
   y <- enquo(y)
@@ -64,12 +64,23 @@ compute_slope_or_zero <- function(data, ..., y, x) {
   safe_get_slope <- possibly(get_slope, otherwise = 0)
 
   #Group and summarize
-  data %>%
+  result = data %>%
     group_by(!!!groups) %>%
     nest() %>%
     mutate(slope = map_dbl(data, safe_get_slope)) %>%
     select(-data) %>% 
     ungroup()
+  
+  if(includepercentchange){
+    
+    result = result %>% 
+      mutate(
+        percentchangepertimeunit = (exp(slope) -1) * 100
+      )
+    
+  }
+  
+  return(result)
   
 }
 

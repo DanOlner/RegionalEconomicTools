@@ -1,0 +1,208 @@
+---
+title: "South Yorkshire BRES job statistics 2015-2024"
+author:
+  - name: "Dan Olner"
+format: 
+  html:
+    output-file: "SouthYorkshire_BRESjobstats_201524"
+    fig-width: 8
+    fig-height: 8
+execute:
+  echo: false
+  message: false
+  warning: false
+fig-responsive: false
+collapse: false
+navbar: false
+sidebar: false
+---
+
+```{r setup}
+library(tidyverse)
+library(zoo)#for making smoothed moving averages
+library(RColorBrewer)
+library(kableExtra)
+
+
+source('../functions/misc_functions.R')
+
+options(scipen = 999)
+
+bres = readRDS('../local/data/bres_sy2024.rds')
+
+
+```
+
+## Notes on the data
+
+This is:
+
+- [BRES](https://www.nomisweb.co.uk/datasets/newbres6pub) full time job count data at local authority level for 2015 to 2024
+- 2 digit SIC sectors are used (shortened names)
+- Keeping only sectors with more than 1% of each local authority's total job count
+- Latest job values are the 2022-24 average, to smooth volatile jobs data
+- Tables are ordered by location quotient (LQ) to show which sectors are more concentrated in each local authority. E.g. Sheffield's top LQ sector is basic metals: its LQ of 5.13 = basic metals job count there is 5.1x higher than the Great Britain average. (BRES data is GB not UK.)
+- Compound Annual Growth Rate figures (just the year on year percent change taken from line-slopes through the data). Two are included: for the full 2015-2024 range, and for 2021-2024. (These use all the data, not smoothed).
+
+
+## Sheffield, sectors with more than 1% of jobs
+
+```{r}
+
+#escape = FALSE so that markdown in the cells (the links) is rendered correctly.
+# knitr::kable(
+#   bres %>% filter(
+#     regional_percent > 2,
+#     GEOGRAPHY_NAME == 'Sheffield'
+#     ) %>% 
+#     select(SIC2dig_shortnames,`jobs (22-24 av)` = jobcount_movingav, regional_percent, LQ, `CAGR 15-24`, `CAGR 21-24`) %>% 
+#   arrange(-LQ), 
+#   escape = FALSE, caption = "")
+
+table_data <- bres %>% 
+  filter(
+    regional_percent > 1,
+    GEOGRAPHY_NAME == 'Sheffield'
+  ) %>% 
+  select(
+    SIC = SIC2dig_shortnames,
+    `jobs (22-24 av)` = jobcount_movingav, 
+    regional_percent, 
+    LQ, 
+    `CAGR 15-24`, 
+    `CAGR 21-24`
+  ) %>% 
+  arrange(-LQ) %>%
+  mutate(
+    `CAGR 15-24` = cell_spec(`CAGR 15-24`, color = ifelse(`CAGR 15-24` < 0, "red", "black")),
+    `CAGR 21-24` = cell_spec(`CAGR 21-24`, color = ifelse(`CAGR 21-24` < 0, "red", "black")),
+    `jobs (22-24 av)` = round(`jobs (22-24 av)`,0),
+    regional_percent = round(regional_percent,1),
+    LQ = round(LQ,2)
+  )
+
+knitr::kable(table_data, escape = FALSE, caption = "")
+
+
+```
+## Rotherham, sectors with more than 1% of jobs
+
+```{r}
+
+#escape = FALSE so that markdown in the cells (the links) is rendered correctly.
+# knitr::kable(
+#   bres %>% filter(
+#     regional_percent > 2,
+#     GEOGRAPHY_NAME == 'Sheffield'
+#     ) %>% 
+#     select(SIC2dig_shortnames,`jobs (22-24 av)` = jobcount_movingav, regional_percent, LQ, `CAGR 15-24`, `CAGR 21-24`) %>% 
+#   arrange(-LQ), 
+#   escape = FALSE, caption = "")
+
+table_data <- bres %>% 
+  filter(
+    regional_percent > 1,
+    GEOGRAPHY_NAME == 'Rotherham'
+  ) %>% 
+  select(
+    SIC = SIC2dig_shortnames,
+    `jobs (22-24 av)` = jobcount_movingav, 
+    regional_percent, 
+    LQ, 
+    `CAGR 15-24`, 
+    `CAGR 21-24`
+  ) %>% 
+  arrange(-LQ) %>%
+  mutate(
+    `CAGR 15-24` = cell_spec(`CAGR 15-24`, color = ifelse(`CAGR 15-24` < 0, "red", "black")),
+    `CAGR 21-24` = cell_spec(`CAGR 21-24`, color = ifelse(`CAGR 21-24` < 0, "red", "black")),
+    `jobs (22-24 av)` = round(`jobs (22-24 av)`,0),
+    regional_percent = round(regional_percent,1),
+    LQ = round(LQ,2)
+  )
+
+knitr::kable(table_data, escape = FALSE, caption = "")
+
+
+```
+## Barnsley, sectors with more than 1% of jobs
+
+```{r}
+
+#escape = FALSE so that markdown in the cells (the links) is rendered correctly.
+# knitr::kable(
+#   bres %>% filter(
+#     regional_percent > 2,
+#     GEOGRAPHY_NAME == 'Sheffield'
+#     ) %>% 
+#     select(SIC2dig_shortnames,`jobs (22-24 av)` = jobcount_movingav, regional_percent, LQ, `CAGR 15-24`, `CAGR 21-24`) %>% 
+#   arrange(-LQ), 
+#   escape = FALSE, caption = "")
+
+table_data <- bres %>% 
+  filter(
+    regional_percent > 1,
+    GEOGRAPHY_NAME == 'Barnsley'
+  ) %>% 
+  select(
+    SIC = SIC2dig_shortnames,
+    `jobs (22-24 av)` = jobcount_movingav, 
+    regional_percent, 
+    LQ, 
+    `CAGR 15-24`, 
+    `CAGR 21-24`
+  ) %>% 
+  arrange(-LQ) %>%
+  mutate(
+    `CAGR 15-24` = cell_spec(`CAGR 15-24`, color = ifelse(`CAGR 15-24` < 0, "red", "black")),
+    `CAGR 21-24` = cell_spec(`CAGR 21-24`, color = ifelse(`CAGR 21-24` < 0, "red", "black")),
+    `jobs (22-24 av)` = round(`jobs (22-24 av)`,0),
+    regional_percent = round(regional_percent,1),
+    LQ = round(LQ,2)
+  )
+
+knitr::kable(table_data, escape = FALSE, caption = "")
+
+
+```
+## Doncaster, sectors with more than 1% of jobs
+
+```{r}
+
+#escape = FALSE so that markdown in the cells (the links) is rendered correctly.
+# knitr::kable(
+#   bres %>% filter(
+#     regional_percent > 2,
+#     GEOGRAPHY_NAME == 'Sheffield'
+#     ) %>% 
+#     select(SIC2dig_shortnames,`jobs (22-24 av)` = jobcount_movingav, regional_percent, LQ, `CAGR 15-24`, `CAGR 21-24`) %>% 
+#   arrange(-LQ), 
+#   escape = FALSE, caption = "")
+
+table_data <- bres %>% 
+  filter(
+    regional_percent > 1,
+    GEOGRAPHY_NAME == 'Doncaster'
+  ) %>% 
+  select(
+    SIC = SIC2dig_shortnames,
+    `jobs (22-24 av)` = jobcount_movingav, 
+    regional_percent, 
+    LQ, 
+    `CAGR 15-24`, 
+    `CAGR 21-24`
+  ) %>% 
+  arrange(-LQ) %>%
+  mutate(
+    `CAGR 15-24` = cell_spec(`CAGR 15-24`, color = ifelse(`CAGR 15-24` < 0, "red", "black")),
+    `CAGR 21-24` = cell_spec(`CAGR 21-24`, color = ifelse(`CAGR 21-24` < 0, "red", "black")),
+    `jobs (22-24 av)` = round(`jobs (22-24 av)`,0),
+    regional_percent = round(regional_percent,1),
+    LQ = round(LQ,2)
+  )
+
+knitr::kable(table_data, escape = FALSE, caption = "")
+
+
+```
+

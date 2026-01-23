@@ -11,6 +11,7 @@ source('functions/misc_functions.R')
 #Set ggplot theme
 theme_set(theme_light())
 
+options(scipen = 999)
 
 # SOUTH YORKSHIRE PERCENT MANUF PLOT----
 
@@ -418,6 +419,197 @@ table(unique(bres.itl3.2digit.ft$GEOGRAPHY_CODE) %in% unique(bres.itl3.5digit.ft
 # Office for life sciences SIC explore----
 
 ofs = read_csv('https://assets.publishing.service.gov.uk/media/656f42020f12ef070e3e0292/BaHTSS_site_level_dataset_machine_readable_2021-22.csv')
+
+
+
+
+# Checking on SIC sector names----
+
+sic = read_csv('data/SIClookup.csv')
+
+# Just want to look at 5 digit names
+sic %>% select(contains('SIC_5')) %>% View
+
+# And on BRES section sums? Life sciences seems weirdly high in some of these things...
+gvajobs = read_csv("data/regionalGVA_plus_BRESjobcounts/regionalGVA_plus_BRESjobcounts_chainedvolume_ITL2_SIC_SECTION_MINUSimputedrent_2022.csv")
+
+gvajobs %>% filter(qg('South y',GEOGRAPHY_NAME), qg('health',SIC07_description)) %>% View
+
+# What total sy jobs??
+gvajobs %>% 
+  filter(qg('South y',GEOGRAPHY_NAME)) %>%
+  group_by(DATE) %>%
+  summarise(across(contains('job'), sum))
+  
+
+# Pulling out latest BRES 2 digit for SYMCA----
+
+# This data's already there, mostly, isn't it?
+# We want SY vs other places / LQs might be good, but let's see.
+
+# This one is up to 2024 and SY level?
+br.itl2 = read_csv("local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE429_internationalterritoriallevelslevel2asofJan2021_2_Fulltimeemployees_2022_2024_SIC_2DIGIT.csv")
+
+# For change of over time, we can use the earlier NUTS zones
+# Or possibly sum by LA into ITL2, but this might be easier for those that do match
+
+# Let's just check la level
+br.la = read_csv("local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE432_localauthoritiesdistrictunitaryasofApril2021_2_Fulltimeemployees_2015_2024_SIC_2DIGIT.csv")
+
+# Let's use these for now, can do at SY level later if needed
+
+# Just checking general volatility...
+p = ggplot(
+  br.la %>% filter(qg('sheffield', GEOGRAPHY_NAME)),
+  aes(x = DATE, y = JOBCOUNT, colour = SIC_2DIGIT_NAME)
+) +
+  geom_line() +
+  theme(legend.position = 'none')
+
+ggplotly(p, tooltip = 'SIC_2DIGIT_NAME')
+
+# ADDING IN 3 YEAR MOVING AV
+# Going to use that for LQs but underlying numbers for slopes
+smoothband = 3
+
+br.la = br.la %>% 
+  arrange(DATE) %>% 
+  group_by(GEOGRAPHY_NAME,SIC_2DIGIT_NAME) %>% 
+  mutate(
+    jobcount_movingav = rollapply(JOBCOUNT,smoothband,mean,align='center',fill=NA)
+  ) %>% 
+  ungroup()
+
+
+
+# Add LQs / proportions
+br.la = br.la %>% 
+  group_split(DATE) %>% 
+  map(
+    add_location_quotient_and_proportions,
+    regionvar = GEOGRAPHY_NAME,
+    lq_var = SIC_2DIGIT_NAME,
+    valuevar = jobcount_movingav
+    # valuevar = JOBCOUNT
+  ) %>% 
+  bind_rows()
+
+# Enshorten names
+
+lookup = data.frame(SIC07_description = unique(gva.sections$SIC07_description), shortnames = shortsectionnames)
+
+siclookup = read_csv('data/SIClookup.csv')
+
+# This is a very silly way to do this!  There should be lookup saved that includes them.
+shortnames = reduceSICnames(unique(siclookup$SIC_2DIGIT_NAME),'2 digit')
+lookup = data.frame(SIC_2DIGIT_NAME = unique(siclookup$SIC_2DIGIT_NAME), SIC2dig_shortnames = shortnames)
+
+br.la = br.la %>% 
+  left_join(
+    lookup, by = 'SIC_2DIGIT_NAME'
+  )
+
+
+# Let's get slopes for the annualised growth rates
+# Let's do two date ranges
+# Don't forget to looog!
+# Adding one so log values don't break - won't materially affect percentages
+# 'Compound annualised growth rate'
+jobslopes15to24 = compute_slope_or_zero(
+  data = br.la, 
+  GEOGRAPHY_NAME, SIC2dig_shortnames,#slopes will be found within whatever grouping vars are added here
+  y = log(JOBCOUNT+1), x = DATE, includepercentchange = T) %>% 
+  mutate(CAGR = round(percentchangepertimeunit,1))
+
+# Check on some things...
+br.la %>% filter(qg('sheffield', GEOGRAPHY_NAME)) %>% View
+
+
+
+# For more recent years
+jobslopes21to24 = compute_slope_or_zero(
+  data = br.la %>% filter(DATE >= 2021), 
+  GEOGRAPHY_NAME, SIC2dig_shortnames,#slopes will be found within whatever grouping vars are added here
+  y = log(JOBCOUNT+1), x = DATE, includepercentchange = T) %>% 
+  mutate(CAGR = round(percentchangepertimeunit,1))
+
+
+
+# Just sanity checking...
+chk = data.frame(
+  DATE = c(2015:2024),
+  # VALUE = seq(1000, by = 100, length.out = 10),
+  # VALUE = 1000 * 1.073^(0:9),#The percent change should be this... looking good.
+  VALUE = 1000 * 1.114^(0:9),#The percent change should be this... looking good.
+  GROUP = 'group1'
+)
+
+# Tick, all good for annualised growth rates
+compute_slope_or_zero(
+  data = chk, 
+  GROUP,
+  y = log(VALUE), x = DATE, includepercentchange = T) %>% 
+  mutate(CAGR = round(percentchangepertimeunit,1))
+
+# Combine into one for displaying
+# Use 3 year moving av for LQ and counts, full range for slopes
+br.la %>% filter(
+  !is.na(LQ),#keep years with LQ values
+  jobcount_movingav > 1000,
+  GEOGRAPHY_NAME == 'Sheffield'
+) %>% 
+  filter(#Needs doing after NA filter to get right MAX
+  DATE == max(DATE)#get latest year in data - for moving av, this will get 2023
+  ) %>% 
+  left_join(
+    jobslopes15to24 %>% rename(`CAGR 15-24` = CAGR),
+    by = c('GEOGRAPHY_NAME','SIC2dig_shortnames')
+  ) %>% 
+  left_join(
+    jobslopes21to24 %>% rename(`CAGR 21-24` = CAGR),
+    by = c('GEOGRAPHY_NAME','SIC2dig_shortnames')
+  ) %>% 
+  mutate(regional_percent = sector_regional_proportion *100) %>% 
+  select(SIC2dig_shortnames,`jobs (22-24 av)` = jobcount_movingav, regional_percent, LQ, `CAGR 15-24`, `CAGR 21-24`) %>% 
+  arrange(-LQ) %>% 
+  slice(1:20)
+
+# Save for qmd
+# saveRDS(
+#   list(bres = br.la,slopesall = jobslopes15to24,slopesrecent = jobslopes21to24),
+#   'local/data/bres2024tabledata.rds'
+# )
+
+
+saveRDS(
+  br.la %>% filter(
+    !is.na(LQ),#keep years with LQ values
+  ) %>% 
+    filter(#Needs doing after NA filter to get right MAX
+      DATE == max(DATE)#get latest year in data - for moving av, this will get 2023
+    ) %>% 
+    left_join(
+      jobslopes15to24 %>% rename(`CAGR 15-24` = CAGR),
+      by = c('GEOGRAPHY_NAME','SIC2dig_shortnames')
+    ) %>% 
+    left_join(
+      jobslopes21to24 %>% rename(`CAGR 21-24` = CAGR),
+      by = c('GEOGRAPHY_NAME','SIC2dig_shortnames')
+    ) %>% 
+    mutate(regional_percent = sector_regional_proportion *100),
+  'local/data/bres_sy2024.rds'
+  )
+
+
+
+
+
+
+
+
+
+
+
 
 
 
