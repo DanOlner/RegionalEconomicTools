@@ -412,7 +412,7 @@ ynh_autoplots = function(sector){
   )
   
   
-  p <- LQ_baseplot(df = yeartoplot %>% filter(SIC07_description == sector), alpha = 0.8, shape = 0, sector_name = SIC07_description, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short)
+  p <- LQ_baseplot(df = yeartoplot %>% filter(SIC07_description == sector), alpha = 0.8, shape = 0, sector_name = SIC07_description, LQ_column = LQ, change_over_time = slope, labelcolumn = placename_short, horriblehack = T)
   
   p <- addplacename_to_LQplot(df = yeartoplot %>% filter(SIC07_description == sector), plot_to_addto = p, maxLQvalmultiplier = 20,#hide it!
                               placename = place, shapenumber = 16,
@@ -537,7 +537,7 @@ ynh_autoplots = function(sector){
   
   # debugonce(LQ_baseplot)
   p2 <- LQ_baseplot(df = yeartoplot, alpha = 1, sector_name = displayregions, 
-                    LQ_column = LQ, change_over_time = slope)
+                    LQ_column = LQ, change_over_time = slope, horriblehack = T)
   
   # debugonce(addplacename_to_LQplot)
   p2 <- addplacename_to_LQplot(df = yeartoplot, plot_to_addto = p2, maxLQvalmultiplier = 20,#Hide it!

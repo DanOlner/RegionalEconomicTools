@@ -275,7 +275,7 @@ LQ_baseplot <- function(df, alpha = 0.1, shape = 16, sector_name, LQ_column, cha
   ylab("")
   
   # HORRIBLE HACK to deal with level enforce working only for one plot type
-  if(horriblehack) p = p + scale_y_discrete(limits = lvls, drop = FALSE) +#Enforce levels on y axis
+  if(horriblehack) p = p + scale_y_discrete(limits = lvls, drop = FALSE) #Enforce levels on y axis
   
   if(!rlang::quo_is_missing(labelcolumn)){
    
