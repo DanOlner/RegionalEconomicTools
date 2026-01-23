@@ -596,6 +596,12 @@ saveRDS(
       jobslopes21to24 %>% rename(`CAGR 21-24` = CAGR),
       by = c('GEOGRAPHY_NAME','SIC2dig_shortnames')
     ) %>% 
+    left_join(#Add back in the raw 2024 job count value to include with the average
+      br.la %>% 
+        filter(DATE == 2024) %>%
+        select(GEOGRAPHY_NAME,SIC2dig_shortnames, jobs2024 = JOBCOUNT),
+      by = c('GEOGRAPHY_NAME','SIC2dig_shortnames')
+    ) %>% 
     mutate(regional_percent = sector_regional_proportion *100),
   'local/data/bres_sy2024.rds'
   )

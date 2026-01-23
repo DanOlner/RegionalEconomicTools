@@ -129,7 +129,7 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="https://www.nomisweb.co.uk/datasets/newbres6pub">BRES</a> full time job count data at local authority level for 2015 to 2024</li>
 <li>2 digit SIC sectors are used (shortened names)</li>
 <li>Keeping only sectors with more than 1% of each local authority’s total job count</li>
-<li>Latest job values are the 2022-24 average, to smooth volatile jobs data</li>
+<li>The 2022-24 average jobcount is included as job data can be volatile; ‘jobs2024’ is the latest jobcount datapoint in BRES.</li>
 <li>Tables are ordered by location quotient (LQ) to show which sectors are more concentrated in each local authority. E.g. Sheffield’s top LQ sector is basic metals: its LQ of 5.13 = basic metals job count there is 5.1x higher than the Great Britain average. (BRES data is GB not UK.)</li>
 <li>Compound Annual Growth Rate figures (just the year on year percent change taken from line-slopes through the data). Two are included: for the full 2015-2024 range, and for 2021-2024. (These use all the data, not smoothed).</li>
 </ul>
@@ -140,9 +140,10 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
-<col style="width: 17%">
+<col style="width: 16%">
 <col style="width: 8%">
-<col style="width: 9%">
+<col style="width: 4%">
+<col style="width: 4%">
 <col style="width: 2%">
 <col style="width: 30%">
 <col style="width: 31%">
@@ -151,7 +152,8 @@ ul.task-list li input[type="checkbox"] {
 <tr class="header">
 <th style="text-align: left;">SIC</th>
 <th style="text-align: right;">jobs (22-24 av)</th>
-<th style="text-align: right;">regional_percent</th>
+<th style="text-align: right;">jobs2024</th>
+<th style="text-align: right;">sector %</th>
 <th style="text-align: right;">LQ</th>
 <th style="text-align: left;">CAGR 15-24</th>
 <th style="text-align: left;">CAGR 21-24</th>
@@ -161,6 +163,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Basic metals</td>
 <td style="text-align: right;">2860</td>
+<td style="text-align: right;">3470</td>
 <td style="text-align: right;">1.6</td>
 <td style="text-align: right;">5.13</td>
 <td style="text-align: left;"><span style="     color: black !important;">1.2</span></td>
@@ -169,6 +172,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Other manufacturing</td>
 <td style="text-align: right;">2265</td>
+<td style="text-align: right;">2215</td>
 <td style="text-align: right;">1.3</td>
 <td style="text-align: right;">3.72</td>
 <td style="text-align: left;"><span style="     color: black !important;">4.2</span></td>
@@ -177,6 +181,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Fabricated metal</td>
 <td style="text-align: right;">5120</td>
+<td style="text-align: right;">4455</td>
 <td style="text-align: right;">2.9</td>
 <td style="text-align: right;">2.44</td>
 <td style="text-align: left;"><span style="     color: red !important;">-4.3</span></td>
@@ -185,6 +190,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Telecommunications</td>
 <td style="text-align: right;">3450</td>
+<td style="text-align: right;">2875</td>
 <td style="text-align: right;">1.9</td>
 <td style="text-align: right;">2.26</td>
 <td style="text-align: left;"><span style="     color: black !important;">1.2</span></td>
@@ -193,6 +199,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Education</td>
 <td style="text-align: right;">21473</td>
+<td style="text-align: right;">21845</td>
 <td style="text-align: right;">12.1</td>
 <td style="text-align: right;">1.71</td>
 <td style="text-align: left;"><span style="     color: black !important;">1</span></td>
@@ -201,6 +208,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Public administration</td>
 <td style="text-align: right;">14823</td>
+<td style="text-align: right;">15740</td>
 <td style="text-align: right;">8.4</td>
 <td style="text-align: right;">1.56</td>
 <td style="text-align: left;"><span style="     color: black !important;">7</span></td>
@@ -209,6 +217,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Postal/courier</td>
 <td style="text-align: right;">2293</td>
+<td style="text-align: right;">2065</td>
 <td style="text-align: right;">1.3</td>
 <td style="text-align: right;">1.40</td>
 <td style="text-align: left;"><span style="     color: red !important;">-0.4</span></td>
@@ -217,6 +226,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Health</td>
 <td style="text-align: right;">18042</td>
+<td style="text-align: right;">17850</td>
 <td style="text-align: right;">10.2</td>
 <td style="text-align: right;">1.33</td>
 <td style="text-align: left;"><span style="     color: black !important;">1.7</span></td>
@@ -225,6 +235,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Financial</td>
 <td style="text-align: right;">4113</td>
+<td style="text-align: right;">4300</td>
 <td style="text-align: right;">2.3</td>
 <td style="text-align: right;">1.20</td>
 <td style="text-align: left;"><span style="     color: red !important;">-1.9</span></td>
@@ -233,6 +244,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Motor trade/repair</td>
 <td style="text-align: right;">4140</td>
+<td style="text-align: right;">4205</td>
 <td style="text-align: right;">2.3</td>
 <td style="text-align: right;">1.10</td>
 <td style="text-align: left;"><span style="     color: black !important;">1.6</span></td>
@@ -241,6 +253,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Engineering/testing</td>
 <td style="text-align: right;">4230</td>
+<td style="text-align: right;">5325</td>
 <td style="text-align: right;">2.4</td>
 <td style="text-align: right;">1.10</td>
 <td style="text-align: left;"><span style="     color: black !important;">3.8</span></td>
@@ -249,6 +262,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Office/business support</td>
 <td style="text-align: right;">3572</td>
+<td style="text-align: right;">2775</td>
 <td style="text-align: right;">2.0</td>
 <td style="text-align: right;">1.03</td>
 <td style="text-align: left;"><span style="     color: red !important;">-0.8</span></td>
@@ -257,6 +271,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Employment</td>
 <td style="text-align: right;">5217</td>
+<td style="text-align: right;">5800</td>
 <td style="text-align: right;">2.9</td>
 <td style="text-align: right;">1.01</td>
 <td style="text-align: left;"><span style="     color: black !important;">2.1</span></td>
@@ -265,6 +280,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Wholesale trade</td>
 <td style="text-align: right;">8268</td>
+<td style="text-align: right;">9105</td>
 <td style="text-align: right;">4.7</td>
 <td style="text-align: right;">1.00</td>
 <td style="text-align: left;"><span style="     color: red !important;">-1.9</span></td>
@@ -273,6 +289,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Retail trade</td>
 <td style="text-align: right;">8968</td>
+<td style="text-align: right;">8705</td>
 <td style="text-align: right;">5.1</td>
 <td style="text-align: right;">1.00</td>
 <td style="text-align: left;"><span style="     color: red !important;">-1.7</span></td>
@@ -281,6 +298,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Residential care</td>
 <td style="text-align: right;">3625</td>
+<td style="text-align: right;">4050</td>
 <td style="text-align: right;">2.0</td>
 <td style="text-align: right;">0.97</td>
 <td style="text-align: left;"><span style="     color: black !important;">3.3</span></td>
@@ -289,6 +307,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Social work (no accommodation)</td>
 <td style="text-align: right;">4000</td>
+<td style="text-align: right;">3950</td>
 <td style="text-align: right;">2.3</td>
 <td style="text-align: right;">0.95</td>
 <td style="text-align: left;"><span style="     color: red !important;">-2.3</span></td>
@@ -297,6 +316,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Specialised construction</td>
 <td style="text-align: right;">5357</td>
+<td style="text-align: right;">5665</td>
 <td style="text-align: right;">3.0</td>
 <td style="text-align: right;">0.94</td>
 <td style="text-align: left;"><span style="     color: black !important;">1</span></td>
@@ -305,6 +325,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Legal/accounting</td>
 <td style="text-align: right;">4855</td>
+<td style="text-align: right;">4965</td>
 <td style="text-align: right;">2.7</td>
 <td style="text-align: right;">0.93</td>
 <td style="text-align: left;"><span style="     color: black !important;">3</span></td>
@@ -313,6 +334,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Food/beverage</td>
 <td style="text-align: right;">5675</td>
+<td style="text-align: right;">5450</td>
 <td style="text-align: right;">3.2</td>
 <td style="text-align: right;">0.87</td>
 <td style="text-align: left;"><span style="     color: black !important;">2.7</span></td>
@@ -321,6 +343,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Land transport/pipelines</td>
 <td style="text-align: right;">3070</td>
+<td style="text-align: right;">2335</td>
 <td style="text-align: right;">1.7</td>
 <td style="text-align: right;">0.86</td>
 <td style="text-align: left;"><span style="     color: red !important;">-3.7</span></td>
@@ -329,6 +352,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Software/consultancy</td>
 <td style="text-align: right;">4625</td>
+<td style="text-align: right;">4620</td>
 <td style="text-align: right;">2.6</td>
 <td style="text-align: right;">0.76</td>
 <td style="text-align: left;"><span style="     color: black !important;">5.3</span></td>
@@ -337,6 +361,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Head office/consults</td>
 <td style="text-align: right;">4240</td>
+<td style="text-align: right;">4225</td>
 <td style="text-align: right;">2.4</td>
 <td style="text-align: right;">0.69</td>
 <td style="text-align: left;"><span style="     color: red !important;">-1.9</span></td>
@@ -345,6 +370,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Financial auxiliaries</td>
 <td style="text-align: right;">1997</td>
+<td style="text-align: right;">1555</td>
 <td style="text-align: right;">1.1</td>
 <td style="text-align: right;">0.58</td>
 <td style="text-align: left;"><span style="     color: red !important;">-4.7</span></td>
@@ -353,6 +379,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Real estate</td>
 <td style="text-align: right;">2017</td>
+<td style="text-align: right;">1870</td>
 <td style="text-align: right;">1.1</td>
 <td style="text-align: right;">0.56</td>
 <td style="text-align: left;"><span style="     color: red !important;">-0.7</span></td>
@@ -361,6 +388,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Building construction</td>
 <td style="text-align: right;">1792</td>
+<td style="text-align: right;">2050</td>
 <td style="text-align: right;">1.0</td>
 <td style="text-align: right;">0.52</td>
 <td style="text-align: left;"><span style="     color: red !important;">-1.3</span></td>
@@ -369,6 +397,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Warehousing/transport support</td>
 <td style="text-align: right;">2470</td>
+<td style="text-align: right;">2620</td>
 <td style="text-align: right;">1.4</td>
 <td style="text-align: right;">0.51</td>
 <td style="text-align: left;"><span style="     color: black !important;">4.7</span></td>
@@ -387,16 +416,18 @@ ul.task-list li input[type="checkbox"] {
 <colgroup>
 <col style="width: 16%">
 <col style="width: 8%">
-<col style="width: 9%">
+<col style="width: 4%">
+<col style="width: 4%">
 <col style="width: 2%">
-<col style="width: 31%">
-<col style="width: 31%">
+<col style="width: 30%">
+<col style="width: 30%">
 </colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">SIC</th>
 <th style="text-align: right;">jobs (22-24 av)</th>
-<th style="text-align: right;">regional_percent</th>
+<th style="text-align: right;">jobs2024</th>
+<th style="text-align: right;">sector %</th>
 <th style="text-align: right;">LQ</th>
 <th style="text-align: left;">CAGR 15-24</th>
 <th style="text-align: left;">CAGR 21-24</th>
@@ -406,6 +437,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Basic metals</td>
 <td style="text-align: right;">1423</td>
+<td style="text-align: right;">1340</td>
 <td style="text-align: right;">2.1</td>
 <td style="text-align: right;">6.73</td>
 <td style="text-align: left;"><span style="     color: red !important;">-1.9</span></td>
@@ -414,6 +446,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Furniture manufacturing</td>
 <td style="text-align: right;">1057</td>
+<td style="text-align: right;">1350</td>
 <td style="text-align: right;">1.6</td>
 <td style="text-align: right;">4.86</td>
 <td style="text-align: left;"><span style="     color: black !important;">6.5</span></td>
@@ -422,6 +455,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Printing/media</td>
 <td style="text-align: right;">847</td>
+<td style="text-align: right;">915</td>
 <td style="text-align: right;">1.3</td>
 <td style="text-align: right;">4.19</td>
 <td style="text-align: left;"><span style="     color: black !important;">1.4</span></td>
@@ -430,6 +464,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Electrical</td>
 <td style="text-align: right;">787</td>
+<td style="text-align: right;">735</td>
 <td style="text-align: right;">1.2</td>
 <td style="text-align: right;">3.78</td>
 <td style="text-align: left;"><span style="     color: black !important;">2</span></td>
@@ -438,6 +473,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Wood/cork</td>
 <td style="text-align: right;">732</td>
+<td style="text-align: right;">565</td>
 <td style="text-align: right;">1.1</td>
 <td style="text-align: right;">3.58</td>
 <td style="text-align: left;"><span style="     color: black !important;">17.6</span></td>
@@ -446,6 +482,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Fabricated metal</td>
 <td style="text-align: right;">2648</td>
+<td style="text-align: right;">2675</td>
 <td style="text-align: right;">3.9</td>
 <td style="text-align: right;">3.33</td>
 <td style="text-align: left;"><span style="     color: black !important;">0.9</span></td>
@@ -454,6 +491,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Postal/courier</td>
 <td style="text-align: right;">1335</td>
+<td style="text-align: right;">1325</td>
 <td style="text-align: right;">2.0</td>
 <td style="text-align: right;">2.15</td>
 <td style="text-align: left;"><span style="     color: black !important;">5</span></td>
@@ -462,6 +500,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Waste management/recovery</td>
 <td style="text-align: right;">773</td>
+<td style="text-align: right;">765</td>
 <td style="text-align: right;">1.2</td>
 <td style="text-align: right;">1.90</td>
 <td style="text-align: left;"><span style="     color: red !important;">-0.5</span></td>
@@ -470,6 +509,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Residential care</td>
 <td style="text-align: right;">2583</td>
+<td style="text-align: right;">2950</td>
 <td style="text-align: right;">3.8</td>
 <td style="text-align: right;">1.82</td>
 <td style="text-align: left;"><span style="     color: black !important;">3.6</span></td>
@@ -478,6 +518,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Building construction</td>
 <td style="text-align: right;">2137</td>
+<td style="text-align: right;">2375</td>
 <td style="text-align: right;">3.2</td>
 <td style="text-align: right;">1.63</td>
 <td style="text-align: left;"><span style="     color: black !important;">2.4</span></td>
@@ -486,6 +527,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Machinery manufacturing</td>
 <td style="text-align: right;">760</td>
+<td style="text-align: right;">725</td>
 <td style="text-align: right;">1.1</td>
 <td style="text-align: right;">1.60</td>
 <td style="text-align: left;"><span style="     color: black !important;">0.1</span></td>
@@ -494,6 +536,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Rubber/plastic</td>
 <td style="text-align: right;">680</td>
+<td style="text-align: right;">535</td>
 <td style="text-align: right;">1.0</td>
 <td style="text-align: right;">1.59</td>
 <td style="text-align: left;"><span style="     color: red !important;">-0.4</span></td>
@@ -502,6 +545,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Motor trade/repair</td>
 <td style="text-align: right;">2255</td>
+<td style="text-align: right;">2450</td>
 <td style="text-align: right;">3.4</td>
 <td style="text-align: right;">1.58</td>
 <td style="text-align: left;"><span style="     color: black !important;">5.2</span></td>
@@ -510,6 +554,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Specialised construction</td>
 <td style="text-align: right;">3395</td>
+<td style="text-align: right;">3990</td>
 <td style="text-align: right;">5.1</td>
 <td style="text-align: right;">1.57</td>
 <td style="text-align: left;"><span style="     color: black !important;">0.8</span></td>
@@ -518,6 +563,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Office/business support</td>
 <td style="text-align: right;">2002</td>
+<td style="text-align: right;">1420</td>
 <td style="text-align: right;">3.0</td>
 <td style="text-align: right;">1.52</td>
 <td style="text-align: left;"><span style="     color: red !important;">-11.8</span></td>
@@ -526,6 +572,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Warehousing/transport support</td>
 <td style="text-align: right;">2248</td>
+<td style="text-align: right;">2370</td>
 <td style="text-align: right;">3.3</td>
 <td style="text-align: right;">1.22</td>
 <td style="text-align: left;"><span style="     color: black !important;">4.9</span></td>
@@ -534,6 +581,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Wholesale trade</td>
 <td style="text-align: right;">3573</td>
+<td style="text-align: right;">3680</td>
 <td style="text-align: right;">5.3</td>
 <td style="text-align: right;">1.15</td>
 <td style="text-align: left;"><span style="     color: black !important;">0.7</span></td>
@@ -542,6 +590,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Food manufacturing</td>
 <td style="text-align: right;">1187</td>
+<td style="text-align: right;">1410</td>
 <td style="text-align: right;">1.8</td>
 <td style="text-align: right;">1.13</td>
 <td style="text-align: left;"><span style="     color: red !important;">-2.5</span></td>
@@ -550,6 +599,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Public administration</td>
 <td style="text-align: right;">4003</td>
+<td style="text-align: right;">4170</td>
 <td style="text-align: right;">6.0</td>
 <td style="text-align: right;">1.11</td>
 <td style="text-align: left;"><span style="     color: red !important;">-3.7</span></td>
@@ -558,6 +608,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Education</td>
 <td style="text-align: right;">5182</td>
+<td style="text-align: right;">5235</td>
 <td style="text-align: right;">7.7</td>
 <td style="text-align: right;">1.09</td>
 <td style="text-align: left;"><span style="     color: red !important;">-3.2</span></td>
@@ -566,6 +617,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Land transport/pipelines</td>
 <td style="text-align: right;">1385</td>
+<td style="text-align: right;">975</td>
 <td style="text-align: right;">2.1</td>
 <td style="text-align: right;">1.02</td>
 <td style="text-align: left;"><span style="     color: red !important;">-2.7</span></td>
@@ -574,6 +626,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Retail trade</td>
 <td style="text-align: right;">3378</td>
+<td style="text-align: right;">3320</td>
 <td style="text-align: right;">5.0</td>
 <td style="text-align: right;">1.00</td>
 <td style="text-align: left;"><span style="     color: red !important;">-1.5</span></td>
@@ -582,6 +635,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Health</td>
 <td style="text-align: right;">4725</td>
+<td style="text-align: right;">4625</td>
 <td style="text-align: right;">7.0</td>
 <td style="text-align: right;">0.92</td>
 <td style="text-align: left;"><span style="     color: black !important;">1.2</span></td>
@@ -590,6 +644,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Social work (no accommodation)</td>
 <td style="text-align: right;">1233</td>
+<td style="text-align: right;">1250</td>
 <td style="text-align: right;">1.8</td>
 <td style="text-align: right;">0.77</td>
 <td style="text-align: left;"><span style="     color: red !important;">-2.4</span></td>
@@ -598,6 +653,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Food/beverage</td>
 <td style="text-align: right;">1868</td>
+<td style="text-align: right;">1760</td>
 <td style="text-align: right;">2.8</td>
 <td style="text-align: right;">0.76</td>
 <td style="text-align: left;"><span style="     color: black !important;">0.9</span></td>
@@ -606,6 +662,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Financial</td>
 <td style="text-align: right;">972</td>
+<td style="text-align: right;">940</td>
 <td style="text-align: right;">1.4</td>
 <td style="text-align: right;">0.75</td>
 <td style="text-align: left;"><span style="     color: red !important;">-1.2</span></td>
@@ -614,6 +671,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Building/landscape</td>
 <td style="text-align: right;">832</td>
+<td style="text-align: right;">1410</td>
 <td style="text-align: right;">1.2</td>
 <td style="text-align: right;">0.69</td>
 <td style="text-align: left;"><span style="     color: red !important;">-0.9</span></td>
@@ -622,6 +680,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Engineering/testing</td>
 <td style="text-align: right;">982</td>
+<td style="text-align: right;">1445</td>
 <td style="text-align: right;">1.5</td>
 <td style="text-align: right;">0.67</td>
 <td style="text-align: left;"><span style="     color: red !important;">-1.1</span></td>
@@ -630,6 +689,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Employment</td>
 <td style="text-align: right;">1103</td>
+<td style="text-align: right;">1110</td>
 <td style="text-align: right;">1.6</td>
 <td style="text-align: right;">0.56</td>
 <td style="text-align: left;"><span style="     color: red !important;">-3.7</span></td>
@@ -638,6 +698,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Software/consultancy</td>
 <td style="text-align: right;">1112</td>
+<td style="text-align: right;">1150</td>
 <td style="text-align: right;">1.7</td>
 <td style="text-align: right;">0.48</td>
 <td style="text-align: left;"><span style="     color: red !important;">-1.2</span></td>
@@ -646,6 +707,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Head office/consults</td>
 <td style="text-align: right;">820</td>
+<td style="text-align: right;">950</td>
 <td style="text-align: right;">1.2</td>
 <td style="text-align: right;">0.35</td>
 <td style="text-align: left;"><span style="     color: red !important;">-3.7</span></td>
@@ -664,16 +726,18 @@ ul.task-list li input[type="checkbox"] {
 <colgroup>
 <col style="width: 16%">
 <col style="width: 8%">
-<col style="width: 9%">
+<col style="width: 4%">
+<col style="width: 4%">
 <col style="width: 2%">
-<col style="width: 31%">
-<col style="width: 31%">
+<col style="width: 30%">
+<col style="width: 30%">
 </colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">SIC</th>
 <th style="text-align: right;">jobs (22-24 av)</th>
-<th style="text-align: right;">regional_percent</th>
+<th style="text-align: right;">jobs2024</th>
+<th style="text-align: right;">sector %</th>
 <th style="text-align: right;">LQ</th>
 <th style="text-align: left;">CAGR 15-24</th>
 <th style="text-align: left;">CAGR 21-24</th>
@@ -683,6 +747,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Furniture manufacturing</td>
 <td style="text-align: right;">1295</td>
+<td style="text-align: right;">1150</td>
 <td style="text-align: right;">2.2</td>
 <td style="text-align: right;">6.92</td>
 <td style="text-align: left;"><span style="     color: black !important;">1.8</span></td>
@@ -691,6 +756,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Non-metallic mineral</td>
 <td style="text-align: right;">988</td>
+<td style="text-align: right;">875</td>
 <td style="text-align: right;">1.7</td>
 <td style="text-align: right;">4.75</td>
 <td style="text-align: left;"><span style="     color: red !important;">-1</span></td>
@@ -699,6 +765,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Wood/cork</td>
 <td style="text-align: right;">785</td>
+<td style="text-align: right;">480</td>
 <td style="text-align: right;">1.4</td>
 <td style="text-align: right;">4.46</td>
 <td style="text-align: left;"><span style="     color: black !important;">3.9</span></td>
@@ -707,6 +774,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Rubber/plastic</td>
 <td style="text-align: right;">1275</td>
+<td style="text-align: right;">925</td>
 <td style="text-align: right;">2.2</td>
 <td style="text-align: right;">3.47</td>
 <td style="text-align: left;"><span style="     color: red !important;">-1.8</span></td>
@@ -715,6 +783,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Food manufacturing</td>
 <td style="text-align: right;">2950</td>
+<td style="text-align: right;">2930</td>
 <td style="text-align: right;">5.1</td>
 <td style="text-align: right;">3.27</td>
 <td style="text-align: left;"><span style="     color: black !important;">1.3</span></td>
@@ -723,6 +792,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Civil engineering</td>
 <td style="text-align: right;">1168</td>
+<td style="text-align: right;">1385</td>
 <td style="text-align: right;">2.0</td>
 <td style="text-align: right;">2.52</td>
 <td style="text-align: left;"><span style="     color: black !important;">2.3</span></td>
@@ -731,6 +801,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Warehousing/transport support</td>
 <td style="text-align: right;">3470</td>
+<td style="text-align: right;">3185</td>
 <td style="text-align: right;">6.0</td>
 <td style="text-align: right;">2.20</td>
 <td style="text-align: left;"><span style="     color: black !important;">3.2</span></td>
@@ -739,6 +810,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Residential care</td>
 <td style="text-align: right;">2000</td>
+<td style="text-align: right;">2350</td>
 <td style="text-align: right;">3.5</td>
 <td style="text-align: right;">1.63</td>
 <td style="text-align: left;"><span style="     color: black !important;">4.3</span></td>
@@ -747,6 +819,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Fabricated metal</td>
 <td style="text-align: right;">1108</td>
+<td style="text-align: right;">1055</td>
 <td style="text-align: right;">1.9</td>
 <td style="text-align: right;">1.62</td>
 <td style="text-align: left;"><span style="     color: red !important;">-0.7</span></td>
@@ -755,6 +828,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Specialised construction</td>
 <td style="text-align: right;">2925</td>
+<td style="text-align: right;">3225</td>
 <td style="text-align: right;">5.1</td>
 <td style="text-align: right;">1.58</td>
 <td style="text-align: left;"><span style="     color: black !important;">3.9</span></td>
@@ -763,6 +837,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Motor trade/repair</td>
 <td style="text-align: right;">1798</td>
+<td style="text-align: right;">1950</td>
 <td style="text-align: right;">3.1</td>
 <td style="text-align: right;">1.47</td>
 <td style="text-align: left;"><span style="     color: black !important;">2.8</span></td>
@@ -771,6 +846,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Machinery manufacturing</td>
 <td style="text-align: right;">587</td>
+<td style="text-align: right;">515</td>
 <td style="text-align: right;">1.0</td>
 <td style="text-align: right;">1.44</td>
 <td style="text-align: left;"><span style="     color: red !important;">-5.5</span></td>
@@ -779,6 +855,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Retail trade</td>
 <td style="text-align: right;">3640</td>
+<td style="text-align: right;">3180</td>
 <td style="text-align: right;">6.3</td>
 <td style="text-align: right;">1.25</td>
 <td style="text-align: left;"><span style="     color: black !important;">2.4</span></td>
@@ -787,6 +864,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Social work (no accommodation)</td>
 <td style="text-align: right;">1700</td>
+<td style="text-align: right;">1600</td>
 <td style="text-align: right;">2.9</td>
 <td style="text-align: right;">1.23</td>
 <td style="text-align: left;"><span style="     color: red !important;">-5.3</span></td>
@@ -795,6 +873,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Health</td>
 <td style="text-align: right;">5310</td>
+<td style="text-align: right;">5285</td>
 <td style="text-align: right;">9.2</td>
 <td style="text-align: right;">1.20</td>
 <td style="text-align: left;"><span style="     color: black !important;">3.4</span></td>
@@ -803,6 +882,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Land transport/pipelines</td>
 <td style="text-align: right;">1400</td>
+<td style="text-align: right;">1125</td>
 <td style="text-align: right;">2.4</td>
 <td style="text-align: right;">1.20</td>
 <td style="text-align: left;"><span style="     color: red !important;">-0.1</span></td>
@@ -811,6 +891,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Education</td>
 <td style="text-align: right;">3885</td>
+<td style="text-align: right;">3795</td>
 <td style="text-align: right;">6.7</td>
 <td style="text-align: right;">0.95</td>
 <td style="text-align: left;"><span style="     color: red !important;">-0.4</span></td>
@@ -819,6 +900,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Office/business support</td>
 <td style="text-align: right;">1073</td>
+<td style="text-align: right;">520</td>
 <td style="text-align: right;">1.9</td>
 <td style="text-align: right;">0.95</td>
 <td style="text-align: left;"><span style="     color: red !important;">-6</span></td>
@@ -827,6 +909,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Wholesale trade</td>
 <td style="text-align: right;">2518</td>
+<td style="text-align: right;">2705</td>
 <td style="text-align: right;">4.4</td>
 <td style="text-align: right;">0.94</td>
 <td style="text-align: left;"><span style="     color: black !important;">1</span></td>
@@ -835,6 +918,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Real estate</td>
 <td style="text-align: right;">1088</td>
+<td style="text-align: right;">1055</td>
 <td style="text-align: right;">1.9</td>
 <td style="text-align: right;">0.93</td>
 <td style="text-align: left;"><span style="     color: black !important;">2.8</span></td>
@@ -843,6 +927,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Food/beverage</td>
 <td style="text-align: right;">1817</td>
+<td style="text-align: right;">1875</td>
 <td style="text-align: right;">3.1</td>
 <td style="text-align: right;">0.86</td>
 <td style="text-align: left;"><span style="     color: black !important;">4.6</span></td>
@@ -851,6 +936,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Public administration</td>
 <td style="text-align: right;">2483</td>
+<td style="text-align: right;">2710</td>
 <td style="text-align: right;">4.3</td>
 <td style="text-align: right;">0.80</td>
 <td style="text-align: left;"><span style="     color: black !important;">6.6</span></td>
@@ -859,6 +945,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Employment</td>
 <td style="text-align: right;">1323</td>
+<td style="text-align: right;">1370</td>
 <td style="text-align: right;">2.3</td>
 <td style="text-align: right;">0.78</td>
 <td style="text-align: left;"><span style="     color: black !important;">7.2</span></td>
@@ -867,6 +954,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Engineering/testing</td>
 <td style="text-align: right;">858</td>
+<td style="text-align: right;">1105</td>
 <td style="text-align: right;">1.5</td>
 <td style="text-align: right;">0.68</td>
 <td style="text-align: left;"><span style="     color: red !important;">-2.4</span></td>
@@ -875,6 +963,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Building construction</td>
 <td style="text-align: right;">762</td>
+<td style="text-align: right;">775</td>
 <td style="text-align: right;">1.3</td>
 <td style="text-align: right;">0.68</td>
 <td style="text-align: left;"><span style="     color: black !important;">0.3</span></td>
@@ -883,6 +972,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Legal/accounting</td>
 <td style="text-align: right;">1087</td>
+<td style="text-align: right;">1575</td>
 <td style="text-align: right;">1.9</td>
 <td style="text-align: right;">0.64</td>
 <td style="text-align: left;"><span style="     color: black !important;">15.6</span></td>
@@ -891,6 +981,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Head office/consults</td>
 <td style="text-align: right;">725</td>
+<td style="text-align: right;">775</td>
 <td style="text-align: right;">1.3</td>
 <td style="text-align: right;">0.36</td>
 <td style="text-align: left;"><span style="     color: black !important;">8.1</span></td>
@@ -909,16 +1000,18 @@ ul.task-list li input[type="checkbox"] {
 <colgroup>
 <col style="width: 16%">
 <col style="width: 8%">
-<col style="width: 9%">
+<col style="width: 4%">
+<col style="width: 4%">
 <col style="width: 2%">
-<col style="width: 31%">
-<col style="width: 31%">
+<col style="width: 30%">
+<col style="width: 30%">
 </colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">SIC</th>
 <th style="text-align: right;">jobs (22-24 av)</th>
-<th style="text-align: right;">regional_percent</th>
+<th style="text-align: right;">jobs2024</th>
+<th style="text-align: right;">sector %</th>
 <th style="text-align: right;">LQ</th>
 <th style="text-align: left;">CAGR 15-24</th>
 <th style="text-align: left;">CAGR 21-24</th>
@@ -928,6 +1021,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Warehousing/transport support</td>
 <td style="text-align: right;">9837</td>
+<td style="text-align: right;">9715</td>
 <td style="text-align: right;">11.0</td>
 <td style="text-align: right;">4.03</td>
 <td style="text-align: left;"><span style="     color: black !important;">11.4</span></td>
@@ -936,6 +1030,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Machinery repair/install</td>
 <td style="text-align: right;">1730</td>
+<td style="text-align: right;">1820</td>
 <td style="text-align: right;">1.9</td>
 <td style="text-align: right;">3.95</td>
 <td style="text-align: left;"><span style="     color: black !important;">2.8</span></td>
@@ -944,6 +1039,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Rubber/plastic</td>
 <td style="text-align: right;">2042</td>
+<td style="text-align: right;">1730</td>
 <td style="text-align: right;">2.3</td>
 <td style="text-align: right;">3.60</td>
 <td style="text-align: left;"><span style="     color: black !important;">2.8</span></td>
@@ -952,6 +1048,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Civil engineering</td>
 <td style="text-align: right;">2085</td>
+<td style="text-align: right;">2520</td>
 <td style="text-align: right;">2.3</td>
 <td style="text-align: right;">2.91</td>
 <td style="text-align: left;"><span style="     color: black !important;">1.1</span></td>
@@ -960,6 +1057,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Land transport/pipelines</td>
 <td style="text-align: right;">4013</td>
+<td style="text-align: right;">3555</td>
 <td style="text-align: right;">4.5</td>
 <td style="text-align: right;">2.22</td>
 <td style="text-align: left;"><span style="     color: black !important;">0.7</span></td>
@@ -968,6 +1066,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Motor trade/repair</td>
 <td style="text-align: right;">3638</td>
+<td style="text-align: right;">3700</td>
 <td style="text-align: right;">4.1</td>
 <td style="text-align: right;">1.92</td>
 <td style="text-align: left;"><span style="     color: black !important;">3.3</span></td>
@@ -976,6 +1075,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Waste management/recovery</td>
 <td style="text-align: right;">910</td>
+<td style="text-align: right;">900</td>
 <td style="text-align: right;">1.0</td>
 <td style="text-align: right;">1.68</td>
 <td style="text-align: left;"><span style="     color: black !important;">3.8</span></td>
@@ -984,6 +1084,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Specialised construction</td>
 <td style="text-align: right;">3832</td>
+<td style="text-align: right;">4150</td>
 <td style="text-align: right;">4.3</td>
 <td style="text-align: right;">1.34</td>
 <td style="text-align: left;"><span style="     color: black !important;">3.5</span></td>
@@ -992,6 +1093,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Health</td>
 <td style="text-align: right;">8000</td>
+<td style="text-align: right;">8500</td>
 <td style="text-align: right;">9.0</td>
 <td style="text-align: right;">1.17</td>
 <td style="text-align: left;"><span style="     color: black !important;">3.2</span></td>
@@ -1000,6 +1102,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Building construction</td>
 <td style="text-align: right;">1892</td>
+<td style="text-align: right;">1825</td>
 <td style="text-align: right;">2.1</td>
 <td style="text-align: right;">1.09</td>
 <td style="text-align: left;"><span style="     color: black !important;">5</span></td>
@@ -1008,6 +1111,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Residential care</td>
 <td style="text-align: right;">2050</td>
+<td style="text-align: right;">2500</td>
 <td style="text-align: right;">2.3</td>
 <td style="text-align: right;">1.08</td>
 <td style="text-align: left;"><span style="     color: red !important;">-1.5</span></td>
@@ -1016,6 +1120,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Retail trade</td>
 <td style="text-align: right;">4865</td>
+<td style="text-align: right;">4555</td>
 <td style="text-align: right;">5.4</td>
 <td style="text-align: right;">1.08</td>
 <td style="text-align: left;"><span style="     color: red !important;">-0.9</span></td>
@@ -1024,6 +1129,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Social work (no accommodation)</td>
 <td style="text-align: right;">2217</td>
+<td style="text-align: right;">2100</td>
 <td style="text-align: right;">2.5</td>
 <td style="text-align: right;">1.04</td>
 <td style="text-align: left;"><span style="     color: red !important;">-1.8</span></td>
@@ -1032,6 +1138,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Public administration</td>
 <td style="text-align: right;">4742</td>
+<td style="text-align: right;">4700</td>
 <td style="text-align: right;">5.3</td>
 <td style="text-align: right;">0.99</td>
 <td style="text-align: left;"><span style="     color: red !important;">-4.3</span></td>
@@ -1040,6 +1147,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Wholesale trade</td>
 <td style="text-align: right;">4087</td>
+<td style="text-align: right;">4060</td>
 <td style="text-align: right;">4.6</td>
 <td style="text-align: right;">0.99</td>
 <td style="text-align: left;"><span style="     color: red !important;">-0.5</span></td>
@@ -1048,6 +1156,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Building/landscape</td>
 <td style="text-align: right;">1512</td>
+<td style="text-align: right;">1450</td>
 <td style="text-align: right;">1.7</td>
 <td style="text-align: right;">0.94</td>
 <td style="text-align: left;"><span style="     color: black !important;">1.5</span></td>
@@ -1056,6 +1165,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Employment</td>
 <td style="text-align: right;">2452</td>
+<td style="text-align: right;">2560</td>
 <td style="text-align: right;">2.7</td>
 <td style="text-align: right;">0.94</td>
 <td style="text-align: left;"><span style="     color: red !important;">-3.4</span></td>
@@ -1064,6 +1174,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Education</td>
 <td style="text-align: right;">5942</td>
+<td style="text-align: right;">5820</td>
 <td style="text-align: right;">6.7</td>
 <td style="text-align: right;">0.94</td>
 <td style="text-align: left;"><span style="     color: red !important;">-3.9</span></td>
@@ -1072,6 +1183,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Financial auxiliaries</td>
 <td style="text-align: right;">1333</td>
+<td style="text-align: right;">1240</td>
 <td style="text-align: right;">1.5</td>
 <td style="text-align: right;">0.77</td>
 <td style="text-align: left;"><span style="     color: black !important;">0.5</span></td>
@@ -1080,6 +1192,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Engineering/testing</td>
 <td style="text-align: right;">1473</td>
+<td style="text-align: right;">2060</td>
 <td style="text-align: right;">1.7</td>
 <td style="text-align: right;">0.76</td>
 <td style="text-align: left;"><span style="     color: black !important;">5</span></td>
@@ -1088,6 +1201,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Head office/consults</td>
 <td style="text-align: right;">2358</td>
+<td style="text-align: right;">2530</td>
 <td style="text-align: right;">2.6</td>
 <td style="text-align: right;">0.76</td>
 <td style="text-align: left;"><span style="     color: black !important;">3.6</span></td>
@@ -1096,6 +1210,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Food/beverage</td>
 <td style="text-align: right;">2458</td>
+<td style="text-align: right;">2325</td>
 <td style="text-align: right;">2.8</td>
 <td style="text-align: right;">0.75</td>
 <td style="text-align: left;"><span style="     color: black !important;">2.6</span></td>
@@ -1104,6 +1219,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">Food manufacturing</td>
 <td style="text-align: right;">1043</td>
+<td style="text-align: right;">1080</td>
 <td style="text-align: right;">1.2</td>
 <td style="text-align: right;">0.75</td>
 <td style="text-align: left;"><span style="     color: black !important;">7.2</span></td>
@@ -1112,6 +1228,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td style="text-align: left;">Legal/accounting</td>
 <td style="text-align: right;">1010</td>
+<td style="text-align: right;">955</td>
 <td style="text-align: right;">1.1</td>
 <td style="text-align: right;">0.38</td>
 <td style="text-align: left;"><span style="     color: black !important;">4.8</span></td>
