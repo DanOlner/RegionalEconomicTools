@@ -103,7 +103,7 @@ unique(qual$SIC)
 
 # Stick to finding GVA error rates for the mo
 # Add gva in...
-# NOTE: ONLY HAVE QUAL FROM 2012 VS 2008 FOR THE NOMINAL DAT
+# NOTE: ONLY HAVE QUAL FROM 2012 VS 2008 FOR THE NOMINAL DATA
 abs_gva = allregions %>% 
   select(-c(goods_materials_services_purchased,turnover,employment_costs)) %>% 
   filter(Year >= 2012) %>% 
@@ -116,7 +116,10 @@ abs_gva = allregions %>%
     gva_max95 = GVA + (GVA_SE * 1.96)
   )
 
-  
+# Save for use elsewhere
+
+
+
 # Quite a lot of missing values - but let's see for a specific year
 abs_gva2023 = abs_gva %>% 
   filter(Year == max(Year)) 
