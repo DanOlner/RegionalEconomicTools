@@ -23,7 +23,7 @@ i2i.yr = readRDS('local/data/payments_itl2_sic2_yearly_w_sections.rds')
 # e.g. for Yorkshire vs North West comparison:
 
 regions_to_compare = c("Yorkshire and The Humber", "North West")
-# regions_to_compare = NULL
+regions_to_compare = i2i.yr %>% filter(!qg('ireland',payer_ITL1name)) %>% select(payer_ITL1name) %>% pull() %>% unique
 
 # First, aggregate to section level (dropping NA sections i.e. SIC code 0)
 # Using most recent year for now - could extend to all years
@@ -183,8 +183,8 @@ distinctive_linkages %>%
 # Select sector pair to analyse (using section names)
 # Start with Finance → Finance (section K)
 payer_section_filter = "Manufacturing"
-payee_section_filter = "Administrative and support service activities"
-# payee_section_filter = "Manufacturing"
+payee_section_filter = "Manufacturing"
+# payee_section_filter = "Administrative and support service activities"
 # payer_section_filter = "Financial and insurance activities"
 # payee_section_filter = "Financial and insurance activities"
 
@@ -340,7 +340,8 @@ top_divergent_flows = all_flow_slopes_wide %>%
 top_divergent_flows %>%
   filter(payer_ITL1name == "Yorkshire and The Humber") %>%
   select(flow_label, annual_pct_change_internal, annual_pct_change_external, external_minus_internal) %>%
-  print(n = 20)
+  # print(n = 20)
+  View
 
 
 
@@ -357,7 +358,8 @@ top_internal_growth %>%
   select(flow_label, annual_pct_change_internal, annual_pct_change_external, external_minus_internal) %>%
   # arrange(desc(annual_pct_change_internal)) %>% 
   arrange(external_minus_internal) %>% 
-  print(n = 20)
+  # print(n = 20)
+  View
 
 
 
@@ -495,6 +497,51 @@ ggplot(regional_self_sufficiency,
   ) +
   scale_y_continuous(labels = scales::percent)
 
+# Multi-year comparison of regional self-sufficiency
+# Select years to compare (first, middle, last)
+available_years = sort(unique(i2i.yr$year))
+selected_years = available_years[c(1, ceiling(length(available_years)/2), length(available_years))]
+
+# Calculate self-sufficiency for selected years
+regional_self_sufficiency_multiyear = i2i.yr %>%
+  filter(
+    !is.na(sectionname_payer),
+    !is.na(sectionname_payee),
+    year %in% selected_years,
+    !qg('households|extraterr', sectionname_payer),
+    !qg('households|extraterr', sectionname_payee)
+  ) %>%
+  {if(!is.null(coef_regions_exclude)) filter(., !payer_ITL1name %in% coef_regions_exclude) else .} %>%
+  mutate(
+    flow_type = ifelse(payer_ITL1name == payee_ITL1name, "internal", "external")
+  ) %>%
+  group_by(payer_ITL1name, year, flow_type) %>%
+  summarise(pounds = sum(pounds, na.rm = TRUE), .groups = 'drop') %>%
+  pivot_wider(names_from = flow_type, values_from = pounds, values_fill = 0) %>%
+  mutate(
+    total = internal + external,
+    overall_regional_share = internal / total,
+    year = factor(year)
+  )
+
+# Plot with dodged bars by year
+ggplot(regional_self_sufficiency_multiyear,
+       aes(x = reorder(payer_ITL1name, overall_regional_share),
+           y = overall_regional_share, fill = year)) +
+  geom_col(position = position_dodge(width = 0.8), width = 0.7) +
+  coord_flip() +
+  labs(
+    title = "Regional Self-Sufficiency Over Time",
+    subtitle = paste0("Share of intermediate purchases sourced within region (",
+                      paste(selected_years, collapse = ", "), ")"),
+    x = "",
+    y = "Internal share of total purchases",
+    fill = "Year"
+  ) +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_brewer(palette = "Paired") +
+  theme(legend.position = "bottom")
+
 # Self-sufficiency by purchasing sector within each region
 sector_self_sufficiency = coefficients_wide %>%
   group_by(payer_ITL1name, sectionname_payer, section_payer_short) %>%
@@ -596,6 +643,13 @@ compare_two_regions = function(sector, region1, region2, coef_data = coefficient
 
 # Example: How does Yorkshire Manufacturing source differently from West Midlands?
 compare_two_regions("Manufacturing", "Yorkshire and The Humber", "West Midlands")
+chk = compare_two_regions("Manufacturing", "Yorkshire and The Humber", "West Midlands") 
+
+# Yep, recipe sums to 1
+chk %>% summarise(across(`West Midlands`:`Yorkshire and The Humber`, ~sum(.)))
+
+chk %>% arrange(-`West Midlands`) %>% mutate(across(`West Midlands`:`Yorkshire and The Humber`, ~.*100))
+
 
 # Visualise recipe comparison for a sector across all regions
 plot_recipe_comparison = function(purchasing_sector, coef_data = coefficients_wide) {
@@ -618,6 +672,8 @@ plot_recipe_comparison = function(purchasing_sector, coef_data = coefficients_wi
 
 plot_recipe_comparison("Manufacturing")
 plot_recipe_comparison("Financial and insurance activities")
+plot_recipe_comparison(i2i.yr %>% filter(qg('entertain',sectionname_payee)) %>% pull(sectionname_payee) %>% unique)
+plot_recipe_comparison(i2i.yr %>% filter(qg('information',sectionname_payee)) %>% pull(sectionname_payee) %>% unique)
 
 
 # 3. WHICH LINKAGES SHOW MOST REGIONAL VARIATION IN LOCAL SOURCING? ----
@@ -660,6 +716,131 @@ linkage_variation %>%
   arrange(mean_regional_share) %>%
   select(flow_label, mean_regional_share, sd_regional_share) %>%
   print(n = 20)
+
+
+# 4. VISUALISING LOCAL VS TRADEABLE SECTORS ----
+
+# Aggregate by PAYEE sector: which sectors receive payments locally vs from other regions?
+# High mean = sector receives payments mostly from local payers
+# Low mean = sector receives payments from across the UK (more "tradeable")
+
+payee_sector_locality = linkage_variation %>%
+  filter(n_regions >= 6) %>%
+  group_by(sectionname_payee, section_payee_short) %>%
+  summarise(
+    # Weighted mean by number of regions (gives more weight to common linkages)
+    mean_local_share = mean(mean_regional_share, na.rm = TRUE),
+    median_local_share = median(mean_regional_share, na.rm = TRUE),
+    sd_local_share = sd(mean_regional_share, na.rm = TRUE),
+    n_linkages = n(),
+    .groups = 'drop'
+  ) %>%
+  arrange(desc(mean_local_share))
+
+# Same for PAYER sector: which sectors source their inputs locally vs from other regions?
+payer_sector_locality = linkage_variation %>%
+  filter(n_regions >= 6) %>%
+  group_by(sectionname_payer, section_payer_short) %>%
+  summarise(
+    mean_local_share = mean(mean_regional_share, na.rm = TRUE),
+    median_local_share = median(mean_regional_share, na.rm = TRUE),
+    sd_local_share = sd(mean_regional_share, na.rm = TRUE),
+    n_linkages = n(),
+    .groups = 'drop'
+  ) %>%
+  arrange(desc(mean_local_share))
+
+# Diverging bar chart: Payee sectors by locality
+# Centred on UK average (0.5 = half local, half imported)
+ggplot(payee_sector_locality,
+       aes(x = reorder(section_payee_short, mean_local_share),
+           y = mean_local_share - 0.5)) +
+  geom_col(aes(fill = mean_local_share > 0.5)) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  coord_flip() +
+  scale_fill_manual(values = c("TRUE" = "steelblue", "FALSE" = "coral"), guide = "none") +
+  scale_y_continuous(
+    labels = function(x) scales::percent(x + 0.5),
+    breaks = seq(-0.3, 0.3, 0.1)
+  ) +
+  labs(
+    title = "How Locally Are Sectors Served?",
+    subtitle = "Mean share of payments received from within same region (deviation from 50%)",
+    x = "",
+    y = "Share of payments from local payers",
+    caption = "Blue = more local, Red = more tradeable/imported"
+  )
+
+# Heatmap: Full payer → payee matrix of mean regional shares
+# Shows which specific linkages are local vs traded
+ggplot(linkage_variation %>% filter(n_regions >= 6),
+       aes(x = section_payee_short, y = section_payer_short, fill = mean_regional_share)) +
+  geom_tile() +
+  scale_fill_gradient2(
+    low = "coral", mid = "white", high = "steelblue",
+    midpoint = 0.5,
+    name = "Local\nshare",
+    labels = scales::percent,
+    limits = c(0, 1)
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 7),
+        axis.text.y = element_text(size = 7)) +
+  labs(
+    title = "Local vs Tradeable Linkages",
+    subtitle = "Mean share of payments sourced within region (across all UK regions)",
+    x = "Payee sector (receiving)",
+    y = "Payer sector (spending)",
+    caption = "Blue = mostly local, Red = mostly imported from other regions"
+  )
+
+# Combined view: scatter plot showing both payer and payee locality
+# Join the two summaries - use full_join to keep sectors that only appear on one side
+sector_locality_combined = payee_sector_locality %>%
+  select(section = section_payee_short, payee_locality = mean_local_share) %>%
+  full_join(
+    payer_sector_locality %>%
+      select(section = section_payer_short, payer_locality = mean_local_share),
+    by = "section"
+  )
+
+# Check which sectors are missing from one side or the other
+sector_locality_combined %>% filter(is.na(payer_locality) | is.na(payee_locality))
+
+# For plotting, we can either:
+# 1. Drop NAs (loses some sectors)
+# 2. Impute with overall mean (shows them but in a "neutral" position)
+# Here we use option 2: impute missing values with 0.5 (neutral) and flag them
+sector_locality_for_plot = sector_locality_combined %>%
+  mutate(
+    has_both = !is.na(payer_locality) & !is.na(payee_locality),
+    # Impute missing with 0.5 (the "neutral" position)
+    payer_locality = ifelse(is.na(payer_locality), 0.5, payer_locality),
+    payee_locality = ifelse(is.na(payee_locality), 0.5, payee_locality)
+  )
+
+# Dynamic axis limits based on actual data range
+axis_min = min(c(sector_locality_for_plot$payer_locality, sector_locality_for_plot$payee_locality), na.rm = TRUE) - 0.02
+axis_max = max(c(sector_locality_for_plot$payer_locality, sector_locality_for_plot$payee_locality), na.rm = TRUE) + 0.02
+
+ggplot(sector_locality_for_plot,
+       aes(x = payer_locality, y = payee_locality, label = section)) +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", alpha = 0.5) +
+  geom_vline(xintercept = 0.5, alpha = 0.3) +
+  geom_hline(yintercept = 0.5, alpha = 0.3) +
+  geom_point(aes(shape = has_both, colour = has_both), size = 3) +
+  geom_text(hjust = -0.1, vjust = 0.5, size = 3) +
+  scale_shape_manual(values = c("TRUE" = 16, "FALSE" = 1), guide = "none") +
+  scale_colour_manual(values = c("TRUE" = "steelblue", "FALSE" = "grey50"), guide = "none") +
+  scale_x_continuous(labels = scales::percent, limits = c(axis_min, axis_max)) +
+  scale_y_continuous(labels = scales::percent, limits = c(axis_min, axis_max)) +
+  labs(
+    title = "Sector Locality: Sourcing vs Serving",
+    subtitle = "How locally does each sector source inputs (x) vs receive payments (y)?",
+    x = "Mean local share of inputs purchased",
+    y = "Mean local share of payments received",
+    caption = "Diagonal = sectors equally local on both sides\nTop-right = locally embedded, Bottom-left = tradeable\nHollow points = missing data on one axis (imputed at 50%)"
+  ) +
+  theme(plot.caption = element_text(hjust = 0))
 
 
 

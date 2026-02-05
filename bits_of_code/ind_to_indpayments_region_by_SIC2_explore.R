@@ -258,7 +258,8 @@ i2i.inoutspending = i2i.spent_here %>%
     i2i.spent_outside, by = c('year','payer_ITL1name')
   ) %>% 
   mutate(
-    in_over_out = pounds_spent_here/pounds_spent_externally
+    in_over_out = pounds_spent_here/pounds_spent_externally,
+    share_of_money_spend_inregion = pounds_spent_here/(pounds_spent_here + pounds_spent_externally)
     # in_over_out = pounds_spent_externally/pounds_spent_here#Just checking not better other way round
   )
 
@@ -277,7 +278,8 @@ pal = setNames(randomcols, unique(i2i.inoutspending$payer_ITL1name))
 # Before indexing, check how those ratios look by themselves
 p1 = ggplot(
   i2i.inoutspending %>% mutate(ynh = ifelse(qg('humber',payer_ITL1name), T,F)),
-  aes(x = year, y = in_over_out, colour = fct_reorder(payer_ITL1name, -in_over_out), size = ynh)
+  aes(x = year, y = share_of_money_spend_inregion, colour = fct_reorder(payer_ITL1name, -share_of_money_spend_inregion), size = ynh)
+  # aes(x = year, y = in_over_out, colour = fct_reorder(payer_ITL1name, -in_over_out), size = ynh)
 ) +
   geom_point() +
   geom_line() +
@@ -290,7 +292,7 @@ p1 = ggplot(
   ) +
   labs(colour = 'Region') +
   guides(size = 'none') +
-  ylab('internal over external spending (log10)')
+  ylab('share of internal vs total spending (log10)')
 
 
 # Index - put in order, use first entry as reference
@@ -298,12 +300,14 @@ p1 = ggplot(
 i2i.inoutspending = i2i.inoutspending %>% 
   group_by(payer_ITL1name) %>% 
   arrange(year) %>% 
-  mutate(in_over_out_index = percent_change(first(in_over_out), in_over_out) + 100)
+  mutate(share_of_money_spend_inregion_index = percent_change(first(share_of_money_spend_inregion), share_of_money_spend_inregion) + 100)
+  # mutate(in_over_out_index = percent_change(first(in_over_out), in_over_out) + 100)
 
 
 p2 = ggplot(
   i2i.inoutspending %>% mutate(ynh = ifelse(qg('humber',payer_ITL1name), T,F)),
-  aes(x = year, y = in_over_out_index, colour = fct_reorder(payer_ITL1name, -in_over_out_index), size = ynh)
+  aes(x = year, y = share_of_money_spend_inregion_index, colour = fct_reorder(payer_ITL1name, -share_of_money_spend_inregion_index), size = ynh)
+  # aes(x = year, y = in_over_out_index, colour = fct_reorder(payer_ITL1name, -in_over_out_index), size = ynh)
 ) +
   geom_point() +
   geom_line() +
