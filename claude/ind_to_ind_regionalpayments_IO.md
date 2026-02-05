@@ -157,3 +157,85 @@ Potential analytical directions:
 3. **Network visualisation** - chord diagrams or Sankey flows for major payment streams
 4. **Temporal analysis** - track structural changes 2019-2025 (including COVID impacts)
 5. **Comparative regional analysis** - identify regions with strong internal linkages vs those dependent on external supply chains
+
+---
+
+## Analysis 1: Flow Location Quotients
+
+**Script**: `bits_of_code/ind_to_indpayments_regional_IO.R`
+
+### What It Does
+
+This analysis applies **Location Quotients (LQs)** to inter-industry payment flows rather than to employment or output. Traditional LQs compare a region's sector share to the national share. Here, we extend this to **flow pairs**: how does the proportion of spending from sector A to sector B in a region compare to the same flow proportion nationally?
+
+### The Formula
+
+```
+LQ_ij = (Flow_ij in region / Total regional flows) / (Flow_ij in UK / Total UK flows)
+```
+
+Where:
+- `i` = payer (spending) sector
+- `j` = payee (receiving) sector
+
+### Interpretation
+
+| LQ Value | log2(LQ) | Meaning |
+|----------|----------|---------|
+| 1.0 | 0 | Flow matches UK average |
+| 2.0 | +1 | Flow is 2× over-represented |
+| 4.0 | +2 | Flow is 4× over-represented |
+| 0.5 | -1 | Flow is 2× under-represented |
+| 0.25 | -2 | Flow is 4× under-represented |
+
+The log2 transformation creates a symmetric scale where +1 and -1 represent the same magnitude of deviation in opposite directions.
+
+### Reading the Heatmaps
+
+Each heatmap shows a **section × section matrix** for one region:
+
+- **Y-axis (rows)**: Payer section (who is spending)
+- **X-axis (columns)**: Payee section (who is receiving)
+- **Colour**:
+  - **Red**: Over-represented linkage (this flow is proportionally larger in this region than in the UK)
+  - **White**: Matches UK average
+  - **Blue**: Under-represented linkage (this flow is proportionally smaller in this region)
+
+#### Example Interpretation
+
+If Yorkshire shows a red cell at (Manufacturing → Professional services), it means:
+> "When Yorkshire businesses spend money, a larger share of Manufacturing's spending goes to Professional services than you'd expect based on the UK pattern."
+
+This could indicate:
+- Strong local professional services supporting manufacturing
+- Specialised technical/engineering consultancy clusters
+- Different manufacturing sub-sectors with different service needs
+
+#### Diagonal vs Off-Diagonal
+
+- **Diagonal cells** (same sector paying itself): Internal sector transactions (e.g., Construction paying Construction)
+- **Off-diagonal cells**: Cross-sector linkages revealing supply chain structure
+
+### Outputs
+
+1. **`flow_lqs`**: Data frame with LQ values for every region × payer section × payee section combination
+
+2. **`lq_matrices`**: Named list of 18×18 matrices, one per region. Access with:
+   ```r
+   lq_matrices[["Yorkshire and The Humber"]]
+   ```
+
+3. **`plot_lq_heatmap()`**: Function to generate heatmap for any region:
+   ```r
+   plot_lq_heatmap("London", flow_lqs)
+   plot_lq_heatmap("Scotland", flow_lqs, use_log = FALSE)  # Raw LQ scale
+   ```
+
+4. **`distinctive_linkages`**: Table of the 10 most unusual flows (highest absolute log2 LQ) per region - useful for quickly identifying what makes each regional economy distinctive
+
+### What This Reveals
+
+- **Regional specialisation patterns**: Which inter-industry relationships are unusually strong or weak
+- **Supply chain structure**: How sectors connect differently across regions
+- **Economic distinctiveness**: Regions with many extreme LQs have unusual economic structures; those with mostly white heatmaps mirror the national pattern
+- **Potential vulnerabilities**: Unusually strong dependencies on specific linkages

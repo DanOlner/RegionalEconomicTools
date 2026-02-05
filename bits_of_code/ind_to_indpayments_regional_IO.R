@@ -57,7 +57,10 @@ flow_lqs = i2i.sections %>%
   left_join(uk_section_flows, by = c('sectionname_payer', 'sectionname_payee')) %>%
   mutate(
     LQ = regional_share / uk_share,
-    LQ_log = log2(LQ)  # Log2 for symmetric interpretation: +1 = 2x over, -1 = 2x under
+    LQ_log = log2(LQ),  # Log2 for symmetric interpretation: +1 = 2x over, -1 = 2x under
+    # Add short section names for cleaner plots
+    section_payer_short = reduceSICnames(sectionname_payer, 'section'),
+    section_payee_short = reduceSICnames(sectionname_payee, 'section')
   )
 
 # Quick check - LQs should average around 1 (weighted by flow size)
@@ -103,7 +106,7 @@ lq_matrices[["Yorkshire and The Humber"]]
 # VISUALISE LQ MATRICES ----
 
 # Heatmap function for a single region
-plot_lq_heatmap = function(region_name, lq_data, use_log = TRUE) {
+plot_lq_heatmap = function(region_name, lq_data, use_log = TRUE, use_short_names = TRUE) {
 
   plot_data = lq_data %>%
     filter(payer_ITL1name == region_name)
@@ -111,7 +114,11 @@ plot_lq_heatmap = function(region_name, lq_data, use_log = TRUE) {
   # Use log2 LQ for symmetric colour scale, or raw LQ
   y_var = if(use_log) "LQ_log" else "LQ"
 
-  p = ggplot(plot_data, aes(x = sectionname_payee, y = sectionname_payer, fill = .data[[y_var]])) +
+  # Use short or full section names
+  x_var = if(use_short_names) "section_payee_short" else "sectionname_payee"
+  y_axis_var = if(use_short_names) "section_payer_short" else "sectionname_payer"
+
+  p = ggplot(plot_data, aes(x = .data[[x_var]], y = .data[[y_axis_var]], fill = .data[[y_var]])) +
     geom_tile() +
     scale_fill_gradient2(
       low = "blue", mid = "white", high = "red",
