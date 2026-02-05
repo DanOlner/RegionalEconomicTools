@@ -964,11 +964,20 @@ ggplot(sector_locality_by_region) +
     aes(x = payer_locality, y = payee_locality, colour = section),
     size = 1.5, alpha = 0.2
   ) +
-  # Labels at mean positions
-  geom_text(
+  # Labels at mean positions (with repelling and background)
+  ggrepel::geom_label_repel(
     data = sector_ranges,
-    aes(x = payer_mean, y = payee_mean, label = section),
-    hjust = -0.15, vjust = 0.5, size = 2.5
+    aes(x = payer_mean, y = payee_mean, label = section, colour = section),
+    size = 2.5,
+    label.padding = unit(0.15, "lines"),
+    box.padding = unit(0.5, "lines"),
+    point.padding = unit(0.3, "lines"),
+    min.segment.length = 0,
+    segment.colour = "grey50",
+    segment.alpha = 0.5,
+    fill = "white",
+    alpha = 0.85,
+    show.legend = FALSE
   ) +
   scale_x_continuous(labels = scales::percent, limits = c(axis_min_lines, axis_max_lines)) +
   scale_y_continuous(labels = scales::percent, limits = c(axis_min_lines, axis_max_lines)) +
@@ -1030,6 +1039,73 @@ ggplot(sector_ranges) +
   )
 
 
+# Faceted version: one panel per sector, showing each ITL1 region
+# This lets us see regional variation within each sector more clearly
+
+# Create abbreviated region names for labelling
+region_abbrevs = c(
+
+  "North East" = "NE",
+  "North West" = "NW",
+  "Yorkshire and The Humber" = "Yorks",
+  "East Midlands" = "E Mid",
+  "West Midlands" = "W Mid",
+  "East of England" = "East",
+  "London" = "Lon",
+  "South East" = "SE",
+  "South West" = "SW",
+  "Wales" = "Wal",
+  "Scotland" = "Scot",
+  "Northern Ireland" = "NI"
+)
+
+# Add abbreviations to the by-region data
+sector_locality_by_region_abbrev = sector_locality_by_region %>%
+  mutate(
+    region_abbrev = region_abbrevs[payer_ITL1name]
+  )
+
+# Faceted scatter plot with ggrepel labels
+ggplot(sector_locality_by_region_abbrev,
+       aes(x = payer_locality, y = payee_locality)) +
+  # Reference lines
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", alpha = 0.3) +
+  geom_vline(xintercept = 0.5, alpha = 0.2) +
+  geom_hline(yintercept = 0.5, alpha = 0.2) +
+  # Mean point (larger, highlighted)
+  geom_point(
+    data = sector_ranges,
+    aes(x = payer_mean, y = payee_mean),
+    size = 4, colour = "red", alpha = 0.7
+  ) +
+  # Regional points
+  geom_point(size = 2, colour = "steelblue", alpha = 0.7) +
+  # Labels for regional points
+  ggrepel::geom_text_repel(
+    aes(label = region_abbrev),
+    size = 2,
+    max.overlaps = 15,
+    segment.colour = "grey70",
+    segment.alpha = 0.5,
+    box.padding = unit(0.2, "lines"),
+    point.padding = unit(0.1, "lines")
+  ) +
+  # Facet by sector
+  facet_wrap(~section, ncol = 4) +
+  scale_x_continuous(labels = scales::percent) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(
+    title = "Sector Locality by Region",
+    subtitle = "Blue points = individual regions; Red point = sector mean",
+    x = "Local share of inputs purchased",
+    y = "Local share of payments received",
+    caption = "Each panel shows one sector; diagonal = equally local on both dimensions"
+  ) +
+  theme(
+    plot.caption = element_text(hjust = 0),
+    strip.text = element_text(size = 7),
+    axis.text = element_text(size = 6)
+  )
 
 
 
