@@ -843,6 +843,198 @@ ggplot(sector_locality_for_plot,
   theme(plot.caption = element_text(hjust = 0))
 
 
+# Same plot but with regional variation shown as rectangles
+# Need to calculate per-region values for both payer and payee locality
+
+# Calculate payer locality (how locally each sector sources inputs) per region
+payer_locality_by_region = coefficients_wide %>%
+  filter(total > 0) %>%
+  group_by(payer_ITL1name, sectionname_payer, section_payer_short) %>%
+  summarise(
+    payer_locality = sum(internal, na.rm = TRUE) / sum(total, na.rm = TRUE),
+    .groups = 'drop'
+  )
+
+# Calculate payee locality (how locally each sector receives payments) per region
+payee_locality_by_region = coefficients_wide %>%
+  filter(total > 0) %>%
+  group_by(payer_ITL1name, sectionname_payee, section_payee_short) %>%
+  summarise(
+    payee_locality = sum(internal, na.rm = TRUE) / sum(total, na.rm = TRUE),
+    .groups = 'drop'
+  )
+
+# Calculate min/max ranges for each sector across regions
+sector_ranges = payer_locality_by_region %>%
+  group_by(section_payer_short) %>%
+  summarise(
+    payer_min = min(payer_locality, na.rm = TRUE),
+    payer_max = max(payer_locality, na.rm = TRUE),
+    payer_mean = mean(payer_locality, na.rm = TRUE),
+    .groups = 'drop'
+  ) %>%
+  rename(section = section_payer_short) %>%
+  inner_join(
+    payee_locality_by_region %>%
+      group_by(section_payee_short) %>%
+      summarise(
+        payee_min = min(payee_locality, na.rm = TRUE),
+        payee_max = max(payee_locality, na.rm = TRUE),
+        payee_mean = mean(payee_locality, na.rm = TRUE),
+        .groups = 'drop'
+      ) %>%
+      rename(section = section_payee_short),
+    by = "section"
+  )
+
+# Dynamic axis limits based on full range
+axis_min_range = min(c(sector_ranges$payer_min, sector_ranges$payee_min), na.rm = TRUE) - 0.02
+axis_max_range = max(c(sector_ranges$payer_max, sector_ranges$payee_max), na.rm = TRUE) + 0.02
+
+# Rectangle version (may be cluttered)
+ggplot(sector_ranges) +
+  # Reference lines first (behind everything)
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", alpha = 0.5) +
+  geom_vline(xintercept = 0.5, alpha = 0.3) +
+  geom_hline(yintercept = 0.5, alpha = 0.3) +
+  # Rectangles showing regional variation
+  geom_rect(
+    aes(xmin = payer_min, xmax = payer_max, ymin = payee_min, ymax = payee_max),
+    fill = "steelblue", alpha = 0.15, colour = "steelblue", linewidth = 0.3
+  ) +
+  # Mean points on top
+  geom_point(aes(x = payer_mean, y = payee_mean), size = 3, colour = "steelblue") +
+  # Labels
+  geom_text(aes(x = payer_mean, y = payee_mean, label = section),
+            hjust = -0.1, vjust = 0.5, size = 3) +
+  scale_x_continuous(labels = scales::percent, limits = c(axis_min_range, axis_max_range)) +
+  scale_y_continuous(labels = scales::percent, limits = c(axis_min_range, axis_max_range)) +
+  labs(
+    title = "Sector Locality with Regional Variation",
+    subtitle = "Rectangles show min-max range across UK regions; points show means",
+    x = "Local share of inputs purchased",
+    y = "Local share of payments received",
+    caption = "Large rectangles = high variation across regions\nSmall rectangles = consistent pattern across UK"
+  ) +
+  theme(plot.caption = element_text(hjust = 0))
+
+
+# Alternative: Lines from mean to each region's value, coloured by sector
+# Join payer and payee locality by region and sector
+sector_locality_by_region = payer_locality_by_region %>%
+  rename(section = section_payer_short) %>%
+  inner_join(
+    payee_locality_by_region %>%
+      rename(section = section_payee_short),
+    by = c("payer_ITL1name", "section")
+  ) %>%
+  # Add mean values for each sector
+
+  left_join(
+    sector_ranges %>% select(section, payer_mean, payee_mean),
+    by = "section"
+  )
+
+# Dynamic axis limits
+axis_min_lines = min(c(sector_locality_by_region$payer_locality,
+                       sector_locality_by_region$payee_locality), na.rm = TRUE) - 0.02
+axis_max_lines = max(c(sector_locality_by_region$payer_locality,
+                       sector_locality_by_region$payee_locality), na.rm = TRUE) + 0.02
+
+# Lines version (still cluttered)
+ggplot(sector_locality_by_region) +
+  # Reference lines
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", alpha = 0.5) +
+  geom_vline(xintercept = 0.5, alpha = 0.3) +
+  geom_hline(yintercept = 0.5, alpha = 0.3) +
+  # Lines from mean to each region
+  geom_segment(
+    aes(x = payer_mean, y = payee_mean,
+        xend = payer_locality, yend = payee_locality,
+        colour = section),
+    alpha = 0.2, linewidth = 0.5
+  ) +
+  # Mean points (larger, on top)
+  geom_point(
+    aes(x = payer_mean, y = payee_mean, colour = section),
+    size = 4
+  ) +
+  # Regional points (smaller)
+  geom_point(
+    aes(x = payer_locality, y = payee_locality, colour = section),
+    size = 1.5, alpha = 0.2
+  ) +
+  # Labels at mean positions
+  geom_text(
+    data = sector_ranges,
+    aes(x = payer_mean, y = payee_mean, label = section),
+    hjust = -0.15, vjust = 0.5, size = 2.5
+  ) +
+  scale_x_continuous(labels = scales::percent, limits = c(axis_min_lines, axis_max_lines)) +
+  scale_y_continuous(labels = scales::percent, limits = c(axis_min_lines, axis_max_lines)) +
+  labs(
+    title = "Sector Locality with Regional Variation",
+    subtitle = "Large points = sector means; small points = individual regions; lines show spread",
+    x = "Local share of inputs purchased",
+    y = "Local share of payments received",
+    caption = "Long lines = high variation across regions\nTight clusters = consistent pattern across UK"
+  ) +
+  theme(
+    plot.caption = element_text(hjust = 0),
+    legend.position = "none"  # Too many sectors for a useful legend
+  )
+
+
+# Crosshairs version: cleaner, shows min-max range as perpendicular lines
+ggplot(sector_ranges) +
+  # Reference lines
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", alpha = 0.5) +
+  geom_vline(xintercept = 0.5, alpha = 0.3) +
+  geom_hline(yintercept = 0.5, alpha = 0.3) +
+  # Vertical line: payer (x) range, at mean payee (y)
+  geom_segment(
+    aes(x = payer_min, xend = payer_max,
+        y = payee_mean, yend = payee_mean,
+        colour = section),
+    linewidth = 0.6, alpha = 0.7
+  ) +
+  # Horizontal line: payee (y) range, at mean payer (x)
+  geom_segment(
+    aes(x = payer_mean, xend = payer_mean,
+        y = payee_min, yend = payee_max,
+        colour = section),
+    linewidth = 0.6, alpha = 0.7
+  ) +
+  # Mean points on top
+  geom_point(
+    aes(x = payer_mean, y = payee_mean, colour = section),
+    size = 3
+  ) +
+  # Labels
+  geom_text(
+    aes(x = payer_mean, y = payee_mean, label = section),
+    hjust = -0.15, vjust = 0.5, size = 2.5
+  ) +
+  scale_x_continuous(labels = scales::percent, limits = c(axis_min_range, axis_max_range)) +
+  scale_y_continuous(labels = scales::percent, limits = c(axis_min_range, axis_max_range)) +
+  labs(
+    title = "Sector Locality with Regional Variation",
+    subtitle = "Points = means; crosshairs show min-max range across UK regions",
+    x = "Local share of inputs purchased",
+    y = "Local share of payments received",
+    caption = "Long horizontal line = high variation in sourcing locality\nLong vertical line = high variation in serving locality"
+  ) +
+  theme(
+    plot.caption = element_text(hjust = 0),
+    legend.position = "none"
+  )
+
+
+
+
+
+
+
 
 
 
