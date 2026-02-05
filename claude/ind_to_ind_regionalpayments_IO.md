@@ -178,6 +178,8 @@ Where:
 - `i` = payer (spending) sector
 - `j` = payee (receiving) sector
 
+The formula compares "what share of this region's total inter-industry payments is the i→j flow?" to "what share of the UK's total inter-industry payments is the i→j flow?" 
+
 ### Interpretation
 
 | LQ Value | log2(LQ) | Meaning |
@@ -232,6 +234,24 @@ This could indicate:
    ```
 
 4. **`distinctive_linkages`**: Table of the 10 most unusual flows (highest absolute log2 LQ) per region - useful for quickly identifying what makes each regional economy distinctive
+
+### Pairwise Regional Comparison
+
+By default, the code compares each region to the UK average. However, you can subset to specific regions for direct pairwise comparison by setting the `regions_to_compare` variable at the top of the LQ section:
+
+```r
+# Compare Yorkshire vs North West directly
+regions_to_compare = c("Yorkshire and The Humber", "North West")
+
+# Or use all regions (default)
+regions_to_compare = NULL
+```
+
+When comparing just two regions:
+- The "total" becomes the combined flows of those two regions only
+- Each region's LQs show how it differs from the other
+- The heatmaps become **mirror images**: if Yorkshire shows red (over-represented) for a flow, North West will show blue (under-represented) by the same magnitude
+- Useful for: neighbouring region analysis, policy comparisons, identifying complementary vs competitive sectors
 
 ### What This Reveals
 

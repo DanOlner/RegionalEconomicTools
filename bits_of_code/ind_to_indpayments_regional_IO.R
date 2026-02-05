@@ -17,6 +17,14 @@ i2i.yr = readRDS('local/data/payments_itl2_sic2_yearly_w_sections.rds')
 # LQ > 1: this linkage is over-represented in the region
 # LQ < 1: this linkage is under-represented
 
+# Optional: subset to specific regions for pairwise comparison
+# If NULL, uses all regions (compares each to UK average)
+# If set to a vector of region names, compares those regions to their combined total
+# e.g. for Yorkshire vs North West comparison:
+
+regions_to_compare = c("Yorkshire and The Humber", "North West")
+# regions_to_compare = NULL
+
 # First, aggregate to section level (dropping NA sections i.e. SIC code 0)
 # Using most recent year for now - could extend to all years
 i2i.sections = i2i.yr %>%
@@ -25,6 +33,9 @@ i2i.sections = i2i.yr %>%
     !is.na(sectionname_payee),
     year == max(year)  # Most recent year
   ) %>%
+  # Apply region filter if specified
+
+  {if(!is.null(regions_to_compare)) filter(., payer_ITL1name %in% regions_to_compare) else .} %>%
   group_by(payer_ITL1name, sectionname_payer, sectionname_payee) %>%
   summarise(
     pounds = sum(pounds, na.rm = TRUE),
@@ -162,4 +173,96 @@ distinctive_linkages = flow_lqs %>%
 distinctive_linkages %>%
   filter(payer_ITL1name == "Yorkshire and The Humber") %>%
   print(n = 10)
+
+
+# INTERNAL VS EXTERNAL FLOW TRENDS ----
+
+# Analyse how spending patterns differ for flows staying within a region vs leaving it
+# Using log-transformed OLS to get comparable growth rates across regions
+
+# Select sector pair to analyse (using section names)
+# Start with Finance → Finance (section K)
+payer_section_filter = "Financial and insurance activities"
+payee_section_filter = "Financial and insurance activities"
+
+# Prepare data: split into internal (same region) vs external (different region)
+flow_trends = i2i.yr %>%
+  filter(
+    !is.na(sectionname_payer),
+    !is.na(sectionname_payee),
+    sectionname_payer == payer_section_filter,
+    sectionname_payee == payee_section_filter
+  ) %>%
+  mutate(
+    flow_type = ifelse(payer_ITL1name == payee_ITL1name, "internal", "external")
+  ) %>%
+  group_by(payer_ITL1name, year, flow_type) %>%
+  summarise(
+    pounds = sum(pounds, na.rm = TRUE),
+    .groups = 'drop'
+  )
+
+# Calculate slopes using log transform for comparable % change interpretation
+# Slope on log(pounds) ~ year gives approximate annual % change
+flow_slopes = get_slope_and_se_safely(
+  data = flow_trends,
+  payer_ITL1name, flow_type,
+  y = log(pounds),
+  x = year
+)
+
+# Convert log slopes to annual % change
+flow_slopes = flow_slopes %>%
+  mutate(
+    annual_pct_change = (exp(slope) - 1) * 100,
+    # 95% CI bounds
+    ci_lower = (exp(slope - 1.96 * se) - 1) * 100,
+    ci_upper = (exp(slope + 1.96 * se) - 1) * 100,
+    # Flag if significantly different from zero
+    sig = sign(ci_lower) == sign(ci_upper)
+  )
+
+# View results
+flow_slopes %>%
+  arrange(flow_type, desc(annual_pct_change)) %>%
+  print(n = 24)
+
+# Pivot to compare internal vs external directly
+flow_slopes_wide = flow_slopes %>%
+  select(payer_ITL1name, flow_type, annual_pct_change, ci_lower, ci_upper, sig) %>%
+  pivot_wider(
+    names_from = flow_type,
+    values_from = c(annual_pct_change, ci_lower, ci_upper, sig)
+  ) %>%
+  mutate(
+    # Difference: positive means external growing faster than internal
+    external_minus_internal = annual_pct_change_external - annual_pct_change_internal
+  ) %>%
+  arrange(desc(external_minus_internal))
+
+flow_slopes_wide
+
+# Visualise: dot plot comparing internal vs external growth rates
+flow_slopes_plot = flow_slopes %>%
+  mutate(
+    payer_ITL1name = fct_reorder(payer_ITL1name, annual_pct_change)
+  ) %>%
+  ggplot(aes(x = annual_pct_change, y = payer_ITL1name, colour = flow_type)) +
+  geom_vline(xintercept = 0, linetype = "dashed", alpha = 0.5) +
+  geom_errorbarh(
+    aes(xmin = ci_lower, xmax = ci_upper),
+    height = 0.2, alpha = 0.5
+  ) +
+  geom_point(size = 3) +
+  scale_colour_manual(values = c("internal" = "blue", "external" = "red")) +
+  labs(
+    title = paste0(payer_section_filter, " → ", payee_section_filter),
+    subtitle = "Annual % change in payment flows (log-linear OLS)",
+    x = "Annual % change",
+    y = "",
+    colour = "Flow type"
+  ) +
+  theme(legend.position = "bottom")
+
+flow_slopes_plot
 
