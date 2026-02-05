@@ -231,8 +231,6 @@ i2i.yr %>%
   )
 
 
-
-
 i2i.spent_here = i2i.yr %>% 
   filter(payer_ITL1name == payee_ITL1name) %>% 
   # filter(

@@ -1,0 +1,301 @@
+year,payer_sic2digit,payer_ITL1,payee_sic2digit,payee_ITL1,pounds,num_transactions,payer_ITL1name,payee_ITL1name,sectioncode_payer,sectionname_payer,sectioncode_payee,sectionname_payee
+2019-01-01,69,E12000007,69,E12000003,4992000,1200,London,Yorkshire and The Humber,M (69-75),"Professional, scientific and technical activities",M (69-75),"Professional, scientific and technical activities"
+2024-01-01,42,E12000005,25,E12000003,198000,0,West Midlands,Yorkshire and The Humber,F (41-43),Construction,C (10-33),Manufacturing
+2020-01-01,70,E12000006,73,E12000006,1214000,0,East of England,East of England,M (69-75),"Professional, scientific and technical activities",M (69-75),"Professional, scientific and technical activities"
+2021-01-01,81,E12000007,20,E12000003,273000,0,London,Yorkshire and The Humber,N (77-82),Administrative and support service activities,C (10-33),Manufacturing
+2024-01-01,96,E12000008,28,E12000007,1678000,3100,South East,London,S (94-96),Other service activities,C (10-33),Manufacturing
+2025-01-01,0,E12000006,33,E12000002,1549000,0,East of England,North West,NA,NA,C (10-33),Manufacturing
+2021-01-01,0,E12000001,87,E12000009,231000,0,North East,South West,NA,NA,Q (86-88),Human health and social work activities
+2022-01-01,35,E12000007,81,E12000005,371000,0,London,West Midlands,D (35),"Electricity, gas, steam and air conditioning supply",N (77-82),Administrative and support service activities
+2021-01-01,49,E12000004,62,E12000009,856000,1200,East Midlands,South West,H (49-53),Transportation and storage,J (58-63),Information and communication
+2023-01-01,49,W99999999,56,E12000009,21000,0,Wales,South West,H (49-53),Transportation and storage,I (55-56),Accommodation and food service activities
+2020-01-01,27,E12000005,25,E12000003,22000,0,West Midlands,Yorkshire and The Humber,C (10-33),Manufacturing,C (10-33),Manufacturing
+2022-01-01,85,E12000001,85,E12000006,386000,300,North East,East of England,P (85),Education,P (85),Education
+2020-01-01,75,E12000005,62,E12000002,82000,0,West Midlands,North West,M (69-75),"Professional, scientific and technical activities",J (58-63),Information and communication
+2021-01-01,45,E12000004,66,E12000004,35000,0,East Midlands,East Midlands,G (45-47),Wholesale and retail trade; repair of motor vehicles,K (64-66),Financial and insurance activities
+2021-01-01,33,E12000003,25,E12000005,1758000,0,Yorkshire and The Humber,West Midlands,C (10-33),Manufacturing,C (10-33),Manufacturing
+2025-01-01,61,E12000006,68,E12000005,264000,0,East of England,West Midlands,J (58-63),Information and communication,L (68),Real estate activities
+2025-01-01,51,E12000007,64,E12000007,54208000,1200,London,London,H (49-53),Transportation and storage,K (64-66),Financial and insurance activities
+2020-01-01,31,E12000004,68,E12000007,200000,0,East Midlands,London,C (10-33),Manufacturing,L (68),Real estate activities
+2023-01-01,43,E12000005,43,E12000003,26878000,5000,West Midlands,Yorkshire and The Humber,F (41-43),Construction,F (41-43),Construction
+2024-01-01,55,E12000004,0,E12000003,154000,0,East Midlands,Yorkshire and The Humber,I (55-56),Accommodation and food service activities,NA,NA
+2025-01-01,64,E12000002,13,E12000002,1768000,0,North West,North West,K (64-66),Financial and insurance activities,C (10-33),Manufacturing
+2021-01-01,78,W99999999,62,E12000009,1317000,500,Wales,South West,N (77-82),Administrative and support service activities,J (58-63),Information and communication
+2025-01-01,50,E12000003,61,E12000006,0,0,Yorkshire and The Humber,East of England,H (49-53),Transportation and storage,J (58-63),Information and communication
+2025-01-01,82,E12000003,82,E12000009,20529000,3900,Yorkshire and The Humber,South West,N (77-82),Administrative and support service activities,N (77-82),Administrative and support service activities
+2025-01-01,90,S99999999,62,E12000002,65000,0,Scotland,North West,R (90-93),"Arts, entertainment and recreation",J (58-63),Information and communication
+2022-01-01,42,E12000005,32,E12000001,177000,0,West Midlands,North East,F (41-43),Construction,C (10-33),Manufacturing
+2021-01-01,82,E12000006,45,W99999999,1582000,1100,East of England,Wales,N (77-82),Administrative and support service activities,G (45-47),Wholesale and retail trade; repair of motor vehicles
+2021-01-01,62,E12000009,62,E12000008,28532000,5500,South West,South East,J (58-63),Information and communication,J (58-63),Information and communication
+2023-01-01,70,E12000006,55,E12000007,3124000,200,East of England,London,M (69-75),"Professional, scientific and technical activities",I (55-56),Accommodation and food service activities
+2022-01-01,46,E12000005,73,E12000006,497000,0,West Midlands,East of England,G (45-47),Wholesale and retail trade; repair of motor vehicles,M (69-75),"Professional, scientific and technical activities"
+2023-01-01,0,E12000003,38,E12000007,811000,0,Yorkshire and The Humber,London,NA,NA,E (36-39),Water supply; sewerage and waste management
+2021-01-01,68,E12000008,81,E12000009,3877000,500,South East,South West,L (68),Real estate activities,N (77-82),Administrative and support service activities
+2020-01-01,74,W99999999,95,E12000009,3000,0,Wales,South West,M (69-75),"Professional, scientific and technical activities",S (94-96),Other service activities
+2020-01-01,77,E12000003,70,E12000005,838000,0,Yorkshire and The Humber,West Midlands,N (77-82),Administrative and support service activities,M (69-75),"Professional, scientific and technical activities"
+2025-01-01,64,E12000008,0,E12000009,165159000,4400,South East,South West,K (64-66),Financial and insurance activities,NA,NA
+2023-01-01,9,E12000007,62,S99999999,2255000,0,London,Scotland,B (5-9),Mining and quarrying,J (58-63),Information and communication
+2022-01-01,96,E12000002,74,W99999999,344000,0,North West,Wales,S (94-96),Other service activities,M (69-75),"Professional, scientific and technical activities"
+2020-01-01,52,E12000006,81,E12000003,1000,0,East of England,Yorkshire and The Humber,H (49-53),Transportation and storage,N (77-82),Administrative and support service activities
+2022-01-01,47,E12000004,80,E12000004,2528000,1200,East Midlands,East Midlands,G (45-47),Wholesale and retail trade; repair of motor vehicles,N (77-82),Administrative and support service activities
+2025-01-01,27,E12000009,35,E12000007,3000000,0,South West,London,C (10-33),Manufacturing,D (35),"Electricity, gas, steam and air conditioning supply"
+2021-01-01,82,E12000007,13,E12000007,6948000,3100,London,London,N (77-82),Administrative and support service activities,C (10-33),Manufacturing
+2022-01-01,58,N99999999,64,E12000007,15000,0,Northern Ireland,London,J (58-63),Information and communication,K (64-66),Financial and insurance activities
+2024-01-01,18,E12000002,93,E12000002,120000,0,North West,North West,C (10-33),Manufacturing,R (90-93),"Arts, entertainment and recreation"
+2019-01-01,33,E12000001,82,E12000007,1260000,1200,North East,London,C (10-33),Manufacturing,N (77-82),Administrative and support service activities
+2021-01-01,45,S99999999,96,E12000009,47000,0,Scotland,South West,G (45-47),Wholesale and retail trade; repair of motor vehicles,S (94-96),Other service activities
+2022-01-01,93,E12000007,43,E12000005,3028000,200,London,West Midlands,R (90-93),"Arts, entertainment and recreation",F (41-43),Construction
+2020-01-01,24,E12000004,46,E12000004,3886000,1200,East Midlands,East Midlands,C (10-33),Manufacturing,G (45-47),Wholesale and retail trade; repair of motor vehicles
+2023-01-01,28,E12000003,71,E12000003,2976000,200,Yorkshire and The Humber,Yorkshire and The Humber,C (10-33),Manufacturing,M (69-75),"Professional, scientific and technical activities"
+2025-01-01,14,E12000002,61,E12000006,3000,0,North West,East of England,C (10-33),Manufacturing,J (58-63),Information and communication
+2023-01-01,49,W99999999,66,E12000007,134000,0,Wales,London,H (49-53),Transportation and storage,K (64-66),Financial and insurance activities
+2025-01-01,62,E12000005,16,E12000005,69000,0,West Midlands,West Midlands,J (58-63),Information and communication,C (10-33),Manufacturing
+2020-01-01,52,E12000002,62,E12000001,277000,0,North West,North East,H (49-53),Transportation and storage,J (58-63),Information and communication
+2022-01-01,94,E12000006,47,E12000002,143000,0,East of England,North West,S (94-96),Other service activities,G (45-47),Wholesale and retail trade; repair of motor vehicles
+2024-01-01,46,E12000008,10,E12000005,110640000,3900,South East,West Midlands,G (45-47),Wholesale and retail trade; repair of motor vehicles,C (10-33),Manufacturing
+2024-01-01,70,E12000003,1,E12000003,2494000,0,Yorkshire and The Humber,Yorkshire and The Humber,M (69-75),"Professional, scientific and technical activities",A (1-3),"Agriculture, forestry and fishing"
+2024-01-01,42,E12000002,86,E12000009,26000,0,North West,South West,F (41-43),Construction,Q (86-88),Human health and social work activities
+2023-01-01,24,E12000001,47,E12000004,29000,0,North East,East Midlands,C (10-33),Manufacturing,G (45-47),Wholesale and retail trade; repair of motor vehicles
+2021-01-01,62,E12000007,50,E12000008,45000,0,London,South East,J (58-63),Information and communication,H (49-53),Transportation and storage
+2019-01-01,25,E12000005,43,E12000007,3230000,1200,West Midlands,London,C (10-33),Manufacturing,F (41-43),Construction
+2023-01-01,50,E12000008,50,E12000008,1327000,0,South East,South East,H (49-53),Transportation and storage,H (49-53),Transportation and storage
+2023-01-01,96,E12000001,86,E12000008,825000,1200,North East,South East,S (94-96),Other service activities,Q (86-88),Human health and social work activities
+2025-01-01,41,W99999999,18,W99999999,103000,0,Wales,Wales,F (41-43),Construction,C (10-33),Manufacturing
+2022-01-01,68,E12000008,49,E12000003,1036000,700,South East,Yorkshire and The Humber,L (68),Real estate activities,H (49-53),Transportation and storage
+2024-01-01,43,E12000007,82,E12000008,70710000,28700,London,South East,F (41-43),Construction,N (77-82),Administrative and support service activities
+2022-01-01,32,W99999999,28,E12000006,634000,0,Wales,East of England,C (10-33),Manufacturing,C (10-33),Manufacturing
+2025-01-01,30,E12000009,64,E12000007,3350000,600,South West,London,C (10-33),Manufacturing,K (64-66),Financial and insurance activities
+2022-01-01,68,E12000006,66,E12000003,320000,1200,East of England,Yorkshire and The Humber,L (68),Real estate activities,K (64-66),Financial and insurance activities
+2019-01-01,42,E12000002,58,E12000002,4000,0,North West,North West,F (41-43),Construction,J (58-63),Information and communication
+2024-01-01,47,E12000008,22,W99999999,301000,0,South East,Wales,G (45-47),Wholesale and retail trade; repair of motor vehicles,C (10-33),Manufacturing
+2021-01-01,86,E12000007,86,E12000004,17926000,4900,London,East Midlands,Q (86-88),Human health and social work activities,Q (86-88),Human health and social work activities
+2022-01-01,42,E12000007,41,E12000008,17151000,1200,London,South East,F (41-43),Construction,F (41-43),Construction
+2025-01-01,85,E12000007,0,E12000006,11896000,3800,London,East of England,P (85),Education,NA,NA
+2023-01-01,49,E12000005,68,E12000003,2601000,100,West Midlands,Yorkshire and The Humber,H (49-53),Transportation and storage,L (68),Real estate activities
+2022-01-01,79,E12000004,61,E12000002,46000,0,East Midlands,North West,N (77-82),Administrative and support service activities,J (58-63),Information and communication
+2020-01-01,31,E12000009,71,E12000009,430000,0,South West,South West,C (10-33),Manufacturing,M (69-75),"Professional, scientific and technical activities"
+2025-01-01,35,E12000009,49,E12000004,80000,0,South West,East Midlands,D (35),"Electricity, gas, steam and air conditioning supply",H (49-53),Transportation and storage
+2019-01-01,88,E12000002,46,N99999999,19000,0,North West,Northern Ireland,Q (86-88),Human health and social work activities,G (45-47),Wholesale and retail trade; repair of motor vehicles
+2022-01-01,39,E12000003,77,E12000002,392000,0,Yorkshire and The Humber,North West,E (36-39),Water supply; sewerage and waste management,N (77-82),Administrative and support service activities
+2019-01-01,69,E12000004,46,E12000009,162000,0,East Midlands,South West,M (69-75),"Professional, scientific and technical activities",G (45-47),Wholesale and retail trade; repair of motor vehicles
+2024-01-01,62,E12000008,93,E12000005,2627000,1200,South East,West Midlands,J (58-63),Information and communication,R (90-93),"Arts, entertainment and recreation"
+2020-01-01,90,E12000004,43,E12000008,46000,0,East Midlands,South East,R (90-93),"Arts, entertainment and recreation",F (41-43),Construction
+2023-01-01,23,E12000006,71,E12000006,58000,0,East of England,East of England,C (10-33),Manufacturing,M (69-75),"Professional, scientific and technical activities"
+2021-01-01,85,E12000005,22,E12000005,120000,0,West Midlands,West Midlands,P (85),Education,C (10-33),Manufacturing
+2023-01-01,17,E12000008,61,E12000006,0,0,South East,East of England,C (10-33),Manufacturing,J (58-63),Information and communication
+2025-01-01,87,E12000008,58,E12000006,60000,0,South East,East of England,Q (86-88),Human health and social work activities,J (58-63),Information and communication
+2021-01-01,32,E12000008,59,E12000007,518000,0,South East,London,C (10-33),Manufacturing,J (58-63),Information and communication
+2021-01-01,82,E12000008,60,E12000008,604000,0,South East,South East,N (77-82),Administrative and support service activities,J (58-63),Information and communication
+2022-01-01,86,E12000005,82,E12000006,13331000,4800,West Midlands,East of England,Q (86-88),Human health and social work activities,N (77-82),Administrative and support service activities
+2024-01-01,42,E12000003,46,W99999999,3803000,1100,Yorkshire and The Humber,Wales,F (41-43),Construction,G (45-47),Wholesale and retail trade; repair of motor vehicles
+2021-01-01,27,E12000002,82,E12000008,972000,500,North West,South East,C (10-33),Manufacturing,N (77-82),Administrative and support service activities
+2019-01-01,70,E12000009,61,N99999999,23000,0,South West,Northern Ireland,M (69-75),"Professional, scientific and technical activities",J (58-63),Information and communication
+2025-01-01,52,E12000009,66,E12000006,265000,0,South West,East of England,H (49-53),Transportation and storage,K (64-66),Financial and insurance activities
+2023-01-01,88,E12000003,68,E12000009,0,0,Yorkshire and The Humber,South West,Q (86-88),Human health and social work activities,L (68),Real estate activities
+2025-01-01,73,S99999999,63,E12000008,29000,0,Scotland,South East,M (69-75),"Professional, scientific and technical activities",J (58-63),Information and communication
+2022-01-01,66,E12000008,81,E12000008,149000,0,South East,South East,K (64-66),Financial and insurance activities,N (77-82),Administrative and support service activities
+2023-01-01,41,E12000005,0,E12000005,58481000,6300,West Midlands,West Midlands,F (41-43),Construction,NA,NA
+2021-01-01,90,E12000004,82,E12000004,359000,100,East Midlands,East Midlands,R (90-93),"Arts, entertainment and recreation",N (77-82),Administrative and support service activities
+2025-01-01,22,E12000004,45,E12000007,71000,0,East Midlands,London,C (10-33),Manufacturing,G (45-47),Wholesale and retail trade; repair of motor vehicles
+2023-01-01,94,E12000007,49,E12000009,6000,0,London,South West,S (94-96),Other service activities,H (49-53),Transportation and storage
+2019-01-01,42,E12000003,9,E12000003,31000,0,Yorkshire and The Humber,Yorkshire and The Humber,F (41-43),Construction,B (5-9),Mining and quarrying
+2020-01-01,81,E12000005,41,S99999999,1000,0,West Midlands,Scotland,N (77-82),Administrative and support service activities,F (41-43),Construction
+2024-01-01,77,E12000001,43,E12000006,728000,0,North East,East of England,N (77-82),Administrative and support service activities,F (41-43),Construction
+2021-01-01,27,E12000005,71,E12000002,193000,0,West Midlands,North West,C (10-33),Manufacturing,M (69-75),"Professional, scientific and technical activities"
+2022-01-01,68,E12000003,56,E12000006,299000,0,Yorkshire and The Humber,East of England,L (68),Real estate activities,I (55-56),Accommodation and food service activities
+2019-01-01,93,E12000003,49,E12000003,414000,0,Yorkshire and The Humber,Yorkshire and The Humber,R (90-93),"Arts, entertainment and recreation",H (49-53),Transportation and storage
+2023-01-01,58,E12000008,77,E12000005,78000,0,South East,West Midlands,J (58-63),Information and communication,N (77-82),Administrative and support service activities
+2025-01-01,32,E12000007,27,E12000006,57000,0,London,East of England,C (10-33),Manufacturing,C (10-33),Manufacturing
+2024-01-01,94,E12000009,94,E12000007,4560000,0,South West,London,S (94-96),Other service activities,S (94-96),Other service activities
+2025-01-01,50,E12000002,0,E12000007,989000,0,North West,London,H (49-53),Transportation and storage,NA,NA
+2019-01-01,69,S99999999,86,S99999999,1038000,1200,Scotland,Scotland,M (69-75),"Professional, scientific and technical activities",Q (86-88),Human health and social work activities
+2021-01-01,10,E12000004,17,E12000002,11896000,0,East Midlands,North West,C (10-33),Manufacturing,C (10-33),Manufacturing
+2025-01-01,87,E12000002,69,E12000009,423000,0,North West,South West,Q (86-88),Human health and social work activities,M (69-75),"Professional, scientific and technical activities"
+2021-01-01,49,S99999999,50,E12000007,58000,0,Scotland,London,H (49-53),Transportation and storage,H (49-53),Transportation and storage
+2019-01-01,32,E12000005,0,E12000004,3283000,1300,West Midlands,East Midlands,C (10-33),Manufacturing,NA,NA
+2020-01-01,52,E12000008,85,E12000008,402000,0,South East,South East,H (49-53),Transportation and storage,P (85),Education
+2020-01-01,46,N99999999,70,E12000009,121000,0,Northern Ireland,South West,G (45-47),Wholesale and retail trade; repair of motor vehicles,M (69-75),"Professional, scientific and technical activities"
+2020-01-01,46,E12000009,86,E12000009,877000,1100,South West,South West,G (45-47),Wholesale and retail trade; repair of motor vehicles,Q (86-88),Human health and social work activities
+2020-01-01,58,E12000008,43,E12000009,216000,0,South East,South West,J (58-63),Information and communication,F (41-43),Construction
+2024-01-01,42,E12000009,74,E12000005,343000,0,South West,West Midlands,F (41-43),Construction,M (69-75),"Professional, scientific and technical activities"
+2020-01-01,28,E12000003,43,E12000002,1529000,0,Yorkshire and The Humber,North West,C (10-33),Manufacturing,F (41-43),Construction
+2020-01-01,68,E12000007,38,E12000008,1592000,2000,London,South East,L (68),Real estate activities,E (36-39),Water supply; sewerage and waste management
+2024-01-01,62,W99999999,63,E12000009,306000,0,Wales,South West,J (58-63),Information and communication,J (58-63),Information and communication
+2023-01-01,68,E12000008,75,E12000006,53000,200,South East,East of England,L (68),Real estate activities,M (69-75),"Professional, scientific and technical activities"
+2023-01-01,55,E12000005,81,E12000002,150000,0,West Midlands,North West,I (55-56),Accommodation and food service activities,N (77-82),Administrative and support service activities
+2019-01-01,59,E12000008,93,E12000006,159000,0,South East,East of England,J (58-63),Information and communication,R (90-93),"Arts, entertainment and recreation"
+2022-01-01,55,E12000002,66,E12000002,142000,0,North West,North West,I (55-56),Accommodation and food service activities,K (64-66),Financial and insurance activities
+2023-01-01,41,E12000008,74,S99999999,964000,100,South East,Scotland,F (41-43),Construction,M (69-75),"Professional, scientific and technical activities"
+2020-01-01,68,E12000006,77,E12000002,235000,0,East of England,North West,L (68),Real estate activities,N (77-82),Administrative and support service activities
+2024-01-01,65,E12000008,73,E12000006,22000,0,South East,East of England,K (64-66),Financial and insurance activities,M (69-75),"Professional, scientific and technical activities"
+2025-01-01,64,E12000007,13,E12000007,7697000,6100,London,London,K (64-66),Financial and insurance activities,C (10-33),Manufacturing
+2022-01-01,68,E12000006,93,E12000003,120000,900,East of England,Yorkshire and The Humber,L (68),Real estate activities,R (90-93),"Arts, entertainment and recreation"
+2020-01-01,78,E12000006,42,E12000003,210000,0,East of England,Yorkshire and The Humber,N (77-82),Administrative and support service activities,F (41-43),Construction
+2025-01-01,35,E12000009,74,E12000006,312000,0,South West,East of England,D (35),"Electricity, gas, steam and air conditioning supply",M (69-75),"Professional, scientific and technical activities"
+2023-01-01,71,E12000008,47,E12000009,1810000,1200,South East,South West,M (69-75),"Professional, scientific and technical activities",G (45-47),Wholesale and retail trade; repair of motor vehicles
+2019-01-01,43,W99999999,69,E12000006,260000,0,Wales,East of England,F (41-43),Construction,M (69-75),"Professional, scientific and technical activities"
+2019-01-01,94,E12000005,43,E12000003,3000,0,West Midlands,Yorkshire and The Humber,S (94-96),Other service activities,F (41-43),Construction
+2019-01-01,28,S99999999,47,E12000004,19000,0,Scotland,East Midlands,C (10-33),Manufacturing,G (45-47),Wholesale and retail trade; repair of motor vehicles
+2020-01-01,43,E12000003,22,E12000004,4693000,600,Yorkshire and The Humber,East Midlands,F (41-43),Construction,C (10-33),Manufacturing
+2022-01-01,82,E12000002,33,N99999999,16000,0,North West,Northern Ireland,N (77-82),Administrative and support service activities,C (10-33),Manufacturing
+2022-01-01,26,E12000005,32,E12000002,245000,0,West Midlands,North West,C (10-33),Manufacturing,C (10-33),Manufacturing
+2025-01-01,82,E12000007,33,W99999999,5886000,2900,London,Wales,N (77-82),Administrative and support service activities,C (10-33),Manufacturing
+2021-01-01,56,E12000001,74,E12000003,78000,0,North East,Yorkshire and The Humber,I (55-56),Accommodation and food service activities,M (69-75),"Professional, scientific and technical activities"
+2022-01-01,93,E12000004,62,E12000003,338000,1200,East Midlands,Yorkshire and The Humber,R (90-93),"Arts, entertainment and recreation",J (58-63),Information and communication
+2024-01-01,77,S99999999,47,S99999999,1279000,1200,Scotland,Scotland,N (77-82),Administrative and support service activities,G (45-47),Wholesale and retail trade; repair of motor vehicles
+2023-01-01,49,E12000003,63,E12000004,45000,0,Yorkshire and The Humber,East Midlands,H (49-53),Transportation and storage,J (58-63),Information and communication
+2019-01-01,1,E12000007,74,E12000002,113000,0,London,North West,A (1-3),"Agriculture, forestry and fishing",M (69-75),"Professional, scientific and technical activities"
+2024-01-01,36,E12000006,62,E12000007,608000,300,East of England,London,E (36-39),Water supply; sewerage and waste management,J (58-63),Information and communication
+2021-01-01,56,S99999999,74,E12000007,611000,100,Scotland,London,I (55-56),Accommodation and food service activities,M (69-75),"Professional, scientific and technical activities"
+2023-01-01,30,E12000005,96,E12000009,12000,0,West Midlands,South West,C (10-33),Manufacturing,S (94-96),Other service activities
+2023-01-01,94,S99999999,18,S99999999,106000,0,Scotland,Scotland,S (94-96),Other service activities,C (10-33),Manufacturing
+2022-01-01,88,S99999999,63,S99999999,79000,0,Scotland,Scotland,Q (86-88),Human health and social work activities,J (58-63),Information and communication
+2024-01-01,49,E12000005,68,E12000009,1571000,0,West Midlands,South West,H (49-53),Transportation and storage,L (68),Real estate activities
+2021-01-01,42,S99999999,58,E12000008,4000,0,Scotland,South East,F (41-43),Construction,J (58-63),Information and communication
+2019-01-01,17,E12000005,25,E12000005,689000,0,West Midlands,West Midlands,C (10-33),Manufacturing,C (10-33),Manufacturing
+2024-01-01,45,E12000002,62,W99999999,16000,0,North West,Wales,G (45-47),Wholesale and retail trade; repair of motor vehicles,J (58-63),Information and communication
+2022-01-01,72,E12000007,70,E12000003,586000,0,London,Yorkshire and The Humber,M (69-75),"Professional, scientific and technical activities",M (69-75),"Professional, scientific and technical activities"
+2019-01-01,66,E12000008,77,E12000001,22000,0,South East,North East,K (64-66),Financial and insurance activities,N (77-82),Administrative and support service activities
+2024-01-01,70,E12000007,80,E12000001,48000,0,London,North East,M (69-75),"Professional, scientific and technical activities",N (77-82),Administrative and support service activities
+2023-01-01,1,E12000008,64,E12000009,741000,1200,South East,South West,A (1-3),"Agriculture, forestry and fishing",K (64-66),Financial and insurance activities
+2020-01-01,63,E12000002,90,E12000007,168000,0,North West,London,J (58-63),Information and communication,R (90-93),"Arts, entertainment and recreation"
+2020-01-01,38,E12000002,49,E12000001,126000,0,North West,North East,E (36-39),Water supply; sewerage and waste management,H (49-53),Transportation and storage
+2024-01-01,96,E12000005,1,E12000004,1773000,0,West Midlands,East Midlands,S (94-96),Other service activities,A (1-3),"Agriculture, forestry and fishing"
+2024-01-01,2,E12000007,0,E12000009,14000,0,London,South West,A (1-3),"Agriculture, forestry and fishing",NA,NA
+2023-01-01,52,E12000002,22,E12000002,384000,0,North West,North West,H (49-53),Transportation and storage,C (10-33),Manufacturing
+2025-01-01,90,E12000009,85,E12000005,79000,0,South West,West Midlands,R (90-93),"Arts, entertainment and recreation",P (85),Education
+2020-01-01,96,E12000007,31,E12000007,1941000,400,London,London,S (94-96),Other service activities,C (10-33),Manufacturing
+2024-01-01,68,E12000009,93,E12000007,576000,2400,South West,London,L (68),Real estate activities,R (90-93),"Arts, entertainment and recreation"
+2021-01-01,41,W99999999,68,E12000009,230000,0,Wales,South West,F (41-43),Construction,L (68),Real estate activities
+2021-01-01,82,E12000002,63,E12000008,3842000,1200,North West,South East,N (77-82),Administrative and support service activities,J (58-63),Information and communication
+2021-01-01,47,E12000005,24,E12000005,1319000,0,West Midlands,West Midlands,G (45-47),Wholesale and retail trade; repair of motor vehicles,C (10-33),Manufacturing
+2023-01-01,42,E12000008,25,E12000005,2790000,0,South East,West Midlands,F (41-43),Construction,C (10-33),Manufacturing
+2020-01-01,47,E12000004,33,W99999999,32000,0,East Midlands,Wales,G (45-47),Wholesale and retail trade; repair of motor vehicles,C (10-33),Manufacturing
+2019-01-01,86,E12000003,25,E12000009,85000,0,Yorkshire and The Humber,South West,Q (86-88),Human health and social work activities,C (10-33),Manufacturing
+2022-01-01,23,W99999999,82,E12000005,55000,0,Wales,West Midlands,C (10-33),Manufacturing,N (77-82),Administrative and support service activities
+2019-01-01,74,E12000007,23,E12000008,501000,0,London,South East,M (69-75),"Professional, scientific and technical activities",C (10-33),Manufacturing
+2024-01-01,88,E12000005,63,E12000009,8000,0,West Midlands,South West,Q (86-88),Human health and social work activities,J (58-63),Information and communication
+2019-01-01,18,E12000003,73,E12000002,36000,0,Yorkshire and The Humber,North West,C (10-33),Manufacturing,M (69-75),"Professional, scientific and technical activities"
+2025-01-01,94,E12000002,86,E12000004,2000,0,North West,East Midlands,S (94-96),Other service activities,Q (86-88),Human health and social work activities
+2023-01-01,45,E12000008,41,E12000008,16535000,2000,South East,South East,G (45-47),Wholesale and retail trade; repair of motor vehicles,F (41-43),Construction
+2024-01-01,82,E12000007,90,E12000008,150616000,19600,London,South East,N (77-82),Administrative and support service activities,R (90-93),"Arts, entertainment and recreation"
+2024-01-01,58,E12000006,74,E12000009,112000,0,East of England,South West,J (58-63),Information and communication,M (69-75),"Professional, scientific and technical activities"
+2022-01-01,68,E12000008,58,E12000003,102000,0,South East,Yorkshire and The Humber,L (68),Real estate activities,J (58-63),Information and communication
+2023-01-01,1,E12000003,56,S99999999,13000,0,Yorkshire and The Humber,Scotland,A (1-3),"Agriculture, forestry and fishing",I (55-56),Accommodation and food service activities
+2019-01-01,87,E12000006,1,E12000007,191000,0,East of England,London,Q (86-88),Human health and social work activities,A (1-3),"Agriculture, forestry and fishing"
+2025-01-01,38,E12000004,71,E12000002,15000,0,East Midlands,North West,E (36-39),Water supply; sewerage and waste management,M (69-75),"Professional, scientific and technical activities"
+2019-01-01,46,E12000001,62,E12000001,2068000,1200,North East,North East,G (45-47),Wholesale and retail trade; repair of motor vehicles,J (58-63),Information and communication
+2022-01-01,49,E12000008,10,S99999999,10000,0,South East,Scotland,H (49-53),Transportation and storage,C (10-33),Manufacturing
+2024-01-01,21,E12000009,71,E12000009,25000,0,South West,South West,C (10-33),Manufacturing,M (69-75),"Professional, scientific and technical activities"
+2021-01-01,59,E12000008,26,E12000008,254000,0,South East,South East,J (58-63),Information and communication,C (10-33),Manufacturing
+2021-01-01,78,E12000007,94,E12000009,8000,0,London,South West,N (77-82),Administrative and support service activities,S (94-96),Other service activities
+2023-01-01,41,E12000008,86,E12000003,577000,0,South East,Yorkshire and The Humber,F (41-43),Construction,Q (86-88),Human health and social work activities
+2023-01-01,82,E12000007,38,E12000008,39337000,14100,London,South East,N (77-82),Administrative and support service activities,E (36-39),Water supply; sewerage and waste management
+2022-01-01,0,N99999999,10,E12000008,1234000,0,Northern Ireland,South East,NA,NA,C (10-33),Manufacturing
+2025-01-01,13,E12000003,0,E12000003,1212000,0,Yorkshire and The Humber,Yorkshire and The Humber,C (10-33),Manufacturing,NA,NA
+2021-01-01,86,E12000009,49,E12000002,625000,600,South West,North West,Q (86-88),Human health and social work activities,H (49-53),Transportation and storage
+2022-01-01,66,E12000002,56,E12000002,29000,0,North West,North West,K (64-66),Financial and insurance activities,I (55-56),Accommodation and food service activities
+2022-01-01,56,W99999999,56,E12000009,2606000,2400,Wales,South West,I (55-56),Accommodation and food service activities,I (55-56),Accommodation and food service activities
+2024-01-01,42,S99999999,81,E12000002,36000,0,Scotland,North West,F (41-43),Construction,N (77-82),Administrative and support service activities
+2024-01-01,33,N99999999,43,E12000005,131000,0,Northern Ireland,West Midlands,C (10-33),Manufacturing,F (41-43),Construction
+2022-01-01,56,S99999999,81,E12000004,102000,400,Scotland,East Midlands,I (55-56),Accommodation and food service activities,N (77-82),Administrative and support service activities
+2021-01-01,38,E12000004,62,E12000003,258000,0,East Midlands,Yorkshire and The Humber,E (36-39),Water supply; sewerage and waste management,J (58-63),Information and communication
+2025-01-01,47,S99999999,22,E12000008,1372000,0,Scotland,South East,G (45-47),Wholesale and retail trade; repair of motor vehicles,C (10-33),Manufacturing
+2025-01-01,11,E12000003,47,E12000004,146000,0,Yorkshire and The Humber,East Midlands,C (10-33),Manufacturing,G (45-47),Wholesale and retail trade; repair of motor vehicles
+2019-01-01,33,E12000009,27,E12000008,489000,0,South West,South East,C (10-33),Manufacturing,C (10-33),Manufacturing
+2019-01-01,56,N99999999,32,N99999999,258000,0,Northern Ireland,Northern Ireland,I (55-56),Accommodation and food service activities,C (10-33),Manufacturing
+2021-01-01,93,S99999999,58,E12000004,28000,0,Scotland,East Midlands,R (90-93),"Arts, entertainment and recreation",J (58-63),Information and communication
+2019-01-01,43,E12000002,42,E12000009,1096000,0,North West,South West,F (41-43),Construction,F (41-43),Construction
+2021-01-01,47,E12000007,96,S99999999,11788000,1200,London,Scotland,G (45-47),Wholesale and retail trade; repair of motor vehicles,S (94-96),Other service activities
+2020-01-01,38,E12000004,47,E12000005,518000,0,East Midlands,West Midlands,E (36-39),Water supply; sewerage and waste management,G (45-47),Wholesale and retail trade; repair of motor vehicles
+2022-01-01,28,E12000005,82,E12000004,2054000,900,West Midlands,East Midlands,C (10-33),Manufacturing,N (77-82),Administrative and support service activities
+2025-01-01,70,E12000005,69,E12000002,2541000,1200,West Midlands,North West,M (69-75),"Professional, scientific and technical activities",M (69-75),"Professional, scientific and technical activities"
+2024-01-01,30,E12000009,30,E12000009,6561000,0,South West,South West,C (10-33),Manufacturing,C (10-33),Manufacturing
+2024-01-01,86,E12000005,94,E12000004,132000,0,West Midlands,East Midlands,Q (86-88),Human health and social work activities,S (94-96),Other service activities
+2019-01-01,96,E12000006,86,E12000007,5113000,1100,East of England,London,S (94-96),Other service activities,Q (86-88),Human health and social work activities
+2019-01-01,81,E12000002,77,S99999999,118000,0,North West,Scotland,N (77-82),Administrative and support service activities,N (77-82),Administrative and support service activities
+2019-01-01,41,E12000006,77,E12000004,3145000,1200,East of England,East Midlands,F (41-43),Construction,N (77-82),Administrative and support service activities
+2021-01-01,47,E12000004,77,E12000009,2489000,2400,East Midlands,South West,G (45-47),Wholesale and retail trade; repair of motor vehicles,N (77-82),Administrative and support service activities
+2023-01-01,25,E12000002,86,E12000002,643000,1100,North West,North West,C (10-33),Manufacturing,Q (86-88),Human health and social work activities
+2025-01-01,90,E12000002,69,S99999999,23000,0,North West,Scotland,R (90-93),"Arts, entertainment and recreation",M (69-75),"Professional, scientific and technical activities"
+2019-01-01,86,E12000001,62,E12000003,645000,300,North East,Yorkshire and The Humber,Q (86-88),Human health and social work activities,J (58-63),Information and communication
+2025-01-01,49,E12000006,33,E12000001,37000,0,East of England,North East,H (49-53),Transportation and storage,C (10-33),Manufacturing
+2024-01-01,28,E12000002,33,E12000004,863000,0,North West,East Midlands,C (10-33),Manufacturing,C (10-33),Manufacturing
+2021-01-01,56,E12000007,49,E12000007,10751000,3400,London,London,I (55-56),Accommodation and food service activities,H (49-53),Transportation and storage
+2020-01-01,55,E12000003,81,E12000004,22000,0,Yorkshire and The Humber,East Midlands,I (55-56),Accommodation and food service activities,N (77-82),Administrative and support service activities
+2019-01-01,26,E12000008,71,E12000003,490000,0,South East,Yorkshire and The Humber,C (10-33),Manufacturing,M (69-75),"Professional, scientific and technical activities"
+2025-01-01,87,E12000001,58,E12000009,13000,0,North East,South West,Q (86-88),Human health and social work activities,J (58-63),Information and communication
+2021-01-01,47,E12000009,16,E12000009,1412000,1100,South West,South West,G (45-47),Wholesale and retail trade; repair of motor vehicles,C (10-33),Manufacturing
+2023-01-01,71,E12000008,53,E12000005,60000,0,South East,West Midlands,M (69-75),"Professional, scientific and technical activities",H (49-53),Transportation and storage
+2021-01-01,86,N99999999,68,E12000007,2059000,0,Northern Ireland,London,Q (86-88),Human health and social work activities,L (68),Real estate activities
+2024-01-01,17,E12000002,61,E12000005,14000,0,North West,West Midlands,C (10-33),Manufacturing,J (58-63),Information and communication
+2021-01-01,26,E12000007,82,E12000004,163000,0,London,East Midlands,C (10-33),Manufacturing,N (77-82),Administrative and support service activities
+2025-01-01,45,E12000003,38,E12000007,542000,1300,Yorkshire and The Humber,London,G (45-47),Wholesale and retail trade; repair of motor vehicles,E (36-39),Water supply; sewerage and waste management
+2024-01-01,59,E12000008,18,E12000004,89000,0,South East,East Midlands,J (58-63),Information and communication,C (10-33),Manufacturing
+2024-01-01,18,E12000004,46,E12000006,2762000,1200,East Midlands,East of England,C (10-33),Manufacturing,G (45-47),Wholesale and retail trade; repair of motor vehicles
+2024-01-01,78,E12000002,41,E12000007,3569000,1700,North West,London,N (77-82),Administrative and support service activities,F (41-43),Construction
+2025-01-01,52,E12000006,39,E12000006,191000,0,East of England,East of England,H (49-53),Transportation and storage,E (36-39),Water supply; sewerage and waste management
+2024-01-01,93,E12000006,46,W99999999,1117000,400,East of England,Wales,R (90-93),"Arts, entertainment and recreation",G (45-47),Wholesale and retail trade; repair of motor vehicles
+2022-01-01,58,E12000007,73,E12000004,693000,600,London,East Midlands,J (58-63),Information and communication,M (69-75),"Professional, scientific and technical activities"
+2023-01-01,55,E12000009,0,E12000003,404000,0,South West,Yorkshire and The Humber,I (55-56),Accommodation and food service activities,NA,NA
+2022-01-01,2,E12000009,82,E12000003,28000,0,South West,Yorkshire and The Humber,A (1-3),"Agriculture, forestry and fishing",N (77-82),Administrative and support service activities
+2021-01-01,58,E12000002,46,E12000009,134000,0,North West,South West,J (58-63),Information and communication,G (45-47),Wholesale and retail trade; repair of motor vehicles
+2019-01-01,72,E12000005,62,E12000005,1144000,0,West Midlands,West Midlands,M (69-75),"Professional, scientific and technical activities",J (58-63),Information and communication
+2020-01-01,47,E12000007,51,E12000007,22893000,2800,London,London,G (45-47),Wholesale and retail trade; repair of motor vehicles,H (49-53),Transportation and storage
+2019-01-01,79,E12000006,62,E12000007,12676000,5000,East of England,London,N (77-82),Administrative and support service activities,J (58-63),Information and communication
+2025-01-01,43,S99999999,16,E12000001,159000,0,Scotland,North East,F (41-43),Construction,C (10-33),Manufacturing
+2025-01-01,85,E12000005,0,E12000001,73000,0,West Midlands,North East,P (85),Education,NA,NA
+2019-01-01,59,N99999999,58,E12000007,22000,0,Northern Ireland,London,J (58-63),Information and communication,J (58-63),Information and communication
+2021-01-01,71,E12000009,62,E12000009,3262000,2300,South West,South West,M (69-75),"Professional, scientific and technical activities",J (58-63),Information and communication
+2025-01-01,82,E12000009,26,E12000008,1796000,0,South West,South East,N (77-82),Administrative and support service activities,C (10-33),Manufacturing
+2019-01-01,24,E12000005,0,E12000007,2592000,0,West Midlands,London,C (10-33),Manufacturing,NA,NA
+2019-01-01,62,E12000004,64,E12000008,5374000,6700,East Midlands,South East,J (58-63),Information and communication,K (64-66),Financial and insurance activities
+2023-01-01,51,E12000009,56,E12000008,21000,0,South West,South East,H (49-53),Transportation and storage,I (55-56),Accommodation and food service activities
+2022-01-01,33,E12000005,61,E12000007,1993000,7600,West Midlands,London,C (10-33),Manufacturing,J (58-63),Information and communication
+2021-01-01,28,E12000006,82,E12000001,79000,0,East of England,North East,C (10-33),Manufacturing,N (77-82),Administrative and support service activities
+2022-01-01,65,E12000003,65,E12000003,2056000,1100,Yorkshire and The Humber,Yorkshire and The Humber,K (64-66),Financial and insurance activities,K (64-66),Financial and insurance activities
+2024-01-01,87,W99999999,56,W99999999,862000,0,Wales,Wales,Q (86-88),Human health and social work activities,I (55-56),Accommodation and food service activities
+2025-01-01,82,E12000007,73,N99999999,997000,0,London,Northern Ireland,N (77-82),Administrative and support service activities,M (69-75),"Professional, scientific and technical activities"
+2025-01-01,45,E12000007,77,E12000004,5883000,200,London,East Midlands,G (45-47),Wholesale and retail trade; repair of motor vehicles,N (77-82),Administrative and support service activities
+2020-01-01,45,E12000005,64,E12000008,517949000,46600,West Midlands,South East,G (45-47),Wholesale and retail trade; repair of motor vehicles,K (64-66),Financial and insurance activities
+2023-01-01,17,E12000007,52,E12000006,231000,0,London,East of England,C (10-33),Manufacturing,H (49-53),Transportation and storage
+2024-01-01,2,E12000008,45,E12000006,486000,0,South East,East of England,A (1-3),"Agriculture, forestry and fishing",G (45-47),Wholesale and retail trade; repair of motor vehicles
+2025-01-01,64,S99999999,55,E12000007,77000,0,Scotland,London,K (64-66),Financial and insurance activities,I (55-56),Accommodation and food service activities
+2023-01-01,68,E12000003,43,E12000007,4332000,2300,Yorkshire and The Humber,London,L (68),Real estate activities,F (41-43),Construction
+2025-01-01,10,E12000007,26,E12000006,295000,0,London,East of England,C (10-33),Manufacturing,C (10-33),Manufacturing
+2020-01-01,94,E12000007,68,S99999999,71000,0,London,Scotland,S (94-96),Other service activities,L (68),Real estate activities
+2023-01-01,28,S99999999,56,S99999999,1096000,0,Scotland,Scotland,C (10-33),Manufacturing,I (55-56),Accommodation and food service activities
+2022-01-01,75,E12000006,64,W99999999,70000,0,East of England,Wales,M (69-75),"Professional, scientific and technical activities",K (64-66),Financial and insurance activities
+2021-01-01,0,N99999999,52,E12000008,264000,0,Northern Ireland,South East,NA,NA,H (49-53),Transportation and storage
+2021-01-01,0,E12000005,25,W99999999,683000,0,West Midlands,Wales,NA,NA,C (10-33),Manufacturing
+2025-01-01,74,E12000007,68,S99999999,1713000,700,London,Scotland,M (69-75),"Professional, scientific and technical activities",L (68),Real estate activities
+2020-01-01,70,E12000007,26,E12000006,848000,0,London,East of England,M (69-75),"Professional, scientific and technical activities",C (10-33),Manufacturing
+2025-01-01,82,E12000005,56,E12000009,1015000,600,West Midlands,South West,N (77-82),Administrative and support service activities,I (55-56),Accommodation and food service activities
+2023-01-01,86,E12000006,28,E12000005,46000,0,East of England,West Midlands,Q (86-88),Human health and social work activities,C (10-33),Manufacturing
+2025-01-01,73,E12000002,65,E12000007,1930000,4800,North West,London,M (69-75),"Professional, scientific and technical activities",K (64-66),Financial and insurance activities
+2022-01-01,8,E12000008,70,E12000005,11000,0,South East,West Midlands,B (5-9),Mining and quarrying,M (69-75),"Professional, scientific and technical activities"
+2021-01-01,61,E12000009,61,E12000004,3516000,100,South West,East Midlands,J (58-63),Information and communication,J (58-63),Information and communication
+2019-01-01,80,E12000004,77,E12000004,47000,0,East Midlands,East Midlands,N (77-82),Administrative and support service activities,N (77-82),Administrative and support service activities
+2023-01-01,1,E12000009,68,E12000004,477000,0,South West,East Midlands,A (1-3),"Agriculture, forestry and fishing",L (68),Real estate activities
+2019-01-01,32,E12000008,82,E12000008,15813000,6100,South East,South East,C (10-33),Manufacturing,N (77-82),Administrative and support service activities
+2021-01-01,47,N99999999,10,S99999999,483000,0,Northern Ireland,Scotland,G (45-47),Wholesale and retail trade; repair of motor vehicles,C (10-33),Manufacturing
+2021-01-01,74,E12000008,49,E12000008,4736000,4700,South East,South East,M (69-75),"Professional, scientific and technical activities",H (49-53),Transportation and storage
+2024-01-01,25,E12000002,78,E12000008,142000,0,North West,South East,C (10-33),Manufacturing,N (77-82),Administrative and support service activities
+2020-01-01,49,S99999999,43,E12000001,62000,0,Scotland,North East,H (49-53),Transportation and storage,F (41-43),Construction
+2024-01-01,52,E12000009,43,E12000003,70000,0,South West,Yorkshire and The Humber,H (49-53),Transportation and storage,F (41-43),Construction
+2023-01-01,70,E12000006,56,W99999999,244000,0,East of England,Wales,M (69-75),"Professional, scientific and technical activities",I (55-56),Accommodation and food service activities
+2024-01-01,1,E12000009,47,E12000003,823000,1200,South West,Yorkshire and The Humber,A (1-3),"Agriculture, forestry and fishing",G (45-47),Wholesale and retail trade; repair of motor vehicles
+2021-01-01,41,E12000004,32,E12000002,834000,0,East Midlands,North West,F (41-43),Construction,C (10-33),Manufacturing
+2024-01-01,18,E12000007,68,E12000006,167000,0,London,East of England,C (10-33),Manufacturing,L (68),Real estate activities
+2019-01-01,58,E12000009,85,E12000005,23000,0,South West,West Midlands,J (58-63),Information and communication,P (85),Education
+2025-01-01,45,E12000002,28,E12000007,136000,300,North West,London,G (45-47),Wholesale and retail trade; repair of motor vehicles,C (10-33),Manufacturing
+2021-01-01,56,E12000005,77,E12000005,2226000,2500,West Midlands,West Midlands,I (55-56),Accommodation and food service activities,N (77-82),Administrative and support service activities
+2019-01-01,53,E12000007,43,E12000005,129000,0,London,West Midlands,H (49-53),Transportation and storage,F (41-43),Construction
+2025-01-01,87,E12000008,81,S99999999,599000,0,South East,Scotland,Q (86-88),Human health and social work activities,N (77-82),Administrative and support service activities
+2022-01-01,25,W99999999,43,E12000007,138000,0,Wales,London,C (10-33),Manufacturing,F (41-43),Construction
+2025-01-01,91,E12000007,43,E12000008,1446000,0,London,South East,R (90-93),"Arts, entertainment and recreation",F (41-43),Construction
+2022-01-01,18,E12000001,70,E12000001,4000,0,North East,North East,C (10-33),Manufacturing,M (69-75),"Professional, scientific and technical activities"
+2024-01-01,30,E12000003,68,E12000003,124000,0,Yorkshire and The Humber,Yorkshire and The Humber,C (10-33),Manufacturing,L (68),Real estate activities
+2022-01-01,20,E12000008,43,S99999999,1349000,0,South East,Scotland,C (10-33),Manufacturing,F (41-43),Construction
+2024-01-01,80,E12000008,41,E12000006,18000,0,South East,East of England,N (77-82),Administrative and support service activities,F (41-43),Construction
+2024-01-01,52,E12000003,33,E12000002,625000,0,Yorkshire and The Humber,North West,H (49-53),Transportation and storage,C (10-33),Manufacturing
