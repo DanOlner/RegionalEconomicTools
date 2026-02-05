@@ -249,11 +249,13 @@ flow_slopes_plot = flow_slopes %>%
   ) %>%
   ggplot(aes(x = annual_pct_change, y = payer_ITL1name, colour = flow_type)) +
   geom_vline(xintercept = 0, linetype = "dashed", alpha = 0.5) +
-  geom_errorbarh(
+  geom_errorbar(
     aes(xmin = ci_lower, xmax = ci_upper),
-    height = 0.2, alpha = 0.5
+    width = 0.2, alpha = 0.5,
+    orientation = "y",
+    position = position_dodge(width = 0.5)
   ) +
-  geom_point(size = 3) +
+  geom_point(size = 3, position = position_dodge(width = 0.5)) +
   scale_colour_manual(values = c("internal" = "blue", "external" = "red")) +
   labs(
     title = paste0(payer_section_filter, " → ", payee_section_filter),
