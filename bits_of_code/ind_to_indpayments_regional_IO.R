@@ -182,8 +182,11 @@ distinctive_linkages %>%
 
 # Select sector pair to analyse (using section names)
 # Start with Finance → Finance (section K)
-payer_section_filter = "Financial and insurance activities"
-payee_section_filter = "Financial and insurance activities"
+payer_section_filter = "Manufacturing"
+payee_section_filter = "Administrative and support service activities"
+# payee_section_filter = "Manufacturing"
+# payer_section_filter = "Financial and insurance activities"
+# payee_section_filter = "Financial and insurance activities"
 
 # Prepare data: split into internal (same region) vs external (different region)
 flow_trends = i2i.yr %>%
@@ -267,4 +270,398 @@ flow_slopes_plot = flow_slopes %>%
   theme(legend.position = "bottom")
 
 flow_slopes_plot
+
+
+# ALL SECTION PAIRS: INTERNAL VS EXTERNAL SLOPES ----
+
+# Calculate internal vs external slopes for ALL section pairs across all regions
+# This allows us to find which flows show the largest divergence between internal/external growth
+
+# Prepare data for all section pairs
+all_flow_trends = i2i.yr %>%
+  filter(
+    !is.na(sectionname_payer),
+    !is.na(sectionname_payee)
+  ) %>%
+  mutate(
+    flow_type = ifelse(payer_ITL1name == payee_ITL1name, "internal", "external")
+  ) %>%
+  group_by(payer_ITL1name, sectionname_payer, sectionname_payee, year, flow_type) %>%
+  summarise(
+    pounds = sum(pounds, na.rm = TRUE),
+    .groups = 'drop'
+  )
+
+# Calculate slopes for all combinations
+# This may take a moment as it's fitting many models
+all_flow_slopes = get_slope_and_se_safely(
+  data = all_flow_trends,
+  payer_ITL1name, sectionname_payer, sectionname_payee, flow_type,
+  y = log(pounds),
+  x = year
+)
+
+# Convert to annual % change and add significance flags
+all_flow_slopes = all_flow_slopes %>%
+  mutate(
+    annual_pct_change = (exp(slope) - 1) * 100,
+    ci_lower = (exp(slope - 1.96 * se) - 1) * 100,
+    ci_upper = (exp(slope + 1.96 * se) - 1) * 100,
+    sig = sign(ci_lower) == sign(ci_upper),
+    # Add short names for display
+    section_payer_short = reduceSICnames(sectionname_payer, 'section'),
+    section_payee_short = reduceSICnames(sectionname_payee, 'section')
+  )
+
+# Pivot to wide format for direct comparison
+all_flow_slopes_wide = all_flow_slopes %>%
+  select(payer_ITL1name, sectionname_payer, sectionname_payee,
+         section_payer_short, section_payee_short,
+         flow_type, annual_pct_change, ci_lower, ci_upper, sig) %>%
+  pivot_wider(
+    names_from = flow_type,
+    values_from = c(annual_pct_change, ci_lower, ci_upper, sig)
+  ) %>%
+  mutate(
+    # Difference: positive = external growing faster than internal
+    external_minus_internal = annual_pct_change_external - annual_pct_change_internal,
+    # Create flow label for display
+    flow_label = paste0(section_payer_short, " → ", section_payee_short)
+  )
+
+# Find flows with largest divergence (external outpacing internal)
+top_divergent_flows = all_flow_slopes_wide %>%
+  filter(!is.na(external_minus_internal)) %>%
+  group_by(payer_ITL1name) %>%
+  slice_max(order_by = external_minus_internal, n = 20) %>%
+  arrange(payer_ITL1name, desc(external_minus_internal))
+
+# View top divergent flows for a specific region
+top_divergent_flows %>%
+  filter(payer_ITL1name == "Yorkshire and The Humber") %>%
+  select(flow_label, annual_pct_change_internal, annual_pct_change_external, external_minus_internal) %>%
+  print(n = 20)
+
+
+
+# Find flows where internal is outpacing external (negative divergence)
+top_internal_growth = all_flow_slopes_wide %>%
+  filter(!is.na(external_minus_internal)) %>%
+  group_by(payer_ITL1name) %>%
+  slice_min(order_by = external_minus_internal, n = 20) %>%
+  arrange(payer_ITL1name, external_minus_internal)
+
+# View top divergent flows for a specific region
+top_internal_growth %>%
+  filter(payer_ITL1name == "Yorkshire and The Humber") %>%
+  select(flow_label, annual_pct_change_internal, annual_pct_change_external, external_minus_internal) %>%
+  # arrange(desc(annual_pct_change_internal)) %>% 
+  arrange(external_minus_internal) %>% 
+  print(n = 20)
+
+
+
+
+# Summary across all regions: which section pairs show consistent patterns?
+section_pair_summary = all_flow_slopes_wide %>%
+  filter(!is.na(external_minus_internal)) %>%
+  group_by(sectionname_payer, sectionname_payee, section_payer_short, section_payee_short) %>%
+  summarise(
+    mean_divergence = mean(external_minus_internal, na.rm = TRUE),
+    median_divergence = median(external_minus_internal, na.rm = TRUE),
+    n_regions_external_faster = sum(external_minus_internal > 0, na.rm = TRUE),
+    n_regions = n(),
+    .groups = 'drop'
+  ) %>%
+  mutate(
+    flow_label = paste0(section_payer_short, " → ", section_payee_short)
+  ) %>%
+  arrange(desc(mean_divergence))
+
+# Top flows where external is consistently outpacing internal across regions
+section_pair_summary %>%
+  filter(n_regions >= 6) %>%  # Only flows present in at least half the regions
+  slice_max(order_by = mean_divergence, n = 20) %>%
+  select(flow_label, mean_divergence, median_divergence, n_regions_external_faster, n_regions)
+
+
+
+
+
+
+# REGIONAL COEFFICIENT MATRICES ----
+
+# Technical coefficients: a_ij = purchases from sector j by sector i / total output of sector i
+# Since we don't have true output data, we use total sales (row sums) as a proxy
+# This gives us "input shares" - what proportion of a sector's purchases come from each supplier
+
+# Use most recent year for coefficient matrices
+coef_year = max(i2i.yr$year)
+
+# Aggregate to section level for the chosen year
+# Keep internal vs external separate so we can compare "recipes"
+i2i_for_coefs = i2i.yr %>%
+  filter(
+    !is.na(sectionname_payer),
+    !is.na(sectionname_payee),
+    year == coef_year
+  ) %>%
+  mutate(
+    flow_type = ifelse(payer_ITL1name == payee_ITL1name, "internal", "external")
+  ) %>%
+  group_by(payer_ITL1name, sectionname_payer, sectionname_payee, flow_type) %>%
+  summarise(
+    pounds = sum(pounds, na.rm = TRUE),
+    .groups = 'drop'
+  )
+
+# Calculate total purchases by each payer sector in each region (proxy for "output")
+# This is the column sum - total intermediate inputs purchased by sector i
+sector_total_purchases = i2i_for_coefs %>%
+  group_by(payer_ITL1name, sectionname_payer) %>%
+  summarise(
+    total_purchases = sum(pounds, na.rm = TRUE),
+    .groups = 'drop'
+  )
+
+# Calculate coefficients: purchases from j / total purchases by i
+# Do this separately for internal and external
+regional_coefficients = i2i_for_coefs %>%
+  left_join(sector_total_purchases, by = c("payer_ITL1name", "sectionname_payer")) %>%
+  mutate(
+    coefficient = pounds / total_purchases,
+    section_payer_short = reduceSICnames(sectionname_payer, 'section'),
+    section_payee_short = reduceSICnames(sectionname_payee, 'section')
+  )
+
+# Pivot to get internal and external coefficients side by side
+coefficients_wide = regional_coefficients %>%
+  select(payer_ITL1name, sectionname_payer, sectionname_payee,
+         section_payer_short, section_payee_short, flow_type, coefficient) %>%
+  pivot_wider(
+    names_from = flow_type,
+    values_from = coefficient,
+    values_fill = 0
+  ) %>%
+  mutate(
+    # Total coefficient (internal + external)
+    total = internal + external,
+    # Regional purchase coefficient: what share is sourced locally?
+    regional_share = ifelse(total > 0, internal / total, NA),
+    flow_label = paste0(section_payer_short, " → ", section_payee_short)
+  )
+
+
+# 1. WHICH REGIONS HAVE STRONGER INTERNAL SUPPLY CHAINS? ----
+
+# Sum internal coefficients across all linkages for each region
+regional_self_sufficiency = coefficients_wide %>%
+  group_by(payer_ITL1name) %>%
+  summarise(
+    total_internal_coef = sum(internal, na.rm = TRUE),
+    total_external_coef = sum(external, na.rm = TRUE),
+    total_coef = sum(total, na.rm = TRUE),
+    overall_regional_share = total_internal_coef / total_coef,
+    .groups = 'drop'
+  ) %>%
+  arrange(desc(overall_regional_share))
+
+regional_self_sufficiency
+
+# Visualise regional self-sufficiency
+ggplot(regional_self_sufficiency,
+       aes(x = reorder(payer_ITL1name, overall_regional_share), y = overall_regional_share)) +
+  geom_col(fill = "steelblue") +
+  geom_hline(yintercept = mean(regional_self_sufficiency$overall_regional_share),
+             linetype = "dashed", colour = "red") +
+  coord_flip() +
+  labs(
+    title = "Regional Self-Sufficiency in Inter-Industry Purchases",
+    subtitle = paste0("Share of intermediate purchases sourced within region (", coef_year, ")"),
+    x = "",
+    y = "Internal share of total purchases",
+    caption = "Red line = UK average"
+  ) +
+  scale_y_continuous(labels = scales::percent)
+
+# Self-sufficiency by purchasing sector within each region
+sector_self_sufficiency = coefficients_wide %>%
+  group_by(payer_ITL1name, sectionname_payer, section_payer_short) %>%
+  summarise(
+    internal_coef = sum(internal, na.rm = TRUE),
+    external_coef = sum(external, na.rm = TRUE),
+    total_coef = sum(total, na.rm = TRUE),
+    regional_share = internal_coef / total_coef,
+    .groups = 'drop'
+  )
+
+# Heatmap of self-sufficiency by region and sector
+ggplot(sector_self_sufficiency,
+       aes(x = section_payer_short, y = payer_ITL1name, fill = regional_share)) +
+  geom_tile() +
+  scale_fill_gradient2(
+    low = "red", mid = "white", high = "darkgreen",
+    midpoint = 0.5,
+    name = "Internal\nshare",
+    labels = scales::percent
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 7)) +
+  labs(
+    title = "Self-Sufficiency by Region and Purchasing Sector",
+    subtitle = "Share of each sector's purchases sourced within region",
+    x = "Purchasing sector",
+    y = ""
+  )
+
+
+# 2. COMPARING "RECIPES" ACROSS REGIONS ----
+
+# Function to extract and compare coefficient vectors for a specific purchasing sector
+compare_sector_recipes = function(purchasing_sector, coef_data = coefficients_wide) {
+
+  # Filter to the purchasing sector and get total coefficients
+  sector_coefs = coef_data %>%
+    filter(sectionname_payer == purchasing_sector) %>%
+    select(payer_ITL1name, sectionname_payee, section_payee_short, total) %>%
+    pivot_wider(
+      names_from = payer_ITL1name,
+      values_from = total,
+      values_fill = 0
+    )
+
+  return(sector_coefs)
+}
+
+# Example: Compare Manufacturing "recipes" across regions
+manufacturing_recipes = compare_sector_recipes("Manufacturing")
+manufacturing_recipes
+
+# Calculate coefficient matrix for a single region (total coefficients)
+make_coefficient_matrix = function(region_name, coef_data = coefficients_wide) {
+
+  region_coefs = coef_data %>%
+    filter(payer_ITL1name == region_name) %>%
+    select(sectionname_payer, sectionname_payee, total)
+
+  coef_matrix = region_coefs %>%
+    pivot_wider(
+      names_from = sectionname_payee,
+      values_from = total,
+      values_fill = 0
+    ) %>%
+    column_to_rownames('sectionname_payer') %>%
+    as.matrix()
+
+  return(coef_matrix)
+}
+
+# Create coefficient matrices for all regions
+coef_matrices = map(unique(coefficients_wide$payer_ITL1name),
+                    ~make_coefficient_matrix(.x, coefficients_wide)) %>%
+  set_names(unique(coefficients_wide$payer_ITL1name))
+
+# Compare two regions' recipes for a specific sector
+compare_two_regions = function(sector, region1, region2, coef_data = coefficients_wide) {
+
+  comparison = coef_data %>%
+    filter(sectionname_payer == sector,
+           payer_ITL1name %in% c(region1, region2)) %>%
+    select(payer_ITL1name, section_payee_short, total) %>%
+    pivot_wider(
+      names_from = payer_ITL1name,
+      values_from = total,
+      values_fill = 0
+    ) %>%
+    mutate(
+      difference = .data[[region1]] - .data[[region2]],
+      ratio = ifelse(.data[[region2]] > 0, .data[[region1]] / .data[[region2]], NA)
+    ) %>%
+    arrange(desc(abs(difference)))
+
+  return(comparison)
+}
+
+# Example: How does Yorkshire Manufacturing source differently from West Midlands?
+compare_two_regions("Manufacturing", "Yorkshire and The Humber", "West Midlands")
+
+# Visualise recipe comparison for a sector across all regions
+plot_recipe_comparison = function(purchasing_sector, coef_data = coefficients_wide) {
+
+  plot_data = coef_data %>%
+    filter(sectionname_payer == purchasing_sector) %>%
+    select(payer_ITL1name, section_payee_short, total)
+
+  ggplot(plot_data, aes(x = section_payee_short, y = payer_ITL1name, fill = total)) +
+    geom_tile() +
+    scale_fill_gradient(low = "white", high = "darkblue", name = "Coefficient") +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 7)) +
+    labs(
+      title = paste0("Input 'Recipes' for ", purchasing_sector),
+      subtitle = "Technical coefficients by supplying sector and region",
+      x = "Supplying sector",
+      y = ""
+    )
+}
+
+plot_recipe_comparison("Manufacturing")
+plot_recipe_comparison("Financial and insurance activities")
+
+
+# 3. WHICH LINKAGES SHOW MOST REGIONAL VARIATION IN LOCAL SOURCING? ----
+
+# For each sector pair, calculate variation in regional_share across regions
+linkage_variation = coefficients_wide %>%
+  filter(!is.na(regional_share), total > 0) %>%
+  group_by(sectionname_payer, sectionname_payee, section_payer_short, section_payee_short) %>%
+  summarise(
+    mean_regional_share = mean(regional_share, na.rm = TRUE),
+    sd_regional_share = sd(regional_share, na.rm = TRUE),
+    cv_regional_share = sd_regional_share / mean_regional_share,  # Coefficient of variation
+    min_regional_share = min(regional_share, na.rm = TRUE),
+    max_regional_share = max(regional_share, na.rm = TRUE),
+    range_regional_share = max_regional_share - min_regional_share,
+    n_regions = n(),
+    .groups = 'drop'
+  ) %>%
+  mutate(
+    flow_label = paste0(section_payer_short, " → ", section_payee_short)
+  )
+
+# Linkages with highest variation in local sourcing
+linkage_variation %>%
+  filter(n_regions >= 6) %>%
+  arrange(desc(range_regional_share)) %>%
+  select(flow_label, mean_regional_share, range_regional_share, min_regional_share, max_regional_share) %>%
+  print(n = 20)
+
+# Linkages that are mostly local everywhere
+linkage_variation %>%
+  filter(n_regions >= 6, mean_regional_share > 0.5) %>%
+  arrange(desc(mean_regional_share)) %>%
+  select(flow_label, mean_regional_share, sd_regional_share) %>%
+  print(n = 20)
+
+# Linkages that are mostly imported everywhere
+linkage_variation %>%
+  filter(n_regions >= 6, mean_regional_share < 0.2) %>%
+  arrange(mean_regional_share) %>%
+  select(flow_label, mean_regional_share, sd_regional_share) %>%
+  print(n = 20)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
