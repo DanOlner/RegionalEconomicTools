@@ -395,17 +395,28 @@ section_pair_summary %>%
 # Since we don't have true output data, we use total sales (row sums) as a proxy
 # This gives us "input shares" - what proportion of a sector's purchases come from each supplier
 
+# Optional: filter to specific regions (or exclude regions)
+# If NULL, uses all regions
+# e.g. exclude Northern Ireland:
+coef_regions_exclude = c("Northern Ireland")
+# coef_regions_exclude = NULL
+
 # Use most recent year for coefficient matrices
 coef_year = max(i2i.yr$year)
 
 # Aggregate to section level for the chosen year
 # Keep internal vs external separate so we can compare "recipes"
+# Drop a couple of sectors too
 i2i_for_coefs = i2i.yr %>%
   filter(
     !is.na(sectionname_payer),
     !is.na(sectionname_payee),
-    year == coef_year
+    year == coef_year,
+    !qg('households|extraterr',sectionname_payer),
+    !qg('households|extraterr',sectionname_payee)
   ) %>%
+  # Apply region exclusion filter if specified
+  {if(!is.null(coef_regions_exclude)) filter(., !payer_ITL1name %in% coef_regions_exclude) else .} %>%
   mutate(
     flow_type = ifelse(payer_ITL1name == payee_ITL1name, "internal", "external")
   ) %>%
@@ -499,12 +510,14 @@ sector_self_sufficiency = coefficients_wide %>%
 ggplot(sector_self_sufficiency,
        aes(x = section_payer_short, y = payer_ITL1name, fill = regional_share)) +
   geom_tile() +
-  scale_fill_gradient2(
-    low = "red", mid = "white", high = "darkgreen",
-    midpoint = 0.5,
-    name = "Internal\nshare",
-    labels = scales::percent
-  ) +
+  # scale_fill_gradient2(
+  #   low = "red", mid = "lightyellow", high = "darkgreen",
+  #   midpoint = 0.5,
+  #   name = "Internal\nshare",
+  #   labels = scales::percent
+  # ) +
+  scale_fill_distiller(palette = 'Blues', direction = 1, name = "Internal\nshare", labels = scales::percent) +
+  # scale_fill_distiller(palette = 'PuBuGn', direction = 1, name = "Internal\nshare", labels = scales::percent) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 7)) +
   labs(
     title = "Self-Sufficiency by Region and Purchasing Sector",
