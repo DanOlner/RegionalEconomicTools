@@ -634,12 +634,14 @@ plot_pairwise_year_heatmap_direction <- function(data, sector_pattern, region_pa
       # Check if either year has missing CI data
       missing_data = is.na(gva_min95) | is.na(gva_max95) | is.na(gva_min95_2) | is.na(gva_max95_2),
       ci_overlap = pmax(gva_min95, gva_min95_2) < pmin(gva_max95, gva_max95_2),
-      # Four-way comparison: no data, overlap, row year higher, row year lower
+      # Four-way comparison: no data, overlap, column year higher, column year lower
+      # Note: x-axis (columns) = year, y-axis (rows) = year2
+      # value is for 'year' (column), value2 is for 'year2' (row)
       comparison = case_when(
         missing_data ~ "No CI data",
         ci_overlap ~ "CIs overlap",
-        value > value2 ~ "Row year higher",
-        value < value2 ~ "Row year lower",
+        value > value2 ~ "Column year higher",
+        value < value2 ~ "Column year lower",
         TRUE ~ "CIs overlap"  # Equal case (unlikely)
       )
     )
@@ -653,14 +655,14 @@ plot_pairwise_year_heatmap_direction <- function(data, sector_pattern, region_pa
     scale_fill_manual(
       values = c("No CI data" = "grey95",
                  "CIs overlap" = "grey75",
-                 "Row year higher" = "steelblue",
-                 "Row year lower" = "coral"),
+                 "Column year higher" = "steelblue",
+                 "Column year lower" = "coral"),
       name = ""
     ) +
     facet_wrap(~Region_name, ncol = 3) +
     labs(
       title = paste0("Pairwise year comparison: ", sector_name),
-      subtitle = "Blue = row year higher, Coral = row year lower, Grey = indistinguishable, × = no CI data",
+      subtitle = "Blue = column > row, Coral = column < row, Grey = indistinguishable, × = no CI data",
       x = "Year (column)",
       y = "Year (row)",
       caption = "Colour shows direction when 95% CIs don't overlap"
