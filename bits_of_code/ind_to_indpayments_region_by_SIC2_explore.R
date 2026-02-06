@@ -324,6 +324,10 @@ p2 = ggplot(
 
 both = p1 + p2
 
+both = p1 / p2
+
+saveRDS(both,'local/data/ind2indbothplots.rds')
+
 both
 
 # Quick Scotland plot over time...

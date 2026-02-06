@@ -81,7 +81,6 @@ names(qual)[6:13] = c(
 
 
 
-
 # Find error rates across regions and sectors----
 
 # What sectors have we got? Let's just keep 2 digit
@@ -117,6 +116,8 @@ abs_gva = allregions %>%
   )
 
 # Save for use elsewhere
+write_csv(abs_gva,'local/data/abs_gva_se_combo.csv')
+
 
 
 

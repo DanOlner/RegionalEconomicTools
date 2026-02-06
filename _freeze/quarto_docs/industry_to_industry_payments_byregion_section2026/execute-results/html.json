@@ -1,0 +1,17 @@
+{
+  "hash": "2270ff9a546aeb18e0784dc15fe973ad",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"1st explore: UK industry to industry payments: ITL1 / SIC sections\"\nauthor:\n  - name: \"Dan Olner / Claude Code\"\nformat: \n  html:\n    output-file: \"industry_to_industry_payments_byregion_section2026.qmd\"\n    fig-width: 8\n    fig-height: 8\nexecute:\n  echo: false\n  message: false\n  warning: false\nfig-responsive: false\ncollapse: false\nnavbar: false\nsidebar: false\n---\n\n\n::: {.cell}\n\n:::\n\n\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](industry_to_industry_payments_byregion_section2026_files/figure-html/unnamed-chunk-1-1.png){width=672}\n:::\n:::\n\n\n",
+    "supporting": [
+      "industry_to_industry_payments_byregion_section2026_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

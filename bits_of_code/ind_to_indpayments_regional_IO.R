@@ -1065,9 +1065,23 @@ sector_locality_by_region_abbrev = sector_locality_by_region %>%
     region_abbrev = region_abbrevs[payer_ITL1name]
   )
 
+# Calculate bounding box of all sector means (for background rectangle)
+means_bbox = list(
+
+  xmin = min(sector_ranges$payer_mean, na.rm = TRUE),
+  xmax = max(sector_ranges$payer_mean, na.rm = TRUE),
+  ymin = min(sector_ranges$payee_mean, na.rm = TRUE),
+  ymax = max(sector_ranges$payee_mean, na.rm = TRUE)
+)
+
 # Faceted scatter plot with ggrepel labels
 ggplot(sector_locality_by_region_abbrev,
        aes(x = payer_locality, y = payee_locality)) +
+  # Background rectangle showing range of all sector means
+  annotate("rect",
+           xmin = means_bbox$xmin, xmax = means_bbox$xmax,
+           ymin = means_bbox$ymin, ymax = means_bbox$ymax,
+           fill = "grey90", alpha = 0.5, colour = "grey70", linetype = "dotted") +
   # Reference lines
   geom_abline(slope = 1, intercept = 0, linetype = "dashed", alpha = 0.3) +
   geom_vline(xintercept = 0.5, alpha = 0.2) +
@@ -1108,8 +1122,257 @@ ggplot(sector_locality_by_region_abbrev,
   )
 
 
+# Alternative faceted view: facet by REGION, plot individual sectors
+# This lets us see each region's sector distribution relative to other regions
+
+# Calculate bounding box of all sector means (for background rectangle) - per region this time
+# We want to show where the overall sector distribution sits
+sectors_bbox = list(
+  xmin = min(sector_locality_by_region$payer_locality, na.rm = TRUE),
+  xmax = max(sector_locality_by_region$payer_locality, na.rm = TRUE),
+  ymin = min(sector_locality_by_region$payee_locality, na.rm = TRUE),
+  ymax = max(sector_locality_by_region$payee_locality, na.rm = TRUE)
+)
+
+# Faceted scatter plot by region
+ggplot(sector_locality_by_region_abbrev,
+       aes(x = payer_locality, y = payee_locality)) +
+  # Background rectangle showing range of all sector values across all regions
+  annotate("rect",
+           xmin = sectors_bbox$xmin, xmax = sectors_bbox$xmax,
+           ymin = sectors_bbox$ymin, ymax = sectors_bbox$ymax,
+           fill = "grey90", alpha = 0.5, colour = "grey70", linetype = "dotted") +
+  # Reference lines
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", alpha = 0.3) +
+  geom_vline(xintercept = 0.5, alpha = 0.2) +
+  geom_hline(yintercept = 0.5, alpha = 0.2) +
+  # Sector points
+  geom_point(size = 2, colour = "steelblue", alpha = 0.7) +
+  # Labels for sector points
+  ggrepel::geom_text_repel(
+    aes(label = section),
+    size = 2,
+    max.overlaps = 20,
+    segment.colour = "grey70",
+    segment.alpha = 0.5,
+    box.padding = unit(0.15, "lines"),
+    point.padding = unit(0.1, "lines")
+  ) +
+  # Facet by region
+  facet_wrap(~payer_ITL1name, ncol = 4) +
+  scale_x_continuous(labels = scales::percent) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(
+    title = "Sector Locality by Region",
+    subtitle = "Each panel shows one region's sectors; grey box = full range across all regions",
+    x = "Local share of inputs purchased",
+    y = "Local share of payments received",
+    caption = "Diagonal = equally local on both dimensions\nTop-right = locally embedded, Bottom-left = tradeable"
+  ) +
+  theme(
+    plot.caption = element_text(hjust = 0),
+    strip.text = element_text(size = 7),
+    axis.text = element_text(size = 6)
+  )
 
 
+# 5. SECTOR LOCALITY CHANGE OVER TIME (ARROW PLOT) ----
+
+# Recalculate coefficients for ALL years to track change over time
+# Get earliest and latest years
+locality_years = c(min(i2i.yr$year), max(i2i.yr$year))
+
+# Or different years...
+locality_years = c(unique(i2i.yr$year)[4], max(i2i.yr$year))
+
+
+# Aggregate to section level for selected years
+# Keep internal vs external separate
+i2i_for_coefs_multiyear = i2i.yr %>%
+  filter(
+    !is.na(sectionname_payer),
+    !is.na(sectionname_payee),
+    year %in% locality_years,
+    !qg('households|extraterr', sectionname_payer),
+    !qg('households|extraterr', sectionname_payee)
+  ) %>%
+  {if(!is.null(coef_regions_exclude)) filter(., !payer_ITL1name %in% coef_regions_exclude) else .} %>%
+  mutate(
+    flow_type = ifelse(payer_ITL1name == payee_ITL1name, "internal", "external")
+  ) %>%
+  group_by(payer_ITL1name, sectionname_payer, sectionname_payee, flow_type, year) %>%
+  summarise(
+    pounds = sum(pounds, na.rm = TRUE),
+    .groups = 'drop'
+  )
+
+# Calculate total purchases by each payer sector in each region per year
+sector_total_purchases_multiyear = i2i_for_coefs_multiyear %>%
+  group_by(payer_ITL1name, sectionname_payer, year) %>%
+  summarise(
+    total_purchases = sum(pounds, na.rm = TRUE),
+    .groups = 'drop'
+  )
+
+# Calculate coefficients by year
+regional_coefficients_multiyear = i2i_for_coefs_multiyear %>%
+  left_join(sector_total_purchases_multiyear,
+            by = c("payer_ITL1name", "sectionname_payer", "year")) %>%
+  mutate(
+    coefficient = pounds / total_purchases,
+    section_payer_short = reduceSICnames(sectionname_payer, 'section'),
+    section_payee_short = reduceSICnames(sectionname_payee, 'section')
+  )
+
+# Pivot to get internal and external coefficients side by side
+coefficients_wide_multiyear = regional_coefficients_multiyear %>%
+  select(payer_ITL1name, sectionname_payer, sectionname_payee,
+         section_payer_short, section_payee_short, flow_type, coefficient, year) %>%
+  pivot_wider(
+    names_from = flow_type,
+    values_from = coefficient,
+    values_fill = 0
+  ) %>%
+  mutate(
+    total = internal + external,
+    regional_share = ifelse(total > 0, internal / total, NA)
+  )
+
+# Calculate payer locality (how locally each sector sources inputs) per region per year
+payer_locality_multiyear = coefficients_wide_multiyear %>%
+  filter(total > 0) %>%
+  group_by(payer_ITL1name, sectionname_payer, section_payer_short, year) %>%
+  summarise(
+    payer_locality = sum(internal, na.rm = TRUE) / sum(total, na.rm = TRUE),
+    .groups = 'drop'
+  )
+
+# Calculate payee locality (how locally each sector receives payments) per region per year
+payee_locality_multiyear = coefficients_wide_multiyear %>%
+  filter(total > 0) %>%
+  group_by(payer_ITL1name, sectionname_payee, section_payee_short, year) %>%
+  summarise(
+    payee_locality = sum(internal, na.rm = TRUE) / sum(total, na.rm = TRUE),
+    .groups = 'drop'
+  )
+
+# Join payer and payee locality by region, sector, and year
+sector_locality_multiyear = payer_locality_multiyear %>%
+  rename(section = section_payer_short) %>%
+  inner_join(
+    payee_locality_multiyear %>%
+      rename(section = section_payee_short),
+    by = c("payer_ITL1name", "section", "year")
+  )
+
+# Pivot to wide format for arrow plotting (start and end positions)
+sector_locality_arrows = sector_locality_multiyear %>%
+  mutate(timepoint = ifelse(year == min(year), "start", "end")) %>%
+  select(payer_ITL1name, section, timepoint, payer_locality, payee_locality) %>%
+  pivot_wider(
+    names_from = timepoint,
+    values_from = c(payer_locality, payee_locality)
+  ) %>%
+  # Calculate change direction for colouring
+
+  mutate(
+    payer_change = payer_locality_end - payer_locality_start,
+    payee_change = payee_locality_end - payee_locality_start,
+    # Compass direction based on change
+    compass = case_when(
+      payer_change > 0 & payee_change > 0 ~ "NE",  # More local on both
+      payer_change > 0 & payee_change < 0 ~ "SE",  # More local sourcing, less local payments
+      payer_change < 0 & payee_change > 0 ~ "NW",  # Less local sourcing, more local payments
+      payer_change < 0 & payee_change < 0 ~ "SW",  # Less local on both
+      TRUE ~ "NC"  # No change
+    )
+  )
+
+# Bounding box for all values across both time points
+arrows_bbox = list(
+  xmin = min(c(sector_locality_arrows$payer_locality_start,
+               sector_locality_arrows$payer_locality_end), na.rm = TRUE),
+  xmax = max(c(sector_locality_arrows$payer_locality_start,
+               sector_locality_arrows$payer_locality_end), na.rm = TRUE),
+  ymin = min(c(sector_locality_arrows$payee_locality_start,
+               sector_locality_arrows$payee_locality_end), na.rm = TRUE),
+  ymax = max(c(sector_locality_arrows$payee_locality_start,
+               sector_locality_arrows$payee_locality_end), na.rm = TRUE)
+)
+
+# Faceted arrow plot by region
+ggplot(sector_locality_arrows) +
+  # Background rectangle
+  annotate("rect",
+           xmin = arrows_bbox$xmin, xmax = arrows_bbox$xmax,
+           ymin = arrows_bbox$ymin, ymax = arrows_bbox$ymax,
+           fill = "grey90", alpha = 0.5, colour = "grey70", linetype = "dotted") +
+  # Reference lines
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", alpha = 0.3) +
+  geom_vline(xintercept = 0.5, alpha = 0.2) +
+  geom_hline(yintercept = 0.5, alpha = 0.2) +
+  # Arrows from start to end position
+  geom_segment(
+    aes(x = payer_locality_start, y = payee_locality_start,
+        xend = payer_locality_end, yend = payee_locality_end,
+        colour = compass),
+    arrow = arrow(length = unit(0.25, "cm"), type = "closed"),
+    linewidth = 0.6, alpha = 0.8
+  ) +
+  # Start points (smaller, fainter)
+  geom_point(
+    aes(x = payer_locality_start, y = payee_locality_start),
+    size = 0.5, colour = "grey40", alpha = 0.5
+  ) +
+  # End points (larger, coloured by direction)
+  geom_point(
+    aes(x = payer_locality_end, y = payee_locality_end, colour = compass),
+    size = 0.5
+  ) +
+  # Labels at end positions
+  ggrepel::geom_text_repel(
+    aes(x = payer_locality_end, y = payee_locality_end, label = section, colour = compass),
+    size = 2,
+    max.overlaps = 15,
+    segment.colour = "grey70",
+    segment.alpha = 0.5,
+    box.padding = unit(0.15, "lines"),
+    point.padding = unit(0.1, "lines"),
+    show.legend = FALSE
+  ) +
+  # Colour scale for compass directions
+  scale_colour_manual(
+    values = c("NE" = "#2ca02c",   # Green: more local on both
+               "SE" = "#ff7f0e",   # Orange: mixed
+               "NW" = "#1f77b4",   # Blue: mixed
+               "SW" = "#d62728",   # Red: less local on both
+               "NC" = "grey50"),
+    labels = c("NE" = "↗ More local (both)",
+               "SE" = "→ More sourcing, less payments",
+               "NW" = "↑ Less sourcing, more payments",
+               "SW" = "↙ Less local (both)",
+               "NC" = "No change"),
+    name = "Direction of change"
+  ) +
+  # Facet by region
+
+  facet_wrap(~payer_ITL1name, ncol = 4) +
+  scale_x_continuous(labels = scales::percent) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(
+    title = paste0("Change in Sector Locality: ", min(locality_years), " → ", max(locality_years)),
+    subtitle = "Arrows show direction of change; colour indicates whether becoming more or less locally embedded",
+    x = "Local share of inputs purchased",
+    y = "Local share of payments received",
+    caption = "Grey points = start position; coloured points = end position\nGreen (NE) = becoming more local; Red (SW) = becoming less local"
+  ) +
+  theme(
+    plot.caption = element_text(hjust = 0),
+    # strip.text = element_text(size = 7),
+    # axis.text = element_text(size = 6),
+    legend.position = "bottom",
+    legend.text = element_text(size = 7)
+  )
 
 
 

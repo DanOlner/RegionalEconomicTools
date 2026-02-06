@@ -1,0 +1,48 @@
+---
+title: "1st explore: UK industry to industry payments: ITL1 / SIC sections"
+author:
+  - name: "Dan Olner / Claude Code"
+format: 
+  html:
+    output-file: "industry_to_industry_payments_byregion_section2026.qmd"
+    fig-width: 8
+    fig-height: 8
+execute:
+  echo: false
+  message: false
+  warning: false
+fig-responsive: false
+collapse: false
+navbar: false
+sidebar: false
+---
+
+```{r setup}
+library(tidyverse)
+library(zoo)#for making smoothed moving averages
+library(RColorBrewer)
+library(kableExtra)
+library(patchwork)
+
+options(scipen = 999)
+
+source('../functions/misc_functions.R')
+
+theme_set(theme_light())
+
+i2i.yr = readRDS('../local/data/payments_itl2_sic2_yearly_w_sections.rds')
+
+
+```
+
+
+```{r}
+#| fig-width: 7
+
+both = readRDS('../local/data/ind2indbothplots.rds')
+
+both
+
+
+```
+
