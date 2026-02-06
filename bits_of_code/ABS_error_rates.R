@@ -406,7 +406,12 @@ itl1.cv.growth <- itl1.cv.linked %>%
     # Worst case low: this year's min vs last year's max
     # Worst case high: this year's max vs last year's min
     growth_bound_low = (gva_min95 / lag(gva_max95)) - 1,
-    growth_bound_high = (gva_max95 / lag(gva_min95)) - 1
+    growth_bound_high = (gva_max95 / lag(gva_min95)) - 1,
+    # Boolean: does CI exclude zero? (i.e. growth is distinguishable from no change)
+    # Less conservative: based on growth of bounds
+    excludes_zero = (growth_min95 > 0 & growth_max95 > 0) | (growth_min95 < 0 & growth_max95 < 0),
+    # Conservative: based on bounds on growth rate
+    excludes_zero_conservative = (growth_bound_low > 0) | (growth_bound_high < 0)
   ) %>%
   ungroup()
 
@@ -478,6 +483,107 @@ plot_sector_growth_with_bounds(itl1.cv.growth, "computer programming")
 # Compare with less conservative bounds
 # plot_sector_growth_with_bounds(itl1.cv.growth, "fabricated metal", use_conservative_bounds = FALSE)
 
+
+# DAN CODING: checks on some of the data above----
+
+# Save West Midlands computer prog as example
+write_csv(
+  itl1.cv.growth %>% 
+    filter(
+      qg('west mid', Region_name),
+      qg('computer prog', SIC07_description)
+      ),
+  'claude/wm_computerprog_itl1cv.csv')
+
+# For the 'excludes zero' in the year on year growth trends
+# Which sectors manage that the most over the years?
+itl1.cv.growth %>%
+  filter(!is.na())
+
+
+## Pairwise year comparison heatmaps----
+
+# Function to create pairwise year CI overlap matrix for a sector across regions
+# Shows which years are distinguishably different from which other years
+plot_pairwise_year_heatmap <- function(data, sector_pattern, region_pattern = NULL) {
+
+
+  # Filter to sector
+  sector_data <- data %>%
+    filter(grepl(sector_pattern, SIC07_description, ignore.case = TRUE))
+
+  if(!is.null(region_pattern)) {
+    sector_data <- sector_data %>%
+      filter(grepl(region_pattern, Region_name, ignore.case = TRUE))
+  }
+
+  if(nrow(sector_data) == 0) {
+    stop(paste("No data found for sector pattern:", sector_pattern))
+  }
+
+  sector_name <- unique(sector_data$SIC07_description)[1]
+
+  # For each region, create pairwise year comparisons
+  # Two years are "distinguishable" if their 95% CIs don't overlap
+  pairwise_results <- sector_data %>%
+    select(Region_name, year, value, gva_min95, gva_max95) %>%
+    # Self-join to get all year pairs
+    inner_join(
+      sector_data %>% select(Region_name, year2 = year, value2 = value,
+                             gva_min95_2 = gva_min95, gva_max95_2 = gva_max95),
+      by = "Region_name",
+      relationship = "many-to-many"
+    ) %>%
+    # Check if CIs overlap: overlap if max of mins < min of maxs
+    mutate(
+      ci_overlap = pmax(gva_min95, gva_min95_2) < pmin(gva_max95, gva_max95_2),
+      distinguishable = !ci_overlap,
+      # Also calculate the direction of difference
+      direction = case_when(
+        !distinguishable ~ "Not distinguishable",
+        value > value2 ~ "Year 1 higher",
+        value < value2 ~ "Year 1 lower",
+        TRUE ~ "Equal"
+      )
+    )
+
+  # Create heatmap - faceted by region
+  p <- ggplot(pairwise_results, aes(x = factor(year), y = factor(year2), fill = distinguishable)) +
+    geom_tile(colour = "white", linewidth = 0.3) +
+    scale_fill_manual(
+      values = c("FALSE" = "grey85", "TRUE" = "steelblue"),
+      labels = c("FALSE" = "CIs overlap", "TRUE" = "CIs don't overlap"),
+      name = ""
+    ) +
+    facet_wrap(~Region_name, ncol = 3) +
+    labs(
+      title = paste0("Pairwise year distinguishability: ", sector_name),
+      subtitle = "Blue = 95% confidence intervals do not overlap (years are distinguishable)",
+      x = "Year",
+      y = "Year",
+      caption = "Based on 95% CIs from ABS coefficient of variation"
+    ) +
+    theme_minimal() +
+    theme(
+      strip.text = element_text(face = "bold", size = 9),
+      plot.title = element_text(size = 11, face = "bold"),
+      plot.subtitle = element_text(size = 9, colour = "grey40"),
+      axis.text.x = element_text(angle = 45, hjust = 1, size = 7),
+      axis.text.y = element_text(size = 7),
+      legend.position = "bottom",
+      panel.grid = element_blank()
+    ) +
+    coord_fixed()
+
+  return(p)
+}
+
+# Plot pairwise heatmaps
+plot_pairwise_year_heatmap(itl1.cv.linked, "computer programming")
+plot_pairwise_year_heatmap(itl1.cv.linked, "fabricated metal")
+
+# Single region version
+plot_pairwise_year_heatmap(itl1.cv.linked, "computer programming", "west midlands")
 
 
 
