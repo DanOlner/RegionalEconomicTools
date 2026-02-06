@@ -332,7 +332,9 @@ write_csv(itl1.cv.linked,'data/itl1_cv_withestimatederrorratefromABS.csv')
 
 
 
-# CLAUDE CODE SECTION: Look at error rates----
+# CLAUDE CODE SECTION: 
+
+## Look at error rates----
 
 # Start with growth in some key sectors, shall we?
 # Let's pick on fabricate metal again
@@ -381,9 +383,12 @@ plot_sector_gva_with_errors <- function(data, sector_pattern, title_suffix = "")
 
 # Plot fabricated metal products
 plot_sector_gva_with_errors(itl1.cv.linked, "fabricated metal")
+plot_sector_gva_with_errors(itl1.cv.linked, "construction of buildings")
+plot_sector_gva_with_errors(itl1.cv.linked, "telecom")
+plot_sector_gva_with_errors(itl1.cv.linked, "computer programming")
 
 
-# Year-on-year growth rates with bounds----
+## Year-on-year growth rates with bounds----
 
 # Calculate YoY growth for central value and bounds
 # Option (a): growth of each series separately
@@ -438,9 +443,9 @@ plot_sector_growth_with_bounds <- function(data, sector_pattern, use_conservativ
     geom_ribbon(aes(ymin = ymin, ymax = ymax),
                 alpha = 0.3, fill = "steelblue") +
     geom_line(colour = "steelblue", linewidth = 0.8) +
-    geom_point(aes(colour = ymin > 0 | ymax < 0), size = 1.5) +
+    geom_point(aes(colour = ymin > 0 | ymax < 0), size = 2.5) +
     scale_colour_manual(
-      values = c("FALSE" = "steelblue", "TRUE" = "darkgreen"),
+      values = c("FALSE" = "steelblue", "TRUE" = "green"),
       labels = c("FALSE" = "Includes zero", "TRUE" = "Excludes zero"),
       name = "Growth CI"
     ) +
@@ -467,6 +472,8 @@ plot_sector_growth_with_bounds <- function(data, sector_pattern, use_conservativ
 
 # Plot YoY growth for fabricated metal products
 plot_sector_growth_with_bounds(itl1.cv.growth, "fabricated metal")
+plot_sector_growth_with_bounds(itl1.cv.growth, "construction of buildings")
+plot_sector_growth_with_bounds(itl1.cv.growth, "computer programming")
 
 # Compare with less conservative bounds
 # plot_sector_growth_with_bounds(itl1.cv.growth, "fabricated metal", use_conservative_bounds = FALSE)
