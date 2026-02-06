@@ -88,6 +88,9 @@ gva.2digit <- gva.2digit %>%
 # Tick
 # gva.2digit %>% filter(qg('yorkshire', Region_name)) %>% View
 
+# Save... 
+write_csv(gva.2digit,'data/regionalGVA/regionalGVA_currentprices_ITL1_SIC_2DIGIT_WIDE_2023.csv')
+
 # Add smoothed vals
 smoothband = 3
 
@@ -98,6 +101,70 @@ gva.2digit = gva.2digit %>%
       gva_movingav = rollapply(value,smoothband,mean,align='center',fill=NA)
     ) %>% 
     ungroup()
+
+
+
+
+
+# REPEAT FOR CHAINED VOLUME
+#Table 1b is CV with ITL1 zones
+gva.2digit <- readxl::read_excel(path = p1f,range = "Table 1b!A2:AD1730") 
+
+#More process-able names with no spaces
+names(gva.2digit) <- gsub(x = names(gva.2digit), pattern = ' ', replacement = '_')
+
+#WARNING: ONLY CORRECT LIST TO REMOVE FOR ITL1 (only one change from ITL2 though, E (36-39))
+#SICs to remove to leave just unique SIC values
+#Still works for 2025 as well as 2024 to leave correct highest res SICs
+SICremoves = c(
+  'Total',
+  'A-E',
+  'A (1-3)',
+  'B (5-9)',
+  'C (10-33)',
+  'CA (10-12)',
+  'CB (13-15)',
+  'CC (16-18)',
+  'CG (22-23)',
+  'CH (24-25)',
+  'CL (29-30)',
+  'CM (31-33)',
+  'E (36-39)',
+  'F (41-43)',
+  'G-T',
+  'G (45-47)',
+  'H (49-53)',
+  'I (55-56)',
+  'J (58-63)',
+  'K (64-66)',
+  'L (68)',#real estate activities - leaves in "Real estate activities, excluding imputed rental" & "Owner-occupiers' imputed rental" as separate categories
+  'M (69-75)',
+  'N (77-82)',
+  'Q (86-88)',
+  'R (90-93)',
+  'S (94-96)'
+)
+
+gva.2digit <- gva.2digit %>% 
+  filter(
+    !SIC07_code %in% SICremoves,
+    !qg('united kingdom|england|extra',Region_name)
+  ) 
+
+# Looking OK
+unique(gva.2digit$SIC07_code)
+unique(gva.2digit$Region_name)
+
+# Enlongen
+gva.2digit <- gva.2digit %>%  
+  pivot_longer(`1998`:names(gva.2digit)[length(names(gva.2digit))], names_to = 'year', values_to = 'value') %>% #get most recent year
+  mutate(year = as.numeric(year))
+
+# Tick
+# gva.2digit %>% filter(qg('yorkshire', Region_name)) %>% View
+
+# Save... 
+write_csv(gva.2digit,'data/regionalGVA/regionalGVA_chainedvolume_ITL1_SIC_2DIGIT_WIDE_2023.csv')
 
 
 

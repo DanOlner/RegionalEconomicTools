@@ -1,5 +1,5 @@
-# See ind_to_indpayments_region_by_SIC... for earlier code wrangling into this more manageable shape
-# Here, let's do some IO digging
+# See ind_to_indpayments_region_by_SIC... 
+# This doc is mostly Claude-Code written
 library(tidyverse)
 library(patchwork)
 source('functions/misc_functions.R')
