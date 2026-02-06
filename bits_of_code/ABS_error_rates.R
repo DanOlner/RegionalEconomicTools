@@ -501,6 +501,23 @@ itl1.cv.growth %>%
   filter(!is.na())
 
 
+# Let's also find the slopes so we can look at fastest growing/shrinkaging sectors overall
+cv_slopes = get_slope_and_se_safely(
+  itl1.cv.linked,
+  Region_name,SIC07_description, 
+  y = log(value), 
+  x = year
+)
+
+# Find sector slope averages...
+meansectorslopes = cv_slopes %>% 
+  group_by(SIC07_description) %>% 
+  summarise(meanslope = mean(slope)) %>% 
+  arrange(meanslope)
+
+
+# BACK TO CLAUDE----  
+
 ## Pairwise year comparison heatmaps----
 
 # Function to create pairwise year CI overlap matrix for a sector across regions
@@ -584,6 +601,92 @@ plot_pairwise_year_heatmap(itl1.cv.linked, "fabricated metal")
 
 # Single region version
 plot_pairwise_year_heatmap(itl1.cv.linked, "computer programming", "west midlands")
+
+
+# Version with direction: shows which year is higher when CIs don't overlap
+plot_pairwise_year_heatmap_direction <- function(data, sector_pattern, region_pattern = NULL) {
+
+  # Filter to sector
+  sector_data <- data %>%
+    filter(grepl(sector_pattern, SIC07_description, ignore.case = TRUE))
+
+  if(!is.null(region_pattern)) {
+    sector_data <- sector_data %>%
+      filter(grepl(region_pattern, Region_name, ignore.case = TRUE))
+  }
+
+  if(nrow(sector_data) == 0) {
+    stop(paste("No data found for sector pattern:", sector_pattern))
+  }
+
+  sector_name <- unique(sector_data$SIC07_description)[1]
+
+  # For each region, create pairwise year comparisons
+  pairwise_results <- sector_data %>%
+    select(Region_name, year, value, gva_min95, gva_max95) %>%
+    inner_join(
+      sector_data %>% select(Region_name, year2 = year, value2 = value,
+                             gva_min95_2 = gva_min95, gva_max95_2 = gva_max95),
+      by = "Region_name",
+      relationship = "many-to-many"
+    ) %>%
+    mutate(
+      # Check if either year has missing CI data
+      missing_data = is.na(gva_min95) | is.na(gva_max95) | is.na(gva_min95_2) | is.na(gva_max95_2),
+      ci_overlap = pmax(gva_min95, gva_min95_2) < pmin(gva_max95, gva_max95_2),
+      # Four-way comparison: no data, overlap, row year higher, row year lower
+      comparison = case_when(
+        missing_data ~ "No CI data",
+        ci_overlap ~ "CIs overlap",
+        value > value2 ~ "Row year higher",
+        value < value2 ~ "Row year lower",
+        TRUE ~ "CIs overlap"  # Equal case (unlikely)
+      )
+    )
+
+  # Create heatmap with four colours
+  p <- ggplot(pairwise_results, aes(x = factor(year), y = factor(year2), fill = comparison)) +
+    geom_tile(colour = "white", linewidth = 0.3) +
+    # Add crosses for missing data cells
+    geom_text(data = pairwise_results %>% filter(comparison == "No CI data"),
+              aes(label = "×"), colour = "grey50", size = 3) +
+    scale_fill_manual(
+      values = c("No CI data" = "grey95",
+                 "CIs overlap" = "grey75",
+                 "Row year higher" = "steelblue",
+                 "Row year lower" = "coral"),
+      name = ""
+    ) +
+    facet_wrap(~Region_name, ncol = 3) +
+    labs(
+      title = paste0("Pairwise year comparison: ", sector_name),
+      subtitle = "Blue = row year higher, Coral = row year lower, Grey = indistinguishable, × = no CI data",
+      x = "Year (column)",
+      y = "Year (row)",
+      caption = "Colour shows direction when 95% CIs don't overlap"
+    ) +
+    theme_minimal() +
+    theme(
+      strip.text = element_text(face = "bold", size = 9),
+      plot.title = element_text(size = 11, face = "bold"),
+      plot.subtitle = element_text(size = 9, colour = "grey40"),
+      axis.text.x = element_text(angle = 45, hjust = 1, size = 7),
+      axis.text.y = element_text(size = 7),
+      legend.position = "bottom",
+      panel.grid = element_blank()
+    ) +
+    coord_fixed()
+
+  return(p)
+}
+
+# Plot with direction
+plot_pairwise_year_heatmap_direction(itl1.cv.linked, "computer programming")
+plot_pairwise_year_heatmap_direction(itl1.cv.linked, "fabricated metal")
+plot_pairwise_year_heatmap_direction(itl1.cv.linked, "land transport")#Identified with OLS slopes as shrinking on av
+
+# Single region
+plot_pairwise_year_heatmap_direction(itl1.cv.linked, "computer programming", "west midlands")
 
 
 
