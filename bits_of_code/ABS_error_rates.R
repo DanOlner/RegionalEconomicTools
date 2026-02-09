@@ -427,13 +427,18 @@ itl1.cv.growth <- itl1.cv.linked %>%
 
 
 # Function to plot YoY growth rates with uncertainty bounds across regions
-plot_sector_growth_with_bounds <- function(data, sector_pattern, use_conservative_bounds = TRUE) {
+plot_sector_growth_with_bounds <- function(data, sector_pattern, use_conservative_bounds = TRUE, region_pattern = NULL) {
 
   # Filter to sector
 
   sector_data <- data %>%
     filter(grepl(sector_pattern, SIC07_description, ignore.case = TRUE)) %>%
     filter(!is.na(growth))  # Remove first year (no growth calc possible)
+
+  if(!is.null(region_pattern)) {
+    sector_data <- sector_data %>%
+      filter(grepl(region_pattern, Region_name, ignore.case = TRUE))
+  }
 
   if(nrow(sector_data) == 0) {
     stop(paste("No data found for sector pattern:", sector_pattern))
@@ -452,7 +457,12 @@ plot_sector_growth_with_bounds <- function(data, sector_pattern, use_conservativ
     bounds_label <- "Growth of 95% CI bounds"
   }
 
-  # Plot with facets by region
+  # Build title — include region name if single region
+  region_label <- if(!is.null(region_pattern)) unique(sector_data$Region_name)[1] else NULL
+  title_text <- paste0("YoY GVA growth: ", sector_name,
+                       if(!is.null(region_label)) paste0(" — ", region_label) else "")
+
+  # Plot
   p <- ggplot(sector_data, aes(x = year, y = growth)) +
     geom_hline(yintercept = 0, linetype = "dashed", colour = "grey50") +
     geom_ribbon(aes(ymin = ymin, ymax = ymax),
@@ -465,9 +475,8 @@ plot_sector_growth_with_bounds <- function(data, sector_pattern, use_conservativ
       name = "Growth CI"
     ) +
     scale_y_continuous(labels = scales::percent_format()) +
-    facet_wrap(~Region_name, scales = "free_y", ncol = 3) +
     labs(
-      title = paste0("Year-on-year GVA growth: ", sector_name),
+      title = title_text,
       subtitle = bounds_label,
       x = "Year",
       y = "Growth rate",
@@ -481,6 +490,11 @@ plot_sector_growth_with_bounds <- function(data, sector_pattern, use_conservativ
       axis.text.x = element_text(angle = 45, hjust = 1, size = 7),
       legend.position = "bottom"
     )
+
+  # Only facet if showing multiple regions
+  if(is.null(region_pattern)) {
+    p <- p + facet_wrap(~Region_name, scales = "free_y", ncol = 3)
+  }
 
   return(p)
 }
@@ -701,6 +715,34 @@ plot_pairwise_year_heatmap_direction(itl1.cv.linked, "land transport")#Identifie
 plot_pairwise_year_heatmap_direction(itl1.cv.linked, "computer programming", "west midlands")
 
 
+## Combination time series plot and plot_pairwise_year_heatmap_direction----
+
+# Combine YoY growth time series with pairwise heatmap for a single region/sector
+plot_growth_and_heatmap <- function(growth_data, level_data, sector_pattern, region_pattern,
+                                    use_conservative_bounds = TRUE) {
+
+  p_growth <- plot_sector_growth_with_bounds(
+    growth_data, sector_pattern,
+    use_conservative_bounds = use_conservative_bounds,
+    region_pattern = region_pattern
+  )
+
+  p_heatmap <- plot_pairwise_year_heatmap_direction(
+    level_data, sector_pattern,
+    region_pattern = region_pattern
+  )
+
+  # Stack: time series on top, heatmap below
+  combined <- p_growth / p_heatmap +
+    plot_layout(heights = c(1, 1.2))
+
+  return(combined)
+}
+
+# Examples
+plot_growth_and_heatmap(itl1.cv.growth, itl1.cv.linked, "computer programming", "west midlands")
+plot_growth_and_heatmap(itl1.cv.growth, itl1.cv.linked, "fabricated metal", "yorkshire")
+plot_growth_and_heatmap(itl1.cv.growth, itl1.cv.linked, "land transport", "london")
 
 
 # DAN CODE----
