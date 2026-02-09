@@ -257,6 +257,8 @@
       preloadTimeSeriesImages(file);
     }
     select.addEventListener("change", updateGridImage);
+    // Default to "Manufacture of fabricated metal products"
+    select.value = "Manufactureoffabricatedmetalproducts";
     updateGridImage();
 
     // --- Tweak these to scale the entire hover grid around its centre ---
@@ -302,8 +304,8 @@
     // Vertically align near the cursor but clamped to viewport.
     function positionPopup(e) {
       const popupW = tsPopup.offsetWidth || 400;
-      const popupH = tsPopup.offsetHeight || 300;
-      const margin = 30;  // gap between cursor and popup
+      const popupH = tsPopup.offsetHeight || 600;
+      const margin = 150;  // gap between cursor and popup
 
       let x = e.clientX + margin;
       let y = e.clientY - popupH / 2;
