@@ -15,12 +15,44 @@
     }
     h1 { font-size: 1.3rem; margin-bottom: 0.2rem; }
     .subtitle { color: #666; font-size: 0.9rem; margin-bottom: 1rem; }
-    select {
-      font-size: 1rem;
-      padding: 6px 10px;
+    .combo-box {
+      position: relative;
       width: 100%;
       max-width: 600px;
       margin-bottom: 1rem;
+    }
+    .combo-box input {
+      font-size: 1rem;
+      padding: 6px 10px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .combo-box ul {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      max-height: 260px;
+      overflow-y: auto;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-top: none;
+      z-index: 500;
+      display: none;
+    }
+    .combo-box ul.open { display: block; }
+    .combo-box li {
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+    .combo-box li:hover,
+    .combo-box li.active {
+      background: #2980b9;
+      color: #fff;
     }
     .grid-container {
       position: relative;
@@ -90,8 +122,11 @@
   <h1>Pairwise Year Comparison Heatmaps</h1>
   <p class="subtitle">Hover over a region facet to view its GVA time series with error bars.</p>
 
-  <label for="sector-select"><strong>Select sector:</strong></label>
-  <select id="sector-select"></select>
+  <label for="sector-input"><strong>Select sector:</strong></label>
+  <div class="combo-box" id="combo-box">
+    <input type="text" id="sector-input" autocomplete="off" placeholder="Type to filter sectors...">
+    <ul id="sector-list"></ul>
+  </div>
 
   <p class="hover-hint" id="hover-hint">Loading panel coordinates...</p>
 
@@ -196,7 +231,9 @@
     const gridImgBase = "../miscimages/chainedvol_growtherror_plots/pairwise_plotsforeachsector/";
     const tsImgBase   = "../miscimages/chainedvol_growtherror_plots/timeseriesplot_foreachITL1_sectorcombo/";
 
-    const select        = document.getElementById("sector-select");
+    const sectorInput   = document.getElementById("sector-input");
+    const sectorList    = document.getElementById("sector-list");
+    const comboBox      = document.getElementById("combo-box");
     const gridImg       = document.getElementById("grid-img");
     const overlay       = document.getElementById("overlay");
     const regionLabel   = document.getElementById("region-label");
@@ -209,14 +246,69 @@
     let panels = [];
     let nativeWidth = 0;
     let nativeHeight = 0;
-    let currentHitRegion = null;  // track to avoid redundant image swaps
+    let currentHitRegion = null;
+    let currentSectorFile = "";
+    let activeIdx = -1;  // keyboard navigation index
 
-    // Populate dropdown
-    sectors.forEach(([label, file]) => {
-      const opt = document.createElement("option");
-      opt.value = file;
-      opt.textContent = label;
-      select.appendChild(opt);
+    // Build the autocomplete list
+    function renderList(filter) {
+      sectorList.innerHTML = "";
+      activeIdx = -1;
+      const q = (filter || "").toLowerCase();
+      const matches = sectors.filter(([label]) => label.toLowerCase().includes(q));
+      if (matches.length === 0) {
+        sectorList.classList.remove("open");
+        return;
+      }
+      matches.forEach(([label, file]) => {
+        const li = document.createElement("li");
+        li.textContent = label;
+        li.dataset.file = file;
+        li.addEventListener("mousedown", (e) => {
+          e.preventDefault();  // keep focus on input
+          selectSector(label, file);
+        });
+        sectorList.appendChild(li);
+      });
+      sectorList.classList.add("open");
+    }
+
+    function selectSector(label, file) {
+      sectorInput.value = label;
+      currentSectorFile = file;
+      sectorList.classList.remove("open");
+      updateGridImage();
+    }
+
+    sectorInput.addEventListener("focus", () => renderList(sectorInput.value));
+    sectorInput.addEventListener("input", () => renderList(sectorInput.value));
+    sectorInput.addEventListener("blur", () => {
+      // Small delay so mousedown on li fires first
+      setTimeout(() => sectorList.classList.remove("open"), 150);
+    });
+
+    // Keyboard navigation
+    sectorInput.addEventListener("keydown", (e) => {
+      const items = sectorList.querySelectorAll("li");
+      if (!items.length) return;
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        activeIdx = Math.min(activeIdx + 1, items.length - 1);
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        activeIdx = Math.max(activeIdx - 1, 0);
+      } else if (e.key === "Enter" && activeIdx >= 0) {
+        e.preventDefault();
+        items[activeIdx].dispatchEvent(new MouseEvent("mousedown"));
+        return;
+      } else if (e.key === "Escape") {
+        sectorList.classList.remove("open");
+        return;
+      } else {
+        return;
+      }
+      items.forEach((li, i) => li.classList.toggle("active", i === activeIdx));
+      items[activeIdx].scrollIntoView({ block: "nearest" });
     });
 
     // Load panel coordinates
@@ -249,17 +341,14 @@
     }
 
     function updateGridImage() {
-      const file = select.value;
-      gridImg.src = gridImgBase + file + ".png";
+      if (!currentSectorFile) return;
+      gridImg.src = gridImgBase + currentSectorFile + ".png";
       tsPopup.style.display = "none";
       currentHitRegion = null;
-      // Preload time series images for this sector
-      preloadTimeSeriesImages(file);
+      preloadTimeSeriesImages(currentSectorFile);
     }
-    select.addEventListener("change", updateGridImage);
     // Default to "Manufacture of fabricated metal products"
-    select.value = "Manufactureoffabricatedmetalproducts";
-    updateGridImage();
+    selectSector("Manufacture of fabricated metal products", "Manufactureoffabricatedmetalproducts");
 
     // --- Tweak these to scale the entire hover grid around its centre ---
     // 1 = current coords as-is. <1 contracts all panels inward, >1 expands outward.
@@ -350,10 +439,8 @@
         // Update time series popup (only swap image if region changed)
         if (currentHitRegion !== hit.region_safe) {
           currentHitRegion = hit.region_safe;
-          const sectorFile = select.value;
-          const sectorLabel = select.options[select.selectedIndex].text;
-          tsPopupImg.src = tsImgBase + sectorFile + "_" + hit.region_safe + ".png";
-          tsPopupHeader.textContent = sectorLabel + " — " + hit.region;
+          tsPopupImg.src = tsImgBase + currentSectorFile + "_" + hit.region_safe + ".png";
+          tsPopupHeader.textContent = sectorInput.value + " — " + hit.region;
         }
         tsPopup.style.display = "block";
         positionPopup(e);
