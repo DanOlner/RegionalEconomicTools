@@ -1,11 +1,16 @@
 # Playing around with standard errors for the ABS component of regional GVA
 # How much are places actually separarable for sectors?
 library(tidyverse)
+library(zoo)
 
 source('functions/misc_functions.R')
 source('functions/data_process_functions.R')
 
-# Get data (dan code)----
+options(scipen = 999)
+
+# DAN CODE----
+
+## Get data----
 
 # From here for regional, including quality measures
 # https://www.ons.gov.uk/businessindustryandtrade/business/businessservices/bulletins/nonfinancialbusinesseconomyukandregionalannualbusinesssurvey/2023results?utm_source=chatgpt.com
@@ -88,7 +93,7 @@ names(qual)[6:13] = c(
 
 
 
-# Find error rates across regions and sectors----
+## Find error rates across regions and sectors----
 
 # What sectors have we got? Let's just keep 2 digit
 # Use this to keep 2 digit without too much faff
@@ -242,13 +247,13 @@ ggplot(
 
 
 
-# Process data for applying those error rates to ITL1 CP and CV values (dan code)----
+## Process data for applying those error rates to ITL1 CP and CV values----
 
 # Outputted these to CSV in yorkshire_n_humber_sectors_dataprep.R
 itl1.cp = read_csv('data/regionalGVA/regionalGVA_currentprices_ITL1_SIC_2DIGIT_WIDE_2023.csv')
 itl1.cv = read_csv('data/regionalGVA/regionalGVA_chainedvolume_ITL1_SIC_2DIGIT_WIDE_2023.csv')
 
-# Check sector matcch. Will have to make numeric, not matching digits
+# Check sector match. Will have to make numeric, not matching digits
 # Quick other checks
 abs_gva %>% select(SIC,Description) %>% distinct() %>% View
 itl1.cp %>% select(SIC07_code,SIC07_description) %>% distinct() %>% View
@@ -314,6 +319,9 @@ itl1.cp.linked = itl1.cp %>%
     gva_max95 = value + (SE * 1.96)
   )
 
+# Save...
+write_csv(itl1.cp.linked,'data/itl1_cp_withestimatederrorratefromABS.csv')
+
 itl1.cv.linked = itl1.cv %>% 
   inner_join(
     abs_gva.shorterSIClist,
@@ -332,7 +340,9 @@ write_csv(itl1.cv.linked,'data/itl1_cv_withestimatederrorratefromABS.csv')
 
 
 
-# CLAUDE CODE SECTION: 
+
+
+# CLAUDE CODE SECTION:----
 
 ## Look at error rates----
 
@@ -689,6 +699,342 @@ plot_pairwise_year_heatmap_direction(itl1.cv.linked, "land transport")#Identifie
 
 # Single region
 plot_pairwise_year_heatmap_direction(itl1.cv.linked, "computer programming", "west midlands")
+
+
+
+
+# DAN CODE----
+
+## How much does the introduction of error rates change LQs at ITL1 level?----
+itl1.cp.linked = read_csv('data/itl1_cp_withestimatederrorratefromABS.csv')
+
+# Repeat LQ-finding code for central estimate and upper/lower bounds then re-combine
+# Let's use the average of the most recent three years
+itl1.cp.smoothed = itl1.cp.linked %>% 
+  group_by(Region_name,SIC07_description) %>%
+  mutate(
+    across(c(value,gva_min95,gva_max95), ~rollapply(.,3,mean,align='center',fill=NA), .names = "{col}_3yr_av")
+  ) %>%
+  ungroup() 
+  # filter(!is.na(value_3yr_av)) #Keep only smoothed data years
+
+
+# Find LQs for the central estimate and 95% bounds
+itl1.cp.centralestLQ = itl1.cp.smoothed %>% 
+  group_split(year) %>%
+  map(add_location_quotient_and_proportions,
+      regionvar = Region_name,
+      lq_var = SIC07_description,
+      valuevar = value) %>%
+  bind_rows() 
+
+itl1.cp.min = itl1.cp.smoothed %>% 
+  group_split(year) %>%
+  map(add_location_quotient_and_proportions,
+      regionvar = Region_name,
+      lq_var = SIC07_description,
+      valuevar = gva_min95) %>%
+  bind_rows() 
+
+itl1.cp.max = itl1.cp.smoothed %>% 
+  group_split(year) %>%
+  map(add_location_quotient_and_proportions,
+      regionvar = Region_name,
+      lq_var = SIC07_description,
+      valuevar = gva_max95) %>%
+  bind_rows() 
+
+
+# No point trying to keep all the 3 different sets of values here...
+itl1.cp.3yrLQs = itl1.cp.centralestLQ %>%
+  select(ITL_code,Region_name,SIC07_description,year,LQ_centralestimate = LQ) %>% 
+  left_join(
+    itl1.cp.min %>% select(ITL_code,SIC07_description,year,LQ_min95 = LQ),
+    by = c('ITL_code','SIC07_description','year')
+  ) %>% 
+  left_join(
+    itl1.cp.max %>% select(ITL_code,SIC07_description,year,LQ_max95 = LQ),
+    by = c('ITL_code','SIC07_description','year')
+  )
+  
+
+# Let's look at some sectors/places...
+ggplot(
+  itl1.cp.3yrLQs %>% filter(qg('fabricated',SIC07_description), year == max(year)),
+  aes(y = fct_reorder(Region_name,LQ_centralestimate), x = LQ_centralestimate)
+) +
+  geom_point() +
+  geom_errorbar(aes(xmin = LQ_min95, xmax = LQ_max95), width = 0.3)
+
+
+
+# No, this is wrong. For LQs, it's tricky: 
+# I was trying to find LQs separately for central, min and max but I realise that actually doesn't make sense (having seen the batty CIs) - they won't sum correctly, will they? Think this through a bit.
+# - The central GVA estimate gets summed across all places, and against other sector sizes too both regionally and nationally. So the variation in the sizes of those is going to wamp out totals isn't it? Though I'm struggling a bit to visualise how.
+# - Possibly I should be **holding all other values constant**, not using mins and maxes for everything
+
+# Or more likely, using the CIs values to simulate what the values could be. That's probably a better idea.
+# Let's give Claude a go at that...
+
+
+# BACK TO CLAUDE----
+
+## Monte Carlo simulation of LQs with uncertainty ----
+
+# APPROACH:
+# The naive method (computing LQs separately on central, min95, max95 values) produces
+# nonsensical results because LQs are ratios of sums — when you set ALL sectors to their
+# min or max simultaneously, the denominators (regional total, national total) shift in
+# unrealistic ways that distort the proportions.
+#
+# Instead, we use Monte Carlo simulation:
+# 1. For each iteration, draw a plausible GVA value for every sector/region/year combo
+#    from N(value, SE), using a log-normal distribution to avoid negative draws.
+# 2. Where SE is missing (NA), hold the value fixed at the central estimate.
+# 3. Run the existing add_location_quotient_and_proportions function on each simulated dataset.
+# 4. Collect the LQ from each iteration and summarise across iterations
+#    (median, 2.5th/97.5th percentiles) to get simulated CIs on the LQ.
+#
+# This correctly propagates uncertainty through the sums that LQs depend on:
+# in any single draw, some sectors are above their mean, some below, producing
+# realistic variation in totals rather than the extreme all-high or all-low scenario.
+#
+# Log-normal note: we parameterise so that the mean of the log-normal equals the
+# observed GVA value and the SD on the log scale corresponds to the observed SE.
+# This prevents negative draws which are an issue for small sectors with large SEs.
+
+# Reload data (in case running from here)
+itl1.cp.linked = read_csv('data/itl1_cp_withestimatederrorratefromABS.csv')
+
+set.seed(42)
+n_sims <- 500
+
+# Pre-compute log-normal parameters for each row
+# For log-normal: if we want mean = value and sd = SE,
+# then on the log scale: sigma^2 = log(1 + (SE/value)^2), mu = log(value) - sigma^2/2
+itl1.cp.sim_params <- itl1.cp.linked %>%
+  mutate(
+    has_se = !is.na(SE) & SE > 0 & value > 0,
+    # Log-normal parameters (only meaningful where has_se is TRUE)
+    lnorm_sigma2 = ifelse(has_se, log(1 + (SE / value)^2), NA),
+    lnorm_sigma = ifelse(has_se, sqrt(lnorm_sigma2), NA),
+    lnorm_mu = ifelse(has_se, log(value) - lnorm_sigma2 / 2, NA)
+  )
+
+# Run simulations — for each iteration, draw GVA values then compute LQs per year
+# Store results in a list for efficiency
+sim_LQs <- vector("list", n_sims)
+
+for(i in 1:n_sims) {
+
+  if(i %% 50 == 0) cat("Simulation", i, "of", n_sims, "\n")
+
+  # Draw simulated GVA values
+  sim_data <- itl1.cp.sim_params %>%
+    mutate(
+      sim_value = ifelse(
+        has_se,
+        rlnorm(n(), meanlog = lnorm_mu, sdlog = lnorm_sigma),
+        value  # No SE available: hold at central estimate
+      )
+    )
+
+  # Compute LQs for each year using the existing function
+  sim_LQ_result <- sim_data %>%
+    group_split(year) %>%
+    map(add_location_quotient_and_proportions,
+        regionvar = Region_name,
+        lq_var = SIC07_description,
+        valuevar = sim_value) %>%
+    bind_rows()
+
+  # Store just the identifying columns and the LQ
+  sim_LQs[[i]] <- sim_LQ_result %>%
+    select(ITL_code, Region_name, SIC07_description, year, LQ) %>%
+    mutate(sim_id = i)
+}
+
+# Combine all simulations
+all_sim_LQs <- bind_rows(sim_LQs)
+
+# Summarise: median and 95% interval across simulations
+LQ_sim_summary <- all_sim_LQs %>%
+  group_by(ITL_code, Region_name, SIC07_description, year) %>%
+  summarise(
+    LQ_median = median(LQ, na.rm = TRUE),
+    LQ_p025 = quantile(LQ, 0.025, na.rm = TRUE),
+    LQ_p975 = quantile(LQ, 0.975, na.rm = TRUE),
+    LQ_sd = sd(LQ, na.rm = TRUE),
+    .groups = 'drop'
+  )
+
+# Also compute the central-estimate LQs for comparison
+LQ_central <- itl1.cp.linked %>%
+  group_split(year) %>%
+  map(add_location_quotient_and_proportions,
+      regionvar = Region_name,
+      lq_var = SIC07_description,
+      valuevar = value) %>%
+  bind_rows() %>%
+  select(ITL_code, Region_name, SIC07_description, year, LQ_central = LQ)
+
+# Merge central and simulated
+LQ_with_sim_CIs <- LQ_central %>%
+  left_join(LQ_sim_summary, by = c('ITL_code', 'Region_name', 'SIC07_description', 'year'))
+
+
+## Visualise simulated LQ uncertainty ----
+
+# Pick a year and sector to inspect
+plot_simulated_LQ <- function(data, sector_pattern, plot_year = NULL) {
+
+  sector_data <- data %>%
+    filter(grepl(sector_pattern, SIC07_description, ignore.case = TRUE))
+
+  if(is.null(plot_year)) plot_year <- max(sector_data$year)
+
+  sector_data <- sector_data %>% filter(year == plot_year)
+  sector_name <- unique(sector_data$SIC07_description)[1]
+
+  ggplot(sector_data, aes(y = fct_reorder(Region_name, LQ_central), x = LQ_central)) +
+    geom_point(size = 2) +
+    geom_errorbarh(aes(xmin = LQ_p025, xmax = LQ_p975), height = 0.3) +
+    geom_vline(xintercept = 1, linetype = 'dashed', colour = 'blue', alpha = 0.5) +
+    labs(
+      title = paste0("Location Quotient with simulated 95% CI: ", sector_name),
+      subtitle = paste0("Year: ", plot_year, " | ", n_sims, " Monte Carlo draws using log-normal on GVA"),
+      x = "Location Quotient",
+      y = "",
+      caption = "Error bars: 2.5th-97.5th percentile from simulation. Dashed line = LQ of 1 (national average)."
+    ) +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(size = 11, face = "bold"),
+      plot.subtitle = element_text(size = 9, colour = "grey40")
+    )
+}
+
+# Example plots
+plot_simulated_LQ(LQ_with_sim_CIs, "fabricated metal")
+plot_simulated_LQ(LQ_with_sim_CIs, "computer programming")
+plot_simulated_LQ(LQ_with_sim_CIs, "construction of buildings")
+plot_simulated_LQ(LQ_with_sim_CIs, "pharmaceutical")
+
+
+# Dancode: Save all sectors...
+map(unique(itl1.cp$SIC07_description), 
+    ~{
+      ggsave(
+        filename = paste0('local/outputs/LQ_errorbars_SIC2s/',gsub('[[:punct:]]| ','',.),'.png'),
+        plot = plot_simulated_LQ(LQ_with_sim_CIs, .),width = 10, height = 10
+    })
+
+
+
+
+
+# Time series version: LQ over time for a single region/sector with simulated CIs
+plot_simulated_LQ_timeseries <- function(data, sector_pattern, region_pattern) {
+
+  plot_data <- data %>%
+    filter(
+      grepl(sector_pattern, SIC07_description, ignore.case = TRUE),
+      grepl(region_pattern, Region_name, ignore.case = TRUE)
+    )
+
+  sector_name <- unique(plot_data$SIC07_description)[1]
+  region_name <- unique(plot_data$Region_name)[1]
+
+  ggplot(plot_data, aes(x = year, y = LQ_central)) +
+    geom_ribbon(aes(ymin = LQ_p025, ymax = LQ_p975), alpha = 0.3, fill = "steelblue") +
+    geom_line(colour = "steelblue", linewidth = 0.8) +
+    geom_point(colour = "steelblue", size = 1.5) +
+    geom_hline(yintercept = 1, linetype = 'dashed', colour = 'blue', alpha = 0.5) +
+    labs(
+      title = paste0("LQ over time: ", sector_name),
+      subtitle = paste0(region_name, " | Shaded = simulated 95% CI from ", n_sims, " MC draws"),
+      x = "Year",
+      y = "Location Quotient",
+      caption = "Dashed line = LQ of 1 (national average). Log-normal draws on GVA with ABS standard errors."
+    ) +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(size = 11, face = "bold"),
+      plot.subtitle = element_text(size = 9, colour = "grey40")
+    )
+}
+
+# Example time series
+plot_simulated_LQ_timeseries(LQ_with_sim_CIs, "fabricated metal", "yorkshire")
+plot_simulated_LQ_timeseries(LQ_with_sim_CIs, "pharmaceutical", "north east")
+plot_simulated_LQ_timeseries(LQ_with_sim_CIs, "computer programming", "west midlands")
+
+
+# Faceted version: all regions for one sector over time
+plot_simulated_LQ_allregions <- function(data, sector_pattern) {
+
+  plot_data <- data %>%
+    filter(grepl(sector_pattern, SIC07_description, ignore.case = TRUE))
+
+  sector_name <- unique(plot_data$SIC07_description)[1]
+
+  ggplot(plot_data, aes(x = year, y = LQ_central)) +
+    geom_ribbon(aes(ymin = LQ_p025, ymax = LQ_p975), alpha = 0.3, fill = "steelblue") +
+    geom_line(colour = "steelblue", linewidth = 0.8) +
+    geom_point(colour = "steelblue", size = 1) +
+    geom_hline(yintercept = 1, linetype = 'dashed', colour = 'blue', alpha = 0.5) +
+    facet_wrap(~Region_name, ncol = 3) +
+    labs(
+      title = paste0("LQ over time with simulated 95% CI: ", sector_name),
+      subtitle = paste0(n_sims, " Monte Carlo draws using log-normal on GVA with ABS standard errors"),
+      x = "Year",
+      y = "Location Quotient"
+    ) +
+    theme_minimal() +
+    theme(
+      strip.text = element_text(face = "bold", size = 9),
+      plot.title = element_text(size = 11, face = "bold"),
+      plot.subtitle = element_text(size = 9, colour = "grey40"),
+      axis.text.x = element_text(angle = 45, hjust = 1, size = 7)
+    )
+}
+
+plot_simulated_LQ_allregions(LQ_with_sim_CIs, "fabricated metal")
+plot_simulated_LQ_allregions(LQ_with_sim_CIs, "computer programming")
+plot_simulated_LQ_allregions(LQ_with_sim_CIs, "pharmaceutical")
+
+
+
+# DAN CHECKS ON THAT CLAUDE OUTPUT----
+
+## Checking the central LQ values look correct----
+
+# Already calculated that
+# And yes, they're all looking fine
+itl1.cp.centralestLQ %>% 
+  # filter(qg('computer prog',SIC07_description), year == max(year)) %>% 
+  filter(qg('pharmaceutical',SIC07_description), year == max(year)) %>% 
+  # filter(qg('fabricated',SIC07_description), year == max(year)) %>% 
+  arrange(-LQ) %>% 
+  select(Region_name,LQ)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
