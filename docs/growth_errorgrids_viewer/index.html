@@ -256,9 +256,28 @@
 
     closeTs.addEventListener("click", () => { tsContainer.style.display = "none"; });
 
+    // --- Tweak these to scale the entire hover grid around its centre ---
+    // 1 = current coords as-is. <1 contracts all panels inward, >1 expands outward.
+    const PANEL_WIDTH_SCALE  = 0.78;
+    const PANEL_HEIGHT_SCALE = 1;
+
+    // Centre of the entire panel grid (in native pixels)
+    const GRID_CX = 1800;  // half of 3600
+    const GRID_CY = 2100;  // half of 4200
+
     // Convert native pixel coords to displayed coords
     function scaleX(px) { return (px / nativeWidth) * gridImg.clientWidth; }
     function scaleY(px) { return (px / nativeHeight) * gridImg.clientHeight; }
+
+    // Scale a panel's coords relative to the whole grid's centre
+    function scaledPanel(p) {
+      return {
+        left:   GRID_CX + (p.left   - GRID_CX) * PANEL_WIDTH_SCALE,
+        right:  GRID_CX + (p.right  - GRID_CX) * PANEL_WIDTH_SCALE,
+        top:    GRID_CY + (p.top    - GRID_CY) * PANEL_HEIGHT_SCALE,
+        bottom: GRID_CY + (p.bottom - GRID_CY) * PANEL_HEIGHT_SCALE
+      };
+    }
 
     // Find which panel the mouse is over
     function hitTest(e) {
@@ -266,8 +285,9 @@
       const mx = e.clientX - rect.left;
       const my = e.clientY - rect.top;
       for (const p of panels) {
-        if (mx >= scaleX(p.left) && mx <= scaleX(p.right) &&
-            my >= scaleY(p.top)  && my <= scaleY(p.bottom)) {
+        const sp = scaledPanel(p);
+        if (mx >= scaleX(sp.left) && mx <= scaleX(sp.right) &&
+            my >= scaleY(sp.top)  && my <= scaleY(sp.bottom)) {
           return p;
         }
       }
@@ -281,10 +301,11 @@
 
       const hit = hitTest(e);
       if (hit) {
-        const x = scaleX(hit.left);
-        const y = scaleY(hit.top);
-        const w = scaleX(hit.right) - x;
-        const h = scaleY(hit.bottom) - y;
+        const sp = scaledPanel(hit);
+        const x = scaleX(sp.left);
+        const y = scaleY(sp.top);
+        const w = scaleX(sp.right) - x;
+        const h = scaleY(sp.bottom) - y;
         ctx.strokeStyle = "rgba(41, 128, 185, 0.8)";
         ctx.lineWidth = 2;
         ctx.strokeRect(x, y, w, h);
