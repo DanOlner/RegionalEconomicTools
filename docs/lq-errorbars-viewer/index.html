@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Location Quotient Error Bars by SIC2 Sector</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #fafafa;
+      color: #333;
+    }
+    h1 {
+      font-size: 1.4rem;
+      margin-bottom: 0.3rem;
+    }
+    .subtitle {
+      color: #666;
+      margin-bottom: 1.2rem;
+      font-size: 0.95rem;
+    }
+    select {
+      font-size: 1rem;
+      padding: 6px 10px;
+      width: 100%;
+      max-width: 600px;
+      margin-bottom: 1rem;
+    }
+    .plot-container {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 10px;
+      text-align: center;
+    }
+    .plot-container img {
+      max-width: 100%;
+      height: auto;
+    }
+    .note {
+      font-size: 0.85rem;
+      color: #888;
+      margin-top: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Location Quotient with Simulated 95% CI</h1>
+  <p class="subtitle">SIC2 sectors &mdash; UK regions, 2023. 500 Monte Carlo draws using log-normal on GVA.</p>
+
+  <label for="sector-select"><strong>Select sector:</strong></label>
+  <select id="sector-select"></select>
+
+  <div class="plot-container">
+    <img id="plot-img" src="" alt="Location Quotient plot">
+  </div>
+
+  <p class="note">Error bars: 2.5th&ndash;97.5th percentile from simulation. Dashed line = LQ of 1 (national average).</p>
+
+  <script>
+    const sectors = [
+      ["Agriculture and hunting", "Agricultureandhunting"],
+      ["Forestry and logging", "Forestryandlogging"],
+      ["Fishing and aquaculture", "Fishingandaquaculture"],
+      ["Mining and quarrying (excluding support activities)", "Miningandquarryingexcludingsupportactivities"],
+      ["Mining support service activities", "Miningsupportserviceactivities"],
+      ["Manufacture of food products", "Manufactureoffoodproducts"],
+      ["Manufacture of beverages and tobacco products", "Manufactureofbeveragesandtobaccoproducts"],
+      ["Manufacture of textiles", "Manufactureoftextiles"],
+      ["Manufacture of wearing apparel", "Manufactureofwearingapparel"],
+      ["Manufacture of leather products", "Manufactureofleatherproducts"],
+      ["Manufacture of wood products (except furniture)", "Manufactureofwoodproductsexceptfurniture"],
+      ["Manufacture of paper products", "Manufactureofpaperproducts"],
+      ["Printing and reproduction of recorded media", "Printingandreproductionofrecordedmedia"],
+      ["Manufacture of coke, refined petroleum and chemicals", "Manufactureofcokerefinedpetroleumandchemicals"],
+      ["Manufacture of pharmaceutical products", "Manufactureofpharmaceuticalproducts"],
+      ["Manufacture of rubber and plastic products", "Manufactureofrubberandplasticproducts"],
+      ["Manufacture of other non-metallic mineral products", "Manufactureofothernonmetallicmineralproducts"],
+      ["Manufacture of basic metals", "Manufactureofbasicmetals"],
+      ["Manufacture of fabricated metal products", "Manufactureoffabricatedmetalproducts"],
+      ["Manufacture of computer, electronic and optical products", "Manufactureofcomputerelectronicandopticalproducts"],
+      ["Manufacture of electrical equipment", "Manufactureofelectricalequipment"],
+      ["Manufacture of machinery and equipment", "Manufactureofmachineryandequipment"],
+      ["Manufacture of motor vehicles", "Manufactureofmotorvehicles"],
+      ["Manufacture of other transport equipment", "Manufactureofothertransportequipment"],
+      ["Manufacture of furniture", "Manufactureoffurniture"],
+      ["Other manufacturing", "Othermanufacturing"],
+      ["Repair and installation of machinery and equipment", "Repairandinstallationofmachineryandequipment"],
+      ["Water supply", "Watersupply"],
+      ["Sewerage activities", "Sewerageactivities"],
+      ["Waste collection, treatment and disposal activities", "Wastecollectiontreatmentanddisposalactivities"],
+      ["Remediation and other waste management services", "Remediationandotherwastemanagementservices"],
+      ["Construction of buildings", "Constructionofbuildings"],
+      ["Civil engineering", "Civilengineering"],
+      ["Specialised construction activities", "Specialisedconstructionactivities"],
+      ["Motor trades", "Motortrades"],
+      ["Wholesale trade", "Wholesaletrade"],
+      ["Retail trade", "Retailtrade"],
+      ["Land transport", "Landtransport"],
+      ["Water transport", "Watertransport"],
+      ["Air transport", "Airtransport"],
+      ["Warehousing and transport support activities", "Warehousingandtransportsupportactivities"],
+      ["Postal and courier activities", "Postalandcourieractivities"],
+      ["Accommodation", "Accommodation"],
+      ["Food and beverage service activities", "Foodandbeverageserviceactivities"],
+      ["Publishing activities", "Publishingactivities"],
+      ["Motion picture, video and TV programme production", "MotionpicturevideoandTVprogrammeproduction"],
+      ["Programming and broadcasting activities", "Programmingandbroadcastingactivities"],
+      ["Telecommunications", "Telecommunications"],
+      ["Computer programming and consultancy", "Computerprogrammingandconsultancy"],
+      ["Information service activities", "Informationserviceactivities"],
+      ["Legal and accounting activities", "Legalandaccountingactivities"],
+      ["Head offices and management consultancy", "Headofficesandmanagementconsultancy"],
+      ["Architectural and engineering activities", "Architecturalandengineeringactivities"],
+      ["Scientific research and development", "Scientificresearchanddevelopment"],
+      ["Advertising and market research", "Advertisingandmarketresearch"],
+      ["Other professional, scientific and technical activities", "Otherprofessionalscientificandtechnicalactivities"],
+      ["Veterinary activities", "Veterinaryactivities"],
+      ["Rental and leasing activities", "Rentalandleasingactivities"],
+      ["Employment activities", "Employmentactivities"],
+      ["Travel agency and tour operator activities", "Travelagencyandtouroperatoractivities"],
+      ["Security and investigation activities", "Securityandinvestigationactivities"],
+      ["Services to buildings and landscape activities", "Servicestobuildingsandlandscapeactivities"],
+      ["Office administration and business support activities", "Officeadministrationandbusinesssupportactivities"],
+      ["Human health activities", "Humanhealthactivities"],
+      ["Residential care activities", "Residentialcareactivities"],
+      ["Social work activities", "Socialworkactivities"],
+      ["Creative arts and entertainment activities", "Creativeartsandentertainmentactivities"],
+      ["Libraries, archives, museums and other cultural activities", "Librariesarchivesmuseumsandotherculturalactivities"],
+      ["Gambling and betting activities", "Gamblingandbettingactivities"],
+      ["Sports, amusement and recreation activities", "Sportsamusementandrecreationactivities"],
+      ["Activities of membership organisations", "Activitiesofmembershiporganisations"],
+      ["Repair of computers, personal and household goods", "Repairofcomputerspersonalandhouseholdgoods"],
+      ["Other personal service activities", "Otherpersonalserviceactivities"]
+    ];
+
+    const select = document.getElementById("sector-select");
+    const img = document.getElementById("plot-img");
+    const imgBase = "../miscimages/LQ_errorbars_SIC2s/";
+
+    sectors.forEach(([label, file]) => {
+      const opt = document.createElement("option");
+      opt.value = file;
+      opt.textContent = label;
+      select.appendChild(opt);
+    });
+
+    function updatePlot() {
+      const file = select.value;
+      img.src = imgBase + file + ".png";
+      img.alt = "LQ plot: " + select.options[select.selectedIndex].text;
+    }
+
+    select.addEventListener("change", updatePlot);
+    updatePlot();
+  </script>
+</body>
+</html>

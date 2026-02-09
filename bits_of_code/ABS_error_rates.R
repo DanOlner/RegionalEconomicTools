@@ -889,7 +889,8 @@ LQ_with_sim_CIs <- LQ_central %>%
 plot_simulated_LQ <- function(data, sector_pattern, plot_year = NULL) {
 
   sector_data <- data %>%
-    filter(grepl(sector_pattern, SIC07_description, ignore.case = TRUE))
+    filter(grepl(sector_pattern, SIC07_description, ignore.case = TRUE, fixed = FALSE) |
+           SIC07_description == sector_pattern)
 
   if(is.null(plot_year)) plot_year <- max(sector_data$year)
 
@@ -921,13 +922,19 @@ plot_simulated_LQ(LQ_with_sim_CIs, "construction of buildings")
 plot_simulated_LQ(LQ_with_sim_CIs, "pharmaceutical")
 
 
-# Dancode: Save all sectors...
-map(unique(itl1.cp$SIC07_description), 
-    ~{
-      ggsave(
-        filename = paste0('local/outputs/LQ_errorbars_SIC2s/',gsub('[[:punct:]]| ','',.),'.png'),
-        plot = plot_simulated_LQ(LQ_with_sim_CIs, .),width = 10, height = 10
-    })
+# Sector names can contain regex special chars like () so the plot function
+# now also does exact match (SIC07_description == sector_pattern) as fallback.
+# tryCatch so one failed sector doesn't stop the whole batch.
+map(unique(LQ_with_sim_CIs$SIC07_description), ~{
+  tryCatch({
+    safe_name <- gsub('[[:punct:]]| ', '', .)
+    p <- plot_simulated_LQ(LQ_with_sim_CIs, .)
+    ggsave(
+      filename = paste0('local/outputs/LQ_errorbars_SIC2s/', safe_name, '.png'),
+      plot = p, width = 10, height = 10
+    )
+  }, error = function(e) cat("Failed for:", ., "\n", e$message, "\n"))
+})
 
 
 
