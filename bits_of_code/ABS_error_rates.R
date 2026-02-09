@@ -361,7 +361,7 @@ plot_sector_gva_with_errors <- function(data, sector_pattern, title_suffix = "",
 
   if(!is.null(region_pattern)) {
     sector_data <- sector_data %>%
-      filter(grepl(region_pattern, Region_name, ignore.case = TRUE))
+      filter(Region_name == region_pattern)
   }
 
   if(nrow(sector_data) == 0) {
@@ -409,6 +409,7 @@ plot_sector_gva_with_errors(itl1.cv.linked, "construction of buildings")
 plot_sector_gva_with_errors(itl1.cv.linked, "telecom")
 plot_sector_gva_with_errors(itl1.cv.linked, "computer programming")
 plot_sector_gva_with_errors(itl1.cv.linked, "computer programming", region_pattern = "West Midlands")
+plot_sector_gva_with_errors(itl1.cv.linked, "computer programming", region_pattern = "East")
 
 
 
@@ -474,7 +475,7 @@ plot_sector_growth_with_bounds <- function(data, sector_pattern, use_conservativ
 
   if(!is.null(region_pattern)) {
     sector_data <- sector_data %>%
-      filter(grepl(region_pattern, Region_name, ignore.case = TRUE))
+      filter(Region_name == region_pattern)
   }
 
   if(nrow(sector_data) == 0) {
@@ -592,7 +593,7 @@ plot_pairwise_year_heatmap <- function(data, sector_pattern, region_pattern = NU
 
   if(!is.null(region_pattern)) {
     sector_data <- sector_data %>%
-      filter(grepl(region_pattern, Region_name, ignore.case = TRUE))
+      filter(Region_name == region_pattern)
   }
 
   if(nrow(sector_data) == 0) {
@@ -661,7 +662,7 @@ plot_pairwise_year_heatmap(itl1.cv.linked, "computer programming")
 plot_pairwise_year_heatmap(itl1.cv.linked, "fabricated metal")
 
 # Single region version
-plot_pairwise_year_heatmap(itl1.cv.linked, "computer programming", "west midlands")
+plot_pairwise_year_heatmap(itl1.cv.linked, "computer programming", "West Midlands")
 
 
 # Version with direction: shows which year is higher when CIs don't overlap
@@ -673,7 +674,7 @@ plot_pairwise_year_heatmap_direction <- function(data, sector_pattern, region_pa
 
   if(!is.null(region_pattern)) {
     sector_data <- sector_data %>%
-      filter(grepl(region_pattern, Region_name, ignore.case = TRUE))
+      filter(Region_name == region_pattern)
   }
 
   if(nrow(sector_data) == 0) {
@@ -749,7 +750,7 @@ plot_pairwise_year_heatmap_direction(itl1.cv.linked, "fabricated metal")
 plot_pairwise_year_heatmap_direction(itl1.cv.linked, "land transport")#Identified with OLS slopes as shrinking on av
 
 # Single region
-plot_pairwise_year_heatmap_direction(itl1.cv.linked, "computer programming", "west midlands")
+plot_pairwise_year_heatmap_direction(itl1.cv.linked, "computer programming", "West Midlands")
 
 
 # Save each facetted plot for each sector
@@ -875,9 +876,9 @@ plot_gva_and_heatmap <- function(data, sector_pattern, region_pattern) {
 }
 
 # Examples
-plot_gva_and_heatmap(itl1.cv.linked, "computer programming", "west midlands")
-plot_gva_and_heatmap(itl1.cv.linked, "fabricated metal", "yorkshire")
-plot_gva_and_heatmap(itl1.cv.linked, "land transport", "london")
+plot_gva_and_heatmap(itl1.cv.linked, "computer programming", "West Midlands")
+plot_gva_and_heatmap(itl1.cv.linked, "fabricated metal", "Yorkshire and The Humber")
+plot_gva_and_heatmap(itl1.cv.linked, "land transport", "London")
 
 
 # DAN CODE----
@@ -983,81 +984,93 @@ ggplot(
 # Reload data (in case running from here)
 itl1.cp.linked = read_csv('data/itl1_cp_withestimatederrorratefromABS.csv')
 
-set.seed(42)
-n_sims <- 500
+# Monte Carlo LQ simulation function.
+# Takes a data frame (with value, SE columns) and a vector of years to simulate.
+# Returns a data frame with central LQ and simulated 95% CI for each region/sector/year.
+simulate_LQ_with_CIs <- function(data, years = NULL, n_sims = 500, seed = 42) {
 
-# Pre-compute log-normal parameters for each row
-# For log-normal: if we want mean = value and sd = SE,
-# then on the log scale: sigma^2 = log(1 + (SE/value)^2), mu = log(value) - sigma^2/2
-itl1.cp.sim_params <- itl1.cp.linked %>%
-  mutate(
-    has_se = !is.na(SE) & SE > 0 & value > 0,
-    # Log-normal parameters (only meaningful where has_se is TRUE)
-    lnorm_sigma2 = ifelse(has_se, log(1 + (SE / value)^2), NA),
-    lnorm_sigma = ifelse(has_se, sqrt(lnorm_sigma2), NA),
-    lnorm_mu = ifelse(has_se, log(value) - lnorm_sigma2 / 2, NA)
-  )
+  set.seed(seed)
 
-# Run simulations — for each iteration, draw GVA values then compute LQs per year
-# Store results in a list for efficiency
-sim_LQs <- vector("list", n_sims)
+  # Default: all years in the data
+  if(is.null(years)) years <- sort(unique(data$year))
 
-for(i in 1:n_sims) {
+  # Filter to requested years
+  sim_input <- data %>% filter(year %in% years)
 
-  if(i %% 50 == 0) cat("Simulation", i, "of", n_sims, "\n")
-
-  # Draw simulated GVA values
-  sim_data <- itl1.cp.sim_params %>%
+  # Pre-compute log-normal parameters
+  sim_params <- sim_input %>%
     mutate(
-      sim_value = ifelse(
-        has_se,
-        rlnorm(n(), meanlog = lnorm_mu, sdlog = lnorm_sigma),
-        value  # No SE available: hold at central estimate
-      )
+      has_se = !is.na(SE) & SE > 0 & value > 0,
+      lnorm_sigma2 = ifelse(has_se, log(1 + (SE / value)^2), NA),
+      lnorm_sigma = ifelse(has_se, sqrt(lnorm_sigma2), NA),
+      lnorm_mu = ifelse(has_se, log(value) - lnorm_sigma2 / 2, NA)
     )
 
-  # Compute LQs for each year using the existing function
-  sim_LQ_result <- sim_data %>%
+  # Run simulations
+  sim_LQs <- vector("list", n_sims)
+
+  for(i in 1:n_sims) {
+    if(i %% 50 == 0) cat("Simulation", i, "of", n_sims, "\n")
+
+    sim_data <- sim_params %>%
+      mutate(
+        sim_value = ifelse(
+          has_se,
+          rlnorm(n(), meanlog = lnorm_mu, sdlog = lnorm_sigma),
+          value
+        )
+      )
+
+    sim_LQ_result <- sim_data %>%
+      group_split(year) %>%
+      map(add_location_quotient_and_proportions,
+          regionvar = Region_name,
+          lq_var = SIC07_description,
+          valuevar = sim_value) %>%
+      bind_rows()
+
+    sim_LQs[[i]] <- sim_LQ_result %>%
+      select(ITL_code, Region_name, SIC07_description, year, LQ) %>%
+      mutate(sim_id = i)
+  }
+
+  # Summarise simulations
+  LQ_sim_summary <- bind_rows(sim_LQs) %>%
+    group_by(ITL_code, Region_name, SIC07_description, year) %>%
+    summarise(
+      LQ_median = median(LQ, na.rm = TRUE),
+      LQ_p025 = quantile(LQ, 0.025, na.rm = TRUE),
+      LQ_p975 = quantile(LQ, 0.975, na.rm = TRUE),
+      LQ_sd = sd(LQ, na.rm = TRUE),
+      .groups = 'drop'
+    )
+
+  # Central-estimate LQs
+  LQ_central <- sim_input %>%
     group_split(year) %>%
     map(add_location_quotient_and_proportions,
         regionvar = Region_name,
         lq_var = SIC07_description,
-        valuevar = sim_value) %>%
-    bind_rows()
+        valuevar = value) %>%
+    bind_rows() %>%
+    select(ITL_code, Region_name, SIC07_description, year, LQ_central = LQ)
 
-  # Store just the identifying columns and the LQ
-  sim_LQs[[i]] <- sim_LQ_result %>%
-    select(ITL_code, Region_name, SIC07_description, year, LQ) %>%
-    mutate(sim_id = i)
+  # Merge and return
+  LQ_central %>%
+    left_join(LQ_sim_summary, by = c('ITL_code', 'Region_name', 'SIC07_description', 'year'))
 }
 
-# Combine all simulations
-all_sim_LQs <- bind_rows(sim_LQs)
+# Run for all years (reproduces previous behaviour)
+n_sims <- 500
+LQ_with_sim_CIs <- simulate_LQ_with_CIs(itl1.cp.linked, years = NULL, n_sims = n_sims)
 
-# Summarise: median and 95% interval across simulations
-LQ_sim_summary <- all_sim_LQs %>%
-  group_by(ITL_code, Region_name, SIC07_description, year) %>%
-  summarise(
-    LQ_median = median(LQ, na.rm = TRUE),
-    LQ_p025 = quantile(LQ, 0.025, na.rm = TRUE),
-    LQ_p975 = quantile(LQ, 0.975, na.rm = TRUE),
-    LQ_sd = sd(LQ, na.rm = TRUE),
-    .groups = 'drop'
-  )
 
-# Also compute the central-estimate LQs for comparison
-LQ_central <- itl1.cp.linked %>%
-  group_split(year) %>%
-  map(add_location_quotient_and_proportions,
-      regionvar = Region_name,
-      lq_var = SIC07_description,
-      valuevar = value) %>%
-  bind_rows() %>%
-  select(ITL_code, Region_name, SIC07_description, year, LQ_central = LQ)
+# Run for first, middle and last years only
+all_years <- sort(unique(itl1.cp.linked$year))
+selected_years <- all_years[c(1, ceiling(length(all_years)/2), length(all_years))]
+cat("Simulating for years:", selected_years, "\n")
 
-# Merge central and simulated
-LQ_with_sim_CIs <- LQ_central %>%
-  left_join(LQ_sim_summary, by = c('ITL_code', 'Region_name', 'SIC07_description', 'year'))
+LQ_selected_years <- simulate_LQ_with_CIs(itl1.cp.linked, years = selected_years, n_sims = n_sims)
 
 
 ## Visualise simulated LQ uncertainty ----
@@ -1123,7 +1136,7 @@ plot_simulated_LQ_timeseries <- function(data, sector_pattern, region_pattern) {
   plot_data <- data %>%
     filter(
       grepl(sector_pattern, SIC07_description, ignore.case = TRUE),
-      grepl(region_pattern, Region_name, ignore.case = TRUE)
+      Region_name == region_pattern
     )
 
   sector_name <- unique(plot_data$SIC07_description)[1]
@@ -1149,9 +1162,9 @@ plot_simulated_LQ_timeseries <- function(data, sector_pattern, region_pattern) {
 }
 
 # Example time series
-plot_simulated_LQ_timeseries(LQ_with_sim_CIs, "fabricated metal", "yorkshire")
-plot_simulated_LQ_timeseries(LQ_with_sim_CIs, "pharmaceutical", "north east")
-plot_simulated_LQ_timeseries(LQ_with_sim_CIs, "computer programming", "west midlands")
+plot_simulated_LQ_timeseries(LQ_with_sim_CIs, "fabricated metal", "Yorkshire and The Humber")
+plot_simulated_LQ_timeseries(LQ_with_sim_CIs, "pharmaceutical", "North East")
+plot_simulated_LQ_timeseries(LQ_with_sim_CIs, "computer programming", "West Midlands")
 
 
 # Faceted version: all regions for one sector over time
@@ -1186,6 +1199,48 @@ plot_simulated_LQ_allregions <- function(data, sector_pattern) {
 plot_simulated_LQ_allregions(LQ_with_sim_CIs, "fabricated metal")
 plot_simulated_LQ_allregions(LQ_with_sim_CIs, "computer programming")
 plot_simulated_LQ_allregions(LQ_with_sim_CIs, "pharmaceutical")
+
+
+# Multi-year comparison: dodged error bars for selected years, all regions
+# Dan note: I think this might mislead - different years are maybe not comparable
+# The error bars are based on simulating for one year, so separating places in that year
+# Not separating years...
+plot_simulated_LQ_multiyear <- function(data, sector_pattern) {
+
+  plot_data <- data %>%
+    filter(grepl(sector_pattern, SIC07_description, ignore.case = TRUE) |
+           SIC07_description == sector_pattern)
+
+  sector_name <- unique(plot_data$SIC07_description)[1]
+
+  ggplot(plot_data, aes(y = fct_reorder(Region_name, LQ_central),
+                        x = LQ_central, colour = factor(year))) +
+    geom_point(position = position_dodge(width = 0.6), size = 2) +
+    geom_errorbarh(aes(xmin = LQ_p025, xmax = LQ_p975),
+                   position = position_dodge(width = 0.6), height = 0.3) +
+    geom_vline(xintercept = 1, linetype = 'dashed', colour = 'grey50', alpha = 0.5) +
+    scale_colour_brewer(palette = "Set1", name = "Year") +
+    labs(
+      title = paste0("Location Quotient with simulated 95% CI: ", sector_name),
+      subtitle = paste0("Years: ", paste(sort(unique(plot_data$year)), collapse = ", "),
+                        " | ", n_sims, " MC draws"),
+      x = "Location Quotient",
+      y = "",
+      caption = "Error bars: 2.5th-97.5th percentile from simulation. Dashed line = LQ of 1."
+    ) +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(size = 11, face = "bold"),
+      plot.subtitle = element_text(size = 9, colour = "grey40"),
+      legend.position = "bottom"
+    )
+}
+
+# Plot multi-year comparison using the selected years simulation
+plot_simulated_LQ_multiyear(LQ_selected_years, "fabricated metal")
+plot_simulated_LQ_multiyear(LQ_selected_years, "computer programming")
+plot_simulated_LQ_multiyear(LQ_selected_years, "pharmaceutical")
+plot_simulated_LQ_multiyear(LQ_selected_years, "manufacture of furniture")
 
 
 
