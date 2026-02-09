@@ -353,11 +353,16 @@ write_csv(itl1.cv.linked,'data/itl1_cv_withestimatederrorratefromABS.csv')
 itl1.cv.linked = read_csv('data/itl1_cv_withestimatederrorratefromABS.csv')
 
 # Function to plot sector GVA with error bars across regions over time
-plot_sector_gva_with_errors <- function(data, sector_pattern, title_suffix = "") {
+plot_sector_gva_with_errors <- function(data, sector_pattern, title_suffix = "", region_pattern = NULL) {
 
   # Filter to sector using pattern matching (case insensitive)
   sector_data <- data %>%
     filter(grepl(sector_pattern, SIC07_description, ignore.case = TRUE))
+
+  if(!is.null(region_pattern)) {
+    sector_data <- sector_data %>%
+      filter(grepl(region_pattern, Region_name, ignore.case = TRUE))
+  }
 
   if(nrow(sector_data) == 0) {
     stop(paste("No data found for sector pattern:", sector_pattern))
@@ -365,16 +370,18 @@ plot_sector_gva_with_errors <- function(data, sector_pattern, title_suffix = "")
 
   # Get the actual sector name for the title
   sector_name <- unique(sector_data$SIC07_description)[1]
+  region_label <- if(!is.null(region_pattern)) unique(sector_data$Region_name)[1] else NULL
+  title_text <- paste0("GVA with 95% CI: ", sector_name,
+                       if(!is.null(region_label)) paste0(" — ", region_label) else "")
 
-  # Create the plot - faceted by region, time on x-axis
+  # Create the plot
   p <- ggplot(sector_data, aes(x = year, y = value)) +
     geom_ribbon(aes(ymin = gva_min95, ymax = gva_max95),
                 alpha = 0.3, fill = "steelblue") +
     geom_line(colour = "steelblue", linewidth = 0.8) +
     geom_point(colour = "steelblue", size = 1.5) +
-    facet_wrap(~Region_name, scales = "free_y", ncol = 3) +
     labs(
-      title = paste0("GVA with 95% CI: ", sector_name),
+      title = title_text,
       subtitle = "Shaded area shows uncertainty from ABS coefficient of variation",
       x = "Year",
       y = "GVA (£m, chained volume)",
@@ -388,6 +395,11 @@ plot_sector_gva_with_errors <- function(data, sector_pattern, title_suffix = "")
       axis.text.x = element_text(angle = 45, hjust = 1, size = 7)
     )
 
+  # Only facet if showing multiple regions
+  if(is.null(region_pattern)) {
+    p <- p + facet_wrap(~Region_name, scales = "free_y", ncol = 3)
+  }
+
   return(p)
 }
 
@@ -396,6 +408,31 @@ plot_sector_gva_with_errors(itl1.cv.linked, "fabricated metal")
 plot_sector_gva_with_errors(itl1.cv.linked, "construction of buildings")
 plot_sector_gva_with_errors(itl1.cv.linked, "telecom")
 plot_sector_gva_with_errors(itl1.cv.linked, "computer programming")
+plot_sector_gva_with_errors(itl1.cv.linked, "computer programming", region_pattern = "West Midlands")
+
+
+
+
+
+# Save all combinations of ITL1 / sector separately
+combos <- expand_grid(
+  sector = unique(itl1.cv.linked$SIC07_description),
+  region = unique(itl1.cv.linked$Region_name)
+)
+
+pwalk(combos, function(sector, region) {
+  tryCatch({
+    safe_sector <- gsub('[[:punct:]]| ', '', sector)
+    safe_region <- gsub('[[:punct:]]| ', '', region)
+    p <- plot_sector_gva_with_errors(itl1.cv.linked, sector, region_pattern = region)
+    ggsave(
+      filename = paste0("docs/miscimages/chainedvol_growtherror_plots/timeseriesplot_foreachITL1_sectorcombo/", safe_sector, '_', safe_region, '.png'),
+      plot = p, width = 6, height = 4
+    )
+  }, error = function(e) cat("Failed for:", sector, "/", region, "\n", e$message, "\n"))
+})
+
+
 
 
 ## Year-on-year growth rates with bounds----
@@ -715,34 +752,132 @@ plot_pairwise_year_heatmap_direction(itl1.cv.linked, "land transport")#Identifie
 plot_pairwise_year_heatmap_direction(itl1.cv.linked, "computer programming", "west midlands")
 
 
+# Save each facetted plot for each sector
+# "docs/miscimages/chainedvol_growtherror_plots/pairwise_plotsforeachsector"
+# dir.create('docs/miscimages/chainedvol_growtherror_plots/pairwise_plotsforeachsector', recursive = TRUE, showWarnings = FALSE)
+
+map(unique(itl1.cv.linked$SIC07_description), ~{
+  tryCatch({
+    safe_name <- gsub('[[:punct:]]| ', '', .)
+    p <- plot_pairwise_year_heatmap_direction(itl1.cv.linked, .)
+    ggsave(
+      filename = paste0('docs/miscimages/chainedvol_growtherror_plots/pairwise_plotsforeachsector/', safe_name, '.png'),
+      plot = p, width = 12, height = 14
+    )
+  }, error = function(e) cat("Failed for:", ., "\n", e$message, "\n"))
+})
+
+
+# Extract panel pixel coordinates from the facetted plot for the interactive viewer.
+# Approach: render the plot into a device, then use grid::convertWidth/Height
+# *while inside the device* to resolve all units (including null/relative ones)
+# into absolute inches. The key is that the gtable must be drawn first.
+# Only needs to run once — the layout is the same for every sector.
+extract_panel_coords <- function(p, img_width_in = 12, img_height_in = 14, dpi = 300) {
+
+  img_width_px  <- img_width_in * dpi
+  img_height_px <- img_height_in * dpi
+
+  # Build the gtable
+  gt <- ggplot_gtable(ggplot_build(p))
+
+  # Open a PNG device at the exact ggsave dimensions, draw the gtable,
+  # then measure. Drawing resolves the null units.
+  tmp <- tempfile(fileext = ".png")
+  png(tmp, width = img_width_px, height = img_height_px, res = dpi)
+  grid::grid.draw(gt)
+
+  # Now convert ALL widths and heights to inches (null units are now resolved)
+  widths_in  <- sapply(seq_along(gt$widths), function(j) {
+    grid::convertWidth(gt$widths[j], "inches", valueOnly = TRUE)
+  })
+  heights_in <- sapply(seq_along(gt$heights), function(j) {
+    grid::convertHeight(gt$heights[j], "inches", valueOnly = TRUE)
+  })
+
+  dev.off()
+  unlink(tmp)
+
+  # Cumulative positions (left edges and top edges)
+  cum_w <- c(0, cumsum(widths_in))   # length = ncol+1
+  cum_h <- c(0, cumsum(heights_in))  # length = nrow+1
+
+  # Find panel grobs in the layout
+  panel_idx <- grep("^panel-", gt$layout$name)
+  panels_layout <- gt$layout[panel_idx, ]
+
+  # Get facet data to map panel names to region names
+  build <- ggplot_build(p)
+  facet_data <- build$layout$layout
+
+  result <- lapply(seq_len(nrow(facet_data)), function(i) {
+    fd <- facet_data[i, ]
+    panel_name <- paste0("panel-", fd$COL, "-", fd$ROW)
+    pl <- panels_layout[panels_layout$name == panel_name, ]
+
+    # l, r, t, b are column/row indices in the gtable
+    x_left   <- cum_w[pl$l]       # left edge of the left column
+    x_right  <- cum_w[pl$r + 1]   # right edge of the right column
+    y_top    <- cum_h[pl$t]       # top edge of the top row
+    y_bottom <- cum_h[pl$b + 1]   # bottom edge of the bottom row
+
+    list(
+      region      = as.character(fd$Region_name),
+      region_safe = gsub('[[:punct:]]| ', '', as.character(fd$Region_name)),
+      left   = round(x_left * dpi),
+      right  = round(x_right * dpi),
+      top    = round(y_top * dpi),
+      bottom = round(y_bottom * dpi)
+    )
+  })
+
+  return(result)
+}
+
+# Build one plot to extract coords (layout is identical for all sectors)
+p_for_coords <- plot_pairwise_year_heatmap_direction(itl1.cv.linked, unique(itl1.cv.linked$SIC07_description)[1])
+panel_coords_list <- extract_panel_coords(p_for_coords)
+
+# Save as a JS file (not JSON) so the HTML can load it via <script src> —
+# this avoids fetch() which is blocked on file:// URLs in most browsers.
+
+# Doesn't work - claude is instead getting dims from the images themselves
+# js_json <- jsonlite::toJSON(panel_coords_list, pretty = TRUE, auto_unbox = TRUE)
+# writeLines(
+#   paste0("const PANEL_COORDS = ", js_json, ";"),
+#   'docs/growth_errorgrids_viewer/panel_coords.js'
+# )
+
+
+
+
+
 ## Combination time series plot and plot_pairwise_year_heatmap_direction----
 
-# Combine YoY growth time series with pairwise heatmap for a single region/sector
-plot_growth_and_heatmap <- function(growth_data, level_data, sector_pattern, region_pattern,
-                                    use_conservative_bounds = TRUE) {
+# Combine GVA time series with pairwise heatmap for a single region/sector
+plot_gva_and_heatmap <- function(data, sector_pattern, region_pattern) {
 
-  p_growth <- plot_sector_growth_with_bounds(
-    growth_data, sector_pattern,
-    use_conservative_bounds = use_conservative_bounds,
+  p_gva <- plot_sector_gva_with_errors(
+    data, sector_pattern,
     region_pattern = region_pattern
   )
 
   p_heatmap <- plot_pairwise_year_heatmap_direction(
-    level_data, sector_pattern,
+    data, sector_pattern,
     region_pattern = region_pattern
   )
 
   # Stack: time series on top, heatmap below
-  combined <- p_growth / p_heatmap +
+  combined <- p_gva / p_heatmap +
     plot_layout(heights = c(1, 1.2))
 
   return(combined)
 }
 
 # Examples
-plot_growth_and_heatmap(itl1.cv.growth, itl1.cv.linked, "computer programming", "west midlands")
-plot_growth_and_heatmap(itl1.cv.growth, itl1.cv.linked, "fabricated metal", "yorkshire")
-plot_growth_and_heatmap(itl1.cv.growth, itl1.cv.linked, "land transport", "london")
+plot_gva_and_heatmap(itl1.cv.linked, "computer programming", "west midlands")
+plot_gva_and_heatmap(itl1.cv.linked, "fabricated metal", "yorkshire")
+plot_gva_and_heatmap(itl1.cv.linked, "land transport", "london")
 
 
 # DAN CODE----
