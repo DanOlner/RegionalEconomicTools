@@ -54,6 +54,16 @@
   <label for="sector-select"><strong>Select sector:</strong></label>
   <select id="sector-select"></select>
 
+  <fieldset style="border:1px solid #ccc; border-radius:4px; padding:6px 12px; margin-bottom:1rem; max-width:400px;">
+    <legend style="font-size:0.9rem; font-weight:bold; padding:0 4px;">View</legend>
+    <label style="margin-right:1rem; cursor:pointer;">
+      <input type="radio" name="year-view" value="single" checked> Single year (latest)
+    </label>
+    <label style="cursor:pointer;">
+      <input type="radio" name="year-view" value="twoyear"> Two-year comparison
+    </label>
+  </fieldset>
+
   <div class="plot-container">
     <img id="plot-img" src="" alt="Location Quotient plot">
   </div>
@@ -139,7 +149,15 @@
 
     const select = document.getElementById("sector-select");
     const img = document.getElementById("plot-img");
-    const imgBase = "../miscimages/LQ_errorbars_SIC2s/";
+
+    const imgBases = {
+      single:  "../miscimages/LQ_errorbars_SIC2s/",
+      twoyear: "../miscimages/LQ_errorbars_SIC2s_twoyear/"
+    };
+
+    function getImgBase() {
+      return imgBases[document.querySelector('input[name="year-view"]:checked').value];
+    }
 
     sectors.forEach(([label, file]) => {
       const opt = document.createElement("option");
@@ -150,11 +168,14 @@
 
     function updatePlot() {
       const file = select.value;
-      img.src = imgBase + file + ".png";
+      img.src = getImgBase() + file + ".png";
       img.alt = "LQ plot: " + select.options[select.selectedIndex].text;
     }
 
     select.addEventListener("change", updatePlot);
+    document.querySelectorAll('input[name="year-view"]').forEach(r =>
+      r.addEventListener("change", updatePlot)
+    );
     updatePlot();
   </script>
 </body>

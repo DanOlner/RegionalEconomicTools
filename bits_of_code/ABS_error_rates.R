@@ -338,7 +338,15 @@ write_csv(itl1.cv.linked,'data/itl1_cv_withestimatederrorratefromABS.csv')
 
 
 
+# While we're here...
+# What number of 2-digits do we get from the inner join?
+# 73 in the join
+unique(itl1.cv.linked$SIC07_description)
+# 82 in the orig
+unique(itl1.cv$SIC07_description)
 
+# OK - out of public sectors, only health is still present in the ABS data
+unique(itl1.cv$SIC07_description)[!unique(itl1.cv$SIC07_description) %in% unique(itl1.cv.linked$SIC07_description)]
 
 
 
@@ -1067,7 +1075,8 @@ LQ_with_sim_CIs <- simulate_LQ_with_CIs(itl1.cp.linked, years = NULL, n_sims = n
 
 # Run for first, middle and last years only
 all_years <- sort(unique(itl1.cp.linked$year))
-selected_years <- all_years[c(1, ceiling(length(all_years)/2), length(all_years))]
+# selected_years <- all_years[c(1, ceiling(length(all_years)/2), length(all_years))]
+selected_years <- all_years[c(ceiling(length(all_years)/2), length(all_years))]
 cat("Simulating for years:", selected_years, "\n")
 
 LQ_selected_years <- simulate_LQ_with_CIs(itl1.cp.linked, years = selected_years, n_sims = n_sims)
@@ -1215,9 +1224,9 @@ plot_simulated_LQ_multiyear <- function(data, sector_pattern) {
 
   ggplot(plot_data, aes(y = fct_reorder(Region_name, LQ_central),
                         x = LQ_central, colour = factor(year))) +
-    geom_point(position = position_dodge(width = 0.6), size = 2) +
+    geom_point(position = position_dodge(width = 0.4), size = 2) +
     geom_errorbarh(aes(xmin = LQ_p025, xmax = LQ_p975),
-                   position = position_dodge(width = 0.6), height = 0.3) +
+                   position = position_dodge(width = 0.4), height = 0.3) +
     geom_vline(xintercept = 1, linetype = 'dashed', colour = 'grey50', alpha = 0.5) +
     scale_colour_brewer(palette = "Set1", name = "Year") +
     labs(
@@ -1239,8 +1248,22 @@ plot_simulated_LQ_multiyear <- function(data, sector_pattern) {
 # Plot multi-year comparison using the selected years simulation
 plot_simulated_LQ_multiyear(LQ_selected_years, "fabricated metal")
 plot_simulated_LQ_multiyear(LQ_selected_years, "computer programming")
+plot_simulated_LQ_multiyear(LQ_selected_years, "telecom")
 plot_simulated_LQ_multiyear(LQ_selected_years, "pharmaceutical")
 plot_simulated_LQ_multiyear(LQ_selected_years, "manufacture of furniture")
+
+# Save each sector's multi-year LQ plot
+map(unique(LQ_selected_years$SIC07_description), ~{
+  tryCatch({
+    safe_name <- gsub('[[:punct:]]| ', '', .)
+    p <- plot_simulated_LQ_multiyear(LQ_selected_years, .)
+    ggsave(
+      filename = paste0('docs/miscimages/LQ_errorbars_SIC2s_twoyear/', safe_name, '.png'),
+      plot = p, width = 10, height = 10
+    )
+  }, error = function(e) cat("Failed for:", ., "\n", e$message, "\n"))
+})
+
 
 
 
