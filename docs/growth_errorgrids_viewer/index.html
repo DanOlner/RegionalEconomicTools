@@ -110,6 +110,11 @@
     Time series: Shaded band = 95% CI from ABS coefficient of variation.
   </p>
 
+  <p id="permalink-container" style="font-size:0.85rem; margin-top:0.5rem;">
+    <a id="sector-permalink" href="#">Link to this sector</a>
+    <span id="permalink-safe" style="color:#999; margin-left:0.5em; font-family:monospace;"></span>
+  </p>
+
   <!-- Panel coordinates — loaded as a plain script tag so it works from file:// -->
   <script src="panel_coords.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/tom-select@2.4.6/dist/js/tom-select.complete.min.js"></script>
@@ -266,10 +271,25 @@
       tsPopup.style.display = "none";
       currentHitRegion = null;
       preloadTimeSeriesImages(file);
+      updatePermalink(file);
     }
 
-    // Default to "Manufacture of fabricated metal products"
-    sectorPicker.setValue("Manufactureoffabricatedmetalproducts", true);  // true = silent, don't trigger onChange yet
+    const permalinkEl   = document.getElementById("sector-permalink");
+    const permalinkSafe = document.getElementById("permalink-safe");
+
+    function updatePermalink(file) {
+      const url = new URL(window.location);
+      url.searchParams.set("sector", file);
+      permalinkEl.href = url.toString();
+      permalinkSafe.textContent = "(" + file + ")";
+    }
+
+    // Use ?sector= query param if present, otherwise default to fabricated metals
+    const urlSector = new URLSearchParams(window.location.search).get("sector");
+    const defaultSector = (urlSector && sectorPicker.options[urlSector])
+      ? urlSector
+      : "Manufactureoffabricatedmetalproducts";
+    sectorPicker.setValue(defaultSector, true);  // true = silent, don't trigger onChange yet
     updateGridImage();
 
     // --- Tweak these to scale the entire hover grid around its centre ---
