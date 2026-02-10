@@ -52,10 +52,10 @@
   <fieldset style="border:1px solid #ccc; border-radius:4px; padding:6px 12px; margin-bottom:1rem; max-width:400px;">
     <legend style="font-size:0.9rem; font-weight:bold; padding:0 4px;">View</legend>
     <label style="margin-right:1rem; cursor:pointer;">
-      <input type="radio" name="year-view" value="single" checked> Single year (latest)
+      <input type="radio" name="year-view" value="single" checked> Single year (2023)
     </label>
     <label style="cursor:pointer;">
-      <input type="radio" name="year-view" value="twoyear"> Two-year comparison
+      <input type="radio" name="year-view" value="twoyear"> 2017 vs 2023
     </label>
   </fieldset>
 
@@ -64,6 +64,11 @@
   </div>
 
   <p class="note">Error bars: 2.5th&ndash;97.5th percentile from simulation. Dashed line = LQ of 1 (national average).</p>
+
+  <p id="permalink-container" style="font-size:0.85rem; margin-top:0.5rem;">
+    <a id="sector-permalink" href="#">Link to this sector</a>
+    <span id="permalink-safe" style="color:#999; margin-left:0.5em; font-family:monospace;"></span>
+  </p>
 
   <script src="https://cdn.jsdelivr.net/npm/tom-select@2.4.6/dist/js/tom-select.complete.min.js"></script>
   <script>
@@ -180,7 +185,37 @@
       if (!file) return;
       img.src = getImgBase() + file + ".png";
       img.alt = "LQ plot: " + getSelectedLabel();
+      updatePermalink(file);
     }
+
+    const permalinkEl   = document.getElementById("sector-permalink");
+    const permalinkSafe = document.getElementById("permalink-safe");
+
+    function getViewMode() {
+      return document.querySelector('input[name="year-view"]:checked').value;
+    }
+
+    function updatePermalink(file) {
+      const url = new URL(window.location);
+      url.searchParams.set("sector", file);
+      url.searchParams.set("view", getViewMode());
+      permalinkEl.href = url.toString();
+      permalinkSafe.textContent = "(" + file + ", " + getViewMode() + ")";
+    }
+
+    // Read query params on load
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlSector = urlParams.get("sector");
+    const urlView   = urlParams.get("view");
+
+    if (urlView === "twoyear") {
+      document.querySelector('input[name="year-view"][value="twoyear"]').checked = true;
+    }
+
+    const defaultSector = (urlSector && sectorPicker.options[urlSector])
+      ? urlSector
+      : "Manufactureoffabricatedmetalproducts";
+    sectorPicker.setValue(defaultSector, true);
 
     document.querySelectorAll('input[name="year-view"]').forEach(r =>
       r.addEventListener("change", updatePlot)
