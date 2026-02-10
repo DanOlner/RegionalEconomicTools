@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pairwise Year Comparison — Hover a Region</title>
+  <!-- Tom Select: searchable dropdown (same UX as selectize.js used in Shiny) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tom-select@2.4.6/dist/css/tom-select.css">
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -15,13 +17,8 @@
     }
     h1 { font-size: 1.3rem; margin-bottom: 0.2rem; }
     .subtitle { color: #666; font-size: 0.9rem; margin-bottom: 1rem; }
-    select {
-      font-size: 1rem;
-      padding: 6px 10px;
-      width: 100%;
-      max-width: 600px;
-      margin-bottom: 1rem;
-    }
+    /* Tom Select container width */
+    .ts-wrapper { max-width: 600px; margin-bottom: 1rem; }
     .grid-container {
       position: relative;
       display: inline-block;
@@ -90,7 +87,7 @@
   <h1>Pairwise Year Comparison Heatmaps</h1>
   <p class="subtitle">Hover over a region facet to view its GVA time series with error bars.</p>
 
-  <label for="sector-select"><strong>Select sector:</strong></label>
+  <label for="sector-select"><strong>Select or type/search sector:</strong></label>
   <select id="sector-select"></select>
 
   <p class="hover-hint" id="hover-hint">Loading panel coordinates...</p>
@@ -115,6 +112,7 @@
 
   <!-- Panel coordinates — loaded as a plain script tag so it works from file:// -->
   <script src="panel_coords.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tom-select@2.4.6/dist/js/tom-select.complete.min.js"></script>
 
   <script>
     const sectors = [
@@ -248,17 +246,30 @@
       });
     }
 
+    // Initialise Tom Select (searchable dropdown like Shiny's selectize)
+    const sectorPicker = new TomSelect("#sector-select", {
+      create: false,
+      sortField: { field: "text", direction: "asc" },
+      onChange: function() { updateGridImage(); }
+    });
+
+    function getSelectedFile() { return sectorPicker.getValue(); }
+    function getSelectedLabel() {
+      const item = sectorPicker.options[sectorPicker.getValue()];
+      return item ? item.text : "";
+    }
+
     function updateGridImage() {
-      const file = select.value;
+      const file = getSelectedFile();
+      if (!file) return;
       gridImg.src = gridImgBase + file + ".png";
       tsPopup.style.display = "none";
       currentHitRegion = null;
-      // Preload time series images for this sector
       preloadTimeSeriesImages(file);
     }
-    select.addEventListener("change", updateGridImage);
+
     // Default to "Manufacture of fabricated metal products"
-    select.value = "Manufactureoffabricatedmetalproducts";
+    sectorPicker.setValue("Manufactureoffabricatedmetalproducts", true);  // true = silent, don't trigger onChange yet
     updateGridImage();
 
     // --- Tweak these to scale the entire hover grid around its centre ---
@@ -350,8 +361,8 @@
         // Update time series popup (only swap image if region changed)
         if (currentHitRegion !== hit.region_safe) {
           currentHitRegion = hit.region_safe;
-          const sectorFile = select.value;
-          const sectorLabel = select.options[select.selectedIndex].text;
+          const sectorFile = getSelectedFile();
+          const sectorLabel = getSelectedLabel();
           tsPopupImg.src = tsImgBase + sectorFile + "_" + hit.region_safe + ".png";
           tsPopupHeader.textContent = sectorLabel + " — " + hit.region;
         }
