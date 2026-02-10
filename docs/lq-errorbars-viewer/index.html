@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Location Quotient Error Bars by SIC2 Sector</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tom-select@2.4.6/dist/css/tom-select.css">
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -22,13 +23,7 @@
       margin-bottom: 1.2rem;
       font-size: 0.95rem;
     }
-    select {
-      font-size: 1rem;
-      padding: 6px 10px;
-      width: 100%;
-      max-width: 600px;
-      margin-bottom: 1rem;
-    }
+    .ts-wrapper { max-width: 600px; margin-bottom: 1rem; }
     .plot-container {
       background: #fff;
       border: 1px solid #ddd;
@@ -51,7 +46,7 @@
   <h1>Location Quotient with Simulated 95% CI</h1>
   <p class="subtitle">SIC2 sectors &mdash; UK regions, 2023. 500 Monte Carlo draws using log-normal on GVA.</p>
 
-  <label for="sector-select"><strong>Select sector:</strong></label>
+  <label for="sector-select"><strong>Select or type/search sector:</strong></label>
   <select id="sector-select"></select>
 
   <fieldset style="border:1px solid #ccc; border-radius:4px; padding:6px 12px; margin-bottom:1rem; max-width:400px;">
@@ -70,6 +65,7 @@
 
   <p class="note">Error bars: 2.5th&ndash;97.5th percentile from simulation. Dashed line = LQ of 1 (national average).</p>
 
+  <script src="https://cdn.jsdelivr.net/npm/tom-select@2.4.6/dist/js/tom-select.complete.min.js"></script>
   <script>
     const sectors = [
       ["Agriculture and hunting", "Agricultureandhunting"],
@@ -166,13 +162,26 @@
       select.appendChild(opt);
     });
 
-    function updatePlot() {
-      const file = select.value;
-      img.src = getImgBase() + file + ".png";
-      img.alt = "LQ plot: " + select.options[select.selectedIndex].text;
+    // Initialise Tom Select (searchable dropdown)
+    const sectorPicker = new TomSelect("#sector-select", {
+      create: false,
+      sortField: { field: "text", direction: "asc" },
+      onChange: function() { updatePlot(); }
+    });
+
+    function getSelectedFile() { return sectorPicker.getValue(); }
+    function getSelectedLabel() {
+      const item = sectorPicker.options[sectorPicker.getValue()];
+      return item ? item.text : "";
     }
 
-    select.addEventListener("change", updatePlot);
+    function updatePlot() {
+      const file = getSelectedFile();
+      if (!file) return;
+      img.src = getImgBase() + file + ".png";
+      img.alt = "LQ plot: " + getSelectedLabel();
+    }
+
     document.querySelectorAll('input[name="year-view"]').forEach(r =>
       r.addEventListener("change", updatePlot)
     );
