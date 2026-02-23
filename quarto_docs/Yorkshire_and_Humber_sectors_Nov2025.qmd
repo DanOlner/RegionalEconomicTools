@@ -419,6 +419,12 @@ ggplot(indstrat_plot %>% filter(!is.na(percent_all_indstrat_movingav)),
 
 ```
 
+
+## Industrial strategy: location quotients for each IS-8, for each local authority in Y&H
+
+Calculated separately to make sure LQs are accurate per IS-8 grouping.
+
+
 ```{r, fig-allindstratLQs}
 #| fig-height: 25
 
