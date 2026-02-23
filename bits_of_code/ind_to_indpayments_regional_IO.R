@@ -1356,7 +1356,7 @@ ggplot(sector_locality_arrows) +
   ) +
   # Facet by region
 
-  facet_wrap(~payer_ITL1name, ncol = 3) +
+  facet_wrap(~payer_ITL1name, ncol = 2) +
   scale_x_continuous(labels = scales::percent) +
   scale_y_continuous(labels = scales::percent) +
   labs(
@@ -1374,6 +1374,7 @@ ggplot(sector_locality_arrows) +
     legend.text = element_text(size = 7)
   )
 
+ggsave('llm_output/io_plots/06_arrow_plot_change.png', width = 8, height = 25)
 
 
 
