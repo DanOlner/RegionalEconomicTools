@@ -1,0 +1,293 @@
+=== 1. REGIONAL SELF-SUFFICIENCY (latest year) ===
+# A tibble: 11 × 5
+   payer_ITL1name           total_internal_coef total_external_coef total_coef
+   <chr>                                  <dbl>               <dbl>      <dbl>
+ 1 London                                  9.23                9.77       19  
+ 2 Scotland                                7.57               11.4        19.0
+ 3 North West                              6.86               12.1        19.0
+ 4 South East                              6.07               12.9        19  
+ 5 Wales                                   5.76               13.2        19  
+ 6 Yorkshire and The Humber                5.17               13.8        19.0
+ 7 South West                              5.07               13.9        19  
+ 8 West Midlands                           4.88               14.1        19  
+ 9 East of England                         4.64               14.4        19  
+10 East Midlands                           4.62               14.4        19  
+11 North East                              4.12               14.9        19.0
+# ℹ 1 more variable: overall_regional_share <dbl>
+
+=== MULTI-YEAR SELF-SUFFICIENCY ===
+Selected years: 2019-01-01 2022-01-01 2025-01-01 
+# A tibble: 11 × 4
+   payer_ITL1name           `2019` `2022` `2025`
+   <chr>                     <dbl>  <dbl>  <dbl>
+ 1 East Midlands             0.167  0.180  0.182
+ 2 East of England           0.188  0.195  0.202
+ 3 London                    0.450  0.441  0.459
+ 4 North East                0.157  0.161  0.185
+ 5 North West                0.227  0.256  0.276
+ 6 Scotland                  0.332  0.345  0.321
+ 7 South East                0.298  0.291  0.304
+ 8 South West                0.188  0.209  0.206
+ 9 Wales                     0.150  0.176  0.220
+10 West Midlands             0.197  0.212  0.226
+11 Yorkshire and The Humber  0.196  0.216  0.213
+
+=== SECTOR SELF-SUFFICIENCY: Y&H ===
+# A tibble: 19 × 2
+   section_payer_short regional_share
+   <chr>                        <dbl>
+ 1 Mining/quarrying             0.496
+ 2 Agri                         0.427
+ 3 Education                    0.374
+ 4 Public/defence               0.360
+ 5 Real est                     0.357
+ 6 Water                        0.341
+ 7 Entertainment                0.333
+ 8 Construction                 0.313
+ 9 Food/service                 0.296
+10 Manuf                        0.284
+11 Other                        0.249
+12 Prof/sci/techn               0.241
+13 Transport                    0.230
+14 Retail                       0.166
+15 ICT                          0.153
+16 Admin/support                0.146
+17 Finance/insu                 0.146
+18 Power                        0.133
+19 Health/soc                   0.129
+
+=== PAYEE LOCALITY (how locally payments received) ===
+# A tibble: 19 × 3
+   sectionname_payee                        section_payee_short mean_local_share
+   <chr>                                    <chr>                          <dbl>
+ 1 Mining and quarrying                     Mining/quarrying               0.643
+ 2 Public administration and defence        Public/defence                 0.574
+ 3 Water supply; sewerage and waste manage… Water                          0.558
+ 4 Agriculture, forestry and fishing        Agri                           0.552
+ 5 Arts, entertainment and recreation       Entertainment                  0.538
+ 6 Construction                             Construction                   0.481
+ 7 Education                                Education                      0.464
+ 8 Accommodation and food service activiti… Food/service                   0.436
+ 9 Manufacturing                            Manuf                          0.426
+10 Real estate activities                   Real est                       0.418
+11 Transportation and storage               Transport                      0.418
+12 Professional, scientific and technical … Prof/sci/techn                 0.363
+13 Human health and social work activities  Health/soc                     0.325
+14 Other service activities                 Other                          0.316
+15 Administrative and support service acti… Admin/support                  0.285
+16 Wholesale and retail trade; repair of m… Retail                         0.268
+17 Information and communication            ICT                            0.195
+18 Electricity, gas, steam and air conditi… Power                          0.177
+19 Financial and insurance activities       Finance/insu                   0.145
+
+=== PAYER LOCALITY (how locally inputs sourced) ===
+# A tibble: 19 × 3
+   sectionname_payer                        section_payer_short mean_local_share
+   <chr>                                    <chr>                          <dbl>
+ 1 Water supply; sewerage and waste manage… Water                          0.531
+ 2 Mining and quarrying                     Mining/quarrying               0.505
+ 3 Public administration and defence        Public/defence                 0.504
+ 4 Education                                Education                      0.458
+ 5 Arts, entertainment and recreation       Entertainment                  0.451
+ 6 Agriculture, forestry and fishing        Agri                           0.451
+ 7 Electricity, gas, steam and air conditi… Power                          0.428
+ 8 Real estate activities                   Real est                       0.412
+ 9 Manufacturing                            Manuf                          0.405
+10 Other service activities                 Other                          0.393
+11 Transportation and storage               Transport                      0.389
+12 Accommodation and food service activiti… Food/service                   0.386
+13 Construction                             Construction                   0.367
+14 Human health and social work activities  Health/soc                     0.341
+15 Professional, scientific and technical … Prof/sci/techn                 0.328
+16 Administrative and support service acti… Admin/support                  0.301
+17 Information and communication            ICT                            0.297
+18 Financial and insurance activities       Finance/insu                   0.295
+19 Wholesale and retail trade; repair of m… Retail                         0.253
+
+=== SECTOR LOCALITY SUMMARY ===
+# A tibble: 19 × 3
+   section          payer_mean payee_mean
+   <chr>                 <dbl>      <dbl>
+ 1 Mining/quarrying      0.454      0.693
+ 2 Agri                  0.401      0.504
+ 3 Education             0.390      0.493
+ 4 Water                 0.376      0.447
+ 5 Real est              0.359      0.424
+ 6 Entertainment         0.355      0.438
+ 7 Food/service          0.346      0.425
+ 8 Construction          0.342      0.484
+ 9 Health/soc            0.308      0.442
+10 Public/defence        0.304      0.698
+11 Power                 0.283      0.252
+12 Manuf                 0.280      0.357
+13 Other                 0.277      0.314
+14 Transport             0.272      0.426
+15 Prof/sci/techn        0.268      0.354
+16 Admin/support         0.225      0.272
+17 ICT                   0.214      0.189
+18 Retail                0.186      0.283
+19 Finance/insu          0.178      0.140
+
+=== Y&H SECTOR LOCALITY vs UK MEANS ===
+# A tibble: 19 × 7
+   section          payer_locality payer_mean payer_diff payee_locality
+   <chr>                     <dbl>      <dbl>      <dbl>          <dbl>
+ 1 Public/defence            0.360      0.304    0.0567          0.786 
+ 2 Mining/quarrying          0.496      0.454    0.0422          0.987 
+ 3 Agri                      0.427      0.401    0.0259          0.421 
+ 4 Manuf                     0.284      0.280    0.00371         0.419 
+ 5 Real est                  0.357      0.359   -0.00233         0.407 
+ 6 Education                 0.374      0.390   -0.0155          0.399 
+ 7 Retail                    0.166      0.186   -0.0205          0.264 
+ 8 Entertainment             0.333      0.355   -0.0222          0.457 
+ 9 Prof/sci/techn            0.241      0.268   -0.0262          0.339 
+10 Other                     0.249      0.277   -0.0281          0.255 
+11 Construction              0.313      0.342   -0.0295          0.508 
+12 Finance/insu              0.146      0.178   -0.0325          0.0430
+13 Water                     0.341      0.376   -0.0348          0.441 
+14 Transport                 0.230      0.272   -0.0426          0.370 
+15 Food/service              0.296      0.346   -0.0496          0.336 
+16 ICT                       0.153      0.214   -0.0602          0.131 
+17 Admin/support             0.146      0.225   -0.0786          0.249 
+18 Power                     0.133      0.283   -0.150           0.0798
+19 Health/soc                0.129      0.308   -0.179           0.397 
+   payee_mean payee_diff
+        <dbl>      <dbl>
+ 1      0.698    0.0874 
+ 2      0.693    0.295  
+ 3      0.504   -0.0825 
+ 4      0.357    0.0630 
+ 5      0.424   -0.0179 
+ 6      0.493   -0.0939 
+ 7      0.283   -0.0189 
+ 8      0.438    0.0191 
+ 9      0.354   -0.0149 
+10      0.314   -0.0587 
+11      0.484    0.0237 
+12      0.140   -0.0965 
+13      0.447   -0.00649
+14      0.426   -0.0562 
+15      0.425   -0.0892 
+16      0.189   -0.0575 
+17      0.272   -0.0223 
+18      0.252   -0.172  
+19      0.442   -0.0453 
+
+=== LINKAGES MOSTLY LOCAL EVERYWHERE (mean > 50%) ===
+# A tibble: 15 × 2
+   flow_label                       mean_regional_share
+   <chr>                                          <dbl>
+ 1 Power -> Entertainment                         0.927
+ 2 Other -> Mining/quarrying                      0.924
+ 3 Water -> Entertainment                         0.923
+ 4 Mining/quarrying -> Water                      0.880
+ 5 Public/defence -> Public/defence               0.838
+ 6 Real est -> Mining/quarrying                   0.836
+ 7 Education -> Agri                              0.773
+ 8 Manuf -> Public/defence                        0.757
+ 9 Public/defence -> Manuf                        0.750
+10 Entertainment -> Water                         0.736
+11 Public/defence -> Entertainment                0.731
+12 Transport -> Mining/quarrying                  0.728
+13 Education -> Public/defence                    0.724
+14 Power -> Education                             0.723
+15 Water -> Mining/quarrying                      0.722
+
+=== LINKAGES MOSTLY IMPORTED EVERYWHERE (mean < 15%) ===
+# A tibble: 15 × 2
+   flow_label                     mean_regional_share
+   <chr>                                        <dbl>
+ 1 Finance/insu -> Power                       0.0862
+ 2 Public/defence -> Finance/insu              0.0925
+ 3 Transport -> Power                          0.106 
+ 4 Manuf -> Power                              0.109 
+ 5 Retail -> Finance/insu                      0.114 
+ 6 ICT -> Power                                0.118 
+ 7 Water -> Finance/insu                       0.120 
+ 8 Agri -> Power                               0.122 
+ 9 Retail -> Power                             0.123 
+10 Transport -> Finance/insu                   0.124 
+11 Admin/support -> Finance/insu               0.126 
+12 Admin/support -> Power                      0.130 
+13 Manuf -> Finance/insu                       0.132 
+14 Retail -> ICT                               0.136 
+15 Other -> Finance/insu                       0.138 
+
+=== SAVING PLOTS ===
+Saved 01_regional_self_sufficiency.png
+Saved 02_sector_self_sufficiency_heatmap.png
+Saved 03_sector_locality_crosshairs.png
+Saved 04_facet_by_sector.png
+Saved 05_facet_by_region.png
+
+Arrow plot years: 2019 2025 
+
+=== Y&H LOCALITY CHANGE OVER TIME ===
+# A tibble: 19 × 8
+   section          payer_locality_start payer_locality_end payer_change
+   <chr>                           <dbl>              <dbl>        <dbl>
+ 1 Public/defence                  0.170              0.360      0.191  
+ 2 Mining/quarrying                0.378              0.496      0.118  
+ 3 Real est                        0.283              0.357      0.0738 
+ 4 Other                           0.187              0.249      0.0624 
+ 5 Food/service                    0.238              0.296      0.0587 
+ 6 Construction                    0.271              0.313      0.0412 
+ 7 Education                       0.336              0.374      0.0386 
+ 8 ICT                             0.125              0.153      0.0282 
+ 9 Retail                          0.139              0.166      0.0270 
+10 Prof/sci/techn                  0.220              0.241      0.0210 
+11 Transport                       0.210              0.230      0.0196 
+12 Entertainment                   0.315              0.333      0.0183 
+13 Manuf                           0.273              0.284      0.0111 
+14 Health/soc                      0.119              0.129      0.00945
+15 Power                           0.124              0.133      0.00905
+16 Admin/support                   0.151              0.146     -0.00486
+17 Water                           0.380              0.341     -0.0394 
+18 Agri                            0.476              0.427     -0.0490 
+19 Finance/insu                    0.230              0.146     -0.0840 
+   payee_locality_start payee_locality_end payee_change compass
+                  <dbl>              <dbl>        <dbl> <chr>  
+ 1               0.248              0.786        0.538  NE     
+ 2               0.954              0.987        0.0336 NE     
+ 3               0.334              0.407        0.0721 NE     
+ 4               0.211              0.255        0.0443 NE     
+ 5               0.262              0.336        0.0743 NE     
+ 6               0.437              0.508        0.0708 NE     
+ 7               0.421              0.399       -0.0221 SE     
+ 8               0.120              0.131        0.0115 NE     
+ 9               0.240              0.264        0.0236 NE     
+10               0.302              0.339        0.0367 NE     
+11               0.328              0.370        0.0422 NE     
+12               0.395              0.457        0.0624 NE     
+13               0.401              0.419        0.0186 NE     
+14               0.335              0.397        0.0614 NE     
+15               0.0925             0.0798      -0.0126 SE     
+16               0.237              0.249        0.0122 NW     
+17               0.475              0.441       -0.0342 SW     
+18               0.562              0.421       -0.141  SW     
+19               0.0546             0.0430      -0.0116 SW     
+
+=== COMPASS DIRECTION SUMMARY (all regions) ===
+# A tibble: 4 × 3
+  compass     n   pct
+  <chr>   <int> <dbl>
+1 NE        126  60.3
+2 NW         21  10.0
+3 SE         35  16.7
+4 SW         27  12.9
+
+=== COMPASS DIRECTION SUMMARY (Y&H only) ===
+# A tibble: 4 × 3
+  compass     n   pct
+  <chr>   <int> <dbl>
+1 NE         13 68.4 
+2 NW          1  5.26
+3 SE          2 10.5 
+4 SW          3 15.8 
+Warning messages:
+1: ggrepel: 4 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+2: ggrepel: 8 unlabeled data points (too many overlaps). Consider increasing max.overlaps 
+Saved 06_arrow_plot_change.png
+Saved 07_local_vs_tradeable_heatmap.png
+
+=== DONE ===

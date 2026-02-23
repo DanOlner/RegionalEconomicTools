@@ -749,7 +749,12 @@ is8_lqplot = function(is8name){
   
   # Pick manually to get just Y&H places
   # ynh itl3 names gets us most of the way
-  itl3.ynh = readRDS('../local/data/itl3ynh.rds')
+  
+  itl3.ynh = tryCatch(
+    readRDS('local/data/itl3ynh.rds'),
+    error = function(e) readRDS('../local/data/itl3ynh.rds')
+  )
+  
   ynhnames = unique(itl3.ynh$Region_name)
   
   ynhnames = c(ynhnames[-c(2,11)], 'Calderdale','Kirklees','Lincolnshire','North Lincolnshire')
