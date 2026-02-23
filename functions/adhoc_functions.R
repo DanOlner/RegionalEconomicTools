@@ -715,9 +715,194 @@ sic90subsector_lqs = function(data,sector){
   
   p2
   
+}
+
+
+
+# Ad-hoc for working out IS-8 LQs separately for each grouping
+is8_lqplot = function(is8name){
+  
+  # g(indstrat_sums)
+  # Turn into an LQ-friendly df with the IS-8 as sector 1 and 'all other jobs here' as sector 2
+  this_is8 = indstrat_sums %>%
+    filter(indstrat_code == is8name) %>% 
+    select(year = DATE,Region_name = GEOGRAPHY_NAME,totaljobs,jobs_minus_thisIS8)#where totaljobs is the IS-8 count and jobs_minus is all others
+  
+  # Now we just make these two columns long as their own sectors
+  this_is8 = this_is8 %>% 
+    pivot_longer(totaljobs:jobs_minus_thisIS8, names_to = 'sector', values_to = 'jobcount')
+  
+  
+  # LQ from that for each year
+  # And keep only the sector we want to view
+  this_is8 = this_is8 %>%
+    group_split(year) %>% 
+    map(
+      add_location_quotient_and_proportions,
+      regionvar = Region_name,
+      lq_var = sector,
+      valuevar = jobcount
+    ) %>% 
+    bind_rows() %>% 
+    filter(sector == 'totaljobs')
+  
+  
+  # Pick manually to get just Y&H places
+  # ynh itl3 names gets us most of the way
+  itl3.ynh = readRDS('../local/data/itl3ynh.rds')
+  ynhnames = unique(itl3.ynh$Region_name)
+  
+  ynhnames = c(ynhnames[-c(2,11)], 'Calderdale','Kirklees','Lincolnshire','North Lincolnshire')
+  
+  # Tick
+  table(ynhnames %in% this_is8$Region_name)
+  
+  # Keep only those
+  this_is8 = this_is8 %>% 
+    filter(
+      Region_name %in% ynhnames
+    )
+  
+  
+  # Enshortenemateifyadoodoo
+  # ynhshortnames - not that short? And also won't match LAs here
+  unique(this_is8$Region_name)
+  
+  this_is8 = this_is8 %>%
+    mutate(
+      Region_name = case_when(
+        Region_name == 'Lincolnshire' ~ 'L\'shire',
+        qg('North linc',Region_name) ~ 'N L\'shire',
+        qg('North york',Region_name) ~ 'N Yorks',
+        qg('East riding',Region_name) ~ 'East Riding',
+        .default = Region_name
+      )
+    )
+  
+  
+  
+  # Get ITL3 plot made for the places in Y&H
+  LQ_slopes <- compute_slope_or_zero(
+    data = this_is8, 
+    Region_name, sector,#slopes will be found within whatever grouping vars are added here
+    y = LQ_log, x = year)
+  
+  
+  #Filter down to a single year... we may want to smooth years, let's see
+  yeartoplot <- this_is8 %>% filter(year == max(year))#use latest year
+  
+  #Add slopes into data to get LQ plots
+  yeartoplot <- yeartoplot %>% 
+    left_join(
+      LQ_slopes,
+      by = c('Region_name', 'sector')
+    )
+  
+  #Get min/max values for LQ over time as well, for each sector and place, to add as bars so range of sector is easy to see
+  minmaxes <- this_is8 %>% 
+    group_by(Region_name, sector) %>% 
+    summarise(
+      min_LQ_all_time = min(LQ, na.rm = T),
+      max_LQ_all_time = max(LQ, na.rm = T)
+    ) %>% 
+    mutate(
+      min_LQ_all_time = ifelse(is.infinite(min_LQ_all_time),NA,min_LQ_all_time),
+      max_LQ_all_time = ifelse(is.infinite(max_LQ_all_time),NA,max_LQ_all_time)
+    )
+  
+  
+  
+  #Join min and max
+  yeartoplot <- yeartoplot %>% 
+    left_join(
+      minmaxes,
+      by = c('Region_name', 'sector')
+    )
+  
+  # Join other SIC levels to it so we can break down into production / other
+  # I think I have a lookup for that, though that will need a tweak due to one extra sector in ITL1
+  
+  # Have just upyeard regionalGVA_siccode_lookupmaker.R for ITL1 as well...
+  # (Forgot I had that!)
+  # gvalookup_itl3 = read_csv('data/siclookup_forregionalGVAcategories_ITL3.csv')
+  
+  # Confirm... tick
+  # table(unique(gvalookup_itl1$SIC07_code) %in% unique(islq$SIC07_code))
+  # yeartoplot <- yeartoplot %>%
+  #   left_join(
+  #     gvalookup_itl3 %>% select(-indstrat_code),
+  #     by = 'SIC07_code'
+  #   )
+  
+  
+  # Make a column with the amount and % in to display as part of labels
+  yeartoplot = yeartoplot %>% 
+    mutate(
+      displayregions = paste0(
+        Region_name,
+        ": ",
+        round(jobcount/1000,1),
+        "K, ",
+        round(sector_regional_proportion * 100,2),
+        "%"
+      )
+    )
+  
+  
+  yeartoplot = yeartoplot %>% 
+    mutate(
+      displayregions = fct_reorder(displayregions,LQ_log,.desc = T)
+    )
+  
+  # factor(yeartoplot.sub$displayregions, levels = placeLQorder, ordered = T)
+  
+  
+  # Get range to display on x axis
+  # Use min and max of minmaxes here
+  plot_range = minmaxes %>% 
+    select(min_LQ_all_time:max_LQ_all_time) %>% 
+    pivot_longer(min_LQ_all_time:max_LQ_all_time, names_to = 'cols', values_to = 'vals') %>% 
+    ungroup() %>% 
+    reframe(range = range(vals)) %>% 
+    pull(range) 
+  
+  if(plot_range[1]==0) plot_range[1] = 0.1# Avoid log infs
+  
+  # debugonce(LQ_baseplot)
+  p2 <- LQ_baseplot(df = yeartoplot, alpha = 1, sector_name = displayregions, 
+                    LQ_column = LQ, change_over_time = slope, horriblehack = T)
+  
+  # debugonce(addplacename_to_LQplot)
+  p2 <- addplacename_to_LQplot(df = yeartoplot, plot_to_addto = p2, maxLQvalmultiplier = 20,#Hide it!
+                               placename = unique(yeartoplot$sector), shapenumber = 16,
+                               min_LQ_all_time = min_LQ_all_time,max_LQ_all_time = max_LQ_all_time,#Include minmax
+                               value_column = jobcount, sector_regional_proportion = sector_regional_proportion,
+                               region_name = sector,
+                               sector_name = displayregions, change_over_time = slope, LQ_column = LQ,
+                               text = 7, value_col_ismoney = T)
+  
+  p2 +
+    coord_cartesian(xlim = plot_range) +
+    ggtitle(is8name)
+  
   
   
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

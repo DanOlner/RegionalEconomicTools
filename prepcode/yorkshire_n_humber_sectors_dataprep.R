@@ -1774,6 +1774,9 @@ for(sector in sectorlist){
 
 # QUICK INDSTRAT V Y&H PLACES LQS?-----
 
+# NOTE: THIS SECTION DOESN'T ACCOUNT FOR CORRECT IS-8 SUMMING
+# SEE IS-8 LQ ATTEMPT 2 BELOW...
+
 # Can we use the code above that puts places on y axis and do this relatively quickly?
 indstrat_sums = readRDS('local/indstrat_sums.rds')
 
@@ -1941,7 +1944,7 @@ make_indstrat_ynhlqplots = function(indstrat_name){
   
   # debugonce(LQ_baseplot)
   p2 <- LQ_baseplot(df = yeartoplot.sub, alpha = 1, sector_name = displayregions, 
-                    LQ_column = LQ, change_over_time = slope)
+                    LQ_column = LQ, change_over_time = slope, horriblehack = T)
   
   # debugonce(addplacename_to_LQplot)
   p2 <- addplacename_to_LQplot(df = yeartoplot.sub, plot_to_addto = p2, maxLQvalmultiplier = 20,#Hide it!
@@ -1966,6 +1969,10 @@ plotz = patchwork::wrap_plots(plotz_gg, ncol = 2)
 
 # Save those plots as is for QMD
 saveRDS(plotz,'local/data/indstrat_lqplots_ynh.rds')
+
+
+
+
 
 
 # TEST MAKING 2-DIGIT SECTOR MAP FROM CH DATA----
@@ -2302,6 +2309,107 @@ itl1 %>%
     percent = (value / sum(value)) * 100
   ) %>% View
   
+
+
+# IS-8 LQs attempt 2----
+
+# See obsidian notes in Y&H econ / Key messages from... 23rd Feb 26
+
+# I think we can get correct LQs thus:
+
+# Reminder what's happening: from line 724 [in industrial_strategy_datalinkage.R], 
+# there are different nested levels of job counts coming from BRES. If e.g. an IS-8 has e.g. line 754: "keep only e.g. 26 given we've got 261,262... 26701?"
+# 
+# But could this work given LQ formula? LQ = 
+# 
+# sector x in region y / all jobs in region y
+# over
+# sector x in GB total / all jobs in GB total
+# 
+# Actually yes. We just need those job totals - which we can add into the LQ calc as 'all other jobs not this IS-8 sector', which is a simple subtract for each turn.
+
+
+# Let's test that. BRES data, can we get totals from here?
+bres.at.itl3 = readRDS('local/data/BRES2024_linkedtoITL3_2025_GVAsiccodes.rds')
+
+# The SIC codes don't matter - we only want the per-ITL3 sums
+# Though let's just check we've got the right geog match...
+indstrat_sums = readRDS('local/indstrat_sums.rds')
+
+# Aaah
+# table(unique(indstrat_sums$GEOGRAPHY_NAME) %in% unique(bres.at.itl3$ITL325NM))
+# table(unique(bres.at.itl3$ITL325NM) %in% unique(indstrat_sums$GEOGRAPHY_NAME))
+
+# Non-matches are just CCs etc?
+# unique(bres.at.itl3$ITL325NM)[!unique(bres.at.itl3$ITL325NM) %in% unique(indstrat_sums$GEOGRAPHY_NAME)]
+# unique(indstrat_sums$GEOGRAPHY_NAME)[!unique(indstrat_sums$GEOGRAPHY_NAME) %in% unique(bres.at.itl3$ITL325NM)]
+
+# What about this? Tick, huzzah!
+bres <- read_csv("local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALLYEARSWITHDATA_TYPE423_localauthoritiescountyunitaryasofApril2023_2_Fulltimeemployees_2015_2024_SIC_5DIGIT.csv")
+
+table(unique(bres$GEOGRAPHY_NAME) %in% unique(indstrat_sums$GEOGRAPHY_NAME))
+
+# DEFRA data seemingly missing for 2024... needs removing from totals
+bres %>% filter(DATE == 2024) %>% View
+
+# So just sum per local authority for our region and GB totals to be correct
+bres.lasums = bres %>% 
+  group_by(DATE,GEOGRAPHY_NAME) %>% 
+  summarise(JOBCOUNT = sum(JOBCOUNT, na.rm = T))#DEFRA issue above
+
+
+# ~~~~~~~~~
+
+# OK so the next bit isn't obvious, so let's run through what we're doing to get LQs per local authority
+# The LQ function as is needs all sectors to make its totals
+# Rather than re-write that, let's just add in all other jobs as its own 'other jobs' sector
+# Which is just all jobs per LA minus our IS-8.
+# Then do the LQ plot process.
+
+# So, another version of the function from 'quick indstrat' above...
+
+# Let's work through one first to get it right
+# Merge in total per LA job count as its own column so the 'all jobs not this IS-8' values can be done
+indstrat_sums = indstrat_sums %>% 
+  left_join(
+    bres.lasums %>% rename(totaljobs_thisLA = JOBCOUNT),
+    by = c('DATE','GEOGRAPHY_NAME')
+  )
+
+# Find 'total jobs minus this IS-8'
+# Remembering that this is only valid for each IS-8 separately, not across them all
+indstrat_sums = indstrat_sums %>% 
+  mutate(
+    jobs_minus_thisIS8 = totaljobs_thisLA - totaljobs
+  )
+
+
+# Then the plot needs repeating per IS-8 separately
+# Let's ad-hoc function it up for ease of debugging
+
+# debugonce(is8_lqplot)
+# is8_lqplot(unique(indstrat_sums$indstrat_code[1]))
+
+# Get all of em
+plotz_gg = map(unique(indstrat_sums$indstrat_code), is8_lqplot)
+
+plotz = patchwork::wrap_plots(plotz_gg, ncol = 2)
+
+# Save for elsewhere
+saveRDS(plotz,'local/data/indstrat_lqplots_ynh.rds')
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1356,7 +1356,7 @@ ggplot(sector_locality_arrows) +
   ) +
   # Facet by region
 
-  facet_wrap(~payer_ITL1name, ncol = 4) +
+  facet_wrap(~payer_ITL1name, ncol = 3) +
   scale_x_continuous(labels = scales::percent) +
   scale_y_continuous(labels = scales::percent) +
   labs(

@@ -2,6 +2,7 @@
 # How much are places actually separarable for sectors?
 library(tidyverse)
 library(zoo)
+library(patchwork)
 
 source('functions/misc_functions.R')
 source('functions/data_process_functions.R')
@@ -889,6 +890,26 @@ plot_gva_and_heatmap(itl1.cv.linked, "fabricated metal", "Yorkshire and The Humb
 plot_gva_and_heatmap(itl1.cv.linked, "land transport", "London")
 
 
+# Save some elsewhere for outputs
+# Edit Y&H name to fit
+ggsave(
+  filename = "~/Code/Regecon_modular_writeup/chunks/uncertainty_in_regionalGVA/images/YNH_growthgrid.png", 
+  # filename = "~/Code/Regecon_modular_writeup/chunks/uncertainty_in_regionalGVA/images/YNH_growthgrid.png", 
+       plot = plot_gva_and_heatmap(
+         itl1.cv.linked %>% mutate(Region_name = ifelse(qg('yorkshire',Region_name),'Yorks & Humber',Region_name)), 
+         "fabricated metal", "Yorks & Humber"),
+       width = 7,height = 10)
+
+ggsave(
+  filename = "~/Code/Regecon_modular_writeup/chunks/uncertainty_in_regionalGVA/images/eastmids_growthgrid.png", 
+  # filename = "~/Code/Regecon_modular_writeup/chunks/uncertainty_in_regionalGVA/images/YNH_growthgrid.png", 
+       plot = plot_gva_and_heatmap(
+         itl1.cv.linked, "fabricated metal", "East Midlands"),
+       width = 7,height = 10)
+
+
+
+
 # DAN CODE----
 
 ## How much does the introduction of error rates change LQs at ITL1 level?----
@@ -988,6 +1009,34 @@ ggplot(
 # Log-normal note: we parameterise so that the mean of the log-normal equals the
 # observed GVA value and the SD on the log scale corresponds to the observed SE.
 # This prevents negative draws which are an issue for small sectors with large SEs.
+
+# The problem with normal draws
+# If you draw from N(GVA, SE), some draws will be negative — especially when the SE is large relative to the GVA value. Think of a small sector in a small region: maybe GVA = £50m with SE = £30m. Drawing from N(50, 30) means roughly 5% of draws will be below -£8.8m, and you'll regularly get values near zero or below it.
+# 
+# Negative GVA values are nonsensical for most sectors, and they'd poison the LQ calculation — the sums in the denominator could shrink toward zero or flip sign, producing wildly distorted quotients.
+# 
+# What the log-normal does
+# A log-normal distribution is always positive — it lives on (0, ∞). So no draw can ever be negative, which matches the physical reality that a sector's output can't be less than zero.
+# 
+# The parameterisation trick
+# The tricky bit is: we don't just want any log-normal. We want one whose mean equals the observed GVA and whose spread matches the observed SE. A log-normal with parameters μ and σ (on the log scale) has:
+# 
+# Mean = exp(μ + σ²/2)
+# Variance = [exp(σ²) - 1] × exp(2μ + σ²)
+# So the code works backwards from the observed values:
+# 
+# 
+# # σ² on the log scale, derived from the coefficient of variation (SE/GVA)
+# lnorm_sigma2 = log(1 + (SE / value)^2)
+# 
+# # μ on the log scale, adjusted so the mean comes out right
+# lnorm_mu = log(value) - lnorm_sigma2 / 2
+# That second line is the key: subtracting σ²/2 compensates for the fact that the log-normal mean is higher than exp(μ). Without that correction, your draws would be systematically too high.
+# 
+# When does it matter?
+# For large sectors with small relative SEs (say GVA = £5000m, SE = £200m), normal and log-normal draws are nearly indistinguishable — the probability of a negative draw from the normal is vanishingly small, and both distributions look symmetric at that scale.
+# 
+# It matters for the long tail of small sectors with big SEs. Those are exactly the cases where the LQ denominators are most sensitive, so getting physically plausible draws there is important for the simulation to behave sensibly.
 
 # Reload data (in case running from here)
 itl1.cp.linked = read_csv('data/itl1_cp_withestimatederrorratefromABS.csv')
@@ -1119,6 +1168,15 @@ plot_simulated_LQ(LQ_with_sim_CIs, "fabricated metal")
 plot_simulated_LQ(LQ_with_sim_CIs, "computer programming")
 plot_simulated_LQ(LQ_with_sim_CIs, "construction of buildings")
 plot_simulated_LQ(LQ_with_sim_CIs, "pharmaceutical")
+
+# Save version for use in output
+ggsave(
+  filename = "~/Code/Regecon_modular_writeup/chunks/uncertainty_in_regionalGVA/images/fabmetals_LQs.png", 
+  plot = plot_simulated_LQ(
+    LQ_with_sim_CIs %>% mutate(Region_name = ifelse(qg('yorkshire',Region_name),'Yorks & Humber',Region_name)), 
+    "fabricated metal"),
+  width = 8,height = 8)
+
 
 
 # Sector names can contain regex special chars like () so the plot function
