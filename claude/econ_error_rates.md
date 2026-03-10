@@ -250,6 +250,69 @@ The consequences of overprecision compound in planning and forecasting: if decis
 
 False precision — sometimes called "[spurious accuracy](https://ideas.repec.org/h/pal/palchp/978-0-230-59501-9_7.html)" — is defined as "a pretence to precision that is either unattainable or useless (or both)." When a GVA figure is reported as £12,347m rather than "roughly £12bn, give or take a billion or so", the [implied precision shapes perception](https://orgvitality.com/blog/false-precision) — exact-looking figures are perceived as more trustworthy regardless of underlying uncertainty.
 
+
+
+#### A Taxonomy of Type I and II Errors in Regional Economic Policy
+
+Error management theory argues that when the costs of false positives and false negatives are asymmetric, it is rational to be biased toward the less costly error ([Johnson et al., 2013](https://www.sciencedirect.com/science/article/abs/pii/S0169534713001365)). The stick-or-snake heuristic captures this nicely: mistaking a stick for a snake (Type I — false alarm) costs you a fright; mistaking a snake for a stick (Type II — miss) costs you a bite. In regional economic policy, the question is: which errors can we live with, and which ones compound silently into misallocated billions?
+
+##### Type I Errors (False Positives / False Alarms): "Seeing a cliff that isn't there"
+
+These are cases where we *detect* a difference, effect, or problem that doesn't actually exist.
+
+**Tolerable Type I errors — over-caution that is recoverable:**
+
+| Error | What happens | Why it's tolerable |
+|-------|-------------|-------------------|
+| **Flagging a spurious regional difference** | Region A's GVA growth looks significantly higher than Region B's; further investigation reveals the gap is within the margin of error. | The investigation cost time, but no resources were misallocated. You braked before the non-existent cliff. |
+| **Over-estimating uncertainty in a solid figure** | A well-measured sector's GVA is treated as unreliable; policy-makers hedge rather than act decisively. | Opportunity cost is real but recoverable — the data will still be there next quarter. Conservative interpretation of noisy data is defensible. |
+| **Demanding more evidence before acting** | A promising regional intervention is delayed because the evaluation evidence doesn't clear a high bar. | The intervention can be piloted later. Delay is frustrating but not catastrophic. Cf. the [precautionary principle](https://en.wikipedia.org/wiki/Precautionary_principle) applied to spending rather than regulation. |
+| **False alarm on data quality** | An analyst flags ABS figures as potentially unreliable due to high CV, triggering a review. The data turns out to be fine. | The review consumed resources but built institutional knowledge about data quality. A culture of questioning numbers is a feature, not a bug. |
+
+**Costly Type I errors — false alarms that do real damage:**
+
+| Error | What happens | Why it's costly |
+|-------|-------------|----------------|
+| **Crying wolf until nobody listens** | Repeated false alarms about data quality cause policy-makers to dismiss *all* uncertainty warnings, including valid ones. This is the Boy Who Cried Wolf completing the cycle: Type I errors breeding Type II errors. | Erodes trust in legitimate quality flags. When a real problem appears, it gets ignored. |
+| **Phantom regional crisis triggers intervention** | A noisy dip in a small area's GVA is interpreted as genuine economic decline; emergency funding is redirected from areas with real need. | Resources misallocated based on statistical noise. Opportunity cost falls on the genuinely struggling area that lost funding ([Cappelen et al., 2020](https://www.aeaweb.org/articles?id=10.1257%2Faer.20211015) — the trade-off between false positives and false negatives in fairness). |
+| **Spurious "success story" attracts wrong lessons** | A region's growth figure is noise, but it's held up as a policy success. Other regions try to replicate the (non-existent) formula. | Policy learning is corrupted. Resources flow to imitate a mirage. |
+| **False positive in programme evaluation** | An intervention is judged to have "worked" based on a noisy before-after comparison. The programme is scaled up nationally. | Scaling a programme that didn't actually work wastes public money and crowds out alternatives that might have been effective. |
+
+##### Type II Errors (False Negatives / Misses): "Missing the cliff that is there"
+
+These are cases where we *fail to detect* a difference, effect, or problem that genuinely exists.
+
+**Tolerable Type II errors — missed signals that don't much matter:**
+
+| Error | What happens | Why it's tolerable |
+|-------|-------------|-------------------|
+| **Missing a tiny real difference between large regions** | ITL1 regions A and B genuinely differ by 0.3% in GVA growth, but the confidence intervals overlap and we call it "no significant difference." | The real difference is too small to be policy-relevant. Not every true effect deserves a policy response. Statistical significance is not the same as practical significance. |
+| **Failing to detect a minor sectoral shift** | A 2-digit SIC sector is slowly declining in one region but the signal is lost in year-to-year noise. | If the decline is small and gradual, it will eventually become detectable. Other indicators (employment, business counts) may pick it up sooner. |
+| **Not spotting a successful intervention amid noise** | A genuinely effective local programme doesn't show a statistically significant impact because the area is too small for the effect to clear the noise floor. | Unfortunate, but if the programme is truly effective it can be evaluated at a larger scale or with better methods. The programme continues regardless of the evaluation. |
+| **Overlooking a real but modest convergence trend** | Regions are slowly converging in productivity, but the trend is indistinguishable from noise over a 5-year window. | Convergence, if real, will become apparent over longer time horizons. Premature claims of convergence based on noisy short-run data would be worse (a Type I error). |
+
+**Costly Type II errors — the silent, compounding misses:**
+
+| Error | What happens | Why it's costly |
+|-------|-------------|----------------|
+| **Trusting a false "no difference" between regions** | Two regions' GVA figures look similar, so funding is spread equally. In reality, one region is in serious decline but the data is too noisy to detect it. | The struggling region doesn't get the help it needs. By the time the decline becomes visible in the data, it may be entrenched. This is Michael riding into the fog. |
+| **Missing genuine regional divergence** | Regions are pulling apart in productivity, but overlapping confidence intervals lead analysts to report "no statistically significant difference." Policy-makers conclude all is well. | Illogical certitude in Manski's terms — treating non-rejection of the null as evidence for the null. Divergence compounds; early intervention is cheaper than late rescue. |
+| **Failing to detect that an intervention didn't work** | A high-profile regional programme absorbs £100m. Evaluation is inconclusive due to noisy data. "Inconclusive" is reported as "no evidence of harm" rather than "we can't tell." The programme continues. | Sunk cost fallacy meets Type II error. Resources continue flowing to an ineffective programme. The fog hides the cliff, and nobody looks for the lighthouse. |
+| **Accepting point estimates as ground truth** | GVA figures are published without standard errors at sub-regional level. Users treat them as exact. Real differences between areas are obscured; real similarities are mistaken for differences. | This is the default condition of most regional analysis. The absence of published uncertainty *is* the Type II error — the error that isn't detected is the error in the numbers themselves. Manski's "conventional certitude" at its most pervasive. |
+| **Deflator-masked decline** | A region's nominal GVA rises, but after applying an uncertain deflator, real growth is actually negative. The deflator's own error is unacknowledged, so the decline goes undetected. | Policy-makers celebrate nominal growth while real living standards fall. The deflator's uncertainty — rarely quantified at regional level — acts as a second layer of fog. |
+
+##### The Asymmetry: Why Type II Errors Are Usually Worse in This Domain
+
+In the Lost Boys scene, the asymmetry is stark: the Type I error (braking unnecessarily) costs you some embarrassment; the Type II error (missing the cliff) kills you. In regional economic policy, the asymmetry is subtler but similar in structure:
+
+- **Type I errors are usually visible and self-correcting.** If you raise a false alarm about data quality, someone will check and find it's fine. If you hold back funding out of caution, the pressure to spend will reassert itself. False positives generate friction, investigation, and correction.
+
+- **Type II errors are usually invisible and self-reinforcing.** If you miss a real regional decline because the data is too noisy, nobody knows what they didn't see. If a programme doesn't work but the evaluation can't detect this, the programme continues. Misses don't generate their own correction signal — they just compound.
+
+This asymmetry argues for a general bias toward the Type I side in regional statistics: it is better to be over-cautious about point estimates, to flag uncertainty even when you're not sure it matters, and to demand error bars even when convention says they're unnecessary. The cost of a few false alarms is far lower than the cost of riding confidently into the fog.
+
+As [Johnson et al. (2013)](https://www.sciencedirect.com/science/article/abs/pii/S0169534713001365) note in the context of error management theory: when the costs of the two error types are asymmetric, the optimal strategy is not to minimise total errors but to be biased toward the cheaper one. In regional economic policy, that means erring on the side of caution — seeing cliffs that aren't there, rather than missing the ones that are.
+
 #### Key References
 
 - Manski, C.F. (2011). "[Policy Analysis with Incredible Certitude](https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1468-0297.2011.02457.x)." *The Economic Journal*, 121(554), F261-F289.
@@ -259,3 +322,7 @@ False precision — sometimes called "[spurious accuracy](https://ideas.repec.or
 - Moore, D.A. & Healy, P.J. "[The Trouble with Overconfidence](https://learnmoore.org/mooredata/3FOC.pdf)." *Psychological Review*.
 - Mandel, D.R. et al. (2025). "[The World Is More Uncertain Than You Think](https://tnsr.org/2025/09/the-world-is-more-uncertain-than-you-think-assessing-and-combating-overconfidence-among-2000-national-security-officials/)." *Texas National Security Review*.
 - Plous, S. (1993). *The Psychology of Judgment and Decision Making*. McGraw-Hill.
+- Johnson, D.D.P., Blumstein, D.T., Fowler, J.H. & Haselton, M.G. (2013). "[The evolution of error: error management, cognitive constraints, and adaptive decision-making biases](https://www.sciencedirect.com/science/article/abs/pii/S0169534713001365)." *Trends in Ecology & Evolution*, 28(8), 474-481.
+- Cappelen, A.W., Cappelen, C. & Tungodden, B. (2020). "[Second-Best Fairness: The Trade-off between False Positives and False Negatives](https://www.aeaweb.org/articles?id=10.1257%2Faer.20211015)." *American Economic Review*.
+- Nair, S. & Howlett, M. (2023). "[Beyond precautionary principle: policy-making under uncertainty and complexity](https://www.tandfonline.com/doi/full/10.1080/25741292.2023.2229090)." *Policy Design and Practice*.
+- Arrow, K.J. & Fischer, A.C. (1974). "Environmental Preservation, Uncertainty, and Irreversibility." *Quarterly Journal of Economics*, 88(2), 312-319.
