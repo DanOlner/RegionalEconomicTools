@@ -25,11 +25,11 @@ p = ggplot() +
   geom_jitter(data = neetsub, aes(x = time_period, y = proportion), colour = 'black', alpha = 0.2, width = 0.2) +
   geom_line(data = neetsub %>% filter(la_name %in% c('York','North Yorkshire')), aes(x = time_period, y = proportion, colour = la_name), size = 0.35) +
   geom_point(data = neetsub %>% filter(la_name %in% c('York','North Yorkshire')), aes(x = time_period, y = proportion, colour = la_name), size = 3) +
-  facet_wrap(~var)
+  facet_wrap(~var, scales = 'free_y')
 
-pp = ggplotly(p, tooltip = 'proportion') %>% layout(width = 600)
+pp = ggplotly(p, tooltip = 'proportion') %>% layout(width = 1100, height = 900)
 
 pp
 
-htmlwidgets::saveWidget(pp, "NEETplot.html", selfcontained = TRUE)
+htmlwidgets::saveWidget(pp, "docs/miscplots/NEETplot.html", selfcontained = TRUE)
 

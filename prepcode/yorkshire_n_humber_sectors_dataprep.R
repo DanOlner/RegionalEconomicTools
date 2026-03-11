@@ -831,6 +831,12 @@ bres = read_csv("local/data/BRES/separate_SIC_types_summedfrom5digitSIC/BRES_ALL
 # Just want geogs and SICs, CV or CP is irrelevant at this point
 itl3 = read_csv("data/regionalGVA/regionalGVA_currentprices_ITL3_SIC_2DIGIT_LONG_2023.csv")
 
+# Random check
+# itl3 %>% filter(Region_name %in% c('York','North Yorkshire')) %>% View
+
+# Remind me how many bespoke SICs here at ITL3 level?
+unique(itl3$SIC07_description)
+
 # Drop one geog from BRES, 2 from ITL3
 bres = bres %>% filter(!qg('north ayr', GEOGRAPHY_NAME))
 
