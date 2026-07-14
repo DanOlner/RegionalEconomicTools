@@ -16,47 +16,50 @@
     </p>
   </header>
 
-  <section class="controls">
-    <div class="area-picker">
-      <label class="ctl">
-        Add area
-        <input id="area-search" type="text" placeholder="Type a place or region…"
-               autocomplete="off">
-      </label>
-      <ul id="area-results" class="dropdown"></ul>
-      <select id="region-quickadd" class="ctl-select"></select>
-    </div>
-
-    <label class="ctl">Year <select id="year-select"></select></label>
-    <label class="ctl">GVA/job scale
-      <select id="scale-select">
-        <option value="shared">Shared (0–350)</option>
-        <option value="fit">Fit each area</option>
-      </select>
-    </label>
-    <span id="count" class="count"></span>
-  </section>
-
   <div class="chips-row">
+    <button id="toggle-controls" class="btn-toggle" type="button" aria-expanded="false">Show controls</button>
     <button id="clear-all" class="btn-clear" type="button" hidden>Clear all</button>
     <span id="selected-chips" class="chips"></span>
   </div>
 
-  <section class="sim-panel">
-    <label class="ctl">Group / find similar
-      <select id="sim-method">
-        <option value="sector">By sector (share / LQ filter)</option>
-        <option value="archetype">By archetype (LQ tags)</option>
-        <option value="share">Similar employment mix</option>
-        <option value="productivity">Similar productivity profile</option>
-        <option value="spearman-gpj">Similar gva/job ranking (Spearman ρ)</option>
-        <option value="spearman-jobs">Similar jobs ranking (Spearman ρ)</option>
-        <option value="spearman-combo">Similar ranking both axes, weighted (Spearman ρ)</option>
-      </select>
-    </label>
-    <div id="sim-controls" class="sim-controls"></div>
-    <div id="sim-results" class="sim-results"></div>
-  </section>
+  <div id="controls-collapsible" class="collapsed">
+    <section class="controls">
+      <div class="area-picker">
+        <label class="ctl">
+          Add area
+          <input id="area-search" type="text" placeholder="Type a place or region…"
+                 autocomplete="off">
+        </label>
+        <ul id="area-results" class="dropdown"></ul>
+        <select id="region-quickadd" class="ctl-select"></select>
+      </div>
+
+      <label class="ctl">Year <select id="year-select"></select></label>
+      <label class="ctl">GVA/job scale
+        <select id="scale-select">
+          <option value="shared">Shared (0–350)</option>
+          <option value="fit">Fit each area</option>
+        </select>
+      </label>
+      <span id="count" class="count"></span>
+    </section>
+
+    <section class="sim-panel">
+      <label class="ctl">Group / find similar
+        <select id="sim-method">
+          <option value="sector">By sector (share / LQ filter)</option>
+          <option value="archetype">By archetype (LQ tags)</option>
+          <option value="share">Similar employment mix</option>
+          <option value="productivity">Similar productivity profile</option>
+          <option value="spearman-gpj">Similar gva/job ranking (Spearman ρ)</option>
+          <option value="spearman-jobs">Similar jobs ranking (Spearman ρ)</option>
+          <option value="spearman-combo">Similar ranking both axes, weighted (Spearman ρ)</option>
+        </select>
+      </label>
+      <div id="sim-controls" class="sim-controls"></div>
+      <div id="sim-results" class="sim-results"></div>
+    </section>
+  </div>
 
   <main id="grid" class="grid"></main>
 

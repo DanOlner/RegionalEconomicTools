@@ -32,6 +32,14 @@ async function init() {
   buildLegend();
   $('#clear-all').onclick = clearAllAreas;
 
+  // Mobile-only fold: hide the controls to give the plots the screen.
+  const toggle = $('#toggle-controls');
+  toggle.onclick = () => {
+    const collapsed = $('#controls-collapsible').classList.toggle('collapsed');
+    toggle.textContent = collapsed ? 'Show controls' : 'Hide controls';
+    toggle.setAttribute('aria-expanded', String(!collapsed));
+  };
+
   // Sensible default: a spread of well-known economies.
   const defaults = ['Leeds', 'Sheffield', 'Manchester', 'Nottingham']
     .map(regionIdxByName).filter(i => i != null);

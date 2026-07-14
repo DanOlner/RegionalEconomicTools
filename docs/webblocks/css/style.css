@@ -81,6 +81,15 @@ body {
 }
 .btn-clear:hover { border-color: var(--accent); color: var(--accent); }
 .btn-clear[hidden] { display: none; }
+
+/* Fold/hide controls toggle — only needed on mobile, hidden on desktop */
+.btn-toggle {
+  background: var(--surface); color: var(--ink);
+  border: 1px solid var(--line); border-radius: 999px;
+  padding: 0.35rem 0.85rem; font-size: 0.82rem; cursor: pointer;
+  min-height: 34px; white-space: nowrap; flex: none; display: none;
+}
+.btn-toggle:hover { border-color: var(--accent); color: var(--accent); }
 .chip {
   display: inline-flex; align-items: center; gap: 0.3rem;
   background: var(--surface); border: 1px solid var(--line);
@@ -181,4 +190,6 @@ body {
   .sim-controls label, .sim-controls select, .sim-controls input { width: 100%; }
   .sim-controls button, .sim-controls select, .sim-controls input { max-width: 100%; }
   .ctl input, .ctl select { width: 100%; }
+  .btn-toggle { display: inline-block; }
+  #controls-collapsible.collapsed { display: none; }
 }
