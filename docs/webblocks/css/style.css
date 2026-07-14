@@ -167,6 +167,7 @@ body {
 
 .page-foot { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--line); font-size: 0.78rem; }
 .page-foot code { background: var(--surface); padding: 0.1rem 0.3rem; border-radius: 4px; }
+.page-foot a { color: var(--accent); }
 
 /* Mobile: single-column stack for natural scrolling */
 @media (max-width: 640px) {

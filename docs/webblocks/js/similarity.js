@@ -60,6 +60,93 @@ function rankByDistance(anchorIdx, vectors, anchorVec, distFn) {
   return { kind: 'ranking', anchorIdx, items };
 }
 
+// ---- Methods 5-7: Spearman rank correlation (ranking vs an anchor) -----------
+// These correlate the ORDER of sectors between two areas, across the 43 sectors:
+//   - gva/job ranking  = how similar the left->right sector order of the two
+//                        block charts is (blocks are sorted by gva/job)
+//   - jobs ranking     = how similar the tall->short block-height order is
+//                        (ranking sectors by job count == by job share)
+//   - combined         = w*rho(gva/job) + (1-w)*rho(jobs)
+// Rank-based, so robust to the huge-gva/job outlier sectors. Higher rho = more
+// similar (sorted descending). Tune the combined weight via spearmanConfig.w.
+export const spearmanConfig = { w: 0.5 };
+
+// Average (fractional) ranks so ties don't distort the correlation.
+function averageRanks(v) {
+  const idx = v.map((_, i) => i).sort((i, j) => v[i] - v[j]);
+  const ranks = new Array(v.length);
+  let i = 0;
+  while (i < idx.length) {
+    let j = i;
+    while (j + 1 < idx.length && v[idx[j + 1]] === v[idx[i]]) j++;
+    const avg = (i + j) / 2 + 1; // mean of 1-based positions i..j
+    for (let k = i; k <= j; k++) ranks[idx[k]] = avg;
+    i = j + 1;
+  }
+  return ranks;
+}
+
+function pearson(x, y) {
+  const n = x.length;
+  let mx = 0, my = 0;
+  for (let i = 0; i < n; i++) { mx += x[i]; my += y[i]; }
+  mx /= n; my /= n;
+  let sxy = 0, sxx = 0, syy = 0;
+  for (let i = 0; i < n; i++) {
+    const dx = x[i] - mx, dy = y[i] - my;
+    sxy += dx * dy; sxx += dx * dx; syy += dy * dy;
+  }
+  const denom = Math.sqrt(sxx * syy);
+  return denom ? sxy / denom : 0;
+}
+
+// Spearman rho with pairwise-complete handling: only sectors finite in BOTH
+// vectors are used (drops NaN gva/job values). Returns NaN if < 2 usable pairs.
+function spearman(a, b) {
+  const xs = [], ys = [];
+  for (let i = 0; i < a.length; i++) {
+    if (Number.isFinite(a[i]) && Number.isFinite(b[i])) { xs.push(a[i]); ys.push(b[i]); }
+  }
+  if (xs.length < 2) return NaN;
+  return pearson(averageRanks(xs), averageRanks(ys));
+}
+
+function rankByCorrelation(anchorIdx, vectors, anchorVec) {
+  const items = vectors.map((v, ri) => ({
+    regionIdx: ri,
+    label: state.regions[ri].name,
+    score: spearman(anchorVec, v),
+  })).filter(it => it.regionIdx !== anchorIdx && Number.isFinite(it.score))
+    .sort((a, b) => b.score - a.score); // higher rho = more similar
+  return { kind: 'ranking', anchorIdx, items };
+}
+
+export function rankBySpearmanGvaPerJob(anchorIdx) {
+  const { features } = buildFeatures();
+  return rankByCorrelation(
+    anchorIdx, features.map(f => f.prodRaw), features[anchorIdx].prodRaw);
+}
+
+export function rankBySpearmanJobs(anchorIdx) {
+  const { features } = buildFeatures();
+  // ranking share == ranking job count (share is jobs/total, monotonic)
+  return rankByCorrelation(
+    anchorIdx, features.map(f => f.share), features[anchorIdx].share);
+}
+
+export function rankBySpearmanCombined(anchorIdx) {
+  const { features } = buildFeatures();
+  const w = spearmanConfig.w;
+  const aGpj = features[anchorIdx].prodRaw, aJobs = features[anchorIdx].share;
+  const items = features.map((f, ri) => ({
+    regionIdx: ri,
+    label: state.regions[ri].name,
+    score: w * spearman(aGpj, f.prodRaw) + (1 - w) * spearman(aJobs, f.share),
+  })).filter(it => it.regionIdx !== anchorIdx && Number.isFinite(it.score))
+    .sort((a, b) => b.score - a.score);
+  return { kind: 'ranking', anchorIdx, items };
+}
+
 // ---- Method 2: LQ archetypes (auto-tag areas by specialisation) --------------
 // Each archetype is one or more sectors. Thresholds are DATA-DRIVEN, not hand-set:
 // an area is tagged when its combined LQ across the archetype's sectors is

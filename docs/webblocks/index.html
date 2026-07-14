@@ -49,6 +49,9 @@
         <option value="archetype">By archetype (LQ tags)</option>
         <option value="share">Similar employment mix</option>
         <option value="productivity">Similar productivity profile</option>
+        <option value="spearman-gpj">Similar gva/job ranking (Spearman ρ)</option>
+        <option value="spearman-jobs">Similar jobs ranking (Spearman ρ)</option>
+        <option value="spearman-combo">Similar ranking both axes, weighted (Spearman ρ)</option>
       </select>
     </label>
     <div id="sim-controls" class="sim-controls"></div>
@@ -64,9 +67,11 @@
 
   <footer class="page-foot">
     <p class="muted">
-      Source: BRES jobs × regional GVA (ITL3), Blue-Peter dataset
-      <code>bresgva2d_2023.rds</code>. Colour is a soft grouping aid — sectors are
-      identified by position, labels and tooltips.
+      Source: BRES jobs × regional GVA (ITL3),  
+      <a href="https://danolner.github.io/posts/r_introslides_gvajobsblocks/" target="_blank" rel="noopener">original R data/code</a>. Colour is a soft grouping aid — sectors are
+      identified by position, labels and tooltips. Method notes:
+      <a href="https://github.com/DanOlner/RegionalEconomicTools/tree/gh-pages/docs/webblocks"
+         target="_blank" rel="noopener">README</a>.
     </p>
   </footer>
 

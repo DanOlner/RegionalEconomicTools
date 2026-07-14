@@ -119,14 +119,18 @@ export function buildFeatures() {
       share[s] = tot ? v[s] / tot : 0;
       lq[s] = natShare[s] ? share[s] / natShare[s] : 0;
     }
+    // prod   = gva-per-job with missing values imputed (for Euclidean distance)
+    // prodRaw = gva-per-job with NaN where missing (for pairwise-complete Spearman)
     const prod = new Float64Array(nS);
+    const prodRaw = new Float64Array(nS);
     const rowsBySector = new Map(areaRows(ri, y).map(r => [r.sectorIdx, r]));
     for (let s = 0; s < nS; s++) {
       const r = rowsBySector.get(s);
-      prod[s] = (r && r.gvaperjob != null && isFinite(r.gvaperjob))
-        ? r.gvaperjob : natProd[s];
+      const ok = r && r.gvaperjob != null && isFinite(r.gvaperjob);
+      prod[s] = ok ? r.gvaperjob : natProd[s];
+      prodRaw[s] = ok ? r.gvaperjob : NaN;
     }
-    return { share, lq, prod, totalJobs: tot };
+    return { share, lq, prod, prodRaw, totalJobs: tot };
   });
 
   state.features = { features, natShare, natProd };

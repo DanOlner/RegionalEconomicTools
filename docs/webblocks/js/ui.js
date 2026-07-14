@@ -5,6 +5,8 @@ import { renderBlockChart, applyHighlight } from './blockchart.js';
 import {
   rankBySectorShare, rankByProductivity, ARCHETYPES, archetypesFor,
   areasByArchetype, areasBySector, archetypeConfig,
+  rankBySpearmanGvaPerJob, rankBySpearmanJobs, rankBySpearmanCombined,
+  spearmanConfig,
 } from './similarity.js';
 
 const ui = {
@@ -241,17 +243,42 @@ function buildSimilarityPanel() {
     return `<label>Anchor area <select id="${id}">${opts}</select></label>`;
   }
 
+  // Anchor-based ranking methods: fn + a suffix describing the metric.
+  const rankMethods = {
+    'share':         { fn: rankBySectorShare,       suffix: 'employment mix' },
+    'productivity':  { fn: rankByProductivity,      suffix: 'productivity profile' },
+    'spearman-gpj':  { fn: rankBySpearmanGvaPerJob, suffix: 'gva/job ranking (ρ)' },
+    'spearman-jobs': { fn: rankBySpearmanJobs,      suffix: 'jobs ranking (ρ)' },
+  };
+
   function render() {
     const m = method.value;
     controls.innerHTML = '';
     results.innerHTML = '';
-    if (m === 'share' || m === 'productivity') {
+    if (rankMethods[m]) {
+      const { fn, suffix } = rankMethods[m];
       controls.innerHTML = anchorSelectHtml('sim-anchor') +
         `<button id="sim-run">Find similar</button>`;
       $('#sim-run').onclick = () => {
         const a = +$('#sim-anchor').value;
-        const res = m === 'share' ? rankBySectorShare(a) : rankByProductivity(a);
-        showResults(res, `Most similar to ${state.regions[a].name}`);
+        showResults(fn(a), `Most similar to ${state.regions[a].name} — ${suffix}`);
+      };
+    } else if (m === 'spearman-combo') {
+      controls.innerHTML = anchorSelectHtml('sim-anchor') +
+        `<label>gva/job ↔ jobs weight` +
+        `<input id="sim-w" type="range" min="0" max="1" step="0.05" value="${spearmanConfig.w}">` +
+        `<span id="sim-w-val" class="muted">w=${spearmanConfig.w.toFixed(2)}</span></label>` +
+        `<button id="sim-run">Find similar</button>`;
+      const wIn = $('#sim-w'), wVal = $('#sim-w-val');
+      wIn.oninput = () => {
+        spearmanConfig.w = parseFloat(wIn.value);
+        wVal.textContent = `w=${spearmanConfig.w.toFixed(2)}`;
+      };
+      $('#sim-run').onclick = () => {
+        const a = +$('#sim-anchor').value;
+        showResults(rankBySpearmanCombined(a),
+          `Most similar to ${state.regions[a].name} — weighted ranking ` +
+          `(ρ, w=${spearmanConfig.w.toFixed(2)} gva/job)`);
       };
     } else if (m === 'archetype') {
       const opts = ARCHETYPES.map(a => `<option>${a.tag}</option>`).join('');
@@ -282,8 +309,13 @@ function buildSimilarityPanel() {
   function showResults(res, title) {
     const box = results;
     if (!res.items.length) { box.innerHTML = `<p class="muted">${title}: no areas.</p>`; return; }
+    // Anchor-based methods (res.anchorIdx set) add the anchor + top 7; others add top 8.
+    const anchored = res.anchorIdx != null;
+    const addLabel = anchored
+      ? 'Add top 7 + anchor'
+      : `Add top ${Math.min(8, res.items.length)}`;
     const head = `<div class="sim-head"><strong>${title}</strong>` +
-      `<button id="sim-addall">Add top ${Math.min(8, res.items.length)}</button></div>`;
+      `<button id="sim-addall">${addLabel}</button></div>`;
     const list = res.items.slice(0, 30).map(it => {
       const inSel = ui.selected.includes(it.regionIdx);
       return `<li data-idx="${it.regionIdx}" class="${inSel ? 'in' : ''}">` +
@@ -292,8 +324,10 @@ function buildSimilarityPanel() {
     box.innerHTML = head + `<ul class="sim-list">${list}</ul>`;
     box.querySelectorAll('li').forEach(li =>
       li.onclick = () => { addArea(+li.dataset.idx); li.classList.add('in'); });
-    $('#sim-addall').onclick = () =>
-      res.items.slice(0, 8).forEach(it => addArea(it.regionIdx));
+    $('#sim-addall').onclick = () => {
+      if (anchored) addArea(res.anchorIdx);
+      res.items.slice(0, anchored ? 7 : 8).forEach(it => addArea(it.regionIdx));
+    };
   }
 
   method.onchange = render;
@@ -301,7 +335,9 @@ function buildSimilarityPanel() {
 }
 
 function fmtScore(kind, score) {
-  if (kind === 'ranking') return score.toFixed(3);       // distance (lower=closer)
+  // 'ranking' score is a distance (lower=closer) or a Spearman ρ (higher=closer);
+  // either way items arrive pre-sorted best-first, so we just show the number.
+  if (kind === 'ranking') return score.toFixed(3);
   return score >= 100 ? score.toFixed(0) : score.toFixed(2);
 }
 

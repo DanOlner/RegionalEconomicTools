@@ -24,9 +24,18 @@ can't be colourblind-safe, so identity is carried by position, inline labels
   (floored at the national average). Tune via `archetypeConfig` in
   `js/similarity.js` (`sdK` defaults to 1 = "mean + 1 SD").
 - **Similar employment mix** — cosine distance on sector job-share vectors vs an
-  anchor area.
+  anchor area (magnitude-based).
 - **Similar productivity profile** — Euclidean distance on z-normalised
-  GVA-per-job-by-sector vectors vs an anchor area.
+  GVA-per-job-by-sector vectors vs an anchor area (magnitude-based).
+- **Spearman rank methods** (rank-based, so robust to the huge-GVA/job outlier
+  sectors, and aligned with the block chart's own encodings):
+  - *Similar gva/job ranking* — Spearman ρ of the sectors' GVA-per-job order =
+    how similar the left→right block order of two charts is.
+  - *Similar jobs ranking* — Spearman ρ of the sectors' job-count order = how
+    similar the tall→short block-height order is (ranking by jobs ≡ by share).
+  - *Similar ranking both axes, weighted* — `w·ρ(gva/job) + (1−w)·ρ(jobs)`, `w` set by a
+    slider (`spearmanConfig.w`, default 0.5). All ρ use average ranks for ties
+    and are pairwise-complete over sectors (drops NaN GVA/job values).
 
 All computed in-browser from the JSON (national totals summed from the data
 itself); no server.
