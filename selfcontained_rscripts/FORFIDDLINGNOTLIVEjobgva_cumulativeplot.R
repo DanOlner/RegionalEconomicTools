@@ -59,8 +59,9 @@ table(unique(bres.gva.2d$ITL_code) %in% unique(itl.lookup$ITL325CD))
 # We can use the lookup to get a list of ITL3s for specific ITL2s or ITL1s even
 listofplaces = itl.lookup %>% 
   # filter(ITL225NM == 'West Yorkshire') %>% #Either look for direct match
-  filter(ITL225NM == 'South Yorkshire') %>% #Either look for direct match
+  # filter(ITL225NM == 'South Yorkshire') %>% #Either look for direct match
   # filter(grepl('west yorks',ITL225NM, ignore.case = T)) %>% #Or search for string
+  filter(qg('yorkshire and the humber', ITL125NM)) %>% #Get all Y&H LAs
   pull(ITL325NM)
 
 # Example for some other places
@@ -86,7 +87,7 @@ listofplaces = itl.lookup %>%
 #   pull() 
 
 # Pick four random
-listofplaces = sample(unique(bres.gva.2d$Region_name),12)
+# listofplaces = sample(unique(bres.gva.2d$Region_name),12)
 # Add in any extras
 
 
@@ -144,7 +145,7 @@ p = ggplot() +
   ) +
   scale_fill_manual(values = setNames(colourstouse,unique(bres.gva.2d$SIC07_description_shortened))) +
   guides(fill = F) +
-  coord_flip(ylim = c(0,300)) +
+  coord_flip(ylim = c(0,350)) +
   facet_wrap(~Region_name, scales = 'free_y', ncol = 6)
 
 # Add basic text labels if block big enough

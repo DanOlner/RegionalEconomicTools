@@ -1,0 +1,48 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls /Users/danolner/Code/RegionalEconomicTools/ && echo \"---\" && ls /Users/danolner/Code/companieshouseopen/ 2>/dev/null | head -60)",
+      "Read(//Users/danolner/Code/companieshouseopen/**)",
+      "Bash(grep -rinlE \"GDHI|disposable income|household income|median \\(wage|earning|income|pay\\)|real wage|wage stagnation|cost of living|productivity.{0,20}\\(pay|wage\\)|who benefits|extraction|cooperativ|ownership|distribut\" --include=\"*.qmd\" --include=\"*.R\" --include=\"*.md\" --include=\"*.qmdxx\" .)",
+      "Bash(awk 'NR>370 && !/^#/ && !/^```/ && !/^[[:space:]]*$/ && !/^[a-z_]+ *<-/ && !/ggplot|geom_|scale_|mutate|filter|read_csv|ggplotly|aes\\\\\\(|select\\\\\\(|pivot_|group_by|summarise|theme|coord_|xlab|ylab|guides|pull|arrange|slice|rename|left_join|facet/' gdp_gaps.qmd)",
+      "Bash(grep -inB1 -A2 -E \"poverty|deprivation|inequalit|wealth\" claude/econ_error_rates.md)",
+      "Bash(awk -F, 'NR>1 && $5!=\"NA\" && $5!=\"\" { *)",
+      "Bash(awk -F',' 'NR>1 && $5!=\"NA\" && $5!=\"\" {two=substr\\($5,1,2\\); sect=$1; key=two\"\\\\t\"sect; if\\(!\\(key in s\\)\\){s[key]=1; n[two]++}} END{u=0;m=0;for\\(t in n\\){if\\(n[t]==1\\)u++;else m++}; print \"unique:\",u,\" shared:\",m,\" total divisions:\",u+m}' data/industrialstrategy2025sectordefs.csv)",
+      "Bash(Rscript bits_of_code/ind_to_indpayments_IS8_localisation.R)",
+      "Bash(echo \"exit code: $?\")",
+      "Read(//tmp/**)",
+      "Bash(grep -v \"^$\")",
+      "Bash(awk '{print $6, $7, $8, $9}')",
+      "Bash(awk '{print $5, $6, $7, $8, $9}')",
+      "Bash(awk '{print $5, $9}')",
+      "Bash(cp /Users/danolner/Code/RegionalEconomicTools/data/industrialstrategy2025sectordefs.csv /Users/danolner/Code/companieshouseopen/data/sectordefs/industrialstrategy2025sectordefs.csv && ls -l /Users/danolner/Code/companieshouseopen/data/sectordefs/industrialstrategy2025sectordefs.csv)",
+      "Bash(sort -t: -k1 -n)",
+      "Bash(awk 'NR>=1460 && NR<=1480 {printf \"%d: %s\\\\n\", NR, $0}' bits_of_code/ind_to_indpayments_regional_IO.R)",
+      "Bash(gzip -c bresgva2d_web.json)",
+      "Bash(awk '{printf \"gzipped: %.0f KB\\\\n\", $1/1024}')",
+      "Bash(grep -v \"^ℹ\\\\|masked\\\\|Attaching\\\\|following\\\\|^$\\\\|flatten\\\\|package\\\\|Warning\\\\|built under\")",
+      "Bash(grep -iv \"conflict\\\\|masked\\\\|attaching\\\\|following\\\\|^$\\\\|flatten\\\\|package\\\\|warning\\\\|built under\\\\|✔\\\\|✖\\\\|tidyverse\\\\|purrr\\\\|dplyr\\\\|forcats\\\\|ggplot\\\\|lubridate\")",
+      "Skill(dataviz)",
+      "Skill(dataviz:*)",
+      "Bash(node -e \"try{require.resolve\\('puppeteer'\\);console.log\\('puppeteer OK'\\)}catch\\(e\\){console.log\\('no puppeteer'\\)}\")",
+      "Bash(node -e \"try{require.resolve\\('playwright'\\);console.log\\('playwright OK'\\)}catch\\(e\\){console.log\\('no playwright'\\)}\")",
+      "Read(//Applications/**)",
+      "Bash(npx --version)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --no-sandbox --hide-scrollbars --virtual-time-budget=6000 --window-size=1400,1000 --screenshot=/private/tmp/claude-501/-Users-danolner-Code-RegionalEconomicTools/238ed366-62ae-426e-8f1e-11ddce33295d/scratchpad/webblocks_desktop.png http://localhost:8791/index.html)",
+      "Bash(echo \"exit:$?\")",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --no-sandbox --hide-scrollbars --virtual-time-budget=6000 --window-size=430,1600 --screenshot=/private/tmp/claude-501/-Users-danolner-Code-RegionalEconomicTools/238ed366-62ae-426e-8f1e-11ddce33295d/scratchpad/webblocks_mobile.png http://localhost:8791/index.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --no-sandbox --virtual-time-budget=6000 --dump-dom http://localhost:8791/_simtest.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --no-sandbox --hide-scrollbars --virtual-time-budget=6000 --window-size=430,900 --screenshot=/private/tmp/claude-501/-Users-danolner-Code-RegionalEconomicTools/238ed366-62ae-426e-8f1e-11ddce33295d/scratchpad/webblocks_mobile2.png http://localhost:8791/index.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --no-sandbox --virtual-time-budget=4000 --dump-dom http://localhost:8791/index.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --no-sandbox --hide-scrollbars --virtual-time-budget=6000 --window-size=430,760 --screenshot=/private/tmp/claude-501/-Users-danolner-Code-RegionalEconomicTools/238ed366-62ae-426e-8f1e-11ddce33295d/scratchpad/webblocks_mobile3.png http://localhost:8791/index.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --no-sandbox --hide-scrollbars --virtual-time-budget=6000 --window-size=500,820 --screenshot=/private/tmp/claude-501/-Users-danolner-Code-RegionalEconomicTools/238ed366-62ae-426e-8f1e-11ddce33295d/scratchpad/webblocks_mobile_final.png http://localhost:8791/index.html)",
+      "Bash(pkill -f \"http.server 8791\")"
+    ],
+    "additionalDirectories": [
+      "/tmp",
+      "/private/tmp",
+      "/Users/danolner/Code/companieshouseopen/data/sectordefs",
+      "/Users/danolner/Code/companieshouseopen"
+    ]
+  }
+}

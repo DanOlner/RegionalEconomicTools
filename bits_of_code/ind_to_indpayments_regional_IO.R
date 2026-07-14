@@ -1379,6 +1379,151 @@ ggsave('llm_output/io_plots/06_arrow_plot_change.png', width = 8, height = 25)
 
 
 
+# 6. WHERE DO NON-LOCAL FLOWS GO? THE "LONDON PULL" (finance in context) ----
+
+# The locality tools above (payer_locality / payee_locality, sections 1 & 4)
+# measure how much a sector keeps INTERNAL vs sends/receives EXTERNAL - but they
+# lump ALL external flow together, so they can't tell us WHERE the external money
+# goes. This section splits every flow three ways - own region / London /
+# rest of UK - to test whether a sector's non-local money is specifically
+# drawn to (or from) London. Motivating question: finance is highly productive
+# in GVA terms but seems to send/receive very little within its own region -
+# do those finance flows go to / come from London?
+
+# Focus on regions OTHER than London: the question is how dependent the rest of
+# the UK is on London. (London's own internal share is just the flip side.)
+london_pull = i2i.yr %>%
+  filter(
+    !is.na(sectionname_payer),
+    !is.na(sectionname_payee),
+    year == max(year),
+    !qg('households|extraterr', sectionname_payer),
+    !qg('households|extraterr', sectionname_payee)
+  )
+
+# Spending side: for each payer sector, where does its money GO?
+spend_dest = london_pull %>%
+  filter(payer_ITL1name != "London") %>%
+  mutate(place = case_when(
+    payer_ITL1name == payee_ITL1name ~ "Own region",
+    payee_ITL1name == "London"       ~ "London",
+    TRUE                             ~ "Rest of UK"
+  )) %>%
+  group_by(sectionname_payer, place) %>%
+  summarise(pounds = sum(pounds, na.rm = TRUE), .groups = 'drop') %>%
+  group_by(sectionname_payer) %>%
+  mutate(share = pounds / sum(pounds)) %>%
+  ungroup() %>%
+  transmute(
+    section = reduceSICnames(sectionname_payer, 'section'),
+    direction = "Spending: where the money goes",
+    place, share
+  )
+
+# Income side: for each payee sector, where does its money COME FROM?
+earn_orig = london_pull %>%
+  filter(payee_ITL1name != "London") %>%
+  mutate(place = case_when(
+    payer_ITL1name == payee_ITL1name ~ "Own region",
+    payer_ITL1name == "London"       ~ "London",
+    TRUE                             ~ "Rest of UK"
+  )) %>%
+  group_by(sectionname_payee, place) %>%
+  summarise(pounds = sum(pounds, na.rm = TRUE), .groups = 'drop') %>%
+  group_by(sectionname_payee) %>%
+  mutate(share = pounds / sum(pounds)) %>%
+  ungroup() %>%
+  transmute(
+    section = reduceSICnames(sectionname_payee, 'section'),
+    direction = "Income: where the money comes from",
+    place, share
+  )
+
+london_pull_long = bind_rows(spend_dest, earn_orig) %>%
+  mutate(
+    place = factor(place, levels = c("Own region", "London", "Rest of UK")),
+    direction = factor(direction,
+                       levels = c("Spending: where the money goes",
+                                  "Income: where the money comes from"))
+  )
+
+# Order sectors by own-region SPENDING share (least locally embedded at bottom)
+sector_order = spend_dest %>%
+  filter(place == "Own region") %>%
+  arrange(share) %>%
+  pull(section)
+
+london_pull_long = london_pull_long %>%
+  mutate(section = factor(section, levels = sector_order))
+
+# Finance highlight: bold + coloured axis label (vector in factor-level order).
+# NB reduceSICnames() shortens "Financial and insurance activities" -> "Finance/insu";
+# if that mapping ever changes, the highlight silently drops (check flagged below).
+finance_lab = "Finance/insu"
+lab_cols  = ifelse(levels(london_pull_long$section) == finance_lab, "firebrick", "grey25")
+lab_faces = ifelse(levels(london_pull_long$section) == finance_lab, "bold", "plain")
+
+fill_cols = c("Own region" = "#2c7fb8",   # blue = locally embedded
+              "London"     = "#e6550d",   # orange = the London pull
+              "Rest of UK" = "grey75")
+
+# Stacked bars: three-way split of each sector's flows, faceted spending vs income
+p_london_stack = ggplot(london_pull_long, aes(x = share, y = section, fill = place)) +
+  geom_col(width = 0.78, position = position_stack(reverse = TRUE)) +
+  facet_wrap(~direction) +
+  scale_fill_manual(values = fill_cols, name = NULL) +
+  scale_x_continuous(labels = scales::percent, expand = expansion(mult = c(0, 0.02))) +
+  labs(
+    title = "Finance is the UK's least locally-embedded sector - and its money flows to/from London",
+    subtitle = "Payment flows for regions OUTSIDE London, most recent year. Sectors ordered by share kept in own region.",
+    x = NULL, y = NULL,
+    caption = "Each bar splits a sector's flows three ways: kept in its own region / to-or-from London / spread across rest of UK.\nExcludes London-based payers/payees, households and extraterritorial bodies."
+  ) +
+  theme(
+    axis.text.y = element_text(colour = lab_cols, face = lab_faces),
+    plot.caption = element_text(hjust = 0),
+    legend.position = "top",
+    panel.grid.major.y = element_blank()
+  )
+
+p_london_stack
+
+# Sanity check the highlight actually landed on a real sector name
+if(!finance_lab %in% levels(london_pull_long$section))
+  warning("finance_lab '", finance_lab, "' not found - highlight will be missing; check reduceSICnames output")
+
+ggsave('llm_output/io_plots/07_finance_london_pull.png', p_london_stack, width = 12, height = 6)
+
+# Companion scatter: own-region share (x) vs London share (y), finance highlighted.
+# Bottom-right = locally embedded; top-left = London-dependent.
+scatter_dat = london_pull_long %>%
+  filter(place %in% c("Own region", "London")) %>%
+  pivot_wider(names_from = place, values_from = share) %>%
+  rename(own = `Own region`, london = London)
+
+p_london_scatter = ggplot(scatter_dat, aes(x = own, y = london)) +
+  geom_point(aes(colour = section == finance_lab, size = section == finance_lab)) +
+  ggrepel::geom_text_repel(aes(label = section, colour = section == finance_lab),
+                           size = 2.8, max.overlaps = 20, show.legend = FALSE) +
+  facet_wrap(~direction) +
+  scale_colour_manual(values = c(`FALSE` = "grey45", `TRUE` = "firebrick"), guide = "none") +
+  scale_size_manual(values = c(`FALSE` = 2, `TRUE` = 3.5), guide = "none") +
+  scale_x_continuous(labels = scales::percent) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(
+    title = "Least locally-embedded sectors are the most London-dependent",
+    subtitle = "Regions outside London, most recent year. Bottom-right = locally embedded; top-left = London-dependent.",
+    x = "Share of flow kept within own region", y = "Share of flow to / from London"
+  ) +
+  theme(plot.subtitle = element_text(size = 9))
+
+p_london_scatter
+
+ggsave('llm_output/io_plots/07_finance_london_scatter.png', p_london_scatter, width = 11, height = 6)
+
+
+
+
 
 
 
