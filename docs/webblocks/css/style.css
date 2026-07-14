@@ -71,7 +71,16 @@ body {
 .count { font-size: 0.8rem; color: var(--muted); align-self: flex-end; }
 
 /* Selected chips */
-.chips { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0.5rem 0; }
+.chips-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; padding: 0.5rem 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.btn-clear {
+  background: var(--surface); color: var(--ink);
+  border: 1px solid var(--line); border-radius: 999px;
+  padding: 0.35rem 0.85rem; font-size: 0.82rem; cursor: pointer;
+  min-height: 34px; white-space: nowrap; flex: none;
+}
+.btn-clear:hover { border-color: var(--accent); color: var(--accent); }
+.btn-clear[hidden] { display: none; }
 .chip {
   display: inline-flex; align-items: center; gap: 0.3rem;
   background: var(--surface); border: 1px solid var(--line);
@@ -83,8 +92,9 @@ body {
 }
 .chip button:hover { color: #d00; }
 
-/* Similarity panel */
-.sim-panel { flex-direction: column; align-items: stretch; }
+/* Similarity panel: a vertical stack — wrap (inherited above) must be off, or a
+   column-direction flex container stretches its last child to fill. */
+.sim-panel { flex-direction: column; flex-wrap: nowrap; align-items: stretch; }
 .sim-controls { display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; align-items: flex-end; }
 .sim-controls label { display: flex; flex-direction: column; gap: 0.2rem; font-size: 0.8rem; color: var(--muted); }
 .sim-controls button, #sim-addall {
@@ -108,7 +118,7 @@ body {
 /* Grid of charts */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem; margin-top: 1rem;
 }
 .card {

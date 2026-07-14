@@ -18,7 +18,11 @@ can't be colourblind-safe, so identity is carried by position, inline labels
 - **By sector** — filter areas above a job-share or location-quotient threshold in
   one sector (e.g. Warehousing LQ ≥ 1.5 → Thurrock, Doncaster, Milton Keynes…).
 - **By archetype** — LQ-based tags (logistics, finance, manufacturing, public
-  sector, professional/knowledge, hospitality, retail, real estate).
+  sector, professional/knowledge, hospitality, retail, real estate). Thresholds
+  are data-driven: an area is tagged when its combined LQ across the archetype's
+  sectors is above `mean + sdK*SD` of that group's distribution across all areas
+  (floored at the national average). Tune via `archetypeConfig` in
+  `js/similarity.js` (`sdK` defaults to 1 = "mean + 1 SD").
 - **Similar employment mix** — cosine distance on sector job-share vectors vs an
   anchor area.
 - **Similar productivity profile** — Euclidean distance on z-normalised

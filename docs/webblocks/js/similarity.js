@@ -61,17 +61,28 @@ function rankByDistance(anchorIdx, vectors, anchorVec, distFn) {
 }
 
 // ---- Method 2: LQ archetypes (auto-tag areas by specialisation) --------------
-// Each archetype is one or more sectors; an area gets the tag if its combined LQ
-// across those sectors clears the threshold. Tuned to be readable, not canonical.
+// Each archetype is one or more sectors. Thresholds are DATA-DRIVEN, not hand-set:
+// an area is tagged when its combined LQ across the archetype's sectors is
+// "notably above typical", defined per archetype as
+//     threshold = max(minLQ, mean + sdK * SD)
+// over the combined-LQ distribution across all areas (population SD). This
+// self-calibrates to each group's spread and to whatever year/data is loaded.
+//
+// Tweak sensitivity via `archetypeConfig` (changing either value recomputes the
+// memoised thresholds automatically, e.g. from the console):
+//   sdK   - how many SDs above the mean counts as specialised (default 1)
+//   minLQ - a floor so a tag always means at least the national average (>= 1)
+export const archetypeConfig = { sdK: 1, minLQ: 1.0 };
+
 export const ARCHETYPES = [
-  { tag: 'Logistics / warehousing', sectors: ['Warehousing', 'Transport', 'Post'], lq: 1.5 },
-  { tag: 'Finance-heavy', sectors: ['Finance'], lq: 1.5 },
-  { tag: 'Manufacturing', sectors: ['Food manuf', 'Textiles', 'Wood/paper', 'Chemicals', 'Metals', 'Electronics', 'Mach/transp manuf', 'Furniture', 'Machinery repair/install'], lq: 1.3 },
-  { tag: 'Public sector / health / ed', sectors: ['Public admin', 'Education', 'Health', 'Care', 'SocialWork'], lq: 1.25 },
-  { tag: 'Professional / knowledge', sectors: ['ICT', 'Media', 'Legal', 'Head office/consult', 'Arch/Eng', 'Research/Ads'], lq: 1.3 },
-  { tag: 'Hospitality / tourism', sectors: ['Accommodation', 'Food', 'Arts/ent', 'Recreation'], lq: 1.3 },
-  { tag: 'Retail / wholesale', sectors: ['Retail', 'Wholesale', 'Motor'], lq: 1.25 },
-  { tag: 'Real estate', sectors: ['Real estate'], lq: 1.5 },
+  { tag: 'Logistics / warehousing', sectors: ['Warehousing', 'Transport', 'Post'] },
+  { tag: 'Finance-heavy', sectors: ['Finance'] },
+  { tag: 'Manufacturing', sectors: ['Food manuf', 'Textiles', 'Wood/paper', 'Chemicals', 'Metals', 'Electronics', 'Mach/transp manuf', 'Furniture', 'Machinery repair/install'] },
+  { tag: 'Public sector / health / ed', sectors: ['Public admin', 'Education', 'Health', 'Care', 'SocialWork'] },
+  { tag: 'Professional / knowledge', sectors: ['ICT', 'Media', 'Legal', 'Head office/consult', 'Arch/Eng', 'Research/Ads'] },
+  { tag: 'Hospitality / tourism', sectors: ['Accommodation', 'Food', 'Arts/ent', 'Recreation'] },
+  { tag: 'Retail / wholesale', sectors: ['Retail', 'Wholesale', 'Motor'] },
+  { tag: 'Real estate', sectors: ['Real estate'] },
 ];
 
 function sectorIdxSet(names) {
@@ -89,9 +100,34 @@ function combinedLQ(regionIdx, sectorIdxs) {
   return nat ? areaShare / nat : 0;
 }
 
+// Per-archetype threshold = max(minLQ, mean + sdK*SD) of the combined-LQ
+// distribution across all areas. Memoised; recomputed when archetypeConfig changes.
+let _thresholds = null, _thresholdsKey = null;
+export function archetypeThresholds() {
+  const key = `${archetypeConfig.sdK}|${archetypeConfig.minLQ}`;
+  if (_thresholds && _thresholdsKey === key) return _thresholds;
+  const n = state.regions.length;
+  _thresholds = new Map();
+  for (const arc of ARCHETYPES) {
+    const sidx = sectorIdxSet(arc.sectors);
+    const vals = new Float64Array(n);
+    let sum = 0;
+    for (let ri = 0; ri < n; ri++) { const v = combinedLQ(ri, sidx); vals[ri] = v; sum += v; }
+    const mean = sum / n;
+    let varSum = 0;
+    for (let ri = 0; ri < n; ri++) { const d = vals[ri] - mean; varSum += d * d; }
+    const sd = Math.sqrt(varSum / n);
+    _thresholds.set(arc.tag, Math.max(archetypeConfig.minLQ, mean + archetypeConfig.sdK * sd));
+  }
+  _thresholdsKey = key;
+  return _thresholds;
+}
+
 // Tags for one area.
 export function archetypesFor(regionIdx) {
-  return ARCHETYPES.filter(a => combinedLQ(regionIdx, sectorIdxSet(a.sectors)) >= a.lq)
+  const thr = archetypeThresholds();
+  return ARCHETYPES
+    .filter(a => combinedLQ(regionIdx, sectorIdxSet(a.sectors)) >= thr.get(a.tag))
     .map(a => a.tag);
 }
 
@@ -100,11 +136,12 @@ export function areasByArchetype(tag) {
   const arc = ARCHETYPES.find(a => a.tag === tag);
   if (!arc) return { kind: 'list', items: [] };
   const sidx = sectorIdxSet(arc.sectors);
+  const threshold = archetypeThresholds().get(tag);
   const items = state.regions.map((r, ri) => ({
     regionIdx: ri, label: r.name, score: combinedLQ(ri, sidx),
-  })).filter(it => it.score >= arc.lq)
+  })).filter(it => it.score >= threshold)
     .sort((a, b) => b.score - a.score);
-  return { kind: 'list', items, meta: { tag, threshold: arc.lq } };
+  return { kind: 'list', items, meta: { tag, threshold } };
 }
 
 // ---- Method 4: pick-a-sector filter -----------------------------------------

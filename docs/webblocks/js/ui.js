@@ -4,7 +4,7 @@ import { state, loadData, buildFeatures, regionIdxByName } from './data.js';
 import { renderBlockChart, applyHighlight } from './blockchart.js';
 import {
   rankBySectorShare, rankByProductivity, ARCHETYPES, archetypesFor,
-  areasByArchetype, areasBySector,
+  areasByArchetype, areasBySector, archetypeConfig,
 } from './similarity.js';
 
 const ui = {
@@ -28,6 +28,7 @@ async function init() {
   buildScaleControl();
   buildSimilarityPanel();
   buildLegend();
+  $('#clear-all').onclick = clearAllAreas;
 
   // Sensible default: a spread of well-known economies.
   const defaults = ['Leeds', 'Sheffield', 'Manchester', 'Nottingham']
@@ -96,6 +97,12 @@ function removeArea(idx) {
   renderSelectedChips();
   renderGrid();
 }
+function clearAllAreas() {
+  ui.selected = [];
+  ui.activeSector = null;
+  renderSelectedChips();
+  renderGrid();
+}
 
 function renderSelectedChips() {
   const box = $('#selected-chips');
@@ -111,6 +118,7 @@ function renderSelectedChips() {
     box.appendChild(chip);
   });
   $('#count').textContent = ui.selected.length ? `${ui.selected.length} areas` : '';
+  $('#clear-all').hidden = ui.selected.length === 0;
 }
 
 // ---- Year + scale controls --------------------------------------------------
@@ -179,7 +187,7 @@ function renderGrid() {
     const width = plot.clientWidth || 320;
     renderBlockChart(plot, {
       regionIdx: idx, yearIdx: ui.yearIdx, width, xMax,
-      height: 320,
+      height: 640,
       onSectorEnter: (sector, d, region) => {
         setActiveSector(sector);
         showTooltip(sector, d, region);
@@ -251,7 +259,9 @@ function buildSimilarityPanel() {
         `<button id="sim-run">Show areas</button>`;
       $('#sim-run').onclick = () => {
         const tag = $('#sim-arc').value;
-        showResults(areasByArchetype(tag), `${tag} areas`);
+        const res = areasByArchetype(tag);
+        const thr = res.meta ? res.meta.threshold.toFixed(2) : '';
+        showResults(res, `${tag} (LQ ≥ ${thr}, mean+${archetypeConfig.sdK}SD)`);
       };
     } else if (m === 'sector') {
       const sopts = state.sectors.map(s => `<option ${s === 'Warehousing' ? 'selected' : ''}>${s}</option>`).join('');
