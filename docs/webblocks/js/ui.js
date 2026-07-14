@@ -291,12 +291,20 @@ function buildSimilarityPanel() {
         showResults(res, `${tag} (LQ ≥ ${thr}, mean+${archetypeConfig.sdK}SD)`);
       };
     } else if (m === 'sector') {
+      // Sensible Min defaults differ by metric: LQ is a ratio around 1, whereas
+      // job share is a small proportion (0..1). Switching metric resets Min.
+      const metricDefaults = { lq: { value: '1.5', step: '0.1' }, share: { value: '0.05', step: '0.01' } };
       const sopts = state.sectors.map(s => `<option ${s === 'Warehousing' ? 'selected' : ''}>${s}</option>`).join('');
       controls.innerHTML =
         `<label>Sector <select id="sim-sector">${sopts}</select></label>` +
-        `<label>By <select id="sim-metric"><option value="lq">Location quotient</option><option value="share">Job share</option></select></label>` +
+        `<label>By <select id="sim-metric"><option value="lq">Location quotient</option><option value="share">Job share (0–1)</option></select></label>` +
         `<label>Min <input id="sim-thresh" type="number" step="0.1" value="1.5" style="width:5em"></label>` +
         `<button id="sim-run">Filter</button>`;
+      $('#sim-metric').onchange = () => {
+        const d = metricDefaults[$('#sim-metric').value];
+        const thresh = $('#sim-thresh');
+        thresh.value = d.value; thresh.step = d.step;
+      };
       $('#sim-run').onclick = () => {
         const s = $('#sim-sector').value, metric = $('#sim-metric').value;
         const thr = parseFloat($('#sim-thresh').value) || 0;
