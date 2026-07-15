@@ -37,7 +37,12 @@
       "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --no-sandbox --hide-scrollbars --virtual-time-budget=6000 --window-size=430,760 --screenshot=/private/tmp/claude-501/-Users-danolner-Code-RegionalEconomicTools/238ed366-62ae-426e-8f1e-11ddce33295d/scratchpad/webblocks_mobile3.png http://localhost:8791/index.html)",
       "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --no-sandbox --hide-scrollbars --virtual-time-budget=6000 --window-size=500,820 --screenshot=/private/tmp/claude-501/-Users-danolner-Code-RegionalEconomicTools/238ed366-62ae-426e-8f1e-11ddce33295d/scratchpad/webblocks_mobile_final.png http://localhost:8791/index.html)",
       "Bash(pkill -f \"http.server 8791\")",
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "Bash(lsof -nP -iTCP -sTCP:LISTEN)",
+      "Bash(awk 'NR==1 || $1 ~ /node|Python|ruby|php|http/')",
+      "Bash(ps -o pid,command -p 7417,45921)",
+      "Bash(kill 7417)",
+      "Bash(lsof -nP -iTCP:8001 -sTCP:LISTEN)"
     ],
     "additionalDirectories": [
       "/tmp",

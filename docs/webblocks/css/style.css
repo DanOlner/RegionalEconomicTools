@@ -36,6 +36,7 @@ body {
 .page-head { padding: 1.25rem 0 0.5rem; }
 .page-head h1 { font-size: clamp(1.2rem, 2.5vw, 1.7rem); margin: 0 0 0.25rem; }
 .sub { color: var(--muted); margin: 0; max-width: 60ch; font-size: 0.9rem; }
+.sub a { color: var(--accent); }
 .muted { color: var(--muted); }
 .pad { padding: 1rem; }
 
@@ -73,23 +74,27 @@ body {
 /* Selected chips */
 .chips-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; padding: 0.5rem 0; }
 .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+/* Clear all — its own colour (rose; it's a destructive "remove everything" action) */
 .btn-clear {
-  background: var(--surface); color: var(--ink);
-  border: 1px solid var(--line); border-radius: 999px;
-  padding: 0.35rem 0.85rem; font-size: 0.82rem; cursor: pointer;
+  background: #c0392b; color: #fff;
+  border: none; border-radius: 999px;
+  padding: 0.35rem 0.9rem; font-size: 0.82rem; cursor: pointer;
   min-height: 34px; white-space: nowrap; flex: none;
 }
-.btn-clear:hover { border-color: var(--accent); color: var(--accent); }
+.btn-clear:hover { background: #a93226; }
 .btn-clear[hidden] { display: none; }
 
-/* Fold/hide controls toggle — only needed on mobile, hidden on desktop */
+/* Fold/hide controls toggle — mobile-only, hidden on desktop. Distinct colour
+   (teal) and a trapezium/tab shape (clip-path) to set it apart from the pills.
+   Filled rather than outlined because borders don't clip cleanly. */
 .btn-toggle {
-  background: var(--surface); color: var(--ink);
-  border: 1px solid var(--line); border-radius: 999px;
-  padding: 0.35rem 0.85rem; font-size: 0.82rem; cursor: pointer;
+  background: #0f766e; color: #fff;
+  border: none;
+  padding: 0.4rem 1.15rem; font-size: 0.82rem; cursor: pointer;
   min-height: 34px; white-space: nowrap; flex: none; display: none;
+  clip-path: polygon(0 0, 100% 0, 88% 100%, 12% 100%);
 }
-.btn-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.btn-toggle:hover { background: #0c5f59; }
 .chip {
   display: inline-flex; align-items: center; gap: 0.3rem;
   background: var(--surface); border: 1px solid var(--line);

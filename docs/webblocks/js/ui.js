@@ -272,21 +272,30 @@ function buildSimilarityPanel() {
         showResults(fn(a), `Most similar to ${state.regions[a].name} — ${suffix}`);
       };
     } else if (m === 'spearman-combo') {
+      // The gva/job<->jobs weight slider was judged overkill; the mix is fixed at
+      // spearmanConfig.w (default 0.5). Flip SHOW_WEIGHT_SLIDER back to true to
+      // restore the interactive slider.
+      const SHOW_WEIGHT_SLIDER = false;
       controls.innerHTML = anchorSelectHtml('sim-anchor') +
-        `<label>gva/job ↔ jobs weight` +
-        `<input id="sim-w" type="range" min="0" max="1" step="0.05" value="${spearmanConfig.w}">` +
-        `<span id="sim-w-val" class="muted">w=${spearmanConfig.w.toFixed(2)}</span></label>` +
+        (SHOW_WEIGHT_SLIDER
+          ? `<label>gva/job ↔ jobs weight` +
+            `<input id="sim-w" type="range" min="0" max="1" step="0.05" value="${spearmanConfig.w}">` +
+            `<span id="sim-w-val" class="muted">w=${spearmanConfig.w.toFixed(2)}</span></label>`
+          : '') +
         `<button id="sim-run">Find similar</button>`;
-      const wIn = $('#sim-w'), wVal = $('#sim-w-val');
-      wIn.oninput = () => {
-        spearmanConfig.w = parseFloat(wIn.value);
-        wVal.textContent = `w=${spearmanConfig.w.toFixed(2)}`;
-      };
+      if (SHOW_WEIGHT_SLIDER) {
+        const wIn = $('#sim-w'), wVal = $('#sim-w-val');
+        wIn.oninput = () => {
+          spearmanConfig.w = parseFloat(wIn.value);
+          wVal.textContent = `w=${spearmanConfig.w.toFixed(2)}`;
+        };
+      }
       $('#sim-run').onclick = () => {
         const a = +$('#sim-anchor').value;
+        const w = spearmanConfig.w;
         showResults(rankBySpearmanCombined(a),
-          `Most similar to ${state.regions[a].name} — weighted ranking ` +
-          `(ρ, w=${spearmanConfig.w.toFixed(2)} gva/job)`);
+          `Most similar to ${state.regions[a].name} — ranking ` +
+          `(ρ, ${Math.round(w * 100)}% gva/job + ${Math.round((1 - w) * 100)}% jobs)`);
       };
     } else if (m === 'archetype') {
       const opts = ARCHETYPES.map(a => `<option>${a.tag}</option>`).join('');
