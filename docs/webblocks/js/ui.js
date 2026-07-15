@@ -198,9 +198,9 @@ function renderGrid() {
     renderBlockChart(plot, {
       regionIdx: idx, yearIdx: ui.yearIdx, width, xMax,
       height: 640,
-      onSectorEnter: (sector, d, region) => {
+      onSectorEnter: (sector, d, region, totalJobs) => {
         setActiveSector(sector);
-        showTooltip(sector, d, region);
+        showTooltip(sector, d, region, totalJobs);
       },
       onSectorLeave: () => { setActiveSector(null); hideTooltip(); },
       highlightSector: ui.activeSector,
@@ -216,13 +216,14 @@ function setActiveSector(sector) {
 }
 
 // ---- Tooltip ----------------------------------------------------------------
-function showTooltip(sector, d, region) {
+function showTooltip(sector, d, region, totalJobs) {
   const tt = $('#tooltip');
   const totalGva = (d.gva != null) ? `£${Math.round(d.gva)}m`
     : `£${Math.round(d.jobs * d.gvaperjob / 1000)}m (est)`;
+  const pct = totalJobs ? ` (${(d.jobs / totalJobs * 100).toFixed(1)}%)` : '';
   tt.innerHTML =
     `<strong>${sector}</strong><br>${region.name}<br>` +
-    `Jobs: ${Math.round(d.jobs).toLocaleString()}<br>` +
+    `Jobs: ${Math.round(d.jobs).toLocaleString()}${pct}<br>` +
     `GVA/job: £${d.gvaperjob.toFixed(1)}k<br>` +
     `Total GVA: ${totalGva}`;
   tt.classList.add('show');

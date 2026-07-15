@@ -113,7 +113,7 @@ export function renderBlockChart(container, opts) {
 
   // Hover / tap interaction.
   blocks
-    .on('mouseenter', (event, d) => onSectorEnter && onSectorEnter(d.sector, d, region))
+    .on('mouseenter', (event, d) => onSectorEnter && onSectorEnter(d.sector, d, region, totalJobs))
     .on('mouseleave', () => onSectorLeave && onSectorLeave());
 
   // Apply cross-area highlight if a sector is active.
